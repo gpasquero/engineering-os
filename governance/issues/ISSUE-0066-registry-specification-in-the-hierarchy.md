@@ -2,7 +2,7 @@
 id: ISSUE-0066
 title: Where the Registry Specification sits in the four-stage modeling hierarchy
 type: question
-status: open
+status: resolved
 severity: high
 created: 2026-08-02
 updated: 2026-08-02
@@ -11,7 +11,7 @@ evidence:
   - governance/adr/ADR-0050-definition-instance-assignment-projection.md
   - governance/adr/ADR-0032-registry-specification-versus-registry-projection.md
   - governance/adr/ADR-0048-dimension-specification-is-a-metamodel-entity.md
-resolved-by: null
+resolved-by: ADR-0052
 ---
 
 # ISSUE-0066 — Where the Registry Specification sits
@@ -72,8 +72,31 @@ third option holds and `ADR-0048`'s stage assignment needs revisiting.
 `ADR-0032`'s field list — membership rules, extension rules — reads like a
 container. But *required metadata* and *constraints* read like a kind.
 
-## Resolution criteria
+## Resolution
 
-An ADR placing the Registry Specification relative to the four stages, and
-stating whether `ADR-0050`'s pattern is complete or one part of a larger
-structure.
+`ADR-0052`. **The hierarchy was mixing two concerns.**
+
+`Definition → Instance → Assignment` belongs to the **semantic model**.
+**Projection belongs to the compilation model** — so it is not part of the
+semantic hierarchy at all. There are two orthogonal pipelines:
+
+```text
+Semantic:      Definition → Instance → Assignment
+Compilation:   Authoritative Semantic Model → Canonical Knowledge Model → Projection
+```
+
+Registry Projections, the Knowledge Explorer, documentation and search indexes
+are **compilation products, not semantic concepts**. This keeps the metamodel
+independent from compiler architecture.
+
+The first option recorded above — that the Registry Specification is orthogonal
+to the hierarchy — was closest, and incomplete: it identified *an* orthogonality
+without seeing that the hierarchy itself contained the mixture. The
+double-pairing this issue found disappears, because Registry Projection now
+appears once, in the compilation pipeline.
+
+`ADR-0050` is superseded. Its first three stages and all its examples survive.
+
+Generalized by `ADR-0053` into a foundational principle: the metamodel defines
+what exists, the compiler defines how it is transformed, and neither embeds the
+other's concepts.

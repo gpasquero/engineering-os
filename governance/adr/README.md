@@ -16,7 +16,7 @@ same session the decision is made.
 > a rule exists; the rule that must be followed lives in a Policy under
 > `shared/policies/`. Agents consume policies; humans read ADRs for rationale.
 
-**Highest allocated ID: `ADR-0050`.** IDs are sequential and never reused.
+**Highest allocated ID: `ADR-0053`.** IDs are sequential and never reused.
 
 > This index table is a hand-maintained projection of ADR front matter. It is
 > listed in the transitional-debt register, `ISSUE-0037`.
@@ -66,8 +66,11 @@ Read these before designing anything that produces an artifact:
   responsible for semantic equivalence across them.
 - **`ADR-0049`** — **dimensions are a scarce architectural resource**. Five
   conditions; creating one requires an ADR.
-- **`ADR-0050`** — the **`Definition → Instance → Assignment → Projection`**
-  hierarchy. Evaluate every extensible concept against it.
+- **`ADR-0052`** — the **semantic hierarchy** `Definition → Instance →
+  Assignment`, orthogonal to the compilation hierarchy.
+- **`ADR-0053`** — **semantic architecture is separate from compiler
+  architecture.** The metamodel defines what exists; the compiler defines how it
+  is transformed.
 - **`ADR-0017`** — reference architecture, not reference implementation.
 - **`ADR-0019`** — Knowledge Packages are a published interface.
 
@@ -124,7 +127,10 @@ Read these before designing anything that produces an artifact:
 | [ADR-0047](ADR-0047-three-representations-of-knowledge.md) | **Three representations of knowledge** | accepted | — |
 | [ADR-0048](ADR-0048-dimension-specification-is-a-metamodel-entity.md) | `DimensionSpecification` is a metamodel entity | accepted | ISSUE-0062 |
 | [ADR-0049](ADR-0049-dimensions-are-a-scarce-architectural-resource.md) | **Dimensions are a scarce architectural resource** | accepted | ISSUE-0064 |
-| [ADR-0050](ADR-0050-definition-instance-assignment-projection.md) | **Definition → Instance → Assignment → Projection** | accepted | — |
+| [ADR-0050](ADR-0050-definition-instance-assignment-projection.md) | Definition → Instance → Assignment → Projection | **superseded by ADR-0052** | — |
+| [ADR-0051](ADR-0051-dimension-review-process.md) | Dimensions enter the metamodel only through a Dimension Review | accepted | ISSUE-0065 |
+| [ADR-0052](ADR-0052-semantic-hierarchy-and-compilation-hierarchy.md) | **Two orthogonal hierarchies** | accepted | ISSUE-0066 |
+| [ADR-0053](ADR-0053-semantic-architecture-is-separate-from-compiler-architecture.md) | **Semantic architecture is separate from compiler architecture** | accepted | — |
 
 ## Supersessions
 
@@ -136,6 +142,7 @@ Read these before designing anything that produces an artifact:
 | `ADR-0015` | `ADR-0018` | The determinism principle survives. What changes is the boundary marker: a commit no longer confers authoritative status — acceptance does. |
 | `ADR-0018` | `ADR-0020` | The acceptance decision survives in full. What changes is the lifecycle vocabulary: the state `Authoritative` is renamed `Active`, and the lifecycle applies to a revision rather than an artifact. |
 | `ADR-0014` | `ADR-0037` | The knowledge-compiler principle and all three tiers survive, renamed layers B, C and D. What is added is Layer A, the Metamodel, above them. |
+| `ADR-0050` | `ADR-0052` | The first three stages and all examples survive. The fourth, Projection, moves to the compilation hierarchy — it was a compilation concern inside a semantic pattern. |
 
 Superseded ADRs are retained as the record of what was believed before. Read the
 superseding ADR for the current rule.

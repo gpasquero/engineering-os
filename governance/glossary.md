@@ -373,22 +373,45 @@ types rather than flattening them into object properties.
 > qualification, the same discipline applied to state names (`ADR-0025`) and
 > normative artifact types (`ADR-0030`).
 
-**Modeling hierarchy** — the recurring four-stage pattern across the framework
-(`ADR-0050`):
+**Semantic hierarchy** — the recurring three-stage pattern across the framework
+(`ADR-0052`):
 
 ```text
-Definition → Instance → Assignment → Projection
+Definition → Instance → Assignment
 ```
 
-| Definition | Instance | Assignment | Projection |
-|---|---|---|---|
-| Dimension Specification | Dimension | Dimension Assignment | Registry Projection |
-| State Machine Specification | State Machine | State Assignment | State Registry Projection |
-| Policy Specification | Policy | *Policy Assignment (future)* | Policy Registry Projection |
+| Definition | Instance | Assignment |
+|---|---|---|
+| Dimension Specification | Dimension | Dimension Assignment |
+| State Machine Specification | State Machine | State Assignment |
+| Policy Specification | Policy | *Policy Assignment (future)* |
 
-Future extensible concepts are evaluated against it before new modeling
-structures are introduced. Where the **Registry Specification** sits relative to
-these four stages is unresolved — `ISSUE-0066`.
+**Compilation hierarchy** — orthogonal to the semantic one:
+
+```text
+Authoritative Semantic Model → Canonical Knowledge Model → Projection
+```
+
+**Registry Projections, the Knowledge Explorer, documentation and search indexes
+are compilation products, not semantic concepts.** Future extensible concepts
+are evaluated against the semantic hierarchy before new modeling structures are
+introduced.
+
+**Dimension Review** — the standard procedure by which a proposed Dimension
+enters the metamodel (`ADR-0051`). Produces one of four outcomes: accepted as a
+Dimension, or rejected and modelled as metadata, as a relationship, or as
+another metamodel entity. `ADR-0049`'s five criteria are **mandatory**
+evaluation criteria. Whether a Review is a distinct artifact type or a
+structured ADR is unresolved — `ISSUE-0067`.
+
+## Semantic architecture versus compiler architecture
+
+> **The metamodel defines what exists. The compiler defines how it is
+> transformed. Neither embeds concepts belonging to the other** (`ADR-0053`).
+
+Every new concept first answers: **is this a semantic concept, a compilation
+concept, or both?** Only concepts genuinely belonging to both appear in both
+architectures, and their correspondence is **explicit rather than implicit**.
 
 ## The three representations of knowledge
 

@@ -30,10 +30,10 @@ M1 is complete. **M3 is unblocked.**
 | Documentation system, session protocol | Defined and accepted |
 | Vision, principles, glossary | Written |
 | Roadmap | M1–M13 |
-| ADRs | 50 — 44 accepted, 6 superseded |
-| Issues | 66 recorded — 24 open, 41 resolved, 1 deferred |
-| Acceptance Records | 12 — `ACCEPT-0001` (trust root) through `ACCEPT-0012` |
-| Session journal | 17 entries |
+| ADRs | 53 — 46 accepted, 7 superseded |
+| Issues | 68 recorded — 24 open, 43 resolved, 1 deferred |
+| Acceptance Records | 13 — `ACCEPT-0001` (trust root) through `ACCEPT-0013` |
+| Session journal | 18 entries |
 | Frozen provenance | `imports/` (3 prototypes), `sources/` (requirements, archives, original handoff) |
 
 ## What does not exist
@@ -85,9 +85,12 @@ the same knowledge, not different knowledge.
 
 **Front matter is interchange syntax** (`ADR-0045`), not the semantic model.
 
-**One modeling hierarchy spans the framework** (`ADR-0050`):
-`Definition → Instance → Assignment → Projection`. Dimensions, state machines
-and policies all follow it.
+**Two orthogonal hierarchies** (`ADR-0052`). Semantic:
+`Definition → Instance → Assignment`. Compilation: `Authoritative Semantic
+Model → Canonical Knowledge Model → Projection`.
+
+**Semantic architecture is separate from compiler architecture** (`ADR-0053`).
+The metamodel defines what exists; the compiler defines how it is transformed.
 
 **Dimensions are scarce** (`ADR-0049`) — five conditions, and creating one
 requires an ADR.
@@ -98,15 +101,15 @@ requires an ADR.
 |---|---|
 | `ACCEPT-0001` | Bootstrap corpus at `2b6484f` — trust root, the only retrospective acceptance |
 | `ACCEPT-0002` | `SESSION-0006` at `aed6d89` — first under the normal workflow |
-| `ACCEPT-0003`–`ACCEPT-0012` | `SESSION-0007` through `SESSION-0016` |
+| `ACCEPT-0003`–`ACCEPT-0013` | `SESSION-0007` through `SESSION-0017` |
 
-**`ADR-0048`–`ADR-0050`, `ISSUE-0065`, `ISSUE-0066` and this session's
+**`ADR-0051`–`ADR-0053`, `ISSUE-0067`, `ISSUE-0068` and this session's
 propagation are `Under Review`**, not `Active`.
 
 ## A note for agents reading this repository
 
-**The ADR corpus is history, not specification** (`ADR-0029`). **Fifty
-decisions**, six superseded, **five partially corrected**.
+**The ADR corpus is history, not specification** (`ADR-0029`). **Fifty-three
+decisions**, seven superseded, five partially corrected.
 
 **Two process gates are in force:**
 
@@ -116,13 +119,18 @@ decisions**, six superseded, **five partially corrected**.
   layer, artifact kind, metamodel entity, compiler phase. `None (Not
   Applicable)` is a valid layer for cross-cutting artifacts; a genuinely
   undetermined answer is a rejection.
+- Answer three more (`ADR-0053`): semantic concept, compilation concept, or
+  both?
+
+**These three gates overlap and nothing states how they compose** —
+`ISSUE-0068`.
 
 ## Blocking
 
 | Issue | Blocks |
 |---|---|
-| `ISSUE-0065` | **M2.** Nine dimension candidates, none evaluated against `ADR-0049`'s five conditions. Five are already in active use. The Dimension Registry cannot be written. |
-| `ISSUE-0066` | **M2.** Where the Registry Specification sits in the four-stage hierarchy. The same Registry Projection now appears in two different pairings. |
+| `ISSUE-0067` | **M2.** Whether a Dimension Review is a distinct artifact type or a structured ADR. **The first time the metamodel-first gate has bound on a concept the project needs** — the metamodel does not exist, so `ADR-0035` cannot be satisfied. |
+| `ISSUE-0068` | **M2.** `ADR-0038`'s mandatory compiler-phase question conflicts with `ADR-0053`'s separation, and three gates now overlap with no composition rule. |
 | `ISSUE-0063` | The minimum classifications every artifact must serialize. `ADR-0038` says what must be knowable; `ADR-0045` says what may be visible; nothing connects them. |
 | `ISSUE-0002` | M8 |
 | `ISSUE-0006` | M10 |
@@ -144,10 +152,9 @@ decisions**, six superseded, **five partially corrected**.
 
 Accept or return this session's work.
 
-Then `ISSUE-0065` — nine dimension candidates, each needing an ADR against
-`ADR-0049`'s five conditions. Some are expected to fail, so this may **remove**
-axes rather than add them. `ISSUE-0066` should be settled alongside it, since
-both determine the Dimension Registry's shape.
+Then `ISSUE-0067` and `ISSUE-0068` together. Both are about the gates governing
+new concepts, and `ISSUE-0067` is the first case where those gates have bound on
+something the project actually needs.
 
 ## Repository state
 

@@ -107,9 +107,12 @@ and every assignment instantiates one (`ADR-0048`).
 **Dimensions are a scarce architectural resource** (`ADR-0049`). A concept
 becomes a Dimension only if it classifies many independent artifact types, is
 orthogonal to other classifications, evolves independently, is useful for
-querying or validation, and takes multiple values across artifacts. Otherwise it
-is metadata, a property, a relationship, or a metamodel entity. **Creating one
-requires an ADR.**
+querying or validation, and takes multiple values across artifacts.
+
+**Dimensions enter the metamodel only through a Dimension Review** (`ADR-0051`),
+producing one of four outcomes: accepted, or rejected and modelled as metadata,
+a relationship, or another metamodel entity. The five criteria are mandatory,
+and the decision becomes an authoritative artifact.
 
 **Artifacts do not contain dimension values.** They are classified by
 **Dimension Assignments** — explicit semantic relationships (`ADR-0042`):
@@ -136,23 +139,35 @@ without the compiler.
 Dimension Assignment → Canonical Serialization → Artifact Front Matter
 ```
 
-## The modeling hierarchy
+## Two orthogonal hierarchies
 
-One recurring four-stage pattern spans the framework (`ADR-0050`):
+**The metamodel defines what exists. The compiler defines how it is
+transformed. Neither embeds concepts belonging to the other** (`ADR-0053`).
+
+**Semantic hierarchy** (`ADR-0052`) — one recurring pattern across the
+framework:
 
 ```text
-Definition → Instance → Assignment → Projection
+Definition → Instance → Assignment
 ```
 
-| Definition | Instance | Assignment | Projection |
-|---|---|---|---|
-| Dimension Specification | Dimension | Dimension Assignment | Registry Projection |
-| State Machine Specification | State Machine | State Assignment | State Registry Projection |
-| Policy Specification | Policy | *Policy Assignment (future)* | Policy Registry Projection |
+| Definition | Instance | Assignment |
+|---|---|---|
+| Dimension Specification | Dimension | Dimension Assignment |
+| State Machine Specification | State Machine | State Assignment |
+| Policy Specification | Policy | *Policy Assignment (future)* |
 
-Future extensible concepts are evaluated against it before new modeling
-structures are introduced. Where the Registry Specification (`ADR-0032`) sits
-relative to these stages is unresolved — `ISSUE-0066`.
+**Compilation hierarchy** — orthogonal:
+
+```text
+Authoritative Semantic Model → Canonical Knowledge Model → Projection
+```
+
+Registry Projections, the Knowledge Explorer, documentation and search indexes
+are **compilation products, not semantic concepts**.
+
+Every new concept answers: **semantic, compilation, or both?** Only concepts
+genuinely in both appear in both, with explicit correspondence.
 
 ## Three representations of knowledge
 
@@ -584,10 +599,11 @@ These are recorded as issues and must not be silently assumed:
 
 - `ISSUE-0049` — where state machine specifications live, and their boundary
   with `shared/vocabularies/`. Blocks `shared/vocabularies/`.
-- `ISSUE-0065` — nine dimension candidates, none evaluated against `ADR-0049`'s
-  five conditions. **Blocks the Dimension Registry.**
-- `ISSUE-0066` — where the Registry Specification sits in the four-stage
-  hierarchy.
+- `ISSUE-0067` — whether a Dimension Review is a distinct artifact type or a
+  structured ADR. **Blocks the reviews**, and is the first time the
+  metamodel-first gate has bound on a concept the project needs.
+- `ISSUE-0068` — `ADR-0038`'s mandatory compiler-phase question conflicts with
+  the semantic/compiler separation, and three gates now overlap.
 - `ISSUE-0063` — the minimum set of classifications that must be serialized.
 - `ISSUE-0048` — no mechanism for correcting part of an `Active` ADR.
 - `ISSUE-0007` — versioning granularity, now also covering what identifies a

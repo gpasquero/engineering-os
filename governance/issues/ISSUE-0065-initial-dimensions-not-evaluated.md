@@ -2,7 +2,7 @@
 id: ISSUE-0065
 title: The initial dimension candidates have not been evaluated against the five conditions
 type: gap
-status: open
+status: resolved
 severity: blocking
 created: 2026-08-02
 updated: 2026-08-02
@@ -11,7 +11,7 @@ evidence:
   - governance/adr/ADR-0049-dimensions-are-a-scarce-architectural-resource.md
   - governance/adr/ADR-0048-dimension-specification-is-a-metamodel-entity.md
   - governance/adr/ADR-0047-three-representations-of-knowledge.md
-resolved-by: null
+resolved-by: ADR-0051
 ---
 
 # ISSUE-0065 — The initial dimensions have not been evaluated
@@ -69,8 +69,34 @@ stand. `ADR-0047` does not say.
 
 These are readings offered for evaluation, not determinations.
 
-## Resolution criteria
+## Resolution
 
-An ADR per surviving dimension, each recording the five conditions, plus an
-explicit decision to model the failures as metadata, properties, relationships
-or metamodel entities. Must precede the Dimension Registry.
+`ADR-0051`, **by rejecting the approach this issue proposed.**
+
+> **Do not evaluate candidate Dimensions one by one. First define the Dimension
+> Evaluation Process.**
+
+Every proposed Dimension is evaluated by a standard **Dimension Review**
+producing one of four outcomes: accepted as a Dimension, or rejected and
+modelled as metadata, as a relationship, or as another metamodel entity. The
+decision becomes an authoritative artifact so the reasoning is preserved, and
+`ADR-0049`'s five criteria become **mandatory** evaluation criteria rather than
+informal guidance.
+
+**Dimensions enter the metamodel only through that review.**
+
+The reasoning: nine ad-hoc evaluations would establish nine precedents rather
+than one procedure, and the tenth candidate would restart the argument.
+
+The nine candidates listed above become the **first inputs** to the process. The
+readings recorded here — that `Governance Status` likely fails condition 2, and
+`Authority` likely fails against `Ownership` — are inputs to their reviews, not
+verdicts.
+
+**`ADR-0053` adds two more objections.** `Compilation Phase` and
+`Representation` now look like compilation concepts rather than semantic ones,
+so both enter their reviews with a specific challenge under the
+semantic/compiler separation.
+
+Newly open: whether a Dimension Review is a distinct artifact type or a
+structured ADR — `ISSUE-0067`.

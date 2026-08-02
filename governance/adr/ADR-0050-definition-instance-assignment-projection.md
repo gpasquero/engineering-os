@@ -1,10 +1,10 @@
 ---
 id: ADR-0050
 title: The Definition → Instance → Assignment → Projection modeling hierarchy
-status: accepted
+status: superseded
 date: 2026-08-02
 supersedes: null
-superseded-by: null
+superseded-by: ADR-0052
 resolves: []
 related: [ADR-0027, ADR-0031, ADR-0032, ADR-0041, ADR-0042, ADR-0048, ISSUE-0066]
 ---
