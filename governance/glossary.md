@@ -261,47 +261,45 @@ permitting multiple implementations. Distinguished from a *reference
 implementation*, of which there will initially be one, in a language
 deliberately deferred (`ISSUE-0036`). See `ADR-0017`.
 
-## The two layers
+## The four semantic layers
 
-**Layer A / the methodology** — contracts, policies, skills, workflows, schemas,
-tests. Authored in this repository.
+**Every artifact belongs to exactly one layer** (`ADR-0037`).
 
-**Layer B / the knowledge model** — the `model/` tree the methodology produces:
-ontology, glossary, bounded contexts, specifications, traceability, impact
-analyses.
+**Layer A — Engineering OS Metamodel.** Defines *the language*. Authored at
+`model/metamodel/` in this repository, versioned with Engineering OS. Adopting
+repositories never modify it; they instantiate it.
 
-Both layers exist in **every** repository that adopts Engineering OS, including
-this one. This repository is distinguished by also *authoring* Layer A.
+**Layer B — Repository Knowledge Model.** Defines *a specific domain*, using
+that language. Each repository owns its own (`ADR-0010`).
 
-**`model-spec/`** — the Layer A specification and copyable scaffold *of* the
-Layer B tree. Part of the methodology; ships to adopters.
+**Layer C — Canonical Knowledge Model.** The compiler-generated semantic
+representation of Layer B, conforming to Layer A (`ADR-0036`).
 
-**`model/`** — a Layer B instance. Always repository-local. This repository's
-`model/` describes Engineering OS itself.
+**Layer D — Derived Projections.** Knowledge Explorer, documentation, Registry
+Projections, search, Knowledge Packages, validation reports, future AI
+interfaces.
 
-> **Disambiguation.** `model-spec/` is the specification; `model/` is an
-> instance of it. Both live here and are one character apart in prose. State
-> which one you mean.
+> **The term was redefined.** Under `ADR-0010`, "Layer A" meant the methodology
+> and "Layer B" the knowledge model. `ADR-0037` redefines Layer A as the
+> Metamodel. The former Layer A content — `shared/`, `skills/`, `workflows/`,
+> `templates/`, `schemas/`, `governance/` — currently has **no layer**
+> (`ISSUE-0056`).
 
-**Target repository** — the software system the Engineering OS is applied to.
-May be this repository, when the methodology is applied to itself.
+**`model-spec/`** — the Layer A specification and copyable scaffold *of* a Layer
+B tree. Ships to adopters.
 
-**Knowledge ownership** — the rule that knowledge is owned by the repository
-that owns the domain. There is no shared central model. See `ADR-0010`.
+**`model/`** — a repository's own tree. For adopters it is Layer B; for
+Engineering OS it also holds `metamodel/`, because this repository's domain is
+the metamodel.
+
+**Target repository** — the software system Engineering OS is applied to. May be
+this repository, when the methodology is applied to itself.
+
+**Knowledge ownership** — knowledge is owned by the repository that owns the
+domain. There is no shared central model. See `ADR-0010`.
 
 **Federation** — how multi-repository environments exchange knowledge without
 sharing a model: by exporting and referencing Knowledge Packages.
-
-**Knowledge Package** — a **published interface between repositories**, and a
-derived artifact. It exports a stable projection derived from the Canonical
-Knowledge Model, and **never** exports authoritative assets, which stay editable
-only in their owning repository. Its purpose is interoperability, not editing.
-
-Its format is a **stable, versioned specification independent of the compiler
-implementation**: compilers may evolve provided they emit conforming packages,
-as different compilers emit binaries conforming to one published specification.
-Packages version the specification, the exported knowledge model and
-compatibility information, and never expose compiler internals. See `ADR-0019`.
 
 ## Epistemic terms
 

@@ -16,33 +16,55 @@ It describes the **target** structure. Directories are created only when they
 receive meaningful content, so the working tree is always a subset of the tree
 below. `governance/build-state.md` records which parts exist today.
 
-## The two-layer rule
+## The four-layer semantic architecture
 
-The single most important structural rule in this project.
+**Every artifact in Engineering OS belongs to exactly one layer** (`ADR-0037`).
 
-**Layer A — the methodology.** Contracts, policies, skills, workflows, schemas,
-tests. Authored here.
+| Layer | Name | Defines |
+|---|---|---|
+| **A** | Engineering OS Metamodel | **the language** |
+| **B** | Repository Knowledge Model | **a specific domain**, using that language |
+| **C** | Canonical Knowledge Model | compiler-generated semantic representation of Layer B |
+| **D** | Derived Projections | Knowledge Explorer, documentation, Registry Projections, search, Knowledge Packages, validation reports, future AI interfaces |
 
-**Layer B — the knowledge model.** The `model/` tree the methodology produces:
-ontology, glossary, bounded contexts, specifications, traceability, impact
-analyses.
+```text
+Layer A   model/metamodel/          ArtifactType · RegistrySpecification ·
+                                    Policy · Workflow · Skill · Capability ·
+                                    StateMachine · Vocabulary · Ontology · …
+             ↓
+          Knowledge Compiler
+             ↓
+Layer C   Canonical Knowledge Model   (conforming to Layer A)
+             ↓
+Layer D   Explorer · Documentation · Indexes · Packages · Validation · Search
+```
 
-These are different things and are never mixed.
+Layer B is each repository's own knowledge model, expressed in the Layer A
+language and compiled into Layer C.
 
-**Both layers exist in every repository that adopts Engineering OS, including
-this one.** What distinguishes this repository is not that it lacks Layer B — it
-is that this repository *also authors* Layer A.
+### The Metamodel
 
-So this repository contains both:
+**Layer A belongs to Engineering OS itself.** It is authored at
+`model/metamodel/`, is an authoritative artifact, is versioned with Engineering
+OS, and evolves through the same governance as every other authoritative
+artifact.
 
-- **`model-spec/`** — the Layer A specification and copyable scaffold *of* the
-  Layer B tree. Part of the methodology; ships to adopters.
-- **`model/`** — this repository's own Layer B instance, describing Engineering
-  OS itself.
+> **Adopting repositories never modify the metamodel. They instantiate it.**
 
-`model-spec/` is the specification; `model/` is an instance of it. They are
-adjacent and similarly named, and they will be confused unless the distinction
-is restated wherever both appear. See `ADR-0010`, which supersedes `ADR-0006`.
+This is why `model/` in *this* repository contains Layer A content: Engineering
+OS's domain genuinely is the metamodel. The shorthand "`model/` is Layer B"
+holds for adopters, not here.
+
+### `model-spec/` and `model/`
+
+- **`model-spec/`** — the specification and copyable scaffold *of* a Layer B
+  tree. Ships to adopters.
+- **`model/`** — this repository's own tree, containing `metamodel/`.
+
+> **Open:** `shared/`, `skills/`, `workflows/`, `templates/`, `schemas/` and
+> `governance/` have **no layer**. Under `ADR-0010` they were "Layer A — the
+> methodology"; `ADR-0037` redefined Layer A as the Metamodel alone.
+> `ISSUE-0056`, which blocks M2.
 
 ## Knowledge ownership
 
@@ -81,18 +103,10 @@ Not a documentation project, and not a documentation generator. It is an
 **executable engineering framework** whose pipelines, validators, generators,
 analyzers and visualizers are first-class code (`ADR-0012`).
 
-Knowledge exists in **three tiers** (`ADR-0014`):
-
-```text
-Repository Assets          AUTHORITATIVE — human-authored, human-readable
-        ↓                  includes model/, governance/
-Knowledge Compiler         deterministic
-        ↓
-Canonical Knowledge Model  DERIVED — internal representation, never hand-edited,
-        ↓                  never inside model/, always reproducible
-Derived Artifacts          DERIVED — website, indexes, graph, reports, caches,
-                           agent context
-```
+Layers B, C and D are the three tiers `ADR-0014` established, preserved by
+`ADR-0037`: authoritative repository assets, the compiler-generated canonical
+model, and the projections derived from it. The canonical model is never
+hand-edited and never lives inside `model/`.
 
 Compiler stages: parsing → normalization → validation → semantic linking.
 
@@ -381,8 +395,9 @@ engineering-os/
 │
 ├── skills/                     M4–M7 — one directory per skill
 ├── workflows/                  M8 — one directory per workflow
-├── model-spec/                 M2 — Layer A specification + scaffold of the Layer B tree
-├── model/                      M11 — this repository's own Layer B knowledge model
+├── model-spec/                 M2 — specification + scaffold of a Layer B tree
+├── model/
+│   └── metamodel/              M2 — LAYER A, the Engineering OS Metamodel
 ├── templates/                  Document templates used by skills
 ├── schemas/                    M9 — JSON Schema for machine validation
 ├── validation/                 M9 — rules and scripts
@@ -444,10 +459,9 @@ These are recorded as issues and must not be silently assumed:
 
 - `ISSUE-0049` — where state machine specifications live, and their boundary
   with `shared/vocabularies/`. Blocks `shared/vocabularies/`.
-- `ISSUE-0055` — where the Metamodel lives, and whether it is Layer A or Layer B.
-  **Blocks M2**, since the metamodel is now its first deliverable.
-- `ISSUE-0031` — the scope of this repository's own `model/`. The same question
-  as `ISSUE-0055` from the other side; the two should be resolved together.
+- `ISSUE-0056` — `shared/`, `skills/`, `workflows/`, `templates/`, `schemas/`
+  and `governance/` have no layer under `ADR-0037`. **Blocks M2**, because
+  `ADR-0038` makes "which layer owns it?" mandatory for every artifact type.
 - `ISSUE-0048` — no mechanism for correcting part of an `Active` ADR.
 - `ISSUE-0007` — versioning granularity, now also covering what identifies a
   **revision**.

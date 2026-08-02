@@ -2,7 +2,7 @@
 id: ISSUE-0055
 title: Where the Metamodel lives, and how adopting repositories obtain it
 type: question
-status: open
+status: resolved
 severity: blocking
 created: 2026-08-02
 updated: 2026-08-02
@@ -11,7 +11,7 @@ evidence:
   - governance/adr/ADR-0035-engineering-os-metamodel.md
   - governance/adr/ADR-0036-canonical-model-conforms-to-the-metamodel.md
   - governance/adr/ADR-0010-repository-local-knowledge-ownership.md
-resolved-by: null
+resolved-by: ADR-0037
 ---
 
 # ISSUE-0055 — Where the Metamodel lives
@@ -62,8 +62,24 @@ which is Layer A. `ADR-0014` keeps the layers strictly separate.
 This is the same tension as `ISSUE-0031`, which asks what Engineering OS's own
 `model/` contains. The two should be resolved together.
 
-## Resolution criteria
+## Resolution
 
-An ADR naming the metamodel's location and artifact kind, stating whether it is
-Layer A or Layer B, and defining how an adopting repository obtains the version
-its canonical model must conform to.
+`ADR-0037`. **The Metamodel is Layer A**, and Layer A is redefined to mean the
+Metamodel.
+
+It is authored at **`model/metamodel/`** inside the Engineering OS repository,
+is an authoritative artifact, is versioned with Engineering OS, and evolves
+through the same governance process as every other authoritative artifact.
+
+> **Adopting repositories never modify the metamodel. They instantiate it.**
+
+Every adopting repository owns its own knowledge model (Layer B), expressed
+using the metamodel's language.
+
+The Knowledge Package option — the more elegant long-term answer — is not
+rejected outright but deferred: federation is M13 and M2 cannot wait. Nothing in
+this decision precludes adding it.
+
+The question underneath is answered by redefinition rather than by choosing a
+side: Layer A no longer means "the methodology". It means the Metamodel. That
+leaves the former Layer A content without a home — `ISSUE-0056`.

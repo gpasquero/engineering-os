@@ -2,14 +2,14 @@
 id: ISSUE-0031
 title: The scope of Engineering OS's own model/ is undefined
 type: gap
-status: open
+status: resolved
 severity: medium
 created: 2026-08-02
 updated: 2026-08-02
 blocks: [M2, M11]
 evidence:
   - governance/adr/ADR-0010-repository-local-knowledge-ownership.md
-resolved-by: null
+resolved-by: ADR-0037
 ---
 
 # ISSUE-0031 — The scope of Engineering OS's own `model/` is undefined
@@ -87,7 +87,21 @@ This is the same question as `ISSUE-0055`, approached from the other side. **The
 two should be resolved together**, and the answer determines whether M11's
 self-model is a large piece of work or largely already done.
 
-## Resolution criteria
+## Resolution
 
-An ADR defining the scope of the self-model and its relationship to
-`governance/`, followed by the model itself in M11.
+`ADR-0037`, resolved together with `ISSUE-0055` as recommended.
+
+**Engineering OS's `model/` contains `metamodel/`.** The first reading above is
+substantially correct: the metamodel is the core of the self-model, **because
+Engineering OS's domain is how systems are described**.
+
+The layer separation is preserved rather than collapsed, by redefining Layer A
+as the Metamodel. So `model/metamodel/` is Layer A content authored inside this
+repository's `model/` — an exception that holds only for Engineering OS, and
+only because its domain genuinely is the metamodel.
+
+**Practical consequence:** M11's self-model is largely the metamodel rather than
+a separate body of work.
+
+The `governance/` overlap raised above is **not** resolved. `governance/` still
+has no layer, which is now part of the larger `ISSUE-0056`.

@@ -50,7 +50,11 @@ requires the original inputs.
 - Before assuming an answer to anything, search `governance/issues/`. If an
   issue is `open`, respect it as open — do not quietly decide it.
 - **Position every new concept in the Metamodel before introducing a new
-  artifact type** (`ADR-0035`). This inverts how the project worked for its first
+  artifact type** (`ADR-0035`), and answer four questions before it is accepted
+  (`ADR-0038`): which layer owns it; is it authoritative or derived; what
+  metamodel entity does it instantiate; which compiler phase consumes or
+  produces it. **An unanswerable question is a rejection, not a gap to fill
+  later.** This inverts how the project worked for its first
   eleven sessions, and it is the structural remedy for naming after the fact —
   the defect behind five vocabulary collisions. This rule belongs in a
   `ModelingPolicy` once M3 exists; until then it lives here.

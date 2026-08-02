@@ -9,8 +9,8 @@ related: [ISSUE-0037]
 
 # Issue Index
 
-**55 recorded · 23 open · 31 resolved · 1 deferred.** Highest allocated ID:
-`ISSUE-0055`.
+**56 recorded · 22 open · 33 resolved · 1 deferred.** Highest allocated ID:
+`ISSUE-0056`.
 
 > **Hand-maintained projection.** Under `ADR-0016` this is a projection of issue
 > front matter, which is authoritative. No generator exists yet (`ISSUE-0036`),
@@ -23,13 +23,14 @@ related: [ISSUE-0037]
 
 | ID | Title | Blocks |
 |---|---|---|
-| [0055](ISSUE-0055-metamodel-location-and-distribution.md) | Where the Metamodel lives, and how adopters obtain it | **M2** |
+| [0056](ISSUE-0056-existing-artifacts-have-no-layer.md) | The methodology artifacts have no layer | **M2** |
 | [0002](ISSUE-0002-composition-primitive-undefined.md) | How a workflow invokes a skill is undefined | M8 |
 | [0006](ISSUE-0006-scenario-testing-method-undefined.md) | How a prompt-based methodology is tested is undefined | M10 |
 
-The Metamodel is now M2's **first** deliverable (`ADR-0036`), so `ISSUE-0055`
-blocks the milestone. `ISSUE-0049` gates the state machine specifications and
-`shared/vocabularies/`. **M3 is unblocked.**
+`ADR-0038` makes "which layer owns it?" mandatory for every artifact type, and
+the methodology directories have no layer — so `ISSUE-0056` blocks M2.
+`ISSUE-0049` gates the state machine specifications and `shared/vocabularies/`.
+**M3 is unblocked.**
 
 ## Open, by milestone
 
@@ -38,7 +39,7 @@ blocks the milestone. `ISSUE-0049` gates the state machine specifications and
 | ID | Title | Type | Severity |
 |---|---|---|---|
 | [0049](ISSUE-0049-state-machine-specification-location.md) | Where state machine specifications live | question | high |
-| [0055](ISSUE-0055-metamodel-location-and-distribution.md) | Where the Metamodel lives, and how adopters obtain it | question | blocking |
+| [0056](ISSUE-0056-existing-artifacts-have-no-layer.md) | The methodology artifacts have no layer | gap | blocking |
 | [0048](ISSUE-0048-no-mechanism-for-correcting-an-active-adr.md) | No mechanism for correcting part of an `Active` ADR | gap | medium |
 | [0007](ISSUE-0007-versioning-granularity-undefined.md) | Versioning granularity; what identifies a revision | question | high |
 | [0011](ISSUE-0011-audience-licence-distribution-undefined.md) | Repository is public with no licence | question | high |
@@ -46,7 +47,6 @@ blocks the milestone. `ISSUE-0049` gates the state machine specifications and
 | [0014](ISSUE-0014-model-changes-directory-missing.md) | `model/changes/` absent from the canonical tree | inconsistency | high |
 | [0015](ISSUE-0015-path-resolution-ambiguity.md) | Skill-relative and target-relative paths not distinguished | inconsistency | high |
 | [0018](ISSUE-0018-assertion-statuses-duplicated.md) | Assertion status vocabulary defined twice | inconsistency | medium |
-| [0031](ISSUE-0031-engineering-os-self-model-scope.md) | Self-model scope; `KNOWLEDGE-MANIFEST` overlaps the glossary | gap | medium |
 | [0019](ISSUE-0019-evidence-record-defaults-diverge.md) | Two minimum evidence records disagree | inconsistency | low |
 
 ### M3 — Shared policies
@@ -84,12 +84,6 @@ blocks the milestone. `ISSUE-0049` gates the state machine specifications and
 | ID | Title | Type | Severity |
 |---|---|---|---|
 | [0006](ISSUE-0006-scenario-testing-method-undefined.md) | How to test a prompt-based methodology | question | blocking |
-
-### M11 — Engineering OS self-model
-
-| ID | Title | Type | Severity |
-|---|---|---|---|
-| [0031](ISSUE-0031-engineering-os-self-model-scope.md) | Scope of Engineering OS's own `model/` | gap | medium |
 
 ### M12 — Documentation, adapters and v1
 
@@ -139,3 +133,5 @@ blocks the milestone. `ISSUE-0049` gates the state machine specifications and
 | [0052](ISSUE-0052-knowledge-explorer-undefined.md) | Knowledge Explorer undefined | `ADR-0034` |
 | [0053](ISSUE-0053-are-registries-authoritative-or-derived.md) | Registry authoritative or derived | `ADR-0032` |
 | [0054](ISSUE-0054-metamodel-undefined.md) | The Engineering OS metamodel was undefined | `ADR-0035` |
+| [0031](ISSUE-0031-engineering-os-self-model-scope.md) | Engineering OS self-model scope | `ADR-0037` |
+| [0055](ISSUE-0055-metamodel-location-and-distribution.md) | Where the Metamodel lives | `ADR-0037` |

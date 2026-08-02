@@ -145,6 +145,10 @@ Blocked by `ISSUE-0006`.
 Apply Engineering OS to itself: build this repository's own `model/` describing
 the framework (`ADR-0010`).
 
+**Substantially reduced by `ADR-0037`**: the metamodel is the core of the
+self-model and is delivered in M2, because Engineering OS's domain is how
+systems are described.
+
 This precedes the v1 release deliberately. If the methodology cannot produce a
 coherent knowledge model of itself, it does not work, and that must be
 discovered before release rather than after. Scope is open — `ISSUE-0031`,

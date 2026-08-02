@@ -1,10 +1,10 @@
 ---
 id: ADR-0014
 title: Engineering OS is a knowledge compiler over a three-tier knowledge model
-status: accepted
+status: superseded
 date: 2026-08-02
 supersedes: ADR-0011
-superseded-by: null
+superseded-by: ADR-0037
 resolves: [ISSUE-0034]
 related: [ADR-0012, ADR-0015, ADR-0016, ISSUE-0029]
 ---

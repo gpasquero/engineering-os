@@ -17,7 +17,7 @@ Session logs are the trajectory record: they answer "how did we get here",
 which no other document does. `build-state.md` answers "where are we", and the
 ADRs answer "why".
 
-**Highest allocated ID: `SESSION-0012`.**
+**Highest allocated ID: `SESSION-0013`.**
 
 ## Index
 
@@ -35,6 +35,7 @@ ADRs answer "why".
 | [SESSION-0010](SESSION-0010-2026-08-02.md) | 2026-08-02 | M2 | `ACCEPT-0005`; normative artifact taxonomy; **Registry Pattern** named after four independent rediscoveries; `ADR-0030`, `ADR-0031` |
 | [SESSION-0011](SESSION-0011-2026-08-02.md) | 2026-08-02 | M2 | `ACCEPT-0006`; Registry Specification vs Projection; `ProcessPolicy` governs Workflow; Knowledge Explorer defined; `ADR-0032`–`ADR-0034`. **M2 and M3 unblocked.** |
 | [SESSION-0012](SESSION-0012-2026-08-02.md) | 2026-08-02 | M2 | `ACCEPT-0007`; **the Engineering OS Metamodel**; the Canonical Knowledge Model conforms to it; `ADR-0035`, `ADR-0036`. **M2 reordered — metamodel before compiler interface.** |
+| [SESSION-0013](SESSION-0013-2026-08-02.md) | 2026-08-02 | M2 | `ACCEPT-0008`; **four-layer semantic architecture**; four questions per artifact type; `ADR-0037`, `ADR-0038`; `ADR-0014` superseded. `ISSUE-0031` and `ISSUE-0055` resolved together. |
 
 ## Reading
 

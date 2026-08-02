@@ -16,7 +16,7 @@ same session the decision is made.
 > a rule exists; the rule that must be followed lives in a Policy under
 > `shared/policies/`. Agents consume policies; humans read ADRs for rationale.
 
-**Highest allocated ID: `ADR-0036`.** IDs are sequential and never reused.
+**Highest allocated ID: `ADR-0038`.** IDs are sequential and never reused.
 
 > This index table is a hand-maintained projection of ADR front matter. It is
 > listed in the transitional-debt register, `ISSUE-0037`.
@@ -47,6 +47,11 @@ Read these before designing anything that produces an artifact:
   it before introducing a new artifact type.**
 - **`ADR-0036`** — the Canonical Knowledge Model is a graph **conforming to the
   Metamodel**. The Metamodel is the contract between authoring and compilation.
+- **`ADR-0037`** — the **four-layer semantic architecture**. Every artifact
+  belongs to exactly one of A (metamodel), B (repository knowledge model),
+  C (canonical model), D (projections).
+- **`ADR-0038`** — **four questions** every new artifact type must answer before
+  acceptance.
 - **`ADR-0017`** — reference architecture, not reference implementation.
 - **`ADR-0019`** — Knowledge Packages are a published interface.
 
@@ -67,7 +72,7 @@ Read these before designing anything that produces an artifact:
 | [ADR-0011](ADR-0011-engineering-os-is-a-knowledge-compiler.md) | Engineering OS is a knowledge compiler | **superseded by ADR-0014** | — |
 | [ADR-0012](ADR-0012-executable-framework-and-artifact-taxonomy.md) | Executable framework with a typed artifact taxonomy | accepted | ISSUE-0005 |
 | [ADR-0013](ADR-0013-three-manifests-by-responsibility.md) | Three manifests separated by responsibility and lifecycle | accepted | ISSUE-0030 |
-| [ADR-0014](ADR-0014-three-tier-knowledge-model.md) | **Knowledge compiler over a three-tier knowledge model** | accepted | ISSUE-0034 |
+| [ADR-0014](ADR-0014-three-tier-knowledge-model.md) | Knowledge compiler over a three-tier knowledge model | **superseded by ADR-0037** | ISSUE-0034 |
 | [ADR-0015](ADR-0015-authoring-is-non-deterministic-compilation-is-deterministic.md) | Authoring is non-deterministic; compilation is deterministic | **superseded by ADR-0018** | ISSUE-0033 |
 | [ADR-0016](ADR-0016-governance-is-authoritative-manifests-are-projections.md) | Governance is authoritative; manifests are projections | accepted | ISSUE-0028, ISSUE-0035 |
 | [ADR-0017](ADR-0017-reference-architecture-not-reference-implementation.md) | **Reference architecture, not reference implementation** | accepted | ISSUE-0032 |
@@ -90,6 +95,8 @@ Read these before designing anything that produces an artifact:
 | [ADR-0034](ADR-0034-knowledge-explorer-is-a-per-repository-projection.md) | The Knowledge Explorer is a per-repository projection | accepted | ISSUE-0052 |
 | [ADR-0035](ADR-0035-engineering-os-metamodel.md) | **The Engineering OS Metamodel** | accepted | ISSUE-0054 |
 | [ADR-0036](ADR-0036-canonical-model-conforms-to-the-metamodel.md) | **The Canonical Knowledge Model conforms to the Metamodel** | accepted | — |
+| [ADR-0037](ADR-0037-four-layer-semantic-architecture.md) | **The four-layer semantic architecture** | accepted | ISSUE-0031, ISSUE-0055 |
+| [ADR-0038](ADR-0038-four-questions-for-every-new-artifact-type.md) | **Four questions for every new artifact type** | accepted | — |
 
 ## Supersessions
 
@@ -100,6 +107,7 @@ Read these before designing anything that produces an artifact:
 | `ADR-0011` | `ADR-0014` | The compiler principle survives entirely. What is added is the three-tier distinction that made `model/`'s status unambiguous. |
 | `ADR-0015` | `ADR-0018` | The determinism principle survives. What changes is the boundary marker: a commit no longer confers authoritative status — acceptance does. |
 | `ADR-0018` | `ADR-0020` | The acceptance decision survives in full. What changes is the lifecycle vocabulary: the state `Authoritative` is renamed `Active`, and the lifecycle applies to a revision rather than an artifact. |
+| `ADR-0014` | `ADR-0037` | The knowledge-compiler principle and all three tiers survive, renamed layers B, C and D. What is added is Layer A, the Metamodel, above them. |
 
 Superseded ADRs are retained as the record of what was believed before. Read the
 superseding ADR for the current rule.
@@ -116,6 +124,7 @@ wrong. There is no front-matter mechanism for this — `ISSUE-0048`.
 | Corrected | By | What |
 |---|---|---|
 | `ADR-0025` | `ADR-0026` | Examples only. `ArtifactLifecycle` should read `ArtifactRevisionLifecycle`. The state-machine rule is untouched and remains `Active`. |
+| `ADR-0010` | `ADR-0037` | Layer terminology only. `ADR-0010` used "Layer A" for the methodology; Layer A is now the Metamodel. Its decision — knowledge is repository-local, environments federate — is untouched and remains `Active`. |
 | `ADR-0031` | `ADR-0032` | The opening definition. "A Registry is an authoritative index" should read: a Registry *Specification* is authoritative; a Registry *Projection* is the derived index. The pattern is untouched and remains `Active`. |
 
 ## Rules
