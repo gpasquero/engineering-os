@@ -29,10 +29,10 @@ M1 is complete.
 | Documentation system, session protocol | Defined and accepted |
 | Vision, principles, glossary | Written |
 | Roadmap | M1–M13 |
-| ADRs | 27 — 22 accepted, 5 superseded |
-| Issues | 48 recorded — 23 open, 24 resolved, 1 deferred |
-| Acceptance Records | 3 — `ACCEPT-0001` (trust root), `ACCEPT-0002`, `ACCEPT-0003` |
-| Session journal | 8 entries |
+| ADRs | 29 — 24 accepted, 5 superseded |
+| Issues | 50 recorded — 23 open, 26 resolved, 1 deferred |
+| Acceptance Records | 4 — `ACCEPT-0001` (trust root) through `ACCEPT-0004` |
+| Session journal | 9 entries |
 | Frozen provenance | `imports/` (3 prototypes), `sources/` (requirements, archives, original handoff) |
 
 ## What does not exist
@@ -41,8 +41,8 @@ No executable code, and none is planned before M9 (`ADR-0017`, `ISSUE-0036`).
 
 Nothing in `shared/`, `skills/`, `workflows/`, `model-spec/`, `model/`,
 `templates/`, `schemas/`, `validation/`, `tests/`, `adapters/` or `docs/`. None
-of the three manifests. No State Machine Registry. No governance policy — the
-first arrives in M3.
+of the three manifests. No State Machine Registry. **No policies of any kind** —
+the first Modeling Policies arrive in M3.
 
 ## Acceptance status
 
@@ -51,17 +51,30 @@ first arrives in M3.
 | `ACCEPT-0001` | Bootstrap corpus at `2b6484f` | Trust root; the only retrospective acceptance |
 | `ACCEPT-0002` | `SESSION-0006` at `aed6d89` | First acceptance under the normal workflow |
 | `ACCEPT-0003` | `SESSION-0007` at `d439084` | — |
+| `ACCEPT-0004` | `SESSION-0008` at `51bed77` | — |
 
-**`ADR-0026`, `ADR-0027`, `ISSUE-0046`–`ISSUE-0048` and this session's
+**`ADR-0028`, `ADR-0029`, `ISSUE-0049`, `ISSUE-0050` and this session's
 propagation are `Under Review`**, not `Active`.
+
+## A note for agents reading this repository
+
+**The ADR corpus is history, not specification** (`ADR-0029`). Twenty-nine
+decisions, five superseded, one partially corrected. Deriving the currently
+applicable rules from it is archaeology.
+
+The normative rules will live in Modeling Policies under `shared/policies/`.
+**Until M3 writes them, no such policy exists**, and the ADRs are the only
+statement of the rules — which is precisely the condition `ADR-0029` exists to
+end.
 
 ## Blocking
 
-**Nothing blocks M2.** One issue gates two deliverables within it:
+**Nothing blocks M2.**
 
 | Issue | Gates |
 |---|---|
-| `ISSUE-0047` | The State Machine Registry and `shared/vocabularies/` — the registry's location overlaps `KNOWLEDGE-MANIFEST.yaml` |
+| `ISSUE-0049` | `shared/vocabularies/` and the state machine specifications |
+| `ISSUE-0050` | `shared/policies/` — blocks M3, not M2 |
 
 The compiler interface specification, `model-spec/`, the manifests and the
 remaining contracts can proceed in parallel.
@@ -75,21 +88,20 @@ remaining contracts can proceed in parallel.
 
 ## Known debt
 
-- **`ISSUE-0037`** — five hand-maintained projections; no generator can exist
-  while `ISSUE-0036` is deferred. Counts are recomputed from the files before
-  each index rewrite, after drifting once in `SESSION-0004`.
-- **`ISSUE-0046`** — modeling guidelines are declared across scattered ADRs with
-  no home document. Two so far, and the set will grow through M3.
-- **`ADR-0027` extends the debt**: registration correctness is unenforced until
-  validators exist, so a malformed registration is caught only by review.
+- **`ISSUE-0037`** — five hand-maintained projections; no generator until
+  `ISSUE-0036` is un-deferred.
+- **`ADR-0027`** — registration correctness is unenforced until validators exist.
+- **`ADR-0029`** — rule text will exist in both ADRs and policies. The divergence
+  is intended, but intended divergence and accidental drift look identical in a
+  diff.
 
 ## Next action
 
 Accept or return this session's work.
 
 Then M2. The compiler interface specification and `model-spec/` are the largest
-unblocked deliverables. `ISSUE-0047` should be settled before either the
-registry or `shared/vocabularies/` is written.
+unblocked deliverables. `ISSUE-0049` should be settled before
+`shared/vocabularies/`.
 
 ## Repository state
 

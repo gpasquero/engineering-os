@@ -9,8 +9,8 @@ related: [ISSUE-0037]
 
 # Issue Index
 
-**48 recorded · 23 open · 24 resolved · 1 deferred.** Highest allocated ID:
-`ISSUE-0048`.
+**50 recorded · 23 open · 26 resolved · 1 deferred.** Highest allocated ID:
+`ISSUE-0050`.
 
 > **Hand-maintained projection.** Under `ADR-0016` this is a projection of issue
 > front matter, which is authoritative. No generator exists yet (`ISSUE-0036`),
@@ -26,8 +26,9 @@ related: [ISSUE-0037]
 | [0002](ISSUE-0002-composition-primitive-undefined.md) | How a workflow invokes a skill is undefined | M8 |
 | [0006](ISSUE-0006-scenario-testing-method-undefined.md) | How a prompt-based methodology is tested is undefined | M10 |
 
-**M2 is unblocked.** `ISSUE-0047` gates the State Machine Registry and
-`shared/vocabularies/` rather than the milestone.
+**M2 is unblocked.** `ISSUE-0049` gates `shared/vocabularies/` and the state
+machine specifications rather than the milestone. `ISSUE-0050` blocks
+`shared/policies/` in M3.
 
 ## Open, by milestone
 
@@ -35,7 +36,7 @@ related: [ISSUE-0037]
 
 | ID | Title | Type | Severity |
 |---|---|---|---|
-| [0047](ISSUE-0047-state-machine-registry-location.md) | Where the State Machine Registry lives | question | high |
+| [0049](ISSUE-0049-state-machine-specification-location.md) | Where state machine specifications live | question | high |
 | [0048](ISSUE-0048-no-mechanism-for-correcting-an-active-adr.md) | No mechanism for correcting part of an `Active` ADR | gap | medium |
 | [0007](ISSUE-0007-versioning-granularity-undefined.md) | Versioning granularity; what identifies a revision | question | high |
 | [0011](ISSUE-0011-audience-licence-distribution-undefined.md) | Repository is public with no licence | question | high |
@@ -53,7 +54,7 @@ related: [ISSUE-0037]
 | [0010](ISSUE-0010-definition-of-done-missing.md) | Definition of Done asserted but never stated | gap | high |
 | [0020](ISSUE-0020-three-conflicting-autonomy-policies.md) | Three incompatible autonomy policies | inconsistency | high |
 | [0021](ISSUE-0021-write-scope-conflict-on-composition.md) | Write scope conflicts on composition | risk | high |
-| [0046](ISSUE-0046-modeling-guidelines-have-no-home.md) | Core modeling guidelines have no home document | gap | high |
+| [0050](ISSUE-0050-policy-is-overloaded.md) | "policy" names at least three artifact kinds | inconsistency | high |
 | [0027](ISSUE-0027-inherited-decisions-lack-context.md) | Ten inherited decisions have no rationale | gap | medium |
 
 ### M4 — Discovery skills
@@ -130,3 +131,5 @@ related: [ISSUE-0037]
 | [0043](ISSUE-0043-document-status-vocabularies-overlap-lifecycle.md) | Status vocabularies overlap the lifecycle | `ADR-0025` |
 | [0044](ISSUE-0044-artifact-versus-revision-lifecycle-naming.md) | Artifact versus revision lifecycle naming | `ADR-0026` |
 | [0045](ISSUE-0045-state-machine-inventory-not-fixed.md) | State machine inventory not fixed | `ADR-0027` |
+| [0046](ISSUE-0046-modeling-guidelines-have-no-home.md) | Modeling guidelines have no home | `ADR-0029` |
+| [0047](ISSUE-0047-state-machine-registry-location.md) | State Machine Registry location | `ADR-0028` |

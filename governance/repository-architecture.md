@@ -185,6 +185,15 @@ this repository names its own. It exists because the project caught the same
 class of collision three times — "skill", "authoritative", and the document
 status vocabularies — and the third time identified the shared root cause.
 
+**The State Machine Registry is a section of `KNOWLEDGE-MANIFEST.yaml`**
+(`ADR-0028`), because a state machine is part of the semantic model of the
+domain — not project metadata, not build metadata, but **knowledge**. The
+manifest indexes and relates machines; individual specifications remain separate
+artifacts (`ISSUE-0049`).
+
+This sharpens the three-manifest split into a decision test: **architecture /
+implementation status / semantic structure.**
+
 **State machines are registered, not enumerated** (`ADR-0027`). Every machine
 registers its identifier, owner, governed entity, purpose, vocabulary,
 transition rules, authoritative specification, related ontology concepts and
@@ -192,8 +201,26 @@ related workflows. The framework validates registrations rather than
 enumerating every possible lifecycle, and documentation, visualizations,
 ontology navigation and validation are generated from the registry.
 
-The same mechanism serves Engineering OS and every adopting repository. Where
-the registry lives is open — `ISSUE-0047`.
+The same mechanism serves Engineering OS and every adopting repository.
+
+## ADRs versus Policies
+
+> **ADRs explain *why* a policy exists. Policies define the rule that must be
+> followed** (`ADR-0029`).
+
+**Modeling Policy** is a first-class artifact type in `shared/policies/`. Unlike
+an ADR it is not tied to a single decision, is expected to evolve, is normative
+rather than historical, and is **directly consumed by AI agents**. Policies
+reference the ADRs they originated from but are not generated from them.
+
+**Agents primarily consume Policies. Humans read ADRs for rationale.**
+
+This exists so the accumulated ADR history never becomes the operational
+specification — a corpus of 29 decisions with five supersessions is a record of
+how a specification came to be, not a specification.
+
+The word "policy" is currently overloaded across modeling, governance and
+process policies — `ISSUE-0050`.
 
 ## Reference architecture, not reference implementation
 
@@ -286,7 +313,7 @@ engineering-os/
 │
 ├── shared/                     M2–M3
 │   ├── contracts/              Normative, machine-checkable interfaces
-│   ├── policies/               Normative prose, referenced and never inlined
+│   ├── policies/               Modeling, governance and process policies
 │   └── vocabularies/           Closed enumerations, single source
 │
 ├── skills/                     M4–M7 — one directory per skill
@@ -352,10 +379,10 @@ current state and proposed state. See `ADR-0005`.
 
 These are recorded as issues and must not be silently assumed:
 
-- `ISSUE-0047` — where the State Machine Registry lives, and its relationship to
-  `KNOWLEDGE-MANIFEST.yaml`. Blocks `shared/vocabularies/`.
-- `ISSUE-0046` — core modeling guidelines are declared across scattered ADRs
-  with no home document.
+- `ISSUE-0049` — where state machine specifications live, and their boundary
+  with `shared/vocabularies/`. Blocks `shared/vocabularies/`.
+- `ISSUE-0050` — "policy" names at least three artifact kinds. Blocks
+  `shared/policies/`.
 - `ISSUE-0048` — no mechanism for correcting part of an `Active` ADR.
 - `ISSUE-0007` — versioning granularity, now also covering what identifies a
   **revision**.

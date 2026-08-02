@@ -40,8 +40,22 @@ A skill lives in `skills/<skill-id>/`.
 representing one kind of engineering change end to end. Workflows sequence
 skills; they contain no methodology of their own.
 
-**Policy** — normative prose that constrains how work is done, stored once in
-`shared/policies/` and referenced by path. Never inlined into a skill.
+**Policy** — normative prose stored once in `shared/policies/` and referenced by
+path. Never inlined into a skill. **The word is currently overloaded** —
+`ISSUE-0050`:
+
+- **Modeling Policy** — governs *how domains are modeled*. A first-class
+  artifact type: not tied to one decision, expected to evolve, normative rather
+  than historical, and **directly consumed by AI agents**. References the ADRs
+  it originated from (`ADR-0029`).
+- **Governance policy** — governs *acceptance*. Cannot modify itself; the
+  currently `Active` one governs its successor's acceptance (`ADR-0023`).
+- **Process policy** — governs *how work is done*: write scope, autonomy and
+  escalation, secrets and privacy, verification, knowledge update.
+
+> **ADRs explain why a policy exists. Policies define the rule that must be
+> followed.** An ADR is historical and immutable; a policy is normative and
+> evolving. Agents read policies; humans read ADRs for rationale.
 
 **Contract** — a machine-checkable interface definition in `shared/contracts/`:
 the shape of a record, or the I/O signature of a skill or workflow.
@@ -121,8 +135,12 @@ state. What identifies a revision is undefined — `ISSUE-0007`.
 after the entity it governs, per the naming rule in `ADR-0026`, which applies to
 every versioned object in Engineering OS.
 
-**State Machine Registry** — the source of truth for state machines. Machines
-are **registered, not enumerated**: each registers its identifier, owner,
+**State Machine Registry** — the source of truth for state machines, and a
+**section of `KNOWLEDGE-MANIFEST.yaml`**, because a state machine is part of the
+semantic model of the domain: not project metadata, not build metadata, but
+knowledge (`ADR-0028`). The manifest **indexes and relates** machines;
+individual specifications remain separate artifacts, whose location is open
+(`ISSUE-0049`). Machines are **registered, not enumerated**: each registers its identifier, owner,
 governed entity, purpose, vocabulary, transition rules, authoritative
 specification, related ontology concepts and related workflows. The framework
 validates registrations rather than enumerating every possible lifecycle, and

@@ -30,9 +30,9 @@ recorded as issues. No skills, policies or contracts.
 resolved by `ADR-0020` through `ADR-0023`, and the trust root `ACCEPT-0001`
 exists.
 
-`ISSUE-0047` gates the State Machine Registry and `shared/vocabularies/`. Other
-M2 work — the compiler interface specification, `model-spec/`, the manifests,
-the remaining contracts — can proceed in parallel.
+`ISSUE-0049` gates `shared/vocabularies/` and the state machine specifications.
+Other M2 work — the compiler interface specification, `model-spec/`, the
+manifests, the remaining contracts — can proceed in parallel.
 
 - **Compiler interface specification** (`ADR-0017`) — language-independent, and
   the substitute for shipping executable tooling in this milestone
@@ -44,10 +44,10 @@ the remaining contracts — can proceed in parallel.
 - Skill contract and workflow contract, including write-scope declaration
 - Evidence record, conflict record, traceability record contracts
 - **Acceptance Record contract** (`ADR-0021`, `ISSUE-0042`)
-- **State Machine Registry** (`ADR-0027`) — the registration model and the
-  machines that exist today. Includes defining the shape of three fields that do
-  not yet have one: transition rules, related ontology concepts, authoritative
-  specification.
+- **State Machine Registry** — a section of `KNOWLEDGE-MANIFEST.yaml`
+  (`ADR-0028`), indexing machines whose specifications are separate artifacts.
+  Includes defining the shape of three fields that do not yet have one:
+  transition rules, related ontology concepts, authoritative specification.
 - `shared/vocabularies/` — **grouped by state machine** (`ADR-0025`), never as
   one global list. Covers assertion statuses, confidence, risk, gate decisions,
   change types, **artifact kinds** (`ADR-0012`) and
@@ -67,17 +67,25 @@ must be readable and editable without the compiler (`ADR-0017`).
 
 ## M3 — Shared policies
 
-Evidence, research, ontology, constraint-placement, write-scope, autonomy and
-escalation, secrets and privacy, traceability, verification and
-knowledge-update policies.
+**Blocked by `ISSUE-0050`** — the policy taxonomy must be fixed before
+`shared/policies/` is written.
+
+The first **Modeling Policies** (`ADR-0029`), stating the rules already decided:
+artifact taxonomy, lifecycle ownership, state machine registration, naming
+conventions, acceptance semantics, traceability requirements. Their source
+material exists across `ADR-0012`, `ADR-0020`, `ADR-0025`, `ADR-0026`,
+`ADR-0027` and `ADR-0028`.
+
+Plus the process policies: evidence, research, ontology, constraint-placement,
+write-scope, autonomy and escalation, secrets and privacy, traceability,
+verification and knowledge-update.
 
 Also the **first governance policy** (`ADR-0023`). Being an Authoritative
 Artifact, it is accepted under the trust root `ACCEPT-0001`, and thereafter
 governs the acceptance of its own successor.
 
-And the **core modeling guidelines** (`ISSUE-0046`) — the rules declared across
-`ADR-0025` and `ADR-0026` that govern modeling in target domains, collected
-where skills can reference them.
+Agents primarily consume policies rather than ADRs (`ADR-0029`), so M4 skills
+depend on this milestone more directly than on the decision corpus.
 
 ## M4 — Discovery skills
 

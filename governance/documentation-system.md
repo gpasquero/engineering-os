@@ -41,7 +41,8 @@ If a fact cannot be traced to a file in this repository, it does not exist.
 | Governance document | none | `governance/` | Mutable | Vision, principles, glossary, roadmap, architecture, protocol |
 | Build state | none | `governance/build-state.md` | Overwritten | The single current-status document |
 | Design note | none | `governance/design/` | Mutable | Working proposals not yet promoted to a decision |
-| Specification | `SPEC-` | `shared/`, `skills/`, `workflows/` | Versioned | Normative contracts and policies (from M2 onward) |
+| Modeling Policy | `POLICY-` | `shared/policies/` | **Mutable, expected to evolve** | Normative modeling rules, consumed primarily by agents (`ADR-0029`) |
+| Specification | `SPEC-` | `shared/`, `skills/`, `workflows/` | Versioned | Normative contracts (from M2 onward) |
 | Provenance | none | `imports/`, `sources/` | **Frozen** | Original inputs, never edited |
 
 No other document types exist. Introducing one requires an ADR.
@@ -162,6 +163,24 @@ Reference documents by ID in prose (`ISSUE-0004`), and by relative path in
 front matter and link targets. Every ADR that answers an issue must list it in
 `resolves`, and that issue must name the ADR in `resolved-by`. This
 bidirectional link is mandatory — a one-sided link is a defect.
+
+## ADRs versus Policies
+
+> **ADRs explain *why* a policy exists. Policies define the rule that must be
+> followed** (`ADR-0029`).
+
+An ADR is **historical**: immutable, superseded rather than edited, a record of
+what was decided and when. A Modeling Policy is **normative**: expected to
+evolve, stating what currently applies.
+
+**Agents primarily consume Policies. Humans read ADRs for rationale.**
+
+Policies reference the ADRs they originated from. They are *not* generated from
+them — a policy is expected to evolve past the decision that created it, and
+that divergence is intended.
+
+This exists so the accumulated ADR history never becomes the operational
+specification.
 
 ## Where knowledge must not live
 

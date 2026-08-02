@@ -12,7 +12,11 @@ related: [ISSUE-0037]
 A decision that is not recorded here will be re-litigated. Write the ADR in the
 same session the decision is made.
 
-**Highest allocated ID: `ADR-0027`.** IDs are sequential and never reused.
+> **This corpus is history, not specification** (`ADR-0029`). ADRs explain *why*
+> a rule exists; the rule that must be followed lives in a Policy under
+> `shared/policies/`. Agents consume policies; humans read ADRs for rationale.
+
+**Highest allocated ID: `ADR-0029`.** IDs are sequential and never reused.
 
 > This index table is a hand-maintained projection of ADR front matter. It is
 > listed in the transitional-debt register, `ISSUE-0037`.
@@ -31,6 +35,9 @@ Read these before designing anything that produces an artifact:
 - **`ADR-0026`** — the lifecycle belongs to a Revision; an Artifact is an
   identity with no lifecycle of its own.
 - **`ADR-0027`** — state machines are registered, not enumerated.
+- **`ADR-0029`** — ADRs explain *why*; Policies define the rule. Agents consume
+  policies, humans read ADRs. **Read this before treating any ADR as a
+  specification.**
 - **`ADR-0017`** — reference architecture, not reference implementation.
 - **`ADR-0019`** — Knowledge Packages are a published interface.
 
@@ -65,6 +72,8 @@ Read these before designing anything that produces an artifact:
 | [ADR-0025](ADR-0025-every-state-belongs-to-exactly-one-state-machine.md) | **Every state belongs to exactly one state machine** | accepted | ISSUE-0043 |
 | [ADR-0026](ADR-0026-artifact-revision-lifecycle.md) | **The lifecycle belongs to a Revision** | accepted | ISSUE-0044 |
 | [ADR-0027](ADR-0027-state-machine-registration-model.md) | **State machines are registered, not enumerated** | accepted | ISSUE-0045 |
+| [ADR-0028](ADR-0028-state-machine-registry-lives-in-knowledge-manifest.md) | The State Machine Registry is a section of `KNOWLEDGE-MANIFEST.yaml` | accepted | ISSUE-0047 |
+| [ADR-0029](ADR-0029-modeling-policy-is-a-first-class-artifact-type.md) | **Modeling Policy is a first-class artifact type** | accepted | ISSUE-0046 |
 
 ## Supersessions
 
