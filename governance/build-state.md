@@ -4,7 +4,7 @@ title: Build State
 status: current
 created: 2026-08-02
 updated: 2026-08-02
-milestone: brownfield-product
+milestone: generalization
 ---
 
 # Build State
@@ -17,8 +17,53 @@ milestone: brownfield-product
 
 ## Current work
 
-**Brownfield Knowledge Acquisition as a product.** The lifecycle runs; the
-question is now whether an engineering team would notice (`ADR-0116`).
+**Generalization.** The lifecycle runs on more than the repository it was built
+against — measured, not assumed (`ADR-0119`).
+
+## Two repositories, one interpreter
+
+| | `ai-desk` | `wa-b2b` |
+|---|---|---|
+| Stack | Node · NestJS · Drizzle | **Java 21 · Spring Boot · JPA** |
+| Files | 780 | **1 913** |
+| Routes · tables · suites | 161 · 34 · 69 | **143 · 45 · 193** |
+| Proposals | 299 | **453** |
+| Metamodel entities exercised | 6 of 23 | **5 of 23** |
+| Metamodel changes required | — | **none** |
+
+**Extraction is declared** (`ADR-0117`). `discovery/mechanical.py` holds eight
+extraction kinds and no path, framework or file extension; `stacks.yaml` holds
+the profiles. The Node profile reproduces the previous hard-coded extractor
+**identically across all eight vocabulary keys**.
+
+**The interpreter was not changed to read Java.** That was the claim under test.
+
+## The second repository found a defect the first had hidden
+
+`R4` names a general Invariant after a test suite's declared subject. No
+`wa-b2b` suite declares one, so it fell back to the **file name** and proposed 67
+invariants called things like `AgentServiceTest` — **13 % of the set, asserting
+nothing, carrying full provenance.**
+
+All 69 `ai-desk` suites declare a `describe` block, so the branch had never run
+in fourteen milestones. **One repository validated a rule and hid a defect in the
+same act.**
+
+Fixed. **`ai-desk` still produces exactly 299 proposals** — which is how a
+correctness fix is distinguished from an optimization (`ADR-0119`).
+
+## The honest result
+
+**Nine of seventeen declared queries answer nothing** on `wa-b2b`.
+
+| | |
+|---|---|
+| `Q-rationale` — *which decision established this?* | **0 of 216** — 135 documents, none recognised as a decision |
+| Authorization | **143 routes, not one carries who may call it** |
+| `Q-constraints` | 0 — the fabricated invariants were the **only** source of `constrains` edges |
+
+**453 proposals, and the two questions a new engineer asks first are both
+unanswerable.** The count is not the result; that gap is.
 
 ## The complete lifecycle runs, against a real commit
 
@@ -97,12 +142,13 @@ a proposal like any other.
 | **`discovery/continuous.py`** | Consumes a mechanical delta, not the repository. **Retractions are governed, never applied** |
 | **`discovery/drift.py`** | **15** drift categories, **each routed to a plan** |
 | **`tools/lifecycle.py`** | The five stages, end to end |
-| `discovery/mechanical.py` | Vocabulary `1.1.0`, reproducible |
+| `discovery/mechanical.py` · `stacks.yaml` | Vocabulary **`2.0.0`** — eight extraction kinds, **two Stack Profiles** |
 | `discovery/skills/skills.yaml` | **10** contracts — 9 `general`, **1 `domain`** — no vendor named |
 | `discovery/interpretive.py` | 6 named rules, 3 strategies |
 | `model/plans.md` · `tools/drift-queue.py` | **8 plans**; drift becomes work |
 | `compiler/apply/` · `tools/review.py` | Authorization and application |
 | `external/ai-desk-lifecycle/` | 72 authored sources · CKM 76 nodes · drift report · 6 products |
+| `external/wa-b2b-onboarding/` | **The first benchmark of an unseen system** — 453 sources, `BENCHMARK.md` |
 | `external/…/experiment/blind/` | The blind benchmark |
 | `tools/check-governance.py` | The corpus check, **committed at last** — 271 records |
 | Registries | 19 |
@@ -134,6 +180,12 @@ unspent.**
 
 **Runtime evidence.** No mode consumes it.
 
+**Any knowledge of authorization.** The highest-value gap found, and deliberately
+not built: one repository is not evidence (`ADR-0119`).
+
+**A second stack for a polyglot repository.** `wa-b2b` hosts Java, TypeScript and
+Python; detection returns one profile.
+
 **Domain Discovery Skills beyond one.** `DS-multitenant-saas` is a shape, not a
 catalogue. Six more were deferred by the test written in the same session.
 
@@ -152,7 +204,10 @@ catalogue. Six more were deferred by the test written in the same session.
 | Question | Where |
 |---|---|
 | **`C1` and `R4` disagree about multi-`describe` suites** — found by the drift report, deliberately unfixed | `LIFECYCLE.md` |
-| **Consumption is a stronger test than validation** — two defects now found by running output, none by checking it | `SESSION-0044` |
+| **Consumption is a stronger test than validation** — three defects now found by running output, none by checking it | `SESSION-0044` |
+| **The same five metamodel entities in two unrelated repositories** — repeated evidence, and it points at the interpreter | `BENCHMARK.md` |
+| **369 migrations and 135 documents unread** — the system's decision history is in the repository and not in the model | `BENCHMARK.md` |
+| **`apply()` never asks whose model is already in the directory** — pointed at another project's model it merged the two and reported success | `SESSION-0045` |
 | **A check retyped each session is not a check** — three records had unparseable front matter for many sessions | `tools/check-governance.py` |
 | Synchronized is not the same as useful; only running the Director against both states would show it | `LIFECYCLE.md` |
 | Nothing verifies a worker honoured its Skill contract | `ADR-0113` |
@@ -161,9 +216,15 @@ catalogue. Six more were deferred by the test written in the same session.
 
 ## Next action
 
-**A change that removes evidence**, to exercise the retraction path — the one
-branch of Continuous Acquisition that has never run, and the one where getting it
-wrong destroys curated knowledge.
+**The second repository: an event-driven service.**
+
+Three findings are one observation short of being actionable, and this is the
+cheapest way to buy the second: **authorization across a message boundary**,
+decisions recorded outside an `adr/` directory, and whether five entities is a
+property of interpreters or of these two repositories.
+
+Still untested, and still where getting it wrong destroys curated knowledge:
+**a change that removes evidence.**
 
 ## Repository state
 

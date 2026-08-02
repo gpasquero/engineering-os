@@ -216,12 +216,34 @@ def invariants_both_levels(mech, cand, task):
     core relationship type.
     """
     W = "W-constraint-interpreter"
-    general = specific = 0
+    general = specific = ungrouped = 0
     for suite in mech["testSuites"]:
         sid = f"Artifact.{_slug(suite['name'])}"
-        subject = suite["describes"][0] if suite["describes"] else suite["name"]
         rule_cases = [c for c in suite["cases"] if _states_a_rule(c)]
         if not rule_cases:
+            continue
+
+        # A suite that declares no subject HAS no general invariant. Falling back
+        # to the file name proposed `AgentServiceTest` as an engineering rule —
+        # 67 of them in the second repository ever tried. ai-desk hid this
+        # because every one of its suites declared a `describe` block, so the
+        # branch never ran. Absence is a finding; it is not a name.
+        subject = suite["describes"][0] if suite["describes"] else None
+        if subject is None:
+            for case in rule_cases:
+                iid = f"Invariant.{_slug(case, 44)}"
+                if cand.entity(iid, "Invariant", case, support="S-inferred",
+                               source=suite["file"], locator=f"case('{case[:70]}')",
+                               worker=W, task=task,
+                               attributes={"origin": ORIGIN,
+                                           "rule": "R4-both-levels",
+                                           "granularity": "guarantee",
+                                           "grouping": "none-declared"}) is None:
+                    continue
+                cand.relation(iid, "enforced-at", sid, support="S-tested",
+                              source=suite["file"], worker=W, task=task,
+                              rule="R4-both-levels")
+                ungrouped += 1
             continue
 
         gid = f"Invariant.{_slug(subject, 40)}"
@@ -257,7 +279,7 @@ def invariants_both_levels(mech, cand, task):
                           source=suite["file"], worker=W, task=task,
                           rule="R4-both-levels")
             specific += 1
-    return {"concepts": general, "guarantees": specific}
+    return {"concepts": general, "guarantees": specific, "ungrouped": ungrouped}
 
 
 STRATEGIES = {

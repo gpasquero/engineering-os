@@ -1,7 +1,7 @@
 {
   "mode": "periodic-reacquisition",
   "note": "Reacquisition validates and challenges the maintained model. It does not replace it. EVERY ITEM IS A PROPOSAL REQUIRING REVIEW (ADR-0112).",
-  "candidateDigest": "30a9a7207f45cc16",
+  "candidateDigest": "81b171cccf561206",
   "authoritativeNodes": 76,
   "candidateProposals": 302,
   "items": {

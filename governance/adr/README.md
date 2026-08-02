@@ -16,7 +16,7 @@ same session the decision is made.
 > a rule exists; the rule that must be followed lives in a Policy under
 > `shared/policies/`. Agents consume policies; humans read ADRs for rationale.
 
-**Highest allocated ID: `ADR-0116`.** IDs are sequential and never reused.
+**Highest allocated ID: `ADR-0119`.** IDs are sequential and never reused.
 
 > This index table is a hand-maintained projection of ADR front matter. It is
 > listed in the transitional-debt register, `ISSUE-0037`.
@@ -211,6 +211,9 @@ Read these before designing anything that produces an artifact:
 | [ADR-0114](ADR-0114-drift-drives-plans.md) | **Each drift class routes to an Engineering Plan; a drift report is a work queue** | accepted | — |
 | [ADR-0115](ADR-0115-skill-catalog.md) | **Discovery Skills are a composable catalog; domain skills are knowledge packages** | accepted | — |
 | [ADR-0116](ADR-0116-product-experience-test.md) | **The admission test is whether it improves a team's experience on a real Brownfield system** | accepted | — |
+| [ADR-0117](ADR-0117-stack-profiles.md) | **Where mechanical facts live is declared by a Stack Profile, never coded** | accepted | — |
+| [ADR-0118](ADR-0118-acquisition-modes-are-product-capabilities.md) | **Initial, Continuous and Periodic are product capabilities, not implementation details** | accepted | — |
+| [ADR-0119](ADR-0119-a-repository-is-a-benchmark.md) | **A repository is a benchmark, not a backlog; evolve only on repeated evidence** | accepted | — |
 
 ## Supersessions
 

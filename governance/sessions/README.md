@@ -67,6 +67,7 @@ ADRs answer "why".
 | [SESSION-0042](SESSION-0042-2026-08-02.md) | 2026-08-02 | skills | `ACCEPT-0037`; **Discovery Skills as engine-independent contracts** (`ADR-0113`), 9 declared; **the genuinely blind benchmark run**; the comparison harness refuses incomparable inputs |
 | [SESSION-0043](SESSION-0043-2026-08-02.md) | 2026-08-02 | lifecycle | `ACCEPT-0038`; **the complete Brownfield Acquisition lifecycle** on a real `ai-desk` commit — Initial → change → Continuous → Reacquisition → **the first Knowledge Drift Report**, which found a divergence between two acquisition modes |
 | [SESSION-0044](SESSION-0044-2026-08-02.md) | 2026-08-02 | product | `ACCEPT-0039`; **drift drives plans** (`ADR-0114`) — the report becomes a work queue; **skill catalog, general and domain** (`ADR-0115`); **the product-experience admission test** (`ADR-0116`); silent plan phases made visible |
+| [SESSION-0045](SESSION-0045-2026-08-02.md) | 2026-08-02 | generalization | `ACCEPT-0040`; **Stack Profiles** (`ADR-0117`) — extraction becomes data; the three **acquisition capabilities** (`ADR-0118`); **a repository is a benchmark** (`ADR-0119`); first run against an unseen Spring Boot system, and a rule caught fabricating 67 invariants |
 
 ## Reading
 

@@ -1,0 +1,124 @@
+# Stack Profiles — where facts live, declared rather than coded (ADR-0117).
+#
+# Mechanical Acquisition holds MECHANISM: seven extraction kinds. A profile is
+# DATA: it says where a stack keeps its packages, modules, routes, tables, tests,
+# configuration references and documents.
+#
+# The vocabulary is the portability boundary. Interpretive Discovery reads the
+# Mechanical Engineering Model and never learns which profile produced it, so a
+# new stack costs a declaration and no interpreter change (ADR-0108).
+#
+# Adding a profile is not evidence a Discovery Skill should generalize. That
+# requires the same need in several repositories (ADR-0119).
+
+profiles:
+
+  # ── Node · NestJS · Drizzle ────────────────────────────────────────────────
+  # The original profile. It was the extractor's hard-coded behaviour until
+  # SESSION-0045; every path here was previously a literal in Python.
+  - id: S-node-nest-drizzle
+    title: Node workspace with NestJS controllers and Drizzle schema
+    detect: [packages/backend/package.json]
+
+    packages:
+      kind: manifest-json
+      glob: packages/*/package.json
+      name-from: parent-dir
+      dependencies: dependencies
+
+    moduleDirs:
+      kind: dirs-under
+      root: packages/backend/src/modules
+      count-suffix: .ts
+
+    routes:
+      kind: routes
+      glob: packages/backend/src/**/*.controller.ts
+      prefix: '@Controller\(\s*[''"]([^''"]*)'
+      verb-path: '@(Get|Post|Put|Patch|Delete)\(\s*[''"]?([^''")]*)'
+      module-from: parent-dir
+
+    tables:
+      kind: declaration-blocks
+      glob: packages/backend/src/common/database/schema/*.ts
+      exclude: [index.ts]
+      declaration: 'pgTable\(\s*[''"]([^''"]+)'
+      member: '^\s*([a-zA-Z][A-Za-z0-9]*)\s*:'
+
+    testSuites:
+      kind: test-suites
+      glob: packages/backend/src/**/*.spec.ts
+      describe: 'describe\(\s*[''"](.+?)[''"]'
+      case: '\bit\(\s*[''"](.+?)[''"]'
+      module-from: parent-dir-skipping-tests
+
+    envRefs:
+      kind: regex-set
+      glob: packages/*/src/**/*.ts
+      pattern: 'process\.env\.([A-Z][A-Z0-9_]+)'
+
+    documents:
+      kind: documents
+      glob: docs/**/*.md
+
+  # ── Java · Spring Boot · JPA ───────────────────────────────────────────────
+  # Added in SESSION-0045 to test whether the vocabulary is portable. It is a
+  # declaration, not an interpreter change — which is the claim being tested.
+  - id: S-java-spring-jpa
+    title: Maven modules with Spring MVC controllers and JPA entities
+    detect: [pom.xml, backend/pom.xml]
+
+    packages:
+      kind: manifest-xml
+      glob: "**/pom.xml"
+      name: '<artifactId>([^<]+)</artifactId>'
+      dependencies: '<dependency>.*?<artifactId>([^<]+)</artifactId>'
+
+    # Spring layers a base package into feature or role directories. Which of
+    # the two a repository chose is an ENGINEERING observation, not a mechanical
+    # one, so the extractor records the directories and says nothing about them.
+    moduleDirs:
+      kind: dirs-under
+      root-marker: "**/src/main/java/**/*Application.java"
+      count-suffix: .java
+
+    routes:
+      kind: routes
+      glob: "**/src/main/java/**/*.java"
+      require: Mapping
+      prefix: '@RequestMapping\(\s*(?:value\s*=\s*)?[''"]([^''"]*)'
+      verb-path: '@(Get|Post|Put|Patch|Delete)Mapping\(\s*(?:value\s*=\s*)?[''"]?([^''",)]*)'
+      module-from: parent-dir
+
+    tables:
+      kind: declaration-blocks
+      glob: "**/src/main/java/**/*.java"
+      require: "@Entity"
+      declaration: '@Table\s*\(\s*name\s*=\s*[''"]([^''"]+)'
+      declaration-fallback: '(?:class|record)\s+([A-Za-z][A-Za-z0-9_]*)'
+      member: '^\s*(?:private|protected|public)\s+(?:final\s+)?[\w<>,\[\]\.\s]+?\s+([a-z][A-Za-z0-9_]*)\s*[;=]'
+
+    testSuites:
+      kind: test-suites
+      glob: "**/src/test/java/**/*.java"
+      require: "@Test"
+      # NO describe-fallback. A class name is not a statement. Substituting
+      # `AgentServiceTest` for a missing @DisplayName manufactured 67 invariants
+      # that assert nothing — absence recorded as content. Mechanical Acquisition
+      # records what is there; a suite with no declared intent has none.
+      describe: '@DisplayName\(\s*[''"](.+?)[''"]\s*\)\s*(?:@[\w.]+(?:\([^)]*\))?\s*)*(?:public\s+|final\s+)*class'
+      case: '@DisplayName\(\s*[''"](.+?)[''"]\s*\)\s*(?:@[\w.]+(?:\([^)]*\))?\s*)*(?:public\s+|private\s+|protected\s+)?void'
+      case-fallback: '@Test\b[\s\S]{0,200}?\bvoid\s+([a-z][A-Za-z0-9_]*)\s*\('
+      module-from: parent-dir
+
+    # Spring externalizes configuration twice: at the reference and at the
+    # default. Only the reference is a fact about the code.
+    envRefs:
+      kind: regex-set
+      glob: "**/src/main/java/**/*.java"
+      pattern: '@Value\(\s*[''"]\$\{([A-Za-z][\w.\-]*)'
+
+    documents:
+      kind: documents
+      glob: "**/*.md"
+      exclude-dirs: [node_modules, target, build, .git, .claude]
