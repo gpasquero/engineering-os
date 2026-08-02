@@ -17,7 +17,7 @@ Session logs are the trajectory record: they answer "how did we get here",
 which no other document does. `build-state.md` answers "where are we", and the
 ADRs answer "why".
 
-**Highest allocated ID: `SESSION-0009`.**
+**Highest allocated ID: `SESSION-0010`.**
 
 ## Index
 
@@ -32,6 +32,7 @@ ADRs answer "why".
 | [SESSION-0007](SESSION-0007-2026-08-02.md) | 2026-08-02 | M2 | `ACCEPT-0002` — first acceptance under the normal workflow; acceptance chain terminates at the record; every state belongs to one state machine; `ADR-0024`, `ADR-0025` |
 | [SESSION-0008](SESSION-0008-2026-08-02.md) | 2026-08-02 | M2 | `ACCEPT-0003`; lifecycle belongs to a Revision; state machines are registered not enumerated; `ADR-0026`, `ADR-0027` |
 | [SESSION-0009](SESSION-0009-2026-08-02.md) | 2026-08-02 | M2 | `ACCEPT-0004`; registry lives in `KNOWLEDGE-MANIFEST.yaml`; Modeling Policy as a first-class artifact type; `ADR-0028`, `ADR-0029` |
+| [SESSION-0010](SESSION-0010-2026-08-02.md) | 2026-08-02 | M2 | `ACCEPT-0005`; normative artifact taxonomy; **Registry Pattern** named after four independent rediscoveries; `ADR-0030`, `ADR-0031` |
 
 ## Reading
 

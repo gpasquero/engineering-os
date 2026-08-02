@@ -2,7 +2,7 @@
 id: ISSUE-0050
 title: "policy" names at least three different artifact kinds
 type: inconsistency
-status: open
+status: resolved
 severity: high
 created: 2026-08-02
 updated: 2026-08-02
@@ -12,7 +12,7 @@ evidence:
   - governance/adr/ADR-0023-governance-is-self-hosting-never-self-certifying.md
   - governance/adr/ADR-0008-shared-layer-three-way-split.md
   - governance/roadmap.md
-resolved-by: null
+resolved-by: ADR-0030
 ---
 
 # ISSUE-0050 — "policy" names at least three different things
@@ -62,7 +62,32 @@ That last question is the general one. Three collisions in one vocabulary
 dimension were solved by `ADR-0025`; this is the same problem in another
 dimension.
 
-## Resolution criteria
+## Resolution
 
-An ADR fixing the policy taxonomy — which types exist, what each governs, which
-invariants apply to which — before `shared/policies/` is written in M3.
+`ADR-0030`. **Do not solve this by inventing prefixes ad hoc.** A taxonomy for
+normative artifacts instead — three distinct artifact kinds:
+
+- **`GovernancePolicy`** — rules governing Engineering OS itself: acceptance,
+  review, release governance.
+- **`ModelingPolicy`** — rules governing how domains must be modeled: ontology
+  modeling, naming conventions, state machine registration, artifact taxonomy,
+  traceability rules.
+- **`ProcessPolicy`** — rules governing execution of workflows: feature
+  implementation, bug investigation, release, migration.
+
+**The unqualified term "Policy" is avoided in specifications.**
+
+The general question this issue raised — *should artifact type names be
+namespaced the way state names are?* — is answered yes, and generalized:
+
+> **A normative artifact type name is always qualified by what it governs.**
+
+`ADR-0025` fixed state names by owning machine; `ADR-0030` fixes normative
+artifact type names by what they govern. Two dimensions of one discipline.
+
+The sub-question about `ADR-0023`'s self-modification invariant is answered by
+scoping: it constrains `GovernancePolicy` only, so modeling rules are not
+accidentally subject to two acceptance cycles.
+
+Opened by this answer: `ISSUE-0051` — `ProcessPolicy` overlaps the M8 workflow
+catalogue, using the same names.

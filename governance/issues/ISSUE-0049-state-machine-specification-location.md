@@ -63,6 +63,19 @@ every state machine specification.
   eight fields in the manifest index. Contradicts `ADR-0028`, which says the
   manifest only indexes.
 
+## Shape clarified by ADR-0031
+
+The Registry Pattern fixes the *division of content* without fixing the
+location. A registry holds identity, location, relationships, ownership, status
+and version; a specification holds complete semantics, constraints, examples,
+rationale and evolution.
+
+So the nine registration fields split across both: the registry entry carries
+identifier, owner and governed entity; the specification carries vocabulary,
+transition rules and the rest. That narrows this issue to one question — where
+the specification file lives — and removes the third option below, which
+contradicts the pattern.
+
 ## Resolution criteria
 
 An ADR naming where state machine specifications live, what

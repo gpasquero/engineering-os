@@ -16,7 +16,7 @@ same session the decision is made.
 > a rule exists; the rule that must be followed lives in a Policy under
 > `shared/policies/`. Agents consume policies; humans read ADRs for rationale.
 
-**Highest allocated ID: `ADR-0029`.** IDs are sequential and never reused.
+**Highest allocated ID: `ADR-0031`.** IDs are sequential and never reused.
 
 > This index table is a hand-maintained projection of ADR front matter. It is
 > listed in the transitional-debt register, `ISSUE-0037`.
@@ -38,6 +38,8 @@ Read these before designing anything that produces an artifact:
 - **`ADR-0029`** — ADRs explain *why*; Policies define the rule. Agents consume
   policies, humans read ADRs. **Read this before treating any ADR as a
   specification.**
+- **`ADR-0031`** — the **Registry Pattern**. A registry indexes; specifications
+  live separately. Evaluate every extensible concept against it.
 - **`ADR-0017`** — reference architecture, not reference implementation.
 - **`ADR-0019`** — Knowledge Packages are a published interface.
 
@@ -74,6 +76,8 @@ Read these before designing anything that produces an artifact:
 | [ADR-0027](ADR-0027-state-machine-registration-model.md) | **State machines are registered, not enumerated** | accepted | ISSUE-0045 |
 | [ADR-0028](ADR-0028-state-machine-registry-lives-in-knowledge-manifest.md) | The State Machine Registry is a section of `KNOWLEDGE-MANIFEST.yaml` | accepted | ISSUE-0047 |
 | [ADR-0029](ADR-0029-modeling-policy-is-a-first-class-artifact-type.md) | **Modeling Policy is a first-class artifact type** | accepted | ISSUE-0046 |
+| [ADR-0030](ADR-0030-normative-artifact-taxonomy.md) | **A taxonomy for normative artifacts** | accepted | ISSUE-0050 |
+| [ADR-0031](ADR-0031-registry-pattern.md) | **Registry Pattern** | accepted | — |
 
 ## Supersessions
 

@@ -41,7 +41,7 @@ If a fact cannot be traced to a file in this repository, it does not exist.
 | Governance document | none | `governance/` | Mutable | Vision, principles, glossary, roadmap, architecture, protocol |
 | Build state | none | `governance/build-state.md` | Overwritten | The single current-status document |
 | Design note | none | `governance/design/` | Mutable | Working proposals not yet promoted to a decision |
-| Modeling Policy | `POLICY-` | `shared/policies/` | **Mutable, expected to evolve** | Normative modeling rules, consumed primarily by agents (`ADR-0029`) |
+| `GovernancePolicy`, `ModelingPolicy`, `ProcessPolicy` | `POLICY-` | `shared/policies/` | **Mutable, expected to evolve** | Normative rules, consumed primarily by agents. Never called "Policy" unqualified (`ADR-0029`, `ADR-0030`) |
 | Specification | `SPEC-` | `shared/`, `skills/`, `workflows/` | Versioned | Normative contracts (from M2 onward) |
 | Provenance | none | `imports/`, `sources/` | **Frozen** | Original inputs, never edited |
 

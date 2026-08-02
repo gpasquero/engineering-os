@@ -9,8 +9,8 @@ related: [ISSUE-0037]
 
 # Issue Index
 
-**50 recorded · 23 open · 26 resolved · 1 deferred.** Highest allocated ID:
-`ISSUE-0050`.
+**53 recorded · 25 open · 27 resolved · 1 deferred.** Highest allocated ID:
+`ISSUE-0053`.
 
 > **Hand-maintained projection.** Under `ADR-0016` this is a projection of issue
 > front matter, which is authoritative. No generator exists yet (`ISSUE-0036`),
@@ -23,12 +23,13 @@ related: [ISSUE-0037]
 
 | ID | Title | Blocks |
 |---|---|---|
+| [0053](ISSUE-0053-are-registries-authoritative-or-derived.md) | Is a Registry authoritative or derived? | **M2 manifests** |
 | [0002](ISSUE-0002-composition-primitive-undefined.md) | How a workflow invokes a skill is undefined | M8 |
 | [0006](ISSUE-0006-scenario-testing-method-undefined.md) | How a prompt-based methodology is tested is undefined | M10 |
 
-**M2 is unblocked.** `ISSUE-0049` gates `shared/vocabularies/` and the state
-machine specifications rather than the milestone. `ISSUE-0050` blocks
-`shared/policies/` in M3.
+`ISSUE-0053` blocks the three manifests specifically. `ISSUE-0049` gates
+`shared/vocabularies/`. `ISSUE-0051` blocks process policies in M3 and the
+workflow catalogue in M8.
 
 ## Open, by milestone
 
@@ -36,6 +37,7 @@ machine specifications rather than the milestone. `ISSUE-0050` blocks
 
 | ID | Title | Type | Severity |
 |---|---|---|---|
+| [0053](ISSUE-0053-are-registries-authoritative-or-derived.md) | Is a Registry authoritative or derived? | inconsistency | blocking |
 | [0049](ISSUE-0049-state-machine-specification-location.md) | Where state machine specifications live | question | high |
 | [0048](ISSUE-0048-no-mechanism-for-correcting-an-active-adr.md) | No mechanism for correcting part of an `Active` ADR | gap | medium |
 | [0007](ISSUE-0007-versioning-granularity-undefined.md) | Versioning granularity; what identifies a revision | question | high |
@@ -54,7 +56,7 @@ machine specifications rather than the milestone. `ISSUE-0050` blocks
 | [0010](ISSUE-0010-definition-of-done-missing.md) | Definition of Done asserted but never stated | gap | high |
 | [0020](ISSUE-0020-three-conflicting-autonomy-policies.md) | Three incompatible autonomy policies | inconsistency | high |
 | [0021](ISSUE-0021-write-scope-conflict-on-composition.md) | Write scope conflicts on composition | risk | high |
-| [0050](ISSUE-0050-policy-is-overloaded.md) | "policy" names at least three artifact kinds | inconsistency | high |
+| [0051](ISSUE-0051-process-policy-overlaps-workflows.md) | `ProcessPolicy` overlaps the workflow catalogue | inconsistency | high |
 | [0027](ISSUE-0027-inherited-decisions-lack-context.md) | Ten inherited decisions have no rationale | gap | medium |
 
 ### M4 — Discovery skills
@@ -71,6 +73,7 @@ machine specifications rather than the milestone. `ISSUE-0050` blocks
 |---|---|---|---|
 | [0002](ISSUE-0002-composition-primitive-undefined.md) | The composition primitive is undefined | question | blocking |
 | [0016](ISSUE-0016-three-change-type-taxonomies.md) | Three incompatible change-type taxonomies | inconsistency | high |
+| [0051](ISSUE-0051-process-policy-overlaps-workflows.md) | `ProcessPolicy` overlaps the workflow catalogue | inconsistency | high |
 
 ### M9 — Schemas, validation and the reference implementation
 
@@ -96,6 +99,7 @@ machine specifications rather than the milestone. `ISSUE-0050` blocks
 |---|---|---|---|
 | [0001](ISSUE-0001-runtime-target-undefined.md) | The agent runtime target is undefined | question | high |
 | [0011](ISSUE-0011-audience-licence-distribution-undefined.md) | Audience, licence and distribution model | question | high |
+| [0052](ISSUE-0052-knowledge-explorer-undefined.md) | The Knowledge Explorer is named but undefined | gap | medium |
 
 ## Deferred
 
@@ -133,3 +137,4 @@ machine specifications rather than the milestone. `ISSUE-0050` blocks
 | [0045](ISSUE-0045-state-machine-inventory-not-fixed.md) | State machine inventory not fixed | `ADR-0027` |
 | [0046](ISSUE-0046-modeling-guidelines-have-no-home.md) | Modeling guidelines have no home | `ADR-0029` |
 | [0047](ISSUE-0047-state-machine-registry-location.md) | State Machine Registry location | `ADR-0028` |
+| [0050](ISSUE-0050-policy-is-overloaded.md) | "policy" named three artifact kinds | `ADR-0030` |

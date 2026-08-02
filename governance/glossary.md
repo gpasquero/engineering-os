@@ -40,18 +40,23 @@ A skill lives in `skills/<skill-id>/`.
 representing one kind of engineering change end to end. Workflows sequence
 skills; they contain no methodology of their own.
 
-**Policy** — normative prose stored once in `shared/policies/` and referenced by
-path. Never inlined into a skill. **The word is currently overloaded** —
-`ISSUE-0050`:
+**Policy** — **never used unqualified in specifications** (`ADR-0030`). Three
+distinct normative artifact kinds live in `shared/policies/`:
 
-- **Modeling Policy** — governs *how domains are modeled*. A first-class
-  artifact type: not tied to one decision, expected to evolve, normative rather
-  than historical, and **directly consumed by AI agents**. References the ADRs
-  it originated from (`ADR-0029`).
-- **Governance policy** — governs *acceptance*. Cannot modify itself; the
-  currently `Active` one governs its successor's acceptance (`ADR-0023`).
-- **Process policy** — governs *how work is done*: write scope, autonomy and
-  escalation, secrets and privacy, verification, knowledge update.
+- **`GovernancePolicy`** — rules governing *Engineering OS itself*: acceptance,
+  review, release governance. Cannot modify itself; the currently `Active` one
+  governs its successor's acceptance (`ADR-0023`).
+- **`ModelingPolicy`** — rules governing *how domains must be modeled*: ontology
+  modeling, naming conventions, state machine registration, artifact taxonomy,
+  traceability rules. Not tied to one decision, expected to evolve, normative
+  rather than historical, **directly consumed by AI agents** (`ADR-0029`).
+- **`ProcessPolicy`** — rules governing *execution of workflows*: feature
+  implementation, bug investigation, release, migration. Overlaps the workflow
+  catalogue — `ISSUE-0051`.
+
+> **The general naming rule for normative artifact types: a name is always
+> qualified by what it governs.** `ADR-0025` fixed state names by owning
+> machine; `ADR-0030` fixes normative artifact type names the same way.
 
 > **ADRs explain why a policy exists. Policies define the rule that must be
 > followed.** An ADR is historical and immutable; a policy is normative and
@@ -134,6 +139,25 @@ state. What identifies a revision is undefined — `ISSUE-0007`.
 **`ArtifactRevisionLifecycle`** — the state machine governing revisions. Named
 after the entity it governs, per the naming rule in `ADR-0026`, which applies to
 every versioned object in Engineering OS.
+
+**Registry** — an **authoritative index of semantic entities**. A Registry never
+contains the complete specification; it references independently versioned
+specifications (`ADR-0031`).
+
+| The Registry answers | The Specification answers |
+|---|---|
+| what exists, where it lives, relationships, ownership, status, version | complete semantics, constraints, examples, rationale, evolution |
+
+**Registry Pattern** — one of the core architectural patterns. Every extensible
+concept is evaluated for Registry + Specification modeling rather than embedding
+complete definitions inside manifests or indexes. It minimizes duplication,
+enables modular evolution, and gives humans and agents one navigation model for
+every concept. Whether a Registry is `authoritative` or `derived` is contested
+across three ADRs — `ISSUE-0053`.
+
+**Knowledge Explorer** — a future surface intended to expose registries for
+navigation independently from the specifications they reference (`ADR-0031`).
+Named with a requirement, not yet defined — `ISSUE-0052`.
 
 **State Machine Registry** — the source of truth for state machines, and a
 **section of `KNOWLEDGE-MANIFEST.yaml`**, because a state machine is part of the

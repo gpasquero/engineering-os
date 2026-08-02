@@ -17,7 +17,7 @@ milestone: M2
 ## Current milestone
 
 **M2 — Foundational contracts, manifests and the compiler interface. Not
-started, and unblocked.**
+started.** The three manifests are blocked; the rest is not.
 
 M1 is complete.
 
@@ -29,10 +29,10 @@ M1 is complete.
 | Documentation system, session protocol | Defined and accepted |
 | Vision, principles, glossary | Written |
 | Roadmap | M1–M13 |
-| ADRs | 29 — 24 accepted, 5 superseded |
-| Issues | 50 recorded — 23 open, 26 resolved, 1 deferred |
-| Acceptance Records | 4 — `ACCEPT-0001` (trust root) through `ACCEPT-0004` |
-| Session journal | 9 entries |
+| ADRs | 31 — 26 accepted, 5 superseded |
+| Issues | 53 recorded — 25 open, 27 resolved, 1 deferred |
+| Acceptance Records | 5 — `ACCEPT-0001` (trust root) through `ACCEPT-0005` |
+| Session journal | 10 entries |
 | Frozen provenance | `imports/` (3 prototypes), `sources/` (requirements, archives, original handoff) |
 
 ## What does not exist
@@ -41,45 +41,43 @@ No executable code, and none is planned before M9 (`ADR-0017`, `ISSUE-0036`).
 
 Nothing in `shared/`, `skills/`, `workflows/`, `model-spec/`, `model/`,
 `templates/`, `schemas/`, `validation/`, `tests/`, `adapters/` or `docs/`. None
-of the three manifests. No State Machine Registry. **No policies of any kind** —
-the first Modeling Policies arrive in M3.
+of the three manifests. No State Machine Registry. **No policies of any kind.**
 
 ## Acceptance status
 
-| Record | Covers | Note |
-|---|---|---|
-| `ACCEPT-0001` | Bootstrap corpus at `2b6484f` | Trust root; the only retrospective acceptance |
-| `ACCEPT-0002` | `SESSION-0006` at `aed6d89` | First acceptance under the normal workflow |
-| `ACCEPT-0003` | `SESSION-0007` at `d439084` | — |
-| `ACCEPT-0004` | `SESSION-0008` at `51bed77` | — |
+| Record | Covers |
+|---|---|
+| `ACCEPT-0001` | Bootstrap corpus at `2b6484f` — trust root, the only retrospective acceptance |
+| `ACCEPT-0002` | `SESSION-0006` at `aed6d89` — first under the normal workflow |
+| `ACCEPT-0003` | `SESSION-0007` at `d439084` |
+| `ACCEPT-0004` | `SESSION-0008` at `51bed77` |
+| `ACCEPT-0005` | `SESSION-0009` at `7af8f44` |
 
-**`ADR-0028`, `ADR-0029`, `ISSUE-0049`, `ISSUE-0050` and this session's
+**`ADR-0030`, `ADR-0031`, `ISSUE-0051`–`ISSUE-0053` and this session's
 propagation are `Under Review`**, not `Active`.
 
 ## A note for agents reading this repository
 
-**The ADR corpus is history, not specification** (`ADR-0029`). Twenty-nine
-decisions, five superseded, one partially corrected. Deriving the currently
-applicable rules from it is archaeology.
+**The ADR corpus is history, not specification** (`ADR-0029`). Thirty-one
+decisions, five superseded, one partially corrected.
 
-The normative rules will live in Modeling Policies under `shared/policies/`.
-**Until M3 writes them, no such policy exists**, and the ADRs are the only
-statement of the rules — which is precisely the condition `ADR-0029` exists to
-end.
+The normative rules will live in `ModelingPolicy`, `GovernancePolicy` and
+`ProcessPolicy` artifacts under `shared/policies/`. **Until M3 writes them, no
+policy exists**, and the ADRs are the only statement of the rules — the
+condition `ADR-0029` exists to end.
 
 ## Blocking
 
-**Nothing blocks M2.**
-
-| Issue | Gates |
+| Issue | Blocks |
 |---|---|
+| `ISSUE-0053` | **The three manifests.** Whether a Registry is `authoritative` or `derived` is contested across `ADR-0031`, `ADR-0016` and `ADR-0012`, and the artifact kind determines how each manifest is built. |
 | `ISSUE-0049` | `shared/vocabularies/` and the state machine specifications |
-| `ISSUE-0050` | `shared/policies/` — blocks M3, not M2 |
+| `ISSUE-0051` | Process policies in M3, and the workflow catalogue in M8 |
+| `ISSUE-0002` | M8 |
+| `ISSUE-0006` | M10 |
 
-The compiler interface specification, `model-spec/`, the manifests and the
-remaining contracts can proceed in parallel.
-
-`ISSUE-0002` (M8) and `ISSUE-0006` (M10) block later milestones.
+The compiler interface specification, `model-spec/` and the remaining contracts
+are unblocked and can start now.
 
 ## Must be resolved within M2
 
@@ -90,7 +88,7 @@ remaining contracts can proceed in parallel.
 
 - **`ISSUE-0037`** — five hand-maintained projections; no generator until
   `ISSUE-0036` is un-deferred.
-- **`ADR-0027`** — registration correctness is unenforced until validators exist.
+- **`ADR-0027`** — registration correctness unenforced until validators exist.
 - **`ADR-0029`** — rule text will exist in both ADRs and policies. The divergence
   is intended, but intended divergence and accidental drift look identical in a
   diff.
@@ -99,9 +97,9 @@ remaining contracts can proceed in parallel.
 
 Accept or return this session's work.
 
-Then M2. The compiler interface specification and `model-spec/` are the largest
-unblocked deliverables. `ISSUE-0049` should be settled before
-`shared/vocabularies/`.
+Then `ISSUE-0053`, which is the only issue blocking a named M2 deliverable.
+Meanwhile the compiler interface specification and `model-spec/` need no further
+decisions.
 
 ## Repository state
 

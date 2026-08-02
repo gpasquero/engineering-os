@@ -208,19 +208,52 @@ The same mechanism serves Engineering OS and every adopting repository.
 > **ADRs explain *why* a policy exists. Policies define the rule that must be
 > followed** (`ADR-0029`).
 
-**Modeling Policy** is a first-class artifact type in `shared/policies/`. Unlike
-an ADR it is not tied to a single decision, is expected to evolve, is normative
-rather than historical, and is **directly consumed by AI agents**. Policies
-reference the ADRs they originated from but are not generated from them.
+Three normative artifact kinds live in `shared/policies/` (`ADR-0030`):
+
+| Kind | Governs |
+|---|---|
+| `GovernancePolicy` | Engineering OS itself — acceptance, review, release |
+| `ModelingPolicy` | how domains must be modeled |
+| `ProcessPolicy` | execution of workflows |
+
+**The unqualified term "Policy" is never used in specifications.** A normative
+artifact type name is always qualified by what it governs — the same discipline
+`ADR-0025` applies to state names.
+
+Unlike an ADR, a policy is not tied to a single decision, is expected to evolve,
+is normative rather than historical, and is **directly consumed by AI agents**.
+Policies reference the ADRs they originated from but are not generated from them.
 
 **Agents primarily consume Policies. Humans read ADRs for rationale.**
 
 This exists so the accumulated ADR history never becomes the operational
-specification — a corpus of 29 decisions with five supersessions is a record of
+specification — a corpus of 31 decisions with five supersessions is a record of
 how a specification came to be, not a specification.
 
-The word "policy" is currently overloaded across modeling, governance and
-process policies — `ISSUE-0050`.
+## The Registry Pattern
+
+**A Registry is an authoritative index of semantic entities. It never contains
+the complete specification** — it references independently versioned ones
+(`ADR-0031`).
+
+| The Registry answers | The Specification answers |
+|---|---|
+| what exists | complete semantics |
+| where it lives | constraints |
+| relationships | examples |
+| ownership | rationale |
+| status, version | evolution |
+
+**Every extensible concept is evaluated for Registry + Specification modeling**
+rather than embedding complete definitions inside manifests or indexes.
+
+The pattern was rediscovered four times — skills indexed by `MANIFEST.yaml`,
+state machines registered rather than enumerated, the registry indexing
+specifications held elsewhere, and policies following the same shape — before
+being named.
+
+Whether a Registry is `authoritative` or `derived` is contested across
+`ADR-0031`, `ADR-0016` and `ADR-0012` — `ISSUE-0053`, which blocks the manifests.
 
 ## Reference architecture, not reference implementation
 
@@ -381,8 +414,11 @@ These are recorded as issues and must not be silently assumed:
 
 - `ISSUE-0049` — where state machine specifications live, and their boundary
   with `shared/vocabularies/`. Blocks `shared/vocabularies/`.
-- `ISSUE-0050` — "policy" names at least three artifact kinds. Blocks
-  `shared/policies/`.
+- `ISSUE-0053` — whether a Registry is authoritative or derived. **Blocks the
+  three manifests.**
+- `ISSUE-0051` — `ProcessPolicy` overlaps the workflow catalogue.
+- `ISSUE-0052` — the Knowledge Explorer is named with a requirement but
+  undefined.
 - `ISSUE-0048` — no mechanism for correcting part of an `Active` ADR.
 - `ISSUE-0007` — versioning granularity, now also covering what identifies a
   **revision**.

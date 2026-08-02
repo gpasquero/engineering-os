@@ -30,9 +30,18 @@ recorded as issues. No skills, policies or contracts.
 resolved by `ADR-0020` through `ADR-0023`, and the trust root `ACCEPT-0001`
 exists.
 
+**`ISSUE-0053` blocks the three manifests** — whether a Registry is
+authoritative or derived is contested across `ADR-0031`, `ADR-0016` and
+`ADR-0012`, and the artifact kind determines how each manifest is built.
+
 `ISSUE-0049` gates `shared/vocabularies/` and the state machine specifications.
-Other M2 work — the compiler interface specification, `model-spec/`, the
-manifests, the remaining contracts — can proceed in parallel.
+The compiler interface specification, `model-spec/` and the remaining contracts
+can proceed in parallel.
+
+**Registry Pattern evaluation** (`ADR-0031`): every extensible concept —
+skills, workflows, state machines, policies, contracts, vocabularies, ontology
+modules, capabilities, invariants, Knowledge Packages — is assessed for
+Registry + Specification modeling before being modeled another way.
 
 - **Compiler interface specification** (`ADR-0017`) — language-independent, and
   the substitute for shipping executable tooling in this milestone
@@ -67,22 +76,25 @@ must be readable and editable without the compiler (`ADR-0017`).
 
 ## M3 — Shared policies
 
-**Blocked by `ISSUE-0050`** — the policy taxonomy must be fixed before
-`shared/policies/` is written.
+**Blocked by `ISSUE-0051`** — `ProcessPolicy` overlaps the M8 workflow
+catalogue, and the boundary must be drawn before process policies are written.
 
-The first **Modeling Policies** (`ADR-0029`), stating the rules already decided:
-artifact taxonomy, lifecycle ownership, state machine registration, naming
-conventions, acceptance semantics, traceability requirements. Their source
-material exists across `ADR-0012`, `ADR-0020`, `ADR-0025`, `ADR-0026`,
-`ADR-0027` and `ADR-0028`.
+Three normative artifact kinds (`ADR-0030`):
 
-Plus the process policies: evidence, research, ontology, constraint-placement,
+- **`ModelingPolicy`** — the rules already decided: artifact taxonomy, lifecycle
+  ownership, state machine registration, naming conventions, traceability
+  requirements. Source material spans `ADR-0012`, `ADR-0020`, `ADR-0025`,
+  `ADR-0026`, `ADR-0027`, `ADR-0028` and `ADR-0031`.
+- **`GovernancePolicy`** — acceptance, review and release governance. The first
+  is accepted under the trust root `ACCEPT-0001` and thereafter governs its own
+  successor (`ADR-0023`).
+- **`ProcessPolicy`** — execution rules for workflows.
+
+The inherited policy list — evidence, research, ontology, constraint-placement,
 write-scope, autonomy and escalation, secrets and privacy, traceability,
-verification and knowledge-update.
-
-Also the **first governance policy** (`ADR-0023`). Being an Authoritative
-Artifact, it is accepted under the trust root `ACCEPT-0001`, and thereafter
-governs the acceptance of its own successor.
+verification, knowledge-update — must be **reclassified** across these three
+kinds. Several entries are genuinely ambiguous and the classification is real
+work, not a formality.
 
 Agents primarily consume policies rather than ADRs (`ADR-0029`), so M4 skills
 depend on this milestone more directly than on the decision corpus.
@@ -108,7 +120,7 @@ depend on this milestone more directly than on the decision corpus.
 `feature`, `bug`, `behavior-change`, `refactoring`, `integration`,
 `architecture-evolution`
 
-Blocked by `ISSUE-0002`. Depends on `ISSUE-0016`.
+Blocked by `ISSUE-0002` and `ISSUE-0051`. Depends on `ISSUE-0016`.
 
 ## M9 — Schemas, validation and the reference implementation
 
@@ -135,8 +147,8 @@ which includes the unresolved question of whether `governance/` overlaps
 
 ## M12 — Documentation, adapters and v1 release
 
-User guides, `adapters/`, licence, changelog. Depends on `ISSUE-0001` and
-`ISSUE-0011`.
+User guides, `adapters/`, licence, changelog, and the **Knowledge Explorer**
+(`ADR-0031`, `ISSUE-0052`). Depends on `ISSUE-0001` and `ISSUE-0011`.
 
 ## M13 — Knowledge Packages and federation
 
