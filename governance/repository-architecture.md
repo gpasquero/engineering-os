@@ -69,23 +69,52 @@ Not a documentation project, and not a documentation generator. It is an
 **executable engineering framework** whose pipelines, validators, generators,
 analyzers and visualizers are first-class code (`ADR-0012`).
 
-Authoritative assets are compiled into a **canonical knowledge model**, which is
-the internal representation of the system and the primary product of
-compilation:
+Knowledge exists in **three tiers** (`ADR-0014`):
 
 ```text
-Authoritative Assets → Parsing → Normalization → Validation
-                     → Semantic Linking → Canonical Knowledge Model
-                     → Derived Artifacts
+Repository Assets          AUTHORITATIVE — human-authored, human-readable
+        ↓                  includes model/, governance/
+Knowledge Compiler         deterministic
+        ↓
+Canonical Knowledge Model  DERIVED — internal representation, never hand-edited,
+        ↓                  never inside model/, always reproducible
+Derived Artifacts          DERIVED — website, indexes, graph, reports, caches,
+                           agent context
 ```
 
-Derived artifacts are produced *from the model*, never directly from the
-authoritative assets. The documentation website is one projection among many —
-knowledge graph, search index, cross-reference index, impact database,
-validation reports, **agent context**. No consumer is privileged. See `ADR-0011`.
+Compiler stages: parsing → normalization → validation → semantic linking.
 
-Whether `model/` is authoritative input or compiled output is **unresolved** —
-`ISSUE-0034`.
+Derived artifacts are produced *from the canonical model*, never directly from
+the authoritative assets. The documentation website is one projection among many.
+**No consumer is privileged.**
+
+## Authoring versus compilation
+
+```text
+Authoring    → non-deterministic
+Compilation  → deterministic
+```
+
+AI agents are **authors, exactly like human engineers**, and authors are
+inherently non-deterministic. An authored artifact becomes authoritative only
+after **human acceptance and version control**; from that point the compiler
+must produce identical outputs from identical authoritative state (`ADR-0015`).
+
+A generator may never invoke an agent — that would make it non-deterministic.
+
+## Reference architecture, not reference implementation
+
+The architecture depends on **no specific implementation language** (`ADR-0017`).
+The compiler exposes a stable interface permitting multiple implementations; the
+reference implementation language is deliberately deferred (`ISSUE-0036`).
+
+Two constraints follow, and they are permanent:
+
+- **An adopting repository does not need the toolchain to consume Engineering
+  OS.** It is required only to generate or validate derived artifacts.
+- **Authoritative artifacts must remain human-readable and usable without
+  executing the compiler.** This is what keeps `ADR-0001` true forever: a
+  session reconstructs context by reading the repository, with no tooling.
 
 ## Artifact taxonomy
 
@@ -121,10 +150,20 @@ file.
 
 Every adopting repository has all three, leaving unused sections empty.
 
-Two overlaps are open and must be settled before these are built:
-`BUILD-STATE.yaml` against `governance/` (`ISSUE-0035`), and
-`KNOWLEDGE-MANIFEST.yaml` against `model/` and `governance/glossary.md`
-(`ISSUE-0031`).
+**`BUILD-STATE.yaml` is a generated projection, not a source.** Governance
+documents — roadmap, ADRs, issues, milestones — remain authoritative
+(`ADR-0016`):
+
+```text
+Governance Documents → Knowledge Compiler → BUILD-STATE.yaml
+```
+
+The same rule applies to every index that restates content held elsewhere.
+Because no generator exists yet, these are hand-maintained under an explicit
+transitional-debt exception, registered in `ISSUE-0037`.
+
+One overlap is still open: `KNOWLEDGE-MANIFEST.yaml` against `model/` and
+`governance/glossary.md` (`ISSUE-0031`).
 
 ## Target structure
 
@@ -219,19 +258,19 @@ current state and proposed state. See `ADR-0005`.
 
 These are recorded as issues and must not be silently assumed:
 
-- `ISSUE-0034` — whether `model/` is authoritative input or compiled output.
-  Blocks `model-spec/`.
-- `ISSUE-0032` — the implementation language and toolchain of the framework.
-  Nothing executable can be built without it.
-- `ISSUE-0033` — where deterministic compilation ends and non-deterministic
-  agent work begins.
-- `ISSUE-0035` — whether `BUILD-STATE.yaml` or `governance/` is authoritative.
+- `ISSUE-0009` — who accepts an artifact, and what review means. Load-bearing
+  for the architecture since `ADR-0015`, because the authoritative tier is only
+  as trustworthy as acceptance makes it.
 - `ISSUE-0031` — the scope of this repository's own `model/`, and its overlap
   with `governance/`.
+- `ISSUE-0037` — hand-maintained projections, until generators exist.
 - `ISSUE-0002` — the composition primitive, which determines whether
   `workflows/` holds prose or executable definitions.
 - `ISSUE-0029` — the Knowledge Package format that federation depends on.
 - `ISSUE-0001` — runtime target, which determines whether `adapters/` is real.
+- `ISSUE-0036` — reference implementation language. **Deferred**, not open.
 
-Resolved: `ISSUE-0003` (`ADR-0009`, superseded by `ADR-0013`), `ISSUE-0004`
-(`ADR-0010`), `ISSUE-0005` (`ADR-0012`), `ISSUE-0030` (`ADR-0013`).
+Resolved: `ISSUE-0003` (`ADR-0009`→`ADR-0013`), `ISSUE-0004` (`ADR-0010`),
+`ISSUE-0005` (`ADR-0012`), `ISSUE-0028` and `ISSUE-0035` (`ADR-0016`),
+`ISSUE-0030` (`ADR-0013`), `ISSUE-0032` (`ADR-0017`), `ISSUE-0033` (`ADR-0015`),
+`ISSUE-0034` (`ADR-0014`).

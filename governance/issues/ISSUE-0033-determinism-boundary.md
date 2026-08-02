@@ -2,7 +2,7 @@
 id: ISSUE-0033
 title: The boundary between deterministic compilation and non-deterministic agent work is undefined
 type: question
-status: open
+status: resolved
 severity: high
 created: 2026-08-02
 updated: 2026-08-02
@@ -10,7 +10,7 @@ blocks: [M2]
 evidence:
   - governance/adr/ADR-0012-executable-framework-and-artifact-taxonomy.md
   - governance/adr/ADR-0011-engineering-os-is-a-knowledge-compiler.md
-resolved-by: null
+resolved-by: ADR-0015
 ---
 
 # ISSUE-0033 — The determinism boundary is undefined
@@ -62,7 +62,28 @@ need a distinct status before review?
 - Can a generator invoke an agent? If so, that generator is not deterministic
   and `ADR-0012` forbids it — is that intended?
 
-## Resolution criteria
+## Resolution
 
-An ADR stating exactly which stages must be deterministic, and how
-agent-produced artifacts are classified in the taxonomy.
+`ADR-0015`. **Determinism applies to the compiler, not to the author.**
+
+AI agents are **authors, exactly like human engineers**, and authors are
+inherently non-deterministic. Once an authored artifact is reviewed and
+committed it becomes authoritative, and from that point the compiler must be
+deterministic over it.
+
+```text
+Authoring    → non-deterministic
+Compilation  → deterministic
+```
+
+**No fifth artifact category** — the option this issue floated was rejected,
+because it would encode a *workflow state* as an *artifact kind*. An unreviewed
+draft is not a different kind of artifact; it is an artifact not yet accepted.
+
+The reading anticipated under "What we know" was confirmed, and made explicit:
+AI-generated content becomes authoritative only after **human acceptance and
+version control**.
+
+Consequence recorded in `ADR-0015`: a generator may never invoke an agent, and
+`ISSUE-0009` (human-in-the-loop authority) is now load-bearing for the
+architecture, not only for the methodology.

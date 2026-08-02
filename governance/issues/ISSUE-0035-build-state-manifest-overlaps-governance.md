@@ -2,7 +2,7 @@
 id: ISSUE-0035
 title: BUILD-STATE.yaml duplicates content that governance/ already owns
 type: inconsistency
-status: open
+status: resolved
 severity: high
 created: 2026-08-02
 updated: 2026-08-02
@@ -12,7 +12,7 @@ evidence:
   - governance/build-state.md
   - governance/issues/index.md
   - governance/roadmap.md
-resolved-by: null
+resolved-by: ADR-0016
 ---
 
 # ISSUE-0035 — `BUILD-STATE.yaml` duplicates `governance/`
@@ -64,8 +64,20 @@ The first option is the most consistent with `ADR-0001` (the repository is the
 memory, readable without tooling) and with `ADR-0012` (derived artifacts are
 generated from authoritative sources).
 
-## Resolution criteria
+## Resolution
 
-An ADR naming which artifact is authoritative, what artifact kind the other is,
-and — if the Markdown remains authoritative — what front matter must carry so
-the YAML is fully derivable.
+`ADR-0016`. **Governance documents remain authoritative; `BUILD-STATE.yaml` is a
+generated projection.** The first option listed above was chosen.
+
+```text
+Governance Documents → Knowledge Compiler → BUILD-STATE.yaml
+```
+
+The same rule applies to every index that restates content held elsewhere.
+
+Where generation is not yet implemented, a projection may temporarily be
+hand-maintained — but only as **transitional technical debt, tracked
+explicitly** in `ISSUE-0037`, and carrying a visible notice.
+
+This preserves `ADR-0001`: the repository stays fully readable as memory with no
+tooling.

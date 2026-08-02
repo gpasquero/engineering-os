@@ -17,7 +17,7 @@ Session logs are the trajectory record: they answer "how did we get here",
 which no other document does. `build-state.md` answers "where are we", and the
 ADRs answer "why".
 
-**Highest allocated ID: `SESSION-0003`.**
+**Highest allocated ID: `SESSION-0004`.**
 
 ## Index
 
@@ -26,6 +26,7 @@ ADRs answer "why".
 | [SESSION-0001](SESSION-0001-2026-08-02.md) | 2026-08-02 | M1 | Repository bootstrap: architecture, documentation system, session protocol, 8 ADRs, 28 issues |
 | [SESSION-0002](SESSION-0002-2026-08-02.md) | 2026-08-02 | M1 | Owner answers on `MANIFEST.yaml` and knowledge ownership; `ADR-0009`, `ADR-0010`; `ADR-0006` superseded; M2 unblocked |
 | [SESSION-0003](SESSION-0003-2026-08-02.md) | 2026-08-02 | M2 | Knowledge compiler, executable framework, three manifests; `ADR-0011`–`ADR-0013`; `ADR-0009` superseded; M2 blocked again by `ISSUE-0032`, `ISSUE-0034` |
+| [SESSION-0004](SESSION-0004-2026-08-02.md) | 2026-08-02 | M2 | Three-tier knowledge model, determinism boundary, governance-as-source, reference architecture; `ADR-0014`–`ADR-0017`; `ADR-0011` superseded; M2 unblocked |
 
 ## Reading
 

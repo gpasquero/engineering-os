@@ -2,7 +2,7 @@
 id: ISSUE-0034
 title: Whether model/ is authoritative input or the compiled canonical model is undefined
 type: question
-status: open
+status: resolved
 severity: blocking
 created: 2026-08-02
 updated: 2026-08-02
@@ -11,7 +11,7 @@ evidence:
   - governance/adr/ADR-0011-engineering-os-is-a-knowledge-compiler.md
   - governance/adr/ADR-0010-repository-local-knowledge-ownership.md
   - governance/adr/ADR-0012-executable-framework-and-artifact-taxonomy.md
-resolved-by: null
+resolved-by: ADR-0014
 ---
 
 # ISSUE-0034 — Is `model/` authoritative input or compiled output?
@@ -69,7 +69,25 @@ be read either way as written.
 - Is a Knowledge Package (`ISSUE-0029`) an export of `model/` or of the compiled
   canonical model? The answer changes what federation actually exchanges.
 
-## Resolution criteria
+## Resolution
 
-An ADR stating which reading is correct, where the canonical knowledge model
-lives, and the artifact kind of both it and `model/`.
+`ADR-0014`. **Reading A.** Repository assets are the authoritative source of
+knowledge; the canonical knowledge model is a derived artifact produced by the
+Knowledge Compiler.
+
+Three tiers are now explicitly named:
+
+1. **Authoritative Knowledge Model** — the repository assets. `model/` belongs
+   here: ontology source, glossary, invariants, workflows, capabilities,
+   specifications, ADR references, traceability metadata. Artifact kind
+   `authoritative`.
+2. **Canonical Knowledge Model** — the compiler's internal representation. Never
+   edited by humans, always reproducible, living under generated artifacts and
+   **never inside `model/`**. Artifact kind `derived`. Serialization is an
+   implementation decision.
+3. **Derived Artifacts** — website, indexes, graph projections, reports, caches.
+
+`ADR-0014` supersedes `ADR-0011`, which stated the compiler principle without
+distinguishing the tiers — the omission that produced this issue.
+
+`model-spec/` is now designable: it specifies an authoritative source tree.

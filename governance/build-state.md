@@ -12,13 +12,14 @@ milestone: M2
 **This document describes only what exists. Planned work belongs in
 `governance/roadmap.md`. Overwrite this file; do not append.**
 
-> Under `ADR-0013` a `BUILD-STATE.yaml` manifest will hold this content in
-> machine form. Which of the two is authoritative is unresolved — `ISSUE-0035`.
-> Until then, this document is authoritative.
+> This is an **authoritative** governance document, not a projection
+> (`ADR-0016`). The machine-readable `BUILD-STATE.yaml` will be generated from
+> it and from issue front matter.
 
 ## Current milestone
 
-**M2 — Foundational contracts and manifests. Not started, and blocked.**
+**M2 — Foundational contracts, manifests and the compiler interface. Not
+started, and unblocked.**
 
 M1 is complete.
 
@@ -30,53 +31,58 @@ M1 is complete.
 | Documentation system, session protocol | Defined and accepted |
 | Vision, principles, glossary | Written |
 | Roadmap | M1–M13 |
-| ADRs | 13 — 11 accepted, 2 superseded (`ADR-0006`→`ADR-0010`, `ADR-0009`→`ADR-0013`) |
-| Issues | 35 recorded — 26 open, 9 resolved |
-| Session journal | 3 entries |
+| ADRs | 17 — 14 accepted, 3 superseded |
+| Issues | 37 recorded — 22 open, 14 resolved, 1 deferred |
+| Session journal | 4 entries |
 | Frozen provenance | `imports/` (3 prototypes), `sources/` (requirements, archives, original handoff) |
 
 ## What does not exist
 
-No executable code of any kind. No language, runtime, dependency manager, test
-framework or CI. `ADR-0012` commits the project to being an executable
-framework, but nothing has been implemented and no toolchain is chosen
-(`ISSUE-0032`).
+No executable code of any kind, and none is planned before M9. `ADR-0017`
+defers the implementation language until architectural stabilization
+(`ISSUE-0036`), so M2 produces a **compiler interface specification** instead of
+tooling.
 
 Nothing has been built in `shared/`, `skills/`, `workflows/`, `model-spec/`,
 `model/`, `templates/`, `schemas/`, `validation/`, `tests/`, `adapters/` or
 `docs/`.
 
-None of the three manifests exist. Their responsibilities are defined
-(`ADR-0013`); the files are M2 deliverables.
+None of the three manifests exist.
 
-## Blocking M2
+## Blocking
 
-| Issue | Question |
-|---|---|
-| `ISSUE-0032` | What language and toolchain? Nothing executable can be built without it, and M2 now contains generated and validated artifacts. |
-| `ISSUE-0034` | Is `model/` authoritative input, or the compiled canonical model? `model-spec/` cannot be designed until this is settled. |
-
-Both follow from `ADR-0011` and `ADR-0012` and are decisions for the project
-owner.
+**Nothing blocks M2.** Two issues block later milestones: `ISSUE-0002` (M8) and
+`ISSUE-0006` (M10).
 
 ## Must be resolved within M2
 
-`ISSUE-0007`, `ISSUE-0011` (licence), `ISSUE-0013`, `ISSUE-0014`, `ISSUE-0015`,
-`ISSUE-0018`, `ISSUE-0019`, `ISSUE-0031`, `ISSUE-0033`, `ISSUE-0035`.
+`ISSUE-0007`, `ISSUE-0009`, `ISSUE-0011`, `ISSUE-0013`, `ISSUE-0014`,
+`ISSUE-0015`, `ISSUE-0018`, `ISSUE-0019`, `ISSUE-0031`.
 
-The two most structurally significant are `ISSUE-0035` (does `BUILD-STATE.yaml`
-or `governance/` own the project's status?) and `ISSUE-0033` (where determinism
-stops and agent work begins).
+`ISSUE-0009` is the most consequential. Since `ADR-0015`, human acceptance is a
+hard architectural requirement — an artifact becomes authoritative only when
+accepted and committed — yet nothing defines who accepts, on what basis, or what
+review consists of. **Nothing currently prevents an agent from committing its
+own output and self-certifying it as authoritative.**
+
+## Known debt
+
+`ISSUE-0037` — every governance projection is hand-maintained, because no
+generator can exist until `ISSUE-0036` is un-deferred. The register lists five
+projections. This is sanctioned by `ADR-0016` as transitional, and grows with
+every record added.
 
 ## Next action
 
-Resolve `ISSUE-0032` and `ISSUE-0034`, each as an ADR. Then begin M2 with
-`shared/vocabularies/` — extracting the assertion statuses and the new artifact
-kinds to single sources closes `ISSUE-0018` and gives everything later a stable
-vocabulary.
+Begin M2 with `shared/vocabularies/`. Extracting the assertion statuses and the
+artifact kinds to single sources closes `ISSUE-0018` and gives everything later
+a stable vocabulary to reference.
+
+Then the compiler interface specification, which is the M2 deliverable that
+unblocks M9 and is the hardest thing in the milestone — `ADR-0017` records the
+risk of specifying seams before an implementation exists to learn from.
 
 ## Repository state
 
 - Branch: `main`, published to `github.com/gpasquero/engineering-os`
-- Visibility: **public, with no licence file** — `ISSUE-0011`, raised to `high`
-  because default copyright makes public code legally unreusable
+- Visibility: **public, with no licence file** — `ISSUE-0011`

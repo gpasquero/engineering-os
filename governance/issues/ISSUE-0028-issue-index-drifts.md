@@ -2,7 +2,7 @@
 id: ISSUE-0028
 title: The issue index is maintained by hand and will drift
 type: risk
-status: open
+status: resolved
 severity: low
 created: 2026-08-02
 updated: 2026-08-02
@@ -10,7 +10,7 @@ blocks: [M9]
 evidence:
   - governance/issues/index.md
   - governance/documentation-system.md
-resolved-by: null
+resolved-by: ADR-0016
 ---
 
 # ISSUE-0028 — The issue index is maintained by hand
@@ -63,7 +63,15 @@ not independently.
 - **Drop the index** and rely on directory listing plus front matter. Loses the
   session-start overview.
 
-## Resolution criteria
+## Resolution
 
-Either a generator or a validation rule in `validation/`, so that the index
-cannot silently disagree with the issue files.
+`ADR-0016`. **Generate, not validate.** The issue index is a projection of issue
+front matter, and governance documents are authoritative.
+
+This issue and `ISSUE-0035` turned out to be the same problem at two scales — a
+derived artifact authored by hand — and one decision resolves both.
+
+The implementation gap remains: no generator exists, because the implementation
+language is deferred (`ISSUE-0036`). Until then the index is hand-maintained
+under the transitional-debt exception, and is listed in the register in
+`ISSUE-0037`.

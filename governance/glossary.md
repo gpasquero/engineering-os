@@ -73,12 +73,28 @@ project. Separated by responsibility and lifecycle, not by audience. Explicitly
 
 **Knowledge compiler** — what Engineering OS is, architecturally. It compiles
 authoritative assets into a canonical knowledge model, from which all derived
-artifacts are produced. Not a documentation generator. See `ADR-0011`.
+artifacts are produced. Not a documentation generator. See `ADR-0014`.
 
-**Canonical knowledge model** — the internal representation produced by
-compilation, and the primary product of the pipeline. Every consumer reads this;
-none parses authoritative assets directly. Its relationship to `model/` is
-unresolved — `ISSUE-0034`.
+**Authoritative Knowledge Model** — tier 1. The repository assets: human-authored
+knowledge describing the domain. `model/` belongs here, as does `governance/`.
+Artifact kind `authoritative`; always human-readable; never generated.
+
+**Canonical Knowledge Model** — tier 2. The compiler's internal representation,
+produced by compilation. **Never edited by humans.** Always reproducible from
+the authoritative assets. Lives under generated artifacts and **never inside
+`model/`**. Its serialization is an implementation decision. Artifact kind
+`derived`.
+
+**Derived Artifacts** — tier 3. Projections of the canonical model.
+
+> **Disambiguation.** Two of the three tiers are derived. "The model" is
+> ambiguous and should not be used unqualified — say *authoritative knowledge
+> model*, *canonical knowledge model*, or `model/`.
+
+**Authoring** — producing an authoritative artifact. Non-deterministic. Done by
+humans **and by AI agents, which are authors in exactly the same sense**. An
+authored artifact becomes authoritative only after human acceptance and version
+control. See `ADR-0015`.
 
 **Projection** — any artifact derived from the canonical knowledge model:
 knowledge graph, search index, cross-reference index, impact database,
@@ -93,9 +109,20 @@ projection, not the model.
 - **Runtime** — temporary, produced during execution. Not committed.
 - **Cached** — rebuildable, produced to avoid recomputation. Not committed.
 
-**Determinism** — the requirement that a pipeline produce identical outputs from
-identical authoritative inputs. Applies to compilation, not to agent-executed
-engineering work; the boundary is unresolved — `ISSUE-0033`.
+**Determinism** — the requirement that the compiler produce identical outputs
+from identical authoritative repository state. **Applies to compilation, never
+to authoring.** A generator may therefore never invoke an agent. See `ADR-0015`.
+
+**Projection** (of governance) — a machine-readable view generated from
+authoritative governance documents, such as `BUILD-STATE.yaml` or an index.
+Never a source. Where a generator does not yet exist, a projection may be
+hand-maintained as declared transitional debt — `ISSUE-0037`.
+
+**Reference architecture** — what Engineering OS defines. The architecture
+depends on no implementation language; the compiler exposes a stable interface
+permitting multiple implementations. Distinguished from a *reference
+implementation*, of which there will initially be one, in a language
+deliberately deferred (`ISSUE-0036`). See `ADR-0017`.
 
 ## The two layers
 

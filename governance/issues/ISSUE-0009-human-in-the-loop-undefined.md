@@ -6,7 +6,7 @@ status: open
 severity: high
 created: 2026-08-02
 updated: 2026-08-02
-blocks: [M3]
+blocks: [M2, M3]
 evidence:
   - imports/ontology-driven-development-v2/SKILL.md
   - imports/reconstruct-system-knowledge/SKILL.md
@@ -47,6 +47,24 @@ disagree about autonomy.
 - **Human approval required for `blocked` and for ontology changes** — slower,
   preserves the gate's meaning.
 - **Tiered by risk** — approval required only above a severity threshold.
+
+## Raised by ADR-0015
+
+`ADR-0015` makes human acceptance a **hard architectural requirement**, not only
+a methodological preference: *AI-generated content becomes authoritative only
+after human acceptance and version control.*
+
+The whole three-tier model of `ADR-0014` rests on the authoritative tier being
+trustworthy, and acceptance is what makes it so. This issue is therefore now
+load-bearing for the architecture, not just for the gate.
+
+It sharpens what must be answered. Beyond "who lifts a `blocked` gate", the
+project must define what **acceptance** means: who accepts, on what basis, and
+what review consists of. A commit is the *record* of acceptance, not a
+definition of it — and nothing currently stops an agent from committing its own
+output and thereby self-certifying it as authoritative.
+
+That gap is the practical risk, and it exists today.
 
 ## Resolution criteria
 

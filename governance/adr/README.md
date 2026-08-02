@@ -4,6 +4,7 @@ title: Decision Index
 status: current
 created: 2026-08-02
 updated: 2026-08-02
+related: [ISSUE-0037]
 ---
 
 # Architecture Decision Records
@@ -11,13 +12,19 @@ updated: 2026-08-02
 A decision that is not recorded here will be re-litigated. Write the ADR in the
 same session the decision is made.
 
-**Highest allocated ID: `ADR-0013`.** IDs are sequential and never reused.
+**Highest allocated ID: `ADR-0017`.** IDs are sequential and never reused.
+
+> This index table is a hand-maintained projection of ADR front matter. It is
+> listed in the transitional-debt register, `ISSUE-0037`.
 
 ## Foundational
 
-`ADR-0011` — **Engineering OS is a knowledge compiler.** It governs the design
-of generators, validators, visualizers, plugins and every future extension
-mechanism. Read it before designing anything that produces an artifact.
+Read these before designing anything that produces an artifact:
+
+- **`ADR-0014`** — Engineering OS is a knowledge compiler over a three-tier
+  knowledge model.
+- **`ADR-0015`** — authoring is non-deterministic; compilation is deterministic.
+- **`ADR-0017`** — reference architecture, not reference implementation.
 
 ## Index
 
@@ -33,19 +40,21 @@ mechanism. Read it before designing anything that produces an artifact.
 | [ADR-0008](ADR-0008-shared-layer-three-way-split.md) | Split `shared/` into contracts, policies and vocabularies | accepted | ISSUE-0024 |
 | [ADR-0009](ADR-0009-manifest-is-the-root-composition-manifest.md) | `MANIFEST.yaml` is the root composition manifest | **superseded by ADR-0013** | ISSUE-0003 |
 | [ADR-0010](ADR-0010-repository-local-knowledge-ownership.md) | Knowledge is repository-local; environments federate | accepted | ISSUE-0004 |
-| [ADR-0011](ADR-0011-engineering-os-is-a-knowledge-compiler.md) | **Engineering OS is a knowledge compiler** | accepted | — |
+| [ADR-0011](ADR-0011-engineering-os-is-a-knowledge-compiler.md) | Engineering OS is a knowledge compiler | **superseded by ADR-0014** | — |
 | [ADR-0012](ADR-0012-executable-framework-and-artifact-taxonomy.md) | Executable framework with a typed artifact taxonomy | accepted | ISSUE-0005 |
 | [ADR-0013](ADR-0013-three-manifests-by-responsibility.md) | Three manifests separated by responsibility and lifecycle | accepted | ISSUE-0030 |
+| [ADR-0014](ADR-0014-three-tier-knowledge-model.md) | **Knowledge compiler over a three-tier knowledge model** | accepted | ISSUE-0034 |
+| [ADR-0015](ADR-0015-authoring-is-non-deterministic-compilation-is-deterministic.md) | **Authoring is non-deterministic; compilation is deterministic** | accepted | ISSUE-0033 |
+| [ADR-0016](ADR-0016-governance-is-authoritative-manifests-are-projections.md) | Governance is authoritative; manifests are projections | accepted | ISSUE-0028, ISSUE-0035 |
+| [ADR-0017](ADR-0017-reference-architecture-not-reference-implementation.md) | **Reference architecture, not reference implementation** | accepted | ISSUE-0032 |
 
 ## Supersessions
 
-**`ADR-0010` supersedes `ADR-0006`.** The two-layer distinction and `model-spec/`
-survive; the claim that this repository never contains a live `model/` does not.
-
-**`ADR-0013` supersedes `ADR-0009`.** The identity claim survives in full — a
-manifest describes architecture and composition and is not a dependency lock
-file. What changes is scope: fifteen concerns are redistributed across three
-manifests with different lifecycles.
+| Superseded | By | What changed |
+|---|---|---|
+| `ADR-0006` | `ADR-0010` | The two-layer distinction and `model-spec/` survive; the claim that this repository never contains a live `model/` does not. |
+| `ADR-0009` | `ADR-0013` | Nothing was wrong. The identity claim survives in full; only the scope of `MANIFEST.yaml` narrows as concerns redistribute across three manifests. |
+| `ADR-0011` | `ADR-0014` | The compiler principle survives entirely. What is added is the three-tier distinction that made `model/`'s status unambiguous. |
 
 Superseded ADRs are retained as the record of what was believed before. Read the
 superseding ADR for the current rule.

@@ -1,10 +1,10 @@
 ---
 id: ADR-0011
 title: Engineering OS is a knowledge compiler
-status: accepted
+status: superseded
 date: 2026-08-02
 supersedes: null
-superseded-by: null
+superseded-by: ADR-0014
 resolves: []
 related: [ADR-0012, ADR-0013, ISSUE-0033, ISSUE-0034]
 ---

@@ -2,7 +2,7 @@
 id: ISSUE-0032
 title: The implementation language and toolchain of the framework are undefined
 type: question
-status: open
+status: resolved
 severity: blocking
 created: 2026-08-02
 updated: 2026-08-02
@@ -10,7 +10,7 @@ blocks: [M2]
 evidence:
   - governance/adr/ADR-0012-executable-framework-and-artifact-taxonomy.md
   - governance/adr/ADR-0011-engineering-os-is-a-knowledge-compiler.md
-resolved-by: null
+resolved-by: ADR-0017
 ---
 
 # ISSUE-0032 — Implementation language and toolchain are undefined
@@ -59,7 +59,20 @@ validated artifacts, and those cannot be built at all without an answer.
 That last question is the important one: if adopters must install a compiler
 toolchain, the adoption cost of the methodology rises sharply.
 
-## Resolution criteria
+## Resolution
 
-An ADR naming the language, runtime, dependency manager and test framework, and
-stating what an adopting repository is required to install.
+`ADR-0017`. **The architecture must not depend on any implementation language.**
+Engineering OS defines a **reference architecture, not a reference
+implementation**. The compiler exposes a stable interface permitting multiple
+implementations.
+
+The sub-question this issue flagged as the important one is answered directly:
+**an adopting repository does not need the toolchain to consume Engineering OS.**
+It is required only to generate or validate derived artifacts, and authoritative
+artifacts must remain human-readable and usable without executing the compiler.
+
+The language itself is **deliberately deferred** until architectural
+stabilization — carried into `ISSUE-0036` so the deferral stays visible.
+
+Cost of the deferral, recorded in `ADR-0017`: M2 cannot ship executable tooling,
+so projections remain hand-maintained for longer — `ISSUE-0037`.

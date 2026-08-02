@@ -24,27 +24,34 @@ Repository architecture and the two-layer rule; documentation system; session
 protocol; governance skeleton; ADRs for decisions made; all known open questions
 recorded as issues. No skills, policies or contracts.
 
-## M2 — Foundational contracts and manifests
+## M2 — Foundational contracts, manifests and the compiler interface
 
-**Blocked by `ISSUE-0032` and `ISSUE-0034`.**
+**Unblocked.** `ISSUE-0032`, `ISSUE-0033`, `ISSUE-0034` and `ISSUE-0035` are
+resolved by `ADR-0014` through `ADR-0017`.
 
+- **Compiler interface specification** (`ADR-0017`) — language-independent, and
+  the substitute for shipping executable tooling in this milestone
 - The three manifests: `MANIFEST.yaml`, `BUILD-STATE.yaml`,
-  `KNOWLEDGE-MANIFEST.yaml` (`ADR-0013`)
+  `KNOWLEDGE-MANIFEST.yaml` (`ADR-0013`), with `BUILD-STATE.yaml` marked as a
+  hand-maintained projection under `ISSUE-0037`
+- `model-spec/` — the authoritative source tree specification and scaffold
+  (`ADR-0014`)
 - Skill contract and workflow contract, including write-scope declaration
 - Evidence record, conflict record, traceability record contracts
 - `shared/vocabularies/` — single-source assertion statuses, confidence, risk,
   gate decisions, change types, **artifact kinds** (`ADR-0012`)
-- `model-spec/` — the Layer B tree specification and scaffold
 - One canonical impact-analysis template
-- The first executable tooling: manifest validation and index generation
-  (`ADR-0012`)
 
-Must be resolved within this milestone: `ISSUE-0007`, `ISSUE-0013`,
-`ISSUE-0014`, `ISSUE-0015`, `ISSUE-0018`, `ISSUE-0019`, `ISSUE-0031`,
-`ISSUE-0033`, `ISSUE-0035`, and `ISSUE-0011` (the licence gap).
+**No executable tooling.** `ADR-0017` defers the implementation language, so
+manifest validation and index generation move to M9.
 
-Design constraints: nothing built here may preclude federation (`ISSUE-0029`),
-and every artifact produced must declare its kind (`ADR-0012`).
+Must be resolved within this milestone: `ISSUE-0007`, `ISSUE-0009`,
+`ISSUE-0011` (the licence gap), `ISSUE-0013`, `ISSUE-0014`, `ISSUE-0015`,
+`ISSUE-0018`, `ISSUE-0019`, `ISSUE-0031`.
+
+Design constraints: nothing built here may preclude federation (`ISSUE-0029`);
+every artifact declares its kind (`ADR-0012`); every authoritative artifact
+must be readable and editable without the compiler (`ADR-0017`).
 
 ## M3 — Shared policies
 
@@ -75,10 +82,13 @@ knowledge-update policies.
 
 Blocked by `ISSUE-0002`. Depends on `ISSUE-0016`.
 
-## M9 — Schemas and validation
+## M9 — Schemas, validation and the reference implementation
 
-JSON Schema for the manifest, skills, workflows and records; validation rules;
-issue-index generator (`ISSUE-0028`).
+Schemas for the manifests, skills, workflows and records; validation rules; and
+the **first executable tooling**, deferred here from M2 by `ADR-0017`.
+
+Requires `ISSUE-0036` (reference implementation language) to be un-deferred.
+Clears the projection debt registered in `ISSUE-0037`.
 
 ## M10 — Scenario tests
 

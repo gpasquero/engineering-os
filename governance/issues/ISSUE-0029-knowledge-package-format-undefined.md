@@ -55,6 +55,24 @@ It also blocks M13 entirely.
   standard.
 - Does importing a package create a traceability obligation on the consumer?
 
+## Sharpened by ADR-0014
+
+The three tiers give this question a precise form it lacked. A Knowledge Package
+is an export of exactly one of:
+
+- **The authoritative assets** — a copy of the source. Simple, but it exports
+  unvalidated, unlinked material and forces every consumer to compile it.
+- **The canonical knowledge model** — the validated, semantically linked
+  representation. Far more useful to a consumer, and consistent with `ADR-0014`'s
+  rule that consumers read the compiled model rather than the sources. But the
+  canonical model is `derived`, so a package would be a projection of a
+  projection, and its version would depend on the compiler version as well as
+  the content.
+- **A dedicated projection** built for federation specifically, with its own
+  stability guarantees.
+
+The second or third is far more likely than the first. Nothing has been decided.
+
 ## Resolution criteria
 
 A Knowledge Package specification and a federation protocol, recorded by ADR.

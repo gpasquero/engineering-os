@@ -4,42 +4,41 @@ title: Issue Index
 status: current
 created: 2026-08-02
 updated: 2026-08-02
-related: [ISSUE-0028, ISSUE-0035]
+related: [ISSUE-0037]
 ---
 
 # Issue Index
 
-**35 recorded · 26 open · 9 resolved.** Highest allocated ID: `ISSUE-0035`.
+**37 recorded · 22 open · 14 resolved · 1 deferred.** Highest allocated ID:
+`ISSUE-0037`.
 
-> This index is maintained by hand and can drift from the issue files, which are
-> authoritative. Tracked as `ISSUE-0028` — now expected to become a derived
-> artifact under `ADR-0012`, once `ISSUE-0035` settles what is authoritative.
+> **Hand-maintained projection.** Under `ADR-0016` this is a projection of issue
+> front matter, which is authoritative. No generator exists yet
+> (`ISSUE-0036`), so it is maintained by hand as declared transitional debt —
+> registered in `ISSUE-0037`. The issue files win in any disagreement.
 
 ## Blocking — the named milestone cannot start
 
 | ID | Title | Blocks |
 |---|---|---|
-| [0032](ISSUE-0032-implementation-language-and-toolchain.md) | Implementation language and toolchain undefined | **M2** |
-| [0034](ISSUE-0034-canonical-model-versus-model-directory.md) | Is `model/` authoritative input or compiled output? | **M2** |
 | [0002](ISSUE-0002-composition-primitive-undefined.md) | How a workflow invokes a skill is undefined | M8 |
 | [0006](ISSUE-0006-scenario-testing-method-undefined.md) | How a prompt-based methodology is tested is undefined | M10 |
 
+**M2 is unblocked.**
+
 ## Open, by milestone
 
-### M2 — Foundational contracts and manifests
+### M2 — Foundational contracts, manifests and the compiler interface
 
 | ID | Title | Type | Severity |
 |---|---|---|---|
-| [0032](ISSUE-0032-implementation-language-and-toolchain.md) | Implementation language and toolchain | question | blocking |
-| [0034](ISSUE-0034-canonical-model-versus-model-directory.md) | `model/` — authoritative input or compiled output | question | blocking |
+| [0009](ISSUE-0009-human-in-the-loop-undefined.md) | Who accepts an artifact, and what review means | question | high |
 | [0007](ISSUE-0007-versioning-granularity-undefined.md) | Versioning granularity and compatibility policy | question | high |
 | [0011](ISSUE-0011-audience-licence-distribution-undefined.md) | Repository is public with no licence | question | high |
 | [0013](ISSUE-0013-three-conflicting-impact-analysis-templates.md) | Three conflicting impact-analysis templates | inconsistency | high |
 | [0014](ISSUE-0014-model-changes-directory-missing.md) | `model/changes/` absent from the canonical tree | inconsistency | high |
 | [0015](ISSUE-0015-path-resolution-ambiguity.md) | Skill-relative and target-relative paths not distinguished | inconsistency | high |
 | [0031](ISSUE-0031-engineering-os-self-model-scope.md) | Self-model scope; `KNOWLEDGE-MANIFEST` overlaps the glossary | gap | medium |
-| [0033](ISSUE-0033-determinism-boundary.md) | Determinism boundary against agent work | question | high |
-| [0035](ISSUE-0035-build-state-manifest-overlaps-governance.md) | `BUILD-STATE.yaml` duplicates `governance/` | inconsistency | high |
 | [0018](ISSUE-0018-assertion-statuses-duplicated.md) | Assertion status vocabulary defined twice | inconsistency | medium |
 | [0019](ISSUE-0019-evidence-record-defaults-diverge.md) | Two minimum evidence records disagree | inconsistency | low |
 
@@ -68,11 +67,11 @@ related: [ISSUE-0028, ISSUE-0035]
 | [0002](ISSUE-0002-composition-primitive-undefined.md) | The composition primitive is undefined | question | blocking |
 | [0016](ISSUE-0016-three-change-type-taxonomies.md) | Three incompatible change-type taxonomies | inconsistency | high |
 
-### M9 — Schemas and validation
+### M9 — Schemas, validation and the reference implementation
 
 | ID | Title | Type | Severity |
 |---|---|---|---|
-| [0028](ISSUE-0028-issue-index-drifts.md) | The issue index is maintained by hand | risk | low |
+| [0037](ISSUE-0037-hand-maintained-projections-are-debt.md) | Hand-maintained projections are transitional debt | risk | high |
 
 ### M10 — Scenario tests
 
@@ -99,11 +98,17 @@ related: [ISSUE-0028, ISSUE-0035]
 |---|---|---|---|
 | [0029](ISSUE-0029-knowledge-package-format-undefined.md) | Knowledge Package format and federation protocol | question | high |
 
+## Deferred
+
+| ID | Title | Defers to |
+|---|---|---|
+| [0036](ISSUE-0036-reference-implementation-language.md) | Reference implementation language | M9 |
+
 ## Resolved
 
 | ID | Title | Resolved by |
 |---|---|---|
-| [0003](ISSUE-0003-manifest-purpose-undefined.md) | Purpose and schema of `MANIFEST.yaml` | `ADR-0009` (superseded by `ADR-0013`) |
+| [0003](ISSUE-0003-manifest-purpose-undefined.md) | Purpose and schema of `MANIFEST.yaml` | `ADR-0009` → `ADR-0013` |
 | [0004](ISSUE-0004-model-tree-location-undefined.md) | Location of the Layer B model tree | `ADR-0010` |
 | [0005](ISSUE-0005-executable-code-in-repository.md) | Whether the repository ships executable code | `ADR-0012` |
 | [0012](ISSUE-0012-skill-term-overloaded.md) | The term "skill" is overloaded | `governance/glossary.md` |
@@ -111,4 +116,9 @@ related: [ISSUE-0028, ISSUE-0035]
 | [0023](ISSUE-0023-reading-order-omitted-vision.md) | Reading order omitted the vision | `ADR-0002` |
 | [0024](ISSUE-0024-shared-directory-undifferentiated.md) | `shared/` was undifferentiated | `ADR-0008` |
 | [0026](ISSUE-0026-os-and-prototype-share-identity.md) | A prototype claims to be the entire OS | `governance/glossary.md` |
+| [0028](ISSUE-0028-issue-index-drifts.md) | The issue index is maintained by hand | `ADR-0016` |
 | [0030](ISSUE-0030-manifest-serves-two-audiences.md) | Manifest audiences — answered as three manifests | `ADR-0013` |
+| [0032](ISSUE-0032-implementation-language-and-toolchain.md) | Implementation language and toolchain | `ADR-0017` |
+| [0033](ISSUE-0033-determinism-boundary.md) | Determinism boundary | `ADR-0015` |
+| [0034](ISSUE-0034-canonical-model-versus-model-directory.md) | `model/` — authoritative input or compiled output | `ADR-0014` |
+| [0035](ISSUE-0035-build-state-manifest-overlaps-governance.md) | `BUILD-STATE.yaml` duplicates `governance/` | `ADR-0016` |
