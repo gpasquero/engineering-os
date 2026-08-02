@@ -21,8 +21,8 @@ using this metamodel**. Adopters never modify it — they instantiate it
 
 ## Status
 
-**First increment.** The entity inventory is complete; entity specifications are
-being written one at a time. `entity-inventory.md` records which exist.
+**12 of 27 entities specified**, all of them descriptive. The operational family
+(`ADR-0065`) is entirely unbuilt. `entity-inventory.md` records the current state.
 
 This is being built under `ADR-0062`: where an existing decision permits
 building, we build, and open questions that do not block the next deliverable
@@ -49,7 +49,8 @@ Every metamodel entity declares eight properties (`ADR-0035`):
 model/metamodel/
 ├── README.md              this file
 ├── entity-inventory.md    all entities, with specification status
-└── entities/              one specification per entity
+├── entities/              one specification per entity
+└── ontology/              the OWL skeleton, and what writing it exposed
 ```
 
 ## Conventions in force
@@ -62,10 +63,18 @@ model/metamodel/
   exists; the compiler defines how it is transformed.
 - **Classification is a relationship, not a property** (`ADR-0042`). Entities do
   not carry dimension values; Dimension Assignments relate them.
+- **Every entity declares its family** — descriptive or operational (`ADR-0065`).
+  The two are not peers and no specification treats them as interchangeable.
 
-## What this is not
+## The OWL skeleton
 
-Not OWL, yet. The first OWL ontologies are the next deliverable, and this
-inventory is what they will formalize. Authoring in readable Markdown first
-keeps `ADR-0017`'s guarantee intact — authoritative artifacts stay usable
-without executing the compiler — while the OWL serialization is designed.
+`ontology/engineering-os-metamodel.ttl` expresses the specified entities as OWL,
+and was written deliberately **before** the metamodel was complete. Reading the
+specifications as class definitions exposed a missing superclass, an entity that
+may be redundant, and two relationships pointing at nothing defined — see
+`ontology/FINDINGS.md`.
+
+Markdown remains the authoring form, which keeps `ADR-0017`'s guarantee intact:
+authoritative artifacts stay usable without executing the compiler. **Which of
+the two is authoritative is not yet decided**, and maintaining both by hand is
+the cost `ISSUE-0037` describes.

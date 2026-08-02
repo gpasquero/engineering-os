@@ -5,6 +5,7 @@ status: draft
 created: 2026-08-02
 updated: 2026-08-02
 semantic-layer: A
+entity-family: descriptive
 artifact-kind: authoritative
 established-by: [ADR-0026, ADR-0064]
 ---

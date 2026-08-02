@@ -45,6 +45,7 @@ ADRs answer "why".
 | [SESSION-0020](SESSION-0020-2026-08-02.md) | 2026-08-02 | M2 | `ACCEPT-0015`; **Naming Qualification**; Principles are semantic entities; **authored versus discovered knowledge**; `ADR-0057`–`ADR-0059` |
 | [SESSION-0021](SESSION-0021-2026-08-02.md) | 2026-08-02 | B1 | `ACCEPT-0016`; Mechanical vs Interpretive Discovery; four knowledge categories; **`ADR-0062` — architecture through implementation**; 22 issues re-triaged as debt; **`model/metamodel/` created** |
 | [SESSION-0022](SESSION-0022-2026-08-02.md) | 2026-08-02 | B1 | `ACCEPT-0017`; **Apache-2.0**; artifact identity model; inventory reclassified into five categories; **7 metamodel entities specified**; `ADR-0063`, `ADR-0064` |
+| [SESSION-0023](SESSION-0023-2026-08-02.md) | 2026-08-02 | B1 | `ACCEPT-0018`; **descriptive vs operational entities** (`ADR-0065`); semantic backbone completed — 12 of 27 specified; **first OWL skeleton**, and six findings from writing it |
 
 ## Reading
 
