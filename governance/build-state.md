@@ -12,9 +12,13 @@ milestone: M2
 **This document describes only what exists. Planned work belongs in
 `governance/roadmap.md`. Overwrite this file; do not append.**
 
+> Under `ADR-0013` a `BUILD-STATE.yaml` manifest will hold this content in
+> machine form. Which of the two is authoritative is unresolved — `ISSUE-0035`.
+> Until then, this document is authoritative.
+
 ## Current milestone
 
-**M2 — Foundational contracts and manifest. Not started, and unblocked.**
+**M2 — Foundational contracts and manifests. Not started, and blocked.**
 
 M1 is complete.
 
@@ -22,55 +26,57 @@ M1 is complete.
 
 | Area | State |
 |---|---|
-| Repository architecture | Defined and accepted (`repository-architecture.md`) |
-| Documentation system | Defined and accepted (`documentation-system.md`) |
-| Session protocol | Defined and accepted (`session-protocol.md`) |
+| Repository architecture | Defined and accepted |
+| Documentation system, session protocol | Defined and accepted |
 | Vision, principles, glossary | Written |
 | Roadmap | M1–M13 |
-| ADRs | 10 — 9 accepted, 1 superseded (`ADR-0006` by `ADR-0010`) |
-| Issues | 31 recorded — 24 open, 7 resolved |
-| Session journal | 2 entries |
-| Frozen provenance | `imports/` (3 prototypes), `sources/` (requirements, archives, original handoff documents) |
+| ADRs | 13 — 11 accepted, 2 superseded (`ADR-0006`→`ADR-0010`, `ADR-0009`→`ADR-0013`) |
+| Issues | 35 recorded — 26 open, 9 resolved |
+| Session journal | 3 entries |
+| Frozen provenance | `imports/` (3 prototypes), `sources/` (requirements, archives, original handoff) |
 
 ## What does not exist
+
+No executable code of any kind. No language, runtime, dependency manager, test
+framework or CI. `ADR-0012` commits the project to being an executable
+framework, but nothing has been implemented and no toolchain is chosen
+(`ISSUE-0032`).
 
 Nothing has been built in `shared/`, `skills/`, `workflows/`, `model-spec/`,
 `model/`, `templates/`, `schemas/`, `validation/`, `tests/`, `adapters/` or
 `docs/`.
 
-There is no `MANIFEST.yaml` — its purpose is now defined (`ADR-0009`) but the
-file itself is an M2 deliverable.
+None of the three manifests exist. Their responsibilities are defined
+(`ADR-0013`); the files are M2 deliverables.
 
-There is no `model/`. This repository will have one, describing Engineering OS
-itself, in M11 (`ADR-0010`, `ISSUE-0031`).
+## Blocking M2
 
-## Blocking
+| Issue | Question |
+|---|---|
+| `ISSUE-0032` | What language and toolchain? Nothing executable can be built without it, and M2 now contains generated and validated artifacts. |
+| `ISSUE-0034` | Is `model/` authoritative input, or the compiled canonical model? `model-spec/` cannot be designed until this is settled. |
 
-**Nothing blocks M2.** `ISSUE-0003` and `ISSUE-0004` were resolved by
-`ADR-0009` and `ADR-0010`.
+Both follow from `ADR-0011` and `ADR-0012` and are decisions for the project
+owner.
 
-Two issues block later milestones: `ISSUE-0002` (M8) and `ISSUE-0006` (M10).
+## Must be resolved within M2
 
-Eight issues must be resolved *within* M2: `ISSUE-0005`, `ISSUE-0007`,
-`ISSUE-0013`, `ISSUE-0014`, `ISSUE-0015`, `ISSUE-0018`, `ISSUE-0019`,
-`ISSUE-0030`.
+`ISSUE-0007`, `ISSUE-0011` (licence), `ISSUE-0013`, `ISSUE-0014`, `ISSUE-0015`,
+`ISSUE-0018`, `ISSUE-0019`, `ISSUE-0031`, `ISSUE-0033`, `ISSUE-0035`.
 
-`ISSUE-0005` (does the repository ship executable code?) is the most urgent of
-these: `ADR-0009` requires build pipelines, documentation generators and
-generated manifest sections, all of which imply executable tooling. It should be
-decided before the manifest schema is written.
+The two most structurally significant are `ISSUE-0035` (does `BUILD-STATE.yaml`
+or `governance/` own the project's status?) and `ISSUE-0033` (where determinism
+stops and agent work begins).
 
 ## Next action
 
-Begin M2 with `shared/vocabularies/`. Extracting the twelve assertion statuses
-to a single source closes `ISSUE-0018` and gives every later artifact a stable
-vocabulary to reference.
-
-Then resolve `ISSUE-0005` and `ISSUE-0030`, both of which constrain the manifest
-schema.
+Resolve `ISSUE-0032` and `ISSUE-0034`, each as an ADR. Then begin M2 with
+`shared/vocabularies/` — extracting the assertion statuses and the new artifact
+kinds to single sources closes `ISSUE-0018` and gives everything later a stable
+vocabulary.
 
 ## Repository state
 
 - Branch: `main`, published to `github.com/gpasquero/engineering-os`
-- Visibility: **public, with no licence file** — see `ISSUE-0011`, raised to
-  `high` because default copyright makes public code legally unreusable
+- Visibility: **public, with no licence file** — `ISSUE-0011`, raised to `high`
+  because default copyright makes public code legally unreusable

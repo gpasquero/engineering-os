@@ -2,7 +2,7 @@
 id: ISSUE-0005
 title: Whether the Engineering OS ships executable code is undecided
 type: question
-status: open
+status: resolved
 severity: high
 created: 2026-08-02
 updated: 2026-08-02
@@ -12,7 +12,7 @@ evidence:
   - governance/design/proposed-architecture.md
   - imports/reconstruct-system-knowledge/SKILL.md
   - governance/adr/ADR-0009-manifest-is-the-root-composition-manifest.md
-resolved-by: null
+resolved-by: ADR-0012
 ---
 
 # ISSUE-0005 — Whether this repository ships executable code is undecided
@@ -60,7 +60,23 @@ This effectively answers the question in the affirmative, but the answer has not
 been recorded as a decision, and the language and dependency policy remain open.
 The severity is therefore raised: it must now be settled in **M2**, not M9.
 
-## Resolution criteria
+## Resolution
 
-An ADR stating whether executable code is in scope, and if so which language and
-what may depend on it.
+`ADR-0012`. **Engineering OS is not a documentation project; it is an executable
+engineering framework.** Build pipelines, validators, generators, analyzers and
+visualizers are first-class code artifacts.
+
+Generated artifacts are never sources of truth. Every executable pipeline must
+be deterministic. The repository distinguishes four artifact kinds —
+`authoritative`, `derived`, `runtime`, `cached` — and every generated artifact
+declares its inputs, its generator, whether it is reproducible and whether it is
+safe to delete.
+
+`ADR-0011` goes further: the framework is a **knowledge compiler**, not a
+documentation generator.
+
+The "pure specification" option is rejected outright.
+
+**The second half of the original resolution criteria — which language, and what
+may depend on it — is not answered.** It is carried into `ISSUE-0032`, which
+blocks M2. `ISSUE-0033` records the unresolved determinism boundary.

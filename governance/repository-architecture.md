@@ -63,15 +63,68 @@ without sharing its internal source of truth.
 Federation does not exist yet (`ISSUE-0029`), but nothing built in `model-spec/`
 or `MANIFEST.yaml` may preclude it.
 
-## The machine entry point
+## Engineering OS is a knowledge compiler
 
-`MANIFEST.yaml` is the root composition manifest: it describes the architecture
-and composition of an Engineering OS project, and **everything else in the
-repository is discoverable from it**.
+Not a documentation project, and not a documentation generator. It is an
+**executable engineering framework** whose pipelines, validators, generators,
+analyzers and visualizers are first-class code (`ADR-0012`).
 
-It is the machine entry point, as `governance/` is the entry point for a human
-or agent reconstructing context. Every adopting repository has one. It is not a
-dependency lock file. See `ADR-0009`.
+Authoritative assets are compiled into a **canonical knowledge model**, which is
+the internal representation of the system and the primary product of
+compilation:
+
+```text
+Authoritative Assets → Parsing → Normalization → Validation
+                     → Semantic Linking → Canonical Knowledge Model
+                     → Derived Artifacts
+```
+
+Derived artifacts are produced *from the model*, never directly from the
+authoritative assets. The documentation website is one projection among many —
+knowledge graph, search index, cross-reference index, impact database,
+validation reports, **agent context**. No consumer is privileged. See `ADR-0011`.
+
+Whether `model/` is authoritative input or compiled output is **unresolved** —
+`ISSUE-0034`.
+
+## Artifact taxonomy
+
+Every artifact in the repository has exactly one kind (`ADR-0012`):
+
+| Kind | Authored by | In version control | Deletable |
+|---|---|---|---|
+| **Authoritative** | Humans, and agents under review | Yes | No — it is the source |
+| **Derived** | Deterministically generated | Per artifact | Yes, rebuildable |
+| **Runtime** | Produced during execution | No | Yes, temporary |
+| **Cached** | Produced to avoid recomputation | No | Yes, rebuildable |
+
+Generated artifacts are **never** sources of truth. Every one declares its
+authoritative inputs, its generator, whether it is reproducible, and whether it
+is safe to delete and regenerate. Pipelines are deterministic — though the
+boundary against non-deterministic agent work is unresolved (`ISSUE-0033`).
+
+No derived artifact is ever edited by hand.
+
+## The three manifests
+
+Separated by responsibility and lifecycle, not by audience (`ADR-0013`):
+
+| Manifest | Responsibility | Lifecycle |
+|---|---|---|
+| `MANIFEST.yaml` | Project composition, enabled modules, extension points, build pipelines, artifact taxonomy, generators, plugins, repository capabilities | **Stable** — changes rarely |
+| `BUILD-STATE.yaml` | Milestones, progress, blockers, active/completed/pending work, ADR and issue references | **Continuous** |
+| `KNOWLEDGE-MANIFEST.yaml` | Ontology modules, vocabularies, knowledge packages, graph modules, bounded contexts, capabilities, invariants, state machines, glossary modules, semantic dependencies | **Per domain change** |
+
+`MANIFEST.yaml` remains the root machine entry point and declares the other two,
+so everything stays discoverable from a single root. It is not a dependency lock
+file.
+
+Every adopting repository has all three, leaving unused sections empty.
+
+Two overlaps are open and must be settled before these are built:
+`BUILD-STATE.yaml` against `governance/` (`ISSUE-0035`), and
+`KNOWLEDGE-MANIFEST.yaml` against `model/` and `governance/glossary.md`
+(`ISSUE-0031`).
 
 ## Target structure
 
@@ -79,8 +132,9 @@ dependency lock file. See `ADR-0009`.
 engineering-os/
 ├── README.md                   Human entry point
 ├── AGENTS.md                   Agent entry point; points at the session protocol
-├── MANIFEST.yaml               Machine entry point; root composition manifest (M2)
-├── GLOSSARY.md                 -> governance/glossary.md (root pointer, M2)
+├── MANIFEST.yaml               Machine entry point; architectural manifest (M2)
+├── BUILD-STATE.yaml            Implementation state (M2) — see ISSUE-0035
+├── KNOWLEDGE-MANIFEST.yaml     Knowledge model manifest (M2) — see ISSUE-0031
 │
 ├── governance/                 PERSISTENT MEMORY — the subject of M1
 │   ├── vision.md               Why this exists
@@ -165,15 +219,19 @@ current state and proposed state. See `ADR-0005`.
 
 These are recorded as issues and must not be silently assumed:
 
+- `ISSUE-0034` — whether `model/` is authoritative input or compiled output.
+  Blocks `model-spec/`.
+- `ISSUE-0032` — the implementation language and toolchain of the framework.
+  Nothing executable can be built without it.
+- `ISSUE-0033` — where deterministic compilation ends and non-deterministic
+  agent work begins.
+- `ISSUE-0035` — whether `BUILD-STATE.yaml` or `governance/` is authoritative.
+- `ISSUE-0031` — the scope of this repository's own `model/`, and its overlap
+  with `governance/`.
 - `ISSUE-0002` — the composition primitive, which determines whether
   `workflows/` holds prose or executable definitions.
-- `ISSUE-0005` — whether this repository ships executable code at all. Strongly
-  informed by `ADR-0009`, which requires build pipelines and generators.
-- `ISSUE-0030` — whether one manifest schema serves both this repository and
-  adopting repositories.
-- `ISSUE-0031` — the scope of this repository's own `model/`, and whether
-  `governance/` overlaps it.
 - `ISSUE-0029` — the Knowledge Package format that federation depends on.
 - `ISSUE-0001` — runtime target, which determines whether `adapters/` is real.
 
-`ISSUE-0003` and `ISSUE-0004` were resolved by `ADR-0009` and `ADR-0010`.
+Resolved: `ISSUE-0003` (`ADR-0009`, superseded by `ADR-0013`), `ISSUE-0004`
+(`ADR-0010`), `ISSUE-0005` (`ADR-0012`), `ISSUE-0030` (`ADR-0013`).

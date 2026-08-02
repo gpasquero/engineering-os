@@ -1,10 +1,10 @@
 ---
 id: ADR-0009
 title: MANIFEST.yaml is the root composition manifest of an Engineering OS project
-status: accepted
+status: superseded
 date: 2026-08-02
 supersedes: null
-superseded-by: null
+superseded-by: ADR-0013
 resolves: [ISSUE-0003]
 related: [ISSUE-0005, ISSUE-0007, ISSUE-0030, ADR-0010]
 ---

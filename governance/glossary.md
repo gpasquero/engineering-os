@@ -52,11 +52,50 @@ definition, for example assertion statuses or risk levels.
 **Adapter** — packaging of the methodology for a specific agent runtime.
 Contains zero methodology.
 
-**Manifest** — `MANIFEST.yaml`, the root composition manifest of an Engineering
-OS project. Describes the project's architecture and composition; everything
-else in the repository is discoverable from it. The machine entry point.
-Explicitly *not* a dependency lock file or package-manager manifest. Every
-adopting repository has one. See `ADR-0009`.
+**Manifest** — one of three root YAML files describing an Engineering OS
+project. Separated by responsibility and lifecycle, not by audience. Explicitly
+*not* dependency lock files. Every adopting repository has all three. See
+`ADR-0013`.
+
+- **`MANIFEST.yaml`** — the **architectural manifest**: project composition,
+  enabled modules, extension points, build pipelines, artifact taxonomy,
+  generators, plugins, repository capabilities. Stable; changes rarely. Remains
+  the root machine entry point and declares the other two.
+- **`BUILD-STATE.yaml`** — the **implementation-state manifest**: milestones,
+  progress, blockers, active, completed and pending work, ADR and issue
+  references. Changes continuously.
+- **`KNOWLEDGE-MANIFEST.yaml`** — the **knowledge-model manifest**: ontology
+  modules, vocabularies, knowledge packages, graph modules, bounded contexts,
+  capabilities, invariants, state machines, glossary modules, semantic
+  dependencies. Changes when semantics change.
+
+## Compilation terms
+
+**Knowledge compiler** — what Engineering OS is, architecturally. It compiles
+authoritative assets into a canonical knowledge model, from which all derived
+artifacts are produced. Not a documentation generator. See `ADR-0011`.
+
+**Canonical knowledge model** — the internal representation produced by
+compilation, and the primary product of the pipeline. Every consumer reads this;
+none parses authoritative assets directly. Its relationship to `model/` is
+unresolved — `ISSUE-0034`.
+
+**Projection** — any artifact derived from the canonical knowledge model:
+knowledge graph, search index, cross-reference index, impact database,
+validation reports, agent context, documentation website. The website is one
+projection, not the model.
+
+**Artifact kind** — a closed vocabulary of four (`ADR-0012`):
+
+- **Authoritative** — human-authored source of truth. Never generated.
+- **Derived** — deterministically generated. Never edited by hand, never a
+  source of truth, always rebuildable.
+- **Runtime** — temporary, produced during execution. Not committed.
+- **Cached** — rebuildable, produced to avoid recomputation. Not committed.
+
+**Determinism** — the requirement that a pipeline produce identical outputs from
+identical authoritative inputs. Applies to compilation, not to agent-executed
+engineering work; the boundary is unresolved — `ISSUE-0033`.
 
 ## The two layers
 

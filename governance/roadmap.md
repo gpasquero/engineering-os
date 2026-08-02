@@ -24,24 +24,27 @@ Repository architecture and the two-layer rule; documentation system; session
 protocol; governance skeleton; ADRs for decisions made; all known open questions
 recorded as issues. No skills, policies or contracts.
 
-## M2 — Foundational contracts and manifest
+## M2 — Foundational contracts and manifests
 
-**Unblocked.** `ISSUE-0003` and `ISSUE-0004` are resolved by `ADR-0009` and
-`ADR-0010`.
+**Blocked by `ISSUE-0032` and `ISSUE-0034`.**
 
-- `MANIFEST.yaml` — the root composition manifest (`ADR-0009`)
+- The three manifests: `MANIFEST.yaml`, `BUILD-STATE.yaml`,
+  `KNOWLEDGE-MANIFEST.yaml` (`ADR-0013`)
 - Skill contract and workflow contract, including write-scope declaration
 - Evidence record, conflict record, traceability record contracts
 - `shared/vocabularies/` — single-source assertion statuses, confidence, risk,
-  gate decisions, change types
+  gate decisions, change types, **artifact kinds** (`ADR-0012`)
 - `model-spec/` — the Layer B tree specification and scaffold
 - One canonical impact-analysis template
+- The first executable tooling: manifest validation and index generation
+  (`ADR-0012`)
 
-Must be resolved within this milestone: `ISSUE-0005`, `ISSUE-0007`,
-`ISSUE-0013`, `ISSUE-0014`, `ISSUE-0015`, `ISSUE-0018`, `ISSUE-0019`,
-`ISSUE-0030`.
+Must be resolved within this milestone: `ISSUE-0007`, `ISSUE-0013`,
+`ISSUE-0014`, `ISSUE-0015`, `ISSUE-0018`, `ISSUE-0019`, `ISSUE-0031`,
+`ISSUE-0033`, `ISSUE-0035`, and `ISSUE-0011` (the licence gap).
 
-Design constraint: nothing built here may preclude federation (`ISSUE-0029`).
+Design constraints: nothing built here may preclude federation (`ISSUE-0029`),
+and every artifact produced must declare its kind (`ADR-0012`).
 
 ## M3 — Shared policies
 

@@ -39,6 +39,21 @@ This is the project's own instance of the duplication problem it identifies in
   overview; reading 28 files at session start is not practical.
 - The duplication is accepted deliberately as a temporary trade, not overlooked.
 
+## New evidence (ADR-0012, ADR-0013)
+
+`ADR-0012` makes this a general solved problem rather than a local one. Under
+the artifact taxonomy, a hand-maintained index that duplicates content held
+elsewhere is simply a **derived artifact authored by hand** — the one thing the
+taxonomy forbids. The build pipeline is required to verify continuously that
+derived artifacts stay synchronized with their authoritative sources.
+
+`ADR-0013` supplies the consumer: `BUILD-STATE.yaml` needs blockers and progress,
+both of which are computable from issue front matter and the roadmap.
+
+The remaining question is not *whether* to generate but *from what*, which is
+`ISSUE-0035`. This issue should be resolved by that decision plus the generator,
+not independently.
+
 ## Options
 
 - **Generate the index** from front matter in M9, alongside the other validation

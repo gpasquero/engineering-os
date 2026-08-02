@@ -11,5 +11,12 @@ Thumbs.db
 # Local agent state
 .claude/settings.local.json
 
-# Nothing else is ignored by design.
-# This repository is the persistent memory: artifacts belong in git.
+# Artifact taxonomy (ADR-0012)
+#
+# Authoritative artifacts are always committed: they are the source of truth.
+# Runtime and cached artifacts are never committed - they are temporary or
+# rebuildable by definition. Paths will be added here once the build pipeline
+# exists and declares them.
+#
+# Whether a given DERIVED artifact is committed is decided per artifact, trading
+# reviewability against churn. That policy is owed to M2.

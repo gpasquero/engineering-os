@@ -2,7 +2,7 @@
 id: ISSUE-0030
 title: MANIFEST.yaml serves both this repository and every adopting repository
 type: question
-status: open
+status: resolved
 severity: high
 created: 2026-08-02
 updated: 2026-08-02
@@ -10,7 +10,7 @@ blocks: [M2]
 evidence:
   - governance/adr/ADR-0009-manifest-is-the-root-composition-manifest.md
   - governance/adr/ADR-0010-repository-local-knowledge-ownership.md
-resolved-by: null
+resolved-by: ADR-0013
 ---
 
 # ISSUE-0030 — `MANIFEST.yaml` serves two audiences
@@ -51,8 +51,22 @@ everything downstream is discoverable from this file.
 - **Core schema plus extensions**, where authoring sections are an extension of
   the adopter schema.
 
-## Resolution criteria
+## Resolution
 
-An ADR stating whether one schema serves both audiences, and if so how required
-sections are distinguished. Must be decided before the manifest schema is
-written in M2.
+`ADR-0013` — **neither one nor two, but three.** The question had the wrong
+axis: the problem is not *audience*, it is **responsibility and lifecycle**.
+
+- `MANIFEST.yaml` — architectural. Stable, changes rarely.
+- `BUILD-STATE.yaml` — implementation state. Changes continuously.
+- `KNOWLEDGE-MANIFEST.yaml` — knowledge model. Changes when semantics change.
+
+The decisive argument is rate of change: binding content that changes yearly to
+content that changes hourly is how a manifest becomes a source of architectural
+drift rather than a defence against it.
+
+The audience question dissolves — an adopting repository has the same three
+manifests, leaving unused sections empty.
+
+Opened by this answer: `ISSUE-0035` (`BUILD-STATE.yaml` overlaps `governance/`).
+`ISSUE-0031` is compounded, because `KNOWLEDGE-MANIFEST.yaml` lists glossary
+modules while the glossary lives in `governance/`.
