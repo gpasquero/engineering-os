@@ -85,6 +85,50 @@ plans:
       - Whether a new invariant should be recorded as a result of the change.
       - The implementation itself.
 
+  - id: P-discover
+    objective: Build a Candidate Engineering Model of {subject}
+    applies-to: [Artifact]
+    rationale: >
+      The first engineering workflow Engineering OS executes on an unknown
+      repository (ADR-0105). It produces PROPOSALS, never authoritative
+      knowledge: the review gate every plan already terminates in is what makes
+      a candidate model authoritative, and it is the same gate.
+    assumptions:
+      - query: Q-provenance
+        statement: This is the repository being onboarded, and what is known of it.
+    phases:
+      - id: extract
+        goal: Derive structure mechanically, interpreting nothing
+        recommendation: R-discover
+        actions: [extract]
+      - id: interpret
+        goal: Propose engineering knowledge, each proposal citing its source
+        recommendation: R-discover
+        actions: [interpret]
+        requires: [extract]
+      - id: assess
+        goal: Report what the candidate model does not contain
+        recommendation: R-discover
+        actions: [identify-gaps]
+        requires: [interpret]
+    reviews:
+      - at: interpret
+        query: Q-evidence
+        because: >
+          A proposal without provenance is a guess, and a candidate model is
+          mostly proposals.
+    expected-evidence:
+      - query: Q-unsupported
+        statement: Every proposed assertion should carry provenance afterwards.
+    completion:
+      - query: Q-provenance
+        expect: non-empty
+        statement: The repository under discovery is identified.
+    defers:
+      - Which proposals are accepted — that is the review gate, not the plan.
+      - Whether a proposed concept is the right abstraction for this domain.
+      - Everything the repository contains that discovery did not reach.
+
   - id: P-change-capability
     objective: Change what {subject} does, and carry it through every realisation
     applies-to: [Capability]

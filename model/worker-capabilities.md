@@ -48,6 +48,29 @@ worker-capabilities:
     rationale: >
       A script runs it and the result is a fact, not an interpretation.
 
+  - id: C-parse-source
+    label: Parse source into structure
+    execution: mechanical
+    rationale: >
+      An AST, a dependency graph or a route table is derived, not interpreted.
+      Deterministic, and the only part of discovery that is.
+
+  - id: C-interpret-source
+    label: Interpret source as engineering knowledge
+    execution: reasoning
+    rationale: >
+      Naming a domain concept, recognising a capability or proposing an invariant
+      from code is irreducibly interpretive (ADR-0060). This is the capability
+      that reads software so that nothing else in the architecture has to
+      (ADR-0105).
+
+  - id: C-propose-knowledge
+    label: Propose an assertion for review
+    execution: reasoning
+    rationale: >
+      Distinct from C-record-knowledge, which writes what was already authorized.
+      Proposing is a claim; recording is a consequence.
+
   - id: C-approve
     label: Approve or reject
     execution: human

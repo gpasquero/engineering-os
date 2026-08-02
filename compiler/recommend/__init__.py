@@ -11,14 +11,39 @@ from ..runtime.phases import feature
 from ..registry import load_all
 from ..query import Model, run, load_queries, OK, EMPTY, NOT_APPLICABLE
 
-ACTIONS = {
-    "review":      "read these before deciding",
-    "inspect":     "look at these; they may need to change",
-    "validate":    "check that these still hold",
-    "update":      "these will be wrong unless changed",
-    "verify":      "confirm these still pass",
-    "investigate": "these are unexplained and may be a problem",
-}
+def _actions():
+    """The action vocabulary is DERIVED from task kinds, not hardcoded.
+
+    An action exists because a task kind derives from it (ADR-0097). Discovery
+    needed three new actions and found the vocabulary in Python; deriving it
+    removes a registry that was pretending to be a mechanism (ADR-0102).
+    """
+    return {k["from-action"]: (k.get("means") or "").strip()
+            for k in load_all()["REG-task-kinds"].values() if k.get("from-action")}
+
+
+class _Actions(dict):
+    """Reads the registry on first use, so import order does not matter."""
+
+    def _load(self):
+        if not super().__len__():
+            self.update(_actions())
+        return self
+
+    def __contains__(self, key):
+        return dict.__contains__(self._load(), key)
+
+    def __getitem__(self, key):
+        return dict.__getitem__(self._load(), key)
+
+    def __iter__(self):
+        return iter(self._load().keys())
+
+    def __len__(self):
+        return dict.__len__(self._load())
+
+
+ACTIONS = _Actions()
 
 
 def load_recommendations(strict=True):

@@ -1,0 +1,75 @@
+{
+  "formatVersion": "1.0.0",
+  "metamodelVersion": "0.4.0-skeleton",
+  "project": "ai-desk-onboarding",
+  "note": "Canonical Knowledge Model. Every edge was asserted; none inferred (ADR-0044, ADR-0061). Serializations are projections of this model, not the model (ADR-0076).",
+  "nodes": [
+    {
+      "id": "Artifact.AiDeskRepository",
+      "type": "Artifact",
+      "label": "ai-desk repository",
+      "family": "descriptive",
+      "position": null,
+      "description": "**The seed.** A repository under discovery has no model yet, so exactly one node\nis authored: the repository itself, as an `Artifact`.\n\nDiscovery is then a plan applied to it, using the existing Director unchanged \u2014\nwhich is the claim `ADR-0105` makes and this project exists to test.",
+      "attributes": {
+        "locator": "469 tracked files; 314 ts, 155 tsx, 64 md",
+        "source": "/Users/willy/Localsources/ai-desk",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "repo.md"
+      }
+    },
+    {
+      "id": "Evidence.RepositoryInventory",
+      "type": "Evidence",
+      "label": "git ls-files inventory",
+      "family": "descriptive",
+      "position": null,
+      "description": "Mechanically derived. The only thing known about the repository before discovery\nruns.",
+      "attributes": {
+        "extracted": "2026-08-02",
+        "kind": "source-reference",
+        "locator": "git ls-files | 469 files",
+        "source": "/Users/willy/Localsources/ai-desk",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "inventory.md"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "Artifact.AiDeskRepository",
+      "predicate": "evidenced-by",
+      "to": "Evidence.RepositoryInventory",
+      "core": "evidenced-by",
+      "category": "traceability"
+    }
+  ],
+  "vocabulary": {
+    "evidenced-by": {
+      "category": "traceability",
+      "means": "A is supported by observable B",
+      "inverse": "supports"
+    }
+  },
+  "statistics": {
+    "nodes": 2,
+    "edges": 1,
+    "byType": {
+      "Artifact": 1,
+      "Evidence": 1
+    },
+    "byFamily": {
+      "descriptive": 2
+    },
+    "byCategory": {
+      "traceability": 1
+    },
+    "byCoreType": {
+      "evidenced-by": 1
+    }
+  }
+}

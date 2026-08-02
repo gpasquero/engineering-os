@@ -4,7 +4,7 @@ title: Build State
 status: current
 created: 2026-08-02
 updated: 2026-08-02
-milestone: autonomy
+milestone: discovery
 ---
 
 # Build State
@@ -17,92 +17,83 @@ milestone: autonomy
 
 ## Current work
 
-**Autonomy** (`ADR-0102`). Reduce the engineering judgment delegated to workers.
+**Engineering Discovery** (`ADR-0105`) — the first engineering workflow
+Engineering OS executes on an unknown repository.
 
-> **Engineering OS is allowed to become smarter. It is not allowed to become less
-> deterministic** (`ADR-0103`).
+## The correction, and its test
 
-## The KPI
+**The Director must never operate directly on a source repository.** It operates
+on an Engineering Model.
 
-| Measure | Value |
-|---|---|
-| decisions **before the first LLM token** — *ai-desk, "add OAuth"* | **54** |
-| decisions **left to workers** | **7** |
-| decisions that **never require an LLM** | *not yet separately counted* |
+`SESSION-0037`'s `ai-desk` input was produced by `grep` — a valid technique and
+**not the architecture.**
 
-The third is the target the KPI evolves toward. **Reporting only the first would
-reward deferral dressed as ordering.**
+> **The only difference between Brownfield and Continuous Engineering is the
+> objective. Everything else is identical.**
 
-## First run on a real repository
+**Tested and it holds:**
 
 ```sh
-python3 tools/compile.py external/ai-desk-auth
-python3 tools/direct.py external/ai-desk-auth I-modify-behavior Capability.Login
+python3 tools/direct.py external/ai-desk-onboarding I-onboard Artifact.AiDeskRepository
 ```
 
-`external/ai-desk-auth/` — 469-file TypeScript SaaS backend, authentication
-subsystem, **31 nodes modelled from the working tree by `grep`**. Six tasks: three
-requiring a worker, two mechanical, one gated.
+Plan, task graph, worker assignment, governance gate, knowledge-update task —
+through **`tools/direct.py` unchanged.** **22 decisions before the first LLM
+token; 4 left to workers.**
 
-**Six findings, ranks 4–6.** The one worth acting on: ADR-0001's
-`tenant_id`-on-every-connection requirement, which the ADR calls *"discipline"*,
-**has no enforcement point.**
+**No execution mechanism was built.** Discovery is declarations in the existing
+registries.
 
-## Friction produced the session's only new artifact
+## Two mechanisms became one
 
-`I-modify-behavior` on `Capability.Login` — the obvious reading of *"add OAuth"* —
-returned **not-applicable**. No plan applied to a capability.
+`ADR-0106`. A **Candidate Engineering Model** and an **Execution Observation**
+are the same artifact at different scales — sets of proposed assertions with
+provenance, produced by probabilistic workers, requiring authorization.
 
-`P-change-capability` was added **because a real run could not express the
-workflow it was given** (`ADR-0102`). It is **data, not a construct**: no entity,
-operator, registry or engine.
+```text
+discovery workers ─┐
+                   ├→ proposed assertions → review → authoring sources → compiler → CKM
+execution workers ─┘
+```
+
+**The loop's unclosed step and discovery intake are one mechanism to build.**
+`ADR-0072` survives untouched: the compiler remains the only writer, still
+writing from authoring sources.
 
 ## What exists
 
 | Area | State |
 |---|---|
-| `compiler/direct/` | Assignment · contexts · intake · loop · KPI. **Confidence ratchet** (`ADR-0104`) |
-| `tools/direct.py` · `plan.py` · `taskgraph.py` · `advise.py` · `ask.py` | The Director and its stages |
-| `model/plans.md` | **3 plans** — Artifact, Concept, **Capability** |
-| `model/workers.md` · `governance-gates.md` · `observation-kinds.md` | 7 · 3 · 8 |
-| `external/ai-desk-auth/` | **31 nodes, real repository, 6 classified findings** |
+| **`discovery/ARCHITECTURE.md`** | Contracts · artifacts · extension points · worker types · compiler interaction |
+| **`external/ai-desk-onboarding/`** | **The seed: two files.** A repository is an `Artifact`; discovery is a plan applied to it |
+| `model/workers.md` | **12 types** — 5 for discovery, 2 of them mechanical |
+| `model/task-kinds.md` | 11 kinds. **The action vocabulary is declared here and nowhere else** |
+| `model/plans.md` · `recommendations.md` · `engineering-intents.md` | 4 · 4 · 4 |
+| `external/ai-desk-auth/` | 31 nodes — **reclassified: a hand-made Candidate Engineering Model that skipped its review** |
 | `external/kubernetes-ssa/` | 41 nodes, four source classes, end-to-end simulation |
 | `tests/` | 17 fixtures, 9 negative, golden outputs |
-| Registries | 14, **cross-references checked** |
-| `model/metamodel/` | 23 of 27 entities — **unchanged for six milestones** |
+| Registries | 14 |
+| `model/metamodel/` | 23 of 27 entities — **unchanged for seven milestones** |
 
-## The confidence tension, resolved not absorbed
+## Friction produced the session's only code change
 
-The direction on structured worker confidence **conflicted with `ADR-0090`**,
-which rejected confidence scores.
+Declaring discovery needed three new actions — `extract`, `interpret`,
+`identify-gaps` — and **the action vocabulary was hardcoded in Python.**
 
-`ADR-0104` resolves it: `ADR-0090` governs **Engineering OS's own conclusions**;
-a worker's confidence is a **probabilistic executor's self-report**. It is
-admitted as an **intake signal that may only add scrutiny** — `record` with
-medium or low confidence escalates to `govern`; **high confidence never lowers
-scrutiny**, because the reason an observation is governed is a property of the
-claim, not of the claimant.
+Task kinds already declare `from-action`, so **an action exists because a task
+kind derives from it.** The vocabulary is now derived, and a hardcoded registry
+pretending to be a mechanism is gone.
 
-**Confidence and reasoning are stripped at the boundary on every path**, verified
-by assertion including the reject paths — where the first implementation leaked
-them.
-
-## Awaiting decision
-
-**Execution Memory** — `governance/design/PROPOSAL-execution-memory.md`. **Not
-implemented**, as directed.
-
-It recommends building **only the run log**: experience is counted from runs and
-**nothing currently records a run**. The four example patterns are hypotheses,
-and **nothing has run twice.**
+**One vocabulary removed, not added** (`ADR-0102`).
 
 ## What does not exist
 
-**Nothing applies a knowledge-update proposal.** The loop still does not close.
+**No applier.** Nothing writes an accepted proposal as an authoring source — the
+single missing mechanism, now serving two purposes.
 
-**No run log.** The KPI cannot be compared across sessions.
+**No discovery worker.** Five types are declared and none is implemented.
 
-No runtime implements any worker type. No confidence value anywhere in any model.
+**No proposal serialisation format.**
 
 ## Blocking
 
@@ -112,24 +103,29 @@ No runtime implements any worker type. No confidence value anywhere in any model
 |---|---|
 | `ISSUE-0037` | Hand-maintained projections. Fourteen registries, zero generated |
 
+## Governance note
+
+**`ACCEPT-0033` is not allocated.** `ACCEPT-0034` was requested when the highest
+allocated was `ACCEPT-0032`. The identifier is used as requested and the gap is
+documented in the record and the index; **a sequence-contiguity check was added
+to validation** so a future gap is reported rather than discovered.
+
 ## Debt discovered while building
 
 | Question | Where |
 |---|---|
-| **`Q-tests` names suites, not cases** — better than files, still not the case that protects a behaviour | `ai-desk-auth/FINDINGS.md` |
-| Two ai-desk test suites have no invariant traced to them; **may be a modelling gap rather than a repository one** | `ai-desk-auth/FINDINGS.md` |
-| Workers will report high confidence by default, so the ratchet protects only when a worker is honest enough to doubt | `ADR-0104` |
-| Three confidence levels is a scale, and a scale is a score with fewer values | `ADR-0104` |
-| **Nothing detects a decision that *could* have been mechanical being delegated anyway** | `ADR-0103` |
+| **Review does not scale.** A candidate model may propose thousands of assertions; batch acceptance trades scrutiny for throughput — the trade `ADR-0023` exists to prevent | `discovery/ARCHITECTURE.md`, `ADR-0106` |
+| Discovery is the largest worker surface contemplated; naming the activities does not make them cheap | `ADR-0105` |
+| Writing authoring sources from proposals means **workers shape the repository's text**, so the parser schema is now load-bearing | `ADR-0106` |
+| `ai-desk-auth` stands as a candidate model that skipped its review | `ADR-0105` |
 
 ## Next action
 
-**The Project Owner's decision on Execution Memory.**
+**The applier.** Write an accepted proposal as an authoring source.
 
-The proposal recommends the run log alone. It is small, is required by every
-version of the experience layer, and is what would make the KPI comparable across
-runs — which is the number this milestone just started reporting and cannot yet
-compare.
+It closes the loop and gives discovery its path **from the same code** — which is
+`ADR-0106`'s point and the reason it is worth building before any discovery
+worker.
 
 ## Repository state
 

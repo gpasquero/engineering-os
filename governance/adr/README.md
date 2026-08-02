@@ -16,7 +16,7 @@ same session the decision is made.
 > a rule exists; the rule that must be followed lives in a Policy under
 > `shared/policies/`. Agents consume policies; humans read ADRs for rationale.
 
-**Highest allocated ID: `ADR-0104`.** IDs are sequential and never reused.
+**Highest allocated ID: `ADR-0106`.** IDs are sequential and never reused.
 
 > This index table is a hand-maintained projection of ADR front matter. It is
 > listed in the transitional-debt register, `ISSUE-0037`.
@@ -199,6 +199,8 @@ Read these before designing anything that produces an artifact:
 | [ADR-0102](ADR-0102-autonomy-is-the-target.md) | **Autonomy is the target; the KPI becomes decisions that never require an LLM** | accepted | — |
 | [ADR-0103](ADR-0103-smarter-never-less-deterministic.md) | **Engineering OS may become smarter; it may not become less deterministic** | accepted | — |
 | [ADR-0104](ADR-0104-worker-confidence.md) | **Worker confidence is an intake signal that may only add scrutiny, never model content** | accepted | — |
+| [ADR-0105](ADR-0105-engineering-discovery-is-a-workflow.md) | **Engineering Discovery is the first engineering workflow, not a preprocessing step** | accepted | — |
+| [ADR-0106](ADR-0106-the-proposed-assertion.md) | **A Candidate Engineering Model and an Execution Observation are the same artifact at different scales** | accepted | — |
 
 ## Supersessions
 

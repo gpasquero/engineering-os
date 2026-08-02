@@ -88,6 +88,25 @@ recommendations:
         query: Q-evidence
         because: the sources this artifact's claims rest on
 
+  - id: R-discover
+    intent: I want to build an engineering model of this repository
+    applies-to: [Artifact]
+    rationale: >
+      Discovery is an engineering process, not a parser (ADR-0105). Structure is
+      derived first because it is mechanical and constrains what interpretation
+      is plausible; gaps are identified last because they are defined by what the
+      earlier steps did not produce.
+    steps:
+      - action: extract
+        query: Q-provenance
+        because: the repository and what is already known about it
+      - action: interpret
+        query: Q-evidence
+        because: sources from which engineering knowledge may be proposed
+      - action: identify-gaps
+        query: Q-unsupported
+        because: assertions the candidate model would carry without support
+
   - id: R-audit-model
     intent: I want to know what this model cannot support
     applies-to: []

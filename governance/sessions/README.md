@@ -60,6 +60,7 @@ ADRs answer "why".
 | [SESSION-0035](SESSION-0035-2026-08-02.md) | 2026-08-02 | taskgraph | `ACCEPT-0030`; **the engineering loop is the architecture** (`ADR-0095`); **`EngineeringIntent` is a registry** (`ADR-0096`); **the Task Graph** (`ADR-0097`); `tools/taskgraph.py`; capabilities, never workers |
 | [SESSION-0036](SESSION-0036-2026-08-02.md) | 2026-08-02 | orchestration | `ACCEPT-0031`; **orchestration is the objective** (`ADR-0098`); **workers are capabilities** (`ADR-0099`); **governance is not a worker** (`ADR-0100`); **context out, observations back** (`ADR-0101`); **end-to-end simulation found two defects** |
 | [SESSION-0037](SESSION-0037-2026-08-02.md) | 2026-08-02 | autonomy | `ACCEPT-0032`; **autonomy is the target** (`ADR-0102`); **smarter, never less deterministic** (`ADR-0103`); **worker confidence resolved against `ADR-0090`** (`ADR-0104`); **first run on a real repository** — ai-desk auth, 54 decisions before the first token |
+| [SESSION-0038](SESSION-0038-2026-08-02.md) | 2026-08-02 | discovery | `ACCEPT-0034`; **Discovery is the first engineering workflow** (`ADR-0105`); **candidate model and observation are one artifact** (`ADR-0106`); discovery runs through the **unchanged** Director; action vocabulary derived from task kinds |
 
 ## Reading
 

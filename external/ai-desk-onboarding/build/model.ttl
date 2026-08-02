@@ -1,0 +1,21 @@
+@prefix ex:   <https://example.org/engineering-os/example#> .
+@prefix eos:  <https://example.org/engineering-os/metamodel#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+# A PROJECTION of the Canonical Knowledge Model (ADR-0072). Generated; do not edit.
+
+<https://example.org/engineering-os/example> a owl:Ontology ;
+    rdfs:comment "Layer B model expressed in the Layer A metamodel." ;
+    owl:imports <https://example.org/engineering-os/metamodel> .
+
+ex:Artifact_AiDeskRepository a eos:Artifact ;
+    rdfs:label "ai-desk repository" ;
+    rdfs:comment "**The seed.** A repository under discovery has no model yet, so exactly one node" .
+
+ex:Evidence_RepositoryInventory a eos:Evidence ;
+    rdfs:label "git ls-files inventory" ;
+    rdfs:comment "Mechanically derived. The only thing known about the repository before discovery" .
+
+ex:Artifact_AiDeskRepository eos:evidencedBy ex:Evidence_RepositoryInventory .

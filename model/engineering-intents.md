@@ -29,6 +29,12 @@ engineering-intents:
     selects-plans: [P-change-implementation, P-change-concept, P-change-capability]
     selects-recommendations: [R-change-implementation, R-change-concept]
 
+  - id: I-onboard
+    label: Onboard a repository
+    asks: What engineering knowledge does this repository contain?
+    selects-plans: [P-discover]
+    selects-recommendations: [R-discover]
+
   - id: I-investigate
     label: Investigate a bug
     asks: What is this supposed to do, and what says so?
