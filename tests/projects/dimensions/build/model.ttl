@@ -1,0 +1,31 @@
+@prefix ex:   <https://example.org/engineering-os/example#> .
+@prefix eos:  <https://example.org/engineering-os/metamodel#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+# A PROJECTION of the Canonical Knowledge Model (ADR-0072). Generated; do not edit.
+
+<https://example.org/engineering-os/example> a owl:Ontology ;
+    rdfs:comment "Layer B model expressed in the Layer A metamodel." ;
+    owl:imports <https://example.org/engineering-os/metamodel> .
+
+ex:Artifact_Doc a eos:Artifact ;
+    rdfs:label "Doc" ;
+    rdfs:comment "Unclassified." .
+
+ex:ArtifactRevision_Doc_r1 a eos:ArtifactRevision ;
+    rdfs:label "Doc r1" ;
+    rdfs:comment "Carries no dimension value." .
+
+ex:Dimension_SemanticLayer a eos:Dimension ;
+    rdfs:label "Semantic layer" ;
+    rdfs:comment "One entity, holding the ten fields. Not a Specification/Instance pair." .
+
+ex:DimensionAssignment_1 a eos:DimensionAssignment ;
+    rdfs:label "Doc r1 is Layer B" ;
+    rdfs:comment "A reified association, versioned independently of what it classifies." .
+
+ex:Dimension_SemanticLayer eos:assignsVia ex:DimensionAssignment_1 .
+ex:DimensionAssignment_1 eos:along ex:Dimension_SemanticLayer .
+ex:DimensionAssignment_1 eos:classifiedBy ex:ArtifactRevision_Doc_r1 .

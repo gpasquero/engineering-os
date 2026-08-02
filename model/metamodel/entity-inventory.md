@@ -44,8 +44,8 @@ remaining entity derives from it.
 | 11 | **DimensionAssignment** | The relationship classifying an artifact along a dimension | `ADR-0042` | [✓](entities/dimension-assignment.md) |
 | 12 | **StateMachineSpecification** | Defines a state machine: states, transitions, what it governs | `ADR-0027`, `ADR-0070` | [✓](entities/state-machine-specification.md) |
 | 13 | **Vocabulary** | A closed enumeration with exactly one definition | `ADR-0008` | — |
-| 14 | **Principle** | A semantic relationship emerging from accepted knowledge. **Not an artifact** | `ADR-0058` | — |
-| 15 | **KnowledgePackage** | A published interface between repositories | `ADR-0019` | — |
+| 14 | **Principle** | A semantic relationship emerging from accepted knowledge. **Not an artifact** | `ADR-0058` | **deferred** |
+| 15 | **KnowledgePackage** | A published interface between repositories | `ADR-0019` | **deferred** |
 
 ### Operational
 
@@ -74,8 +74,23 @@ Recorded by `ADR-0065` as not classifying cleanly. Each describes structure
 | 25 | **Manifest** | A root declaration of composition, status or semantics | `ADR-0013` | — |
 | 26 | **ValidationRule** | A constraint a semantic model must satisfy | `ADR-0048` | — |
 
-**20 of 26 specified.** The simplification review is **complete** (`ISSUE-0074`,
-resolved by `ADR-0070`).
+**20 of 26 specified. Four remain in scope; two are deferred** (`ADR-0075`).
+
+A remaining entity is justified by a **compiler requirement**, not by
+architectural completeness. *If the compiler never needs an entity, question
+whether the metamodel needs it either.*
+
+| Entity | What the compiler would do differently | Status |
+|---|---|---|
+| `ValidationRule` | Own the checks hard-coded in `resolve()` | **needed now** |
+| `Registry` | Hold the vocabulary the compiler reads by regex today | **needed now** |
+| `Vocabulary` | Type the closed enumerations scattered as bare strings | needed soon |
+| `Manifest` | Declare what a project is, replacing the `model/*.md` assumption | needed soon |
+| `Principle` | Nothing — the compiler compiles no ADRs | **deferred** |
+| `KnowledgePackage` | Nothing — there is one repository | **deferred** |
+
+The simplification review is **complete** (`ISSUE-0074`, resolved by
+`ADR-0070`).
 
 The criterion was not structural similarity but **independent existence**: does a
 Specification define something whose instances may exist outside Engineering OS?

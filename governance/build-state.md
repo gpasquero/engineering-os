@@ -19,64 +19,62 @@ milestone: B1
 
 **B1 — Engineering OS Metamodel. In progress.**
 
-Advancing under `ADR-0062`: **architecture through implementation.**
+**Compiler evolution takes precedence over metamodel expansion** (`ADR-0075`).
+Remaining entities are justified by compiler requirement, not by architectural
+completeness.
 
-## The pipeline runs
+## The product
+
+**The Canonical Knowledge Model** (`ADR-0072`). OWL, the explorer, the graphs and
+every register are projections of it. Nothing else is the deliverable.
 
 ```sh
-python3 tools/compile.py examples/tiny
+python3 tools/compile.py --phases      # the phase contract
+python3 tools/compile.py examples/tiny # compile a project
+python3 tools/test.py                  # rebuild every test project
 ```
 
 ```text
-[metamodel] 20 entity types, 67 registered predicates
-[discover]  13 authoring sources
-[parse]     13 nodes
-[resolve]   OK — 16 edges, all types and predicates valid
-[emit]      canonical-knowledge-model.json, model.ttl, graph.md, explorer.html
+all 10 project(s) behaved as declared
 ```
-
-**The metamodel is load-bearing.** Phase 3 reads `model/metamodel/` and rejects
-a model that violates it — verified by breaking the example three ways and
-confirming all three are caught.
 
 ## What exists
 
 | Area | State |
 |---|---|
-| **`examples/tiny/`** | **First end-to-end pipeline.** 13 nodes → Canonical Knowledge Model, OWL, graph, HTML explorer |
-| **`tools/compile.py`** | The Knowledge Compiler — discover, parse, resolve, emit |
+| **`tools/compile.py`** | Six declared phases (`ADR-0073`); **7 features, each declaring input, output, invariants and determinism** |
+| **`tests/projects/`** | **10 compiler test projects — 6 pass, 4 must fail.** Determinism checked by compiling twice and comparing |
+| **`tools/test.py`** | The regression suite. Every compiler change rebuilds every project |
 | **`tools/generate-metamodel-views.py`** | Three generated graph views |
-| **`model/metamodel/`** | **20 of 26 Layer A entities specified.** Simplification review complete |
-| **`model/metamodel/relationship-vocabulary.md`** | 18 core types + inverses; **every predicate has a registered parent** |
-| `model/metamodel/ontology/` | OWL 0.4.0 — **660 triples, 31 classes, 73 object properties** |
-| `LICENSE` | Apache-2.0 (`ADR-0063`) |
-| ADRs | 71 — 63 accepted, 8 superseded |
+| `examples/tiny/` | The reference end-to-end example, 13 nodes |
+| **`model/metamodel/`** | **20 of 26 entities specified.** 4 remain in scope, 2 deferred |
+| `model/metamodel/relationship-vocabulary.md` | 18 core types; **63 predicates, all parented**; 2 of 5 required fields machine-readable |
+| `model/metamodel/ontology/` | OWL 0.4.0 — 660 triples, 31 classes, 73 object properties |
+| ADRs | 75 — 67 accepted, 8 superseded |
 | Issues | 74 — **1 open, 51 resolved, 22 deferred as debt** |
-| Acceptance Records | 21 |
-| Session journal | 26 entries |
+| Acceptance Records | 22 |
+| Session journal | 27 entries |
 
 ### Metamodel progress
 
 | Family | Specified | Remaining |
 |---|---|---|
-| **Descriptive** | BoundedContext · Artifact · ArtifactRevision · Concept · Capability · RelationshipType · Invariant · Evidence · Actor · Dimension · DimensionAssignment · StateMachineSpecification | Vocabulary · Principle · KnowledgePackage |
+| **Descriptive** | BoundedContext · Artifact · ArtifactRevision · Concept · Capability · RelationshipType · Invariant · Evidence · Actor · Dimension · DimensionAssignment · StateMachineSpecification | `Vocabulary` (soon) · ~~Principle~~ · ~~KnowledgePackage~~ |
 | **Operational** | Policy · Workflow · WorkflowStep · Skill · EngineeringGate · AcceptanceRecord · ADR · Issue | — |
-| **Unassigned** | none | Registry · Manifest · ValidationRule |
+| **Unassigned** | none | `ValidationRule` (now) · `Registry` (now) · `Manifest` (soon) |
 
-**26 confirmed entities, down from 28, with no expressible statement lost.**
-`StateMachine` removed and `DimensionSpecification` merged — in **opposite
-directions**, decided by independent existence rather than structural similarity
-(`ADR-0070`).
+`Principle` and `KnowledgePackage` are **deferred** (`ADR-0075`): the compiler
+compiles no ADRs, and there is one repository.
 
 ## What does not exist
 
-No manifests. No policy instances. No `Principle` extraction. No lifecycle
-enforcement, no dimension assignment, no acceptance checking in the compiler.
-Nothing in `shared/`, `skills/`, `workflows/`, `schemas/`, `validation/`,
-`tests/`, `adapters/` or `docs/`.
+No `ValidationRule` entity — the checks live in `resolve()` as Python. No
+`Registry` entity — the compiler reads the vocabulary from Markdown by regex. No
+manifest, so a project is *whatever is in `model/*.md`*. No lifecycle
+enforcement, no acceptance checking, no dimension assignment in the compiler.
 
-The metamodel OWL is hand-written. The views, the CKM and its four projections
-are generated.
+**The governance corpus is not compiled.** 192 records, and the Canonical
+Knowledge Model covers 13 example nodes plus 10 test projects.
 
 ## Blocking
 
@@ -84,52 +82,48 @@ are generated.
 
 | Issue | Why it is open |
 |---|---|
-| `ISSUE-0037` | Hand-maintained projections. **Substantially discharged**: `views/` and all `examples/tiny/build/` output are generated; the four governance indexes are not |
+| `ISSUE-0037` | Hand-maintained projections. **Now an architectural violation, not an inconvenience** (`ADR-0072`): a hand-maintained projection is a projection with no model behind it. Four governance indexes, the corrections table and the metamodel ontology are still hand-maintained |
 
 ## Architectural debt
 
 **22 deferred issues.**
 
-- **`ISSUE-0073`** — Operational Knowledge. `ADR-0070` now draws the boundary
-  from a new direction: a Specification whose instances live outside the
-  repository is exactly where Engineering OS stops.
-- **`ISSUE-0063`** — minimum serialized classification set. The compiler assigns
-  no dimensions at all.
+- **`ISSUE-0073`** — Operational Knowledge. `ADR-0070` draws the boundary: a
+  Specification whose instances live outside the repository is where Engineering
+  OS stops.
 - **`ISSUE-0048`** — `ADR.corrects` specified; six corrections still in a
   hand-maintained table.
+- **`ISSUE-0063`** — minimum serialized classification set. The compiler assigns
+  no dimensions.
 
 ## Debt discovered while building
 
 | Question | Where |
 |---|---|
-| Eighteen core relationship types is a seed; some will prove unused | `relationship-vocabulary.md` |
-| Four mappings are strained — `produces`, `guarded-by`, `has-position`, `requires` | `relationship-vocabulary.md` |
-| No core type declares a cardinality or constraint convention | `relationship-vocabulary.md` |
-| Nothing enforces that a new predicate declares a parent — a natural first `ValidationRule` | `ADR-0071` |
-| **Transitions** and **conditions** both point at things that are not entities; both extrinsic by `ADR-0068`'s test | `FINDINGS.md` |
-| `Evidence.supports` has no range; no `Assertion` entity | `FINDINGS.md` #4 |
-| Nothing enforces that an acceptance reviewer differs from the author | `acceptance-record.md` |
-| The framework declares none of its own BoundedContexts, Actors or RelationshipTypes | four specifications |
+| **441 field declarations required, fewer than a third exist.** Domain, range and cardinality are prose the compiler cannot read | `relationship-vocabulary.md` |
+| Only one `ValidationRule` exists and it is hard-coded in `resolve()` | `ADR-0075` |
+| Four vocabulary mappings are strained — `produces`, `guarded-by`, `has-position`, `requires` | `relationship-vocabulary.md` |
+| No test project exercises the six unspecified entities. **The gap is the map** | `tests/README.md` |
+| Transitions and conditions point at things that are not entities; both extrinsic by `ADR-0068`'s test | `FINDINGS.md` |
+| Nothing enforces that an acceptance reviewer differs from the author | `acceptance-record.md`, `tests/projects/acceptance` |
+| Deferral has no automatic trigger, and two entities were just deferred | `ADR-0075`, `issue.md` |
 
 ## Acceptance status
 
-`ACCEPT-0001` (trust root) through `ACCEPT-0021`, covering `SESSION-0006`
-through `SESSION-0025`.
+`ACCEPT-0001` (trust root) through `ACCEPT-0022`, covering `SESSION-0006`
+through `SESSION-0026`.
 
-**`ADR-0069`, `ADR-0070`, `ADR-0071`, the normalization, the relationship
-vocabulary, `tools/compile.py` and `examples/tiny/` are `Under Review`.**
+**`ADR-0072`–`ADR-0075`, the phase-declaring compiler, `tools/test.py` and the
+ten test projects are `Under Review`.**
 
 ## Next action
 
-**Extend the pipeline before extending the metamodel.**
+**`ValidationRule` and `Registry`** — the two entities the compiler already
+needs, both currently implemented as Python that the model should own.
 
-Six entities remain — `Vocabulary`, `Principle`, `KnowledgePackage`, `Registry`,
-`Manifest`, `ValidationRule` — and four of them are things the compiler needs
-rather than things the model lacks. `ValidationRule` in particular now has a
-concrete first instance: *every predicate must declare a registered parent*.
-
-Specifying them against a running pipeline will be sharper than specifying them
-against prose, which is the whole argument of `ADR-0062`.
+`ValidationRule` has a concrete first instance ready: *every predicate declares a
+registered parent*. Moving it from `resolve()` into the model is the smallest
+change that makes the metamodel own its own enforcement.
 
 ## Repository state
 

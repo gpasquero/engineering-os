@@ -76,6 +76,12 @@ mechanically produced projection in the repository (`ISSUE-0037`).
   cardinalities, inference and identity.
 - **The metamodel defines `RelationshipType`, not `Relationship`** (`ADR-0066`).
   It declares the vocabulary of edges; it does not model every edge as an entity.
+- **The Canonical Knowledge Model is the product** (`ADR-0072`). This metamodel,
+  the OWL and every register are projections or inputs — none is the deliverable.
+- **`RelationshipType` is the type system of the knowledge graph** (`ADR-0074`).
+  Seven fields per predicate; the gap is recorded in `relationship-vocabulary.md`.
+- **A remaining entity is justified by compiler need** (`ADR-0075`), not by
+  architectural completeness.
 - **Every predicate specializes a registered core type** (`ADR-0071`). Four
   categories — structural, behavioral, semantic, traceability. Classification,
   not collapse: specific predicates stay distinct.

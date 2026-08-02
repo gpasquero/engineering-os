@@ -1,0 +1,114 @@
+{
+  "metamodelVersion": "0.4.0-skeleton",
+  "note": "Canonical Knowledge Model. Every edge was asserted; none inferred (ADR-0061).",
+  "nodes": [
+    {
+      "id": "Artifact.Report",
+      "type": "Artifact",
+      "label": "Validation report",
+      "family": "descriptive",
+      "position": null,
+      "description": "Output."
+    },
+    {
+      "id": "Skill.Validate",
+      "type": "Skill",
+      "label": "Validate",
+      "family": "operational",
+      "position": null,
+      "description": "Carries no position of its own."
+    },
+    {
+      "id": "Workflow.Pipeline",
+      "type": "Workflow",
+      "label": "Pipeline",
+      "family": "operational",
+      "position": null,
+      "description": "Sequences steps. Holds no methodology."
+    },
+    {
+      "id": "WorkflowStep.P.1",
+      "type": "WorkflowStep",
+      "label": "Validate (first pass)",
+      "family": "operational",
+      "position": "1",
+      "description": "Position 1."
+    },
+    {
+      "id": "WorkflowStep.P.3",
+      "type": "WorkflowStep",
+      "label": "Validate (second pass)",
+      "family": "operational",
+      "position": "3",
+      "description": "Position 3, same Skill. The position is a fact about the association."
+    }
+  ],
+  "edges": [
+    {
+      "from": "Skill.Validate",
+      "predicate": "produces",
+      "to": "Artifact.Report",
+      "core": "implements",
+      "category": "structural"
+    },
+    {
+      "from": "Workflow.Pipeline",
+      "predicate": "has-step",
+      "to": "WorkflowStep.P.1",
+      "core": "contains",
+      "category": "structural"
+    },
+    {
+      "from": "Workflow.Pipeline",
+      "predicate": "has-step",
+      "to": "WorkflowStep.P.3",
+      "core": "contains",
+      "category": "structural"
+    },
+    {
+      "from": "WorkflowStep.P.1",
+      "predicate": "executes",
+      "to": "Skill.Validate",
+      "core": "executes",
+      "category": "behavioral"
+    },
+    {
+      "from": "WorkflowStep.P.1",
+      "predicate": "step-of",
+      "to": "Workflow.Pipeline",
+      "core": "contained-by",
+      "category": "structural"
+    },
+    {
+      "from": "WorkflowStep.P.3",
+      "predicate": "executes",
+      "to": "Skill.Validate",
+      "core": "executes",
+      "category": "behavioral"
+    }
+  ],
+  "statistics": {
+    "nodes": 5,
+    "edges": 6,
+    "byType": {
+      "Artifact": 1,
+      "Skill": 1,
+      "Workflow": 1,
+      "WorkflowStep": 2
+    },
+    "byFamily": {
+      "descriptive": 1,
+      "operational": 4
+    },
+    "byCategory": {
+      "behavioral": 2,
+      "structural": 4
+    },
+    "byCoreType": {
+      "contained-by": 1,
+      "contains": 2,
+      "executes": 2,
+      "implements": 1
+    }
+  }
+}

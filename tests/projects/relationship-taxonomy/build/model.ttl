@@ -1,0 +1,66 @@
+@prefix ex:   <https://example.org/engineering-os/example#> .
+@prefix eos:  <https://example.org/engineering-os/metamodel#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+# A PROJECTION of the Canonical Knowledge Model (ADR-0072). Generated; do not edit.
+
+<https://example.org/engineering-os/example> a owl:Ontology ;
+    rdfs:comment "Layer B model expressed in the Layer A metamodel." ;
+    owl:imports <https://example.org/engineering-os/metamodel> .
+
+ex:ADR_T a eos:ADR ;
+    rdfs:label "A decision" ;
+    rdfs:comment "traceability: resolves." .
+
+ex:Artifact_Out a eos:Artifact ;
+    rdfs:label "Output" ;
+    rdfs:comment "Target." .
+
+ex:ArtifactRevision_Out_r1 a eos:ArtifactRevision ;
+    rdfs:label "Output r1" ;
+    rdfs:comment "semantic: derives-from. Added because the suite reported that this project" .
+
+ex:BC_Test a eos:BoundedContext ;
+    rdfs:label "Test context" ;
+    rdfs:comment "Root of the structural relationships." .
+
+ex:Concept_Other a eos:Concept ;
+    rdfs:label "Other thing" ;
+    rdfs:comment "structural." .
+
+ex:Concept_Thing a eos:Concept ;
+    rdfs:label "Thing" ;
+    rdfs:comment "structural: contained-by, references." .
+
+ex:Issue_T a eos:Issue ;
+    rdfs:label "An unknown" ;
+    rdfs:comment "traceability target." .
+
+ex:Policy_Test a eos:Policy ;
+    rdfs:label "Test policy" ;
+    rdfs:comment "behavioral: governs." .
+
+ex:Skill_Test a eos:Skill ;
+    rdfs:label "Test skill" ;
+    rdfs:comment "structural: implements." .
+
+ex:Workflow_Test a eos:Workflow ;
+    rdfs:label "Test workflow" ;
+    rdfs:comment "structural: contains." .
+
+ex:WorkflowStep_Test_1 a eos:WorkflowStep ;
+    rdfs:label "Step 1" ;
+    eos:hasPosition 1 ;
+    rdfs:comment "behavioral: executes. semantic: has-position." .
+
+ex:ADR_T eos:resolves ex:Issue_T .
+ex:ArtifactRevision_Out_r1 eos:revisionOf ex:Artifact_Out .
+ex:Concept_Other eos:scopedTo ex:BC_Test .
+ex:Concept_Thing eos:references ex:Concept_Other .
+ex:Concept_Thing eos:scopedTo ex:BC_Test .
+ex:Policy_Test eos:governs ex:Workflow_Test .
+ex:Skill_Test eos:produces ex:Artifact_Out .
+ex:Workflow_Test eos:hasStep ex:WorkflowStep_Test_1 .
+ex:WorkflowStep_Test_1 eos:executes ex:Skill_Test .

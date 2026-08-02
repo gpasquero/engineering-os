@@ -1,0 +1,195 @@
+{
+  "metamodelVersion": "0.4.0-skeleton",
+  "note": "Canonical Knowledge Model. Every edge was asserted; none inferred (ADR-0061).",
+  "nodes": [
+    {
+      "id": "ADR.T",
+      "type": "ADR",
+      "label": "A decision",
+      "family": "operational",
+      "position": null,
+      "description": "traceability: resolves."
+    },
+    {
+      "id": "Artifact.Out",
+      "type": "Artifact",
+      "label": "Output",
+      "family": "descriptive",
+      "position": null,
+      "description": "Target."
+    },
+    {
+      "id": "ArtifactRevision.Out.r1",
+      "type": "ArtifactRevision",
+      "label": "Output r1",
+      "family": "descriptive",
+      "position": null,
+      "description": "semantic: derives-from. Added because the suite reported that this project\nclaimed to exercise all four categories and had no semantic edge."
+    },
+    {
+      "id": "BC.Test",
+      "type": "BoundedContext",
+      "label": "Test context",
+      "family": "descriptive",
+      "position": null,
+      "description": "Root of the structural relationships."
+    },
+    {
+      "id": "Concept.Other",
+      "type": "Concept",
+      "label": "Other thing",
+      "family": "descriptive",
+      "position": null,
+      "description": "structural."
+    },
+    {
+      "id": "Concept.Thing",
+      "type": "Concept",
+      "label": "Thing",
+      "family": "descriptive",
+      "position": null,
+      "description": "structural: contained-by, references."
+    },
+    {
+      "id": "Issue.T",
+      "type": "Issue",
+      "label": "An unknown",
+      "family": "operational",
+      "position": null,
+      "description": "traceability target."
+    },
+    {
+      "id": "Policy.Test",
+      "type": "Policy",
+      "label": "Test policy",
+      "family": "operational",
+      "position": null,
+      "description": "behavioral: governs."
+    },
+    {
+      "id": "Skill.Test",
+      "type": "Skill",
+      "label": "Test skill",
+      "family": "operational",
+      "position": null,
+      "description": "structural: implements."
+    },
+    {
+      "id": "Workflow.Test",
+      "type": "Workflow",
+      "label": "Test workflow",
+      "family": "operational",
+      "position": null,
+      "description": "structural: contains."
+    },
+    {
+      "id": "WorkflowStep.Test.1",
+      "type": "WorkflowStep",
+      "label": "Step 1",
+      "family": "operational",
+      "position": "1",
+      "description": "behavioral: executes. semantic: has-position."
+    }
+  ],
+  "edges": [
+    {
+      "from": "ADR.T",
+      "predicate": "resolves",
+      "to": "Issue.T",
+      "core": "resolves",
+      "category": "traceability"
+    },
+    {
+      "from": "ArtifactRevision.Out.r1",
+      "predicate": "revision-of",
+      "to": "Artifact.Out",
+      "core": "derives-from",
+      "category": "semantic"
+    },
+    {
+      "from": "Concept.Other",
+      "predicate": "scoped-to",
+      "to": "BC.Test",
+      "core": "contained-by",
+      "category": "structural"
+    },
+    {
+      "from": "Concept.Thing",
+      "predicate": "references",
+      "to": "Concept.Other",
+      "core": "references",
+      "category": "structural"
+    },
+    {
+      "from": "Concept.Thing",
+      "predicate": "scoped-to",
+      "to": "BC.Test",
+      "core": "contained-by",
+      "category": "structural"
+    },
+    {
+      "from": "Policy.Test",
+      "predicate": "governs",
+      "to": "Workflow.Test",
+      "core": "governs",
+      "category": "behavioral"
+    },
+    {
+      "from": "Skill.Test",
+      "predicate": "produces",
+      "to": "Artifact.Out",
+      "core": "implements",
+      "category": "structural"
+    },
+    {
+      "from": "Workflow.Test",
+      "predicate": "has-step",
+      "to": "WorkflowStep.Test.1",
+      "core": "contains",
+      "category": "structural"
+    },
+    {
+      "from": "WorkflowStep.Test.1",
+      "predicate": "executes",
+      "to": "Skill.Test",
+      "core": "executes",
+      "category": "behavioral"
+    }
+  ],
+  "statistics": {
+    "nodes": 11,
+    "edges": 9,
+    "byType": {
+      "ADR": 1,
+      "Artifact": 1,
+      "ArtifactRevision": 1,
+      "BoundedContext": 1,
+      "Concept": 2,
+      "Issue": 1,
+      "Policy": 1,
+      "Skill": 1,
+      "Workflow": 1,
+      "WorkflowStep": 1
+    },
+    "byFamily": {
+      "descriptive": 5,
+      "operational": 6
+    },
+    "byCategory": {
+      "behavioral": 2,
+      "semantic": 1,
+      "structural": 5,
+      "traceability": 1
+    },
+    "byCoreType": {
+      "contained-by": 2,
+      "contains": 1,
+      "derives-from": 1,
+      "executes": 1,
+      "governs": 1,
+      "implements": 1,
+      "references": 1,
+      "resolves": 1
+    }
+  }
+}

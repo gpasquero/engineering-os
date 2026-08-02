@@ -1,0 +1,82 @@
+{
+  "metamodelVersion": "0.4.0-skeleton",
+  "note": "Canonical Knowledge Model. Every edge was asserted; none inferred (ADR-0061).",
+  "nodes": [
+    {
+      "id": "Artifact.Doc",
+      "type": "Artifact",
+      "label": "Doc",
+      "family": "descriptive",
+      "position": null,
+      "description": "Unclassified."
+    },
+    {
+      "id": "ArtifactRevision.Doc.r1",
+      "type": "ArtifactRevision",
+      "label": "Doc r1",
+      "family": "descriptive",
+      "position": null,
+      "description": "Carries no dimension value."
+    },
+    {
+      "id": "Dimension.SemanticLayer",
+      "type": "Dimension",
+      "label": "Semantic layer",
+      "family": "descriptive",
+      "position": null,
+      "description": "One entity, holding the ten fields. Not a Specification/Instance pair."
+    },
+    {
+      "id": "DimensionAssignment.1",
+      "type": "DimensionAssignment",
+      "label": "Doc r1 is Layer B",
+      "family": "descriptive",
+      "position": null,
+      "description": "A reified association, versioned independently of what it classifies."
+    }
+  ],
+  "edges": [
+    {
+      "from": "Dimension.SemanticLayer",
+      "predicate": "assigns-via",
+      "to": "DimensionAssignment.1",
+      "core": "defined-by",
+      "category": "semantic"
+    },
+    {
+      "from": "DimensionAssignment.1",
+      "predicate": "along",
+      "to": "Dimension.SemanticLayer",
+      "core": "references",
+      "category": "structural"
+    },
+    {
+      "from": "DimensionAssignment.1",
+      "predicate": "classified-by",
+      "to": "ArtifactRevision.Doc.r1",
+      "core": "defined-by",
+      "category": "semantic"
+    }
+  ],
+  "statistics": {
+    "nodes": 4,
+    "edges": 3,
+    "byType": {
+      "Artifact": 1,
+      "ArtifactRevision": 1,
+      "Dimension": 1,
+      "DimensionAssignment": 1
+    },
+    "byFamily": {
+      "descriptive": 4
+    },
+    "byCategory": {
+      "semantic": 2,
+      "structural": 1
+    },
+    "byCoreType": {
+      "defined-by": 2,
+      "references": 1
+    }
+  }
+}

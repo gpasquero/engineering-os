@@ -1,0 +1,101 @@
+{
+  "metamodelVersion": "0.4.0-skeleton",
+  "note": "Canonical Knowledge Model. Every edge was asserted; none inferred (ADR-0061).",
+  "nodes": [
+    {
+      "id": "Actor.Maintainer",
+      "type": "Actor",
+      "label": "Maintainer",
+      "family": "descriptive",
+      "position": null,
+      "description": "Decides."
+    },
+    {
+      "id": "Artifact.Change",
+      "type": "Artifact",
+      "label": "A change",
+      "family": "descriptive",
+      "position": null,
+      "description": "Reviewed."
+    },
+    {
+      "id": "Gate.Review",
+      "type": "EngineeringGate",
+      "label": "Review gate",
+      "family": "operational",
+      "position": null,
+      "description": "Holds the questions. Outcomes are a closed enumeration per gate."
+    },
+    {
+      "id": "Policy.ReviewBeforeMerge",
+      "type": "Policy",
+      "label": "Review before merge",
+      "family": "operational",
+      "position": null,
+      "description": "GovernancePolicy. Constrains normatively."
+    },
+    {
+      "id": "Workflow.Merge",
+      "type": "Workflow",
+      "label": "Merge",
+      "family": "operational",
+      "position": null,
+      "description": "Passes a gate."
+    }
+  ],
+  "edges": [
+    {
+      "from": "Gate.Review",
+      "predicate": "decided-by",
+      "to": "Actor.Maintainer",
+      "core": "accepted-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Gate.Review",
+      "predicate": "reviews",
+      "to": "Artifact.Change",
+      "core": "validates",
+      "category": "behavioral"
+    },
+    {
+      "from": "Policy.ReviewBeforeMerge",
+      "predicate": "governs",
+      "to": "Workflow.Merge",
+      "core": "governs",
+      "category": "behavioral"
+    },
+    {
+      "from": "Workflow.Merge",
+      "predicate": "passes-through",
+      "to": "Gate.Review",
+      "core": "validated-by",
+      "category": "behavioral"
+    }
+  ],
+  "statistics": {
+    "nodes": 5,
+    "edges": 4,
+    "byType": {
+      "Actor": 1,
+      "Artifact": 1,
+      "EngineeringGate": 1,
+      "Policy": 1,
+      "Workflow": 1
+    },
+    "byFamily": {
+      "descriptive": 2,
+      "operational": 3
+    },
+    "byCategory": {
+      "behavioral": 3,
+      "traceability": 1
+    },
+    "byCoreType": {
+      "accepted-by": 1,
+      "governs": 1,
+      "validated-by": 1,
+      "validates": 1
+    }
+  }
+}

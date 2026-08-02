@@ -6,7 +6,7 @@ created: 2026-08-02
 updated: 2026-08-02
 semantic-layer: A
 artifact-kind: authoritative
-established-by: [ADR-0031, ADR-0066, ADR-0071]
+established-by: [ADR-0031, ADR-0066, ADR-0071, ADR-0074]
 ---
 
 # Relationship Vocabulary
@@ -155,6 +155,24 @@ category holds plain attributes.
 
 **`requires → depends-on`** crosses categories — a structural-looking predicate
 landing in traceability. That is probably correct and it reads oddly.
+
+## Field completeness (`ADR-0074`)
+
+`RelationshipType` requires seven fields per predicate. Across 63 predicates:
+
+| Field | Declared | Where |
+|---|---|---|
+| semantic definition | **63 / 63** | the core-type tables above, plus each entity's relationships table |
+| parent relationship | **63 / 63** | the mapping below, verified programmatically |
+| domain | ~63, informally | prose in `entities/*.md`; **not machine-readable** |
+| range | ~63, informally | prose in `entities/*.md`; **not machine-readable** |
+| cardinality | ~63, informally | prose — "exactly one", "zero or more" |
+| inference rules | **0** | none declared, and none should be by default (`ADR-0044`) |
+| validation rules | **1** | *every predicate declares a registered parent*, currently hard-coded in `resolve()` rather than owned by the model |
+
+**Two of five required fields are machine-readable.** Domain, range and
+cardinality exist as prose the compiler cannot use, which is what keeps
+`resolve()` a name-existence check rather than real type-checking.
 
 ## Measured effect
 

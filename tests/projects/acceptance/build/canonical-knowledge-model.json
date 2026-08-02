@@ -1,0 +1,110 @@
+{
+  "metamodelVersion": "0.4.0-skeleton",
+  "note": "Canonical Knowledge Model. Every edge was asserted; none inferred (ADR-0061).",
+  "nodes": [
+    {
+      "id": "AcceptanceRecord.1",
+      "type": "AcceptanceRecord",
+      "label": "Acceptance of r1",
+      "family": "operational",
+      "position": null,
+      "description": "Acceptance confers Active status. Commits do not."
+    },
+    {
+      "id": "Actor.Reviewer",
+      "type": "Actor",
+      "label": "Reviewer",
+      "family": "descriptive",
+      "position": null,
+      "description": "A role, not a party."
+    },
+    {
+      "id": "Artifact.Spec",
+      "type": "Artifact",
+      "label": "A specification",
+      "family": "descriptive",
+      "position": null,
+      "description": "No lifecycle of its own."
+    },
+    {
+      "id": "ArtifactRevision.Spec.r1",
+      "type": "ArtifactRevision",
+      "label": "Specification r1",
+      "family": "descriptive",
+      "position": null,
+      "description": "Carries the lifecycle state and is the unit accepted."
+    },
+    {
+      "id": "Evidence.Check",
+      "type": "Evidence",
+      "label": "Validation run",
+      "family": "descriptive",
+      "position": null,
+      "description": "Cited in support. Makes the acceptance falsifiable rather than true."
+    }
+  ],
+  "edges": [
+    {
+      "from": "AcceptanceRecord.1",
+      "predicate": "accepts",
+      "to": "ArtifactRevision.Spec.r1",
+      "core": "accepts",
+      "category": "traceability"
+    },
+    {
+      "from": "AcceptanceRecord.1",
+      "predicate": "cites",
+      "to": "Evidence.Check",
+      "core": "references",
+      "category": "structural"
+    },
+    {
+      "from": "AcceptanceRecord.1",
+      "predicate": "reviewed-by",
+      "to": "Actor.Reviewer",
+      "core": "accepted-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Artifact.Spec",
+      "predicate": "has-active-revision",
+      "to": "ArtifactRevision.Spec.r1",
+      "core": "derived-into",
+      "category": "semantic"
+    },
+    {
+      "from": "ArtifactRevision.Spec.r1",
+      "predicate": "revision-of",
+      "to": "Artifact.Spec",
+      "core": "derives-from",
+      "category": "semantic"
+    }
+  ],
+  "statistics": {
+    "nodes": 5,
+    "edges": 5,
+    "byType": {
+      "AcceptanceRecord": 1,
+      "Actor": 1,
+      "Artifact": 1,
+      "ArtifactRevision": 1,
+      "Evidence": 1
+    },
+    "byFamily": {
+      "descriptive": 4,
+      "operational": 1
+    },
+    "byCategory": {
+      "semantic": 2,
+      "structural": 1,
+      "traceability": 2
+    },
+    "byCoreType": {
+      "accepted-by": 1,
+      "accepts": 1,
+      "derived-into": 1,
+      "derives-from": 1,
+      "references": 1
+    }
+  }
+}

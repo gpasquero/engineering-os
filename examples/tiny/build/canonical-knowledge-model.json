@@ -3,6 +3,14 @@
   "note": "Canonical Knowledge Model. Every edge was asserted; none inferred (ADR-0061).",
   "nodes": [
     {
+      "id": "ADR.0001",
+      "type": "ADR",
+      "label": "Verify payment synchronously at checkout",
+      "family": "operational",
+      "position": null,
+      "description": "Decision with alternatives considered. Never edited once accepted; superseded."
+    },
+    {
       "id": "AcceptanceRecord.0001",
       "type": "AcceptanceRecord",
       "label": "Acceptance of checkout service r2",
@@ -17,14 +25,6 @@
       "family": "descriptive",
       "position": null,
       "description": "The role that submits orders. A role, not a person."
-    },
-    {
-      "id": "ADR.0001",
-      "type": "ADR",
-      "label": "Verify payment synchronously at checkout",
-      "family": "operational",
-      "position": null,
-      "description": "Decision with alternatives considered. Never edited once accepted; superseded."
     },
     {
       "id": "Artifact.CheckoutService",
@@ -109,6 +109,13 @@
   ],
   "edges": [
     {
+      "from": "ADR.0001",
+      "predicate": "resolves",
+      "to": "Issue.0001",
+      "core": "resolves",
+      "category": "traceability"
+    },
+    {
       "from": "AcceptanceRecord.0001",
       "predicate": "accepts",
       "to": "ArtifactRevision.CheckoutService.r2",
@@ -137,13 +144,6 @@
       "category": "behavioral"
     },
     {
-      "from": "ADR.0001",
-      "predicate": "resolves",
-      "to": "Issue.0001",
-      "core": "resolves",
-      "category": "traceability"
-    },
-    {
       "from": "Artifact.CheckoutService",
       "predicate": "has-active-revision",
       "to": "ArtifactRevision.CheckoutService.r2",
@@ -159,16 +159,16 @@
     },
     {
       "from": "Capability.PlaceOrder",
-      "predicate": "scoped-to",
-      "to": "BoundedContext.Sales",
-      "core": "contained-by",
+      "predicate": "realised-by",
+      "to": "Artifact.CheckoutService",
+      "core": "implemented-by",
       "category": "structural"
     },
     {
       "from": "Capability.PlaceOrder",
-      "predicate": "realised-by",
-      "to": "Artifact.CheckoutService",
-      "core": "implemented-by",
+      "predicate": "scoped-to",
+      "to": "BoundedContext.Sales",
+      "core": "contained-by",
       "category": "structural"
     },
     {
@@ -180,17 +180,17 @@
     },
     {
       "from": "Invariant.PaymentBeforeShipping",
-      "predicate": "scoped-to",
-      "to": "BoundedContext.Sales",
-      "core": "contained-by",
-      "category": "structural"
-    },
-    {
-      "from": "Invariant.PaymentBeforeShipping",
       "predicate": "constrains",
       "to": "Concept.Order",
       "core": "governs",
       "category": "behavioral"
+    },
+    {
+      "from": "Invariant.PaymentBeforeShipping",
+      "predicate": "scoped-to",
+      "to": "BoundedContext.Sales",
+      "core": "contained-by",
+      "category": "structural"
     },
     {
       "from": "Skill.ValidateOrder",
@@ -208,17 +208,17 @@
     },
     {
       "from": "WorkflowStep.Checkout.1",
-      "predicate": "step-of",
-      "to": "Workflow.Checkout",
-      "core": "contained-by",
-      "category": "structural"
-    },
-    {
-      "from": "WorkflowStep.Checkout.1",
       "predicate": "executes",
       "to": "Skill.ValidateOrder",
       "core": "executes",
       "category": "behavioral"
+    },
+    {
+      "from": "WorkflowStep.Checkout.1",
+      "predicate": "step-of",
+      "to": "Workflow.Checkout",
+      "core": "contained-by",
+      "category": "structural"
     }
   ],
   "statistics": {
@@ -239,11 +239,28 @@
       "Workflow": 1,
       "WorkflowStep": 1
     },
+    "byFamily": {
+      "descriptive": 7,
+      "operational": 6
+    },
     "byCategory": {
       "behavioral": 3,
       "semantic": 2,
       "structural": 8,
       "traceability": 3
+    },
+    "byCoreType": {
+      "accepted-by": 1,
+      "accepts": 1,
+      "contained-by": 5,
+      "contains": 1,
+      "derived-into": 1,
+      "derives-from": 1,
+      "executes": 2,
+      "governs": 1,
+      "implemented-by": 1,
+      "implements": 1,
+      "resolves": 1
     }
   }
 }

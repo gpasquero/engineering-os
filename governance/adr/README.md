@@ -16,7 +16,7 @@ same session the decision is made.
 > a rule exists; the rule that must be followed lives in a Policy under
 > `shared/policies/`. Agents consume policies; humans read ADRs for rationale.
 
-**Highest allocated ID: `ADR-0071`.** IDs are sequential and never reused.
+**Highest allocated ID: `ADR-0075`.** IDs are sequential and never reused.
 
 > This index table is a hand-maintained projection of ADR front matter. It is
 > listed in the transitional-debt register, `ISSUE-0037`.
@@ -166,6 +166,10 @@ Read these before designing anything that produces an artifact:
 | [ADR-0069](ADR-0069-normalization-not-entity-reduction.md) | **Optimize semantic independence, not entity count** | accepted | — |
 | [ADR-0070](ADR-0070-the-specification-criterion.md) | **A Specification is justified by independent existence** | accepted | ISSUE-0074 |
 | [ADR-0071](ADR-0071-relationship-vocabulary.md) | Relationship types are classified into a registered vocabulary | accepted | — |
+| [ADR-0072](ADR-0072-the-semantic-model-is-the-product.md) | **The Canonical Knowledge Model is the primary product; everything else is a projection** | accepted | — |
+| [ADR-0073](ADR-0073-compiler-phases-are-first-class.md) | Compiler phases are first-class and every feature declares its contract | accepted | — |
+| [ADR-0074](ADR-0074-relationshiptype-is-a-type-system.md) | RelationshipType is the type system of the knowledge graph | accepted | — |
+| [ADR-0075](ADR-0075-entities-are-justified-by-compiler-need.md) | Remaining entities are justified by compiler need, not architectural completeness | accepted | — |
 
 ## Supersessions
 
