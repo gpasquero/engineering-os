@@ -10,85 +10,89 @@ artifact-kind: authoritative
 
 # Metamodel Entity Inventory
 
-Every entity Engineering OS defines, with the decision that established it and
-whether its specification exists.
+Every candidate entity, classified by whether it belongs to the Layer A semantic
+metamodel at all.
 
-**25 entities. 2 specified.**
+**The early inventory conflated four different things.** Appearing in
+`ADR-0035`'s list is not evidence that a concept is a semantic entity.
 
-## Artifact and lifecycle
+## Confirmed Layer A entities
 
-| Entity | Purpose | Established by | Spec |
-|---|---|---|---|
-| **ArtifactType** | The kind of a thing the framework manages | `ADR-0035` | — |
-| **ArtifactRevision** | An identifiable version of an artifact; the unit that is accepted and that carries lifecycle state | `ADR-0026` | [✓](entities/artifact-revision.md) |
-| **AcceptanceRecord** | The act conferring `Active` status on a revision | `ADR-0021` | — |
-| **ADR** | A recorded architectural decision, with context, alternatives and consequences | `ADR-0002` | — |
-| **Issue** | A recorded unknown: question, inconsistency, gap or risk | `ADR-0003` | — |
+Belong to the semantic metamodel. Specified in dependency order.
 
-## Classification
+| # | Entity | Purpose | Established by | Spec |
+|---|---|---|---|---|
+| 1 | **Artifact** | A stable logical identity that owns many revisions | `ADR-0026`, `ADR-0064` | [✓](entities/artifact.md) |
+| 2 | **ArtifactRevision** | An immutable revision of an Artifact; the unit accepted and the unit carrying lifecycle state | `ADR-0026`, `ADR-0064` | [✓](entities/artifact-revision.md) |
+| 3 | **Concept** | A named unit of meaning within a bounded context | `ADR-0035` | [✓](entities/concept.md) |
+| 4 | **Capability** | Something a system can do, externally visible | `ADR-0035` | [✓](entities/capability.md) |
+| 5 | **DimensionSpecification** | Defines one independent axis of classification | `ADR-0048` | [✓](entities/dimension-specification.md) |
+| 6 | **Dimension** | An instance of a DimensionSpecification | `ADR-0041` | [✓](entities/dimension.md) |
+| 7 | **DimensionAssignment** | The relationship classifying an artifact along a dimension | `ADR-0042` | [✓](entities/dimension-assignment.md) |
+| 8 | **RegistrySpecification** | Defines a registry: identity, membership rules, extension rules | `ADR-0032` | — |
+| 9 | **StateMachineSpecification** | Defines a state machine and its vocabulary | `ADR-0027` | — |
+| 10 | **StateMachine** | An instance of a StateMachineSpecification | `ADR-0025` | — |
+| 11 | **Policy** | A normative rule motivated by Principles — `GovernancePolicy`, `ModelingPolicy`, `ProcessPolicy` | `ADR-0029`, `ADR-0030` | — |
+| 12 | **Workflow** | Executable orchestration; sequences skills, holds no methodology | `ADR-0033` | — |
+| 13 | **Skill** | A composable unit of methodology with an explicit contract | `governance/glossary.md` | — |
+| 14 | **EngineeringGate** | An Engineering Process reviewing the introduction or modification of a concept | `ADR-0054` | — |
+| 15 | **AcceptanceRecord** | The act conferring `Active` status on a revision | `ADR-0021` | — |
+| 16 | **ADR** | A recorded architectural decision | `ADR-0002` | — |
+| 17 | **Issue** | A recorded unknown | `ADR-0003` | — |
+| 18 | **KnowledgePackage** | A published interface between repositories | `ADR-0019` | — |
+| 19 | **Principle** | A semantic relationship emerging from accepted knowledge. **Not an artifact** | `ADR-0058` | — |
+| 20 | **Vocabulary** | A closed enumeration with exactly one definition | `ADR-0008` | — |
+| 21 | **Manifest** | A root declaration of composition, status or semantics | `ADR-0013` | — |
+| 22 | **ValidationRule** | A constraint a semantic model must satisfy | `ADR-0048` | — |
 
-| Entity | Purpose | Established by | Spec |
-|---|---|---|---|
-| **DimensionSpecification** | Defines one independent axis of classification | `ADR-0048` | [✓](entities/dimension-specification.md) |
-| **Dimension** | An instance of a DimensionSpecification | `ADR-0041` | — |
-| **DimensionAssignment** | The relationship classifying an artifact along a dimension | `ADR-0042` | — |
-| **Vocabulary** | A closed enumeration with exactly one definition | `ADR-0008` | — |
-| **StateMachine** | The owner of a state vocabulary; every state belongs to exactly one | `ADR-0025` | — |
+**7 of 22 specified.**
 
-## Registry
+## Compiler-architecture concepts
 
-| Entity | Purpose | Established by | Spec |
-|---|---|---|---|
-| **RegistrySpecification** | Defines a registry: identity, membership rules, extension rules | `ADR-0032` | — |
-| **Manifest** | A root declaration of a project's composition, status or semantics | `ADR-0013` | — |
+**Not Layer A semantic entities.** They belong to the compiler architecture, and
+`ADR-0053` states that the metamodel contains no compiler concepts. They appear
+in `ADR-0035`'s early inventory and are relocated here.
 
-## Normative
+| Concept | Belongs to |
+|---|---|
+| **Compiler** | Compiler architecture (`ADR-0014`, `ADR-0061`) |
+| **Projection** | Compilation hierarchy (`ADR-0052`) |
+| **RegistryProjection** | Compilation hierarchy (`ADR-0032`) |
+| **ValidationResult** | Compiler or operational output |
 
-| Entity | Purpose | Established by | Spec |
-|---|---|---|---|
-| **Principle** | A semantic relationship emerging from accepted architectural knowledge. **Not an artifact** | `ADR-0058` | — |
-| **Policy** | A normative rule motivated by one or more Principles | `ADR-0029`, `ADR-0030` | — |
-| **Gate** | An Engineering Process reviewing the introduction or modification of a concept | `ADR-0054` | — |
+They will be specified where the Knowledge Compiler specification is written
+(B4), not here.
 
-## Engineering
+## Tooling concepts
 
-| Entity | Purpose | Established by | Spec |
-|---|---|---|---|
-| **Skill** | A composable unit of methodology with an explicit contract | `governance/glossary.md` | — |
-| **Workflow** | Executable orchestration; sequences skills, holds no methodology | `ADR-0033` | — |
-| **Capability** | *Named in `ADR-0035`; no definition exists in this project yet* | `ADR-0035` | — |
+Neither semantic nor compiler-architectural. Implementation.
 
-## Semantic
+| Concept | Note |
+|---|---|
+| **Validator** | The program executing ValidationRules. Language-dependent (`ADR-0017`, `ISSUE-0036`) |
 
-| Entity | Purpose | Established by | Spec |
-|---|---|---|---|
-| **Ontology** | *Named in `ADR-0035`; no definition exists in this project yet* | `ADR-0035` | — |
-| **Concept** | *Named in `ADR-0035`; no definition exists in this project yet* | `ADR-0035` | — |
-| **KnowledgePackage** | A published interface between repositories; a stable projection of the canonical model | `ADR-0019` | — |
+## Undefined candidates
 
-## Compilation boundary
+Named somewhere, with no definition and no decision establishing them as
+entities.
 
-These four are **named in `ADR-0035` but belong to the compiler architecture**,
-not the semantic one (`ADR-0053`). Whether they appear in the metamodel at all
-is unresolved and deferred as architectural debt.
+| Candidate | Status |
+|---|---|
+| **Ontology** | Named in `ADR-0035`. OWL is an inherited decision awaiting an ADR (`ISSUE-0027`). Deferred to B2, where the first OWL ontologies define what one is |
 
-| Entity | Purpose | Established by |
-|---|---|---|
-| **Compiler** | The deterministic semantic compiler | `ADR-0014`, `ADR-0061` |
-| **Projection** | A derived artifact produced from the canonical model | `ADR-0052` |
-| **RegistryProjection** | The generated index of registered entities | `ADR-0032` |
-| **Validation** | *Named in `ADR-0035`; no definition exists yet* | `ADR-0035` |
+## Rejected candidates
+
+| Candidate | Why rejected |
+|---|---|
+| **Validation** *(unqualified)* | Conflated three distinct things: `ValidationRule` (semantic), `ValidationResult` (compiler or operational), `Validator` (tooling). Removed from the inventory rather than defined |
 
 ## Recorded while building
 
-Three entities — **Capability**, **Concept**, **Validation** — were named in
-`ADR-0035`'s inventory and have never been defined anywhere in the project.
-`SESSION-0017` recorded this: writing the metamodel is design work, not
-transcription.
+**`Validation` is the eighth term this project has had to split**, after
+"skill", "authoritative", "state", "policy", "registry", "layer/level" and
+"level/process". It was caught before being specified rather than after —
+`ADR-0057`'s Naming Qualification doing its work.
 
-**Ontology** is named but undefined here while OWL is an inherited decision
-awaiting an ADR (`ISSUE-0027`).
-
-The four compilation-boundary entities create a tension with `ADR-0053`, which
-says the metamodel contains no compiler concepts. Recorded as debt rather than
-resolved, per `ADR-0062`.
+**Three entities relocated, one rejected, one deferred.** Of `ADR-0035`'s twenty
+named entities, five do not belong in the Layer A metamodel. That inventory was
+written before `ADR-0053` drew the semantic/compiler boundary.

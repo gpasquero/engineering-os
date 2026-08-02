@@ -6,7 +6,7 @@ created: 2026-08-02
 updated: 2026-08-02
 semantic-layer: A
 artifact-kind: authoritative
-established-by: [ADR-0026, ADR-0020]
+established-by: [ADR-0026, ADR-0020, ADR-0064]
 ---
 
 # ArtifactRevision
@@ -16,12 +16,27 @@ and the unit that is accepted.**
 
 ## identity
 
-An ArtifactRevision is identified **within an Artifact identity**, not globally.
-An Artifact is an identity that may own many Revisions; a Revision has exactly
-one lifecycle state (`ADR-0026`).
+**The pair `(artifact-id, revision-id)`** (`ADR-0064`).
 
-**What identifies a revision — commit, content hash or declared version — is
-undefined.** `ISSUE-0007`, deferred as architectural debt.
+An Artifact has a stable logical identifier. An ArtifactRevision has an
+**immutable revision identifier scoped to its Artifact** — unique within the
+Artifact, not globally.
+
+The revision identifier:
+
+- must be **immutable**;
+- must be **unique within the Artifact**;
+- **must not require Git**;
+- **may** be mapped to a Git commit, content digest or external revision
+  identifier;
+- must not assume any one storage or version-control implementation is
+  universal.
+
+> **A Git commit SHA is provenance, not identity.**
+
+`ACCEPT-0001` used a commit SHA for the trust root as a pragmatic choice,
+explicitly not a decision. Under `ADR-0064` that reading is retroactively
+correct: it was recording provenance.
 
 ## purpose
 
@@ -75,6 +90,7 @@ dimension (`ADR-0042`), serialized into front matter as interchange syntax
 | supersedes / superseded-by | ArtifactRevision | forms the supersession chain |
 | accepted-by | AcceptanceRecord | exactly one for an `Active` revision |
 | classified-by | DimensionAssignment | zero or more |
+| has-provenance | external revision reference | zero or more — Git commit, content digest |
 
 ## extension points
 
@@ -82,9 +98,11 @@ An adopting repository may **assign additional dimensions** to its revisions.
 It may not add lifecycle states — `ArtifactRevisionLifecycle` is a closed
 vocabulary, and a new state requires an ADR under `ADR-0025`.
 
-## Recorded while building
+## Debt
 
-`ADR-0026` states that an Artifact "has metadata such as identifier, ownership
-and revision history" — but **`Artifact` has no entity specification**, and this
-specification refers to it throughout. Writing `ArtifactRevision` before
-`Artifact` was the wrong order and is worth noting for the next increment.
+**Who allocates a revision identifier, and when, is not stated** (`ADR-0064`).
+Recorded rather than decided, per `ADR-0062`.
+
+`SESSION-0021` noted that this specification was written before `Artifact`,
+which it references throughout. [`Artifact`](artifact.md) now exists, and the
+identity field that had to say *undefined* is answered.

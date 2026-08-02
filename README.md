@@ -73,3 +73,14 @@ domain; there is no central shared model, and multi-repository environments
 federate through versioned Knowledge Packages.
 
 See `governance/adr/ADR-0010-repository-local-knowledge-ownership.md`.
+
+## Licence
+
+Licensed under the **Apache License 2.0** — SPDX: `Apache-2.0`. See
+[`LICENSE`](LICENSE).
+
+Permits commercial and non-commercial use, modification and redistribution, and
+includes an explicit patent grant. Adopting repositories are unconstrained in
+what they build on top: Engineering OS is applied *to* systems it does not own.
+
+See `governance/adr/ADR-0063-apache-2-0-license.md` for the reasoning.

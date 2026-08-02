@@ -2,7 +2,7 @@
 id: ISSUE-0011
 title: Audience, licence and distribution model are undefined
 type: question
-status: open
+status: resolved
 severity: high
 created: 2026-08-02
 updated: 2026-08-02
@@ -10,7 +10,7 @@ blocks: [M2, M12]
 evidence:
   - sources/handoff/README.md
   - sources/handoff/BOOTSTRAP.md
-resolved-by: null
+resolved-by: ADR-0063
 ---
 
 # ISSUE-0011 — Audience, licence and distribution model are undefined
@@ -57,3 +57,19 @@ answered de facto by publication, and the licence gap is live now.
 
 An ADR naming the audience and the distribution model, plus a `LICENSE` file if
 the answer is public.
+
+## Resolution
+
+`ADR-0063`. **This project is intended to be publicly reusable.** The repository
+is licensed under **Apache-2.0** (SPDX: `Apache-2.0`).
+
+Chosen for commercial and non-commercial use, modification and redistribution,
+an **explicit patent grant**, and fitness for a framework expected to contain
+specifications, tooling and executable code.
+
+`LICENSE` holds the canonical text. SPDX headers are added where appropriate
+once executable source exists, and **not** retroactively to Markdown governance
+documents.
+
+The audience question this issue also raised is answered by implication: public,
+reusable, and unconstrained for adopting repositories.

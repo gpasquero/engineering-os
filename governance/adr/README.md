@@ -16,7 +16,7 @@ same session the decision is made.
 > a rule exists; the rule that must be followed lives in a Policy under
 > `shared/policies/`. Agents consume policies; humans read ADRs for rationale.
 
-**Highest allocated ID: `ADR-0062`.** IDs are sequential and never reused.
+**Highest allocated ID: `ADR-0064`.** IDs are sequential and never reused.
 
 > This index table is a hand-maintained projection of ADR front matter. It is
 > listed in the transitional-debt register, `ISSUE-0037`.
@@ -157,6 +157,8 @@ Read these before designing anything that produces an artifact:
 | [ADR-0060](ADR-0060-mechanical-and-interpretive-discovery.md) | **Mechanical and Interpretive Discovery** | accepted | ISSUE-0071 |
 | [ADR-0061](ADR-0061-four-categories-of-knowledge.md) | **Four categories of knowledge** | accepted | — |
 | [ADR-0062](ADR-0062-architecture-through-implementation.md) | **Architecture through implementation** | accepted | — |
+| [ADR-0063](ADR-0063-apache-2-0-license.md) | Engineering OS is licensed under Apache-2.0 | accepted | ISSUE-0011 |
+| [ADR-0064](ADR-0064-artifact-and-revision-identity.md) | Artifact and ArtifactRevision identity | accepted | ISSUE-0007 |
 
 ## Supersessions
 

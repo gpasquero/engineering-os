@@ -9,7 +9,7 @@ related: [ISSUE-0037]
 
 # Issue Index
 
-**73 recorded · 2 open · 48 resolved · 23 deferred.** Highest allocated ID:
+**73 recorded · 1 open · 50 resolved · 22 deferred.** Highest allocated ID:
 `ISSUE-0073`.
 
 > **Hand-maintained projection.** Under `ADR-0016` this is a projection of issue
@@ -21,23 +21,22 @@ related: [ISSUE-0037]
 
 ## Open
 
-Only two issues are open. Both are non-architectural.
+One issue is open.
 
 | ID | Title | Why open |
 |---|---|---|
-| [0011](ISSUE-0011-audience-licence-distribution-undefined.md) | Repository is public with no licence | Legal exposure, not a design question |
 | [0037](ISSUE-0037-hand-maintained-projections-are-debt.md) | Hand-maintained projections | Operational debt; B5 discharges it |
 
 ## Architectural debt
 
-**23 issues deferred under `ADR-0062`.** Each is a real question that does not
+**22 issues deferred under `ADR-0062`.** Each is a real question that does not
 block the next deliverable. They are reopened when implementation requires them,
 not on a schedule.
 
 | ID | Title | Reopen at |
 |---|---|---|
 | [0073](ISSUE-0073-operational-knowledge-versus-evidence-hierarchy.md) | "runtime" names two things; Operational Knowledge versus the evidence hierarchy | **B1** — most likely to be met early |
-| [0007](ISSUE-0007-versioning-granularity-undefined.md) | What identifies a revision | **B1** — `ArtifactRevision` already says "undefined" |
+| — | *`ISSUE-0007` was deferred here and resolved one session later by `ADR-0064`, because building `ArtifactRevision` turned it into a blank field* | — |
 | [0072](ISSUE-0072-how-artifacts-declare-principles.md) | How an artifact declares the Principles it establishes | B1–B3 |
 | [0063](ISSUE-0063-minimum-serialized-classifications.md) | Minimum serialized classification set | B3 |
 | [0049](ISSUE-0049-state-machine-specification-location.md) | Where state machine specifications live | B1 |
@@ -112,3 +111,5 @@ not on a schedule.
 | [0069](ISSUE-0069-level-and-process-reused.md) | "Level" and "Process" reused | `ADR-0057` |
 | [0070](ISSUE-0070-are-principles-a-first-class-artifact-type.md) | Are Principles an artifact type? | `ADR-0058` |
 | [0071](ISSUE-0071-how-discovered-knowledge-is-produced.md) | How discovered knowledge is produced | `ADR-0060` |
+| [0011](ISSUE-0011-audience-licence-distribution-undefined.md) | Licence and audience | `ADR-0063` |
+| [0007](ISSUE-0007-versioning-granularity-undefined.md) | Artifact and revision identity | `ADR-0064` |

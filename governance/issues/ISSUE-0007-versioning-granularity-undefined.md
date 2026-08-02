@@ -2,7 +2,7 @@
 id: ISSUE-0007
 title: Versioning granularity and compatibility policy are undefined
 type: question
-status: deferred
+status: resolved
 severity: high
 created: 2026-08-02
 updated: 2026-08-02
@@ -10,15 +10,16 @@ blocks: [M2]
 evidence:
   - sources/handoff/BOOTSTRAP.md
   - sources/handoff/DECISIONS.md
-resolved-by: null
+resolved-by: ADR-0064
 defers-to: [M2]
 debt: architectural
 ---
 
 # ISSUE-0007 — Versioning granularity is undefined
 
-> **Architectural debt** (`ADR-0062`). Deferred because it is not needed to
-> build the next deliverable. Reopen when implementation requires it.
+> Deferred as architectural debt in `SESSION-0021`, then **resolved one session
+> later because building `ArtifactRevision` turned it into a blank field.** The
+> deferral was correct and short-lived.
 
 ## Statement
 
@@ -72,3 +73,25 @@ a trust root, not a decision.
 
 An ADR naming the version-bearing units, the scheme, what a breaking change
 means for a prose artifact, and how a version mismatch is detected and handled.
+
+## Resolution
+
+`ADR-0064`, for the artifact-identity half of the question.
+
+**An Artifact has a stable logical identifier. An ArtifactRevision has an
+immutable revision identifier scoped to its Artifact.** Identity is the pair
+`(artifact-id, revision-id)`.
+
+The revision identifier must be immutable, unique within the Artifact, and
+**must not require Git**. It may be *mapped* to a Git commit, content digest or
+external revision identifier, but must not assume any one storage or
+version-control implementation is universal.
+
+> **A Git commit SHA is provenance, not identity.**
+
+`ACCEPT-0001`'s pragmatic use of a commit SHA is retroactively correct — it was
+recording provenance.
+
+**Component versioning** — semver granularity across skills, contracts and
+manifests — is a separate question and is not answered here. It returns as debt
+when a component needs a version.

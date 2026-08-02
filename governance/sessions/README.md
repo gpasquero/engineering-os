@@ -17,7 +17,7 @@ Session logs are the trajectory record: they answer "how did we get here",
 which no other document does. `build-state.md` answers "where are we", and the
 ADRs answer "why".
 
-**Highest allocated ID: `SESSION-0021`.**
+**Highest allocated ID: `SESSION-0022`.**
 
 ## Index
 
@@ -44,6 +44,7 @@ ADRs answer "why".
 | [SESSION-0019](SESSION-0019-2026-08-02.md) | 2026-08-02 | M2 | `ACCEPT-0014`; **Engineering Gate**; questions belong to Gates; **Principle → Policy → Process**; `ADR-0054`–`ADR-0056`; `ADR-0038` superseded |
 | [SESSION-0020](SESSION-0020-2026-08-02.md) | 2026-08-02 | M2 | `ACCEPT-0015`; **Naming Qualification**; Principles are semantic entities; **authored versus discovered knowledge**; `ADR-0057`–`ADR-0059` |
 | [SESSION-0021](SESSION-0021-2026-08-02.md) | 2026-08-02 | B1 | `ACCEPT-0016`; Mechanical vs Interpretive Discovery; four knowledge categories; **`ADR-0062` — architecture through implementation**; 22 issues re-triaged as debt; **`model/metamodel/` created** |
+| [SESSION-0022](SESSION-0022-2026-08-02.md) | 2026-08-02 | B1 | `ACCEPT-0017`; **Apache-2.0**; artifact identity model; inventory reclassified into five categories; **7 metamodel entities specified**; `ADR-0063`, `ADR-0064` |
 
 ## Reading
 
