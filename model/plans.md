@@ -85,6 +85,160 @@ plans:
       - Whether a new invariant should be recorded as a result of the change.
       - The implementation itself.
 
+  - id: P-review-unsupported
+    objective: Decide whether {subject} should be retracted or re-evidenced
+    applies-to: [Invariant, Concept, Capability, Artifact]
+    rationale: >
+      A maintained assertion that a fresh reacquisition no longer supports has
+      three possible causes and only one of them justifies retraction: the
+      evidence moved, the extractor changed, or the system genuinely changed.
+      **Retraction is the only plan that can destroy curated knowledge**, so it
+      begins by looking for the evidence rather than by removing the claim.
+    assumptions:
+      - query: Q-evidence
+        statement: This is the evidence the assertion currently cites.
+      - query: Q-rationale
+        statement: This is the decision that established it, if any.
+    phases:
+      - id: locate
+        goal: Find the evidence, or establish that it is gone
+        recommendation: R-change-implementation
+        actions: [investigate]
+      - id: assess
+        goal: Determine which of the three causes applies
+        recommendation: R-change-implementation
+        actions: [review]
+        requires: [locate]
+      - id: decide
+        goal: Retract, re-evidence, or leave standing
+        recommendation: R-audit-model
+        actions: [investigate]
+        requires: [assess]
+    reviews:
+      - at: decide
+        query: Q-evidence
+        because: >
+          Retracting an assertion whose evidence merely moved destroys curated
+          knowledge, and nothing restores it.
+    expected-evidence:
+      - query: Q-evidence
+        statement: Either new provenance, or a recorded reason for retraction.
+    completion:
+      - query: Q-evidence
+        expect: non-empty
+        statement: The assertion's evidence situation is known.
+    defers:
+      - Whether the system changed or the extractor did.
+      - Whether retraction or re-evidencing is correct.
+      - "**The retraction itself, which is a governed proposal and never automatic.**"
+
+  - id: P-verify-capability
+    objective: Establish whether {subject} is actually implemented
+    applies-to: [Capability]
+    rationale: >
+      A modelled capability with no implementation evidence is either a
+      description of something that was never built, or a gap in extraction. The
+      difference matters and neither is visible from the model alone.
+    assumptions:
+      - query: Q-constraints
+        statement: These invariants bound the capability, if it exists.
+    phases:
+      - id: search
+        goal: Look for an implementation the model does not record
+        recommendation: R-change-concept
+        actions: [review]
+      - id: conclude
+        goal: Record the implementation, or record its absence
+        recommendation: R-audit-model
+        actions: [investigate]
+        requires: [search]
+    reviews:
+      - at: conclude
+        query: Q-constraints
+        because: a capability that constrains nothing may not be a capability
+    expected-evidence:
+      - query: Q-tests
+        statement: An implementing or validating artifact should be linked afterwards.
+    completion:
+      - query: Q-constraints
+        expect: non-empty
+        statement: What bounds this capability is known.
+    defers:
+      - Whether the capability was never built or merely never modelled.
+      - Whether an unimplemented capability should be retracted or kept as intent.
+
+  - id: P-establish-enforcement
+    objective: Find where {subject} is enforced, or record that nothing enforces it
+    applies-to: [Invariant]
+    rationale: >
+      An invariant with no enforcement point is a finding, not an error
+      (`invariant.md`). This plan does not assume enforcement exists — it
+      establishes which of the two states holds, because an unenforced invariant
+      that everyone believes is enforced is the more dangerous case.
+    assumptions:
+      - query: Q-evidence
+        statement: This is what the invariant rests on.
+    phases:
+      - id: search
+        goal: Look for a test, guard or check that enforces it
+        recommendation: R-change-implementation
+        actions: [investigate]
+      - id: record
+        goal: Link the enforcement point, or record its absence explicitly
+        recommendation: R-audit-model
+        actions: [investigate]
+        requires: [search]
+    reviews:
+      - at: record
+        query: Q-evidence
+        because: >
+          Recording an enforcement point that does not enforce is worse than
+          recording none.
+    expected-evidence:
+      - query: Q-evidence
+        statement: Either an enforcement link, or a recorded absence.
+    completion:
+      - query: Q-evidence
+        expect: non-empty
+        statement: The invariant's evidence is known.
+    defers:
+      - Whether the absence of enforcement is acceptable.
+      - Whether enforcement should be added, and where.
+
+  - id: P-resolve-conflict
+    objective: Resolve two readings of the same evidence about {subject}
+    applies-to: [Invariant, Concept, Capability, Artifact, ADR]
+    rationale: >
+      A conflict is the strongest finding kind (`ADR-0090`) and the only one a
+      rule may never settle. This plan gathers both readings and their evidence
+      and stops — the decision is a human's.
+    assumptions:
+      - query: Q-evidence
+        statement: This is the evidence both readings rest on.
+      - query: Q-rationale
+        statement: This decision established the maintained reading, if any.
+    phases:
+      - id: gather
+        goal: Assemble both readings with their evidence
+        recommendation: R-change-concept
+        actions: [review, validate]
+    reviews:
+      - at: gather
+        query: Q-rationale
+        because: >
+          A conflict with a superseded decision on one side is not a conflict.
+    expected-evidence:
+      - query: Q-evidence
+        statement: Both readings should be traceable to their sources.
+    completion:
+      - query: Q-evidence
+        expect: non-empty
+        statement: Both readings are evidenced.
+    defers:
+      - "**Which reading is correct — this plan cannot and must not decide.**"
+      - Whether both are wrong.
+      - Whether the conflict indicates a real inconsistency in the system.
+
   - id: P-discover
     objective: Build a Candidate Engineering Model of {subject}
     applies-to: [Artifact]

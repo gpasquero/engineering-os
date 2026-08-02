@@ -1,6 +1,6 @@
 ---
 id: ISSUE-0050
-title: "policy" names at least three different artifact kinds
+title: '"policy" names at least three different artifact kinds'
 type: inconsistency
 status: resolved
 severity: high

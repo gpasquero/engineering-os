@@ -1,6 +1,6 @@
 ---
 id: ISSUE-0061
-title: "Level" and "Layer" are two ordinal schemes whose first element is the metamodel in both
+title: '"Level" and "Layer" are two ordinal schemes whose first element is the metamodel in both'
 type: risk
 status: resolved
 severity: high

@@ -1,6 +1,6 @@
 ---
 id: ISSUE-0038
-title: "authoritative" names both a lifecycle state and an artifact kind
+title: '"authoritative" names both a lifecycle state and an artifact kind'
 type: inconsistency
 status: resolved
 severity: blocking

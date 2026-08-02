@@ -65,7 +65,8 @@ def applicable(model, plan, subject):
                      "no language model participates in producing a plan (ADR-0092)",
                      "every action names the query and recommendation it came from",
                      "derived and deferred items are both enumerated (ADR-0093)",
-                     "phase order follows declared dependencies, not discovery order"],
+                     "phase order follows declared dependencies, not discovery order",
+                     "a step whose query does not apply is reported, never silently skipped"],
          determinism="a composition of deterministic queries; order and dependencies "
                      "are declared, not inferred")
 def plan(model, spec, subject=None):
@@ -119,11 +120,20 @@ def plan(model, spec, subject=None):
     for pid in ordered:
         phase = phases[pid]
         rec = recommendations[phase["recommendation"]]
-        actions = []
+        actions, skipped = [], []
         for step in rec["steps"]:
             if step["action"] not in (phase.get("actions") or []):
                 continue
             answer = ask(step["query"], step["because"].strip())
+            if answer["status"] == NOT_APPLICABLE:
+                # A phase borrows a recommendation's STEPS, not its
+                # applicability: the plan declares its own subject types and each
+                # query declares its own. A step whose query does not apply to
+                # this subject produces nothing — and saying so is the point.
+                # Silent empty phases hid this across five plans.
+                skipped.append({"query": step["query"], "action": step["action"],
+                                "why": answer["diagnostics"][0]["message"]})
+                continue
             if not answer["rows"]:
                 continue
             step_no += 1
@@ -138,7 +148,7 @@ def plan(model, spec, subject=None):
                 f"{step['action']} {r['id']} ({step['query']})" for r in answer["rows"]]
         result["phases"].append({
             "id": pid, "goal": phase["goal"], "requires": phase.get("requires") or [],
-            "actions": actions})
+            "actions": actions, "notApplicable": skipped})
 
     for item in spec.get("reviews") or []:
         answer = ask(item["query"], item["because"].strip())

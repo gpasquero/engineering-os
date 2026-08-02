@@ -48,8 +48,11 @@ def render(r, reasoning=False):
     for phase in r["phases"]:
         dep = f"   requires: {', '.join(phase['requires'])}" if phase["requires"] else ""
         L.append(f"  ── {phase['id'].upper()}: {phase['goal']}{dep}")
-        if not phase["actions"]:
+        if not phase["actions"] and not phase.get("notApplicable"):
             L.append("       (nothing to do — no query returned anything)")
+        for s in phase.get("notApplicable") or []:
+            L.append(f"       ! {s['action']} skipped: {s['why']}")
+            L.append(f"         [{s['query']}]")
         for act in phase["actions"]:
             L.append(f"     {act['order']:>2}. {act['action'].upper()}  {act['because']}")
             for t in act["targets"]:

@@ -13,8 +13,15 @@
 # question. Two remain open: type enforcement is now checked by tools, and the
 # tension between exhaustive stopping conditions and bounded counts is real.
 
+# Each skill declares its KIND (ADR-0115):
+#   general — knows about software in any domain
+#   domain  — carries a domain's engineering knowledge; NOT a parser plugin
+# A domain skill proposes only existing metamodel types. A domain that required a
+# new entity would be evidence the domain does not fit (ADR-0085).
+
 skills:
   - id: DS-repository-survey
+    kind: general
     objective: Establish what kind of system this is and how it is organised.
     required-inputs: [mechanical-model]
     evidence: [packages, fileCounts, dependencies, moduleDirs]
@@ -31,6 +38,7 @@ skills:
     review: Batch-reviewable per package.
 
   - id: DS-architecture-discovery
+    kind: general
     objective: >
       Identify architectural boundaries, and asymmetries between them that no
       single fact reveals.
@@ -59,6 +67,7 @@ skills:
     review: Individual. Distribution claims are interpretation, not extraction.
 
   - id: DS-domain-concept-discovery
+    kind: general
     objective: Propose the domain vocabulary the system is written in.
     required-inputs: [mechanical-model]
     evidence: [tables, routes, moduleDirs]
@@ -75,6 +84,7 @@ skills:
     review: Individual.
 
   - id: DS-capability-discovery
+    kind: general
     objective: Propose what the system can do, as externally visible capabilities.
     required-inputs: [mechanical-model]
     evidence: [routes, moduleDirs, testSuites]
@@ -90,6 +100,7 @@ skills:
     review: Individual.
 
   - id: DS-invariant-discovery
+    kind: general
     objective: >
       Propose conditions that must hold, at both the concept and the specific
       guarantee level (ADR-0111).
@@ -114,6 +125,7 @@ skills:
     output-schema: candidate-proposals-v1-with-specializes
 
   - id: DS-decision-discovery
+    kind: general
     objective: Propose decisions and the rationale behind what exists.
     required-inputs: [mechanical-model]
     evidence: [documents, dependencies, tables]
@@ -132,6 +144,7 @@ skills:
       claim this skill can make and must say so.
 
   - id: DS-workflow-discovery
+    kind: general
     objective: Propose engineering or runtime processes the system embodies.
     required-inputs: [mechanical-model]
     evidence: [documents, routes, moduleDirs]
@@ -149,6 +162,7 @@ skills:
     review: Individual.
 
   - id: DS-gap-discovery
+    kind: general
     objective: >
       Report what is absent, ambiguous or contradictory. Propose no knowledge.
     required-inputs: [mechanical-model, candidate-proposals]
@@ -167,6 +181,7 @@ skills:
       Not accepted into the model. Recorded as knowledge gaps (S-unknown).
 
   - id: DS-candidate-synthesis
+    kind: general
     objective: >
       Merge the outputs of the other skills into one Candidate Engineering Model,
       resolving duplicates and surfacing contradictions.
@@ -186,3 +201,36 @@ skills:
     review: >
       Individual for merges and conflicts. A merge that discards an origin is a
       defect.
+
+  # ── Domain skills ────────────────────────────────────────────────────────
+  # One worked example, not seven empty declarations. A category with no members
+  # is a hypothesis; a category with one member is a shape others can follow.
+
+  - id: DS-multitenant-saas
+    kind: domain
+    domain: Multi-tenant SaaS
+    objective: >
+      Propose the invariants and absences a multi-tenant system is expected to
+      have, and report which are missing.
+    required-inputs: [mechanical-model]
+    evidence: [tables, routes, testSuites, documents]
+    questions:
+      - Which tables carry a tenant discriminator and which do not?
+      - How does a request acquire its tenant, and does every path acquire it the same way?
+      - Is isolation enforced by the database, the application, or by convention?
+      - What happens to a request that presents no tenant context?
+      - Are tenant-scoped background jobs isolated the same way as requests?
+    permitted-tools: [read-mechanical-model]
+    proposal-types: [Invariant, Concept, Capability]
+    provenance: >
+      A domain expectation that is NOT met must cite what was searched and found
+      absent — an unmet expectation is a proposal about the system, not about the
+      domain.
+    uncertainty: high | medium | low, per proposal.
+    stopping: When every domain question is answered or recorded as unanswerable.
+    output-schema: candidate-proposals-v1
+    proposal-count: 5-12
+    review: >
+      Individual, and with more scrutiny than a general skill. A domain skill
+      knows what it expects to find, which is exactly the bias that makes it
+      useful and the bias that makes it dangerous (ADR-0115).

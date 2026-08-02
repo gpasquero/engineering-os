@@ -155,7 +155,8 @@ def main(argv):
             failures += 1
 
     print()
-    for checker in ("tools/check-query-schema.py", "tools/check-skills.py"):
+    for checker in ("tools/check-query-schema.py", "tools/check-skills.py",
+                    "tools/check-plans.py", "tools/check-governance.py"):
         proc = subprocess.run([sys.executable, str(ROOT / checker)],
                               capture_output=True, text=True)
         print("  " + proc.stdout.strip().splitlines()[-1])

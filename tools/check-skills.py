@@ -24,7 +24,7 @@ from compiler.registry import load_all  # noqa: E402
 VALID_TYPES = {"Concept", "Capability", "BoundedContext", "Invariant", "Actor",
                "ADR", "Workflow", "WorkflowStep", "Artifact", "Evidence",
                "relationship"}
-REQUIRED = ["objective", "required-inputs", "evidence", "questions",
+REQUIRED = ["kind", "objective", "required-inputs", "evidence", "questions",
             "permitted-tools", "proposal-types", "provenance", "uncertainty",
             "stopping", "output-schema", "review"]
 VENDORS = ("claude", "codex", "gpt", "gemini", "anthropic", "openai", "llama",
@@ -53,6 +53,11 @@ def main():
                       for i in (skill.get("required-inputs") or []))
         if depends and sid not in MAY_DEPEND:
             problems.append("requires another skill's output; not independently runnable")
+        if skill.get("kind") not in ("general", "domain"):
+            problems.append(f"kind must be 'general' or 'domain', got {skill.get('kind')!r}")
+        if skill.get("kind") == "domain" and not skill.get("domain"):
+            problems.append("a domain skill must name its domain")
+
         # proposal-types must name real metamodel entities. A blind worker
         # reported that nothing flagged a proposal typed outside the list; the
         # list itself was never checked either.
