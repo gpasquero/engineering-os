@@ -3340,6 +3340,25 @@
         }
       },
       {
+        "id": "Invariant.ATicketCannotTransitionToItselfNoOpViaIsvali",
+        "type": "Invariant",
+        "label": "a ticket cannot transition to itself (no-op) via isValidTransition",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/status-transitions.spec.ts",
+          "locator": "it('a ticket cannot transition to itself (no-op) via isValidTransition')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
         "id": "Invariant.AccountLockoutBruteForceProtection",
         "type": "Invariant",
         "label": "account lockout & brute-force protection",
@@ -3354,8 +3373,66 @@
         },
         "attributes": {
           "origin": "O-deterministic-rule",
-          "rule": "R3-describe-names-the-invariant",
-          "asserted-by-cases": "3"
+          "rule": "R4-both-levels",
+          "granularity": "concept",
+          "established-by-cases": "3"
+        }
+      },
+      {
+        "id": "Invariant.AgentDoesNotPassSupervisorOnlyCheck",
+        "type": "Invariant",
+        "label": "agent does NOT pass supervisor-only check",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/common/guards/__tests__/roles.guard.spec.ts",
+          "locator": "it('agent does NOT pass supervisor-only check')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.AideskAppWithoutAnyTenantContextCannotReadTi",
+        "type": "Invariant",
+        "label": "aidesk_app without any tenant context cannot read tickets",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/common/database/__tests__/tenant-isolation.integration.spec.ts",
+          "locator": "it('aidesk_app without any tenant context cannot read tickets')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.AlwaysReturnsTrue",
+        "type": "Invariant",
+        "label": "always returns true",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/channel/adapters/email/providers/in-memory-email.provider.spec.ts",
+          "locator": "it('always returns true')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
         }
       },
       {
@@ -3373,8 +3450,9 @@
         },
         "attributes": {
           "origin": "O-deterministic-rule",
-          "rule": "R3-describe-names-the-invariant",
-          "asserted-by-cases": "4"
+          "rule": "R4-both-levels",
+          "granularity": "concept",
+          "established-by-cases": "4"
         }
       },
       {
@@ -3392,8 +3470,9 @@
         },
         "attributes": {
           "origin": "O-deterministic-rule",
-          "rule": "R3-describe-names-the-invariant",
-          "asserted-by-cases": "3"
+          "rule": "R4-both-levels",
+          "granularity": "concept",
+          "established-by-cases": "3"
         }
       },
       {
@@ -3411,8 +3490,9 @@
         },
         "attributes": {
           "origin": "O-deterministic-rule",
-          "rule": "R3-describe-names-the-invariant",
-          "asserted-by-cases": "1"
+          "rule": "R4-both-levels",
+          "granularity": "concept",
+          "established-by-cases": "1"
         }
       },
       {
@@ -3430,8 +3510,9 @@
         },
         "attributes": {
           "origin": "O-deterministic-rule",
-          "rule": "R3-describe-names-the-invariant",
-          "asserted-by-cases": "1"
+          "rule": "R4-both-levels",
+          "granularity": "concept",
+          "established-by-cases": "1"
         }
       },
       {
@@ -3449,8 +3530,9 @@
         },
         "attributes": {
           "origin": "O-deterministic-rule",
-          "rule": "R3-describe-names-the-invariant",
-          "asserted-by-cases": "1"
+          "rule": "R4-both-levels",
+          "granularity": "concept",
+          "established-by-cases": "1"
         }
       },
       {
@@ -3468,8 +3550,9 @@
         },
         "attributes": {
           "origin": "O-deterministic-rule",
-          "rule": "R3-describe-names-the-invariant",
-          "asserted-by-cases": "6"
+          "rule": "R4-both-levels",
+          "granularity": "concept",
+          "established-by-cases": "6"
         }
       },
       {
@@ -3487,8 +3570,9 @@
         },
         "attributes": {
           "origin": "O-deterministic-rule",
-          "rule": "R3-describe-names-the-invariant",
-          "asserted-by-cases": "15"
+          "rule": "R4-both-levels",
+          "granularity": "concept",
+          "established-by-cases": "15"
         }
       },
       {
@@ -3506,8 +3590,9 @@
         },
         "attributes": {
           "origin": "O-deterministic-rule",
-          "rule": "R3-describe-names-the-invariant",
-          "asserted-by-cases": "1"
+          "rule": "R4-both-levels",
+          "granularity": "concept",
+          "established-by-cases": "1"
         }
       },
       {
@@ -3525,8 +3610,180 @@
         },
         "attributes": {
           "origin": "O-deterministic-rule",
-          "rule": "R3-describe-names-the-invariant",
-          "asserted-by-cases": "2"
+          "rule": "R4-both-levels",
+          "granularity": "concept",
+          "established-by-cases": "2"
+        }
+      },
+      {
+        "id": "Invariant.DoesNotAddAPriorityConditionWhenTheArrayIsEm",
+        "type": "Invariant",
+        "label": "does NOT add a priority condition when the array is empty",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/list-filters.spec.ts",
+          "locator": "it('does NOT add a priority condition when the array is empty')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.DoesNotHaveUpdatedAtImmutable",
+        "type": "Invariant",
+        "label": "does not have updated_at (immutable)",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/common/database/schema/__tests__/schema.spec.ts",
+          "locator": "it('does not have updated_at (immutable)')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.DoesNotHaveUpdatedAtOrDeletedAt",
+        "type": "Invariant",
+        "label": "does not have updated_at or deleted_at",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/common/database/schema/__tests__/schema.spec.ts",
+          "locator": "it('does not have updated_at or deleted_at')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.DoesNotReStampCompletedatWhenAlreadyDone",
+        "type": "Invariant",
+        "label": "does not re-stamp completedAt when already done",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket-todo/__tests__/ticket-todo.service.spec.ts",
+          "locator": "it('does not re-stamp completedAt when already done')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.DoesNotRestampFirstassignedatWhenItAlreadyEx",
+        "type": "Invariant",
+        "label": "does not restamp firstAssignedAt when it already exists",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/update-assignment-tags.spec.ts",
+          "locator": "it('does not restamp firstAssignedAt when it already exists')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.DoesNotTouchCustomfieldsWhenTheKeyIsOmitted",
+        "type": "Invariant",
+        "label": "does not touch customFields when the key is omitted",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/update-custom-fields.spec.ts",
+          "locator": "it('does not touch customFields when the key is omitted')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.FailsAllWhenOneConditionMisses",
+        "type": "Invariant",
+        "label": "fails ALL when one condition misses",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/automation/__tests__/automation.service.spec.ts",
+          "locator": "it('fails ALL when one condition misses')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.FindsAnExistingTagByNameAndDoesNotCreateADup",
+        "type": "Invariant",
+        "label": "finds an existing tag by name and does not create a duplicate",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/tag/__tests__/tag-by-name.spec.ts",
+          "locator": "it('finds an existing tag by name and does not create a duplicate')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.FirstRefreshSucceedsAndRotatesSecondUseOfThe",
+        "type": "Invariant",
+        "label": "first refresh succeeds and rotates; second use of the same raw refresh token fails",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts",
+          "locator": "it('first refresh succeeds and rotates; second use of the same raw refresh')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
         }
       },
       {
@@ -3544,8 +3801,28 @@
         },
         "attributes": {
           "origin": "O-deterministic-rule",
-          "rule": "R3-describe-names-the-invariant",
-          "asserted-by-cases": "1"
+          "rule": "R4-both-levels",
+          "granularity": "concept",
+          "established-by-cases": "1"
+        }
+      },
+      {
+        "id": "Invariant.IssuetokensStoresTheSha256HashOfTheRefreshTo",
+        "type": "Invariant",
+        "label": "issueTokens stores the sha256 hash of the refresh token, never the raw value",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/refresh-token-rotation.spec.ts",
+          "locator": "it('issueTokens stores the sha256 hash of the refresh token, never the raw')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
         }
       },
       {
@@ -3563,8 +3840,104 @@
         },
         "attributes": {
           "origin": "O-deterministic-rule",
-          "rule": "R3-describe-names-the-invariant",
-          "asserted-by-cases": "7"
+          "rule": "R4-both-levels",
+          "granularity": "concept",
+          "established-by-cases": "7"
+        }
+      },
+      {
+        "id": "Invariant.JwtstrategySurfacesMissingFieldsAsUndefinedD",
+        "type": "Invariant",
+        "label": "JwtStrategy surfaces missing fields as undefined (downstream guards must reject)",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts",
+          "locator": "it('JwtStrategy surfaces missing fields as undefined (downstream guards mu')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.ListReturnsOnlyMaskedKeysNeverTheFullRawSecr",
+        "type": "Invariant",
+        "label": "list() returns only masked keys \u2014 never the full raw secret",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/api-key/__tests__/api-key-security.spec.ts",
+          "locator": "it('list() returns only masked keys \u2014 never the full raw secret')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.LocksTheAccountOnThe5ThWrongPasswordForExact",
+        "type": "Invariant",
+        "label": "locks the account on the 5th wrong password for exactly 15 minutes",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/account-lockout.spec.ts",
+          "locator": "it('locks the account on the 5th wrong password for exactly 15 minutes')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.LogoutRevokesTheTokenSubsequentRefreshMustFa",
+        "type": "Invariant",
+        "label": "logout revokes the token (subsequent refresh must fail)",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/refresh-token-rotation.spec.ts",
+          "locator": "it('logout revokes the token (subsequent refresh must fail)')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.NestedScrScriptIptAttackCannotReformIntoAScr",
+        "type": "Invariant",
+        "label": "nested <scr<script>ipt> attack cannot reform into a script tag",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/common/utils/__tests__/sanitize-html.spec.ts",
+          "locator": "it('nested <scr<script>ipt> attack cannot reform into a script tag')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
         }
       },
       {
@@ -3582,8 +3955,47 @@
         },
         "attributes": {
           "origin": "O-deterministic-rule",
-          "rule": "R3-describe-names-the-invariant",
-          "asserted-by-cases": "5"
+          "rule": "R4-both-levels",
+          "granularity": "concept",
+          "established-by-cases": "5"
+        }
+      },
+      {
+        "id": "Invariant.PerAgentIsolationLockingAgentADoesNotAffectA",
+        "type": "Invariant",
+        "label": "per-agent isolation: locking agent A does not affect agent B",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/account-lockout.spec.ts",
+          "locator": "it('per-agent isolation: locking agent A does not affect agent B')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.QuickFilterMineWithoutACurrentAgentIdDoesNot",
+        "type": "Invariant",
+        "label": "quick_filter=mine without a current agent id does not bind the agent column",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/list-filters.spec.ts",
+          "locator": "it('quick_filter=mine without a current agent id does not bind the agent c')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
         }
       },
       {
@@ -3601,8 +4013,1339 @@
         },
         "attributes": {
           "origin": "O-deterministic-rule",
-          "rule": "R3-describe-names-the-invariant",
-          "asserted-by-cases": "3"
+          "rule": "R4-both-levels",
+          "granularity": "concept",
+          "established-by-cases": "3"
+        }
+      },
+      {
+        "id": "Invariant.RejectsA7CharPasswordBelowMinimum",
+        "type": "Invariant",
+        "label": "rejects a 7-char password (below minimum)",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/password-security.spec.ts",
+          "locator": "it('rejects a 7-char password (below minimum)')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsAKeyThatDoesNotStartWithAidkWithoutHi",
+        "type": "Invariant",
+        "label": "rejects a key that does not start with aidk_ without hitting the DB",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/api-key/__tests__/api-key-security.spec.ts",
+          "locator": "it('rejects a key that does not start with aidk_ without hitting the DB')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsANonStringPasswordTypeConfusionAttemp",
+        "type": "Invariant",
+        "label": "rejects a non-string password (type confusion attempt)",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/password-security.spec.ts",
+          "locator": "it('rejects a non-string password (type confusion attempt)')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsANonUuidAssignedAgentId",
+        "type": "Invariant",
+        "label": "rejects a non-UUID assigned_agent_id",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/update-dto-allowlist.spec.ts",
+          "locator": "it('rejects a non-UUID assigned_agent_id')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsANonUuidAssignedGroupId",
+        "type": "Invariant",
+        "label": "rejects a non-UUID assigned_group_id",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/update-dto-allowlist.spec.ts",
+          "locator": "it('rejects a non-UUID assigned_group_id')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsATagLongerThan50Characters",
+        "type": "Invariant",
+        "label": "rejects a tag longer than 50 characters",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/update-dto-allowlist.spec.ts",
+          "locator": "it('rejects a tag longer than 50 characters')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsATamperedKeyCorrectPrefixWrongHash",
+        "type": "Invariant",
+        "label": "rejects a tampered key (correct prefix, wrong hash)",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/api-key/__tests__/api-key-security.spec.ts",
+          "locator": "it('rejects a tampered key (correct prefix, wrong hash)')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsATokenSignedWithADifferentSecret",
+        "type": "Invariant",
+        "label": "rejects a token signed with a different secret",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts",
+          "locator": "it('rejects a token signed with a different secret')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsATokenWithATamperedPayloadModifiedTid",
+        "type": "Invariant",
+        "label": "rejects a token with a tampered payload (modified tid)",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts",
+          "locator": "it('rejects a token with a tampered payload (modified tid)')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsATokenWithAlgorithm",
+        "type": "Invariant",
+        "label": "rejects a token with algorithm",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts",
+          "locator": "it('rejects a token with algorithm')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsAgentNonAdmin",
+        "type": "Invariant",
+        "label": "rejects agent (non-admin)",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/common/guards/__tests__/roles.guard.spec.ts",
+          "locator": "it('rejects agent (non-admin)')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsAnEmptyPassword",
+        "type": "Invariant",
+        "label": "rejects an empty password",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/password-security.spec.ts",
+          "locator": "it('rejects an empty password')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsAnEntirelyMalformedToken",
+        "type": "Invariant",
+        "label": "rejects an entirely malformed token",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts",
+          "locator": "it('rejects an entirely malformed token')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsAnExpiredToken",
+        "type": "Invariant",
+        "label": "rejects an expired token",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts",
+          "locator": "it('rejects an expired token')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsAnInvalidAdminEmail",
+        "type": "Invariant",
+        "label": "rejects an invalid admin email",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/password-security.spec.ts",
+          "locator": "it('rejects an invalid admin email')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsAnInvalidPriorityValue",
+        "type": "Invariant",
+        "label": "rejects an invalid priority value",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts",
+          "locator": "it('rejects an invalid priority value')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsAnInvalidStatusValue",
+        "type": "Invariant",
+        "label": "rejects an invalid status value",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts",
+          "locator": "it('rejects an invalid status value')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsAnUnknownQuickFilterAfterNewAndMineWa",
+        "type": "Invariant",
+        "label": "rejects an unknown quick_filter after new-and-mine was added",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/pr-a-quick-wins.spec.ts",
+          "locator": "it('rejects an unknown quick_filter after new-and-mine was added')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsAssignedAgentIdThatIsNotAUuid",
+        "type": "Invariant",
+        "label": "rejects assigned_agent_id that is not a UUID",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts",
+          "locator": "it('rejects assigned_agent_id that is not a UUID')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsAssignedGroupIdThatIsNotAUuid",
+        "type": "Invariant",
+        "label": "rejects assigned_group_id that is not a UUID",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts",
+          "locator": "it('rejects assigned_group_id that is not a UUID')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsBccEmailsContainingAnInvalidEmailAddr",
+        "type": "Invariant",
+        "label": "rejects bcc_emails containing an invalid email address",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/conversation/__tests__/create-conversation-dto.spec.ts",
+          "locator": "it('rejects bcc_emails containing an invalid email address')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsBccEmailsLongerThan20Entries",
+        "type": "Invariant",
+        "label": "rejects bcc_emails longer than 20 entries",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/conversation/__tests__/create-conversation-dto.spec.ts",
+          "locator": "it('rejects bcc_emails longer than 20 entries')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsBlankTitle",
+        "type": "Invariant",
+        "label": "rejects blank title",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket-todo/__tests__/ticket-todo.service.spec.ts",
+          "locator": "it('rejects blank title')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsCcEmailsContainingAnInvalidEmailAddre",
+        "type": "Invariant",
+        "label": "rejects cc_emails containing an invalid email address",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/conversation/__tests__/create-conversation-dto.spec.ts",
+          "locator": "it('rejects cc_emails containing an invalid email address')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsCcEmailsLongerThan20EntriesArraymaxsi",
+        "type": "Invariant",
+        "label": "rejects cc_emails longer than 20 entries (ArrayMaxSize guard)",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/conversation/__tests__/create-conversation-dto.spec.ts",
+          "locator": "it('rejects cc_emails longer than 20 entries (ArrayMaxSize guard)')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsCcEmailsThatIsNotAnArray",
+        "type": "Invariant",
+        "label": "rejects cc_emails that is not an array",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/conversation/__tests__/create-conversation-dto.spec.ts",
+          "locator": "it('rejects cc_emails that is not an array')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsCcEmailsWithANumericElementIsemailEac",
+        "type": "Invariant",
+        "label": "rejects cc_emails with a numeric element (IsEmail each)",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/conversation/__tests__/create-conversation-dto.spec.ts",
+          "locator": "it('rejects cc_emails with a numeric element (IsEmail each)')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsClosedOpenViaUpdateClosedIsTerminal",
+        "type": "Invariant",
+        "label": "rejects closed -> open via update (closed is terminal)",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/ticket.service.spec.ts",
+          "locator": "it('rejects closed -> open via update (closed is terminal)')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsContactIdThatIsNotAUuid",
+        "type": "Invariant",
+        "label": "rejects contact_id that is not a UUID",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts",
+          "locator": "it('rejects contact_id that is not a UUID')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsCustomFieldsWhenItIsNotAnObject",
+        "type": "Invariant",
+        "label": "rejects custom_fields when it is not an object",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/update-dto-allowlist.spec.ts",
+          "locator": "it('rejects custom_fields when it is not an object')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsDisallowedMimeTypes",
+        "type": "Invariant",
+        "label": "rejects disallowed MIME types",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/attachment/__tests__/attachment.service.spec.ts",
+          "locator": "it('rejects disallowed MIME types')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsEmptyIds",
+        "type": "Invariant",
+        "label": "rejects empty ids",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket-todo/__tests__/ticket-todo.service.spec.ts",
+          "locator": "it('rejects empty ids')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsEmptySubject",
+        "type": "Invariant",
+        "label": "rejects empty subject",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts",
+          "locator": "it('rejects empty subject')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsInvalidStatusTransitionWithHelpfulErr",
+        "type": "Invariant",
+        "label": "rejects invalid status transition with helpful error mentioning states",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/ticket.service.spec.ts",
+          "locator": "it('rejects invalid status transition with helpful error mentioning states')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsMergeIntoASoftDeletedPrimaryNotfoundB",
+        "type": "Invariant",
+        "label": "rejects merge into a soft-deleted primary (NotFound because of isNull(deletedAt) filter)",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/ticket-merge-extra.spec.ts",
+          "locator": "it('rejects merge into a soft-deleted primary (NotFound because of isNull(')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsMergingATicketIntoItselfSameId",
+        "type": "Invariant",
+        "label": "rejects merging a ticket into itself (same id)",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/ticket-merge-extra.spec.ts",
+          "locator": "it('rejects merging a ticket into itself (same id)')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsMergingFromAClosedSecondaryTicket",
+        "type": "Invariant",
+        "label": "rejects merging FROM a closed secondary ticket",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/ticket-merge-extra.spec.ts",
+          "locator": "it('rejects merging FROM a closed secondary ticket')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsMissingPassword",
+        "type": "Invariant",
+        "label": "rejects missing password",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/password-security.spec.ts",
+          "locator": "it('rejects missing password')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsMissingSubject",
+        "type": "Invariant",
+        "label": "rejects missing subject",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts",
+          "locator": "it('rejects missing subject')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsMoreThan20Tags",
+        "type": "Invariant",
+        "label": "rejects more than 20 tags",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/update-dto-allowlist.spec.ts",
+          "locator": "it('rejects more than 20 tags')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsMoreThan20TagsArraymaxsizeGuard",
+        "type": "Invariant",
+        "label": "rejects more than 20 tags (ArrayMaxSize guard)",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts",
+          "locator": "it('rejects more than 20 tags (ArrayMaxSize guard)')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsNewPendingOnHoldResolved",
+        "type": "Invariant",
+        "label": "rejects new -> pending/on_hold/resolved",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/ticket.service.spec.ts",
+          "locator": "it('rejects new -> pending/on_hold/resolved')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsNonUuidAssignedAgentId",
+        "type": "Invariant",
+        "label": "rejects non-UUID assigned_agent_id",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts",
+          "locator": "it('rejects non-UUID assigned_agent_id')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsOpenClosedMustGoViaResolved",
+        "type": "Invariant",
+        "label": "rejects open -> closed (must go via resolved)",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/ticket.service.spec.ts",
+          "locator": "it('rejects open -> closed (must go via resolved)')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsOversizedFilesForAgentContext",
+        "type": "Invariant",
+        "label": "rejects oversized files for agent context",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/attachment/__tests__/attachment.service.spec.ts",
+          "locator": "it('rejects oversized files for agent context')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsOversizedFilesForWidgetContext",
+        "type": "Invariant",
+        "label": "rejects oversized files for widget context",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/attachment/__tests__/attachment.service.spec.ts",
+          "locator": "it('rejects oversized files for widget context')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsPendingClosed",
+        "type": "Invariant",
+        "label": "rejects pending -> closed",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/ticket.service.spec.ts",
+          "locator": "it('rejects pending -> closed')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsPriorityOutsideTheAllowedSet",
+        "type": "Invariant",
+        "label": "rejects priority outside the allowed set",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts",
+          "locator": "it('rejects priority outside the allowed set')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsReopenWhenTicketIsNotResolved",
+        "type": "Invariant",
+        "label": "rejects reopen when ticket is not resolved",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/ticket.service.spec.ts",
+          "locator": "it('rejects reopen when ticket is not resolved')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsRolesNotInTheAllowList",
+        "type": "Invariant",
+        "label": "rejects roles not in the allow list",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/common/guards/__tests__/roles.guard.spec.ts",
+          "locator": "it('rejects roles not in the allow list')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsSourceOutsideTheAllowedSet",
+        "type": "Invariant",
+        "label": "rejects source outside the allowed set",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts",
+          "locator": "it('rejects source outside the allowed set')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsSqlInjectionLikeContactId",
+        "type": "Invariant",
+        "label": "rejects SQL-injection-like contact_id (",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts",
+          "locator": "it('rejects SQL-injection-like contact_id (')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsStatusOutsideTheAllowedEnum",
+        "type": "Invariant",
+        "label": "rejects status outside the allowed enum",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts",
+          "locator": "it('rejects status outside the allowed enum')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsSubjectLongerThan500CharactersMatches",
+        "type": "Invariant",
+        "label": "rejects subject longer than 500 characters (matches DB varchar limit)",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts",
+          "locator": "it('rejects subject longer than 500 characters (matches DB varchar limit)')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsTagsWithANonStringElement",
+        "type": "Invariant",
+        "label": "rejects tags with a non-string element",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts",
+          "locator": "it('rejects tags with a non-string element')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsTheCorrectPasswordWhileTheLockoutWind",
+        "type": "Invariant",
+        "label": "rejects the CORRECT password while the lockout window is active",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/account-lockout.spec.ts",
+          "locator": "it('rejects the CORRECT password while the lockout window is active')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsUnknownIds",
+        "type": "Invariant",
+        "label": "rejects unknown ids",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket-todo/__tests__/ticket-todo.service.spec.ts",
+          "locator": "it('rejects unknown ids')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsUnknownRoleStringsNoRoleEscalationVia",
+        "type": "Invariant",
+        "label": "rejects unknown role strings (no role escalation via typos)",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/common/guards/__tests__/roles.guard.spec.ts",
+          "locator": "it('rejects unknown role strings (no role escalation via typos)')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsViewer",
+        "type": "Invariant",
+        "label": "rejects viewer",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/common/guards/__tests__/roles.guard.spec.ts",
+          "locator": "it('rejects viewer')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsWhen50FormsExist",
+        "type": "Invariant",
+        "label": "rejects when 50 forms exist",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket-form/__tests__/ticket-form.service.spec.ts",
+          "locator": "it('rejects when 50 forms exist')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsWhenRoleIsANonStringTypeInjectionAtte",
+        "type": "Invariant",
+        "label": "rejects when role is a non-string type (injection attempt)",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/common/guards/__tests__/roles.guard.spec.ts",
+          "locator": "it('rejects when role is a non-string type (injection attempt)')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsWhenRoleIsNullUndefined",
+        "type": "Invariant",
+        "label": "rejects when role is null/undefined",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/common/guards/__tests__/roles.guard.spec.ts",
+          "locator": "it('rejects when role is null/undefined')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsWhenUserHasNoRoleFieldOnJwt",
+        "type": "Invariant",
+        "label": "rejects when user has no role field on JWT",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/common/guards/__tests__/roles.guard.spec.ts",
+          "locator": "it('rejects when user has no role field on JWT')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsWhenUserIsMissingFromTheRequest",
+        "type": "Invariant",
+        "label": "rejects when user is missing from the request",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/common/guards/__tests__/roles.guard.spec.ts",
+          "locator": "it('rejects when user is missing from the request')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RejectsWithSenderMismatchWhenSenderDiffersFr",
+        "type": "Invariant",
+        "label": "rejects with sender_mismatch when sender differs from contact",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/channel/correlation/ticket-correlation.service.spec.ts",
+          "locator": "it('rejects with sender_mismatch when sender differs from contact')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RemovesStyleBlocksEntirelyBlocksCssExpressio",
+        "type": "Invariant",
+        "label": "removes <style> blocks entirely (blocks CSS expression attacks)",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/common/utils/__tests__/sanitize-html.spec.ts",
+          "locator": "it('removes <style> blocks entirely (blocks CSS expression attacks)')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.ReplayingARevokedTokenFailsLookupFilterExclu",
+        "type": "Invariant",
+        "label": "replaying a revoked token fails (lookup filter excludes revoked rows)",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/refresh-token-rotation.spec.ts",
+          "locator": "it('replaying a revoked token fails (lookup filter excludes revoked rows)')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.ResumedTicketDoesNotOverwriteSlafirstrespons",
+        "type": "Invariant",
+        "label": "resumed ticket does not overwrite slaFirstResponseDueAt if first response already met",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/sla/__tests__/sla-timer.service.spec.ts",
+          "locator": "it('resumed ticket does not overwrite slaFirstResponseDueAt if first respo')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.ReturnsTheSameDateFor0Minutes",
+        "type": "Invariant",
+        "label": "returns the same date for 0 minutes",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/common/utils/__tests__/business-hours-calc.spec.ts",
+          "locator": "it('returns the same date for 0 minutes')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.RevokeThrowsNotfoundexceptionWhenKeyDoesNotE",
+        "type": "Invariant",
+        "label": "revoke throws NotFoundException when key does not exist",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/api-key/__tests__/api-key-security.spec.ts",
+          "locator": "it('revoke throws NotFoundException when key does not exist')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
         }
       },
       {
@@ -3620,8 +5363,9 @@
         },
         "attributes": {
           "origin": "O-deterministic-rule",
-          "rule": "R3-describe-names-the-invariant",
-          "asserted-by-cases": "1"
+          "rule": "R4-both-levels",
+          "granularity": "concept",
+          "established-by-cases": "1"
         }
       },
       {
@@ -3639,8 +5383,9 @@
         },
         "attributes": {
           "origin": "O-deterministic-rule",
-          "rule": "R3-describe-names-the-invariant",
-          "asserted-by-cases": "10"
+          "rule": "R4-both-levels",
+          "granularity": "concept",
+          "established-by-cases": "10"
         }
       },
       {
@@ -3658,8 +5403,9 @@
         },
         "attributes": {
           "origin": "O-deterministic-rule",
-          "rule": "R3-describe-names-the-invariant",
-          "asserted-by-cases": "1"
+          "rule": "R4-both-levels",
+          "granularity": "concept",
+          "established-by-cases": "1"
         }
       },
       {
@@ -3677,8 +5423,85 @@
         },
         "attributes": {
           "origin": "O-deterministic-rule",
-          "rule": "R3-describe-names-the-invariant",
-          "asserted-by-cases": "2"
+          "rule": "R4-both-levels",
+          "granularity": "concept",
+          "established-by-cases": "2"
+        }
+      },
+      {
+        "id": "Invariant.ScopesTheTagLookupByTenantidTenantIsolation",
+        "type": "Invariant",
+        "label": "scopes the tag lookup by tenantId (tenant isolation)",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/tag/__tests__/tag-by-name.spec.ts",
+          "locator": "it('scopes the tag lookup by tenantId (tenant isolation)')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.ShouldCreateContactWithoutCompanyWhenDomainD",
+        "type": "Invariant",
+        "label": "should create contact without company when domain does not match",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/contact/__tests__/contact.service.spec.ts",
+          "locator": "it('should create contact without company when domain does not match')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.ShouldEnforceRequiredFields",
+        "type": "Invariant",
+        "label": "should enforce required fields",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/custom-field/__tests__/custom-field.service.spec.ts",
+          "locator": "it('should enforce required fields')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.SkippingDeactivatedAgentsDoesNotBreakRotatio",
+        "type": "Invariant",
+        "label": "skipping deactivated agents does not break rotation",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/group/__tests__/round-robin-distribution.spec.ts",
+          "locator": "it('skipping deactivated agents does not break rotation')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
         }
       },
       {
@@ -3696,8 +5519,66 @@
         },
         "attributes": {
           "origin": "O-deterministic-rule",
-          "rule": "R3-describe-names-the-invariant",
-          "asserted-by-cases": "1"
+          "rule": "R4-both-levels",
+          "granularity": "concept",
+          "established-by-cases": "1"
+        }
+      },
+      {
+        "id": "Invariant.StillRejectsUnknownFieldsGuardsAgainstSilent",
+        "type": "Invariant",
+        "label": "still rejects unknown fields (guards against silent misuses)",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/update-dto-allowlist.spec.ts",
+          "locator": "it('still rejects unknown fields (guards against silent misuses)')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.SupervisorDoesNotPassAdminOnlyCheck",
+        "type": "Invariant",
+        "label": "supervisor does NOT pass admin-only check",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/common/guards/__tests__/roles.guard.spec.ts",
+          "locator": "it('supervisor does NOT pass admin-only check')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
+        }
+      },
+      {
+        "id": "Invariant.TagsEmptyArrayClearsAllTagsAndDoesNotInsertA",
+        "type": "Invariant",
+        "label": "tags: empty array clears all tags and does not insert anything new",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/update-assignment-tags.spec.ts",
+          "locator": "it('tags: empty array clears all tags and does not insert anything new')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
         }
       },
       {
@@ -3715,8 +5596,28 @@
         },
         "attributes": {
           "origin": "O-deterministic-rule",
-          "rule": "R3-describe-names-the-invariant",
-          "asserted-by-cases": "3"
+          "rule": "R4-both-levels",
+          "granularity": "concept",
+          "established-by-cases": "3"
+        }
+      },
+      {
+        "id": "Invariant.ThrowsNotfoundexceptionWhenTheTicketDoesNotE",
+        "type": "Invariant",
+        "label": "throws NotFoundException when the ticket does not exist",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/tag/__tests__/tag-by-name.spec.ts",
+          "locator": "it('throws NotFoundException when the ticket does not exist')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "R4-both-levels",
+          "granularity": "guarantee"
         }
       },
       {
@@ -3734,8 +5635,9 @@
         },
         "attributes": {
           "origin": "O-deterministic-rule",
-          "rule": "R3-describe-names-the-invariant",
-          "asserted-by-cases": "1"
+          "rule": "R4-both-levels",
+          "granularity": "concept",
+          "established-by-cases": "1"
         }
       },
       {
@@ -3753,8 +5655,9 @@
         },
         "attributes": {
           "origin": "O-deterministic-rule",
-          "rule": "R3-describe-names-the-invariant",
-          "asserted-by-cases": "1"
+          "rule": "R4-both-levels",
+          "granularity": "concept",
+          "established-by-cases": "1"
         }
       },
       {
@@ -3772,8 +5675,9 @@
         },
         "attributes": {
           "origin": "O-deterministic-rule",
-          "rule": "R3-describe-names-the-invariant",
-          "asserted-by-cases": "1"
+          "rule": "R4-both-levels",
+          "granularity": "concept",
+          "established-by-cases": "1"
         }
       },
       {
@@ -3791,8 +5695,9 @@
         },
         "attributes": {
           "origin": "O-deterministic-rule",
-          "rule": "R3-describe-names-the-invariant",
-          "asserted-by-cases": "1"
+          "rule": "R4-both-levels",
+          "granularity": "concept",
+          "established-by-cases": "1"
         }
       },
       {
@@ -3810,8 +5715,9 @@
         },
         "attributes": {
           "origin": "O-deterministic-rule",
-          "rule": "R3-describe-names-the-invariant",
-          "asserted-by-cases": "6"
+          "rule": "R4-both-levels",
+          "granularity": "concept",
+          "established-by-cases": "6"
         }
       },
       {
@@ -3829,8 +5735,9 @@
         },
         "attributes": {
           "origin": "O-deterministic-rule",
-          "rule": "R3-describe-names-the-invariant",
-          "asserted-by-cases": "2"
+          "rule": "R4-both-levels",
+          "granularity": "concept",
+          "established-by-cases": "2"
         }
       },
       {
@@ -3848,8 +5755,9 @@
         },
         "attributes": {
           "origin": "O-deterministic-rule",
-          "rule": "R3-describe-names-the-invariant",
-          "asserted-by-cases": "3"
+          "rule": "R4-both-levels",
+          "granularity": "concept",
+          "established-by-cases": "3"
         }
       },
       {
@@ -3867,8 +5775,9 @@
         },
         "attributes": {
           "origin": "O-deterministic-rule",
-          "rule": "R3-describe-names-the-invariant",
-          "asserted-by-cases": "2"
+          "rule": "R4-both-levels",
+          "granularity": "concept",
+          "established-by-cases": "2"
         }
       },
       {
@@ -3886,8 +5795,9 @@
         },
         "attributes": {
           "origin": "O-deterministic-rule",
-          "rule": "R3-describe-names-the-invariant",
-          "asserted-by-cases": "1"
+          "rule": "R4-both-levels",
+          "granularity": "concept",
+          "established-by-cases": "1"
         }
       },
       {
@@ -3905,8 +5815,9 @@
         },
         "attributes": {
           "origin": "O-deterministic-rule",
-          "rule": "R3-describe-names-the-invariant",
-          "asserted-by-cases": "5"
+          "rule": "R4-both-levels",
+          "granularity": "concept",
+          "established-by-cases": "5"
         }
       },
       {
@@ -3924,8 +5835,9 @@
         },
         "attributes": {
           "origin": "O-deterministic-rule",
-          "rule": "R3-describe-names-the-invariant",
-          "asserted-by-cases": "7"
+          "rule": "R4-both-levels",
+          "granularity": "concept",
+          "established-by-cases": "7"
         }
       }
     ],
@@ -5866,6 +7778,36 @@
         }
       },
       {
+        "from": "Invariant.ATicketCannotTransitionToItselfNoOpViaIsvali",
+        "predicate": "enforced-at",
+        "to": "Artifact.StatusTransitionsSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/status-transitions.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.ATicketCannotTransitionToItselfNoOpViaIsvali",
+        "predicate": "specializes",
+        "to": "Invariant.TicketStatusTransitionMatrixExhaustive",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/status-transitions.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
         "from": "Invariant.AccountLockoutBruteForceProtection",
         "predicate": "constrains",
         "to": "Capability.Auth",
@@ -5877,7 +7819,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -5892,7 +7834,97 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.AgentDoesNotPassSupervisorOnlyCheck",
+        "predicate": "enforced-at",
+        "to": "Artifact.RolesGuardSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/common/guards/__tests__/roles.guard.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.AgentDoesNotPassSupervisorOnlyCheck",
+        "predicate": "specializes",
+        "to": "Invariant.Rolesguard",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/common/guards/__tests__/roles.guard.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.AideskAppWithoutAnyTenantContextCannotReadTi",
+        "predicate": "enforced-at",
+        "to": "Artifact.TenantIsolationIntegrationSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/common/database/__tests__/tenant-isolation.integration.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.AideskAppWithoutAnyTenantContextCannotReadTi",
+        "predicate": "specializes",
+        "to": "Invariant.RlsTenantIsolationIntegration",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/common/database/__tests__/tenant-isolation.integration.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.AlwaysReturnsTrue",
+        "predicate": "enforced-at",
+        "to": "Artifact.InMemoryEmailProviderSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/channel/adapters/email/providers/in-memory-email.provider.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.AlwaysReturnsTrue",
+        "predicate": "specializes",
+        "to": "Invariant.Inmemoryemailprovider",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/channel/adapters/email/providers/in-memory-email.provider.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -5907,7 +7939,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -5922,7 +7954,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -5937,7 +7969,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -5952,7 +7984,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -5967,7 +7999,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -5982,7 +8014,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -5997,7 +8029,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6012,7 +8044,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6027,7 +8059,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6042,7 +8074,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6057,7 +8089,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6072,7 +8104,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6087,7 +8119,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6102,7 +8134,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6117,7 +8149,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6132,7 +8164,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6147,7 +8179,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6162,7 +8194,277 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.DoesNotAddAPriorityConditionWhenTheArrayIsEm",
+        "predicate": "enforced-at",
+        "to": "Artifact.ListFiltersSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/list-filters.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.DoesNotAddAPriorityConditionWhenTheArrayIsEm",
+        "predicate": "specializes",
+        "to": "Invariant.TicketserviceListNewFilterSurface",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/list-filters.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.DoesNotHaveUpdatedAtImmutable",
+        "predicate": "enforced-at",
+        "to": "Artifact.SchemaSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/common/database/schema/__tests__/schema.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.DoesNotHaveUpdatedAtImmutable",
+        "predicate": "specializes",
+        "to": "Invariant.DatabaseSchema",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/common/database/schema/__tests__/schema.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.DoesNotHaveUpdatedAtOrDeletedAt",
+        "predicate": "enforced-at",
+        "to": "Artifact.SchemaSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/common/database/schema/__tests__/schema.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.DoesNotHaveUpdatedAtOrDeletedAt",
+        "predicate": "specializes",
+        "to": "Invariant.DatabaseSchema",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/common/database/schema/__tests__/schema.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.DoesNotReStampCompletedatWhenAlreadyDone",
+        "predicate": "enforced-at",
+        "to": "Artifact.TicketTodoServiceSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket-todo/__tests__/ticket-todo.service.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.DoesNotReStampCompletedatWhenAlreadyDone",
+        "predicate": "specializes",
+        "to": "Invariant.Tickettodoservice",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket-todo/__tests__/ticket-todo.service.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.DoesNotRestampFirstassignedatWhenItAlreadyEx",
+        "predicate": "enforced-at",
+        "to": "Artifact.UpdateAssignmentTagsSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/update-assignment-tags.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.DoesNotRestampFirstassignedatWhenItAlreadyEx",
+        "predicate": "specializes",
+        "to": "Invariant.TicketserviceUpdateAssignmentTags",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/update-assignment-tags.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.DoesNotTouchCustomfieldsWhenTheKeyIsOmitted",
+        "predicate": "enforced-at",
+        "to": "Artifact.UpdateCustomFieldsSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/update-custom-fields.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.DoesNotTouchCustomfieldsWhenTheKeyIsOmitted",
+        "predicate": "specializes",
+        "to": "Invariant.TicketserviceUpdateCustomFieldsMerge",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/update-custom-fields.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.FailsAllWhenOneConditionMisses",
+        "predicate": "enforced-at",
+        "to": "Artifact.AutomationServiceSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/automation/__tests__/automation.service.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.FailsAllWhenOneConditionMisses",
+        "predicate": "specializes",
+        "to": "Invariant.Automationservice",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/automation/__tests__/automation.service.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.FindsAnExistingTagByNameAndDoesNotCreateADup",
+        "predicate": "enforced-at",
+        "to": "Artifact.TagByNameSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/tag/__tests__/tag-by-name.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.FindsAnExistingTagByNameAndDoesNotCreateADup",
+        "predicate": "specializes",
+        "to": "Invariant.TagserviceAddtoticketbyname",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/tag/__tests__/tag-by-name.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.FirstRefreshSucceedsAndRotatesSecondUseOfThe",
+        "predicate": "enforced-at",
+        "to": "Artifact.JwtSecuritySpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.FirstRefreshSucceedsAndRotatesSecondUseOfThe",
+        "predicate": "specializes",
+        "to": "Invariant.JwtSecurity",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6177,7 +8479,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6192,7 +8494,37 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.IssuetokensStoresTheSha256HashOfTheRefreshTo",
+        "predicate": "enforced-at",
+        "to": "Artifact.RefreshTokenRotationSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/refresh-token-rotation.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.IssuetokensStoresTheSha256HashOfTheRefreshTo",
+        "predicate": "specializes",
+        "to": "Invariant.RefreshTokenRotation",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/refresh-token-rotation.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6207,7 +8539,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6222,7 +8554,157 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.JwtstrategySurfacesMissingFieldsAsUndefinedD",
+        "predicate": "enforced-at",
+        "to": "Artifact.JwtSecuritySpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.JwtstrategySurfacesMissingFieldsAsUndefinedD",
+        "predicate": "specializes",
+        "to": "Invariant.JwtSecurity",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.ListReturnsOnlyMaskedKeysNeverTheFullRawSecr",
+        "predicate": "enforced-at",
+        "to": "Artifact.ApiKeySecuritySpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/api-key/__tests__/api-key-security.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.ListReturnsOnlyMaskedKeysNeverTheFullRawSecr",
+        "predicate": "specializes",
+        "to": "Invariant.ApikeyserviceSecurity",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/api-key/__tests__/api-key-security.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.LocksTheAccountOnThe5ThWrongPasswordForExact",
+        "predicate": "enforced-at",
+        "to": "Artifact.AccountLockoutSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/account-lockout.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.LocksTheAccountOnThe5ThWrongPasswordForExact",
+        "predicate": "specializes",
+        "to": "Invariant.AccountLockoutBruteForceProtection",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/account-lockout.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.LogoutRevokesTheTokenSubsequentRefreshMustFa",
+        "predicate": "enforced-at",
+        "to": "Artifact.RefreshTokenRotationSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/refresh-token-rotation.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.LogoutRevokesTheTokenSubsequentRefreshMustFa",
+        "predicate": "specializes",
+        "to": "Invariant.RefreshTokenRotation",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/refresh-token-rotation.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.NestedScrScriptIptAttackCannotReformIntoAScr",
+        "predicate": "enforced-at",
+        "to": "Artifact.SanitizeHtmlSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/common/utils/__tests__/sanitize-html.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.NestedScrScriptIptAttackCannotReformIntoAScr",
+        "predicate": "specializes",
+        "to": "Invariant.SanitizehtmlXssPrevention",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/common/utils/__tests__/sanitize-html.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6237,7 +8719,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6252,7 +8734,67 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.PerAgentIsolationLockingAgentADoesNotAffectA",
+        "predicate": "enforced-at",
+        "to": "Artifact.AccountLockoutSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/account-lockout.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.PerAgentIsolationLockingAgentADoesNotAffectA",
+        "predicate": "specializes",
+        "to": "Invariant.AccountLockoutBruteForceProtection",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/account-lockout.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.QuickFilterMineWithoutACurrentAgentIdDoesNot",
+        "predicate": "enforced-at",
+        "to": "Artifact.ListFiltersSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/list-filters.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.QuickFilterMineWithoutACurrentAgentIdDoesNot",
+        "predicate": "specializes",
+        "to": "Invariant.TicketserviceListNewFilterSurface",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/list-filters.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6267,7 +8809,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6282,7 +8824,2107 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsA7CharPasswordBelowMinimum",
+        "predicate": "enforced-at",
+        "to": "Artifact.PasswordSecuritySpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/password-security.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsA7CharPasswordBelowMinimum",
+        "predicate": "specializes",
+        "to": "Invariant.PasswordPolicyRegisterdto",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/password-security.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsAKeyThatDoesNotStartWithAidkWithoutHi",
+        "predicate": "enforced-at",
+        "to": "Artifact.ApiKeySecuritySpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/api-key/__tests__/api-key-security.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsAKeyThatDoesNotStartWithAidkWithoutHi",
+        "predicate": "specializes",
+        "to": "Invariant.ApikeyserviceSecurity",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/api-key/__tests__/api-key-security.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsANonStringPasswordTypeConfusionAttemp",
+        "predicate": "enforced-at",
+        "to": "Artifact.PasswordSecuritySpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/password-security.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsANonStringPasswordTypeConfusionAttemp",
+        "predicate": "specializes",
+        "to": "Invariant.PasswordPolicyRegisterdto",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/password-security.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsANonUuidAssignedAgentId",
+        "predicate": "enforced-at",
+        "to": "Artifact.UpdateDtoAllowlistSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/update-dto-allowlist.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsANonUuidAssignedAgentId",
+        "predicate": "specializes",
+        "to": "Invariant.UpdateticketdtoAllowlist",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/update-dto-allowlist.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsANonUuidAssignedGroupId",
+        "predicate": "enforced-at",
+        "to": "Artifact.UpdateDtoAllowlistSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/update-dto-allowlist.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsANonUuidAssignedGroupId",
+        "predicate": "specializes",
+        "to": "Invariant.UpdateticketdtoAllowlist",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/update-dto-allowlist.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsATagLongerThan50Characters",
+        "predicate": "enforced-at",
+        "to": "Artifact.UpdateDtoAllowlistSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/update-dto-allowlist.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsATagLongerThan50Characters",
+        "predicate": "specializes",
+        "to": "Invariant.UpdateticketdtoAllowlist",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/update-dto-allowlist.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsATamperedKeyCorrectPrefixWrongHash",
+        "predicate": "enforced-at",
+        "to": "Artifact.ApiKeySecuritySpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/api-key/__tests__/api-key-security.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsATamperedKeyCorrectPrefixWrongHash",
+        "predicate": "specializes",
+        "to": "Invariant.ApikeyserviceSecurity",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/api-key/__tests__/api-key-security.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsATokenSignedWithADifferentSecret",
+        "predicate": "enforced-at",
+        "to": "Artifact.JwtSecuritySpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsATokenSignedWithADifferentSecret",
+        "predicate": "specializes",
+        "to": "Invariant.JwtSecurity",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsATokenWithATamperedPayloadModifiedTid",
+        "predicate": "enforced-at",
+        "to": "Artifact.JwtSecuritySpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsATokenWithATamperedPayloadModifiedTid",
+        "predicate": "specializes",
+        "to": "Invariant.JwtSecurity",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsATokenWithAlgorithm",
+        "predicate": "enforced-at",
+        "to": "Artifact.JwtSecuritySpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsATokenWithAlgorithm",
+        "predicate": "specializes",
+        "to": "Invariant.JwtSecurity",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsAgentNonAdmin",
+        "predicate": "enforced-at",
+        "to": "Artifact.RolesGuardSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/common/guards/__tests__/roles.guard.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsAgentNonAdmin",
+        "predicate": "specializes",
+        "to": "Invariant.Rolesguard",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/common/guards/__tests__/roles.guard.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsAnEmptyPassword",
+        "predicate": "enforced-at",
+        "to": "Artifact.PasswordSecuritySpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/password-security.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsAnEmptyPassword",
+        "predicate": "specializes",
+        "to": "Invariant.PasswordPolicyRegisterdto",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/password-security.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsAnEntirelyMalformedToken",
+        "predicate": "enforced-at",
+        "to": "Artifact.JwtSecuritySpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsAnEntirelyMalformedToken",
+        "predicate": "specializes",
+        "to": "Invariant.JwtSecurity",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsAnExpiredToken",
+        "predicate": "enforced-at",
+        "to": "Artifact.JwtSecuritySpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsAnExpiredToken",
+        "predicate": "specializes",
+        "to": "Invariant.JwtSecurity",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsAnInvalidAdminEmail",
+        "predicate": "enforced-at",
+        "to": "Artifact.PasswordSecuritySpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/password-security.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsAnInvalidAdminEmail",
+        "predicate": "specializes",
+        "to": "Invariant.PasswordPolicyRegisterdto",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/password-security.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsAnInvalidPriorityValue",
+        "predicate": "enforced-at",
+        "to": "Artifact.DtoValidationSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsAnInvalidPriorityValue",
+        "predicate": "specializes",
+        "to": "Invariant.Createticketdto",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsAnInvalidStatusValue",
+        "predicate": "enforced-at",
+        "to": "Artifact.DtoValidationSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsAnInvalidStatusValue",
+        "predicate": "specializes",
+        "to": "Invariant.Createticketdto",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsAnUnknownQuickFilterAfterNewAndMineWa",
+        "predicate": "enforced-at",
+        "to": "Artifact.PrAQuickWinsSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/pr-a-quick-wins.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsAnUnknownQuickFilterAfterNewAndMineWa",
+        "predicate": "specializes",
+        "to": "Invariant.TicketcontrollerListNewAndMineQuickFilte",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/pr-a-quick-wins.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsAssignedAgentIdThatIsNotAUuid",
+        "predicate": "enforced-at",
+        "to": "Artifact.DtoValidationSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsAssignedAgentIdThatIsNotAUuid",
+        "predicate": "specializes",
+        "to": "Invariant.Createticketdto",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsAssignedGroupIdThatIsNotAUuid",
+        "predicate": "enforced-at",
+        "to": "Artifact.DtoValidationSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsAssignedGroupIdThatIsNotAUuid",
+        "predicate": "specializes",
+        "to": "Invariant.Createticketdto",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsBccEmailsContainingAnInvalidEmailAddr",
+        "predicate": "enforced-at",
+        "to": "Artifact.CreateConversationDtoSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/conversation/__tests__/create-conversation-dto.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsBccEmailsContainingAnInvalidEmailAddr",
+        "predicate": "specializes",
+        "to": "Invariant.CreateconversationdtoCcEmailsBccEmails",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/conversation/__tests__/create-conversation-dto.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsBccEmailsLongerThan20Entries",
+        "predicate": "enforced-at",
+        "to": "Artifact.CreateConversationDtoSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/conversation/__tests__/create-conversation-dto.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsBccEmailsLongerThan20Entries",
+        "predicate": "specializes",
+        "to": "Invariant.CreateconversationdtoCcEmailsBccEmails",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/conversation/__tests__/create-conversation-dto.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsBlankTitle",
+        "predicate": "enforced-at",
+        "to": "Artifact.TicketTodoServiceSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket-todo/__tests__/ticket-todo.service.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsBlankTitle",
+        "predicate": "specializes",
+        "to": "Invariant.Tickettodoservice",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket-todo/__tests__/ticket-todo.service.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsCcEmailsContainingAnInvalidEmailAddre",
+        "predicate": "enforced-at",
+        "to": "Artifact.CreateConversationDtoSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/conversation/__tests__/create-conversation-dto.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsCcEmailsContainingAnInvalidEmailAddre",
+        "predicate": "specializes",
+        "to": "Invariant.CreateconversationdtoCcEmailsBccEmails",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/conversation/__tests__/create-conversation-dto.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsCcEmailsLongerThan20EntriesArraymaxsi",
+        "predicate": "enforced-at",
+        "to": "Artifact.CreateConversationDtoSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/conversation/__tests__/create-conversation-dto.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsCcEmailsLongerThan20EntriesArraymaxsi",
+        "predicate": "specializes",
+        "to": "Invariant.CreateconversationdtoCcEmailsBccEmails",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/conversation/__tests__/create-conversation-dto.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsCcEmailsThatIsNotAnArray",
+        "predicate": "enforced-at",
+        "to": "Artifact.CreateConversationDtoSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/conversation/__tests__/create-conversation-dto.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsCcEmailsThatIsNotAnArray",
+        "predicate": "specializes",
+        "to": "Invariant.CreateconversationdtoCcEmailsBccEmails",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/conversation/__tests__/create-conversation-dto.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsCcEmailsWithANumericElementIsemailEac",
+        "predicate": "enforced-at",
+        "to": "Artifact.CreateConversationDtoSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/conversation/__tests__/create-conversation-dto.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsCcEmailsWithANumericElementIsemailEac",
+        "predicate": "specializes",
+        "to": "Invariant.CreateconversationdtoCcEmailsBccEmails",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/conversation/__tests__/create-conversation-dto.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsClosedOpenViaUpdateClosedIsTerminal",
+        "predicate": "enforced-at",
+        "to": "Artifact.TicketServiceSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/ticket.service.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsClosedOpenViaUpdateClosedIsTerminal",
+        "predicate": "specializes",
+        "to": "Invariant.Ticketservice",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/ticket.service.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsContactIdThatIsNotAUuid",
+        "predicate": "enforced-at",
+        "to": "Artifact.DtoValidationSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsContactIdThatIsNotAUuid",
+        "predicate": "specializes",
+        "to": "Invariant.Createticketdto",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsCustomFieldsWhenItIsNotAnObject",
+        "predicate": "enforced-at",
+        "to": "Artifact.UpdateDtoAllowlistSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/update-dto-allowlist.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsCustomFieldsWhenItIsNotAnObject",
+        "predicate": "specializes",
+        "to": "Invariant.UpdateticketdtoAllowlist",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/update-dto-allowlist.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsDisallowedMimeTypes",
+        "predicate": "enforced-at",
+        "to": "Artifact.AttachmentServiceSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/attachment/__tests__/attachment.service.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsDisallowedMimeTypes",
+        "predicate": "specializes",
+        "to": "Invariant.Attachmentservice",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/attachment/__tests__/attachment.service.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsEmptyIds",
+        "predicate": "enforced-at",
+        "to": "Artifact.TicketTodoServiceSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket-todo/__tests__/ticket-todo.service.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsEmptyIds",
+        "predicate": "specializes",
+        "to": "Invariant.Tickettodoservice",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket-todo/__tests__/ticket-todo.service.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsEmptySubject",
+        "predicate": "enforced-at",
+        "to": "Artifact.DtoValidationSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsEmptySubject",
+        "predicate": "specializes",
+        "to": "Invariant.Createticketdto",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsInvalidStatusTransitionWithHelpfulErr",
+        "predicate": "enforced-at",
+        "to": "Artifact.TicketServiceSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/ticket.service.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsInvalidStatusTransitionWithHelpfulErr",
+        "predicate": "specializes",
+        "to": "Invariant.Ticketservice",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/ticket.service.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsMergeIntoASoftDeletedPrimaryNotfoundB",
+        "predicate": "enforced-at",
+        "to": "Artifact.TicketMergeExtraSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/ticket-merge-extra.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsMergeIntoASoftDeletedPrimaryNotfoundB",
+        "predicate": "specializes",
+        "to": "Invariant.TicketserviceMergeAdditionalScenarios",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/ticket-merge-extra.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsMergingATicketIntoItselfSameId",
+        "predicate": "enforced-at",
+        "to": "Artifact.TicketMergeExtraSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/ticket-merge-extra.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsMergingATicketIntoItselfSameId",
+        "predicate": "specializes",
+        "to": "Invariant.TicketserviceMergeAdditionalScenarios",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/ticket-merge-extra.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsMergingFromAClosedSecondaryTicket",
+        "predicate": "enforced-at",
+        "to": "Artifact.TicketMergeExtraSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/ticket-merge-extra.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsMergingFromAClosedSecondaryTicket",
+        "predicate": "specializes",
+        "to": "Invariant.TicketserviceMergeAdditionalScenarios",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/ticket-merge-extra.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsMissingPassword",
+        "predicate": "enforced-at",
+        "to": "Artifact.PasswordSecuritySpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/password-security.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsMissingPassword",
+        "predicate": "specializes",
+        "to": "Invariant.PasswordPolicyRegisterdto",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/password-security.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsMissingSubject",
+        "predicate": "enforced-at",
+        "to": "Artifact.DtoValidationSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsMissingSubject",
+        "predicate": "specializes",
+        "to": "Invariant.Createticketdto",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsMoreThan20Tags",
+        "predicate": "enforced-at",
+        "to": "Artifact.UpdateDtoAllowlistSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/update-dto-allowlist.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsMoreThan20Tags",
+        "predicate": "specializes",
+        "to": "Invariant.UpdateticketdtoAllowlist",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/update-dto-allowlist.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsMoreThan20TagsArraymaxsizeGuard",
+        "predicate": "enforced-at",
+        "to": "Artifact.DtoValidationSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsMoreThan20TagsArraymaxsizeGuard",
+        "predicate": "specializes",
+        "to": "Invariant.Createticketdto",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsNewPendingOnHoldResolved",
+        "predicate": "enforced-at",
+        "to": "Artifact.TicketServiceSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/ticket.service.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsNewPendingOnHoldResolved",
+        "predicate": "specializes",
+        "to": "Invariant.Ticketservice",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/ticket.service.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsNonUuidAssignedAgentId",
+        "predicate": "enforced-at",
+        "to": "Artifact.DtoValidationSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsNonUuidAssignedAgentId",
+        "predicate": "specializes",
+        "to": "Invariant.Createticketdto",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsOpenClosedMustGoViaResolved",
+        "predicate": "enforced-at",
+        "to": "Artifact.TicketServiceSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/ticket.service.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsOpenClosedMustGoViaResolved",
+        "predicate": "specializes",
+        "to": "Invariant.Ticketservice",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/ticket.service.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsOversizedFilesForAgentContext",
+        "predicate": "enforced-at",
+        "to": "Artifact.AttachmentServiceSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/attachment/__tests__/attachment.service.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsOversizedFilesForAgentContext",
+        "predicate": "specializes",
+        "to": "Invariant.Attachmentservice",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/attachment/__tests__/attachment.service.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsOversizedFilesForWidgetContext",
+        "predicate": "enforced-at",
+        "to": "Artifact.AttachmentServiceSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/attachment/__tests__/attachment.service.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsOversizedFilesForWidgetContext",
+        "predicate": "specializes",
+        "to": "Invariant.Attachmentservice",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/attachment/__tests__/attachment.service.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsPendingClosed",
+        "predicate": "enforced-at",
+        "to": "Artifact.TicketServiceSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/ticket.service.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsPendingClosed",
+        "predicate": "specializes",
+        "to": "Invariant.Ticketservice",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/ticket.service.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsPriorityOutsideTheAllowedSet",
+        "predicate": "enforced-at",
+        "to": "Artifact.DtoValidationSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsPriorityOutsideTheAllowedSet",
+        "predicate": "specializes",
+        "to": "Invariant.Createticketdto",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsReopenWhenTicketIsNotResolved",
+        "predicate": "enforced-at",
+        "to": "Artifact.TicketServiceSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/ticket.service.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsReopenWhenTicketIsNotResolved",
+        "predicate": "specializes",
+        "to": "Invariant.Ticketservice",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/ticket.service.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsRolesNotInTheAllowList",
+        "predicate": "enforced-at",
+        "to": "Artifact.RolesGuardSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/common/guards/__tests__/roles.guard.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsRolesNotInTheAllowList",
+        "predicate": "specializes",
+        "to": "Invariant.Rolesguard",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/common/guards/__tests__/roles.guard.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsSourceOutsideTheAllowedSet",
+        "predicate": "enforced-at",
+        "to": "Artifact.DtoValidationSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsSourceOutsideTheAllowedSet",
+        "predicate": "specializes",
+        "to": "Invariant.Createticketdto",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsSqlInjectionLikeContactId",
+        "predicate": "enforced-at",
+        "to": "Artifact.DtoValidationSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsSqlInjectionLikeContactId",
+        "predicate": "specializes",
+        "to": "Invariant.Createticketdto",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsStatusOutsideTheAllowedEnum",
+        "predicate": "enforced-at",
+        "to": "Artifact.DtoValidationSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsStatusOutsideTheAllowedEnum",
+        "predicate": "specializes",
+        "to": "Invariant.Createticketdto",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsSubjectLongerThan500CharactersMatches",
+        "predicate": "enforced-at",
+        "to": "Artifact.DtoValidationSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsSubjectLongerThan500CharactersMatches",
+        "predicate": "specializes",
+        "to": "Invariant.Createticketdto",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsTagsWithANonStringElement",
+        "predicate": "enforced-at",
+        "to": "Artifact.DtoValidationSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsTagsWithANonStringElement",
+        "predicate": "specializes",
+        "to": "Invariant.Createticketdto",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsTheCorrectPasswordWhileTheLockoutWind",
+        "predicate": "enforced-at",
+        "to": "Artifact.AccountLockoutSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/account-lockout.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsTheCorrectPasswordWhileTheLockoutWind",
+        "predicate": "specializes",
+        "to": "Invariant.AccountLockoutBruteForceProtection",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/account-lockout.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsUnknownIds",
+        "predicate": "enforced-at",
+        "to": "Artifact.TicketTodoServiceSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket-todo/__tests__/ticket-todo.service.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsUnknownIds",
+        "predicate": "specializes",
+        "to": "Invariant.Tickettodoservice",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket-todo/__tests__/ticket-todo.service.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsUnknownRoleStringsNoRoleEscalationVia",
+        "predicate": "enforced-at",
+        "to": "Artifact.RolesGuardSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/common/guards/__tests__/roles.guard.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsUnknownRoleStringsNoRoleEscalationVia",
+        "predicate": "specializes",
+        "to": "Invariant.Rolesguard",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/common/guards/__tests__/roles.guard.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsViewer",
+        "predicate": "enforced-at",
+        "to": "Artifact.RolesGuardSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/common/guards/__tests__/roles.guard.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsViewer",
+        "predicate": "specializes",
+        "to": "Invariant.Rolesguard",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/common/guards/__tests__/roles.guard.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsWhen50FormsExist",
+        "predicate": "enforced-at",
+        "to": "Artifact.TicketFormServiceSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket-form/__tests__/ticket-form.service.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsWhen50FormsExist",
+        "predicate": "specializes",
+        "to": "Invariant.Ticketformservice",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket-form/__tests__/ticket-form.service.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsWhenRoleIsANonStringTypeInjectionAtte",
+        "predicate": "enforced-at",
+        "to": "Artifact.RolesGuardSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/common/guards/__tests__/roles.guard.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsWhenRoleIsANonStringTypeInjectionAtte",
+        "predicate": "specializes",
+        "to": "Invariant.Rolesguard",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/common/guards/__tests__/roles.guard.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsWhenRoleIsNullUndefined",
+        "predicate": "enforced-at",
+        "to": "Artifact.RolesGuardSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/common/guards/__tests__/roles.guard.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsWhenRoleIsNullUndefined",
+        "predicate": "specializes",
+        "to": "Invariant.Rolesguard",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/common/guards/__tests__/roles.guard.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsWhenUserHasNoRoleFieldOnJwt",
+        "predicate": "enforced-at",
+        "to": "Artifact.RolesGuardSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/common/guards/__tests__/roles.guard.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsWhenUserHasNoRoleFieldOnJwt",
+        "predicate": "specializes",
+        "to": "Invariant.Rolesguard",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/common/guards/__tests__/roles.guard.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsWhenUserIsMissingFromTheRequest",
+        "predicate": "enforced-at",
+        "to": "Artifact.RolesGuardSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/common/guards/__tests__/roles.guard.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsWhenUserIsMissingFromTheRequest",
+        "predicate": "specializes",
+        "to": "Invariant.Rolesguard",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/common/guards/__tests__/roles.guard.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsWithSenderMismatchWhenSenderDiffersFr",
+        "predicate": "enforced-at",
+        "to": "Artifact.TicketCorrelationServiceSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/channel/correlation/ticket-correlation.service.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RejectsWithSenderMismatchWhenSenderDiffersFr",
+        "predicate": "specializes",
+        "to": "Invariant.Ticketcorrelationservice",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/channel/correlation/ticket-correlation.service.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RemovesStyleBlocksEntirelyBlocksCssExpressio",
+        "predicate": "enforced-at",
+        "to": "Artifact.SanitizeHtmlSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/common/utils/__tests__/sanitize-html.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RemovesStyleBlocksEntirelyBlocksCssExpressio",
+        "predicate": "specializes",
+        "to": "Invariant.SanitizehtmlXssPrevention",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/common/utils/__tests__/sanitize-html.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.ReplayingARevokedTokenFailsLookupFilterExclu",
+        "predicate": "enforced-at",
+        "to": "Artifact.RefreshTokenRotationSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/refresh-token-rotation.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.ReplayingARevokedTokenFailsLookupFilterExclu",
+        "predicate": "specializes",
+        "to": "Invariant.RefreshTokenRotation",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/auth/__tests__/refresh-token-rotation.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.ResumedTicketDoesNotOverwriteSlafirstrespons",
+        "predicate": "enforced-at",
+        "to": "Artifact.SlaTimerServiceSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/sla/__tests__/sla-timer.service.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.ResumedTicketDoesNotOverwriteSlafirstrespons",
+        "predicate": "specializes",
+        "to": "Invariant.SlatimerservicePauseResumeEdgeCases",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/sla/__tests__/sla-timer.service.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.ReturnsTheSameDateFor0Minutes",
+        "predicate": "enforced-at",
+        "to": "Artifact.BusinessHoursCalcSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/common/utils/__tests__/business-hours-calc.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.ReturnsTheSameDateFor0Minutes",
+        "predicate": "specializes",
+        "to": "Invariant.Calculatebusinessminutes",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/common/utils/__tests__/business-hours-calc.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RevokeThrowsNotfoundexceptionWhenKeyDoesNotE",
+        "predicate": "enforced-at",
+        "to": "Artifact.ApiKeySecuritySpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/api-key/__tests__/api-key-security.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.RevokeThrowsNotfoundexceptionWhenKeyDoesNotE",
+        "predicate": "specializes",
+        "to": "Invariant.ApikeyserviceSecurity",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/api-key/__tests__/api-key-security.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6297,7 +10939,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6312,7 +10954,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6327,7 +10969,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6342,7 +10984,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6357,7 +10999,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6372,7 +11014,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6387,7 +11029,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6402,7 +11044,127 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.ScopesTheTagLookupByTenantidTenantIsolation",
+        "predicate": "enforced-at",
+        "to": "Artifact.TagByNameSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/tag/__tests__/tag-by-name.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.ScopesTheTagLookupByTenantidTenantIsolation",
+        "predicate": "specializes",
+        "to": "Invariant.TagserviceAddtoticketbyname",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/tag/__tests__/tag-by-name.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.ShouldCreateContactWithoutCompanyWhenDomainD",
+        "predicate": "enforced-at",
+        "to": "Artifact.ContactServiceSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/contact/__tests__/contact.service.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.ShouldCreateContactWithoutCompanyWhenDomainD",
+        "predicate": "specializes",
+        "to": "Invariant.Contactservice",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/contact/__tests__/contact.service.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.ShouldEnforceRequiredFields",
+        "predicate": "enforced-at",
+        "to": "Artifact.CustomFieldServiceSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/custom-field/__tests__/custom-field.service.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.ShouldEnforceRequiredFields",
+        "predicate": "specializes",
+        "to": "Invariant.Customfieldservice",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/custom-field/__tests__/custom-field.service.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.SkippingDeactivatedAgentsDoesNotBreakRotatio",
+        "predicate": "enforced-at",
+        "to": "Artifact.RoundRobinDistributionSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/group/__tests__/round-robin-distribution.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.SkippingDeactivatedAgentsDoesNotBreakRotatio",
+        "predicate": "specializes",
+        "to": "Invariant.RoundRobinDistributionFairness",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/group/__tests__/round-robin-distribution.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6417,7 +11179,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6432,7 +11194,97 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.StillRejectsUnknownFieldsGuardsAgainstSilent",
+        "predicate": "enforced-at",
+        "to": "Artifact.UpdateDtoAllowlistSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/update-dto-allowlist.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.StillRejectsUnknownFieldsGuardsAgainstSilent",
+        "predicate": "specializes",
+        "to": "Invariant.UpdateticketdtoAllowlist",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/update-dto-allowlist.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.SupervisorDoesNotPassAdminOnlyCheck",
+        "predicate": "enforced-at",
+        "to": "Artifact.RolesGuardSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/common/guards/__tests__/roles.guard.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.SupervisorDoesNotPassAdminOnlyCheck",
+        "predicate": "specializes",
+        "to": "Invariant.Rolesguard",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/common/guards/__tests__/roles.guard.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.TagsEmptyArrayClearsAllTagsAndDoesNotInsertA",
+        "predicate": "enforced-at",
+        "to": "Artifact.UpdateAssignmentTagsSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/update-assignment-tags.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.TagsEmptyArrayClearsAllTagsAndDoesNotInsertA",
+        "predicate": "specializes",
+        "to": "Invariant.TicketserviceUpdateAssignmentTags",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/ticket/__tests__/update-assignment-tags.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6447,7 +11299,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6462,7 +11314,37 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.ThrowsNotfoundexceptionWhenTheTicketDoesNotE",
+        "predicate": "enforced-at",
+        "to": "Artifact.TagByNameSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/modules/tag/__tests__/tag-by-name.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.ThrowsNotfoundexceptionWhenTheTicketDoesNotE",
+        "predicate": "specializes",
+        "to": "Invariant.TagserviceAddtoticketbyname",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/modules/tag/__tests__/tag-by-name.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T02-interpret",
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6477,7 +11359,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6492,7 +11374,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6507,7 +11389,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6522,7 +11404,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6537,7 +11419,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6552,7 +11434,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6567,7 +11449,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6582,7 +11464,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6597,7 +11479,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6612,7 +11494,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6627,7 +11509,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6642,7 +11524,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6657,7 +11539,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6672,7 +11554,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6687,7 +11569,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6702,7 +11584,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6717,7 +11599,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6732,7 +11614,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6747,7 +11629,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6762,7 +11644,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6777,7 +11659,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       },
       {
@@ -6792,7 +11674,7 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T02-interpret",
-          "rule": "R3-describe-names-the-invariant"
+          "rule": "R4-both-levels"
         }
       }
     ],
@@ -6989,8 +11871,8 @@
     ]
   },
   "statistics": {
-    "entities": 203,
-    "relationships": 191,
+    "entities": 302,
+    "relationships": 389,
     "classifications": 0,
     "ambiguities": 5,
     "conflicts": 0,
@@ -6998,9 +11880,9 @@
     "bySupport": {
       "S-confirmed-deterministic": 4,
       "S-implemented": 93,
-      "S-inferred": 191,
+      "S-inferred": 389,
       "S-specified": 5,
-      "S-tested": 101
+      "S-tested": 200
     },
     "byType": {
       "ADR": 5,
@@ -7008,18 +11890,18 @@
       "BoundedContext": 4,
       "Capability": 28,
       "Concept": 34,
-      "Invariant": 31
+      "Invariant": 130
     },
     "byWorker": {
-      "W-constraint-interpreter": 93,
+      "W-constraint-interpreter": 390,
       "W-decision-archaeologist": 5,
       "W-domain-interpreter": 296
     },
     "byOrigin": {
-      "O-deterministic-rule": 394
+      "O-deterministic-rule": 691
     },
     "byRule": {
-      "R3-describe-names-the-invariant": 31,
+      "R4-both-levels": 130,
       "S1-module-is-a-capability": 28,
       "S1-package-is-a-context": 4,
       "S1-pgtable-is-a-concept": 34,
@@ -7028,7 +11910,7 @@
       "S4-spec-validates-module": 70
     }
   },
-  "digest": "0cc71144aa3fe909",
+  "digest": "41467ffd585da3f8",
   "mechanicalModelDigest": "dd47744e6bc66150",
-  "interpretationStrategy": "suite-level"
+  "interpretationStrategy": "both-levels"
 }

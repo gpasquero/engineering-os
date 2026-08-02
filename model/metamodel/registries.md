@@ -217,6 +217,31 @@ registries:
       An adopting repository may add origins. Origin is reported as counts by
       kind and never combined into a score (ADR-0090, ADR-0109).
 
+  - id: REG-interpretive-failures
+    registers: how an interpretive failure is classified before it is called one
+    source: ../interpretive-failures.md
+    extraction: yaml-block
+    collection: interpretive-failures
+    membership: >
+      A classification is registered by appearing with an id, what it means, the
+      stage that owns it, and its remedy.
+    extension: >
+      An adopting repository may add classifications. A failure is never called
+      an interpretation failure until the required mechanical evidence is known
+      to be available (ADR-0110).
+
+  - id: REG-drift-categories
+    registers: what a Knowledge Drift Report may report
+    source: ../drift-categories.md
+    extraction: yaml-block
+    collection: drift-categories
+    membership: >
+      A category is registered by appearing with an id, what it means, what it
+      detects and its intake outcome.
+    extension: >
+      An adopting repository may add categories. Every drift item is a proposal
+      requiring review; reacquisition never overwrites (ADR-0112).
+
   - id: REG-validation-rules
     registers: the rules the compiler executes
     source: validation-rules.md

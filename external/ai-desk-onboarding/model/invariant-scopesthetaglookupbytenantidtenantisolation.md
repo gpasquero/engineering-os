@@ -1,24 +1,19 @@
 ---
-id: Invariant.RefreshTokenRotation
+id: Invariant.ScopesTheTagLookupByTenantidTenantIsolation
 type: Invariant
-label: Refresh token rotation
+label: scopes the tag lookup by tenantId (tenant isolation)
 attributes:
-  established-by-cases: '3'
-  granularity: concept
-  locator: describe('Refresh token rotation')
+  granularity: guarantee
+  locator: it('scopes the tag lookup by tenantId (tenant isolation)')
   origin: O-deterministic-rule
   proposed-by: W-constraint-interpreter
   proposed-in: T02-interpret
   rule: R4-both-levels
-  source: packages/backend/src/modules/auth/__tests__/refresh-token-rotation.spec.ts
+  source: packages/backend/src/modules/tag/__tests__/tag-by-name.spec.ts
   support: S-inferred
-relationships:
-- constrains: Capability.Auth
-- enforced-at: Artifact.RefreshTokenRotationSpec
+relationships: []
 ---
 
 Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`.
-
-Inferred by rule `R4-both-levels`.
 
 **Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.

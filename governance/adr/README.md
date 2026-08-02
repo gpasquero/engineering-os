@@ -16,7 +16,7 @@ same session the decision is made.
 > a rule exists; the rule that must be followed lives in a Policy under
 > `shared/policies/`. Agents consume policies; humans read ADRs for rationale.
 
-**Highest allocated ID: `ADR-0109`.** IDs are sequential and never reused.
+**Highest allocated ID: `ADR-0112`.** IDs are sequential and never reused.
 
 > This index table is a hand-maintained projection of ADR front matter. It is
 > listed in the transitional-debt register, `ISSUE-0037`.
@@ -204,6 +204,9 @@ Read these before designing anything that produces an artifact:
 | [ADR-0107](ADR-0107-discovery-production.md) | **Discovery production is worker output; orchestration declarations are not a substitute for it** | accepted | — |
 | [ADR-0108](ADR-0108-discovery-has-two-stages.md) | **Discovery has two stages; Interpretive Discovery operates exclusively on the Mechanical Model** | accepted | — |
 | [ADR-0109](ADR-0109-assertion-origin.md) | **Every proposed assertion records its origin kind** | accepted | — |
+| [ADR-0110](ADR-0110-three-acquisition-stages.md) | **Brownfield acquisition has three stages; the trust boundary is review rather than determinism** | accepted | — |
+| [ADR-0111](ADR-0111-granularity-preservation.md) | **Abstraction and specificity coexist; the relation is `specializes` and no entity is added** | accepted | — |
+| [ADR-0112](ADR-0112-acquisition-modes-and-drift.md) | **Acquisition has three modes; reacquisition produces a Knowledge Drift Report and never overwrites** | accepted | — |
 
 ## Supersessions
 

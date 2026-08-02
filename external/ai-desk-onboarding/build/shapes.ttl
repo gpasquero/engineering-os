@@ -97,6 +97,12 @@ eos:scopedToShape
     sh:description "specializes contained-by (structural)" ;
     sh:node eos:MetamodelEntity .
 
+eos:specializesShape
+    a sh:PropertyShape ;
+    sh:path eos:specializes ;
+    sh:description "specializes specializes (structural)" ;
+    sh:node eos:MetamodelEntity .
+
 eos:validatesShape
     a sh:PropertyShape ;
     sh:path eos:validates ;

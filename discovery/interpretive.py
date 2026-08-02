@@ -203,9 +203,67 @@ def gaps(mech, cand, task):
         cand.gap(label, why, worker=W, task=task)
 
 
+def invariants_both_levels(mech, cand, task):
+    """R4 — both levels, related by `specializes` (`ADR-0111`).
+
+    `R3` reaches the concept and loses the specific guarantee; `R1` keeps the
+    guarantee and never states the concept. Neither dominates, and the resolution
+    is not to choose.
+
+    The `describe` block becomes the general Invariant; each rule-stating case
+    becomes a specific Invariant that `specializes` it. **No new entity** — a
+    specific guarantee is a narrower Invariant, and `specializes` is a registered
+    core relationship type.
+    """
+    W = "W-constraint-interpreter"
+    general = specific = 0
+    for suite in mech["testSuites"]:
+        sid = f"Artifact.{_slug(suite['name'])}"
+        subject = suite["describes"][0] if suite["describes"] else suite["name"]
+        rule_cases = [c for c in suite["cases"] if _states_a_rule(c)]
+        if not rule_cases:
+            continue
+
+        gid = f"Invariant.{_slug(subject, 40)}"
+        if cand.entity(gid, "Invariant", subject, support="S-inferred",
+                       source=suite["file"], locator=f"describe('{subject}')",
+                       worker=W, task=task,
+                       attributes={"origin": ORIGIN,
+                                   "rule": "R4-both-levels",
+                                   "granularity": "concept",
+                                   "established-by-cases": str(len(rule_cases))}) is not None:
+            cand.relation(gid, "enforced-at", sid, support="S-tested",
+                          source=suite["file"], worker=W, task=task,
+                          rule="R4-both-levels")
+            cand.relation(gid, "constrains", f"Capability.{_slug(suite['moduleDir'])}",
+                          support="S-inferred", source=suite["file"], worker=W,
+                          task=task, rule="R4-both-levels")
+            general += 1
+
+        for case in rule_cases:
+            iid = f"Invariant.{_slug(case, 44)}"
+            if cand.entity(iid, "Invariant", case, support="S-inferred",
+                           source=suite["file"], locator=f"it('{case[:70]}')",
+                           worker=W, task=task,
+                           attributes={"origin": ORIGIN,
+                                       "rule": "R4-both-levels",
+                                       "granularity": "guarantee"}) is None:
+                continue
+            # A specific guarantee is a NARROWER invariant, not a different kind.
+            cand.relation(iid, "specializes", gid, support="S-inferred",
+                          source=suite["file"], worker=W, task=task,
+                          rule="R4-both-levels")
+            cand.relation(iid, "enforced-at", sid, support="S-tested",
+                          source=suite["file"], worker=W, task=task,
+                          rule="R4-both-levels")
+            specific += 1
+    return {"concepts": general, "guarantees": specific}
+
+
 STRATEGIES = {
     "case-level": invariants_case_level,
     "suite-level": invariants_suite_level,
+    "both-levels": invariants_both_levels,
 }
 
 

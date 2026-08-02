@@ -1,0 +1,108 @@
+# Interpretive Acquisition — probabilistic worker output (ADR-0109, ADR-0110).
+#
+# Worker:        Claude (Sonnet 4.5), acting as a probabilistic interpretive worker
+# Input:         external/ai-desk-onboarding/mechanical-engineering-model.json
+#                digest dd47744e6bc66150 — FROZEN, identical to the deterministic run
+# Task contract: "Propose engineering knowledge from the Mechanical Model. Read no
+#                source file. Cite the mechanical facts each proposal rests on."
+# Run:           SESSION-0041
+#
+# CONTAMINATION DISCLOSURE — this experiment is NOT blind.
+#   This worker had already seen the output of rules R1, R3 and R4 in prior
+#   sessions. It is therefore contaminated on TEST-DERIVED INVARIANTS, and no
+#   proposal below is drawn from test case or describe-block text.
+#   Every proposal rests on route, table, dependency or document facts, which no
+#   deterministic rule interprets beyond mechanical restatement.
+#   A genuinely blind comparison requires a worker that has not seen this
+#   repository. This is recorded as a limitation, not worked around.
+
+origin: O-probabilistic-interpretation
+model: claude-sonnet-4.5
+mechanical-model-digest: dd47744e6bc66150
+
+proposals:
+  - id: Invariant.WebhookTenantResolutionIsAsymmetric
+    type: Invariant
+    label: >
+      Exactly one route carries the tenant in its URL path; every other route
+      derives it from the token
+    support: S-inferred
+    uncertainty: high
+    input-evidence:
+      - routes[161] — POST /channels/:tenantSlug/:channelType/webhook
+      - routes — the remaining 160 carry no tenant identifier in the path
+      - tables.agents, tables.tenants — tenant is a column, not a path segment
+    assumptions:
+      - An inbound webhook cannot present a JWT, so its tenant must be in the URL.
+      - That is a deliberate design choice rather than an oversight.
+    reasoning: >
+      Comparing 161 route facts against each other isolates a single asymmetry.
+      The tenant isolation invariant therefore has TWO enforcement paths, and
+      only one of them is the one the auth model describes. Nothing in the
+      repository records that the webhook path is different.
+    why-no-deterministic-rule-found-it: >
+      F-rule-insufficient. The fact is present — all 161 routes are extracted.
+      Reaching the conclusion requires comparing a route against the distribution
+      of all other routes, which no declared rule does.
+
+  - id: Workflow.PhasedDelivery
+    type: Workflow
+    label: A six-phase delivery workflow, A through F, each ending in a verification gate
+    support: S-specified
+    uncertainty: medium
+    input-evidence:
+      - documents — 44 headings matching "Task [A-F].n"
+      - documents — 6 headings matching "Phase [A-F] Completion ... Verification"
+      - documents/plans/work-plan.md — "ai-desk Phase 1: Work Plan"
+    assumptions:
+      - The task numbering encodes ordering rather than arbitrary labels.
+      - A "Completion ... Verification" document is a gate rather than a report.
+    reasoning: >
+      Fifty document headings, individually meaningless, describe one engineering
+      process when read together: six phases, each with numbered tasks and a
+      terminating verification document.
+    why-no-deterministic-rule-found-it: >
+      F-fact-absent for workflows generally — no rule proposes workflows, and
+      `workflows` is a declared gap. The headings ARE extracted, so a rule could
+      be written; none was.
+
+  - id: Invariant.SoftDeleteIsPervasive
+    type: Invariant
+    label: Deletion is logical across the schema, not physical
+    support: S-inferred
+    uncertainty: medium
+    input-evidence:
+      - tables — deletedAt appears across many table column lists
+      - documents — "Task F.3: Soft deletes and restore"
+    assumptions:
+      - A deletedAt column implies rows are retained and filtered.
+    reasoning: >
+      A schema-wide column convention plus a work-plan task naming it as a
+      deliverable. Neither alone establishes a system-wide invariant.
+    why-no-deterministic-rule-found-it: >
+      F-rule-insufficient. Column facts are extracted; recognising a convention
+      across tables and matching it to a document heading is cross-source.
+
+  - id: Concept.ApiKeyAuthentication
+    type: Concept
+    label: A second authentication mechanism, independent of agent login
+    support: S-implemented
+    uncertainty: low
+    input-evidence:
+      - tables.api_keys — keyHash, keyPrefix, keyLastFour, lastUsedAt, revokedAt, tenantId
+      - moduleDirs — api-key
+      - testSuites — api-key-security.spec, api-key.service.spec
+    assumptions:
+      - Hashed storage with a displayable prefix indicates a bearer credential.
+    reasoning: >
+      The column shape is a recognisable API-key pattern. Two authentication
+      paths exist and the auth module covers only one.
+    why-no-deterministic-rule-found-it: >
+      F-rule-insufficient. Every fact is extracted — columns, module, suites.
+      Naming the column shape as an authentication mechanism is interpretation.
+    correction-during-this-run: >
+      This worker initially assumed api_keys was UNTESTED and that the untested
+      second path was the finding. Checking the mechanical model showed two test
+      suites exist. The assumption was false and the finding is weaker than
+      first stated. Recorded because a probabilistic worker's discarded
+      hypotheses are part of its provenance.

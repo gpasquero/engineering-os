@@ -1,20 +1,19 @@
 ---
-id: Invariant.RefreshTokenRotation
+id: Invariant.RejectsAnEmptyPassword
 type: Invariant
-label: Refresh token rotation
+label: rejects an empty password
 attributes:
-  established-by-cases: '3'
-  granularity: concept
-  locator: describe('Refresh token rotation')
+  granularity: guarantee
+  locator: it('rejects an empty password')
   origin: O-deterministic-rule
   proposed-by: W-constraint-interpreter
   proposed-in: T02-interpret
   rule: R4-both-levels
-  source: packages/backend/src/modules/auth/__tests__/refresh-token-rotation.spec.ts
+  source: packages/backend/src/modules/auth/__tests__/password-security.spec.ts
   support: S-inferred
 relationships:
-- constrains: Capability.Auth
-- enforced-at: Artifact.RefreshTokenRotationSpec
+- enforced-at: Artifact.PasswordSecuritySpec
+- specializes: Invariant.PasswordPolicyRegisterdto
 ---
 
 Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`.

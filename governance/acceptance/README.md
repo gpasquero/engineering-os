@@ -15,11 +15,12 @@ committed.
 
 **Acceptance is an engineering decision, not a Git operation** (`ADR-0020`).
 
-**Highest allocated ID: `ACCEPT-0034`.** IDs are never reused.
+**Highest allocated ID: `ACCEPT-0036`.** IDs are never reused.
 
-> **`ACCEPT-0033` is not allocated.** Requested as `ACCEPT-0034` by the reviewer
-> when the highest allocated was `ACCEPT-0032`. The gap is deliberate and
-> documented in `ACCEPT-0034`; no `ACCEPT-0033` will be created.
+> **`ACCEPT-0033` and `ACCEPT-0035` are not allocated.** Each was skipped when
+> the reviewer requested the next identifier: `ACCEPT-0034` while the highest was
+> `0032`, and `ACCEPT-0036` while the highest was `0034`. The gaps are deliberate
+> and documented in the records that follow them. Neither will be created.
 
 ## Index
 
@@ -58,6 +59,7 @@ committed.
 | [ACCEPT-0031](ACCEPT-0031-session-0035-decisions.md) | `SESSION-0035` — the Task Graph at `d4954eb` | Project Owner (`gpasquero`) | accepted | 2026-08-02 |
 | [ACCEPT-0032](ACCEPT-0032-session-0036-decisions.md) | `SESSION-0036` — the Engineering Director runtime at `fe7a263` | Project Owner (`gpasquero`) | accepted | 2026-08-02 |
 | [ACCEPT-0034](ACCEPT-0034-session-0037-decisions.md) | `SESSION-0037` — autonomy and the first real-repository run at `1003d57` | Project Owner (`gpasquero`) | accepted | 2026-08-02 |
+| [ACCEPT-0036](ACCEPT-0036-session-0040-decisions.md) | `SESSION-0040` — two-stage Discovery and a refuted conclusion at `2a13b4c` | Project Owner (`gpasquero`) | accepted | 2026-08-02 |
 
 ## The three conditions
 

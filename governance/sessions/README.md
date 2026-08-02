@@ -63,6 +63,7 @@ ADRs answer "why".
 | [SESSION-0038](SESSION-0038-2026-08-02.md) | 2026-08-02 | discovery | `ACCEPT-0034`; **Discovery is the first engineering workflow** (`ADR-0105`); **candidate model and observation are one artifact** (`ADR-0106`); discovery runs through the **unchanged** Director; action vocabulary derived from task kinds |
 | [SESSION-0039](SESSION-0039-2026-08-02.md) | 2026-08-02 | brownfield | **First complete Brownfield onboarding** — 315 proposals discovered from ai-desk, 25 authorized and applied, compiled, OWL + SHACL + indexes + explorer generated, Director re-run; **the deterministic ceiling measured** (`ADR-0107`) |
 | [SESSION-0040](SESSION-0040-2026-08-02.md) | 2026-08-02 | discovery | **Discovery split into two stages** (`ADR-0108`); **assertion origin recorded** (`ADR-0109`); **the deterministic-ceiling conclusion refuted** — a suite-level rule recovers 4 of 4 human invariants with no LLM |
+| [SESSION-0041](SESSION-0041-2026-08-02.md) | 2026-08-02 | acquisition | `ACCEPT-0036`; **three acquisition stages** (`ADR-0110`); **granularity preserved via `specializes`** (`ADR-0111`); **three modes + Knowledge Drift Report** (`ADR-0112`); **first comparative benchmark** — 4 interpreters, one frozen Mechanical Model |
 
 ## Reading
 

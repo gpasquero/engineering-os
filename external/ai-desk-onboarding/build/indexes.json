@@ -49,6 +49,59 @@
       }
     },
     {
+      "id": "Artifact.ApiKeyController",
+      "type": "Artifact",
+      "label": "api-key.controller.ts",
+      "family": "descriptive",
+      "text": "api-key.controller.ts artifact proposed by `w-domain-interpreter` in task `t02-interpret` and accepted through review. support: `s-implemented`.\n\ninferred by rule `s2-controller-implements-module`.\n\n**authored from a discovery prop",
+      "attributes": {
+        "locator": "3 routes",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "routes": "3",
+        "rule": "S2-controller-implements-module",
+        "source": "packages/backend/src/modules/api-key/api-key.controller.ts",
+        "support": "S-implemented"
+      }
+    },
+    {
+      "id": "Artifact.ApiKeySecuritySpec",
+      "type": "Artifact",
+      "label": "api-key-security.spec.spec.ts",
+      "family": "descriptive",
+      "text": "api-key-security.spec.spec.ts artifact proposed by `w-domain-interpreter` in task `t02-interpret` and accepted through review. support: `s-tested`.\n\ninferred by rule `s4-spec-validates-module`.\n\n**authored from a discovery proposal** (`adr",
+      "attributes": {
+        "cases": "10",
+        "describes": "ApiKeyService \u2014 security | key generation | validation",
+        "locator": "10 cases",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "S4-spec-validates-module",
+        "source": "packages/backend/src/modules/api-key/__tests__/api-key-security.spec.ts",
+        "support": "S-tested"
+      }
+    },
+    {
+      "id": "Artifact.ApiKeyServiceSpec",
+      "type": "Artifact",
+      "label": "api-key.service.spec.spec.ts",
+      "family": "descriptive",
+      "text": "api-key.service.spec.spec.ts artifact proposed by `w-domain-interpreter` in task `t02-interpret` and accepted through review. support: `s-tested`.\n\ninferred by rule `s4-spec-validates-module`.\n\n**authored from a discovery proposal** (`adr",
+      "attributes": {
+        "cases": "11",
+        "describes": "ApiKeyService | create | list",
+        "locator": "11 cases",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "S4-spec-validates-module",
+        "source": "packages/backend/src/modules/api-key/__tests__/api-key.service.spec.ts",
+        "support": "S-tested"
+      }
+    },
+    {
       "id": "Artifact.AuthController",
       "type": "Artifact",
       "label": "auth.controller.ts",
@@ -172,6 +225,23 @@
       }
     },
     {
+      "id": "Capability.ApiKey",
+      "type": "Capability",
+      "label": "api-key module",
+      "family": "descriptive",
+      "text": "api-key module capability proposed by `w-domain-interpreter` in task `t02-interpret` and accepted through review. support: `s-implemented`.\n\ninferred by rule `s1-module-is-a-capability`.\n\n**authored from a discovery proposal**",
+      "attributes": {
+        "locator": "module directory",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "S1-module-is-a-capability",
+        "source": "packages/backend/src/modules/api-key",
+        "support": "S-implemented",
+        "ts-files": "6"
+      }
+    },
+    {
       "id": "Capability.Auth",
       "type": "Capability",
       "label": "auth module",
@@ -186,6 +256,23 @@
         "source": "packages/backend/src/modules/auth",
         "support": "S-implemented",
         "ts-files": "11"
+      }
+    },
+    {
+      "id": "Concept.TableApiKeys",
+      "type": "Concept",
+      "label": "api_keys table",
+      "family": "descriptive",
+      "text": "api_keys table concept proposed by `w-domain-interpreter` in task `t02-interpret` and accepted through review. support: `s-implemented`.\n\n**authored from a discovery proposal** (`adr-0106`). this is an authoring source, not",
+      "attributes": {
+        "locator": "pgTable('api_keys')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "S1-pgtable-is-a-concept",
+        "source": "packages/backend/src/common/database/schema/api-keys.ts",
+        "support": "S-implemented",
+        "tenant-scoped": "true"
       }
     },
     {
@@ -223,14 +310,15 @@
       "type": "Invariant",
       "label": "account lockout & brute-force protection",
       "family": "descriptive",
-      "text": "account lockout & brute-force protection invariant proposed by `w-constraint-interpreter` in task `t02-interpret` and accepted through review. support: `s-inferred`.\n\ninferred by rule `r3-describe-names-the-invariant`.\n\n**authored from a discovery pro",
+      "text": "account lockout & brute-force protection invariant proposed by `w-constraint-interpreter` in task `t02-interpret` and accepted through review. support: `s-inferred`.\n\ninferred by rule `r4-both-levels`.\n\n**authored from a discovery proposal** (`adr-010",
       "attributes": {
-        "asserted-by-cases": "3",
+        "established-by-cases": "3",
+        "granularity": "concept",
         "locator": "describe('account lockout & brute-force protection')",
         "origin": "O-deterministic-rule",
         "proposed-by": "W-constraint-interpreter",
         "proposed-in": "T02-interpret",
-        "rule": "R3-describe-names-the-invariant",
+        "rule": "R4-both-levels",
         "source": "packages/backend/src/modules/auth/__tests__/account-lockout.spec.ts",
         "support": "S-inferred"
       }
@@ -240,15 +328,50 @@
       "type": "Invariant",
       "label": "JWT security",
       "family": "descriptive",
-      "text": "jwt security invariant proposed by `w-constraint-interpreter` in task `t02-interpret` and accepted through review. support: `s-inferred`.\n\ninferred by rule `r3-describe-names-the-invariant`.\n\n**authored from a discovery pro",
+      "text": "jwt security invariant proposed by `w-constraint-interpreter` in task `t02-interpret` and accepted through review. support: `s-inferred`.\n\ninferred by rule `r4-both-levels`.\n\n**authored from a discovery proposal** (`adr-010",
       "attributes": {
-        "asserted-by-cases": "7",
+        "established-by-cases": "7",
+        "granularity": "concept",
         "locator": "describe('JWT security')",
         "origin": "O-deterministic-rule",
         "proposed-by": "W-constraint-interpreter",
         "proposed-in": "T02-interpret",
-        "rule": "R3-describe-names-the-invariant",
+        "rule": "R4-both-levels",
         "source": "packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts",
+        "support": "S-inferred"
+      }
+    },
+    {
+      "id": "Invariant.JwtstrategySurfacesMissingFieldsAsUndefinedD",
+      "type": "Invariant",
+      "label": "JwtStrategy surfaces missing fields as undefined (downstream guards must reject)",
+      "family": "descriptive",
+      "text": "jwtstrategy surfaces missing fields as undefined (downstream guards must reject) invariant proposed by `w-constraint-interpreter` in task `t02-interpret` and accepted through review. support: `s-inferred`.\n\ninferred by rule `r4-both-levels`.\n\n**authored from a discovery proposal** (`adr-010",
+      "attributes": {
+        "granularity": "guarantee",
+        "locator": "it('JwtStrategy surfaces missing fields as undefined (downstream guards mu')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "R4-both-levels",
+        "source": "packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts",
+        "support": "S-inferred"
+      }
+    },
+    {
+      "id": "Invariant.LocksTheAccountOnThe5ThWrongPasswordForExact",
+      "type": "Invariant",
+      "label": "locks the account on the 5th wrong password for exactly 15 minutes",
+      "family": "descriptive",
+      "text": "locks the account on the 5th wrong password for exactly 15 minutes invariant proposed by `w-constraint-interpreter` in task `t02-interpret` and accepted through review. support: `s-inferred`.\n\ninferred by rule `r4-both-levels`.\n\n**authored from a discovery proposal** (`adr-010",
+      "attributes": {
+        "granularity": "guarantee",
+        "locator": "it('locks the account on the 5th wrong password for exactly 15 minutes')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "R4-both-levels",
+        "source": "packages/backend/src/modules/auth/__tests__/account-lockout.spec.ts",
         "support": "S-inferred"
       }
     },
@@ -257,14 +380,15 @@
       "type": "Invariant",
       "label": "Password policy \u2014 RegisterDto",
       "family": "descriptive",
-      "text": "password policy \u2014 registerdto invariant proposed by `w-constraint-interpreter` in task `t02-interpret` and accepted through review. support: `s-inferred`.\n\ninferred by rule `r3-describe-names-the-invariant`.\n\n**authored from a discovery pro",
+      "text": "password policy \u2014 registerdto invariant proposed by `w-constraint-interpreter` in task `t02-interpret` and accepted through review. support: `s-inferred`.\n\ninferred by rule `r4-both-levels`.\n\n**authored from a discovery proposal** (`adr-010",
       "attributes": {
-        "asserted-by-cases": "5",
+        "established-by-cases": "5",
+        "granularity": "concept",
         "locator": "describe('Password policy \u2014 RegisterDto')",
         "origin": "O-deterministic-rule",
         "proposed-by": "W-constraint-interpreter",
         "proposed-in": "T02-interpret",
-        "rule": "R3-describe-names-the-invariant",
+        "rule": "R4-both-levels",
         "source": "packages/backend/src/modules/auth/__tests__/password-security.spec.ts",
         "support": "S-inferred"
       }
@@ -274,15 +398,118 @@
       "type": "Invariant",
       "label": "Refresh token rotation",
       "family": "descriptive",
-      "text": "refresh token rotation invariant proposed by `w-constraint-interpreter` in task `t02-interpret` and accepted through review. support: `s-inferred`.\n\ninferred by rule `r3-describe-names-the-invariant`.\n\n**authored from a discovery pro",
+      "text": "refresh token rotation invariant proposed by `w-constraint-interpreter` in task `t02-interpret` and accepted through review. support: `s-inferred`.\n\ninferred by rule `r4-both-levels`.\n\n**authored from a discovery proposal** (`adr-010",
       "attributes": {
-        "asserted-by-cases": "3",
+        "established-by-cases": "3",
+        "granularity": "concept",
         "locator": "describe('Refresh token rotation')",
         "origin": "O-deterministic-rule",
         "proposed-by": "W-constraint-interpreter",
         "proposed-in": "T02-interpret",
-        "rule": "R3-describe-names-the-invariant",
+        "rule": "R4-both-levels",
         "source": "packages/backend/src/modules/auth/__tests__/refresh-token-rotation.spec.ts",
+        "support": "S-inferred"
+      }
+    },
+    {
+      "id": "Invariant.RejectsA7CharPasswordBelowMinimum",
+      "type": "Invariant",
+      "label": "rejects a 7-char password (below minimum)",
+      "family": "descriptive",
+      "text": "rejects a 7-char password (below minimum) invariant proposed by `w-constraint-interpreter` in task `t02-interpret` and accepted through review. support: `s-inferred`.\n\ninferred by rule `r4-both-levels`.\n\n**authored from a discovery proposal** (`adr-010",
+      "attributes": {
+        "granularity": "guarantee",
+        "locator": "it('rejects a 7-char password (below minimum)')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "R4-both-levels",
+        "source": "packages/backend/src/modules/auth/__tests__/password-security.spec.ts",
+        "support": "S-inferred"
+      }
+    },
+    {
+      "id": "Invariant.RejectsANonStringPasswordTypeConfusionAttemp",
+      "type": "Invariant",
+      "label": "rejects a non-string password (type confusion attempt)",
+      "family": "descriptive",
+      "text": "rejects a non-string password (type confusion attempt) invariant proposed by `w-constraint-interpreter` in task `t02-interpret` and accepted through review. support: `s-inferred`.\n\ninferred by rule `r4-both-levels`.\n\n**authored from a discovery proposal** (`adr-010",
+      "attributes": {
+        "granularity": "guarantee",
+        "locator": "it('rejects a non-string password (type confusion attempt)')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "R4-both-levels",
+        "source": "packages/backend/src/modules/auth/__tests__/password-security.spec.ts",
+        "support": "S-inferred"
+      }
+    },
+    {
+      "id": "Invariant.RejectsAnEmptyPassword",
+      "type": "Invariant",
+      "label": "rejects an empty password",
+      "family": "descriptive",
+      "text": "rejects an empty password invariant proposed by `w-constraint-interpreter` in task `t02-interpret` and accepted through review. support: `s-inferred`.\n\ninferred by rule `r4-both-levels`.\n\n**authored from a discovery proposal** (`adr-010",
+      "attributes": {
+        "granularity": "guarantee",
+        "locator": "it('rejects an empty password')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "R4-both-levels",
+        "source": "packages/backend/src/modules/auth/__tests__/password-security.spec.ts",
+        "support": "S-inferred"
+      }
+    },
+    {
+      "id": "Invariant.RejectsMissingPassword",
+      "type": "Invariant",
+      "label": "rejects missing password",
+      "family": "descriptive",
+      "text": "rejects missing password invariant proposed by `w-constraint-interpreter` in task `t02-interpret` and accepted through review. support: `s-inferred`.\n\ninferred by rule `r4-both-levels`.\n\n**authored from a discovery proposal** (`adr-010",
+      "attributes": {
+        "granularity": "guarantee",
+        "locator": "it('rejects missing password')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "R4-both-levels",
+        "source": "packages/backend/src/modules/auth/__tests__/password-security.spec.ts",
+        "support": "S-inferred"
+      }
+    },
+    {
+      "id": "Invariant.RejectsTheCorrectPasswordWhileTheLockoutWind",
+      "type": "Invariant",
+      "label": "rejects the CORRECT password while the lockout window is active",
+      "family": "descriptive",
+      "text": "rejects the correct password while the lockout window is active invariant proposed by `w-constraint-interpreter` in task `t02-interpret` and accepted through review. support: `s-inferred`.\n\ninferred by rule `r4-both-levels`.\n\n**authored from a discovery proposal** (`adr-010",
+      "attributes": {
+        "granularity": "guarantee",
+        "locator": "it('rejects the CORRECT password while the lockout window is active')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "R4-both-levels",
+        "source": "packages/backend/src/modules/auth/__tests__/account-lockout.spec.ts",
+        "support": "S-inferred"
+      }
+    },
+    {
+      "id": "Invariant.RejectsWhenUserHasNoRoleFieldOnJwt",
+      "type": "Invariant",
+      "label": "rejects when user has no role field on JWT",
+      "family": "descriptive",
+      "text": "rejects when user has no role field on jwt invariant proposed by `w-constraint-interpreter` in task `t02-interpret` and accepted through review. support: `s-inferred`.\n\n**authored from a discovery proposal** (`adr-0106`). this is an authoring source, no",
+      "attributes": {
+        "granularity": "guarantee",
+        "locator": "it('rejects when user has no role field on JWT')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "R4-both-levels",
+        "source": "packages/backend/src/common/guards/__tests__/roles.guard.spec.ts",
         "support": "S-inferred"
       }
     },
@@ -291,15 +518,33 @@
       "type": "Invariant",
       "label": "RLS tenant isolation (integration)",
       "family": "descriptive",
-      "text": "rls tenant isolation (integration) invariant proposed by `w-constraint-interpreter` in task `t02-interpret` and accepted through review. support: `s-inferred`.\n\ninferred by rule `r3-describe-names-the-invariant`.\n\n**authored from a discovery pro",
+      "text": "rls tenant isolation (integration) invariant proposed by `w-constraint-interpreter` in task `t02-interpret` and accepted through review. support: `s-inferred`.\n\ninferred by rule `r4-both-levels`.\n\n**authored from a discovery proposal** (`adr-010",
       "attributes": {
-        "asserted-by-cases": "1",
+        "established-by-cases": "1",
+        "granularity": "concept",
         "locator": "describe('RLS tenant isolation (integration)')",
         "origin": "O-deterministic-rule",
         "proposed-by": "W-constraint-interpreter",
         "proposed-in": "T02-interpret",
-        "rule": "R3-describe-names-the-invariant",
+        "rule": "R4-both-levels",
         "source": "packages/backend/src/common/database/__tests__/tenant-isolation.integration.spec.ts",
+        "support": "S-inferred"
+      }
+    },
+    {
+      "id": "Invariant.ScopesTheTagLookupByTenantidTenantIsolation",
+      "type": "Invariant",
+      "label": "scopes the tag lookup by tenantId (tenant isolation)",
+      "family": "descriptive",
+      "text": "scopes the tag lookup by tenantid (tenant isolation) invariant proposed by `w-constraint-interpreter` in task `t02-interpret` and accepted through review. support: `s-inferred`.\n\n**authored from a discovery proposal** (`adr-0106`). this is an authoring source, no",
+      "attributes": {
+        "granularity": "guarantee",
+        "locator": "it('scopes the tag lookup by tenantId (tenant isolation)')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "R4-both-levels",
+        "source": "packages/backend/src/modules/tag/__tests__/tag-by-name.spec.ts",
         "support": "S-inferred"
       }
     }
@@ -310,6 +555,16 @@
         "id": "Invariant.AccountLockoutBruteForceProtection",
         "hops": 1,
         "via": "enforced-at"
+      },
+      {
+        "id": "Invariant.LocksTheAccountOnThe5ThWrongPasswordForExact",
+        "hops": 1,
+        "via": "enforced-at"
+      },
+      {
+        "id": "Invariant.RejectsTheCorrectPasswordWhileTheLockoutWind",
+        "hops": 1,
+        "via": "enforced-at"
       }
     ],
     "Artifact.JwtSecuritySpec": [
@@ -317,11 +572,36 @@
         "id": "Invariant.JwtSecurity",
         "hops": 1,
         "via": "enforced-at"
+      },
+      {
+        "id": "Invariant.JwtstrategySurfacesMissingFieldsAsUndefinedD",
+        "hops": 1,
+        "via": "enforced-at"
       }
     ],
     "Artifact.PasswordSecuritySpec": [
       {
         "id": "Invariant.PasswordPolicyRegisterdto",
+        "hops": 1,
+        "via": "enforced-at"
+      },
+      {
+        "id": "Invariant.RejectsA7CharPasswordBelowMinimum",
+        "hops": 1,
+        "via": "enforced-at"
+      },
+      {
+        "id": "Invariant.RejectsANonStringPasswordTypeConfusionAttemp",
+        "hops": 1,
+        "via": "enforced-at"
+      },
+      {
+        "id": "Invariant.RejectsAnEmptyPassword",
+        "hops": 1,
+        "via": "enforced-at"
+      },
+      {
+        "id": "Invariant.RejectsMissingPassword",
         "hops": 1,
         "via": "enforced-at"
       }
@@ -342,12 +622,32 @@
     ],
     "BoundedContext.Backend": [
       {
+        "id": "Capability.ApiKey",
+        "hops": 1,
+        "via": "scoped-to"
+      },
+      {
         "id": "Capability.Auth",
         "hops": 1,
         "via": "scoped-to"
       },
       {
         "id": "Artifact.AccountLockoutSpec",
+        "hops": 2,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Artifact.ApiKeyController",
+        "hops": 2,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Artifact.ApiKeySecuritySpec",
+        "hops": 2,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Artifact.ApiKeyServiceSpec",
         "hops": 2,
         "via": "scoped-to"
       },
@@ -395,6 +695,58 @@
         "id": "Invariant.RefreshTokenRotation",
         "hops": 2,
         "via": "scoped-to"
+      },
+      {
+        "id": "Invariant.JwtstrategySurfacesMissingFieldsAsUndefinedD",
+        "hops": 3,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Invariant.LocksTheAccountOnThe5ThWrongPasswordForExact",
+        "hops": 3,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Invariant.RejectsA7CharPasswordBelowMinimum",
+        "hops": 3,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Invariant.RejectsANonStringPasswordTypeConfusionAttemp",
+        "hops": 3,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Invariant.RejectsAnEmptyPassword",
+        "hops": 3,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Invariant.RejectsMissingPassword",
+        "hops": 3,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Invariant.RejectsTheCorrectPasswordWhileTheLockoutWind",
+        "hops": 3,
+        "via": "scoped-to"
+      }
+    ],
+    "Capability.ApiKey": [
+      {
+        "id": "Artifact.ApiKeyController",
+        "hops": 1,
+        "via": "implements"
+      },
+      {
+        "id": "Artifact.ApiKeySecuritySpec",
+        "hops": 1,
+        "via": "validates"
+      },
+      {
+        "id": "Artifact.ApiKeyServiceSpec",
+        "hops": 1,
+        "via": "validates"
       }
     ],
     "Capability.Auth": [
@@ -447,6 +799,41 @@
         "id": "Invariant.RefreshTokenRotation",
         "hops": 1,
         "via": "constrains"
+      },
+      {
+        "id": "Invariant.JwtstrategySurfacesMissingFieldsAsUndefinedD",
+        "hops": 2,
+        "via": "constrains"
+      },
+      {
+        "id": "Invariant.LocksTheAccountOnThe5ThWrongPasswordForExact",
+        "hops": 2,
+        "via": "constrains"
+      },
+      {
+        "id": "Invariant.RejectsA7CharPasswordBelowMinimum",
+        "hops": 2,
+        "via": "constrains"
+      },
+      {
+        "id": "Invariant.RejectsANonStringPasswordTypeConfusionAttemp",
+        "hops": 2,
+        "via": "constrains"
+      },
+      {
+        "id": "Invariant.RejectsAnEmptyPassword",
+        "hops": 2,
+        "via": "constrains"
+      },
+      {
+        "id": "Invariant.RejectsMissingPassword",
+        "hops": 2,
+        "via": "constrains"
+      },
+      {
+        "id": "Invariant.RejectsTheCorrectPasswordWhileTheLockoutWind",
+        "hops": 2,
+        "via": "constrains"
       }
     ],
     "Evidence.RepositoryInventory": [
@@ -454,6 +841,47 @@
         "id": "Artifact.AiDeskRepository",
         "hops": 1,
         "via": "evidenced-by"
+      }
+    ],
+    "Invariant.AccountLockoutBruteForceProtection": [
+      {
+        "id": "Invariant.LocksTheAccountOnThe5ThWrongPasswordForExact",
+        "hops": 1,
+        "via": "specializes"
+      },
+      {
+        "id": "Invariant.RejectsTheCorrectPasswordWhileTheLockoutWind",
+        "hops": 1,
+        "via": "specializes"
+      }
+    ],
+    "Invariant.JwtSecurity": [
+      {
+        "id": "Invariant.JwtstrategySurfacesMissingFieldsAsUndefinedD",
+        "hops": 1,
+        "via": "specializes"
+      }
+    ],
+    "Invariant.PasswordPolicyRegisterdto": [
+      {
+        "id": "Invariant.RejectsA7CharPasswordBelowMinimum",
+        "hops": 1,
+        "via": "specializes"
+      },
+      {
+        "id": "Invariant.RejectsANonStringPasswordTypeConfusionAttemp",
+        "hops": 1,
+        "via": "specializes"
+      },
+      {
+        "id": "Invariant.RejectsAnEmptyPassword",
+        "hops": 1,
+        "via": "specializes"
+      },
+      {
+        "id": "Invariant.RejectsMissingPassword",
+        "hops": 1,
+        "via": "specializes"
       }
     ]
   },
@@ -466,8 +894,8 @@
     }
   },
   "statistics": {
-    "searchable": 18,
-    "withImpact": 8,
+    "searchable": 32,
+    "withImpact": 12,
     "withTraceability": 1
   }
 }

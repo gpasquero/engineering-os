@@ -83,6 +83,7 @@ specializes.
 | `along` | `references` | structural |
 | `of-kind` | `references` | structural |
 | `relates-to` | `references` | structural |
+| `specializes` | `specializes` | structural |
 | `specialises` | `specializes` | structural |
 | `implements` | `implements` | structural |
 | `realised-by` | `implemented-by` | structural |

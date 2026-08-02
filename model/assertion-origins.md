@@ -43,6 +43,17 @@ assertion-origins:
       Always individual, regardless of claimed support (ADR-0104). A
       probabilistic proposal is never batch-accepted.
 
+  - id: O-imported-authoritative
+    means: >
+      Imported from a source that was already authoritative elsewhere — a
+      Knowledge Package, or a model accepted in another repository.
+    stage: interpretive
+    reproducible: exactly
+    review: >
+      Individual. Authority does not cross repositories: an import carries its
+      acceptance history as provenance and does not confer status locally
+      (ADR-0019).
+
   - id: O-human-proposal
     means: A person proposed it.
     stage: interpretive
@@ -50,6 +61,24 @@ assertion-origins:
     review: >
       Individual, and the reviewer must not be the proposer (ADR-0023).
 ```
+
+## Probabilistic proposals carry more
+
+A `O-probabilistic-interpretation` proposal is not auditable from its statement
+alone. It additionally records:
+
+| Field | Why |
+|---|---|
+| `model` and `version` | the same prompt to a different model is a different worker |
+| `task-contract` | the prompt or contract it was given |
+| `input-evidence` | **identifiers of the mechanical facts it saw** |
+| `assumptions` | what it stated it assumed |
+| `uncertainty` | its own `high`/`medium`/`low` (`ADR-0104`) |
+| `run` | the originating run |
+
+**`input-evidence` is the one that makes comparison possible.** Two interpreters
+are comparable only if what each saw is recorded, and `ADR-0108` makes the
+Mechanical Model that shared input.
 
 ## Reported as a composition, never a score
 

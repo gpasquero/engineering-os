@@ -4,7 +4,7 @@ title: Build State
 status: current
 created: 2026-08-02
 updated: 2026-08-02
-milestone: discovery-two-stage
+milestone: acquisition
 ---
 
 # Build State
@@ -17,94 +17,99 @@ milestone: discovery-two-stage
 
 ## Current work
 
-**Two-stage Discovery** (`ADR-0108`), with **assertion origin recorded**
-(`ADR-0109`).
+**Brownfield acquisition** in three stages (`ADR-0110`), across three modes
+(`ADR-0112`).
 
-## A conclusion was refuted
+## The trust boundary
 
-`SESSION-0039` claimed a **deterministic ceiling**: *better than a human at
-coverage, worse at abstraction.*
+> **Review and acceptance, not determinism** (`ADR-0110`).
 
-**It measured one rule.** The abstraction was already in the repository:
+| | Valuable because |
+|---|---|
+| Deterministic discovery | reproducible, cheap, auditable |
+| Probabilistic discovery | synthesizes meaning across weakly structured evidence |
+
+**Both are used. Neither is authoritative.** `ADR-0103` still protects the
+Director — a language model may enter acquisition and never planning — and the
+boundary between them is curation.
+
+## The first comparative benchmark
+
+One frozen Mechanical Model, digest `dd47744e6bc66150`. Four interpreters.
+
+| | R1 | R3 | **R4** | Claude |
+|---|---|---|---|---|
+| assertions | 271 | 203 | **302** | 4 |
+| concepts · guarantees | 0 · 99 | 31 · 0 | **31 · 99** | 3 · 0 |
+| `specializes` edges | 0 | 0 | **99** | 0 |
+| **cross-source syntheses** | 0 | 0 | 0 | **4** |
+| reproducible | exactly | exactly | exactly | no |
+
+**Volume and abstraction are different axes.** `R4` proposes 302 assertions and
+zero syntheses; the probabilistic worker proposes 4 and 4.
+
+**Three of four probabilistic findings are `F-rule-insufficient`** — the only
+failure class that is evidence for probabilistic interpretation. `SESSION-0040`'s
+was `F-fact-ignored`, which is not.
+
+**The comparison is contaminated and says so**: the worker had seen `R1`/`R3`/`R4`
+output. No proposal is drawn from test text; all rest on route, table, dependency
+or document facts. A blind comparison needs a worker that has not seen this
+repository.
+
+## The strongest probabilistic finding
+
+**Exactly one route of 161 carries the tenant in its URL path** —
+`POST /channels/:tenantSlug/:channelType/webhook`. Every other route derives it
+from the token.
+
+**The tenant isolation invariant therefore has two enforcement paths**, and
+nothing in the repository records that one is different. Reaching it requires
+comparing a route against the distribution of all other routes; **no declared
+rule compares a fact to its own population.**
+
+## Granularity is preserved
+
+`ADR-0111`. Both levels, related by `specializes`, using existing constructs:
 
 ```text
-describe('account lockout & brute-force protection')
+Invariant.AccountLockoutBruteForceProtection      ← concept
+    ▲ specializes
+Invariant.LocksTheAccountOnThe5ThWrongPassword    ← guarantee
 ```
 
-| Human's invariant | `R1` case-level | `R3` suite-level |
-|---|---|---|
-| account lockout | no | **YES** |
-| tenant isolation | yes | **YES** |
-| refresh token rotation | no | **YES** |
-| JWT security | no | **YES** |
-
-**Four of four, with no language model.** Including the one `SESSION-0039`
-reported as *"missed entirely"* — missed because `R1` read `it()` names and the
-concept was in a `describe` block.
-
-## The measurement is only possible because of the split
-
-```sh
-python3 discovery/run.py /Users/willy/Localsources/ai-desk external/ai-desk-onboarding \
-    --strategy=suite-level
-```
-
-| Stage | Reads | Produces |
-|---|---|---|
-| **Mechanical** | source files | Mechanical Engineering Model, digest `dd47744e6bc66150` |
-| **Interpretive** | **only the Mechanical Model** | proposed engineering knowledge |
-
-**Interpreters never open a file.** That constraint is what makes two
-interpreters comparable and what separates a missing fact from a bad abstraction.
-
-| Interpreter, same input | entities | invariants |
-|---|---|---|
-| case-level `R1` | 271 | 99 |
-| **suite-level `R3`** | **203** | **31** |
+**No `Guarantee` entity.** A specific guarantee is a narrower `Invariant`, and
+`specializes` is a registered core type. **The metamodel is unchanged for a tenth
+milestone.**
 
 ## What exists
 
 | Area | State |
 |---|---|
-| **`discovery/mechanical.py`** | Facts only: 4 packages · 61 deps · 28 modules · 161 routes · 34 tables · 70 suites with `describe` blocks · 27 env refs · 62 documents |
-| **`discovery/interpretive.py`** | 6 named rules, **two comparable invariant strategies**. Reads no file |
-| `discovery/candidate.py` | Candidate model with content digest and origin statistics |
-| `compiler/apply/` · `tools/review.py` | Authorization and application as authoring sources |
-| **`model/assertion-origins.md`** | 4 origin kinds. **394 of 394 assertions reproducible** |
-| `model/support-classification.md` | 8 kinds — 3 batch, 3 individual, 1 gap-only |
-| `compiler/emitters/` | json · owl · mermaid · explorer · **shacl** · **indexes** |
-| `external/ai-desk-onboarding/` | Mechanical model · candidate model · 16 authored sources · CKM · 6 products |
-| `tests/` | 17 fixtures, 9 negative, golden for 6 emitters |
-| Registries | **16** |
-| `model/metamodel/` | 23 of 27 entities — **unchanged for nine milestones** |
+| `discovery/mechanical.py` | Facts only, reproducible, versioned vocabulary |
+| **`discovery/interpretive.py`** | 6 named rules, **three comparable strategies** including `R4` |
+| **`external/…/experiment/`** | The benchmark and the probabilistic worker's proposals with full `ADR-0109` provenance |
+| **`model/interpretive-failures.md`** | 5 classes. *Do not call it an interpretation failure until the required fact is known available* |
+| **`model/drift-categories.md`** | 11 categories, all proposals, one recordable |
+| `model/assertion-origins.md` | **5 origins**, plus 6 provenance fields required of probabilistic proposals |
+| `compiler/apply/` · `tools/review.py` | Authorization and application |
+| `external/ai-desk-onboarding/` | Mechanical model · 302 proposals · **30 authored sources** · CKM 32 nodes · 6 products |
+| Registries | **18** |
+| `model/metamodel/` | 23 of 27 entities — **unchanged for ten milestones** |
 
-## The plan improved, and in the right way
+## What does not exist
 
-```text
-Invariant.AccountLockoutBruteForceProtection
-Invariant.JwtSecurity
-Invariant.PasswordPolicyRegisterdto
-Invariant.RefreshTokenRotation
-```
+**Continuous Acquisition and Periodic Reacquisition.** Two of three modes are
+declared and unbuilt, and **the drift report cannot be meaningful until at least
+one incremental update has happened.**
 
-**Concepts, not transcriptions** — and derived rather than authored.
+**A blind comparison.** The one run is contaminated by construction.
 
-## What is unreached, not unreachable
+**Curation measurement** — assertions accepted and rejected under review is the
+metric that matters most and was not measured.
 
-| Gap | Why |
-|---|---|
-| **prose invariants** | No rule reads document prose. A guarantee stated only in an ADR and asserted by no test is invisible |
-| both levels at once | `R3` reaches the concept, `R1` the specific guarantee. **Neither dominates**, and a rule proposing both is the obvious next deterministic step |
-| workflows · runtime behaviour | No rule and no observation |
-
-## The argument for a probabilistic interpreter is now weaker
-
-`SESSION-0039` called it evidential. **It was not** — the evidence supported *a
-better rule*, and a better rule delivered it.
-
-The case must be made **against `R3`, over the same Mechanical Model**. That is a
-harder bar than the one this project set for itself, and `ADR-0108` exists to
-enforce it.
+**The navigable knowledge product** from a broad authorized model. 30 of 302
+proposals are applied.
 
 ## Blocking
 
@@ -112,22 +117,30 @@ enforce it.
 
 | Issue | Why it is open |
 |---|---|
-| `ISSUE-0037` | Hand-maintained projections. Sixteen registries, zero generated |
+| `ISSUE-0037` | Hand-maintained projections. Eighteen registries, zero generated |
+
+## Governance note
+
+**`ACCEPT-0033` and `ACCEPT-0035` are not allocated.** Each was skipped when the
+next identifier was requested. Both gaps are documented in the index and in the
+records that follow them; validation reports an undocumented gap and accepts a
+documented one.
 
 ## Debt discovered while building
 
 | Question | Where |
 |---|---|
-| **The Mechanical Model's vocabulary is itself a ceiling** — a fact nobody extracted is invisible to every interpreter | `ADR-0108` |
-| Origin is self-reported; nothing verifies it. **Re-running is the check and nothing runs it** | `assertion-origins.md` |
-| Four origin kinds will prove insufficient; hybrids have no entry | `ADR-0109` |
-| `R3` loses detail `R1` keeps; the combination is unbuilt | `ai-desk-onboarding/FINDINGS.md` |
+| **Invariant counts stopped being comparable** — `R4` proposes both levels, so *number of invariants* conflates concepts and guarantees | `ADR-0111` |
+| A specific invariant with no general one is anomalous and nothing detects it | `ADR-0111` |
+| Failure classification is manual; nothing checks whether a fact is in the Mechanical Model | `interpretive-failures.md` |
+| `F-fact-ignored` is only detectable in hindsight, when a better rule uses the fact | `interpretive-failures.md` |
+| Curation load rises with probabilistic proposals, and review already does not scale | `ADR-0110` |
+| The `ADR-0103` boundary now depends on a distinction a reader must hold: models in acquisition, never in direction | `ADR-0110` |
 
 ## Next action
 
-**A rule that proposes both levels** — the concept, with its cases as
-constituent assertions. Then a rule that reads prose. **Then, if still justified,
-a probabilistic interpreter** — measured against `R3`.
+**A genuinely blind comparison**, then **Continuous Acquisition** — the mode
+whose absence makes the drift report meaningless.
 
 ## Repository state
 

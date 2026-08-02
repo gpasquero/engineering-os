@@ -22,6 +22,18 @@ ex:Artifact_AiDeskRepository a eos:Artifact ;
     rdfs:label "ai-desk repository" ;
     rdfs:comment "**The seed**, authored by hand. One node, so discovery has a subject." .
 
+ex:Artifact_ApiKeyController a eos:Artifact ;
+    rdfs:label "api-key.controller.ts" ;
+    rdfs:comment "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`." .
+
+ex:Artifact_ApiKeySecuritySpec a eos:Artifact ;
+    rdfs:label "api-key-security.spec.spec.ts" ;
+    rdfs:comment "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-tested`." .
+
+ex:Artifact_ApiKeyServiceSpec a eos:Artifact ;
+    rdfs:label "api-key.service.spec.spec.ts" ;
+    rdfs:comment "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-tested`." .
+
 ex:Artifact_AuthController a eos:Artifact ;
     rdfs:label "auth.controller.ts" ;
     rdfs:comment "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`." .
@@ -50,8 +62,16 @@ ex:BoundedContext_Backend a eos:BoundedContext ;
     rdfs:label "backend package" ;
     rdfs:comment "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-confirmed-deterministic`." .
 
+ex:Capability_ApiKey a eos:Capability ;
+    rdfs:label "api-key module" ;
+    rdfs:comment "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`." .
+
 ex:Capability_Auth a eos:Capability ;
     rdfs:label "auth module" ;
+    rdfs:comment "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`." .
+
+ex:Concept_TableApiKeys a eos:Concept ;
+    rdfs:label "api_keys table" ;
     rdfs:comment "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`." .
 
 ex:Concept_TableRefreshTokens a eos:Concept ;
@@ -70,6 +90,14 @@ ex:Invariant_JwtSecurity a eos:Invariant ;
     rdfs:label "JWT security" ;
     rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
 
+ex:Invariant_JwtstrategySurfacesMissingFieldsAsUndefinedD a eos:Invariant ;
+    rdfs:label "JwtStrategy surfaces missing fields as undefined (downstream guards must reject)" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
+
+ex:Invariant_LocksTheAccountOnThe5ThWrongPasswordForExact a eos:Invariant ;
+    rdfs:label "locks the account on the 5th wrong password for exactly 15 minutes" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
+
 ex:Invariant_PasswordPolicyRegisterdto a eos:Invariant ;
     rdfs:label "Password policy — RegisterDto" ;
     rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
@@ -78,24 +106,70 @@ ex:Invariant_RefreshTokenRotation a eos:Invariant ;
     rdfs:label "Refresh token rotation" ;
     rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
 
+ex:Invariant_RejectsA7CharPasswordBelowMinimum a eos:Invariant ;
+    rdfs:label "rejects a 7-char password (below minimum)" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
+
+ex:Invariant_RejectsANonStringPasswordTypeConfusionAttemp a eos:Invariant ;
+    rdfs:label "rejects a non-string password (type confusion attempt)" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
+
+ex:Invariant_RejectsAnEmptyPassword a eos:Invariant ;
+    rdfs:label "rejects an empty password" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
+
+ex:Invariant_RejectsMissingPassword a eos:Invariant ;
+    rdfs:label "rejects missing password" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
+
+ex:Invariant_RejectsTheCorrectPasswordWhileTheLockoutWind a eos:Invariant ;
+    rdfs:label "rejects the CORRECT password while the lockout window is active" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
+
+ex:Invariant_RejectsWhenUserHasNoRoleFieldOnJwt a eos:Invariant ;
+    rdfs:label "rejects when user has no role field on JWT" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
+
 ex:Invariant_RlsTenantIsolationIntegration a eos:Invariant ;
     rdfs:label "RLS tenant isolation (integration)" ;
     rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
 
+ex:Invariant_ScopesTheTagLookupByTenantidTenantIsolation a eos:Invariant ;
+    rdfs:label "scopes the tag lookup by tenantId (tenant isolation)" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
+
 ex:Artifact_AccountLockoutSpec eos:validates ex:Capability_Auth .
 ex:Artifact_AiDeskRepository eos:evidencedBy ex:Evidence_RepositoryInventory .
+ex:Artifact_ApiKeyController eos:implements ex:Capability_ApiKey .
+ex:Artifact_ApiKeySecuritySpec eos:validates ex:Capability_ApiKey .
+ex:Artifact_ApiKeyServiceSpec eos:validates ex:Capability_ApiKey .
 ex:Artifact_AuthController eos:implements ex:Capability_Auth .
 ex:Artifact_AuthServiceSpec eos:validates ex:Capability_Auth .
 ex:Artifact_JwtSecuritySpec eos:validates ex:Capability_Auth .
 ex:Artifact_PasswordSecuritySpec eos:validates ex:Capability_Auth .
 ex:Artifact_RefreshTokenRotationSpec eos:validates ex:Capability_Auth .
+ex:Capability_ApiKey eos:scopedTo ex:BoundedContext_Backend .
 ex:Capability_Auth eos:scopedTo ex:BoundedContext_Backend .
 ex:Invariant_AccountLockoutBruteForceProtection eos:constrains ex:Capability_Auth .
 ex:Invariant_AccountLockoutBruteForceProtection eos:enforcedAt ex:Artifact_AccountLockoutSpec .
 ex:Invariant_JwtSecurity eos:constrains ex:Capability_Auth .
 ex:Invariant_JwtSecurity eos:enforcedAt ex:Artifact_JwtSecuritySpec .
+ex:Invariant_JwtstrategySurfacesMissingFieldsAsUndefinedD eos:enforcedAt ex:Artifact_JwtSecuritySpec .
+ex:Invariant_JwtstrategySurfacesMissingFieldsAsUndefinedD eos:specializes ex:Invariant_JwtSecurity .
+ex:Invariant_LocksTheAccountOnThe5ThWrongPasswordForExact eos:enforcedAt ex:Artifact_AccountLockoutSpec .
+ex:Invariant_LocksTheAccountOnThe5ThWrongPasswordForExact eos:specializes ex:Invariant_AccountLockoutBruteForceProtection .
 ex:Invariant_PasswordPolicyRegisterdto eos:constrains ex:Capability_Auth .
 ex:Invariant_PasswordPolicyRegisterdto eos:enforcedAt ex:Artifact_PasswordSecuritySpec .
 ex:Invariant_RefreshTokenRotation eos:constrains ex:Capability_Auth .
 ex:Invariant_RefreshTokenRotation eos:enforcedAt ex:Artifact_RefreshTokenRotationSpec .
+ex:Invariant_RejectsA7CharPasswordBelowMinimum eos:enforcedAt ex:Artifact_PasswordSecuritySpec .
+ex:Invariant_RejectsA7CharPasswordBelowMinimum eos:specializes ex:Invariant_PasswordPolicyRegisterdto .
+ex:Invariant_RejectsANonStringPasswordTypeConfusionAttemp eos:enforcedAt ex:Artifact_PasswordSecuritySpec .
+ex:Invariant_RejectsANonStringPasswordTypeConfusionAttemp eos:specializes ex:Invariant_PasswordPolicyRegisterdto .
+ex:Invariant_RejectsAnEmptyPassword eos:enforcedAt ex:Artifact_PasswordSecuritySpec .
+ex:Invariant_RejectsAnEmptyPassword eos:specializes ex:Invariant_PasswordPolicyRegisterdto .
+ex:Invariant_RejectsMissingPassword eos:enforcedAt ex:Artifact_PasswordSecuritySpec .
+ex:Invariant_RejectsMissingPassword eos:specializes ex:Invariant_PasswordPolicyRegisterdto .
+ex:Invariant_RejectsTheCorrectPasswordWhileTheLockoutWind eos:enforcedAt ex:Artifact_AccountLockoutSpec .
+ex:Invariant_RejectsTheCorrectPasswordWhileTheLockoutWind eos:specializes ex:Invariant_AccountLockoutBruteForceProtection .
 ex:Invariant_RlsTenantIsolationIntegration eos:enforcedAt ex:Artifact_TenantIsolationIntegrationSpec .
