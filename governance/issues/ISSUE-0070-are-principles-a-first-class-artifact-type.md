@@ -2,7 +2,7 @@
 id: ISSUE-0070
 title: Whether Principles are a first-class artifact type, and how they relate to the ADRs recording them
 type: question
-status: open
+status: resolved
 severity: blocking
 created: 2026-08-02
 updated: 2026-08-02
@@ -10,7 +10,7 @@ blocks: [M2, M3]
 evidence:
   - governance/adr/ADR-0056-principle-policy-process-artifact.md
   - governance/adr/ADR-0029-modeling-policy-is-a-first-class-artifact-type.md
-resolved-by: null
+resolved-by: ADR-0058
 ---
 
 # ISSUE-0070 — Are Principles a first-class artifact type?
@@ -64,8 +64,32 @@ it is currently the kind most deeply buried in the decision history.
 But making it an artifact type means a fourth normative type, and `ADR-0049`
 established that scarcity is a virtue for exactly this reason.
 
-## Resolution criteria
+## Resolution
 
-An ADR stating whether Principle is an artifact type, a classification of an
-ADR, or content within a Policy — and if it is a type, how it relates to the
-ADRs that currently record the three named principles.
+`ADR-0058`. **All three options above assume a Principle is something
+authored.**
+
+> **Principles are not artifacts. They are semantic relationships that emerge
+> from accepted architectural knowledge.**
+
+```text
+ADR establishes Principle → motivates Policy → governs Process → produces Artifacts
+```
+
+Principles belong to the **semantic model**, not the document taxonomy. They are
+first-class **semantic entities** in the metamodel, **extracted by the Knowledge
+Compiler** from authoritative artifacts and made explicit in the Canonical
+Knowledge Model. The Knowledge Explorer allows navigation by Principle
+**independently of the documents that established them**.
+
+Both goals this issue traded off are satisfied: the document taxonomy stays
+small *and* principles become explicit and queryable. No fourth normative
+artifact type, so `ADR-0049`'s scarcity discipline holds.
+
+It also fixes something this issue did not raise: a principle emerging across
+several ADRs — the Registry Pattern spans `ADR-0027`, `ADR-0028`, `ADR-0031` and
+`ADR-0032` — becomes **one entity**, not a set of cross-references.
+
+**Newly open:** "extracts" carries the weight, and nothing says whether
+principles are declared or inferred — which bears directly on `ADR-0020`'s
+determinism requirement. `ISSUE-0071`.

@@ -2,7 +2,7 @@
 id: ISSUE-0069
 title: ADR-0056 reuses "Level" and "Process", both already in use for other concepts
 type: inconsistency
-status: open
+status: resolved
 severity: blocking
 created: 2026-08-02
 updated: 2026-08-02
@@ -11,7 +11,7 @@ evidence:
   - governance/adr/ADR-0056-principle-policy-process-artifact.md
   - governance/adr/ADR-0046-abstraction-level-and-semantic-layer.md
   - governance/adr/ADR-0033-process-policy-governs-workflow.md
-resolved-by: null
+resolved-by: ADR-0057
 ---
 
 # ISSUE-0069 — "Level" and "Process" are reused
@@ -69,7 +69,27 @@ it is the same as a workflow's process or not — which is the substantive part.
 - `ADR-0056`'s diagram has four stages — Principle, Policy, Process, Artifact —
   while the text names three levels. Is Artifact a level or the output?
 
-## Resolution criteria
+## Resolution
 
-An ADR supplying qualified names for both, and stating whether `ADR-0033`'s
-Process and `ADR-0056`'s Process are one concept. Must precede the metamodel.
+`ADR-0057`, **by closing the class rather than the eighth instance.**
+
+> **Whenever a concept belongs to a specific architectural dimension, its
+> published name includes that dimension whenever ambiguity is possible.**
+
+A **Naming Qualification Policy**, not a renaming strategy. The short name may
+still be used informally where context is unambiguous; the qualified name is
+canonical.
+
+Ten canonical names are fixed, including three that settle this issue:
+**Engineering Process** (distinguished from **Business Process**),
+**Workflow Execution**, and **Knowledge Representation**.
+
+Gates and workflows are both Engineering Processes; a Workflow Execution is the
+act of running one. `ADR-0056`'s level scheme takes its qualified name by
+applying the policy rather than by being named here.
+
+This is what `ADR-0046` predicted three sessions ago: three ADRs applying one
+discipline meant the discipline was a rule. It is now one — recorded in an ADR,
+and destined for a `ModelingPolicy` in M3.
+
+Auditing the existing corpus for unqualified names is M3 work.

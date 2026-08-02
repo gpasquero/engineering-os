@@ -16,7 +16,7 @@ same session the decision is made.
 > a rule exists; the rule that must be followed lives in a Policy under
 > `shared/policies/`. Agents consume policies; humans read ADRs for rationale.
 
-**Highest allocated ID: `ADR-0056`.** IDs are sequential and never reused.
+**Highest allocated ID: `ADR-0059`.** IDs are sequential and never reused.
 
 > This index table is a hand-maintained projection of ADR front matter. It is
 > listed in the transitional-debt register, `ISSUE-0037`.
@@ -75,6 +75,12 @@ Read these before designing anything that produces an artifact:
   processes are instances, not scattered rules.
 - **`ADR-0056`** — **`Principle → Policy → Process → Artifact`.** Why ADRs,
   Policies and Gates all exist without overlapping.
+- **`ADR-0057`** — **Naming Qualification.** A concept's canonical name includes
+  its architectural dimension. Closed a class of defect hit eight times.
+- **`ADR-0058`** — **Principles are semantic entities, not artifacts**, extracted
+  by the compiler.
+- **`ADR-0059`** — **authored versus discovered knowledge.** Maximize the
+  discovered; it is why the compiler is worth building.
 - **`ADR-0017`** — reference architecture, not reference implementation.
 - **`ADR-0019`** — Knowledge Packages are a published interface.
 
@@ -138,6 +144,9 @@ Read these before designing anything that produces an artifact:
 | [ADR-0054](ADR-0054-engineering-gate.md) | **Engineering Gate is a first-class metamodel concept** | accepted | ISSUE-0067 |
 | [ADR-0055](ADR-0055-questions-belong-to-gates.md) | Evaluation questions belong to Gates | accepted | ISSUE-0068 |
 | [ADR-0056](ADR-0056-principle-policy-process-artifact.md) | **Principle, Policy, Process** | accepted | — |
+| [ADR-0057](ADR-0057-naming-qualification.md) | **Naming Qualification** | accepted | ISSUE-0069 |
+| [ADR-0058](ADR-0058-principles-are-semantic-entities-not-artifacts.md) | **Principles are semantic entities, not artifacts** | accepted | ISSUE-0070 |
+| [ADR-0059](ADR-0059-authored-versus-discovered-knowledge.md) | **Authored versus discovered knowledge** | accepted | — |
 
 ## Supersessions
 

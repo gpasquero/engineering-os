@@ -418,26 +418,61 @@ another metamodel entity. `ADR-0049`'s five criteria are **mandatory**
 evaluation criteria. Whether a Review is a distinct artifact type or a
 structured ADR is unresolved — `ISSUE-0067`.
 
-## The three levels of engineering knowledge
+## Principle, Policy, Engineering Process
 
-`Principle → Policy → Process → Artifact` (`ADR-0056`).
+```text
+ADR establishes Principle → motivates Policy → governs Engineering Process
+    → produces Artifacts
+```
 
-**Principles** — stable architectural truths. The Registry Pattern,
-`Definition → Instance → Assignment`, semantic versus compilation architecture.
+**Principle** — a **semantic relationship that emerges from accepted
+architectural knowledge**. **Not an artifact** (`ADR-0058`). Principles belong
+to the semantic model, not the document taxonomy: they are first-class semantic
+entities in the metamodel, **extracted by the Knowledge Compiler** from
+authoritative artifacts and navigable **independently of the documents that
+established them**. One principle may emerge from several ADRs.
 
-**Policies** — normative engineering rules derived from principles. Naming
-Policy, Dimension Review Policy, Acceptance Policy.
+**Policy** — a normative engineering rule motivated by one or more Principles.
 
-**Processes** — operational procedures implementing policies. Dimension Review,
-Acceptance Review, Metamodel Position Gate.
+**Engineering Process** — an operational procedure implementing a Policy.
+Dimension Review, Acceptance Review, the Metamodel Position Gate. Distinguished
+from a **Business Process**, which belongs to an adopting repository's domain.
+A **Workflow Execution** is the act of running one.
 
-This explains why ADRs, Policies and Gates all exist without overlapping
-responsibilities: ADRs record how content came to be, Policies hold rules,
-Gates are processes.
+This explains why ADRs, Policies and Gates exist without overlapping: ADRs
+record how content came to be, Policies hold rules, Gates are Engineering
+Processes.
 
-> **Unresolved.** "Level" is used here for a second scheme after Abstraction
-> Level, and "Process" for a second concept after `ADR-0033`'s — `ISSUE-0069`.
-> Whether Principles are a first-class artifact type is open — `ISSUE-0070`.
+## Naming Qualification
+
+> **Whenever a concept belongs to a specific architectural dimension, its
+> published name includes that dimension whenever ambiguity is possible**
+> (`ADR-0057`).
+
+Not a renaming strategy — a **semantic qualification** strategy. The short name
+may be used informally where context is unambiguous; **the qualified name is
+canonical**.
+
+Canonical names: Abstraction Level · Semantic Layer · Engineering Process ·
+Business Process · Engineering Gate · Workflow Execution · Artifact Revision
+Lifecycle · State Machine Lifecycle · Compiler Phase · Knowledge Representation.
+
+This closed a class of defect the project had hit **eight times**.
+
+## Authored versus discovered knowledge
+
+**Authored knowledge** — explicitly written: ADRs, Policies, Specifications.
+
+**Discovered knowledge** — found by the compiler: Principles, traceability,
+dependency graphs, architectural patterns, impact graphs, semantic clusters.
+
+> **Engineering OS maximizes discovered knowledge.** The compiler's higher
+> purpose is revealing architectural knowledge that exists implicitly across
+> many authoritative artifacts but was never written as a single document
+> (`ADR-0059`).
+
+How discovery is produced — declared or inferred — and whether it can be
+deterministic is unresolved: `ISSUE-0071`.
 
 ## Semantic architecture versus compiler architecture
 

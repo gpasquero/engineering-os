@@ -133,18 +133,45 @@ for it. **Triggering conditions are the enforcement surface.**
 
 The metamodel models Gate **independently from the rules a gate executes**.
 
-## Principle → Policy → Process → Artifact
+## Principle → Policy → Engineering Process → Artifact
 
-Three levels of engineering knowledge (`ADR-0056`):
+```text
+ADR establishes Principle → motivates Policy → governs Engineering Process
+    → produces Artifacts
+```
 
-- **Principles** — stable architectural truths.
-- **Policies** — normative rules derived from them.
-- **Processes** — operational procedures implementing those policies.
+**Principles are not artifacts** (`ADR-0058`). They are semantic relationships
+emerging from accepted architectural knowledge, represented as first-class
+semantic entities in the metamodel and **extracted by the compiler** from
+authoritative artifacts. One principle may emerge from several ADRs — the
+Registry Pattern spans four. The Knowledge Explorer navigates by Principle
+independently of the documents that established them.
 
-This is why ADRs, Policies and Gates exist without overlapping
-responsibilities: ADRs record how content came to be, Policies hold the rules,
-Gates are the processes. Every policy cites its principle; every process cites
-its policy.
+This is why ADRs, Policies and Gates exist without overlapping: ADRs record how
+content came to be, Policies hold rules, Gates are Engineering Processes.
+
+## Naming Qualification
+
+**A concept's canonical name includes its architectural dimension whenever
+ambiguity is possible** (`ADR-0057`). Not renaming — qualification. Short names
+remain valid informally; the qualified name is canonical.
+
+Abstraction Level · Semantic Layer · Engineering Process · Business Process ·
+Engineering Gate · Workflow Execution · Artifact Revision Lifecycle · State
+Machine Lifecycle · Compiler Phase · Knowledge Representation.
+
+## Authored versus discovered knowledge
+
+| Authored | Discovered |
+|---|---|
+| ADRs, Policies, Specifications | Principles, traceability, dependency graphs, architectural patterns, impact graphs, semantic clusters |
+
+**Engineering OS maximizes discovered knowledge** (`ADR-0059`). The compiler's
+higher purpose is revealing architectural knowledge that exists implicitly
+across many authoritative artifacts but was never written as a single document.
+
+Whether discovery can be deterministic — `ADR-0020` requires it — is
+unresolved: `ISSUE-0071`.
 
 **Artifacts do not contain dimension values.** They are classified by
 **Dimension Assignments** — explicit semantic relationships (`ADR-0042`):
@@ -631,10 +658,8 @@ These are recorded as issues and must not be silently assumed:
 
 - `ISSUE-0049` — where state machine specifications live, and their boundary
   with `shared/vocabularies/`. Blocks `shared/vocabularies/`.
-- `ISSUE-0069` — "Level" and "Process" are reused for new schemes. **Seventh
-  terminology collision**, and the metamodel must not inherit it.
-- `ISSUE-0070` — whether Principles are a first-class artifact type, and how
-  they relate to the ADRs currently recording them.
+- `ISSUE-0071` — how discovered knowledge is produced, and whether discovery can
+  be deterministic. **Blocks the metamodel and M9.**
 - `ISSUE-0063` — the minimum set of classifications that must be serialized.
 - `ISSUE-0048` — no mechanism for correcting part of an `Active` ADR.
 - `ISSUE-0007` — versioning granularity, now also covering what identifies a

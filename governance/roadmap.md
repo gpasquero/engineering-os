@@ -101,10 +101,9 @@ verification, knowledge-update — must be **reclassified** across these three
 kinds. Several entries are genuinely ambiguous and the classification is real
 work, not a formality.
 
-A **naming-discipline `ModelingPolicy`** is now overdue: `ADR-0025`, `ADR-0030`
-and `ADR-0046` each apply the same rule — qualify classification-scheme names
-rather than renaming or splitting. Three ADRs applying one rule is a rule, and
-`ADR-0056` now gives it a level to live at.
+The **Naming Qualification `ModelingPolicy`** (`ADR-0057`), plus an audit of the
+existing corpus for unqualified names. `ADR-0046` predicted this three sessions
+before it was decided.
 
 Policies cite the **Principle** they derive from and are implemented by
 **Processes** (`ADR-0056`).
