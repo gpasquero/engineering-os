@@ -15,13 +15,15 @@ from .parser import parse
 from .resolver import resolve, load_metamodel
 from .validator import validate, load_rules
 from .ckm import build
-from .emitters import json as json_emitter, owl, mermaid, explorer
+from .emitters import json as json_emitter, owl, mermaid, explorer, shacl, indexes
 
 EMITTERS = {
     "canonical-knowledge-model.json": json_emitter.emit,
     "model.ttl": owl.emit,
     "graph.md": mermaid.emit,
     "explorer.html": explorer.emit,
+    "shapes.ttl": shacl.emit,
+    "indexes.json": indexes.emit,
 }
 
 

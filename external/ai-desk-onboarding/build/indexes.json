@@ -1,0 +1,632 @@
+{
+  "note": "Projections of the Canonical Knowledge Model, derived by the declared query engine (ADR-0086).",
+  "search": [
+    {
+      "id": "ADR.0001",
+      "type": "ADR",
+      "label": "ADR-0001: Multi-tenancy Strategy",
+      "family": "operational",
+      "text": "adr-0001: multi-tenancy strategy adr proposed by `w-structure-extractor` in task `t01-extract` and accepted through review. support: `s-specified`.\n\n**authored from a discovery proposal** (`adr-0106`). this is an authoring source, not a ",
+      "attributes": {
+        "decision": "Shared Schema + PostgreSQL Row-Level Security",
+        "locator": "header",
+        "proposed-by": "W-structure-extractor",
+        "proposed-in": "T01-extract",
+        "source": "docs/adr/ADR-0001-multi-tenancy-strategy.md",
+        "status": "Proposed",
+        "support": "S-specified"
+      }
+    },
+    {
+      "id": "Artifact.AccountLockoutSpec",
+      "type": "Artifact",
+      "label": "account-lockout.spec.ts",
+      "family": "descriptive",
+      "text": "account-lockout.spec.ts artifact proposed by `w-structure-extractor` in task `t01-extract` and accepted through review. support: `s-tested`.\n\n**authored from a discovery proposal** (`adr-0106`). this is an authoring source, not a mod",
+      "attributes": {
+        "cases": "8",
+        "locator": "8 it() cases",
+        "proposed-by": "W-structure-extractor",
+        "proposed-in": "T01-extract",
+        "source": "packages/backend/src/modules/auth/__tests__/account-lockout.spec.ts",
+        "support": "S-tested"
+      }
+    },
+    {
+      "id": "Artifact.AiDeskRepository",
+      "type": "Artifact",
+      "label": "ai-desk repository",
+      "family": "descriptive",
+      "text": "ai-desk repository artifact **the seed**, authored by hand. one node, so that discovery has a subject.",
+      "attributes": {
+        "locator": "469 tracked files",
+        "source": "/Users/willy/Localsources/ai-desk",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Artifact.AuthController",
+      "type": "Artifact",
+      "label": "auth.controller.ts",
+      "family": "descriptive",
+      "text": "auth.controller.ts artifact proposed by `w-structure-extractor` in task `t01-extract` and accepted through review. support: `s-implemented`.\n\n**authored from a discovery proposal** (`adr-0106`). this is an authoring source, not ",
+      "attributes": {
+        "locator": "@Controller('auth'), 3 routes",
+        "prefix": "auth",
+        "proposed-by": "W-structure-extractor",
+        "proposed-in": "T01-extract",
+        "routes": "3",
+        "source": "packages/backend/src/modules/auth/auth.controller.ts",
+        "support": "S-implemented"
+      }
+    },
+    {
+      "id": "Artifact.AuthServiceSpec",
+      "type": "Artifact",
+      "label": "auth.service.spec.ts",
+      "family": "descriptive",
+      "text": "auth.service.spec.ts artifact proposed by `w-structure-extractor` in task `t01-extract` and accepted through review. support: `s-tested`.\n\n**authored from a discovery proposal** (`adr-0106`). this is an authoring source, not a mod",
+      "attributes": {
+        "cases": "12",
+        "locator": "12 it() cases",
+        "proposed-by": "W-structure-extractor",
+        "proposed-in": "T01-extract",
+        "source": "packages/backend/src/modules/auth/__tests__/auth.service.spec.ts",
+        "support": "S-tested"
+      }
+    },
+    {
+      "id": "Artifact.JwtSecuritySpec",
+      "type": "Artifact",
+      "label": "jwt-security.spec.ts",
+      "family": "descriptive",
+      "text": "jwt-security.spec.ts artifact proposed by `w-structure-extractor` in task `t01-extract` and accepted through review. support: `s-tested`.\n\n**authored from a discovery proposal** (`adr-0106`). this is an authoring source, not a mod",
+      "attributes": {
+        "cases": "11",
+        "locator": "11 it() cases",
+        "proposed-by": "W-structure-extractor",
+        "proposed-in": "T01-extract",
+        "source": "packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts",
+        "support": "S-tested"
+      }
+    },
+    {
+      "id": "Artifact.PasswordSecuritySpec",
+      "type": "Artifact",
+      "label": "password-security.spec.ts",
+      "family": "descriptive",
+      "text": "password-security.spec.ts artifact proposed by `w-structure-extractor` in task `t01-extract` and accepted through review. support: `s-tested`.\n\n**authored from a discovery proposal** (`adr-0106`). this is an authoring source, not a mod",
+      "attributes": {
+        "cases": "10",
+        "locator": "10 it() cases",
+        "proposed-by": "W-structure-extractor",
+        "proposed-in": "T01-extract",
+        "source": "packages/backend/src/modules/auth/__tests__/password-security.spec.ts",
+        "support": "S-tested"
+      }
+    },
+    {
+      "id": "Artifact.RefreshTokenRotationSpec",
+      "type": "Artifact",
+      "label": "refresh-token-rotation.spec.ts",
+      "family": "descriptive",
+      "text": "refresh-token-rotation.spec.ts artifact proposed by `w-structure-extractor` in task `t01-extract` and accepted through review. support: `s-tested`.\n\n**authored from a discovery proposal** (`adr-0106`). this is an authoring source, not a mod",
+      "attributes": {
+        "cases": "7",
+        "locator": "7 it() cases",
+        "proposed-by": "W-structure-extractor",
+        "proposed-in": "T01-extract",
+        "source": "packages/backend/src/modules/auth/__tests__/refresh-token-rotation.spec.ts",
+        "support": "S-tested"
+      }
+    },
+    {
+      "id": "BoundedContext.Backend",
+      "type": "BoundedContext",
+      "label": "backend package",
+      "family": "descriptive",
+      "text": "backend package boundedcontext proposed by `w-structure-extractor` in task `t01-extract` and accepted through review. support: `s-confirmed-deterministic`.\n\n**authored from a discovery proposal** (`adr-0106`). this is an authoring ",
+      "attributes": {
+        "locator": "workspace package",
+        "package": "backend",
+        "proposed-by": "W-structure-extractor",
+        "proposed-in": "T01-extract",
+        "source": "packages/backend",
+        "support": "S-confirmed-deterministic"
+      }
+    },
+    {
+      "id": "Capability.Auth",
+      "type": "Capability",
+      "label": "auth module",
+      "family": "descriptive",
+      "text": "auth module capability proposed by `w-structure-extractor` in task `t01-extract` and accepted through review. support: `s-implemented`.\n\n**authored from a discovery proposal** (`adr-0106`). this is an authoring source, not ",
+      "attributes": {
+        "locator": "NestJS module directory",
+        "module": "auth",
+        "proposed-by": "W-structure-extractor",
+        "proposed-in": "T01-extract",
+        "source": "packages/backend/src/modules/auth",
+        "support": "S-implemented"
+      }
+    },
+    {
+      "id": "Concept.EnvDbPassword",
+      "type": "Concept",
+      "label": "$DB_PASSWORD",
+      "family": "descriptive",
+      "text": "$db_password concept proposed by `w-structure-extractor` in task `t01-extract` and accepted through review. support: `s-confirmed-deterministic`.\n\n**authored from a discovery proposal** (`adr-0106`). this is an authoring ",
+      "attributes": {
+        "env-var": "DB_PASSWORD",
+        "locator": "process.env.DB_PASSWORD",
+        "proposed-by": "W-structure-extractor",
+        "proposed-in": "T01-extract",
+        "source": "packages/backend/src/common/database/__tests__/tenant-isolation.integration.spec.ts",
+        "support": "S-confirmed-deterministic"
+      }
+    },
+    {
+      "id": "Concept.EnvDbSystemPassword",
+      "type": "Concept",
+      "label": "$DB_SYSTEM_PASSWORD",
+      "family": "descriptive",
+      "text": "$db_system_password concept proposed by `w-structure-extractor` in task `t01-extract` and accepted through review. support: `s-confirmed-deterministic`.\n\n**authored from a discovery proposal** (`adr-0106`). this is an authoring ",
+      "attributes": {
+        "env-var": "DB_SYSTEM_PASSWORD",
+        "locator": "process.env.DB_SYSTEM_PASSWORD",
+        "proposed-by": "W-structure-extractor",
+        "proposed-in": "T01-extract",
+        "source": "packages/backend/src/common/database/__tests__/tenant-isolation.integration.spec.ts",
+        "support": "S-confirmed-deterministic"
+      }
+    },
+    {
+      "id": "Concept.EnvJwtAccessSecret",
+      "type": "Concept",
+      "label": "$JWT_ACCESS_SECRET",
+      "family": "descriptive",
+      "text": "$jwt_access_secret concept proposed by `w-structure-extractor` in task `t01-extract` and accepted through review. support: `s-confirmed-deterministic`.\n\n**authored from a discovery proposal** (`adr-0106`). this is an authoring ",
+      "attributes": {
+        "env-var": "JWT_ACCESS_SECRET",
+        "locator": "process.env.JWT_ACCESS_SECRET",
+        "proposed-by": "W-structure-extractor",
+        "proposed-in": "T01-extract",
+        "source": "packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts",
+        "support": "S-confirmed-deterministic"
+      }
+    },
+    {
+      "id": "Concept.EnvRedisPassword",
+      "type": "Concept",
+      "label": "$REDIS_PASSWORD",
+      "family": "descriptive",
+      "text": "$redis_password concept proposed by `w-structure-extractor` in task `t01-extract` and accepted through review. support: `s-confirmed-deterministic`.\n\n**authored from a discovery proposal** (`adr-0106`). this is an authoring ",
+      "attributes": {
+        "env-var": "REDIS_PASSWORD",
+        "locator": "process.env.REDIS_PASSWORD",
+        "proposed-by": "W-structure-extractor",
+        "proposed-in": "T01-extract",
+        "source": "packages/backend/src/modules/sla/sla-timer.service.ts",
+        "support": "S-confirmed-deterministic"
+      }
+    },
+    {
+      "id": "Concept.NestjsJwt",
+      "type": "Concept",
+      "label": "@nestjs/jwt",
+      "family": "descriptive",
+      "text": "@nestjs/jwt concept proposed by `w-structure-extractor` in task `t01-extract` and accepted through review. support: `s-confirmed-deterministic`.\n\n**authored from a discovery proposal** (`adr-0106`). this is an authoring ",
+      "attributes": {
+        "framework": "@nestjs/jwt",
+        "locator": "dependencies",
+        "package": "backend",
+        "proposed-by": "W-structure-extractor",
+        "proposed-in": "T01-extract",
+        "source": "packages/backend/package.json",
+        "support": "S-confirmed-deterministic"
+      }
+    },
+    {
+      "id": "Concept.PassportJwt",
+      "type": "Concept",
+      "label": "passport-jwt",
+      "family": "descriptive",
+      "text": "passport-jwt concept proposed by `w-structure-extractor` in task `t01-extract` and accepted through review. support: `s-confirmed-deterministic`.\n\n**authored from a discovery proposal** (`adr-0106`). this is an authoring ",
+      "attributes": {
+        "framework": "passport-jwt",
+        "locator": "dependencies",
+        "package": "backend",
+        "proposed-by": "W-structure-extractor",
+        "proposed-in": "T01-extract",
+        "source": "packages/backend/package.json",
+        "support": "S-confirmed-deterministic"
+      }
+    },
+    {
+      "id": "Concept.TableRefreshTokens",
+      "type": "Concept",
+      "label": "refresh_tokens table",
+      "family": "descriptive",
+      "text": "refresh_tokens table concept proposed by `w-structure-extractor` in task `t01-extract` and accepted through review. support: `s-implemented`.\n\n**authored from a discovery proposal** (`adr-0106`). this is an authoring source, not ",
+      "attributes": {
+        "locator": "pgTable('refresh_tokens')",
+        "proposed-by": "W-structure-extractor",
+        "proposed-in": "T01-extract",
+        "source": "packages/backend/src/common/database/schema/refresh-tokens.ts",
+        "support": "S-implemented",
+        "table": "refresh_tokens",
+        "tenant-scoped": "false"
+      }
+    },
+    {
+      "id": "Evidence.RepositoryInventory",
+      "type": "Evidence",
+      "label": "git ls-files inventory",
+      "family": "descriptive",
+      "text": "git ls-files inventory evidence the only thing known before discovery ran.",
+      "attributes": {
+        "kind": "source-reference",
+        "locator": "git ls-files | 469 files",
+        "source": "/Users/willy/Localsources/ai-desk",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Evidence.RepositoryLayout",
+      "type": "Evidence",
+      "label": "Repository layout",
+      "family": "descriptive",
+      "text": "repository layout evidence proposed by `w-structure-extractor` in task `t01-extract` and accepted through review. support: `s-confirmed-deterministic`.\n\n**authored from a discovery proposal** (`adr-0106`). this is an authoring ",
+      "attributes": {
+        "kind": "source-reference",
+        "locator": "2442 files, 4 packages",
+        "packages": "backend,frontend,shared,widget",
+        "proposed-by": "W-structure-extractor",
+        "proposed-in": "T01-extract",
+        "source": ".",
+        "support": "S-confirmed-deterministic",
+        "top-languages": ".js:841,.ts:573,.map:477,.json:224,.tsx:155"
+      }
+    },
+    {
+      "id": "Invariant.JwtstrategySurfacesMissingFieldsAsUndef",
+      "type": "Invariant",
+      "label": "JwtStrategy surfaces missing fields as undefined (downstream guards must reject)",
+      "family": "descriptive",
+      "text": "jwtstrategy surfaces missing fields as undefined (downstream guards must reject) invariant proposed by `w-constraint-interpreter` in task `t02-interpret` and accepted through review. support: `s-inferred`.\n\ninferred by rule `r1-test-name-states-a-rule`.\n\n**authored from a discovery proposal",
+      "attributes": {
+        "asserted-by": "Artifact.JwtSecuritySpec",
+        "locator": "it('JwtStrategy surfaces missing fields as undefined (downstream guards mu')",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "R1-test-name-states-a-rule",
+        "source": "packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts",
+        "support": "S-inferred"
+      }
+    },
+    {
+      "id": "Invariant.LocksTheAccountOnThe5ThWrongPassword",
+      "type": "Invariant",
+      "label": "locks the account on the 5th wrong password for exactly 15 minutes",
+      "family": "descriptive",
+      "text": "locks the account on the 5th wrong password for exactly 15 minutes invariant proposed by `w-constraint-interpreter` in task `t02-interpret` and accepted through review. support: `s-inferred`.\n\ninferred by rule `r1-test-name-states-a-rule`.\n\n**authored from a discovery proposal",
+      "attributes": {
+        "asserted-by": "Artifact.AccountLockoutSpec",
+        "locator": "it('locks the account on the 5th wrong password for exactly 15 minutes')",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "R1-test-name-states-a-rule",
+        "source": "packages/backend/src/modules/auth/__tests__/account-lockout.spec.ts",
+        "support": "S-inferred"
+      }
+    },
+    {
+      "id": "Invariant.RejectsA7CharPasswordBelowMinimum",
+      "type": "Invariant",
+      "label": "rejects a 7-char password (below minimum)",
+      "family": "descriptive",
+      "text": "rejects a 7-char password (below minimum) invariant proposed by `w-constraint-interpreter` in task `t02-interpret` and accepted through review. support: `s-inferred`.\n\ninferred by rule `r1-test-name-states-a-rule`.\n\n**authored from a discovery proposal",
+      "attributes": {
+        "asserted-by": "Artifact.PasswordSecuritySpec",
+        "locator": "it('rejects a 7-char password (below minimum)')",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "R1-test-name-states-a-rule",
+        "source": "packages/backend/src/modules/auth/__tests__/password-security.spec.ts",
+        "support": "S-inferred"
+      }
+    },
+    {
+      "id": "Invariant.RejectsANonStringPasswordTypeConfusio",
+      "type": "Invariant",
+      "label": "rejects a non-string password (type confusion attempt)",
+      "family": "descriptive",
+      "text": "rejects a non-string password (type confusion attempt) invariant proposed by `w-constraint-interpreter` in task `t02-interpret` and accepted through review. support: `s-inferred`.\n\ninferred by rule `r1-test-name-states-a-rule`.\n\n**authored from a discovery proposal",
+      "attributes": {
+        "asserted-by": "Artifact.PasswordSecuritySpec",
+        "locator": "it('rejects a non-string password (type confusion attempt)')",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "R1-test-name-states-a-rule",
+        "source": "packages/backend/src/modules/auth/__tests__/password-security.spec.ts",
+        "support": "S-inferred"
+      }
+    },
+    {
+      "id": "Invariant.RejectsAnEmptyPassword",
+      "type": "Invariant",
+      "label": "rejects an empty password",
+      "family": "descriptive",
+      "text": "rejects an empty password invariant proposed by `w-constraint-interpreter` in task `t02-interpret` and accepted through review. support: `s-inferred`.\n\ninferred by rule `r1-test-name-states-a-rule`.\n\n**authored from a discovery proposal",
+      "attributes": {
+        "asserted-by": "Artifact.PasswordSecuritySpec",
+        "locator": "it('rejects an empty password')",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "R1-test-name-states-a-rule",
+        "source": "packages/backend/src/modules/auth/__tests__/password-security.spec.ts",
+        "support": "S-inferred"
+      }
+    },
+    {
+      "id": "Invariant.RejectsMissingPassword",
+      "type": "Invariant",
+      "label": "rejects missing password",
+      "family": "descriptive",
+      "text": "rejects missing password invariant proposed by `w-constraint-interpreter` in task `t02-interpret` and accepted through review. support: `s-inferred`.\n\ninferred by rule `r1-test-name-states-a-rule`.\n\n**authored from a discovery proposal",
+      "attributes": {
+        "asserted-by": "Artifact.PasswordSecuritySpec",
+        "locator": "it('rejects missing password')",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "R1-test-name-states-a-rule",
+        "source": "packages/backend/src/modules/auth/__tests__/password-security.spec.ts",
+        "support": "S-inferred"
+      }
+    },
+    {
+      "id": "Invariant.RejectsTheCorrectPasswordWhileTheLocko",
+      "type": "Invariant",
+      "label": "rejects the CORRECT password while the lockout window is active",
+      "family": "descriptive",
+      "text": "rejects the correct password while the lockout window is active invariant proposed by `w-constraint-interpreter` in task `t02-interpret` and accepted through review. support: `s-inferred`.\n\ninferred by rule `r1-test-name-states-a-rule`.\n\n**authored from a discovery proposal",
+      "attributes": {
+        "asserted-by": "Artifact.AccountLockoutSpec",
+        "locator": "it('rejects the CORRECT password while the lockout window is active')",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "R1-test-name-states-a-rule",
+        "source": "packages/backend/src/modules/auth/__tests__/account-lockout.spec.ts",
+        "support": "S-inferred"
+      }
+    },
+    {
+      "id": "Invariant.RejectsWhenUserHasNoRoleFieldOnJwt",
+      "type": "Invariant",
+      "label": "rejects when user has no role field on JWT",
+      "family": "descriptive",
+      "text": "rejects when user has no role field on jwt invariant proposed by `w-constraint-interpreter` in task `t02-interpret` and accepted through review. support: `s-inferred`.\n\n**authored from a discovery proposal** (`adr-0106`). this is an authoring source, no",
+      "attributes": {
+        "asserted-by": "Artifact.RolesGuardSpec",
+        "locator": "it('rejects when user has no role field on JWT')",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "R1-test-name-states-a-rule",
+        "source": "packages/backend/src/common/guards/__tests__/roles.guard.spec.ts",
+        "support": "S-inferred"
+      }
+    }
+  ],
+  "impact": {
+    "Artifact.AccountLockoutSpec": [
+      {
+        "id": "Invariant.LocksTheAccountOnThe5ThWrongPassword",
+        "hops": 1,
+        "via": "enforced-at"
+      },
+      {
+        "id": "Invariant.RejectsTheCorrectPasswordWhileTheLocko",
+        "hops": 1,
+        "via": "enforced-at"
+      }
+    ],
+    "Artifact.JwtSecuritySpec": [
+      {
+        "id": "Invariant.JwtstrategySurfacesMissingFieldsAsUndef",
+        "hops": 1,
+        "via": "enforced-at"
+      }
+    ],
+    "Artifact.PasswordSecuritySpec": [
+      {
+        "id": "Invariant.RejectsA7CharPasswordBelowMinimum",
+        "hops": 1,
+        "via": "enforced-at"
+      },
+      {
+        "id": "Invariant.RejectsANonStringPasswordTypeConfusio",
+        "hops": 1,
+        "via": "enforced-at"
+      },
+      {
+        "id": "Invariant.RejectsAnEmptyPassword",
+        "hops": 1,
+        "via": "enforced-at"
+      },
+      {
+        "id": "Invariant.RejectsMissingPassword",
+        "hops": 1,
+        "via": "enforced-at"
+      }
+    ],
+    "BoundedContext.Backend": [
+      {
+        "id": "Capability.Auth",
+        "hops": 1,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Concept.NestjsJwt",
+        "hops": 1,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Concept.PassportJwt",
+        "hops": 1,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Artifact.AccountLockoutSpec",
+        "hops": 2,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Artifact.AuthController",
+        "hops": 2,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Artifact.AuthServiceSpec",
+        "hops": 2,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Artifact.JwtSecuritySpec",
+        "hops": 2,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Artifact.PasswordSecuritySpec",
+        "hops": 2,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Artifact.RefreshTokenRotationSpec",
+        "hops": 2,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Invariant.JwtstrategySurfacesMissingFieldsAsUndef",
+        "hops": 2,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Invariant.LocksTheAccountOnThe5ThWrongPassword",
+        "hops": 2,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Invariant.RejectsA7CharPasswordBelowMinimum",
+        "hops": 2,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Invariant.RejectsANonStringPasswordTypeConfusio",
+        "hops": 2,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Invariant.RejectsAnEmptyPassword",
+        "hops": 2,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Invariant.RejectsMissingPassword",
+        "hops": 2,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Invariant.RejectsTheCorrectPasswordWhileTheLocko",
+        "hops": 2,
+        "via": "scoped-to"
+      }
+    ],
+    "Capability.Auth": [
+      {
+        "id": "Artifact.AccountLockoutSpec",
+        "hops": 1,
+        "via": "validates"
+      },
+      {
+        "id": "Artifact.AuthController",
+        "hops": 1,
+        "via": "implements"
+      },
+      {
+        "id": "Artifact.AuthServiceSpec",
+        "hops": 1,
+        "via": "validates"
+      },
+      {
+        "id": "Artifact.JwtSecuritySpec",
+        "hops": 1,
+        "via": "validates"
+      },
+      {
+        "id": "Artifact.PasswordSecuritySpec",
+        "hops": 1,
+        "via": "validates"
+      },
+      {
+        "id": "Artifact.RefreshTokenRotationSpec",
+        "hops": 1,
+        "via": "validates"
+      },
+      {
+        "id": "Invariant.JwtstrategySurfacesMissingFieldsAsUndef",
+        "hops": 1,
+        "via": "constrains"
+      },
+      {
+        "id": "Invariant.LocksTheAccountOnThe5ThWrongPassword",
+        "hops": 1,
+        "via": "constrains"
+      },
+      {
+        "id": "Invariant.RejectsA7CharPasswordBelowMinimum",
+        "hops": 1,
+        "via": "constrains"
+      },
+      {
+        "id": "Invariant.RejectsANonStringPasswordTypeConfusio",
+        "hops": 1,
+        "via": "constrains"
+      },
+      {
+        "id": "Invariant.RejectsAnEmptyPassword",
+        "hops": 1,
+        "via": "constrains"
+      },
+      {
+        "id": "Invariant.RejectsMissingPassword",
+        "hops": 1,
+        "via": "constrains"
+      },
+      {
+        "id": "Invariant.RejectsTheCorrectPasswordWhileTheLocko",
+        "hops": 1,
+        "via": "constrains"
+      }
+    ],
+    "Evidence.RepositoryInventory": [
+      {
+        "id": "Artifact.AiDeskRepository",
+        "hops": 1,
+        "via": "evidenced-by"
+      }
+    ]
+  },
+  "traceability": {
+    "Artifact.AiDeskRepository": {
+      "evidence": [
+        "Evidence.RepositoryInventory"
+      ],
+      "rationale": []
+    }
+  },
+  "statistics": {
+    "searchable": 27,
+    "withImpact": 6,
+    "withTraceability": 1
+  }
+}

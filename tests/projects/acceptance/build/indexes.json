@@ -1,0 +1,91 @@
+{
+  "note": "Projections of the Canonical Knowledge Model, derived by the declared query engine (ADR-0086).",
+  "search": [
+    {
+      "id": "AcceptanceRecord.1",
+      "type": "AcceptanceRecord",
+      "label": "Acceptance of r1",
+      "family": "operational",
+      "text": "acceptance of r1 acceptancerecord acceptance confers active status. commits do not.",
+      "attributes": {}
+    },
+    {
+      "id": "Actor.Reviewer",
+      "type": "Actor",
+      "label": "Reviewer",
+      "family": "descriptive",
+      "text": "reviewer actor a role, not a party.",
+      "attributes": {}
+    },
+    {
+      "id": "Artifact.Spec",
+      "type": "Artifact",
+      "label": "A specification",
+      "family": "descriptive",
+      "text": "a specification artifact no lifecycle of its own.",
+      "attributes": {}
+    },
+    {
+      "id": "ArtifactRevision.Spec.r1",
+      "type": "ArtifactRevision",
+      "label": "Specification r1",
+      "family": "descriptive",
+      "text": "specification r1 artifactrevision carries the lifecycle state and is the unit accepted.",
+      "attributes": {}
+    },
+    {
+      "id": "Evidence.Check",
+      "type": "Evidence",
+      "label": "Validation run",
+      "family": "descriptive",
+      "text": "validation run evidence cited in support. makes the acceptance falsifiable rather than true.",
+      "attributes": {}
+    }
+  ],
+  "impact": {
+    "Actor.Reviewer": [
+      {
+        "id": "AcceptanceRecord.1",
+        "hops": 1,
+        "via": "reviewed-by"
+      }
+    ],
+    "Artifact.Spec": [
+      {
+        "id": "ArtifactRevision.Spec.r1",
+        "hops": 1,
+        "via": "revision-of"
+      },
+      {
+        "id": "AcceptanceRecord.1",
+        "hops": 2,
+        "via": "revision-of"
+      }
+    ],
+    "ArtifactRevision.Spec.r1": [
+      {
+        "id": "AcceptanceRecord.1",
+        "hops": 1,
+        "via": "accepts"
+      },
+      {
+        "id": "Artifact.Spec",
+        "hops": 1,
+        "via": "has-active-revision"
+      }
+    ],
+    "Evidence.Check": [
+      {
+        "id": "AcceptanceRecord.1",
+        "hops": 1,
+        "via": "cites"
+      }
+    ]
+  },
+  "traceability": {},
+  "statistics": {
+    "searchable": 5,
+    "withImpact": 4,
+    "withTraceability": 0
+  }
+}

@@ -10,12 +10,135 @@
     rdfs:comment "Layer B model expressed in the Layer A metamodel." ;
     owl:imports <https://example.org/engineering-os/metamodel> .
 
+ex:ADR_0001 a eos:ADR ;
+    rdfs:label "ADR-0001: Multi-tenancy Strategy" ;
+    rdfs:comment "Proposed by `W-structure-extractor` in task `T01-extract` and accepted through review. Support: `S-specified`." .
+
+ex:Artifact_AccountLockoutSpec a eos:Artifact ;
+    rdfs:label "account-lockout.spec.ts" ;
+    rdfs:comment "Proposed by `W-structure-extractor` in task `T01-extract` and accepted through review. Support: `S-tested`." .
+
 ex:Artifact_AiDeskRepository a eos:Artifact ;
     rdfs:label "ai-desk repository" ;
-    rdfs:comment "**The seed.** A repository under discovery has no model yet, so exactly one node" .
+    rdfs:comment "**The seed**, authored by hand. One node, so that discovery has a subject." .
+
+ex:Artifact_AuthController a eos:Artifact ;
+    rdfs:label "auth.controller.ts" ;
+    rdfs:comment "Proposed by `W-structure-extractor` in task `T01-extract` and accepted through review. Support: `S-implemented`." .
+
+ex:Artifact_AuthServiceSpec a eos:Artifact ;
+    rdfs:label "auth.service.spec.ts" ;
+    rdfs:comment "Proposed by `W-structure-extractor` in task `T01-extract` and accepted through review. Support: `S-tested`." .
+
+ex:Artifact_JwtSecuritySpec a eos:Artifact ;
+    rdfs:label "jwt-security.spec.ts" ;
+    rdfs:comment "Proposed by `W-structure-extractor` in task `T01-extract` and accepted through review. Support: `S-tested`." .
+
+ex:Artifact_PasswordSecuritySpec a eos:Artifact ;
+    rdfs:label "password-security.spec.ts" ;
+    rdfs:comment "Proposed by `W-structure-extractor` in task `T01-extract` and accepted through review. Support: `S-tested`." .
+
+ex:Artifact_RefreshTokenRotationSpec a eos:Artifact ;
+    rdfs:label "refresh-token-rotation.spec.ts" ;
+    rdfs:comment "Proposed by `W-structure-extractor` in task `T01-extract` and accepted through review. Support: `S-tested`." .
+
+ex:BoundedContext_Backend a eos:BoundedContext ;
+    rdfs:label "backend package" ;
+    rdfs:comment "Proposed by `W-structure-extractor` in task `T01-extract` and accepted through review. Support: `S-confirmed-deterministic`." .
+
+ex:Capability_Auth a eos:Capability ;
+    rdfs:label "auth module" ;
+    rdfs:comment "Proposed by `W-structure-extractor` in task `T01-extract` and accepted through review. Support: `S-implemented`." .
+
+ex:Concept_EnvDbPassword a eos:Concept ;
+    rdfs:label "$DB_PASSWORD" ;
+    rdfs:comment "Proposed by `W-structure-extractor` in task `T01-extract` and accepted through review. Support: `S-confirmed-deterministic`." .
+
+ex:Concept_EnvDbSystemPassword a eos:Concept ;
+    rdfs:label "$DB_SYSTEM_PASSWORD" ;
+    rdfs:comment "Proposed by `W-structure-extractor` in task `T01-extract` and accepted through review. Support: `S-confirmed-deterministic`." .
+
+ex:Concept_EnvJwtAccessSecret a eos:Concept ;
+    rdfs:label "$JWT_ACCESS_SECRET" ;
+    rdfs:comment "Proposed by `W-structure-extractor` in task `T01-extract` and accepted through review. Support: `S-confirmed-deterministic`." .
+
+ex:Concept_EnvRedisPassword a eos:Concept ;
+    rdfs:label "$REDIS_PASSWORD" ;
+    rdfs:comment "Proposed by `W-structure-extractor` in task `T01-extract` and accepted through review. Support: `S-confirmed-deterministic`." .
+
+ex:Concept_NestjsJwt a eos:Concept ;
+    rdfs:label "@nestjs/jwt" ;
+    rdfs:comment "Proposed by `W-structure-extractor` in task `T01-extract` and accepted through review. Support: `S-confirmed-deterministic`." .
+
+ex:Concept_PassportJwt a eos:Concept ;
+    rdfs:label "passport-jwt" ;
+    rdfs:comment "Proposed by `W-structure-extractor` in task `T01-extract` and accepted through review. Support: `S-confirmed-deterministic`." .
+
+ex:Concept_TableRefreshTokens a eos:Concept ;
+    rdfs:label "refresh_tokens table" ;
+    rdfs:comment "Proposed by `W-structure-extractor` in task `T01-extract` and accepted through review. Support: `S-implemented`." .
 
 ex:Evidence_RepositoryInventory a eos:Evidence ;
     rdfs:label "git ls-files inventory" ;
-    rdfs:comment "Mechanically derived. The only thing known about the repository before discovery" .
+    rdfs:comment "The only thing known before discovery ran." .
 
+ex:Evidence_RepositoryLayout a eos:Evidence ;
+    rdfs:label "Repository layout" ;
+    rdfs:comment "Proposed by `W-structure-extractor` in task `T01-extract` and accepted through review. Support: `S-confirmed-deterministic`." .
+
+ex:Invariant_JwtstrategySurfacesMissingFieldsAsUndef a eos:Invariant ;
+    rdfs:label "JwtStrategy surfaces missing fields as undefined (downstream guards must reject)" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
+
+ex:Invariant_LocksTheAccountOnThe5ThWrongPassword a eos:Invariant ;
+    rdfs:label "locks the account on the 5th wrong password for exactly 15 minutes" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
+
+ex:Invariant_RejectsA7CharPasswordBelowMinimum a eos:Invariant ;
+    rdfs:label "rejects a 7-char password (below minimum)" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
+
+ex:Invariant_RejectsANonStringPasswordTypeConfusio a eos:Invariant ;
+    rdfs:label "rejects a non-string password (type confusion attempt)" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
+
+ex:Invariant_RejectsAnEmptyPassword a eos:Invariant ;
+    rdfs:label "rejects an empty password" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
+
+ex:Invariant_RejectsMissingPassword a eos:Invariant ;
+    rdfs:label "rejects missing password" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
+
+ex:Invariant_RejectsTheCorrectPasswordWhileTheLocko a eos:Invariant ;
+    rdfs:label "rejects the CORRECT password while the lockout window is active" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
+
+ex:Invariant_RejectsWhenUserHasNoRoleFieldOnJwt a eos:Invariant ;
+    rdfs:label "rejects when user has no role field on JWT" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
+
+ex:Artifact_AccountLockoutSpec eos:validates ex:Capability_Auth .
 ex:Artifact_AiDeskRepository eos:evidencedBy ex:Evidence_RepositoryInventory .
+ex:Artifact_AuthController eos:implements ex:Capability_Auth .
+ex:Artifact_AuthServiceSpec eos:validates ex:Capability_Auth .
+ex:Artifact_JwtSecuritySpec eos:validates ex:Capability_Auth .
+ex:Artifact_PasswordSecuritySpec eos:validates ex:Capability_Auth .
+ex:Artifact_RefreshTokenRotationSpec eos:validates ex:Capability_Auth .
+ex:Capability_Auth eos:scopedTo ex:BoundedContext_Backend .
+ex:Concept_NestjsJwt eos:scopedTo ex:BoundedContext_Backend .
+ex:Concept_PassportJwt eos:scopedTo ex:BoundedContext_Backend .
+ex:Invariant_JwtstrategySurfacesMissingFieldsAsUndef eos:constrains ex:Capability_Auth .
+ex:Invariant_JwtstrategySurfacesMissingFieldsAsUndef eos:enforcedAt ex:Artifact_JwtSecuritySpec .
+ex:Invariant_LocksTheAccountOnThe5ThWrongPassword eos:constrains ex:Capability_Auth .
+ex:Invariant_LocksTheAccountOnThe5ThWrongPassword eos:enforcedAt ex:Artifact_AccountLockoutSpec .
+ex:Invariant_RejectsA7CharPasswordBelowMinimum eos:constrains ex:Capability_Auth .
+ex:Invariant_RejectsA7CharPasswordBelowMinimum eos:enforcedAt ex:Artifact_PasswordSecuritySpec .
+ex:Invariant_RejectsANonStringPasswordTypeConfusio eos:constrains ex:Capability_Auth .
+ex:Invariant_RejectsANonStringPasswordTypeConfusio eos:enforcedAt ex:Artifact_PasswordSecuritySpec .
+ex:Invariant_RejectsAnEmptyPassword eos:constrains ex:Capability_Auth .
+ex:Invariant_RejectsAnEmptyPassword eos:enforcedAt ex:Artifact_PasswordSecuritySpec .
+ex:Invariant_RejectsMissingPassword eos:constrains ex:Capability_Auth .
+ex:Invariant_RejectsMissingPassword eos:enforcedAt ex:Artifact_PasswordSecuritySpec .
+ex:Invariant_RejectsTheCorrectPasswordWhileTheLocko eos:constrains ex:Capability_Auth .
+ex:Invariant_RejectsTheCorrectPasswordWhileTheLocko eos:enforcedAt ex:Artifact_AccountLockoutSpec .

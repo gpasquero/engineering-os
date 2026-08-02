@@ -1,0 +1,190 @@
+{
+  "note": "Projections of the Canonical Knowledge Model, derived by the declared query engine (ADR-0086).",
+  "search": [
+    {
+      "id": "ADR.T",
+      "type": "ADR",
+      "label": "A decision",
+      "family": "operational",
+      "text": "a decision adr traceability: resolves.",
+      "attributes": {}
+    },
+    {
+      "id": "Artifact.Out",
+      "type": "Artifact",
+      "label": "Output",
+      "family": "descriptive",
+      "text": "output artifact target.",
+      "attributes": {}
+    },
+    {
+      "id": "ArtifactRevision.Out.r1",
+      "type": "ArtifactRevision",
+      "label": "Output r1",
+      "family": "descriptive",
+      "text": "output r1 artifactrevision semantic: derives-from. added because the suite reported that this project\nclaimed to exercise all four categories and had no semantic edge.",
+      "attributes": {}
+    },
+    {
+      "id": "BC.Test",
+      "type": "BoundedContext",
+      "label": "Test context",
+      "family": "descriptive",
+      "text": "test context boundedcontext root of the structural relationships.",
+      "attributes": {}
+    },
+    {
+      "id": "Concept.Other",
+      "type": "Concept",
+      "label": "Other thing",
+      "family": "descriptive",
+      "text": "other thing concept structural.",
+      "attributes": {}
+    },
+    {
+      "id": "Concept.Thing",
+      "type": "Concept",
+      "label": "Thing",
+      "family": "descriptive",
+      "text": "thing concept structural: contained-by, references.",
+      "attributes": {}
+    },
+    {
+      "id": "Issue.T",
+      "type": "Issue",
+      "label": "An unknown",
+      "family": "operational",
+      "text": "an unknown issue traceability target.",
+      "attributes": {}
+    },
+    {
+      "id": "Policy.Test",
+      "type": "Policy",
+      "label": "Test policy",
+      "family": "operational",
+      "text": "test policy policy behavioral: governs.",
+      "attributes": {}
+    },
+    {
+      "id": "Skill.Test",
+      "type": "Skill",
+      "label": "Test skill",
+      "family": "operational",
+      "text": "test skill skill structural: implements.",
+      "attributes": {}
+    },
+    {
+      "id": "Workflow.Test",
+      "type": "Workflow",
+      "label": "Test workflow",
+      "family": "operational",
+      "text": "test workflow workflow structural: contains.",
+      "attributes": {}
+    },
+    {
+      "id": "WorkflowStep.Test.1",
+      "type": "WorkflowStep",
+      "label": "Step 1",
+      "family": "operational",
+      "text": "step 1 workflowstep behavioral: executes. semantic: has-position.",
+      "attributes": {}
+    }
+  ],
+  "impact": {
+    "Artifact.Out": [
+      {
+        "id": "ArtifactRevision.Out.r1",
+        "hops": 1,
+        "via": "revision-of"
+      },
+      {
+        "id": "Skill.Test",
+        "hops": 1,
+        "via": "produces"
+      },
+      {
+        "id": "WorkflowStep.Test.1",
+        "hops": 2,
+        "via": "produces"
+      },
+      {
+        "id": "Workflow.Test",
+        "hops": 3,
+        "via": "produces"
+      },
+      {
+        "id": "Policy.Test",
+        "hops": 4,
+        "via": "produces"
+      }
+    ],
+    "BC.Test": [
+      {
+        "id": "Concept.Other",
+        "hops": 1,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Concept.Thing",
+        "hops": 1,
+        "via": "scoped-to"
+      }
+    ],
+    "Concept.Other": [
+      {
+        "id": "Concept.Thing",
+        "hops": 1,
+        "via": "references"
+      }
+    ],
+    "Issue.T": [
+      {
+        "id": "ADR.T",
+        "hops": 1,
+        "via": "resolves"
+      }
+    ],
+    "Skill.Test": [
+      {
+        "id": "WorkflowStep.Test.1",
+        "hops": 1,
+        "via": "executes"
+      },
+      {
+        "id": "Workflow.Test",
+        "hops": 2,
+        "via": "executes"
+      },
+      {
+        "id": "Policy.Test",
+        "hops": 3,
+        "via": "executes"
+      }
+    ],
+    "Workflow.Test": [
+      {
+        "id": "Policy.Test",
+        "hops": 1,
+        "via": "governs"
+      }
+    ],
+    "WorkflowStep.Test.1": [
+      {
+        "id": "Workflow.Test",
+        "hops": 1,
+        "via": "has-step"
+      },
+      {
+        "id": "Policy.Test",
+        "hops": 2,
+        "via": "has-step"
+      }
+    ]
+  },
+  "traceability": {},
+  "statistics": {
+    "searchable": 11,
+    "withImpact": 7,
+    "withTraceability": 0
+  }
+}

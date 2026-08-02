@@ -1,0 +1,88 @@
+{
+  "note": "Projections of the Canonical Knowledge Model, derived by the declared query engine (ADR-0086).",
+  "search": [
+    {
+      "id": "Artifact.Doc",
+      "type": "Artifact",
+      "label": "Doc",
+      "family": "descriptive",
+      "text": "doc artifact unclassified.",
+      "attributes": {}
+    },
+    {
+      "id": "ArtifactRevision.Doc.r1",
+      "type": "ArtifactRevision",
+      "label": "Doc r1",
+      "family": "descriptive",
+      "text": "doc r1 artifactrevision carries no dimension value. `revision-of` was absent until `vr-0007` caught it:\nidentity is the pair (artifact-id, revision-id) (`adr-0064`), and a revision with\nno artifact has half an identity.",
+      "attributes": {}
+    },
+    {
+      "id": "Dimension.SemanticLayer",
+      "type": "Dimension",
+      "label": "Semantic layer",
+      "family": "descriptive",
+      "text": "semantic layer dimension one entity, holding the ten fields. not a specification/instance pair.",
+      "attributes": {}
+    },
+    {
+      "id": "DimensionAssignment.1",
+      "type": "DimensionAssignment",
+      "label": "Doc r1 is Layer B",
+      "family": "descriptive",
+      "text": "doc r1 is layer b dimensionassignment a reified association, versioned independently of what it classifies.",
+      "attributes": {}
+    }
+  ],
+  "impact": {
+    "Artifact.Doc": [
+      {
+        "id": "ArtifactRevision.Doc.r1",
+        "hops": 1,
+        "via": "revision-of"
+      },
+      {
+        "id": "DimensionAssignment.1",
+        "hops": 2,
+        "via": "revision-of"
+      },
+      {
+        "id": "Dimension.SemanticLayer",
+        "hops": 3,
+        "via": "revision-of"
+      }
+    ],
+    "ArtifactRevision.Doc.r1": [
+      {
+        "id": "DimensionAssignment.1",
+        "hops": 1,
+        "via": "classified-by"
+      },
+      {
+        "id": "Dimension.SemanticLayer",
+        "hops": 2,
+        "via": "classified-by"
+      }
+    ],
+    "Dimension.SemanticLayer": [
+      {
+        "id": "DimensionAssignment.1",
+        "hops": 1,
+        "via": "along"
+      }
+    ],
+    "DimensionAssignment.1": [
+      {
+        "id": "Dimension.SemanticLayer",
+        "hops": 1,
+        "via": "assigns-via"
+      }
+    ]
+  },
+  "traceability": {},
+  "statistics": {
+    "searchable": 4,
+    "withImpact": 4,
+    "withTraceability": 0
+  }
+}

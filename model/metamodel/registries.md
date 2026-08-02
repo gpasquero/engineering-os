@@ -193,6 +193,18 @@ registries:
       An adopting repository declares kinds its execution can report. Workers
       never write to the model (ADR-0101).
 
+  - id: REG-support-classification
+    registers: what kind of support a proposed assertion has
+    source: ../support-classification.md
+    extraction: yaml-block
+    collection: support-classification
+    membership: >
+      A classification is registered by appearing with an id, what it means, the
+      workers that propose it, and how it is reviewed.
+    extension: >
+      An adopting repository may add classifications. These are kinds, not a
+      scale: they are unordered and do not combine (ADR-0090).
+
   - id: REG-validation-rules
     registers: the rules the compiler executes
     source: validation-rules.md

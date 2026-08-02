@@ -84,6 +84,7 @@ specializes.
 | `of-kind` | `references` | structural |
 | `relates-to` | `references` | structural |
 | `specialises` | `specializes` | structural |
+| `implements` | `implements` | structural |
 | `realised-by` | `implemented-by` | structural |
 | `provided-by` | `implemented-by` | structural |
 | `produces` | `implements` | structural |
@@ -146,8 +147,9 @@ specializes.
 
 `ADR-0071` says a new entity **reuses a core type directly wherever it can**, and
 specializes only where it must. The mapping table did not record that, so the
-three core types first used directly — `represents`, `derives-from`, `validates`
-— were reported as unregistered predicates by the repository validator.
+core types first used directly — `represents`, `derives-from`, `validates`, and
+later `implements` when a discovery worker emitted it — were reported as
+unregistered predicates by the repository validator.
 
 **A core type is a predicate that is its own parent.** Those rows are now
 present; the remaining core types will be added as entities reach for them.

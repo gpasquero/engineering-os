@@ -1,0 +1,118 @@
+{
+  "note": "Projections of the Canonical Knowledge Model, derived by the declared query engine (ADR-0086).",
+  "search": [
+    {
+      "id": "Artifact.Report",
+      "type": "Artifact",
+      "label": "Validation report",
+      "family": "descriptive",
+      "text": "validation report artifact output.",
+      "attributes": {}
+    },
+    {
+      "id": "Skill.Validate",
+      "type": "Skill",
+      "label": "Validate",
+      "family": "operational",
+      "text": "validate skill carries no position of its own.",
+      "attributes": {}
+    },
+    {
+      "id": "Workflow.Pipeline",
+      "type": "Workflow",
+      "label": "Pipeline",
+      "family": "operational",
+      "text": "pipeline workflow sequences steps. holds no methodology.",
+      "attributes": {}
+    },
+    {
+      "id": "WorkflowStep.P.1",
+      "type": "WorkflowStep",
+      "label": "Validate (first pass)",
+      "family": "operational",
+      "text": "validate (first pass) workflowstep position 1.",
+      "attributes": {}
+    },
+    {
+      "id": "WorkflowStep.P.3",
+      "type": "WorkflowStep",
+      "label": "Validate (second pass)",
+      "family": "operational",
+      "text": "validate (second pass) workflowstep position 3, same skill. the position is a fact about the association.",
+      "attributes": {}
+    }
+  ],
+  "impact": {
+    "Artifact.Report": [
+      {
+        "id": "Skill.Validate",
+        "hops": 1,
+        "via": "produces"
+      },
+      {
+        "id": "WorkflowStep.P.1",
+        "hops": 2,
+        "via": "produces"
+      },
+      {
+        "id": "WorkflowStep.P.3",
+        "hops": 2,
+        "via": "produces"
+      },
+      {
+        "id": "Workflow.Pipeline",
+        "hops": 3,
+        "via": "produces"
+      }
+    ],
+    "Skill.Validate": [
+      {
+        "id": "WorkflowStep.P.1",
+        "hops": 1,
+        "via": "executes"
+      },
+      {
+        "id": "WorkflowStep.P.3",
+        "hops": 1,
+        "via": "executes"
+      },
+      {
+        "id": "Workflow.Pipeline",
+        "hops": 2,
+        "via": "executes"
+      }
+    ],
+    "Workflow.Pipeline": [
+      {
+        "id": "WorkflowStep.P.1",
+        "hops": 1,
+        "via": "step-of"
+      }
+    ],
+    "WorkflowStep.P.1": [
+      {
+        "id": "Workflow.Pipeline",
+        "hops": 1,
+        "via": "has-step"
+      }
+    ],
+    "WorkflowStep.P.3": [
+      {
+        "id": "Workflow.Pipeline",
+        "hops": 1,
+        "via": "has-step"
+      },
+      {
+        "id": "WorkflowStep.P.1",
+        "hops": 2,
+        "via": "has-step"
+      }
+    ]
+  },
+  "traceability": {},
+  "statistics": {
+    "searchable": 5,
+    "withImpact": 5,
+    "withTraceability": 0
+  }
+}

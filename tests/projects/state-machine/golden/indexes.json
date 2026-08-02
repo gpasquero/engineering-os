@@ -1,0 +1,71 @@
+{
+  "note": "Projections of the Canonical Knowledge Model, derived by the declared query engine (ADR-0086).",
+  "search": [
+    {
+      "id": "Artifact.Doc",
+      "type": "Artifact",
+      "label": "Doc",
+      "family": "descriptive",
+      "text": "doc artifact has no state.",
+      "attributes": {}
+    },
+    {
+      "id": "ArtifactRevision.Doc.r1",
+      "type": "ArtifactRevision",
+      "label": "Doc r1",
+      "family": "descriptive",
+      "text": "doc r1 artifactrevision governed by the machine.",
+      "attributes": {}
+    },
+    {
+      "id": "SMS.RevisionLifecycle",
+      "type": "StateMachineSpecification",
+      "label": "Artifact revision lifecycle",
+      "family": "descriptive",
+      "text": "artifact revision lifecycle statemachinespecification draft, under review, accepted, active, superseded, archived. every state belongs\nto exactly one machine.",
+      "attributes": {}
+    },
+    {
+      "id": "Workflow.Review",
+      "type": "Workflow",
+      "label": "Review workflow",
+      "family": "operational",
+      "text": "review workflow workflow drives the machine.",
+      "attributes": {}
+    }
+  ],
+  "impact": {
+    "Artifact.Doc": [
+      {
+        "id": "ArtifactRevision.Doc.r1",
+        "hops": 1,
+        "via": "revision-of"
+      },
+      {
+        "id": "SMS.RevisionLifecycle",
+        "hops": 2,
+        "via": "revision-of"
+      }
+    ],
+    "ArtifactRevision.Doc.r1": [
+      {
+        "id": "SMS.RevisionLifecycle",
+        "hops": 1,
+        "via": "controls-lifecycle-of"
+      }
+    ],
+    "Workflow.Review": [
+      {
+        "id": "SMS.RevisionLifecycle",
+        "hops": 1,
+        "via": "driven-by"
+      }
+    ]
+  },
+  "traceability": {},
+  "statistics": {
+    "searchable": 4,
+    "withImpact": 3,
+    "withTraceability": 0
+  }
+}

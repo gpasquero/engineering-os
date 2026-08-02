@@ -1,0 +1,76 @@
+{
+  "note": "Projections of the Canonical Knowledge Model, derived by the declared query engine (ADR-0086).",
+  "search": [
+    {
+      "id": "ADR.Twice",
+      "type": "ADR",
+      "label": "A decision related twice to one invariant",
+      "family": "operational",
+      "text": "a decision related twice to one invariant adr **two predicates, one target.** `establishes` is what `q-rationale` follows;\n`references` is the parallel edge that must not be mistaken for it.",
+      "attributes": {}
+    },
+    {
+      "id": "Artifact.Impl",
+      "type": "Artifact",
+      "label": "Implementation",
+      "family": "descriptive",
+      "text": "implementation artifact two predicates, one target. `q-tests` follows `validates` only.",
+      "attributes": {}
+    },
+    {
+      "id": "Concept.Target",
+      "type": "Concept",
+      "label": "Target concept",
+      "family": "descriptive",
+      "text": "target concept concept reached by two predicates from one artifact.",
+      "attributes": {}
+    },
+    {
+      "id": "Invariant.Both",
+      "type": "Invariant",
+      "label": "An invariant reached by two predicates",
+      "family": "descriptive",
+      "text": "an invariant reached by two predicates invariant two different edges arrive here from the same node.",
+      "attributes": {}
+    }
+  ],
+  "impact": {
+    "Concept.Target": [
+      {
+        "id": "Artifact.Impl",
+        "hops": 1,
+        "via": "references"
+      },
+      {
+        "id": "Invariant.Both",
+        "hops": 1,
+        "via": "constrains"
+      },
+      {
+        "id": "ADR.Twice",
+        "hops": 2,
+        "via": "constrains"
+      }
+    ],
+    "Invariant.Both": [
+      {
+        "id": "ADR.Twice",
+        "hops": 1,
+        "via": "establishes"
+      }
+    ]
+  },
+  "traceability": {
+    "Invariant.Both": {
+      "evidence": [],
+      "rationale": [
+        "ADR.Twice"
+      ]
+    }
+  },
+  "statistics": {
+    "searchable": 4,
+    "withImpact": 2,
+    "withTraceability": 1
+  }
+}

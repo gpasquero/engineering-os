@@ -1,0 +1,50 @@
+{
+  "note": "Projections of the Canonical Knowledge Model, derived by the declared query engine (ADR-0086).",
+  "search": [
+    {
+      "id": "Concept.Documented",
+      "type": "Concept",
+      "label": "A concept with provenance",
+      "family": "descriptive",
+      "text": "a concept with provenance concept attributes are carried verbatim and are not interpreted by the compiler.",
+      "attributes": {
+        "locator": "section 4.2",
+        "source": "https://example.org/spec.html",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Evidence.Citation",
+      "type": "Evidence",
+      "label": "A citation",
+      "family": "descriptive",
+      "text": "a citation evidence a scalar attribute may be a number; it is stringified on the way in.",
+      "attributes": {
+        "directness-rank": "4",
+        "kind": "external-reference"
+      }
+    }
+  ],
+  "impact": {
+    "Evidence.Citation": [
+      {
+        "id": "Concept.Documented",
+        "hops": 1,
+        "via": "evidenced-by"
+      }
+    ]
+  },
+  "traceability": {
+    "Concept.Documented": {
+      "evidence": [
+        "Evidence.Citation"
+      ],
+      "rationale": []
+    }
+  },
+  "statistics": {
+    "searchable": 2,
+    "withImpact": 1,
+    "withTraceability": 1
+  }
+}

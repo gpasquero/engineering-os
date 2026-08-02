@@ -1,0 +1,71 @@
+{
+  "note": "Projections of the Canonical Knowledge Model, derived by the declared query engine (ADR-0086).",
+  "search": [
+    {
+      "id": "ADR.New",
+      "type": "ADR",
+      "label": "The replacing decision",
+      "family": "operational",
+      "text": "the replacing decision adr replaces the old one.",
+      "attributes": {}
+    },
+    {
+      "id": "ADR.Old",
+      "type": "ADR",
+      "label": "A superseded decision",
+      "family": "operational",
+      "text": "a superseded decision adr superseded, and still readable.",
+      "attributes": {}
+    },
+    {
+      "id": "Artifact.Stale",
+      "type": "Artifact",
+      "label": "An implementation of a superseded rationale",
+      "family": "descriptive",
+      "text": "an implementation of a superseded rationale artifact three hops from the supersession that invalidates its reason.",
+      "attributes": {}
+    },
+    {
+      "id": "Concept.Rationale",
+      "type": "Concept",
+      "label": "A concept established by the old decision",
+      "family": "descriptive",
+      "text": "a concept established by the old decision concept its reason no longer stands.",
+      "attributes": {}
+    }
+  ],
+  "impact": {
+    "ADR.New": [
+      {
+        "id": "ADR.Old",
+        "hops": 1,
+        "via": "superseded-by"
+      }
+    ],
+    "Concept.Rationale": [
+      {
+        "id": "ADR.Old",
+        "hops": 1,
+        "via": "establishes"
+      },
+      {
+        "id": "Artifact.Stale",
+        "hops": 1,
+        "via": "represents"
+      }
+    ]
+  },
+  "traceability": {
+    "Concept.Rationale": {
+      "evidence": [],
+      "rationale": [
+        "ADR.Old"
+      ]
+    }
+  },
+  "statistics": {
+    "searchable": 4,
+    "withImpact": 2,
+    "withTraceability": 1
+  }
+}

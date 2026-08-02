@@ -1,0 +1,106 @@
+{
+  "note": "Projections of the Canonical Knowledge Model, derived by the declared query engine (ADR-0086).",
+  "search": [
+    {
+      "id": "Actor.Maintainer",
+      "type": "Actor",
+      "label": "Maintainer",
+      "family": "descriptive",
+      "text": "maintainer actor decides.",
+      "attributes": {}
+    },
+    {
+      "id": "Artifact.Change",
+      "type": "Artifact",
+      "label": "A change",
+      "family": "descriptive",
+      "text": "a change artifact reviewed.",
+      "attributes": {}
+    },
+    {
+      "id": "Gate.Review",
+      "type": "EngineeringGate",
+      "label": "Review gate",
+      "family": "operational",
+      "text": "review gate engineeringgate holds the questions. outcomes are a closed enumeration per gate.",
+      "attributes": {}
+    },
+    {
+      "id": "Policy.ReviewBeforeMerge",
+      "type": "Policy",
+      "label": "Review before merge",
+      "family": "operational",
+      "text": "review before merge policy governancepolicy. constrains normatively.",
+      "attributes": {}
+    },
+    {
+      "id": "Workflow.Merge",
+      "type": "Workflow",
+      "label": "Merge",
+      "family": "operational",
+      "text": "merge workflow passes a gate.",
+      "attributes": {}
+    }
+  ],
+  "impact": {
+    "Actor.Maintainer": [
+      {
+        "id": "Gate.Review",
+        "hops": 1,
+        "via": "decided-by"
+      },
+      {
+        "id": "Workflow.Merge",
+        "hops": 2,
+        "via": "decided-by"
+      },
+      {
+        "id": "Policy.ReviewBeforeMerge",
+        "hops": 3,
+        "via": "decided-by"
+      }
+    ],
+    "Artifact.Change": [
+      {
+        "id": "Gate.Review",
+        "hops": 1,
+        "via": "reviews"
+      },
+      {
+        "id": "Workflow.Merge",
+        "hops": 2,
+        "via": "reviews"
+      },
+      {
+        "id": "Policy.ReviewBeforeMerge",
+        "hops": 3,
+        "via": "reviews"
+      }
+    ],
+    "Gate.Review": [
+      {
+        "id": "Workflow.Merge",
+        "hops": 1,
+        "via": "passes-through"
+      },
+      {
+        "id": "Policy.ReviewBeforeMerge",
+        "hops": 2,
+        "via": "passes-through"
+      }
+    ],
+    "Workflow.Merge": [
+      {
+        "id": "Policy.ReviewBeforeMerge",
+        "hops": 1,
+        "via": "governs"
+      }
+    ]
+  },
+  "traceability": {},
+  "statistics": {
+    "searchable": 5,
+    "withImpact": 4,
+    "withTraceability": 0
+  }
+}

@@ -1,0 +1,79 @@
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix eos:  <https://example.org/engineering-os/metamodel#> .
+@prefix ex:   <https://example.org/engineering-os/example#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+# A PROJECTION of the Canonical Knowledge Model (ADR-0072).
+# Shapes are generated from the SAME registries the compiler reads, so
+# the shapes and the compiler cannot enforce different rules.
+
+eos:ArtifactShape
+    a sh:NodeShape ;
+    sh:targetClass eos:Artifact ;
+    sh:property [
+        sh:path eos:label ; sh:minCount 1 ; sh:datatype xsd:string ;
+        sh:message "Every Artifact must carry a label" ;
+    ] .
+
+eos:ArtifactRevisionShape
+    a sh:NodeShape ;
+    sh:targetClass eos:ArtifactRevision ;
+    sh:property [
+        sh:path eos:label ; sh:minCount 1 ; sh:datatype xsd:string ;
+        sh:message "Every ArtifactRevision must carry a label" ;
+    ] .
+
+eos:DimensionShape
+    a sh:NodeShape ;
+    sh:targetClass eos:Dimension ;
+    sh:property [
+        sh:path eos:label ; sh:minCount 1 ; sh:datatype xsd:string ;
+        sh:message "Every Dimension must carry a label" ;
+    ] .
+
+eos:DimensionAssignmentShape
+    a sh:NodeShape ;
+    sh:targetClass eos:DimensionAssignment ;
+    sh:property [
+        sh:path eos:label ; sh:minCount 1 ; sh:datatype xsd:string ;
+        sh:message "Every DimensionAssignment must carry a label" ;
+    ] .
+
+# Every predicate used in the model, constrained to its registered core
+# type. A predicate with no registered parent is rejected at compile
+# time by VR-0002; these shapes state the same rule declaratively.
+
+eos:alongShape
+    a sh:PropertyShape ;
+    sh:path eos:along ;
+    sh:description "specializes references (structural)" ;
+    sh:node eos:MetamodelEntity .
+
+eos:assignsViaShape
+    a sh:PropertyShape ;
+    sh:path eos:assignsVia ;
+    sh:description "specializes defined-by (semantic)" ;
+    sh:node eos:MetamodelEntity .
+
+eos:classifiedByShape
+    a sh:PropertyShape ;
+    sh:path eos:classifiedBy ;
+    sh:description "specializes defined-by (semantic)" ;
+    sh:node eos:MetamodelEntity .
+
+eos:revisionOfShape
+    a sh:PropertyShape ;
+    sh:path eos:revisionOf ;
+    sh:description "specializes derives-from (semantic)" ;
+    sh:node eos:MetamodelEntity .
+
+# ValidationRules the compiler executes, stated as documentation. A
+# shape may not assert a constraint no rule enforces.
+
+#   VR-0001  declared-entity-type: '{value}' is not a metamodel entity
+#   VR-0002  registered-predicate: predicate '{value}' has no registered parent (ADR-0071)
+#   VR-0003  resolvable-target: '{predicate}' points at unknown node '{value}'
+#   VR-0004  unique-identity: duplicate node id '{value}' declared {count} times
+#   VR-0005  forbidden-self-reference: '{predicate}' on '{subject}' points at itself
+#   VR-0006  required-relationship: a WorkflowStep must declare 'executes'
+#   VR-0007  required-relationship: an ArtifactRevision must declare 'revision-of'

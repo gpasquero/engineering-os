@@ -1,0 +1,151 @@
+@prefix sh:   <http://www.w3.org/ns/shacl#> .
+@prefix eos:  <https://example.org/engineering-os/metamodel#> .
+@prefix ex:   <https://example.org/engineering-os/example#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+# A PROJECTION of the Canonical Knowledge Model (ADR-0072).
+# Shapes are generated from the SAME registries the compiler reads, so
+# the shapes and the compiler cannot enforce different rules.
+
+eos:ADRShape
+    a sh:NodeShape ;
+    sh:targetClass eos:ADR ;
+    sh:property [
+        sh:path eos:label ; sh:minCount 1 ; sh:datatype xsd:string ;
+        sh:message "Every ADR must carry a label" ;
+    ] .
+
+eos:ArtifactShape
+    a sh:NodeShape ;
+    sh:targetClass eos:Artifact ;
+    sh:property [
+        sh:path eos:label ; sh:minCount 1 ; sh:datatype xsd:string ;
+        sh:message "Every Artifact must carry a label" ;
+    ] .
+
+eos:ArtifactRevisionShape
+    a sh:NodeShape ;
+    sh:targetClass eos:ArtifactRevision ;
+    sh:property [
+        sh:path eos:label ; sh:minCount 1 ; sh:datatype xsd:string ;
+        sh:message "Every ArtifactRevision must carry a label" ;
+    ] .
+
+eos:BoundedContextShape
+    a sh:NodeShape ;
+    sh:targetClass eos:BoundedContext ;
+    sh:property [
+        sh:path eos:label ; sh:minCount 1 ; sh:datatype xsd:string ;
+        sh:message "Every BoundedContext must carry a label" ;
+    ] .
+
+eos:ConceptShape
+    a sh:NodeShape ;
+    sh:targetClass eos:Concept ;
+    sh:property [
+        sh:path eos:label ; sh:minCount 1 ; sh:datatype xsd:string ;
+        sh:message "Every Concept must carry a label" ;
+    ] .
+
+eos:IssueShape
+    a sh:NodeShape ;
+    sh:targetClass eos:Issue ;
+    sh:property [
+        sh:path eos:label ; sh:minCount 1 ; sh:datatype xsd:string ;
+        sh:message "Every Issue must carry a label" ;
+    ] .
+
+eos:PolicyShape
+    a sh:NodeShape ;
+    sh:targetClass eos:Policy ;
+    sh:property [
+        sh:path eos:label ; sh:minCount 1 ; sh:datatype xsd:string ;
+        sh:message "Every Policy must carry a label" ;
+    ] .
+
+eos:SkillShape
+    a sh:NodeShape ;
+    sh:targetClass eos:Skill ;
+    sh:property [
+        sh:path eos:label ; sh:minCount 1 ; sh:datatype xsd:string ;
+        sh:message "Every Skill must carry a label" ;
+    ] .
+
+eos:WorkflowShape
+    a sh:NodeShape ;
+    sh:targetClass eos:Workflow ;
+    sh:property [
+        sh:path eos:label ; sh:minCount 1 ; sh:datatype xsd:string ;
+        sh:message "Every Workflow must carry a label" ;
+    ] .
+
+eos:WorkflowStepShape
+    a sh:NodeShape ;
+    sh:targetClass eos:WorkflowStep ;
+    sh:property [
+        sh:path eos:label ; sh:minCount 1 ; sh:datatype xsd:string ;
+        sh:message "Every WorkflowStep must carry a label" ;
+    ] .
+
+# Every predicate used in the model, constrained to its registered core
+# type. A predicate with no registered parent is rejected at compile
+# time by VR-0002; these shapes state the same rule declaratively.
+
+eos:executesShape
+    a sh:PropertyShape ;
+    sh:path eos:executes ;
+    sh:description "specializes executes (behavioral)" ;
+    sh:node eos:MetamodelEntity .
+
+eos:governsShape
+    a sh:PropertyShape ;
+    sh:path eos:governs ;
+    sh:description "specializes governs (behavioral)" ;
+    sh:node eos:MetamodelEntity .
+
+eos:hasStepShape
+    a sh:PropertyShape ;
+    sh:path eos:hasStep ;
+    sh:description "specializes contains (structural)" ;
+    sh:node eos:MetamodelEntity .
+
+eos:producesShape
+    a sh:PropertyShape ;
+    sh:path eos:produces ;
+    sh:description "specializes implements (structural)" ;
+    sh:node eos:MetamodelEntity .
+
+eos:referencesShape
+    a sh:PropertyShape ;
+    sh:path eos:references ;
+    sh:description "specializes references (structural)" ;
+    sh:node eos:MetamodelEntity .
+
+eos:resolvesShape
+    a sh:PropertyShape ;
+    sh:path eos:resolves ;
+    sh:description "specializes resolves (traceability)" ;
+    sh:node eos:MetamodelEntity .
+
+eos:revisionOfShape
+    a sh:PropertyShape ;
+    sh:path eos:revisionOf ;
+    sh:description "specializes derives-from (semantic)" ;
+    sh:node eos:MetamodelEntity .
+
+eos:scopedToShape
+    a sh:PropertyShape ;
+    sh:path eos:scopedTo ;
+    sh:description "specializes contained-by (structural)" ;
+    sh:node eos:MetamodelEntity .
+
+# ValidationRules the compiler executes, stated as documentation. A
+# shape may not assert a constraint no rule enforces.
+
+#   VR-0001  declared-entity-type: '{value}' is not a metamodel entity
+#   VR-0002  registered-predicate: predicate '{value}' has no registered parent (ADR-0071)
+#   VR-0003  resolvable-target: '{predicate}' points at unknown node '{value}'
+#   VR-0004  unique-identity: duplicate node id '{value}' declared {count} times
+#   VR-0005  forbidden-self-reference: '{predicate}' on '{subject}' points at itself
+#   VR-0006  required-relationship: a WorkflowStep must declare 'executes'
+#   VR-0007  required-relationship: an ArtifactRevision must declare 'revision-of'
