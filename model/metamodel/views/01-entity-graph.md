@@ -5,7 +5,7 @@
 
 Edges are the `relationships` tables of every entity specification, restricted to targets that are themselves specified entities.
 
-**20 entities, 55 internal edges.**
+**22 entities, 60 internal edges.**
 
 ```mermaid
 graph LR
@@ -34,6 +34,8 @@ graph LR
   Concept[Concept]
   BoundedContext -->|contains| Concept
   BoundedContext -->|contains| Capability
+  CanonicalKnowledgeModel[CanonicalKnowledgeModel]
+  CanonicalKnowledgeModel -->|derives-from| Artifact
   Capability -->|provided-by| BoundedContext
   Capability -->|expressed-in| Concept
   Workflow[Workflow]
@@ -68,6 +70,8 @@ graph LR
   Policy -->|governs| Workflow
   Policy -->|governs| EngineeringGate
   Policy -->|governs| Artifact
+  ValidationRule[ValidationRule]
+  Policy -->|enforced-by| ValidationRule
   RelationshipType[RelationshipType]
   RelationshipType -->|scoped-to| BoundedContext
   RelationshipType -->|constrained-by| Invariant
@@ -79,32 +83,35 @@ graph LR
   StateMachineSpecification[StateMachineSpecification]
   StateMachineSpecification -->|driven-by| Workflow
   StateMachineSpecification -->|scoped-to| BoundedContext
+  ValidationRule -->|constrains| RelationshipType
+  ValidationRule -->|motivated-by| ADR
+  ValidationRule -->|validates| CanonicalKnowledgeModel
   WorkflowStep -->|step-of| Workflow
   WorkflowStep -->|executes| Skill
   Workflow -->|has-step| WorkflowStep
   Workflow -->|passes-through| EngineeringGate
   Workflow -->|produces| Artifact
-  class Actor,ArtifactRevision,Artifact,BoundedContext,Capability,Concept,DimensionAssignment,Dimension,Evidence,Invariant,RelationshipType,StateMachineSpecification descriptive;
-  class AcceptanceRecord,ADR,EngineeringGate,Issue,Policy,Skill,WorkflowStep,Workflow operational;
+  class Actor,ArtifactRevision,Artifact,BoundedContext,CanonicalKnowledgeModel,Capability,Concept,DimensionAssignment,Dimension,Evidence,Invariant,RelationshipType,StateMachineSpecification descriptive;
+  class AcceptanceRecord,ADR,EngineeringGate,Issue,Policy,Skill,ValidationRule,WorkflowStep,Workflow operational;
   classDef descriptive fill:#e8f0fe,stroke:#4285f4;
   classDef operational fill:#fce8e6,stroke:#ea4335;
 ```
 
 ## Structural metrics
 
-**20 nodes.** Computed from the graph, not read from the specifications.
+**22 nodes.** Computed from the graph, not read from the specifications.
 
 ### Isolated and near-isolated
 
 No isolated nodes.
 
-**Pendant (degree 1):** `ADR`, `Dimension`
+**Pendant (degree 1):** `Dimension`
 
 ### Hubs (degree ≥ 5)
 
 | Node | Degree |
 |---|---|
-| `Artifact` | 9 |
+| `Artifact` | 10 |
 | `Workflow` | 6 |
 | `Invariant` | 6 |
 | `Evidence` | 6 |
@@ -114,13 +121,11 @@ No isolated nodes.
 
 ### Near-identical neighbourhoods (Jaccard ≥ 0.6)
 
-| Similarity | A | B | Shared neighbours |
-|---|---|---|---|
-| 0.67 | `EngineeringGate` | `Policy` | `Artifact`, `Workflow` |
+None above threshold.
 
 ### Chains (in-degree 1, out-degree 1)
 
-`ADR`, `Dimension`
+`CanonicalKnowledgeModel`, `Dimension`
 
 ### Repeated motifs (relation used ≥ 3 times)
 
@@ -130,3 +135,4 @@ No isolated nodes.
 | 3 | `governs` |
 | 3 | `expressed-in` |
 | 3 | `evidenced-by` |
+| 3 | `constrains` |
