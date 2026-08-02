@@ -19,7 +19,13 @@ findings were answered by the reviewer within one session (`ADR-0066`,
 `ADR-0067`); one was deferred to a scheduled review (`ISSUE-0074`).
 
 **Second checkpoint — 19 of 27 entities**, adding the operational family. Two new
-findings, recorded as #7 and #8 below.
+findings, recorded as #7 and #8 below. #7 is answered by `ADR-0068`.
+
+**Third checkpoint — 22 of 28 entities.** No new findings of this kind, which is
+itself the result: the checkpoints have stopped revealing missing entities and
+started revealing missing semantic constructs. Structural findings from this
+point are recorded in `../views/README.md`, against generated graphs rather than
+against the ontology text.
 
 **None of these blocks B1.** They are recorded here and, where they need to
 survive beyond this document, in the affected specification's `Debt` section.
@@ -121,6 +127,14 @@ Knowledge Compiler must check that an ontology cannot (`ISSUE-0063`).
 
 ### 7. `RelationshipType` cannot express order
 
+> **ANSWERED — `ADR-0068`.** "Ordering" named two things. **Intrinsic** ordering
+> is a property of the ordered entities and needs only a comparable property —
+> `directnessRank` already is one. **Extrinsic** ordering belongs to the
+> association, and `ADR-0066` already requires such an association to be
+> reified. `RelationshipType` is not extended; `WorkflowStep` is the reification.
+> The diagnostic test: *can the same target hold two different positions under
+> two different sources?*
+
 `Workflow.sequences` is **ordered**. Every other relationship in the metamodel is
 a set.
 
@@ -192,6 +206,28 @@ engineering performed on it.
 That gap is the strongest available argument that `ADR-0065`'s two families are
 real: **half the metamodel is missing and the half that is present is internally
 complete.**
+
+## The class of discovery has changed
+
+The first two checkpoints revealed **missing entities** — `ContextualEntity`, and
+the absent targets of `supports`, `typedBy`, `holds`. Missing entities indicate
+incomplete modelling.
+
+The third revealed **a missing semantic construct**: ordering. That is a
+different class of discovery, and it indicates the metamodel is stabilising —
+the remaining work is increasingly about **expressiveness rather than
+coverage**.
+
+Two more constructs are already visible from the same direction and are recorded
+as debt rather than pursued:
+
+- **Transitions.** `StateMachineSpecification.declares-transitions` points at
+  something that is not an entity, and under `ADR-0068`'s test a transition is
+  extrinsic — it should be a reified association, exactly like `WorkflowStep`.
+- **Conditions.** `WorkflowStep.guarded-by` and `Workflow`'s branch conditions
+  both point at "condition", which has no representation anywhere.
+
+Neither blocks B1.
 
 ## Status of this artifact
 

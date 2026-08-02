@@ -64,7 +64,7 @@ losing what matters. The *contract* is formal; the *method* is not.
 
 - Nodes in the Canonical Knowledge Model.
 - A contract-compatibility view: which Skills could substitute for which.
-- An orphaned-skill report: Skills no Workflow sequences.
+- An orphaned-skill report: Skills no WorkflowStep executes.
 
 ## relationships
 
@@ -73,7 +73,7 @@ losing what matters. The *contract* is formal; the *method* is not.
 | requires | Artifact or Concept | zero or more |
 | produces | Artifact | one or more |
 | governed-by | ProcessPolicy | zero or more |
-| sequenced-by | Workflow | zero or more |
+| executed-by | WorkflowStep | zero or more |
 
 **`produces` is one-or-more.** A Skill that produces nothing is not a unit of
 methodology — it is a description of an attitude. This is the one cardinality in

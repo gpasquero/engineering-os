@@ -43,8 +43,8 @@ remaining entity derives from it.
 | 10 | **DimensionSpecification** | Defines one independent axis of classification | `ADR-0048` | [✓](entities/dimension-specification.md) |
 | 11 | **Dimension** | An instance of a DimensionSpecification | `ADR-0041` | [✓](entities/dimension.md) |
 | 12 | **DimensionAssignment** | The relationship classifying an artifact along a dimension | `ADR-0042` | [✓](entities/dimension-assignment.md) |
-| 13 | **StateMachineSpecification** | Defines a state machine and its vocabulary | `ADR-0027` | — |
-| 14 | **StateMachine** | An instance of a StateMachineSpecification | `ADR-0025` | — |
+| 13 | **StateMachineSpecification** | Defines a state machine: states, transitions, what it governs | `ADR-0027` | [✓](entities/state-machine-specification.md) |
+| 14 | **StateMachine** | An instance of a StateMachineSpecification. **Fails the `ADR-0067` test** | `ADR-0025` | [✓](entities/state-machine.md) |
 | 15 | **Vocabulary** | A closed enumeration with exactly one definition | `ADR-0008` | — |
 | 16 | **Principle** | A semantic relationship emerging from accepted knowledge. **Not an artifact** | `ADR-0058` | — |
 | 17 | **KnowledgePackage** | A published interface between repositories | `ADR-0019` | — |
@@ -63,6 +63,7 @@ real. It held — see `ontology/FINDINGS.md`.
 | 22 | **AcceptanceRecord** | The act conferring `Active` status on a revision | `ADR-0021` | [✓](entities/acceptance-record.md) |
 | 23 | **ADR** | A recorded architectural decision | `ADR-0002` | [✓](entities/adr.md) |
 | 24 | **Issue** | A recorded unknown | `ADR-0003` | [✓](entities/issue.md) |
+| 25 | **WorkflowStep** | The reified association between a Workflow and a Skill, carrying its position | `ADR-0068` | [✓](entities/workflow-step.md) |
 
 ### Family unassigned
 
@@ -71,17 +72,23 @@ Recorded by `ADR-0065` as not classifying cleanly. Each describes structure
 
 | # | Entity | Purpose | Established by | Spec |
 |---|---|---|---|---|
-| 25 | **RegistrySpecification** | Defines a registry: identity, membership rules, extension rules | `ADR-0032` | — |
-| 26 | **Manifest** | A root declaration of composition, status or semantics | `ADR-0013` | — |
-| 27 | **ValidationRule** | A constraint a semantic model must satisfy | `ADR-0048` | — |
+| 26 | **RegistrySpecification** | Defines a registry: identity, membership rules, extension rules | `ADR-0032` | — |
+| 27 | **Manifest** | A root declaration of composition, status or semantics | `ADR-0013` | — |
+| 28 | **ValidationRule** | A constraint a semantic model must satisfy | `ADR-0048` | — |
 
-**19 of 27 specified.** The remaining eight are five descriptive and three
-unassigned.
+**22 of 28 specified — past the simplification review threshold** (`ISSUE-0074`).
 
-**Approaching the simplification review threshold** (`ISSUE-0074`): at
-approximately 20 of 27, entity pairs that can merge without losing expressive
-power are identified as one considered pass. `Dimension` / `DimensionSpecification`
-is the first candidate.
+Two merge candidates are now confirmed, both by the `ADR-0067` test and
+independently by the generated graphs (`views/README.md`):
+
+| Candidate | Evidence |
+|---|---|
+| `StateMachine` / `StateMachineSpecification` | Introduces no relationship its specification does not declare. **Pendant in every view.** The stronger of the two — nothing points at it |
+| `Dimension` / `DimensionSpecification` | Same 1:1 shape. **A pass-through chain node in two independent views** |
+
+**The Specification/Instance pattern did not survive a second domain.** That was
+the test, and the conclusion may be larger than two merges — see
+`entities/state-machine.md`.
 
 ## Compiler-architecture concepts
 

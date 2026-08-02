@@ -21,9 +21,8 @@ using this metamodel**. Adopters never modify it — they instantiate it
 
 ## Status
 
-**19 of 27 entities specified.** Both families (`ADR-0065`) are now present and
-the operational family is complete. `entity-inventory.md` records the current
-state.
+**22 of 28 entities specified**, past the simplification review threshold
+(`ISSUE-0074`). `entity-inventory.md` records the current state.
 
 This is being built under `ADR-0062`: where an existing decision permits
 building, we build, and open questions that do not block the next deliverable
@@ -52,8 +51,12 @@ model/metamodel/
 ├── README.md              this file
 ├── entity-inventory.md    all entities, with specification status
 ├── entities/              one specification per entity
-└── ontology/              the OWL skeleton, and what writing it exposed
+├── ontology/              the OWL skeleton, and what writing it exposed
+└── views/                 generated graph views, and what inspecting them showed
 ```
+
+`views/` is **generated** by `tools/generate-metamodel-views.py` — the first
+mechanically produced projection in the repository (`ISSUE-0037`).
 
 ## Conventions in force
 
@@ -72,6 +75,9 @@ model/metamodel/
   cardinalities, inference and identity.
 - **The metamodel defines `RelationshipType`, not `Relationship`** (`ADR-0066`).
   It declares the vocabulary of edges; it does not model every edge as an entity.
+- **Ordering is intrinsic or extrinsic** (`ADR-0068`). Intrinsic ordering is a
+  comparable property of the ordered things; extrinsic ordering belongs to the
+  association and requires reifying it. `RelationshipType` is never extended.
 
 ## The OWL skeleton
 
@@ -79,10 +85,16 @@ model/metamodel/
 and is regenerated at checkpoints **before** the metamodel is complete rather
 than after.
 
-Two checkpoints have run, at 12 and 19 entities, producing eight findings. One
-withdrew an entity one session after it was accepted (`ADR-0066`); one changed
-how every future entity is admitted (`ADR-0067`); one is scheduled for a
-simplification review (`ISSUE-0074`). See `ontology/FINDINGS.md`.
+Three checkpoints have run, at 12, 19 and 22 entities, producing eight findings.
+One withdrew an entity a session after it was accepted (`ADR-0066`); one changed
+how every future entity is admitted (`ADR-0067`); one resolved ordering as a
+general capability (`ADR-0068`); one is scheduled for a simplification review
+(`ISSUE-0074`).
+
+**The class of discovery has changed.** The checkpoints have stopped revealing
+missing entities and started revealing missing semantic constructs — the
+remaining work is increasingly about expressiveness rather than coverage. See
+`ontology/FINDINGS.md`.
 
 Markdown remains the authoring form, which keeps `ADR-0017`'s guarantee intact:
 authoritative artifacts stay usable without executing the compiler. **Which of

@@ -27,114 +27,110 @@ New questions that do not block the next deliverable become architectural debt.
 
 | Area | State |
 |---|---|
-| **`model/metamodel/`** | **19 of 27 Layer A entities specified.** Both families present; the operational family is complete |
-| **`model/metamodel/ontology/`** | OWL skeleton at 0.2.0 — **433 triples, 30 classes, 45 object properties**, parses clean |
+| **`model/metamodel/`** | **22 of 28 Layer A entities specified** — past the simplification review threshold |
+| **`model/metamodel/ontology/`** | OWL skeleton at 0.3.0 — **496 triples, 33 classes, 52 object properties**, parses clean |
+| **`model/metamodel/views/`** | **Three generated graph views.** The first mechanically produced projection in the repository |
+| **`tools/`** | `generate-metamodel-views.py` — the first executable code in the repository |
 | `LICENSE` | Apache-2.0, canonical text (`ADR-0063`) |
 | Repository architecture, documentation system, session protocol | Accepted |
 | Roadmap | Six-deliverable build sequence, B1–B6 |
-| ADRs | 67 — 59 accepted, 8 superseded |
+| ADRs | 68 — 60 accepted, 8 superseded |
 | Issues | 74 — **1 open, 50 resolved, 23 deferred as debt** |
-| Acceptance Records | 19 |
-| Session journal | 24 entries |
+| Acceptance Records | 20 |
+| Session journal | 25 entries |
 | Frozen provenance | `imports/`, `sources/` |
 
 ### Metamodel progress
 
 | Family | Specified | Remaining |
 |---|---|---|
-| **Descriptive** | BoundedContext · Artifact · Concept · Capability · RelationshipType · Invariant · Evidence · Actor · ArtifactRevision · DimensionSpecification · Dimension · DimensionAssignment | StateMachineSpecification · StateMachine · Vocabulary · Principle · KnowledgePackage |
-| **Operational** | **complete** — Policy · Workflow · Skill · EngineeringGate · AcceptanceRecord · ADR · Issue | — |
+| **Descriptive** | BoundedContext · Artifact · Concept · Capability · RelationshipType · Invariant · Evidence · Actor · ArtifactRevision · DimensionSpecification · Dimension · DimensionAssignment · StateMachineSpecification · StateMachine | Vocabulary · Principle · KnowledgePackage |
+| **Operational** | Policy · Workflow · WorkflowStep · Skill · EngineeringGate · AcceptanceRecord · ADR · Issue | — |
 | **Unassigned** | none | RegistrySpecification · Manifest · ValidationRule |
 
-**Every entity specification now answers one question before acceptance**
-(`ADR-0067`): *what new semantic relationship does this entity introduce that
-cannot already be expressed?* If the answer is "none", the entity is probably
-redundant.
-
-Four concepts were **relocated** out of Layer A as compiler architecture. One was
-**rejected**: `Validation` unqualified. One is **deferred**: `Ontology`, pending
-B2. One was **withdrawn one session after acceptance**: `Relationship`, replaced
-by `RelationshipType` (`ADR-0066`).
+**Every specification answers the `ADR-0067` question** — what new semantic
+relationship does this introduce that cannot already be expressed? **One entity
+answered "none" and says so**: `StateMachine`.
 
 ## What does not exist
 
-No executable code. No Canonical Knowledge Model. No compiler. No manifests. No
-policy instances. Nothing in `shared/`, `skills/`, `workflows/`, `model-spec/`,
-`schemas/`, `validation/`, `tests/`, `adapters/` or `docs/`.
+No Canonical Knowledge Model. No compiler. No manifests. No policy instances.
+Nothing in `shared/`, `skills/`, `workflows/`, `model-spec/`, `schemas/`,
+`validation/`, `tests/`, `adapters/` or `docs/`.
 
-The OWL skeleton is **hand-written, not compiled**.
+The OWL skeleton is **hand-written, not compiled**. The graph views **are**
+generated.
 
 ## Blocking
 
 **Nothing blocks B1.**
 
-One issue is open, and it is not architectural:
-
 | Issue | Why it is open |
 |---|---|
-| `ISSUE-0037` | Hand-maintained projections — operational debt that B5 discharges. The OWL skeleton is the sixth |
+| `ISSUE-0037` | Hand-maintained projections — operational debt. **Partly discharged**: `views/` is generated, the four indexes are not |
 
-## Scheduled
+## Ready to perform
 
-| Work | Trigger |
+| Work | State |
 |---|---|
-| **`ISSUE-0074` — metamodel simplification review** | ~75% of Layer A specified, i.e. about 20 of 27. **One entity away.** First candidate: `Dimension` / `DimensionSpecification` |
+| **`ISSUE-0074` — metamodel simplification review** | **Trigger met** (22 of 28) and the three graph views it is performed against exist. Two confirmed merge candidates, plus the `Specification` suffix as a general question and the `governs` collision |
 
 ## Architectural debt
 
-**23 deferred issues.** Reopened when implementation requires them, not on a
-schedule.
+**23 deferred issues.** Reopened when implementation requires them.
 
 Nearest to the surface:
 
-- **`ISSUE-0074`** — the simplification review, one entity from its trigger.
-- **`ISSUE-0073`** — surfaced twice in one session, in `Evidence` (runtime
-  observation ranked most direct while Operational Knowledge sits outside the
-  model) and in `Workflow` (Workflow Execution is unmodelled). Stepped over both
-  times.
-- **`ISSUE-0048`** — `ADR.corrects` is now specified as a relationship, and the
-  six existing corrections still live only in a hand-maintained table.
+- **`ISSUE-0074`** — ready to perform, not performed.
+- **`ISSUE-0073`** — surfaced a third time, in `Workflow`: Workflow Execution is
+  unmodelled, and executions are where Operational Knowledge would enter.
+- **`ISSUE-0048`** — `ADR.corrects` is specified; the six corrections still live
+  only in a hand-maintained table.
 
 ## Debt discovered while building
 
-**Recorded in each specification's `Debt` section, and in
-`model/metamodel/ontology/FINDINGS.md` for what the OWL exposed** — eight
-findings across two checkpoints.
+**In each specification's `Debt` section, in `ontology/FINDINGS.md` for what the
+OWL exposed, and in `views/README.md` for what the graphs showed.**
 
-Open, none blocking:
+Missing semantic constructs — the class of finding that replaced missing
+entities:
+
+| Construct | Status |
+|---|---|
+| **Ordering** | **Resolved** (`ADR-0068`). Intrinsic or extrinsic; no new construct needed |
+| **Transitions** | `declares-transitions` points at a non-entity. Extrinsic by `ADR-0068`'s test, so it should be reified like `WorkflowStep` |
+| **Conditions** | `WorkflowStep.guarded-by` and Workflow branches both point at "condition", which has no representation |
+
+Other open items, none blocking:
 
 | Question | Where |
 |---|---|
-| `RelationshipType` cannot express **order**, and `Workflow.sequences` needs it | `FINDINGS.md` #7 |
-| `EngineeringGate.holds` and `.produces` point at *question* and *outcome*, neither an entity | `FINDINGS.md` #8 |
+| The metamodel has **no reusable relationship vocabulary** — no relation used 3+ times in the ontology | `views/README.md` #3 |
+| `governs` names three different relationships | `views/README.md` #4 |
 | `Evidence.supports` has no range; no `Assertion` entity exists | `FINDINGS.md` #4 |
-| `DimensionAssignment.hasValue` has a per-dimension range plain OWL cannot express | `FINDINGS.md` #6 |
 | Nothing enforces that an acceptance reviewer differs from the author | `acceptance-record.md` |
 | Nothing detects that a deferred issue's trigger has been met | `issue.md` |
-| The framework declares none of its own BoundedContexts, Actors or RelationshipTypes | `bounded-context.md`, `actor.md`, `relationship-type.md` |
-| Whether Markdown or OWL is authoritative once the compiler exists | `FINDINGS.md` |
+| The framework declares none of its own BoundedContexts, Actors, RelationshipTypes or state machines | four specifications |
 
 ## Acceptance status
 
-`ACCEPT-0001` (trust root) through `ACCEPT-0019`, covering `SESSION-0006`
-through `SESSION-0023`.
+`ACCEPT-0001` (trust root) through `ACCEPT-0020`, covering `SESSION-0006`
+through `SESSION-0024`.
 
-**`ADR-0066`, `ADR-0067`, `ISSUE-0074`, `RelationshipType`, the seven operational
-specifications and the 0.2.0 ontology are `Under Review`**, not `Active`.
+**`ADR-0068`, `StateMachineSpecification`, `StateMachine`, `WorkflowStep`, the
+0.3.0 ontology, `tools/` and `views/` are `Under Review`**, not `Active`.
 
 ## Next action
 
-**Continue B1.** Five descriptive entities remain — `StateMachineSpecification`,
-`StateMachine`, `Vocabulary`, `Principle`, `KnowledgePackage` — plus the three
-unassigned.
+**Perform `ISSUE-0074`** — the simplification review, against the graph views
+rather than the specifications. The trigger is met and the inputs exist.
 
-**`StateMachineSpecification` / `StateMachine` should be written next**, because
-they have the same Specification/Instance shape as `Dimension` /
-`DimensionSpecification`. Writing them is what makes the simplification review
-answerable: if the pair has the same problem, the pattern is in question
-everywhere; if it does not, `Dimension` is the anomaly.
+Then finish B1: `Vocabulary`, `Principle`, `KnowledgePackage`,
+`RegistrySpecification`, `Manifest`, `ValidationRule`.
 
-Do not open architectural questions unless they block. Record and continue.
+**`RegistrySpecification` should be written before the review concludes**, or the
+review will decide the `Specification` suffix question on two data points when a
+third is one specification away.
 
 ## Repository state
 

@@ -10,6 +10,7 @@ blocks: []
 evidence:
   - model/metamodel/ontology/FINDINGS.md
   - model/metamodel/entity-inventory.md
+  - model/metamodel/views/README.md
   - governance/adr/ADR-0067-the-relationship-is-the-design-unit.md
 resolved-by: null
 defers-to: [B1]
@@ -20,6 +21,10 @@ debt: architectural
 
 > **Scheduled work, deferred by decision** (`ADR-0062`). Not blocking. The
 > trigger is a completion threshold, not a contradiction.
+>
+> **The trigger has been met** — 22 of 28 entities, and the three graph views the
+> review is to be performed against exist (`model/metamodel/views/`). The review
+> itself has not been performed.
 
 ## Statement
 
@@ -45,17 +50,32 @@ to be built.
 
 ## What we know
 
-**`Dimension` / `DimensionSpecification` is the first candidate.** The 1:1
-correspondence is a very strong signal. `Dimension` has no authoritative
-representation of its own, is functionally determined by its specification, and
-carries no property the specification lacks (`FINDINGS.md` #2).
+**Two candidates are now confirmed**, and the second is stronger than the first.
+
+| Candidate | Evidence |
+|---|---|
+| `StateMachine` / `StateMachineSpecification` | Introduces no relationship its specification declares (`ADR-0067` test, applied in `entities/state-machine.md`). **Pendant in every generated view.** Nothing points at it |
+| `Dimension` / `DimensionSpecification` | Same 1:1 shape (`FINDINGS.md` #2). **A pass-through chain node in two independent views.** Defensible only on the grounds that `DimensionAssignment.along` reads better pointing at an axis |
 
 The reviewer's instruction is explicit: **do not force them to remain separate
 merely because the architecture originally evolved that way.**
 
-The Specification/Instance split is used more than once — `StateMachineSpecification`
-/ `StateMachine` has the same shape and is unspecified. Whether that pair has the
-same problem is unknown, and it will be known once both are written.
+**The Specification/Instance pattern was tested against a second independent
+domain and did not survive.** State machines have the same empty middle layer.
+The conclusion may therefore be larger than two merges: if
+`RegistrySpecification` has the same shape, `Specification` is a suffix the
+metamodel applies where no distinction exists.
+
+**Genuine instantiation exists in both domains, but not where the pattern put
+it** — for dimensions it is `DimensionAssignment`, which already exists; for
+state machines it is an execution over time, which is Operational Knowledge and
+deliberately outside the model (`ISSUE-0073`).
+
+**A third structural candidate came from the graphs, not from the test.**
+`governs` names three different relationships — constrains normatively, controls
+the lifecycle of, may classify — and the ontology already had to rename one to
+avoid a clash. That is a candidate tenth terminology split (`ADR-0057`), and it
+belongs to this review.
 
 **Neither premature optimisation nor preserved accidental complexity is
 acceptable.** The threshold exists to hold that line.
@@ -67,9 +87,11 @@ of merge or retain decisions, each recorded.
 
 ## Resolution criteria
 
-Resolved when the review has been performed and its outcome recorded as ADRs —
-one per merge or explicit retention, at minimum for `Dimension` /
-`DimensionSpecification`.
+Resolved when the review has been performed **against the generated graph views
+rather than the Markdown specifications**, and its outcome recorded as ADRs — one
+per merge or explicit retention.
 
-**Trigger: approximately 75% of Layer A entities specified.** With 27 entities
-currently confirmed, that is roughly 20.
+At minimum: `StateMachine`, `Dimension`, the `Specification` suffix as a general
+question, and the `governs` collision.
+
+**Trigger: approximately 75% of Layer A entities specified. Met** — 22 of 28.

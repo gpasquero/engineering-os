@@ -15,7 +15,7 @@ committed.
 
 **Acceptance is an engineering decision, not a Git operation** (`ADR-0020`).
 
-**Highest allocated ID: `ACCEPT-0019`.** IDs are sequential and never reused.
+**Highest allocated ID: `ACCEPT-0020`.** IDs are sequential and never reused.
 
 ## Index
 
@@ -40,6 +40,7 @@ committed.
 | [ACCEPT-0017](ACCEPT-0017-session-0021-decisions.md) | `SESSION-0021` decisions and first Layer A artifacts at `926b0ee` | Project Owner (`gpasquero`) | accepted | 2026-08-02 |
 | [ACCEPT-0018](ACCEPT-0018-session-0022-decisions.md) | `SESSION-0022` decisions, licence and metamodel batch at `b23b173` | Project Owner (`gpasquero`) | accepted | 2026-08-02 |
 | [ACCEPT-0019](ACCEPT-0019-session-0023-decisions.md) | `SESSION-0023` decisions, semantic backbone and first OWL ontology at `7ee3b44` | Project Owner (`gpasquero`) | accepted | 2026-08-02 |
+| [ACCEPT-0020](ACCEPT-0020-session-0024-decisions.md) | `SESSION-0024` decisions, operational family and second OWL checkpoint at `1fdc337` | Project Owner (`gpasquero`) | accepted | 2026-08-02 |
 
 ## The three conditions
 

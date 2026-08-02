@@ -7,7 +7,7 @@ updated: 2026-08-02
 semantic-layer: A
 entity-family: operational
 artifact-kind: authoritative
-established-by: [ADR-0033, ADR-0051, ADR-0065]
+established-by: [ADR-0033, ADR-0051, ADR-0065, ADR-0068]
 ---
 
 # Workflow
@@ -70,14 +70,18 @@ Gates it passes through.
 
 | Relationship | Target | Cardinality |
 |---|---|---|
-| sequences | Skill | one or more, **ordered** |
+| has-step | WorkflowStep | one or more |
 | passes-through | EngineeringGate | zero or more |
 | governed-by | ProcessPolicy | zero or more |
 | produces | Artifact | zero or more, via its Skills |
 
-**`sequences` is the metamodel's first ordered relationship.** Every other
-relationship is a set; this one is a list, and `RelationshipType` has no field
-for that distinction.
+**`has-step` is unordered, and the Workflow is still ordered.** The order lives on
+`WorkflowStep.has-position` (`ADR-0068`): the same Skill occupies different
+positions in different Workflows, so the position is a fact about the association
+rather than about either end.
+
+A Workflow does not relate directly to a Skill. It relates to steps, and steps
+execute skills.
 
 ## extension points
 
@@ -87,15 +91,10 @@ methodology lives in Skills rather than here.
 
 ## Debt
 
-**`RelationshipType` cannot express order.** Its five fields — domain, range,
-cardinality, constraints, semantics — have no notion of sequence, and `sequences`
-needs one. **This is the first relationship the metamodel cannot type**, found by
-writing the entity that needs it.
-
-It does not block: the ordering can be carried in the Workflow's own declaration
-rather than in the relationship. It does mean the relationship vocabulary is
-incomplete, and `RelationshipType` will need either an ordering field or an
-explicit statement that ordered relationships are modelled differently.
+**Ordering was the first semantic construct the metamodel could not express**,
+and it is resolved (`ADR-0068`). The resolution cost one entity — `WorkflowStep` —
+and no extension to `RelationshipType`. Recorded because the next ordered domain
+should reach for the same answer rather than rediscovering it.
 
 **Workflow Execution is unmodelled.** `ADR-0057` names it as a canonical concept
 and no entity exists. Executions are where Operational Knowledge would enter the
