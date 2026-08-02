@@ -2,14 +2,14 @@
 id: ISSUE-0039
 title: The explicitly-configured governance policy mechanism does not exist
 type: gap
-status: open
+status: resolved
 severity: high
 created: 2026-08-02
 updated: 2026-08-02
 blocks: [M3]
 evidence:
   - governance/adr/ADR-0018-acceptance-confers-authoritative-status.md
-resolved-by: null
+resolved-by: ADR-0023
 ---
 
 # ISSUE-0039 — The governance policy mechanism does not exist
@@ -50,8 +50,23 @@ follow, in opposite directions:
 That third question is the interesting one: a governance policy that can be
 edited by the party it constrains provides no guarantee at all.
 
-## Resolution criteria
+## Resolution
 
-An ADR defining where governance policies live, what they may express, and who
-may change them — including the base case that terminates the regress. Feeds the
-autonomy and escalation policy in M3.
+`ADR-0023`. **Governance is self-hosting but never self-certifying.**
+
+Governance policies are themselves Authoritative Artifacts and follow exactly the
+same acceptance lifecycle. **A governance policy cannot modify itself.** Every
+change must be proposed separately, undergo review, receive an Acceptance
+Record, and become `Active` only after acceptance.
+
+The question this issue identified as the interesting one — *who may change a
+policy, and does that change require acceptance* — is answered by ordering:
+
+> **The currently Active governance policy always governs the acceptance of the
+> next revision.**
+
+This guarantees that no policy can silently relax the rules under which it is
+accepted. The base case is the trust root, `ACCEPT-0001`.
+
+Notably, no new concept was needed: policies reuse the artifact taxonomy, the
+revision lifecycle and the Acceptance Record unchanged.

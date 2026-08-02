@@ -2,7 +2,7 @@
 id: ISSUE-0040
 title: The entire existing corpus was self-certified and has no acceptance record
 type: risk
-status: open
+status: resolved
 severity: blocking
 created: 2026-08-02
 updated: 2026-08-02
@@ -10,7 +10,7 @@ blocks: [M2]
 evidence:
   - governance/adr/ADR-0018-acceptance-confers-authoritative-status.md
   - governance/sessions/SESSION-0004-2026-08-02.md
-resolved-by: null
+resolved-by: ADR-0022
 ---
 
 # ISSUE-0040 — The existing corpus was self-certified
@@ -61,7 +61,23 @@ the record into.
 this must state its own base case — the first acceptance is necessarily made
 under a rule that is not yet in force.
 
-## Resolution criteria
+## Resolution
 
-Either an acceptance record covering the existing corpus, or a recorded,
-time-bounded exception. Depends on `ISSUE-0041`.
+`ADR-0022`, realised as **`ACCEPT-0001`** — the repository's trust root.
+
+**Engineering OS cannot retroactively invent history**, so the repository
+bootstraps trust explicitly instead. A single Bootstrap Acceptance Record covers
+the corpus at revision `2b6484f`, stating that the artifacts were produced
+collaboratively during the bootstrap phase, were reviewed and directed by the
+project owner, that formal Acceptance Records did not yet exist, and that this
+record establishes the initial trusted baseline.
+
+**This is the only retrospective acceptance permitted.** All future authoritative
+revisions follow the normal workflow.
+
+The record is scoped to a **named revision** and explicitly cannot accept work
+created after it — otherwise a one-time trust root would become a standing
+exemption from acceptance.
+
+The circularity noted above is stated in the record rather than concealed: the
+first acceptance is necessarily made under a rule not yet in force.

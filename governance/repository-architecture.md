@@ -112,11 +112,16 @@ inherently non-deterministic. A generator may never invoke an agent — that wou
 make it non-deterministic.
 
 **Authoritative status is conferred by acceptance, not by authorship and not by
-a commit** (`ADR-0018`).
+a commit** (`ADR-0020`).
 
 ```text
-Draft → Under Review → Accepted → Authoritative → Superseded → Archived
+Draft → Under Review → Accepted → Active → Superseded → Archived
 ```
+
+This is the lifecycle of a **revision**, and it is independent of the artifact
+taxonomy. An artifact is *authoritative* because of its taxonomy; a revision is
+*Active* because of its lifecycle. Exactly one revision of an artifact is
+`Active` at a time.
 
 Acceptance is an engineering decision, not a Git operation. It requires all
 three of:
@@ -125,15 +130,26 @@ three of:
 2. traceability to the motivating issue, ADR or requirement
 3. successful validation of all applicable deterministic checks
 
+Condition 3 turns on **applicability**: where no deterministic validator exists,
+none are applicable and the condition is satisfied. Not an exception — the
+normal reading, which means the acceptance model never changes as tooling
+arrives (`ADR-0021`).
+
 **Self-certification is prohibited.** Engineering OS never assumes an AI agent
-can accept its own work; automated acceptance is possible only through an
-explicitly configured governance policy, and that mechanism does not yet exist
-(`ISSUE-0039`).
+can accept its own work.
 
-Acceptance itself is knowledge, and is traceable.
+Acceptance is recorded in an **Acceptance Record** under
+`governance/acceptance/` (`ADR-0021`), and is itself traceable knowledge.
 
-> The lifecycle state `Authoritative` and the artifact kind `authoritative` are
-> different concepts sharing one word. Unresolved — `ISSUE-0038`.
+**Governance is self-hosting but never self-certifying** (`ADR-0023`).
+Governance policies are Authoritative Artifacts following the same lifecycle,
+and **the currently `Active` policy always governs the acceptance of the next
+revision** — so no policy can silently relax the rules under which it is
+accepted.
+
+The chain terminates at **`ACCEPT-0001`**, the trust root: the single permitted
+retrospective acceptance, covering the bootstrap corpus at a named revision
+(`ADR-0022`).
 
 ## Reference architecture, not reference implementation
 
@@ -220,6 +236,7 @@ engineering-os/
 │   ├── inherited-decisions.md       Pre-M1 decisions awaiting ADR context
 │   ├── adr/                    Decision records
 │   ├── issues/                 Open questions, inconsistencies, gaps, risks
+│   ├── acceptance/             Acceptance Records — the trust chain
 │   ├── sessions/               Append-only session journal
 │   └── design/                 Working proposals, not yet decisions
 │
@@ -291,13 +308,11 @@ current state and proposed state. See `ADR-0005`.
 
 These are recorded as issues and must not be silently assumed:
 
-- `ISSUE-0038` — `authoritative` names both a lifecycle state and an artifact
-  kind. Blocks both vocabularies.
-- `ISSUE-0040` — every artifact here was self-certified and has no acceptance
-  record, including `ADR-0018` itself.
-- `ISSUE-0041` — the shape and location of an acceptance record.
-- `ISSUE-0039` — the governance policy mechanism that would permit automated
-  acceptance.
+- `ISSUE-0042` — whether an Acceptance Record itself requires acceptance.
+- `ISSUE-0043` — the project's document status vocabularies overlap the revision
+  lifecycle. Blocks `shared/vocabularies/`.
+- `ISSUE-0007` — versioning granularity, now also covering what identifies a
+  **revision**.
 - `ISSUE-0031` — the scope of this repository's own `model/`, and its overlap
   with `governance/`.
 - `ISSUE-0037` — hand-maintained projections, until generators exist.

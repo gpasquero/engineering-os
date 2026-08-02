@@ -26,8 +26,15 @@ recorded as issues. No skills, policies or contracts.
 
 ## M2 — Foundational contracts, manifests and the compiler interface
 
-**Blocked by `ISSUE-0038`, `ISSUE-0040` and `ISSUE-0041`** — all consequences of
-`ADR-0018`, which made acceptance architectural.
+**Unblocked.** `ISSUE-0038`, `ISSUE-0039`, `ISSUE-0040` and `ISSUE-0041` are
+resolved by `ADR-0020` through `ADR-0023`, and the trust root `ACCEPT-0001`
+exists.
+
+Two issues gate specific deliverables rather than the milestone:
+`ISSUE-0043` must be settled before `shared/vocabularies/`, and `ISSUE-0042`
+before the Acceptance Record contract in `shared/contracts/`. Other M2 work —
+the compiler interface specification, `model-spec/`, the manifests — can proceed
+in parallel.
 
 - **Compiler interface specification** (`ADR-0017`) — language-independent, and
   the substitute for shipping executable tooling in this milestone
@@ -38,10 +45,10 @@ recorded as issues. No skills, policies or contracts.
   (`ADR-0014`)
 - Skill contract and workflow contract, including write-scope declaration
 - Evidence record, conflict record, traceability record contracts
-- **Acceptance record contract** (`ADR-0018`, `ISSUE-0041`)
+- **Acceptance Record contract** (`ADR-0021`, `ISSUE-0042`)
 - `shared/vocabularies/` — single-source assertion statuses, confidence, risk,
-  gate decisions, change types, **artifact kinds** (`ADR-0012`) and **artifact
-  lifecycle states** (`ADR-0018`)
+  gate decisions, change types, **artifact kinds** (`ADR-0012`) and **revision
+  lifecycle states** (`ADR-0020`)
 - One canonical impact-analysis template
 
 **No executable tooling.** `ADR-0017` defers the implementation language, so
@@ -60,6 +67,10 @@ must be readable and editable without the compiler (`ADR-0017`).
 Evidence, research, ontology, constraint-placement, write-scope, autonomy and
 escalation, secrets and privacy, traceability, verification and
 knowledge-update policies.
+
+Also the **first governance policy** (`ADR-0023`). Being an Authoritative
+Artifact, it is accepted under the trust root `ACCEPT-0001`, and thereafter
+governs the acceptance of its own successor.
 
 ## M4 — Discovery skills
 

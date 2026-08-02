@@ -2,7 +2,7 @@
 id: ISSUE-0038
 title: "authoritative" names both a lifecycle state and an artifact kind
 type: inconsistency
-status: open
+status: resolved
 severity: blocking
 created: 2026-08-02
 updated: 2026-08-02
@@ -11,7 +11,7 @@ evidence:
   - governance/adr/ADR-0018-acceptance-confers-authoritative-status.md
   - governance/adr/ADR-0012-executable-framework-and-artifact-taxonomy.md
   - governance/adr/ADR-0014-three-tier-knowledge-model.md
-resolved-by: null
+resolved-by: ADR-0020
 ---
 
 # ISSUE-0038 — `authoritative` names two different things
@@ -66,8 +66,29 @@ between the two states is usable by the compiler.
 - Keep both and disambiguate by qualifier everywhere. Weakest option; it is what
   the project already had to abandon for "skill".
 
-## Resolution criteria
+## Resolution
 
-An ADR fixing both vocabularies with no shared term, and stating precisely what
-distinguishes `Accepted` from `Authoritative`. Must precede
-`shared/vocabularies/`.
+`ADR-0020`. **The lifecycle state `Authoritative` is renamed `Active`.** The
+artifact taxonomy keeps `authoritative`, being the more established usage.
+
+- **Artifact taxonomy** — the *nature of an artifact*: Authoritative, Derived,
+  Runtime, Cached.
+- **Revision lifecycle** — the lifecycle of a *revision*: Draft, Under Review,
+  Accepted, **Active**, Superseded, Archived.
+
+The second ambiguity is answered with a real distinction, not a definition of
+convenience:
+
+- **Accepted** — the revision has successfully completed the acceptance process.
+- **Active** — the accepted revision is the current governing revision for that
+  artifact.
+
+It matters because an accepted revision may immediately become superseded by a
+newer accepted revision.
+
+> An artifact is authoritative because of its **taxonomy**. A revision is Active
+> because of its **lifecycle**. The two remain completely independent.
+
+Opened by this answer: `ISSUE-0043` — the project's own document status
+vocabularies now overlap the revision lifecycle. `revision` also became
+load-bearing and undefined; folded into `ISSUE-0007`.

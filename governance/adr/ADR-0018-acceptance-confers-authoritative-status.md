@@ -1,10 +1,10 @@
 ---
 id: ADR-0018
 title: Acceptance confers authoritative status; compilation remains deterministic
-status: accepted
+status: superseded
 date: 2026-08-02
 supersedes: ADR-0015
-superseded-by: null
+superseded-by: ADR-0020
 resolves: [ISSUE-0009]
 related: [ADR-0014, ISSUE-0038, ISSUE-0039, ISSUE-0040, ISSUE-0041]
 ---

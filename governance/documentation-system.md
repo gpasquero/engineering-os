@@ -37,6 +37,7 @@ If a fact cannot be traced to a file in this repository, it does not exist.
 | Architecture Decision Record | `ADR-` | `governance/adr/` | Immutable once `accepted` | Records a decision, its context, alternatives and consequences |
 | Issue | `ISSUE-` | `governance/issues/` | Mutable until `closed` | Records an open question, inconsistency, gap or risk |
 | Session log | `SESSION-` | `governance/sessions/` | Immutable once written | Append-only journal of what a session did |
+| Acceptance Record | `ACCEPT-` | `governance/acceptance/` | Immutable once written | The act that confers `Active` status on a revision (`ADR-0021`) |
 | Governance document | none | `governance/` | Mutable | Vision, principles, glossary, roadmap, architecture, protocol |
 | Build state | none | `governance/build-state.md` | Overwritten | The single current-status document |
 | Design note | none | `governance/design/` | Mutable | Working proposals not yet promoted to a decision |
@@ -116,6 +117,12 @@ An accepted ADR is never edited. It is superseded by a new ADR.
 **Governance-document status** — `accepted` (normative), `current` (a living
 index or status document), `proposal` (a design note, not binding),
 `superseded` (replaced; must name `superseded-by`).
+
+> **These three vocabularies predate the revision lifecycle** defined in
+> `ADR-0020` (`Draft`, `Under Review`, `Accepted`, `Active`, `Superseded`,
+> `Archived`), and overlap it without agreeing. An ADR marked
+> `status: accepted` is, in lifecycle terms, `Active`. Unresolved —
+> `ISSUE-0043`. Must be settled before `shared/vocabularies/` is written.
 
 ## ID allocation
 

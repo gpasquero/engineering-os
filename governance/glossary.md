@@ -101,14 +101,41 @@ authoritative. Requires explicit reviewer approval, traceability to the
 motivating issue or ADR, and successful validation of applicable deterministic
 checks. Is itself knowledge, and traceable. See `ADR-0018`.
 
-**Artifact lifecycle** — a closed vocabulary of six states (`ADR-0018`):
-`Draft` → `Under Review` → `Accepted` → `Authoritative` → `Superseded` →
-`Archived`.
+**Revision** — an identifiable version of an artifact. The unit the lifecycle
+applies to, and the unit that is accepted. What identifies a revision is
+undefined — `ISSUE-0007`.
 
-> **Disambiguation, unresolved.** `Authoritative` is a *lifecycle state* here and
-> an *artifact kind* in the taxonomy below. They are different concepts sharing
-> one word — the same defect as the overloaded "skill". See `ISSUE-0038`. What
-> distinguishes `Accepted` from `Authoritative` is also unsettled.
+**Revision lifecycle** — a closed vocabulary of six states (`ADR-0020`):
+`Draft` → `Under Review` → `Accepted` → `Active` → `Superseded` → `Archived`.
+
+- **Accepted** — the revision has successfully completed the acceptance process.
+- **Active** — the accepted revision is the current governing revision for that
+  artifact. Exactly one revision of an artifact is `Active` at a time.
+
+The distinction matters because an accepted revision may immediately become
+superseded by a newer accepted revision.
+
+> **The two axes are independent.** An artifact is *authoritative* because of its
+> **taxonomy**; a revision is *Active* because of its **lifecycle**. A
+> hand-authored ontology file is an Authoritative Artifact whether its current
+> revision is `Draft`, `Active` or `Archived`.
+>
+> The lifecycle state formerly called `Authoritative` was renamed `Active` to
+> end that collision (`ISSUE-0038`).
+
+**Acceptance Record** — the artifact that records an acceptance, under
+`governance/acceptance/` with the prefix `ACCEPT-`. A first-class Authoritative
+Artifact. Whether it requires acceptance itself is unresolved — `ISSUE-0042`.
+
+**Trust root** — `ACCEPT-0001`, the single permitted retrospective acceptance,
+covering the bootstrap corpus at a named revision. Every later acceptance chains
+back to it (`ADR-0022`).
+
+**Governance policy** — an Authoritative Artifact that constrains how work is
+accepted. Follows the same lifecycle as any other. **The currently `Active`
+policy always governs the acceptance of the next revision**, so no policy can
+silently relax the rules under which it is accepted. Governance is
+**self-hosting but never self-certifying** (`ADR-0023`).
 
 **Self-certification** — an author accepting its own work. **Prohibited** unless
 an explicit governance policy enables it. Engineering OS never assumes an AI

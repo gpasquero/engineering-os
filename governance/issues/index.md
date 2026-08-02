@@ -9,24 +9,26 @@ related: [ISSUE-0037]
 
 # Issue Index
 
-**41 recorded · 24 open · 16 resolved · 1 deferred.** Highest allocated ID:
-`ISSUE-0041`.
+**43 recorded · 22 open · 20 resolved · 1 deferred.** Highest allocated ID:
+`ISSUE-0043`.
 
 > **Hand-maintained projection.** Under `ADR-0016` this is a projection of issue
-> front matter, which is authoritative. No generator exists yet
-> (`ISSUE-0036`), so it is maintained by hand as declared transitional debt —
-> registered in `ISSUE-0037`. **These counts drifted once already**, in
-> `SESSION-0004`. The issue files win in any disagreement.
+> front matter, which is authoritative. No generator exists yet (`ISSUE-0036`),
+> so it is maintained by hand as declared transitional debt — registered in
+> `ISSUE-0037`. **These counts drifted once already**, in `SESSION-0004`; they
+> are now computed from the files before each rewrite. The issue files win in
+> any disagreement.
 
 ## Blocking — the named milestone cannot start
 
 | ID | Title | Blocks |
 |---|---|---|
-| [0038](ISSUE-0038-authoritative-names-two-things.md) | `authoritative` names both a lifecycle state and an artifact kind | **M2** |
-| [0040](ISSUE-0040-existing-corpus-was-self-certified.md) | The entire existing corpus was self-certified | **M2** |
-| [0041](ISSUE-0041-acceptance-record-undefined.md) | The acceptance record is undefined | **M2** |
 | [0002](ISSUE-0002-composition-primitive-undefined.md) | How a workflow invokes a skill is undefined | M8 |
 | [0006](ISSUE-0006-scenario-testing-method-undefined.md) | How a prompt-based methodology is tested is undefined | M10 |
+
+**M2 is unblocked.** Two issues gate specific deliverables within it rather than
+the milestone: `ISSUE-0043` before `shared/vocabularies/`, `ISSUE-0042` before
+the Acceptance Record contract.
 
 ## Open, by milestone
 
@@ -34,10 +36,9 @@ related: [ISSUE-0037]
 
 | ID | Title | Type | Severity |
 |---|---|---|---|
-| [0038](ISSUE-0038-authoritative-names-two-things.md) | `authoritative` names two things | inconsistency | blocking |
-| [0040](ISSUE-0040-existing-corpus-was-self-certified.md) | Existing corpus was self-certified | risk | blocking |
-| [0041](ISSUE-0041-acceptance-record-undefined.md) | Acceptance record undefined | gap | blocking |
-| [0007](ISSUE-0007-versioning-granularity-undefined.md) | Versioning granularity and compatibility policy | question | high |
+| [0042](ISSUE-0042-acceptance-record-regress.md) | Does an Acceptance Record require acceptance? | question | high |
+| [0043](ISSUE-0043-document-status-vocabularies-overlap-lifecycle.md) | Document status vocabularies overlap the revision lifecycle | inconsistency | high |
+| [0007](ISSUE-0007-versioning-granularity-undefined.md) | Versioning granularity; what identifies a revision | question | high |
 | [0011](ISSUE-0011-audience-licence-distribution-undefined.md) | Repository is public with no licence | question | high |
 | [0013](ISSUE-0013-three-conflicting-impact-analysis-templates.md) | Three conflicting impact-analysis templates | inconsistency | high |
 | [0014](ISSUE-0014-model-changes-directory-missing.md) | `model/changes/` absent from the canonical tree | inconsistency | high |
@@ -53,7 +54,6 @@ related: [ISSUE-0037]
 | [0010](ISSUE-0010-definition-of-done-missing.md) | Definition of Done asserted but never stated | gap | high |
 | [0020](ISSUE-0020-three-conflicting-autonomy-policies.md) | Three incompatible autonomy policies | inconsistency | high |
 | [0021](ISSUE-0021-write-scope-conflict-on-composition.md) | Write scope conflicts on composition | risk | high |
-| [0039](ISSUE-0039-governance-policy-mechanism-missing.md) | Governance policy mechanism does not exist | gap | high |
 | [0027](ISSUE-0027-inherited-decisions-lack-context.md) | Ten inherited decisions have no rationale | gap | medium |
 
 ### M4 — Discovery skills
@@ -109,7 +109,7 @@ related: [ISSUE-0037]
 | [0003](ISSUE-0003-manifest-purpose-undefined.md) | Purpose and schema of `MANIFEST.yaml` | `ADR-0009` → `ADR-0013` |
 | [0004](ISSUE-0004-model-tree-location-undefined.md) | Location of the Layer B model tree | `ADR-0010` |
 | [0005](ISSUE-0005-executable-code-in-repository.md) | Whether the repository ships executable code | `ADR-0012` |
-| [0009](ISSUE-0009-human-in-the-loop-undefined.md) | Human-in-the-loop authority — answered as acceptance | `ADR-0018` |
+| [0009](ISSUE-0009-human-in-the-loop-undefined.md) | Human-in-the-loop authority — answered as acceptance | `ADR-0018` → `ADR-0020` |
 | [0012](ISSUE-0012-skill-term-overloaded.md) | The term "skill" is overloaded | `governance/glossary.md` |
 | [0022](ISSUE-0022-bootstrap-versus-product-identity.md) | Bootstrap package versus product | `ADR-0001` |
 | [0023](ISSUE-0023-reading-order-omitted-vision.md) | Reading order omitted the vision | `ADR-0002` |
@@ -119,6 +119,10 @@ related: [ISSUE-0037]
 | [0029](ISSUE-0029-knowledge-package-format-undefined.md) | Knowledge Package format | `ADR-0019` |
 | [0030](ISSUE-0030-manifest-serves-two-audiences.md) | Manifest audiences — answered as three manifests | `ADR-0013` |
 | [0032](ISSUE-0032-implementation-language-and-toolchain.md) | Implementation language and toolchain | `ADR-0017` |
-| [0033](ISSUE-0033-determinism-boundary.md) | Determinism boundary | `ADR-0015` → `ADR-0018` |
+| [0033](ISSUE-0033-determinism-boundary.md) | Determinism boundary | `ADR-0015` → `ADR-0020` |
 | [0034](ISSUE-0034-canonical-model-versus-model-directory.md) | `model/` — authoritative input or compiled output | `ADR-0014` |
 | [0035](ISSUE-0035-build-state-manifest-overlaps-governance.md) | `BUILD-STATE.yaml` duplicates `governance/` | `ADR-0016` |
+| [0038](ISSUE-0038-authoritative-names-two-things.md) | `authoritative` named two things | `ADR-0020` |
+| [0039](ISSUE-0039-governance-policy-mechanism-missing.md) | Governance policy mechanism | `ADR-0023` |
+| [0040](ISSUE-0040-existing-corpus-was-self-certified.md) | Existing corpus was self-certified | `ADR-0022` → `ACCEPT-0001` |
+| [0041](ISSUE-0041-acceptance-record-undefined.md) | Acceptance record undefined | `ADR-0021` |

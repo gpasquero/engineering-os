@@ -12,14 +12,14 @@ milestone: M2
 **This document describes only what exists. Planned work belongs in
 `governance/roadmap.md`. Overwrite this file; do not append.**
 
-> This is an **authoritative** governance document, not a projection
-> (`ADR-0016`). The machine-readable `BUILD-STATE.yaml` will be generated from
-> it and from issue front matter.
+> An **Authoritative Artifact**, not a projection (`ADR-0016`). The
+> machine-readable `BUILD-STATE.yaml` will be generated from it and from issue
+> front matter.
 
 ## Current milestone
 
 **M2 — Foundational contracts, manifests and the compiler interface. Not
-started, and blocked.**
+started, and unblocked.**
 
 M1 is complete.
 
@@ -31,9 +31,10 @@ M1 is complete.
 | Documentation system, session protocol | Defined and accepted |
 | Vision, principles, glossary | Written |
 | Roadmap | M1–M13 |
-| ADRs | 19 — 15 accepted, 4 superseded |
-| Issues | 41 recorded — 24 open, 16 resolved, 1 deferred |
-| Session journal | 5 entries |
+| ADRs | 23 — 18 accepted, 5 superseded |
+| Issues | 43 recorded — 22 open, 20 resolved, 1 deferred |
+| **Acceptance Records** | **1 — `ACCEPT-0001`, the trust root** |
+| Session journal | 6 entries |
 | Frozen provenance | `imports/` (3 prototypes), `sources/` (requirements, archives, original handoff) |
 
 ## What does not exist
@@ -42,19 +43,31 @@ No executable code, and none is planned before M9 (`ADR-0017`, `ISSUE-0036`).
 
 Nothing has been built in `shared/`, `skills/`, `workflows/`, `model-spec/`,
 `model/`, `templates/`, `schemas/`, `validation/`, `tests/`, `adapters/` or
-`docs/`. None of the three manifests exist.
+`docs/`. None of the three manifests exist. No governance policy exists — the
+first arrives in M3.
 
-**No acceptance records exist**, and no mechanism defines them.
+## Acceptance status
 
-## Blocking M2
+`ACCEPT-0001` covers the bootstrap corpus at revision `2b6484f` and **nothing
+after it** (`ADR-0022`).
 
-All three follow from `ADR-0018`, which made acceptance architectural.
+**Everything created since that revision is `Under Review`, not `Active`** —
+`ADR-0020` through `ADR-0023`, `ACCEPT-0001` itself, `ISSUE-0042`, `ISSUE-0043`,
+and this session's propagation edits. They await acceptance by a reviewer other
+than their author (`ADR-0023`).
 
-| Issue | Question |
+This is the normal workflow operating, not a defect. It is also the first time
+the repository has held unaccepted work, which is what the lifecycle exists to
+express.
+
+## Blocking
+
+**Nothing blocks M2.** Two issues gate specific deliverables within it:
+
+| Issue | Gates |
 |---|---|
-| `ISSUE-0038` | `authoritative` names both a lifecycle state and an artifact kind. Both vocabularies are early M2 deliverables; renaming afterwards is expensive. |
-| `ISSUE-0041` | What an acceptance record is — fields, location, artifact kind, and whether condition 3 can be satisfied before validation tooling exists. |
-| `ISSUE-0040` | Every artifact here was self-certified and has no acceptance record, including `ADR-0018` itself. Depends on `ISSUE-0041`. |
+| `ISSUE-0043` | `shared/vocabularies/` — four document status vocabularies overlap the revision lifecycle |
+| `ISSUE-0042` | The Acceptance Record contract — whether a record requires its own acceptance |
 
 `ISSUE-0002` (M8) and `ISSUE-0006` (M10) block later milestones.
 
@@ -63,23 +76,19 @@ All three follow from `ADR-0018`, which made acceptance architectural.
 `ISSUE-0007`, `ISSUE-0011`, `ISSUE-0013`, `ISSUE-0014`, `ISSUE-0015`,
 `ISSUE-0018`, `ISSUE-0019`, `ISSUE-0031`.
 
-## Known debt and compliance gaps
+## Known debt
 
-- **`ISSUE-0040`** — the repository does not satisfy `ADR-0018`. The
-  authoritative tier currently rests on nothing, because nothing in it was
-  accepted by anyone other than its author.
 - **`ISSUE-0037`** — five hand-maintained projections, because no generator can
-  exist until `ISSUE-0036` is un-deferred. The counts in
-  `governance/issues/index.md` already drifted once, in `SESSION-0004`.
-- **`ISSUE-0039`** — the governance policy mechanism that `ADR-0018` names as
-  the only route to automated acceptance does not exist.
+  exist until `ISSUE-0036` is un-deferred. Counts drifted once already, in
+  `SESSION-0004`, and are now recomputed from the files before each rewrite.
 
 ## Next action
 
-Resolve `ISSUE-0041` first — it is the dependency for `ISSUE-0040`, and until an
-acceptance record exists there is nowhere to record that anything was accepted.
+Accept this session's work, or return it for revision. Until then the corpus
+above `2b6484f` is `Under Review`.
 
-Then `ISSUE-0038`, before `shared/vocabularies/` is written.
+Then M2: the compiler interface specification and `model-spec/` can proceed
+immediately; `shared/vocabularies/` waits on `ISSUE-0043`.
 
 ## Repository state
 

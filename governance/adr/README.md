@@ -12,7 +12,7 @@ related: [ISSUE-0037]
 A decision that is not recorded here will be re-litigated. Write the ADR in the
 same session the decision is made.
 
-**Highest allocated ID: `ADR-0019`.** IDs are sequential and never reused.
+**Highest allocated ID: `ADR-0023`.** IDs are sequential and never reused.
 
 > This index table is a hand-maintained projection of ADR front matter. It is
 > listed in the transitional-debt register, `ISSUE-0037`.
@@ -23,8 +23,9 @@ Read these before designing anything that produces an artifact:
 
 - **`ADR-0014`** — Engineering OS is a knowledge compiler over a three-tier
   knowledge model.
-- **`ADR-0018`** — acceptance confers authoritative status; compilation remains
-  deterministic.
+- **`ADR-0020`** — artifact taxonomy and revision lifecycle are independent;
+  acceptance confers `Active` status.
+- **`ADR-0023`** — governance is self-hosting but never self-certifying.
 - **`ADR-0017`** — reference architecture, not reference implementation.
 - **`ADR-0019`** — Knowledge Packages are a published interface.
 
@@ -49,8 +50,12 @@ Read these before designing anything that produces an artifact:
 | [ADR-0015](ADR-0015-authoring-is-non-deterministic-compilation-is-deterministic.md) | Authoring is non-deterministic; compilation is deterministic | **superseded by ADR-0018** | ISSUE-0033 |
 | [ADR-0016](ADR-0016-governance-is-authoritative-manifests-are-projections.md) | Governance is authoritative; manifests are projections | accepted | ISSUE-0028, ISSUE-0035 |
 | [ADR-0017](ADR-0017-reference-architecture-not-reference-implementation.md) | **Reference architecture, not reference implementation** | accepted | ISSUE-0032 |
-| [ADR-0018](ADR-0018-acceptance-confers-authoritative-status.md) | **Acceptance confers authoritative status** | accepted | ISSUE-0009 |
+| [ADR-0018](ADR-0018-acceptance-confers-authoritative-status.md) | Acceptance confers authoritative status | **superseded by ADR-0020** | ISSUE-0009 |
 | [ADR-0019](ADR-0019-knowledge-packages-are-a-published-interface.md) | **Knowledge Packages are a published interface** | accepted | ISSUE-0029 |
+| [ADR-0020](ADR-0020-artifact-taxonomy-and-revision-lifecycle-are-independent.md) | **Artifact taxonomy and revision lifecycle are independent** | accepted | ISSUE-0038 |
+| [ADR-0021](ADR-0021-acceptance-record-specification.md) | Acceptance Record specification | accepted | ISSUE-0041 |
+| [ADR-0022](ADR-0022-bootstrap-acceptance-establishes-the-trust-root.md) | Bootstrap acceptance establishes the trust root | accepted | ISSUE-0040 |
+| [ADR-0023](ADR-0023-governance-is-self-hosting-never-self-certifying.md) | **Governance is self-hosting but never self-certifying** | accepted | ISSUE-0039 |
 
 ## Supersessions
 
@@ -60,9 +65,14 @@ Read these before designing anything that produces an artifact:
 | `ADR-0009` | `ADR-0013` | Nothing was wrong. The identity claim survives in full; only the scope of `MANIFEST.yaml` narrows as concerns redistribute across three manifests. |
 | `ADR-0011` | `ADR-0014` | The compiler principle survives entirely. What is added is the three-tier distinction that made `model/`'s status unambiguous. |
 | `ADR-0015` | `ADR-0018` | The determinism principle survives. What changes is the boundary marker: a commit no longer confers authoritative status — acceptance does. |
+| `ADR-0018` | `ADR-0020` | The acceptance decision survives in full. What changes is the lifecycle vocabulary: the state `Authoritative` is renamed `Active`, and the lifecycle applies to a revision rather than an artifact. |
 
 Superseded ADRs are retained as the record of what was believed before. Read the
 superseding ADR for the current rule.
+
+The acceptance chain `ADR-0015` → `ADR-0018` → `ADR-0020` is three deep in two
+sessions. That depth is honest evidence that this area is still settling, not a
+defect in the mechanism.
 
 ## Rules
 

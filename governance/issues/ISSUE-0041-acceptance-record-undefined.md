@@ -2,14 +2,14 @@
 id: ISSUE-0041
 title: The shape and location of an acceptance record are undefined
 type: gap
-status: open
+status: resolved
 severity: blocking
 created: 2026-08-02
 updated: 2026-08-02
 blocks: [M2]
 evidence:
   - governance/adr/ADR-0018-acceptance-confers-authoritative-status.md
-resolved-by: null
+resolved-by: ADR-0021
 ---
 
 # ISSUE-0041 — The acceptance record is undefined
@@ -51,8 +51,27 @@ evidence, conflict and traceability records.
 That last question needs an answer immediately, because it determines whether
 *any* artifact can be accepted before M9.
 
-## Resolution criteria
+## Resolution
 
-A contract in `shared/contracts/` defining the acceptance record, plus an ADR
-settling the regress base case and the status of condition 3 before validation
-tooling exists.
+`ADR-0021`. **Acceptance Records are first-class Authoritative Artifacts** with
+a dedicated specification, located under `governance/acceptance/`.
+
+Fourteen minimum fields, from `id` and artifact revision through reviewer,
+decision, rationale, related ADRs and issues, validation summary, exceptions,
+supersession links, and `signatures` as a future extension.
+
+**The condition 3 question is answered by applicability, not by exception.** The
+requirement is "all *applicable* deterministic validations". Where no
+deterministic validator exists, none are applicable, and condition 3 is
+satisfied. This is the normal reading — as tooling evolves, additional checks
+become applicable automatically without any change to the acceptance model.
+
+That reading matters: treating condition 3 as blocking would have made every
+artifact unacceptable before M9, including the decision needed to bootstrap the
+trust root.
+
+The location question resolved to `governance/`, not `model/`.
+
+**The regress is not settled.** An Acceptance Record is itself an Authoritative
+Artifact and would by the letter of `ADR-0020` require its own acceptance —
+`ISSUE-0042`.

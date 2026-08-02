@@ -76,8 +76,12 @@ Authoritative status is determined by an explicit acceptance process, **not by
 who created the artifact**. Lifecycle:
 
 ```text
-Draft → Under Review → Accepted → Authoritative → Superseded → Archived
+Draft → Under Review → Accepted → Active → Superseded → Archived
 ```
+
+> The state shown here as `Active` was originally named `Authoritative` in
+> `ADR-0018`. It was renamed by `ADR-0020`, which supersedes it, to end the
+> collision with the artifact kind of the same name (`ISSUE-0038`).
 
 **Acceptance is an engineering decision, not a Git operation. A commit alone
 does not make an artifact authoritative** — which corrects the boundary marker

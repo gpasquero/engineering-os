@@ -43,6 +43,26 @@ on a specific contract version.
 - **Repository version plus contract versions** — only the machine-checkable
   interfaces version independently. Middle path.
 
+## Extended by ADR-0020 and ADR-0021
+
+The revision lifecycle applies to **revisions**, and an Acceptance Record
+carries an `artifact revision` field. Nothing defines what identifies a
+revision.
+
+This is a distinct question from component versioning, but it is close enough
+that one ADR should settle both:
+
+- Is a revision a commit SHA, a content hash, or a declared version?
+- A commit SHA is unambiguous but couples the knowledge model to Git, which
+  `ADR-0018` deliberately decoupled acceptance from.
+- A content hash is VCS-independent but unreadable, and changes on
+  whitespace-only edits.
+- A declared version is readable but must be maintained by the author, and
+  nothing would prevent two different contents claiming one revision.
+
+Until this is settled, `ACCEPT-0001` uses a commit SHA — a pragmatic choice for
+a trust root, not a decision.
+
 ## Resolution criteria
 
 An ADR naming the version-bearing units, the scheme, what a breaking change
