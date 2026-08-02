@@ -104,6 +104,20 @@ registries:
       An adopting repository declares recommendations from registered queries.
       Recommendation logic is never written in code (ADR-0091).
 
+  - id: REG-plans
+    registers: engineering plans, derived deterministically from the model
+    source: ../plans.md
+    extraction: yaml-block
+    collection: plans
+    membership: >
+      A plan is registered by appearing with an id, an objective, the subject
+      types it applies to, a rationale, phases whose recommendations and actions
+      exist, and an explicit list of what it defers.
+    extension: >
+      An adopting repository declares plans from registered recommendations and
+      queries. No plan logic is written in code, and no language model
+      participates in producing a plan (ADR-0092, ADR-0094).
+
   - id: REG-validation-rules
     registers: the rules the compiler executes
     source: validation-rules.md

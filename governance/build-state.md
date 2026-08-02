@@ -4,7 +4,7 @@ title: Build State
 status: current
 created: 2026-08-02
 updated: 2026-08-02
-milestone: exploit-the-model
+milestone: engineering-planning
 ---
 
 # Build State
@@ -17,78 +17,91 @@ milestone: exploit-the-model
 
 ## Current work
 
-**Exploiting the Kubernetes model** (`ADR-0089`). Engineering value is the
-optimization target; architecture serves the product.
+**The Engineering Director** (`ADR-0092`). Engineering OS reasons; LLMs execute,
+and the two responsibilities are never merged.
+
+## The measure
+
+`ADR-0093`. **How much engineering judgment happens before an LLM must think.**
+Entity, ADR, compiler-feature and query counts are inventory, not progress.
+
+| Plan | Subject | Derived | Deferred |
+|---|---|---|---|
+| `P-change-implementation` | `Artifact.ConflictGo` | **10** | 3 |
+| `P-change-implementation` | `Artifact.MetaV1Types` | 6 | 3 |
+| `P-change-concept` | `Concept.ManagedFields` | 14 | 3 |
+
+**Deferred items are enumerated, never counted.** *This plan cannot tell you
+whether the change is source-compatible for existing callers* is information;
+*3 deferrals* is a metric.
 
 ## What valuable engineering capability became possible
 
-**Engineering OS now produces guidance, not only knowledge.**
+**A deterministic Engineering Plan, derived entirely from the model.**
 
 ```sh
-python3 tools/advise.py external/kubernetes-ssa R-change-implementation Artifact.ConflictGo
-python3 tools/advise.py external/kubernetes-ssa R-audit-model
-python3 tools/ask.py external/kubernetes-ssa Q-assumptions Artifact.MetaV1Types
+python3 tools/plan.py external/kubernetes-ssa P-change-implementation Artifact.ConflictGo
+python3 tools/plan.py external/kubernetes-ssa P-change-concept Concept.ManagedFields --reasoning
 ```
 
-A maintainer about to change `conflict.go` is told what to review, verify,
-inspect and investigate — **and every line names the query that produced it.**
-Nothing is asserted that a query did not return.
+Objective · assumptions · reasoning chain · ordered actions · dependencies ·
+required reviews · expected evidence · completion conditions · **derived and
+deferred judgment**.
+
+**No language model participates.** Every action names the query and
+recommendation that produced it.
+
+### The plan surfaced the model's own gap as an unmet precondition
+
+Planning a change to `conflict.go` leaves one completion condition unchecked:
+
+```text
+[ ] The constraints on this artifact are known and were reviewed.   [Q-assumptions]
+[x] At least one test validates this artifact.                      [Q-tests]
+```
+
+That is the traceability gap found last session — nothing constrains
+`Concept.Conflict` — **arriving unprompted as a reason the work is not ready to
+start.** The same plan against `Artifact.MetaV1Types` checks that box and leaves
+the other unchecked.
 
 ## What exists
 
 | Area | State |
 |---|---|
-| **`model/recommendations.md`** | **3 recommendations**, composed entirely of semantic queries. No logic in code (`ADR-0091`) |
-| **`compiler/recommend/`** | Executes recommendations by executing queries; 6-action closed vocabulary |
-| **`tools/advise.py`** | Implements no recommendation. `--json` for agents |
-| **`model/finding-kinds.md`** | **8-kind taxonomy ranked by strength** (`ADR-0090`). **No confidence scores anywhere** |
-| `model/queries.md` | **17 declared queries** — `Q-assumptions`, `Q-obsolete-decisions`, `Q-stale-implementation` added |
-| `compiler/query/` | 5 operators + **`has-path`**, the second gap external validation found |
-| `external/kubernetes-ssa/` | 41 nodes, four source classes, **6 findings classified by kind and support** |
-| `tests/` | **17 fixtures**, 9 negative, golden outputs, query rows/status/paths |
-| Parity | **981 query/subject pairs** across four projects, full fidelity |
-| `model/metamodel/` | 23 of 27 entities — **unchanged for two milestones** |
-| ADRs | 91 — 83 accepted, 8 superseded |
-| Issues | 74 — 1 open, 51 resolved, 22 deferred |
-| Acceptance Records | 28 · Session journal | 33 entries |
+| **`model/plans.md`** | **2 plans**, declared. Phases, dependencies, reviews, evidence, completion, explicit `defers` |
+| **`compiler/plan/`** | Derives plans by executing queries and recommendations. Stable topological phase order; cyclic dependencies rejected |
+| **`tools/plan.py`** | Implements no plan. `--reasoning` prints the full chain; `--json` for executors |
+| `model/recommendations.md` · `compiler/recommend/` | 3 recommendations, 6-action vocabulary |
+| `model/queries.md` · `compiler/query/` | 17 queries, 6 operators |
+| `model/finding-kinds.md` | 8-kind taxonomy. **No confidence scores anywhere** |
+| `external/kubernetes-ssa/` | 41 nodes, four source classes, 6 classified findings |
+| `tests/` | 17 fixtures, 9 negative, golden outputs |
+| Parity | **981 query/subject pairs**, four projects, full fidelity |
+| `model/metamodel/` | 23 of 27 entities — **unchanged for three milestones** |
+| Registries | **8** — entity types, predicates, core types, rules, queries, recommendations, plans, finding kinds |
 
-## The Kubernetes findings, classified
+## Awaiting decision
 
-`ADR-0090`. **Kind describes what was found; support describes how well it is
-evidenced.**
+**`EngineeringIntent`** — `governance/design/PROPOSAL-engineering-intent.md`.
+**Not implemented**, as directed.
 
-| Finding | Kind | Rank | Support |
-|---|---|---|---|
-| A `managedFields` timestamp is not the time that entry last changed | documentation-gap | 5 | confirmed |
-| That timestamp is rendered in the conflict message a user reads | observability-gap | 6 | confirmed |
-| `ApplyRequiresFieldManager` is asserted by a test and no document | documentation-gap | 5 | confirmed |
-| **Nothing constrains `Concept.Conflict`** — found by `Q-assumptions`, not by reading | traceability-gap | 4 | confirmed |
-| Whether KEP-2885 and KEP-5958 refine KEP-555 | ambiguous-evidence | 7 | ambiguous |
-| Who owns fields set by defaulting | missing-evidence | 8 | unsupported |
-
-**Ranks 1–3 are empty.** No confirmed contradiction, no behavioral or
-architectural inconsistency. **The strongest thing this validation found is a
-documentation gap**, and saying so is the point of the taxonomy.
-
-## Two external-validation gaps, two domain-neutral corrections
-
-| Gap | Where it belonged | Correction |
-|---|---|---|
-| An assertion could not cite its exact source | **authoring representation** | uninterpreted `attributes` on nodes |
-| *Which artifacts no longer match their design rationale?* was inexpressible | **query language** | `has-path` — filter a row on a property several hops away |
-
-**Neither was about Kubernetes.** Both fixtures mention no domain.
+The proposal recommends **neither** offered option. Not a Layer A entity: it
+would be the first whose instances live outside models. Not a Recommendation
+specialization: that inverts the relationship, since an intent should *select*
+recommendations rather than be one. **A registry beside them**, because
+promoting a registry later is cheap and demoting an entity is not.
 
 ## What does not exist
 
-**No confidence scores, and none will be added** (`ADR-0090`).
+Of the nine steps in `ADR-0092`'s loop, **four exist**: Reasoning, Engineering
+Plan, Recommendations, and the model the first three read.
 
-**No AI workflow selection.** `ADR-0091` generalises it: the semantic layer
-recommends engineering actions and execution engines consume them.
+**No Engineering Goal, no Execution Plan, no Task Graph, no AI workers, no
+Verification, and no Knowledge Update.** The loop does not close, which is the
+step that would make this a system that learns.
 
-**No `Finding` entity** — no question requires one (`ADR-0085`).
-
-**No second external system.** The metamodel has modelled one domain shape.
+No second external system. No confidence scores, and none will be added.
 
 ## Blocking
 
@@ -96,25 +109,24 @@ recommends engineering actions and execution engines consume them.
 
 | Issue | Why it is open |
 |---|---|
-| `ISSUE-0037` | Hand-maintained projections. **Seven registries**, seven hand-maintained sources, zero generated |
+| `ISSUE-0037` | Hand-maintained projections. **Eight registries**, eight hand-maintained sources, zero generated |
 
 ## Debt discovered while building
 
 | Question | Where |
 |---|---|
-| Step order in a recommendation is a judgement with nothing to check it | `recommendations.md` |
-| A recommendation inherits the bluntness of its queries — `Q-tests` names a file of 30 tests | `recommendations.md` |
-| `R-audit-model`'s empty `applies-to` overloads the field: *no subject* and *any subject* look alike | `recommendations.md` |
-| Finding classification is the author's judgement, and the incentive runs the wrong way | `finding-kinds.md` |
-| `documentation-gap` and `traceability-gap` overlap | `finding-kinds.md` |
-| Test granularity is the file — still the sharpest modelling limitation | `kubernetes-ssa/FINDINGS.md` |
+| Phase order and `requires` are judgements encoded as data with nothing to check them | `plans.md` |
+| **`defers` is authored, not derived.** Nothing detects a decision neither derived nor deferred | `plans.md` |
+| Completion conditions are checkable in principle and unchecked in practice — nothing re-runs a plan | `plans.md` |
+| A plan inherits every weakness of its queries and presents it with more authority | `ADR-0094` |
+| The judgment measure is gameable by inflating `derived` with trivia | `ADR-0093` |
 
 ## Next action
 
-**A second external system of a different shape** — PostgreSQL or LLVM
-(`ADR-0089` direction). The objective is **architectural diversity, not scale**.
+**The Project Owner's decision on `EngineeringIntent`**, then the second external
+system — PostgreSQL or LLVM, for architectural diversity rather than scale.
 
-**Aim at ranks 1–3 of the finding taxonomy.** Kubernetes reached rank 5, and the
+**Aim at ranks 1–3 of the finding taxonomy.** Kubernetes reached rank 5; the
 three strongest kinds have never been used.
 
 ## Repository state

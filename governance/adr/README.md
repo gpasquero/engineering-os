@@ -16,7 +16,7 @@ same session the decision is made.
 > a rule exists; the rule that must be followed lives in a Policy under
 > `shared/policies/`. Agents consume policies; humans read ADRs for rationale.
 
-**Highest allocated ID: `ADR-0091`.** IDs are sequential and never reused.
+**Highest allocated ID: `ADR-0094`.** IDs are sequential and never reused.
 
 > This index table is a hand-maintained projection of ADR front matter. It is
 > listed in the transitional-debt register, `ISSUE-0037`.
@@ -186,6 +186,9 @@ Read these before designing anything that produces an artifact:
 | [ADR-0089](ADR-0089-engineering-value-is-the-target.md) | **Engineering value is the optimization target; architecture serves the product** | accepted | — |
 | [ADR-0090](ADR-0090-finding-taxonomy.md) | **Findings are classified by kind and strength; evidence quality is never a score** | accepted | — |
 | [ADR-0091](ADR-0091-engineering-recommendation.md) | **Engineering Recommendation — guidance derived from semantic queries, never hardcoded** | accepted | — |
+| [ADR-0092](ADR-0092-the-engineering-director.md) | **The product is an Engineering Director; Engineering OS reasons, LLMs execute** | accepted | — |
+| [ADR-0093](ADR-0093-the-judgment-measure.md) | **Success is measured by how much engineering judgment happens before an LLM must think** | accepted | — |
+| [ADR-0094](ADR-0094-the-engineering-plan.md) | **The Engineering Plan is an authoritative artifact derived deterministically from the model** | accepted | — |
 
 ## Supersessions
 

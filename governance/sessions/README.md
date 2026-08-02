@@ -56,6 +56,7 @@ ADRs answer "why".
 | [SESSION-0031](SESSION-0031-2026-08-02.md) | 2026-08-02 | usefulness | `ACCEPT-0026`; **semantic API hardening** (`ADR-0088`) — path provenance, traversed-edge output, parallel-edge correctness, declaration schema, applicability, bounded traversal, full-fidelity parity; **a real ordering divergence found between the engines** |
 | [SESSION-0032](SESSION-0032-2026-08-02.md) | 2026-08-02 | k8s-ssa | `ACCEPT-0027`; **Kubernetes Server-Side Apply modelled** — charter, 41 nodes, four source classes, reviewed ground truth; **cross-source finding: a `managedFields` timestamp is not the time that entry last changed**; one domain-neutral compiler correction |
 | [SESSION-0033](SESSION-0033-2026-08-02.md) | 2026-08-02 | exploit | `ACCEPT-0028`; **engineering value is the target** (`ADR-0089`); **finding taxonomy, no confidence scores** (`ADR-0090`); **Engineering Recommendation** (`ADR-0091`); `has-path`; six maintainer questions; `tools/advise.py` |
+| [SESSION-0034](SESSION-0034-2026-08-02.md) | 2026-08-02 | director | `ACCEPT-0029`; **the product is an Engineering Director** (`ADR-0092`); **the judgment measure** (`ADR-0093`); **the Engineering Plan** (`ADR-0094`); `tools/plan.py`; `EngineeringIntent` **proposal, not implemented** |
 
 ## Reading
 
