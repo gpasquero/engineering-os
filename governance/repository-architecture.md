@@ -112,8 +112,36 @@ Artifact → Dimension Assignment → Dimension → Dimension Value
 
 Assignments are versioned and may change without changing artifact identity;
 validation targets assignments, not artifacts. The Canonical Knowledge Model
-represents them as graph relationships rather than embedded metadata. Where they
-are authored is unresolved — `ISSUE-0060`.
+represents them as graph relationships rather than embedded metadata.
+
+**Dimensions are independent, not isolated** (`ADR-0044`). Values are never
+derived from one another, but dimensions may declare relationships describing
+compatibility, applicability or constraints — **descriptive, never
+inferential**. Inference Rules, if ever introduced, are their own artifact type.
+
+**Front matter is an interchange syntax, not the semantic model** (`ADR-0045`).
+An authoritative artifact exposes a **Human Representation**: a canonical
+serialization of selected assignments, so the repository stays understandable
+without the compiler.
+
+```text
+Dimension Assignment → Canonical Serialization → Artifact Front Matter
+```
+
+## Three representations of knowledge
+
+| Representation | Is |
+|---|---|
+| **Semantic** | the canonical graph |
+| **Authoring** | the human-editable source artifacts |
+| **Presentation** | generated views — Explorer, documentation, indexes, registry projections |
+
+**The compiler maintains semantic equivalence across all three.** They are
+different views of the same knowledge, not different knowledge (`ADR-0047`).
+A discrepancy between representations is a compiler defect.
+
+This is how the project optimizes for human authoring, machine reasoning and
+generated documentation at once without duplicating semantics.
 
 ## Three semantic levels
 
@@ -129,8 +157,9 @@ A different axis from the four layers (`ADR-0043`):
 itself**, and lets dimensions, classifications and assertions evolve
 independently. The Knowledge Graph represents the three as distinct node types.
 
-> Levels classify *what kind of statement*; layers classify *where in the
-> pipeline*. Both begin with the metamodel — `ISSUE-0061`.
+> **Always use the qualified names** (`ADR-0046`): **Abstraction Level**
+> classifies abstraction, **Semantic Layer** classifies position in the
+> knowledge architecture. No renaming was required — only qualification.
 
 ## Knowledge ownership
 
@@ -529,11 +558,11 @@ These are recorded as issues and must not be silently assumed:
 
 - `ISSUE-0049` — where state machine specifications live, and their boundary
   with `shared/vocabularies/`. Blocks `shared/vocabularies/`.
-- `ISSUE-0059` — dimension independence versus declared relationships, and four
-  undefined dimensions. **Blocks the Dimension Registry.**
-- `ISSUE-0060` — where Dimension Assignments are authored, and whether
-  classification stays readable without the compiler. **Blocks M2.**
-- `ISSUE-0061` — "Level" and "Layer" are confusable ordinal schemes.
+- `ISSUE-0062` — four dimensions remain undefined, deferred through three
+  consecutive issues. **Blocks the Dimension Registry.**
+- `ISSUE-0063` — the minimum set of classifications that must be serialized.
+- `ISSUE-0064` — whether Representation is an independent dimension or a
+  grouping of Semantic Layers.
 - `ISSUE-0048` — no mechanism for correcting part of an `Active` ADR.
 - `ISSUE-0007` — versioning granularity, now also covering what identifies a
   **revision**.

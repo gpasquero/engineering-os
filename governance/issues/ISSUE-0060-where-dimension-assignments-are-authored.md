@@ -2,7 +2,7 @@
 id: ISSUE-0060
 title: Where Dimension Assignments are authored, and whether classification stays readable without the compiler
 type: question
-status: open
+status: resolved
 severity: blocking
 created: 2026-08-02
 updated: 2026-08-02
@@ -11,7 +11,7 @@ evidence:
   - governance/adr/ADR-0042-dimension-assignments.md
   - governance/adr/ADR-0017-reference-architecture-not-reference-implementation.md
   - governance/adr/ADR-0014-three-tier-knowledge-model.md
-resolved-by: null
+resolved-by: ADR-0045
 ---
 
 # ISSUE-0060 — Where Dimension Assignments are authored
@@ -67,8 +67,28 @@ If the former, `ADR-0042` rules it out and legibility must be recovered some
 other way. If the latter, most of the tension dissolves and the decision is
 about syntax rather than semantics.
 
-## Resolution criteria
+## Resolution
 
-An ADR stating where assignments are authored, and how an artifact's
-classification remains determinable without running the compiler — or an
-explicit decision that it need not be, with `ADR-0017` amended accordingly.
+`ADR-0045`. **The crux is answered in favour of serialization.**
+
+> Front matter is an **interchange syntax**, not the semantic model.
+
+Every authoritative artifact may expose a **Human Representation** of selected
+classifications. It is not the semantic source of truth — it is a **canonical
+serialization** of semantic assignments:
+
+```text
+Dimension Assignment → Canonical Serialization → Artifact Front Matter
+```
+
+The compiler reconstructs semantic relationships from that serialization, and
+the relationship exists independently of it. Both principles survive: the
+repository stays human-readable, and the Canonical Knowledge Model stays
+graph-based. **`ADR-0017` is not amended.**
+
+The first option listed above was chosen, on the second horn of the question
+this issue posed: front matter is a serialization of a relationship, not a
+property.
+
+**Newly open:** `ADR-0045` says "may expose" and "selected classifications",
+leaving the minimum unstated — `ISSUE-0063`.

@@ -17,7 +17,7 @@ Session logs are the trajectory record: they answer "how did we get here",
 which no other document does. `build-state.md` answers "where are we", and the
 ADRs answer "why".
 
-**Highest allocated ID: `SESSION-0015`.**
+**Highest allocated ID: `SESSION-0016`.**
 
 ## Index
 
@@ -38,6 +38,7 @@ ADRs answer "why".
 | [SESSION-0013](SESSION-0013-2026-08-02.md) | 2026-08-02 | M2 | `ACCEPT-0008`; **four-layer semantic architecture**; four questions per artifact type; `ADR-0037`, `ADR-0038`; `ADR-0014` superseded. `ISSUE-0031` and `ISSUE-0055` resolved together. |
 | [SESSION-0014](SESSION-0014-2026-08-02.md) | 2026-08-02 | M2 | `ACCEPT-0009`; layers classify **artifacts, not directories**; **Architectural Dimensions**; `ADR-0039`, `ADR-0040`. `ADR-0037` corrected. |
 | [SESSION-0015](SESSION-0015-2026-08-02.md) | 2026-08-02 | M2 | `ACCEPT-0010`; dimensions registered; **Dimension Assignments**; **three semantic levels**; `ADR-0041`–`ADR-0043` |
+| [SESSION-0016](SESSION-0016-2026-08-02.md) | 2026-08-02 | M2 | `ACCEPT-0011`; independence ≠ isolation; **front matter as interchange syntax**; qualified names; **three representations**; `ADR-0044`–`ADR-0047` |
 
 ## Reading
 

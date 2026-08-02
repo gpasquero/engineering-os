@@ -2,7 +2,7 @@
 id: ISSUE-0059
 title: Dimension independence conflicts with declared inter-dimension relationships, and four dimensions overlap
 type: inconsistency
-status: open
+status: resolved
 severity: blocking
 created: 2026-08-02
 updated: 2026-08-02
@@ -11,7 +11,7 @@ evidence:
   - governance/adr/ADR-0040-architectural-dimensions.md
   - governance/adr/ADR-0041-dimensions-are-registered-first-class-entities.md
   - governance/adr/ADR-0020-artifact-taxonomy-and-revision-lifecycle-are-independent.md
-resolved-by: null
+resolved-by: ADR-0044
 ---
 
 # ISSUE-0059 — Dimension independence versus declared relationships
@@ -68,8 +68,29 @@ is whether the same holds, or whether they are one axis with two names.
   says it is intended here.
 - Does `Visibility` range over artifacts, over projections, or over both?
 
-## Resolution criteria
+## Resolution
 
-An ADR reconciling independence with declared relationships, and defining or
-eliminating the four dimensions. Must precede the Dimension Registry
-Specification.
+`ADR-0044`. **The apparent contradiction comes from confusing independence with
+isolation.**
+
+Dimensions are semantically independent — values are not derived from one
+another. But dimensions **may** define semantic relationships with other
+dimensions, and **those relationships are descriptive, not inferential**. They
+describe compatibility, applicability or constraints, and never imply automatic
+classification.
+
+Compilation Phase may reference Semantic Layer without a layer assignment
+determining a phase. Artifact Taxonomy may constrain Lifecycle applicability.
+
+Three rules follow: dimensions remain independent; **dimension relationships are
+independent semantic entities**; and no dimension derives another's value unless
+an explicit inference rule exists. **Inference Rules, if ever introduced, become
+their own first-class artifact type** rather than being embedded in dimension
+definitions — a placement decided before anything needs it.
+
+Both `ADR-0040` and `ADR-0041` are preserved exactly. No supersession, no
+correction: the contradiction was in the reading.
+
+**Part 2 is not answered.** The four undefined dimensions and the
+`Governance Status` / `Lifecycle` overlap carry into `ISSUE-0062` — the third
+consecutive issue to defer the same question.

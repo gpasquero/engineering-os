@@ -300,9 +300,16 @@ specification.
 **Dimension Registry Projection**, following the Registry Pattern.
 
 Examples: Semantic Layer · Artifact Taxonomy · Lifecycle · Governance Status ·
-Ownership · Authority · Visibility · Compilation Phase. Four are undefined, and
-`ADR-0040`'s independence claim sits uneasily with declared inter-dimension
-relationships — `ISSUE-0059`.
+Ownership · Authority · Visibility · Compilation Phase. Four remain undefined —
+`ISSUE-0062`.
+
+> **Independence is not isolation** (`ADR-0044`). Dimension *values* are never
+> derived from one another, but dimensions **may** declare semantic
+> relationships describing compatibility, applicability or constraints. Those
+> relationships are **descriptive, never inferential** — they never imply
+> automatic classification. No dimension derives another's value unless an
+> explicit **Inference Rule** exists, and Inference Rules, if ever introduced,
+> are their own first-class artifact type.
 
 **Dimension Assignment** — the explicit semantic relationship by which an
 artifact is classified. **Artifacts do not contain dimension values**
@@ -314,8 +321,21 @@ Artifact → Dimension Assignment → Dimension → Dimension Value
 
 Assignments are versioned, may change without changing artifact identity, and
 are what validation targets. The Canonical Knowledge Model represents them as
-**graph relationships rather than embedded metadata**. Where they are *authored*
-is unresolved — `ISSUE-0060`.
+**graph relationships rather than embedded metadata**.
+
+**Human Representation** — a **canonical serialization** of selected semantic
+assignments, exposed by an authoritative artifact so the repository stays
+understandable without executing the compiler (`ADR-0045`). It is **not the
+semantic source of truth**.
+
+```text
+Dimension Assignment → Canonical Serialization → Artifact Front Matter
+```
+
+> **Front matter is an interchange syntax, not the semantic model.** The
+> compiler reconstructs relationships from it; the relationship exists
+> independently of it. Which classifications must be serialized is unstated —
+> `ISSUE-0063`.
 
 ## The three semantic levels
 
@@ -334,9 +354,29 @@ Distinct from the four layers, and a different axis (`ADR-0043`).
 object model itself.** The Knowledge Graph represents the three as distinct node
 types rather than flattening them into object properties.
 
-> **Levels are not layers.** Levels classify *what kind of statement* something
-> is; layers classify *where in the compilation pipeline* it sits. Both begin
-> with the metamodel, which invites conflation — `ISSUE-0061`.
+> **Levels are not layers, and both names are always qualified** (`ADR-0046`).
+> **Abstraction Level** classifies abstraction; **Semantic Layer** classifies
+> semantic position in the knowledge architecture. No renaming — only
+> qualification, the same discipline applied to state names (`ADR-0025`) and
+> normative artifact types (`ADR-0030`).
+
+## The three representations of knowledge
+
+**Semantic Representation** — the canonical graph.
+
+**Authoring Representation** — the human-editable source artifacts.
+
+**Presentation Representation** — generated views: Knowledge Explorer,
+documentation, search indexes, registry projections.
+
+> **The compiler is responsible for maintaining semantic equivalence across
+> these.** They are different views of the same knowledge, **not different
+> knowledge** (`ADR-0047`). This is how Engineering OS optimizes simultaneously
+> for human authoring, machine reasoning and generated documentation without
+> duplicating semantics.
+
+Whether Representation is an independent dimension or a grouping of Semantic
+Layers is unresolved — `ISSUE-0064`.
 
 > **The term was redefined.** Under `ADR-0010`, "Layer A" meant the methodology
 > and "Layer B" the knowledge model. `ADR-0037` redefines Layer A as the

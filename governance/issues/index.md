@@ -9,8 +9,8 @@ related: [ISSUE-0037]
 
 # Issue Index
 
-**61 recorded · 24 open · 36 resolved · 1 deferred.** Highest allocated ID:
-`ISSUE-0061`.
+**64 recorded · 24 open · 39 resolved · 1 deferred.** Highest allocated ID:
+`ISSUE-0064`.
 
 > **Hand-maintained projection.** Under `ADR-0016` this is a projection of issue
 > front matter, which is authoritative. No generator exists yet (`ISSUE-0036`),
@@ -23,15 +23,14 @@ related: [ISSUE-0037]
 
 | ID | Title | Blocks |
 |---|---|---|
-| [0059](ISSUE-0059-dimension-independence-and-overlaps.md) | Dimension independence versus declared relationships | **M2** |
-| [0060](ISSUE-0060-where-dimension-assignments-are-authored.md) | Where Dimension Assignments are authored | **M2** |
+| [0062](ISSUE-0062-four-dimensions-still-undefined.md) | Four dimensions remain undefined | **M2** |
+| [0064](ISSUE-0064-representation-versus-semantic-layer.md) | Representation versus Semantic Layer | **M2** |
 | [0002](ISSUE-0002-composition-primitive-undefined.md) | How a workflow invokes a skill is undefined | M8 |
 | [0006](ISSUE-0006-scenario-testing-method-undefined.md) | How a prompt-based methodology is tested is undefined | M10 |
 
-The Dimension Registry cannot be written while independence and the four
-undefined dimensions are unsettled (`ISSUE-0059`), and assignments have no
-authoring home (`ISSUE-0060`). `ISSUE-0061` should be settled before the
-metamodel names either scheme. **M3 is unblocked.**
+The Dimension Registry cannot be written while four dimensions are undefined
+(`ISSUE-0062`) and Representation may be a duplicate axis (`ISSUE-0064`).
+`ISSUE-0063` gates the front-matter contracts. **M3 is unblocked.**
 
 ## Open, by milestone
 
@@ -40,9 +39,9 @@ metamodel names either scheme. **M3 is unblocked.**
 | ID | Title | Type | Severity |
 |---|---|---|---|
 | [0049](ISSUE-0049-state-machine-specification-location.md) | Where state machine specifications live | question | high |
-| [0059](ISSUE-0059-dimension-independence-and-overlaps.md) | Dimension independence versus declared relationships | inconsistency | blocking |
-| [0060](ISSUE-0060-where-dimension-assignments-are-authored.md) | Where Dimension Assignments are authored | question | blocking |
-| [0061](ISSUE-0061-level-and-layer-are-confusable.md) | "Level" and "Layer" are confusable | risk | high |
+| [0062](ISSUE-0062-four-dimensions-still-undefined.md) | Four dimensions remain undefined | gap | blocking |
+| [0064](ISSUE-0064-representation-versus-semantic-layer.md) | Representation versus Semantic Layer | question | high |
+| [0063](ISSUE-0063-minimum-serialized-classifications.md) | The minimum serialized classification set | gap | high |
 | [0048](ISSUE-0048-no-mechanism-for-correcting-an-active-adr.md) | No mechanism for correcting part of an `Active` ADR | gap | medium |
 | [0007](ISSUE-0007-versioning-granularity-undefined.md) | Versioning granularity; what identifies a revision | question | high |
 | [0011](ISSUE-0011-audience-licence-distribution-undefined.md) | Repository is public with no licence | question | high |
@@ -141,3 +140,6 @@ metamodel names either scheme. **M3 is unblocked.**
 | [0056](ISSUE-0056-existing-artifacts-have-no-layer.md) | Methodology artifacts had no layer | `ADR-0039` |
 | [0057](ISSUE-0057-dimension-set-is-not-fixed.md) | The dimension set was not fixed | `ADR-0041` |
 | [0058](ISSUE-0058-how-artifacts-declare-classification.md) | How artifacts declare classification | `ADR-0042` |
+| [0059](ISSUE-0059-dimension-independence-and-overlaps.md) | Dimension independence versus relationships | `ADR-0044` |
+| [0060](ISSUE-0060-where-dimension-assignments-are-authored.md) | Where assignments are authored | `ADR-0045` |
+| [0061](ISSUE-0061-level-and-layer-are-confusable.md) | "Level" and "Layer" confusable | `ADR-0046` |

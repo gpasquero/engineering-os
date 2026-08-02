@@ -30,10 +30,10 @@ M1 is complete. **M3 is unblocked.**
 | Documentation system, session protocol | Defined and accepted |
 | Vision, principles, glossary | Written |
 | Roadmap | M1–M13 |
-| ADRs | 43 — 37 accepted, 6 superseded |
-| Issues | 61 recorded — 24 open, 36 resolved, 1 deferred |
-| Acceptance Records | 10 — `ACCEPT-0001` (trust root) through `ACCEPT-0010` |
-| Session journal | 15 entries |
+| ADRs | 47 — 41 accepted, 6 superseded |
+| Issues | 64 recorded — 24 open, 39 resolved, 1 deferred |
+| Acceptance Records | 11 — `ACCEPT-0001` (trust root) through `ACCEPT-0011` |
+| Session journal | 16 entries |
 | Frozen provenance | `imports/` (3 prototypes), `sources/` (requirements, archives, original handoff) |
 
 ## What does not exist
@@ -74,8 +74,16 @@ entities, added without changing compiler logic.
 **Dimension Assignments** (`ADR-0042`) — classification is a *relationship*, not
 a property. Artifacts do not contain dimension values.
 
-**Three semantic levels** (`ADR-0043`) — Metamodel (types), Model (instances),
-Classification (assertions). A different axis from the four layers.
+**Abstraction Levels** (`ADR-0043`, `ADR-0046`) — Metamodel (types), Model
+(instances), Classification (assertions). A different axis from Semantic Layers;
+both names are always qualified.
+
+**Three representations of knowledge** (`ADR-0047`) — Semantic (the canonical
+graph), Authoring (human-editable sources), Presentation (generated views). The
+compiler maintains semantic equivalence across them; they are different views of
+the same knowledge, not different knowledge.
+
+**Front matter is interchange syntax** (`ADR-0045`), not the semantic model.
 
 ## Acceptance status
 
@@ -83,14 +91,14 @@ Classification (assertions). A different axis from the four layers.
 |---|---|
 | `ACCEPT-0001` | Bootstrap corpus at `2b6484f` — trust root, the only retrospective acceptance |
 | `ACCEPT-0002` | `SESSION-0006` at `aed6d89` — first under the normal workflow |
-| `ACCEPT-0003`–`ACCEPT-0010` | `SESSION-0007` through `SESSION-0014` |
+| `ACCEPT-0003`–`ACCEPT-0011` | `SESSION-0007` through `SESSION-0015` |
 
-**`ADR-0041`–`ADR-0043`, `ISSUE-0059`–`ISSUE-0061` and this session's
+**`ADR-0044`–`ADR-0047`, `ISSUE-0062`–`ISSUE-0064` and this session's
 propagation are `Under Review`**, not `Active`.
 
 ## A note for agents reading this repository
 
-**The ADR corpus is history, not specification** (`ADR-0029`). Forty-three
+**The ADR corpus is history, not specification** (`ADR-0029`). Forty-seven
 decisions, six superseded, four partially corrected.
 
 **Two process gates are in force:**
@@ -106,9 +114,9 @@ decisions, six superseded, four partially corrected.
 
 | Issue | Blocks |
 |---|---|
-| `ISSUE-0059` | **M2.** Dimension independence contradicts the "relationships to other dimensions" field, and four dimensions are undefined. The Dimension Registry cannot be written. |
-| `ISSUE-0060` | **M2.** Where Dimension Assignments are authored. If they exist only in the compiled graph, an artifact's classification is unreadable without the toolchain — against `ADR-0017`. |
-| `ISSUE-0061` | "Level" and "Layer" are confusable ordinal schemes, both beginning with the metamodel. Should be settled before the metamodel names either. |
+| `ISSUE-0062` | **M2.** Four dimensions remain undefined — deferred through three consecutive issues. The Dimension Registry cannot be written. |
+| `ISSUE-0064` | **M2.** Whether Representation is an independent dimension or a grouping of Semantic Layers. Registering a duplicate axis is the failure `ISSUE-0061` established the discipline to prevent. |
+| `ISSUE-0063` | The minimum classifications every artifact must serialize. `ADR-0038` says what must be knowable; `ADR-0045` says what may be visible; nothing connects them. |
 | `ISSUE-0002` | M8 |
 | `ISSUE-0006` | M10 |
 
@@ -128,9 +136,9 @@ decisions, six superseded, four partially corrected.
 
 Accept or return this session's work.
 
-Then `ISSUE-0059`, `ISSUE-0060` and `ISSUE-0061`. The first two are one design —
-what dimensions are, and how assignments reach the compiler. The third is cheap
-now and expensive after the metamodel is written.
+Then `ISSUE-0062` and `ISSUE-0064`, which together decide what goes into the
+Dimension Registry. `ISSUE-0062` has now been deferred three times; it is the
+oldest unanswered question in the dimension design.
 
 ## Repository state
 

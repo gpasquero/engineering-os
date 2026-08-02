@@ -16,7 +16,7 @@ same session the decision is made.
 > a rule exists; the rule that must be followed lives in a Policy under
 > `shared/policies/`. Agents consume policies; humans read ADRs for rationale.
 
-**Highest allocated ID: `ADR-0043`.** IDs are sequential and never reused.
+**Highest allocated ID: `ADR-0047`.** IDs are sequential and never reused.
 
 > This index table is a hand-maintained projection of ADR front matter. It is
 > listed in the transitional-debt register, `ISSUE-0037`.
@@ -58,8 +58,12 @@ Read these before designing anything that produces an artifact:
   multiple independent axes; the metamodel models them explicitly.
 - **`ADR-0042`** — artifacts are classified by **Dimension Assignments**, not by
   embedded values.
-- **`ADR-0043`** — **three semantic levels**: Metamodel, Model, Classification.
-  Read with `ADR-0037`; levels are not layers.
+- **`ADR-0043`** — **three Abstraction Levels**: Metamodel, Model,
+  Classification. Read with `ADR-0037`; levels are not layers.
+- **`ADR-0045`** — **front matter is interchange syntax**, not the semantic
+  model.
+- **`ADR-0047`** — **three representations of knowledge**, with the compiler
+  responsible for semantic equivalence across them.
 - **`ADR-0017`** — reference architecture, not reference implementation.
 - **`ADR-0019`** — Knowledge Packages are a published interface.
 
@@ -110,6 +114,10 @@ Read these before designing anything that produces an artifact:
 | [ADR-0041](ADR-0041-dimensions-are-registered-first-class-entities.md) | Dimensions are registered first-class entities | accepted | ISSUE-0057 |
 | [ADR-0042](ADR-0042-dimension-assignments.md) | **Dimension Assignments** | accepted | ISSUE-0058 |
 | [ADR-0043](ADR-0043-three-semantic-levels.md) | **Three semantic levels** | accepted | — |
+| [ADR-0044](ADR-0044-independence-is-not-isolation.md) | Independence is not isolation | accepted | ISSUE-0059 |
+| [ADR-0045](ADR-0045-human-representation-and-front-matter-as-interchange-syntax.md) | **Front matter is interchange syntax** | accepted | ISSUE-0060 |
+| [ADR-0046](ADR-0046-abstraction-level-and-semantic-layer.md) | Abstraction Level and Semantic Layer | accepted | ISSUE-0061 |
+| [ADR-0047](ADR-0047-three-representations-of-knowledge.md) | **Three representations of knowledge** | accepted | — |
 
 ## Supersessions
 

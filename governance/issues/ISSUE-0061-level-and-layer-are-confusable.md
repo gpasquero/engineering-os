@@ -2,7 +2,7 @@
 id: ISSUE-0061
 title: "Level" and "Layer" are two ordinal schemes whose first element is the metamodel in both
 type: risk
-status: open
+status: resolved
 severity: high
 created: 2026-08-02
 updated: 2026-08-02
@@ -10,7 +10,7 @@ blocks: [M2]
 evidence:
   - governance/adr/ADR-0043-three-semantic-levels.md
   - governance/adr/ADR-0037-four-layer-semantic-architecture.md
-resolved-by: null
+resolved-by: ADR-0046
 ---
 
 # ISSUE-0061 — "Level" and "Layer" are confusable
@@ -71,7 +71,26 @@ The second is the most consistent with the architecture the project just built:
 if levels and layers are independent axes, they are dimensions, and `ADR-0041`
 already says how dimensions are declared.
 
-## Resolution criteria
+## Resolution
 
-An ADR renaming one scheme, or modelling both as registered dimensions with
-their independence stated formally. Must precede the metamodel.
+`ADR-0046`. **Both concepts are valid and describe different dimensions.**
+
+- **Level classifies abstraction.**
+- **Layer classifies semantic position** in the Engineering OS knowledge
+  architecture.
+
+Explicit qualified names are introduced — **Abstraction Level** and **Semantic
+Layer** — and future diagrams, specifications and ontology definitions always
+use them in full.
+
+> **No renaming is required. Only qualification.**
+
+Neither of the first two options was taken as written. Renaming was rejected
+because both words are accurate; formal registration is subsumed rather than
+chosen, since they *are* two dimensions under `ADR-0040` and `ADR-0041` already
+says how dimensions are declared.
+
+This is the **third application of the same discipline**, after state names
+(`ADR-0025`) and normative artifact types (`ADR-0030`). Three ADRs applying one
+rule is a rule — it belongs in a `ModelingPolicy` in M3 rather than being
+rediscovered a fourth time.

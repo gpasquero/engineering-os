@@ -101,6 +101,10 @@ verification, knowledge-update — must be **reclassified** across these three
 kinds. Several entries are genuinely ambiguous and the classification is real
 work, not a formality.
 
+A **naming-discipline `ModelingPolicy`** is now overdue: `ADR-0025`, `ADR-0030`
+and `ADR-0046` each apply the same rule — qualify classification-scheme names
+rather than renaming or splitting. Three ADRs applying one rule is a rule.
+
 Agents primarily consume policies rather than ADRs (`ADR-0029`), so M4 skills
 depend on this milestone more directly than on the decision corpus.
 
