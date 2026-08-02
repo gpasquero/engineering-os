@@ -15,8 +15,9 @@ class Candidate:
     """Accumulates proposals. Never writes authoritative knowledge."""
 
     def __init__(self, repository, bootstrap):
-        self.repository = repository
-        self.bootstrap = bootstrap
+        # Coerced: a candidate model is serialized, and a path object is not.
+        self.repository = str(repository)
+        self.bootstrap = str(bootstrap)
         self.entities, self.relationships = [], []
         self.classifications, self.invariants = [], []
         self.capabilities, self.workflows = [], []

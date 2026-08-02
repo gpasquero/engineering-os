@@ -1,0 +1,394 @@
+@prefix ex:   <https://example.org/engineering-os/example#> .
+@prefix eos:  <https://example.org/engineering-os/metamodel#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+# A PROJECTION of the Canonical Knowledge Model (ADR-0072). Generated; do not edit.
+
+<https://example.org/engineering-os/example> a owl:Ontology ;
+    rdfs:comment "Layer B model expressed in the Layer A metamodel." ;
+    owl:imports <https://example.org/engineering-os/metamodel> .
+
+ex:ADR_0001 a eos:ADR ;
+    rdfs:label "ADR-0001: Multi-tenancy Strategy" ;
+    rdfs:comment "Proposed by `W-decision-archaeologist` in task `T02-interpret` and accepted through review. Support: `S-specified`." .
+
+ex:Artifact_AccountLockoutSpec a eos:Artifact ;
+    rdfs:label "account-lockout.spec.spec.ts" ;
+    rdfs:comment "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-tested`." .
+
+ex:Artifact_AuthController a eos:Artifact ;
+    rdfs:label "auth.controller.ts" ;
+    rdfs:comment "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`." .
+
+ex:Artifact_AuthServiceSpec a eos:Artifact ;
+    rdfs:label "auth.service.spec.spec.ts" ;
+    rdfs:comment "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-tested`." .
+
+ex:Artifact_BusinessHoursCalcSpec a eos:Artifact ;
+    rdfs:label "business-hours-calc.spec.spec.ts" ;
+    rdfs:comment "Proposed by `W-domain-interpreter` in task `T-continuous` and accepted through review. Support: `S-tested`." .
+
+ex:Artifact_BusinessHoursUtilSpec a eos:Artifact ;
+    rdfs:label "business-hours.util.spec.spec.ts" ;
+    rdfs:comment "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-tested`." .
+
+ex:Artifact_JwtSecuritySpec a eos:Artifact ;
+    rdfs:label "jwt-security.spec.spec.ts" ;
+    rdfs:comment "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-tested`." .
+
+ex:Artifact_PasswordSecuritySpec a eos:Artifact ;
+    rdfs:label "password-security.spec.spec.ts" ;
+    rdfs:comment "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-tested`." .
+
+ex:Artifact_RefreshTokenRotationSpec a eos:Artifact ;
+    rdfs:label "refresh-token-rotation.spec.spec.ts" ;
+    rdfs:comment "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-tested`." .
+
+ex:Artifact_SlaController a eos:Artifact ;
+    rdfs:label "sla.controller.ts" ;
+    rdfs:comment "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`." .
+
+ex:Artifact_SlaServiceSpec a eos:Artifact ;
+    rdfs:label "sla.service.spec.spec.ts" ;
+    rdfs:comment "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-tested`." .
+
+ex:Artifact_SlaTimerServiceSpec a eos:Artifact ;
+    rdfs:label "sla-timer.service.spec.spec.ts" ;
+    rdfs:comment "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-tested`." .
+
+ex:Artifact_TenantIsolationIntegrationSpec a eos:Artifact ;
+    rdfs:label "tenant-isolation.integration.spec.spec.ts" ;
+    rdfs:comment "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-tested`." .
+
+ex:Artifact_TicketAuditServiceSpec a eos:Artifact ;
+    rdfs:label "ticket-audit.service.spec.spec.ts" ;
+    rdfs:comment "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-tested`." .
+
+ex:Artifact_TicketController a eos:Artifact ;
+    rdfs:label "ticket.controller.ts" ;
+    rdfs:comment "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`." .
+
+ex:Artifact_TicketCorrelationServiceSpec a eos:Artifact ;
+    rdfs:label "ticket-correlation.service.spec.spec.ts" ;
+    rdfs:comment "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-tested`." .
+
+ex:Artifact_TicketFormController a eos:Artifact ;
+    rdfs:label "ticket-form.controller.ts" ;
+    rdfs:comment "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`." .
+
+ex:Artifact_TicketFormServiceSpec a eos:Artifact ;
+    rdfs:label "ticket-form.service.spec.spec.ts" ;
+    rdfs:comment "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-tested`." .
+
+ex:Artifact_TicketLinkController a eos:Artifact ;
+    rdfs:label "ticket-link.controller.ts" ;
+    rdfs:comment "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`." .
+
+ex:Artifact_TicketLinkServiceSpec a eos:Artifact ;
+    rdfs:label "ticket-link.service.spec.spec.ts" ;
+    rdfs:comment "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-tested`." .
+
+ex:Artifact_TicketMergeExtraSpec a eos:Artifact ;
+    rdfs:label "ticket-merge-extra.spec.spec.ts" ;
+    rdfs:comment "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-tested`." .
+
+ex:Artifact_TicketMergeSpec a eos:Artifact ;
+    rdfs:label "ticket-merge.spec.spec.ts" ;
+    rdfs:comment "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-tested`." .
+
+ex:Artifact_TicketServiceSpec a eos:Artifact ;
+    rdfs:label "ticket.service.spec.spec.ts" ;
+    rdfs:comment "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-tested`." .
+
+ex:Artifact_TicketTodoController a eos:Artifact ;
+    rdfs:label "ticket-todo.controller.ts" ;
+    rdfs:comment "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`." .
+
+ex:Artifact_TicketTodoServiceSpec a eos:Artifact ;
+    rdfs:label "ticket-todo.service.spec.spec.ts" ;
+    rdfs:comment "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-tested`." .
+
+ex:BoundedContext_Backend a eos:BoundedContext ;
+    rdfs:label "backend package" ;
+    rdfs:comment "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-confirmed-deterministic`." .
+
+ex:Capability_Auth a eos:Capability ;
+    rdfs:label "auth module" ;
+    rdfs:comment "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`." .
+
+ex:Capability_Sla a eos:Capability ;
+    rdfs:label "sla module" ;
+    rdfs:comment "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`." .
+
+ex:Capability_Ticket a eos:Capability ;
+    rdfs:label "ticket module" ;
+    rdfs:comment "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`." .
+
+ex:Capability_TicketForm a eos:Capability ;
+    rdfs:label "ticket-form module" ;
+    rdfs:comment "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`." .
+
+ex:Capability_TicketLink a eos:Capability ;
+    rdfs:label "ticket-link module" ;
+    rdfs:comment "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`." .
+
+ex:Capability_TicketTodo a eos:Capability ;
+    rdfs:label "ticket-todo module" ;
+    rdfs:comment "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`." .
+
+ex:Concept_TableBusinessHours a eos:Concept ;
+    rdfs:label "business_hours table" ;
+    rdfs:comment "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`." .
+
+ex:Concept_TableRefreshTokens a eos:Concept ;
+    rdfs:label "refresh_tokens table" ;
+    rdfs:comment "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`." .
+
+ex:Concept_TableSlaPolicies a eos:Concept ;
+    rdfs:label "sla_policies table" ;
+    rdfs:comment "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`." .
+
+ex:Concept_TableTicketAuditLog a eos:Concept ;
+    rdfs:label "ticket_audit_log table" ;
+    rdfs:comment "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`." .
+
+ex:Concept_TableTicketForms a eos:Concept ;
+    rdfs:label "ticket_forms table" ;
+    rdfs:comment "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`." .
+
+ex:Concept_TableTicketLinks a eos:Concept ;
+    rdfs:label "ticket_links table" ;
+    rdfs:comment "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`." .
+
+ex:Concept_TableTicketTags a eos:Concept ;
+    rdfs:label "ticket_tags table" ;
+    rdfs:comment "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`." .
+
+ex:Concept_TableTicketTodos a eos:Concept ;
+    rdfs:label "ticket_todos table" ;
+    rdfs:comment "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`." .
+
+ex:Concept_TableTicketWatchers a eos:Concept ;
+    rdfs:label "ticket_watchers table" ;
+    rdfs:comment "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`." .
+
+ex:Concept_TableTickets a eos:Concept ;
+    rdfs:label "tickets table" ;
+    rdfs:comment "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`." .
+
+ex:Invariant_ATicketCannotTransitionToItselfNoOpViaIsvali a eos:Invariant ;
+    rdfs:label "a ticket cannot transition to itself (no-op) via isValidTransition" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
+
+ex:Invariant_AccountLockoutBruteForceProtection a eos:Invariant ;
+    rdfs:label "account lockout & brute-force protection" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
+
+ex:Invariant_Addbusinessminutes a eos:Invariant ;
+    rdfs:label "addBusinessMinutes" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T-continuous` and accepted through review. Support: `S-inferred`." .
+
+ex:Invariant_Calculatebusinessminutes a eos:Invariant ;
+    rdfs:label "calculateBusinessMinutes" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T-continuous` and accepted through review. Support: `S-inferred`." .
+
+ex:Invariant_JwtSecurity a eos:Invariant ;
+    rdfs:label "JWT security" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
+
+ex:Invariant_JwtstrategySurfacesMissingFieldsAsUndefinedD a eos:Invariant ;
+    rdfs:label "JwtStrategy surfaces missing fields as undefined (downstream guards must reject)" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
+
+ex:Invariant_LocksTheAccountOnThe5ThWrongPasswordForExact a eos:Invariant ;
+    rdfs:label "locks the account on the 5th wrong password for exactly 15 minutes" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
+
+ex:Invariant_PasswordPolicyRegisterdto a eos:Invariant ;
+    rdfs:label "Password policy — RegisterDto" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
+
+ex:Invariant_RefreshTokenRotation a eos:Invariant ;
+    rdfs:label "Refresh token rotation" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
+
+ex:Invariant_RejectsA7CharPasswordBelowMinimum a eos:Invariant ;
+    rdfs:label "rejects a 7-char password (below minimum)" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
+
+ex:Invariant_RejectsANonStringPasswordTypeConfusionAttemp a eos:Invariant ;
+    rdfs:label "rejects a non-string password (type confusion attempt)" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
+
+ex:Invariant_RejectsAnEmptyPassword a eos:Invariant ;
+    rdfs:label "rejects an empty password" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
+
+ex:Invariant_RejectsMergingATicketIntoItselfSameId a eos:Invariant ;
+    rdfs:label "rejects merging a ticket into itself (same id)" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
+
+ex:Invariant_RejectsMergingFromAClosedSecondaryTicket a eos:Invariant ;
+    rdfs:label "rejects merging FROM a closed secondary ticket" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
+
+ex:Invariant_RejectsMissingPassword a eos:Invariant ;
+    rdfs:label "rejects missing password" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
+
+ex:Invariant_RejectsReopenWhenTicketIsNotResolved a eos:Invariant ;
+    rdfs:label "rejects reopen when ticket is not resolved" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
+
+ex:Invariant_RejectsTheCorrectPasswordWhileTheLockoutWind a eos:Invariant ;
+    rdfs:label "rejects the CORRECT password while the lockout window is active" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
+
+ex:Invariant_RejectsWhenUserHasNoRoleFieldOnJwt a eos:Invariant ;
+    rdfs:label "rejects when user has no role field on JWT" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
+
+ex:Invariant_ResumedTicketDoesNotOverwriteSlafirstrespons a eos:Invariant ;
+    rdfs:label "resumed ticket does not overwrite slaFirstResponseDueAt if first response already met" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
+
+ex:Invariant_ReturnsTheSameDateFor0Minutes a eos:Invariant ;
+    rdfs:label "returns the same date for 0 minutes" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T-continuous` and accepted through review. Support: `S-inferred`." .
+
+ex:Invariant_RlsTenantIsolationIntegration a eos:Invariant ;
+    rdfs:label "RLS tenant isolation (integration)" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
+
+ex:Invariant_ScopesTheTagLookupByTenantidTenantIsolation a eos:Invariant ;
+    rdfs:label "scopes the tag lookup by tenantId (tenant isolation)" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
+
+ex:Invariant_SlatimerservicePauseResumeEdgeCases a eos:Invariant ;
+    rdfs:label "SlaTimerService — pause/resume edge cases" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
+
+ex:Invariant_ThrowsNotfoundexceptionWhenTheTicketDoesNotE a eos:Invariant ;
+    rdfs:label "throws NotFoundException when the ticket does not exist" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
+
+ex:Invariant_TicketStatusTransitionMatrixExhaustive a eos:Invariant ;
+    rdfs:label "ticket status transition matrix (exhaustive)" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
+
+ex:Invariant_TicketcontrollerListNewAndMineQuickFilte a eos:Invariant ;
+    rdfs:label "TicketController.list — new-and-mine quick filter" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
+
+ex:Invariant_Ticketcorrelationservice a eos:Invariant ;
+    rdfs:label "TicketCorrelationService" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
+
+ex:Invariant_Ticketformservice a eos:Invariant ;
+    rdfs:label "TicketFormService" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
+
+ex:Invariant_Ticketservice a eos:Invariant ;
+    rdfs:label "TicketService" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
+
+ex:Invariant_TicketserviceListNewFilterSurface a eos:Invariant ;
+    rdfs:label "TicketService.list — new filter surface" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
+
+ex:Invariant_TicketserviceMergeAdditionalScenarios a eos:Invariant ;
+    rdfs:label "TicketService.merge — additional scenarios" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
+
+ex:Invariant_TicketserviceUpdateAssignmentTags a eos:Invariant ;
+    rdfs:label "TicketService.update — assignment + tags" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
+
+ex:Invariant_TicketserviceUpdateCustomFieldsMerge a eos:Invariant ;
+    rdfs:label "TicketService.update — custom_fields merge" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
+
+ex:Invariant_Tickettodoservice a eos:Invariant ;
+    rdfs:label "TicketTodoService" ;
+    rdfs:comment "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`." .
+
+ex:Artifact_AccountLockoutSpec eos:validates ex:Capability_Auth .
+ex:Artifact_AuthController eos:implements ex:Capability_Auth .
+ex:Artifact_AuthServiceSpec eos:validates ex:Capability_Auth .
+ex:Artifact_BusinessHoursUtilSpec eos:validates ex:Capability_Sla .
+ex:Artifact_JwtSecuritySpec eos:validates ex:Capability_Auth .
+ex:Artifact_PasswordSecuritySpec eos:validates ex:Capability_Auth .
+ex:Artifact_RefreshTokenRotationSpec eos:validates ex:Capability_Auth .
+ex:Artifact_SlaController eos:implements ex:Capability_Sla .
+ex:Artifact_SlaServiceSpec eos:validates ex:Capability_Sla .
+ex:Artifact_SlaTimerServiceSpec eos:validates ex:Capability_Sla .
+ex:Artifact_TicketAuditServiceSpec eos:validates ex:Capability_Ticket .
+ex:Artifact_TicketController eos:implements ex:Capability_Ticket .
+ex:Artifact_TicketFormController eos:implements ex:Capability_TicketForm .
+ex:Artifact_TicketFormServiceSpec eos:validates ex:Capability_TicketForm .
+ex:Artifact_TicketLinkController eos:implements ex:Capability_TicketLink .
+ex:Artifact_TicketLinkServiceSpec eos:validates ex:Capability_TicketLink .
+ex:Artifact_TicketMergeExtraSpec eos:validates ex:Capability_Ticket .
+ex:Artifact_TicketMergeSpec eos:validates ex:Capability_Ticket .
+ex:Artifact_TicketServiceSpec eos:validates ex:Capability_Ticket .
+ex:Artifact_TicketTodoController eos:implements ex:Capability_TicketTodo .
+ex:Artifact_TicketTodoServiceSpec eos:validates ex:Capability_TicketTodo .
+ex:Capability_Auth eos:scopedTo ex:BoundedContext_Backend .
+ex:Capability_Sla eos:scopedTo ex:BoundedContext_Backend .
+ex:Capability_Ticket eos:scopedTo ex:BoundedContext_Backend .
+ex:Capability_TicketForm eos:scopedTo ex:BoundedContext_Backend .
+ex:Capability_TicketLink eos:scopedTo ex:BoundedContext_Backend .
+ex:Capability_TicketTodo eos:scopedTo ex:BoundedContext_Backend .
+ex:Invariant_ATicketCannotTransitionToItselfNoOpViaIsvali eos:specializes ex:Invariant_TicketStatusTransitionMatrixExhaustive .
+ex:Invariant_AccountLockoutBruteForceProtection eos:constrains ex:Capability_Auth .
+ex:Invariant_AccountLockoutBruteForceProtection eos:enforcedAt ex:Artifact_AccountLockoutSpec .
+ex:Invariant_Addbusinessminutes eos:enforcedAt ex:Artifact_BusinessHoursCalcSpec .
+ex:Invariant_Calculatebusinessminutes eos:enforcedAt ex:Artifact_BusinessHoursCalcSpec .
+ex:Invariant_JwtSecurity eos:constrains ex:Capability_Auth .
+ex:Invariant_JwtSecurity eos:enforcedAt ex:Artifact_JwtSecuritySpec .
+ex:Invariant_JwtstrategySurfacesMissingFieldsAsUndefinedD eos:enforcedAt ex:Artifact_JwtSecuritySpec .
+ex:Invariant_JwtstrategySurfacesMissingFieldsAsUndefinedD eos:specializes ex:Invariant_JwtSecurity .
+ex:Invariant_LocksTheAccountOnThe5ThWrongPasswordForExact eos:enforcedAt ex:Artifact_AccountLockoutSpec .
+ex:Invariant_LocksTheAccountOnThe5ThWrongPasswordForExact eos:specializes ex:Invariant_AccountLockoutBruteForceProtection .
+ex:Invariant_PasswordPolicyRegisterdto eos:constrains ex:Capability_Auth .
+ex:Invariant_PasswordPolicyRegisterdto eos:enforcedAt ex:Artifact_PasswordSecuritySpec .
+ex:Invariant_RefreshTokenRotation eos:constrains ex:Capability_Auth .
+ex:Invariant_RefreshTokenRotation eos:enforcedAt ex:Artifact_RefreshTokenRotationSpec .
+ex:Invariant_RejectsA7CharPasswordBelowMinimum eos:enforcedAt ex:Artifact_PasswordSecuritySpec .
+ex:Invariant_RejectsA7CharPasswordBelowMinimum eos:specializes ex:Invariant_PasswordPolicyRegisterdto .
+ex:Invariant_RejectsANonStringPasswordTypeConfusionAttemp eos:enforcedAt ex:Artifact_PasswordSecuritySpec .
+ex:Invariant_RejectsANonStringPasswordTypeConfusionAttemp eos:specializes ex:Invariant_PasswordPolicyRegisterdto .
+ex:Invariant_RejectsAnEmptyPassword eos:enforcedAt ex:Artifact_PasswordSecuritySpec .
+ex:Invariant_RejectsAnEmptyPassword eos:specializes ex:Invariant_PasswordPolicyRegisterdto .
+ex:Invariant_RejectsMergingATicketIntoItselfSameId eos:enforcedAt ex:Artifact_TicketMergeExtraSpec .
+ex:Invariant_RejectsMergingATicketIntoItselfSameId eos:specializes ex:Invariant_TicketserviceMergeAdditionalScenarios .
+ex:Invariant_RejectsMergingFromAClosedSecondaryTicket eos:enforcedAt ex:Artifact_TicketMergeExtraSpec .
+ex:Invariant_RejectsMergingFromAClosedSecondaryTicket eos:specializes ex:Invariant_TicketserviceMergeAdditionalScenarios .
+ex:Invariant_RejectsMissingPassword eos:enforcedAt ex:Artifact_PasswordSecuritySpec .
+ex:Invariant_RejectsMissingPassword eos:specializes ex:Invariant_PasswordPolicyRegisterdto .
+ex:Invariant_RejectsReopenWhenTicketIsNotResolved eos:enforcedAt ex:Artifact_TicketServiceSpec .
+ex:Invariant_RejectsReopenWhenTicketIsNotResolved eos:specializes ex:Invariant_Ticketservice .
+ex:Invariant_RejectsTheCorrectPasswordWhileTheLockoutWind eos:enforcedAt ex:Artifact_AccountLockoutSpec .
+ex:Invariant_RejectsTheCorrectPasswordWhileTheLockoutWind eos:specializes ex:Invariant_AccountLockoutBruteForceProtection .
+ex:Invariant_ResumedTicketDoesNotOverwriteSlafirstrespons eos:enforcedAt ex:Artifact_SlaTimerServiceSpec .
+ex:Invariant_ResumedTicketDoesNotOverwriteSlafirstrespons eos:specializes ex:Invariant_SlatimerservicePauseResumeEdgeCases .
+ex:Invariant_ReturnsTheSameDateFor0Minutes eos:specializes ex:Invariant_Calculatebusinessminutes .
+ex:Invariant_RlsTenantIsolationIntegration eos:enforcedAt ex:Artifact_TenantIsolationIntegrationSpec .
+ex:Invariant_SlatimerservicePauseResumeEdgeCases eos:constrains ex:Capability_Sla .
+ex:Invariant_SlatimerservicePauseResumeEdgeCases eos:enforcedAt ex:Artifact_SlaTimerServiceSpec .
+ex:Invariant_TicketStatusTransitionMatrixExhaustive eos:constrains ex:Capability_Ticket .
+ex:Invariant_TicketcontrollerListNewAndMineQuickFilte eos:constrains ex:Capability_Ticket .
+ex:Invariant_Ticketcorrelationservice eos:enforcedAt ex:Artifact_TicketCorrelationServiceSpec .
+ex:Invariant_Ticketformservice eos:constrains ex:Capability_TicketForm .
+ex:Invariant_Ticketformservice eos:enforcedAt ex:Artifact_TicketFormServiceSpec .
+ex:Invariant_Ticketservice eos:constrains ex:Capability_Ticket .
+ex:Invariant_Ticketservice eos:enforcedAt ex:Artifact_TicketServiceSpec .
+ex:Invariant_TicketserviceListNewFilterSurface eos:constrains ex:Capability_Ticket .
+ex:Invariant_TicketserviceMergeAdditionalScenarios eos:constrains ex:Capability_Ticket .
+ex:Invariant_TicketserviceMergeAdditionalScenarios eos:enforcedAt ex:Artifact_TicketMergeExtraSpec .
+ex:Invariant_TicketserviceUpdateAssignmentTags eos:constrains ex:Capability_Ticket .
+ex:Invariant_TicketserviceUpdateCustomFieldsMerge eos:constrains ex:Capability_Ticket .
+ex:Invariant_Tickettodoservice eos:constrains ex:Capability_TicketTodo .
+ex:Invariant_Tickettodoservice eos:enforcedAt ex:Artifact_TicketTodoServiceSpec .

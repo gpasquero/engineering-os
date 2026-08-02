@@ -1,0 +1,2244 @@
+{
+  "formatVersion": "1.0.0",
+  "metamodelVersion": "0.4.0-skeleton",
+  "project": "ai-desk-lifecycle",
+  "note": "Canonical Knowledge Model. Every edge was asserted; none inferred (ADR-0044, ADR-0061). Serializations are projections of this model, not the model (ADR-0076).",
+  "nodes": [
+    {
+      "id": "ADR.0001",
+      "type": "ADR",
+      "label": "ADR-0001: Multi-tenancy Strategy",
+      "family": "operational",
+      "position": null,
+      "description": "Proposed by `W-decision-archaeologist` in task `T02-interpret` and accepted through review. Support: `S-specified`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "locator": "header",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-decision-archaeologist",
+        "proposed-in": "T02-interpret",
+        "rule": "S3-adr-directory-is-a-decision",
+        "source": "docs/adr/ADR-0001-multi-tenancy-strategy.md",
+        "status": "Proposed",
+        "support": "S-specified"
+      },
+      "provenance": {
+        "source": "adr-0001.md"
+      }
+    },
+    {
+      "id": "Artifact.AccountLockoutSpec",
+      "type": "Artifact",
+      "label": "account-lockout.spec.spec.ts",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-tested`.\n\nInferred by rule `S4-spec-validates-module`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "cases": "8",
+        "describes": "account lockout & brute-force protection",
+        "locator": "8 cases",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "S4-spec-validates-module",
+        "source": "packages/backend/src/modules/auth/__tests__/account-lockout.spec.ts",
+        "support": "S-tested"
+      },
+      "provenance": {
+        "source": "artifact-accountlockoutspec.md"
+      }
+    },
+    {
+      "id": "Artifact.AuthController",
+      "type": "Artifact",
+      "label": "auth.controller.ts",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`.\n\nInferred by rule `S2-controller-implements-module`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "locator": "3 routes",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "routes": "3",
+        "rule": "S2-controller-implements-module",
+        "source": "packages/backend/src/modules/auth/auth.controller.ts",
+        "support": "S-implemented"
+      },
+      "provenance": {
+        "source": "artifact-authcontroller.md"
+      }
+    },
+    {
+      "id": "Artifact.AuthServiceSpec",
+      "type": "Artifact",
+      "label": "auth.service.spec.spec.ts",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-tested`.\n\nInferred by rule `S4-spec-validates-module`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "cases": "12",
+        "describes": "AuthService | login | refresh",
+        "locator": "12 cases",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "S4-spec-validates-module",
+        "source": "packages/backend/src/modules/auth/__tests__/auth.service.spec.ts",
+        "support": "S-tested"
+      },
+      "provenance": {
+        "source": "artifact-authservicespec.md"
+      }
+    },
+    {
+      "id": "Artifact.BusinessHoursCalcSpec",
+      "type": "Artifact",
+      "label": "business-hours-calc.spec.spec.ts",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-domain-interpreter` in task `T-continuous` and accepted through review. Support: `S-tested`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "cases": "11",
+        "locator": "11 cases",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T-continuous",
+        "rule": "C1-new-suite",
+        "source": "packages/backend/src/common/utils/__tests__/business-hours-calc.spec.ts",
+        "support": "S-tested"
+      },
+      "provenance": {
+        "source": "artifact-businesshourscalcspec.md"
+      }
+    },
+    {
+      "id": "Artifact.BusinessHoursUtilSpec",
+      "type": "Artifact",
+      "label": "business-hours.util.spec.spec.ts",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-tested`.\n\nInferred by rule `S4-spec-validates-module`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "cases": "20",
+        "describes": "computeBusinessDeadline | same-day computation | cross-day computation",
+        "locator": "20 cases",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "S4-spec-validates-module",
+        "source": "packages/backend/src/modules/sla/__tests__/business-hours.util.spec.ts",
+        "support": "S-tested"
+      },
+      "provenance": {
+        "source": "artifact-businesshoursutilspec.md"
+      }
+    },
+    {
+      "id": "Artifact.JwtSecuritySpec",
+      "type": "Artifact",
+      "label": "jwt-security.spec.spec.ts",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-tested`.\n\nInferred by rule `S4-spec-validates-module`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "cases": "11",
+        "describes": "JWT security | signature verification | payload / expiry enforcement",
+        "locator": "11 cases",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "S4-spec-validates-module",
+        "source": "packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts",
+        "support": "S-tested"
+      },
+      "provenance": {
+        "source": "artifact-jwtsecurityspec.md"
+      }
+    },
+    {
+      "id": "Artifact.PasswordSecuritySpec",
+      "type": "Artifact",
+      "label": "password-security.spec.spec.ts",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-tested`.\n\nInferred by rule `S4-spec-validates-module`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "cases": "10",
+        "describes": "Password policy \u2014 RegisterDto | bcrypt hashing guarantees",
+        "locator": "10 cases",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "S4-spec-validates-module",
+        "source": "packages/backend/src/modules/auth/__tests__/password-security.spec.ts",
+        "support": "S-tested"
+      },
+      "provenance": {
+        "source": "artifact-passwordsecurityspec.md"
+      }
+    },
+    {
+      "id": "Artifact.RefreshTokenRotationSpec",
+      "type": "Artifact",
+      "label": "refresh-token-rotation.spec.spec.ts",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-tested`.\n\nInferred by rule `S4-spec-validates-module`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "cases": "7",
+        "describes": "Refresh token rotation",
+        "locator": "7 cases",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "S4-spec-validates-module",
+        "source": "packages/backend/src/modules/auth/__tests__/refresh-token-rotation.spec.ts",
+        "support": "S-tested"
+      },
+      "provenance": {
+        "source": "artifact-refreshtokenrotationspec.md"
+      }
+    },
+    {
+      "id": "Artifact.SlaController",
+      "type": "Artifact",
+      "label": "sla.controller.ts",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`.\n\nInferred by rule `S2-controller-implements-module`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "locator": "10 routes",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "routes": "10",
+        "rule": "S2-controller-implements-module",
+        "source": "packages/backend/src/modules/sla/sla.controller.ts",
+        "support": "S-implemented"
+      },
+      "provenance": {
+        "source": "artifact-slacontroller.md"
+      }
+    },
+    {
+      "id": "Artifact.SlaServiceSpec",
+      "type": "Artifact",
+      "label": "sla.service.spec.spec.ts",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-tested`.\n\nInferred by rule `S4-spec-validates-module`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "cases": "14",
+        "describes": "SlaService | createPolicy | findPolicyById",
+        "locator": "14 cases",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "S4-spec-validates-module",
+        "source": "packages/backend/src/modules/sla/__tests__/sla.service.spec.ts",
+        "support": "S-tested"
+      },
+      "provenance": {
+        "source": "artifact-slaservicespec.md"
+      }
+    },
+    {
+      "id": "Artifact.SlaTimerServiceSpec",
+      "type": "Artifact",
+      "label": "sla-timer.service.spec.spec.ts",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-tested`.\n\nInferred by rule `S4-spec-validates-module`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "cases": "8",
+        "describes": "SlaTimerService \u2014 pause/resume edge cases",
+        "locator": "8 cases",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "S4-spec-validates-module",
+        "source": "packages/backend/src/modules/sla/__tests__/sla-timer.service.spec.ts",
+        "support": "S-tested"
+      },
+      "provenance": {
+        "source": "artifact-slatimerservicespec.md"
+      }
+    },
+    {
+      "id": "Artifact.TenantIsolationIntegrationSpec",
+      "type": "Artifact",
+      "label": "tenant-isolation.integration.spec.spec.ts",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-tested`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "cases": "9",
+        "describes": "RLS tenant isolation (integration)",
+        "locator": "9 cases",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "S4-spec-validates-module",
+        "source": "packages/backend/src/common/database/__tests__/tenant-isolation.integration.spec.ts",
+        "support": "S-tested"
+      },
+      "provenance": {
+        "source": "artifact-tenantisolationintegrationspec.md"
+      }
+    },
+    {
+      "id": "Artifact.TicketAuditServiceSpec",
+      "type": "Artifact",
+      "label": "ticket-audit.service.spec.spec.ts",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-tested`.\n\nInferred by rule `S4-spec-validates-module`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "cases": "3",
+        "describes": "TicketAuditService",
+        "locator": "3 cases",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "S4-spec-validates-module",
+        "source": "packages/backend/src/modules/ticket/__tests__/ticket-audit.service.spec.ts",
+        "support": "S-tested"
+      },
+      "provenance": {
+        "source": "artifact-ticketauditservicespec.md"
+      }
+    },
+    {
+      "id": "Artifact.TicketController",
+      "type": "Artifact",
+      "label": "ticket.controller.ts",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`.\n\nInferred by rule `S2-controller-implements-module`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "locator": "14 routes",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "routes": "14",
+        "rule": "S2-controller-implements-module",
+        "source": "packages/backend/src/modules/ticket/ticket.controller.ts",
+        "support": "S-implemented"
+      },
+      "provenance": {
+        "source": "artifact-ticketcontroller.md"
+      }
+    },
+    {
+      "id": "Artifact.TicketCorrelationServiceSpec",
+      "type": "Artifact",
+      "label": "ticket-correlation.service.spec.spec.ts",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-tested`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "cases": "10",
+        "describes": "TicketCorrelationService | subject_token strategy | external_in_reply_to strategy",
+        "locator": "10 cases",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "S4-spec-validates-module",
+        "source": "packages/backend/src/modules/channel/correlation/ticket-correlation.service.spec.ts",
+        "support": "S-tested"
+      },
+      "provenance": {
+        "source": "artifact-ticketcorrelationservicespec.md"
+      }
+    },
+    {
+      "id": "Artifact.TicketFormController",
+      "type": "Artifact",
+      "label": "ticket-form.controller.ts",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`.\n\nInferred by rule `S2-controller-implements-module`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "locator": "6 routes",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "routes": "6",
+        "rule": "S2-controller-implements-module",
+        "source": "packages/backend/src/modules/ticket-form/ticket-form.controller.ts",
+        "support": "S-implemented"
+      },
+      "provenance": {
+        "source": "artifact-ticketformcontroller.md"
+      }
+    },
+    {
+      "id": "Artifact.TicketFormServiceSpec",
+      "type": "Artifact",
+      "label": "ticket-form.service.spec.spec.ts",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-tested`.\n\nInferred by rule `S4-spec-validates-module`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "cases": "7",
+        "describes": "TicketFormService",
+        "locator": "7 cases",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "S4-spec-validates-module",
+        "source": "packages/backend/src/modules/ticket-form/__tests__/ticket-form.service.spec.ts",
+        "support": "S-tested"
+      },
+      "provenance": {
+        "source": "artifact-ticketformservicespec.md"
+      }
+    },
+    {
+      "id": "Artifact.TicketLinkController",
+      "type": "Artifact",
+      "label": "ticket-link.controller.ts",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`.\n\nInferred by rule `S2-controller-implements-module`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "locator": "3 routes",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "routes": "3",
+        "rule": "S2-controller-implements-module",
+        "source": "packages/backend/src/modules/ticket-link/ticket-link.controller.ts",
+        "support": "S-implemented"
+      },
+      "provenance": {
+        "source": "artifact-ticketlinkcontroller.md"
+      }
+    },
+    {
+      "id": "Artifact.TicketLinkServiceSpec",
+      "type": "Artifact",
+      "label": "ticket-link.service.spec.spec.ts",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-tested`.\n\nInferred by rule `S4-spec-validates-module`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "cases": "6",
+        "describes": "TicketLinkService | create | remove",
+        "locator": "6 cases",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "S4-spec-validates-module",
+        "source": "packages/backend/src/modules/ticket-link/__tests__/ticket-link.service.spec.ts",
+        "support": "S-tested"
+      },
+      "provenance": {
+        "source": "artifact-ticketlinkservicespec.md"
+      }
+    },
+    {
+      "id": "Artifact.TicketMergeExtraSpec",
+      "type": "Artifact",
+      "label": "ticket-merge-extra.spec.spec.ts",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-tested`.\n\nInferred by rule `S4-spec-validates-module`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "cases": "7",
+        "describes": "TicketService.merge \u2014 additional scenarios",
+        "locator": "7 cases",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "S4-spec-validates-module",
+        "source": "packages/backend/src/modules/ticket/__tests__/ticket-merge-extra.spec.ts",
+        "support": "S-tested"
+      },
+      "provenance": {
+        "source": "artifact-ticketmergeextraspec.md"
+      }
+    },
+    {
+      "id": "Artifact.TicketMergeSpec",
+      "type": "Artifact",
+      "label": "ticket-merge.spec.spec.ts",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-tested`.\n\nInferred by rule `S4-spec-validates-module`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "cases": "7",
+        "describes": "TicketService - merge",
+        "locator": "7 cases",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "S4-spec-validates-module",
+        "source": "packages/backend/src/modules/ticket/__tests__/ticket-merge.spec.ts",
+        "support": "S-tested"
+      },
+      "provenance": {
+        "source": "artifact-ticketmergespec.md"
+      }
+    },
+    {
+      "id": "Artifact.TicketServiceSpec",
+      "type": "Artifact",
+      "label": "ticket.service.spec.spec.ts",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-tested`.\n\nInferred by rule `S4-spec-validates-module`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "cases": "35",
+        "describes": "TicketService | isValidTransition (PR-1 matrix) | create",
+        "locator": "35 cases",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "S4-spec-validates-module",
+        "source": "packages/backend/src/modules/ticket/__tests__/ticket.service.spec.ts",
+        "support": "S-tested"
+      },
+      "provenance": {
+        "source": "artifact-ticketservicespec.md"
+      }
+    },
+    {
+      "id": "Artifact.TicketTodoController",
+      "type": "Artifact",
+      "label": "ticket-todo.controller.ts",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`.\n\nInferred by rule `S2-controller-implements-module`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "locator": "5 routes",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "routes": "5",
+        "rule": "S2-controller-implements-module",
+        "source": "packages/backend/src/modules/ticket-todo/ticket-todo.controller.ts",
+        "support": "S-implemented"
+      },
+      "provenance": {
+        "source": "artifact-tickettodocontroller.md"
+      }
+    },
+    {
+      "id": "Artifact.TicketTodoServiceSpec",
+      "type": "Artifact",
+      "label": "ticket-todo.service.spec.spec.ts",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-tested`.\n\nInferred by rule `S4-spec-validates-module`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "cases": "17",
+        "describes": "TicketTodoService | list | create",
+        "locator": "17 cases",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "S4-spec-validates-module",
+        "source": "packages/backend/src/modules/ticket-todo/__tests__/ticket-todo.service.spec.ts",
+        "support": "S-tested"
+      },
+      "provenance": {
+        "source": "artifact-tickettodoservicespec.md"
+      }
+    },
+    {
+      "id": "BoundedContext.Backend",
+      "type": "BoundedContext",
+      "label": "backend package",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-confirmed-deterministic`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "locator": "workspace package",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "S1-package-is-a-context",
+        "source": "packages/backend/package.json",
+        "support": "S-confirmed-deterministic"
+      },
+      "provenance": {
+        "source": "boundedcontext-backend.md"
+      }
+    },
+    {
+      "id": "Capability.Auth",
+      "type": "Capability",
+      "label": "auth module",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`.\n\nInferred by rule `S1-module-is-a-capability`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "locator": "module directory",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "S1-module-is-a-capability",
+        "source": "packages/backend/src/modules/auth",
+        "support": "S-implemented",
+        "ts-files": "11"
+      },
+      "provenance": {
+        "source": "capability-auth.md"
+      }
+    },
+    {
+      "id": "Capability.Sla",
+      "type": "Capability",
+      "label": "sla module",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`.\n\nInferred by rule `S1-module-is-a-capability`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "locator": "module directory",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "S1-module-is-a-capability",
+        "source": "packages/backend/src/modules/sla",
+        "support": "S-implemented",
+        "ts-files": "13"
+      },
+      "provenance": {
+        "source": "capability-sla.md"
+      }
+    },
+    {
+      "id": "Capability.Ticket",
+      "type": "Capability",
+      "label": "ticket module",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`.\n\nInferred by rule `S1-module-is-a-capability`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "locator": "module directory",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "S1-module-is-a-capability",
+        "source": "packages/backend/src/modules/ticket",
+        "support": "S-implemented",
+        "ts-files": "27"
+      },
+      "provenance": {
+        "source": "capability-ticket.md"
+      }
+    },
+    {
+      "id": "Capability.TicketForm",
+      "type": "Capability",
+      "label": "ticket-form module",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`.\n\nInferred by rule `S1-module-is-a-capability`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "locator": "module directory",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "S1-module-is-a-capability",
+        "source": "packages/backend/src/modules/ticket-form",
+        "support": "S-implemented",
+        "ts-files": "5"
+      },
+      "provenance": {
+        "source": "capability-ticketform.md"
+      }
+    },
+    {
+      "id": "Capability.TicketLink",
+      "type": "Capability",
+      "label": "ticket-link module",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`.\n\nInferred by rule `S1-module-is-a-capability`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "locator": "module directory",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "S1-module-is-a-capability",
+        "source": "packages/backend/src/modules/ticket-link",
+        "support": "S-implemented",
+        "ts-files": "5"
+      },
+      "provenance": {
+        "source": "capability-ticketlink.md"
+      }
+    },
+    {
+      "id": "Capability.TicketTodo",
+      "type": "Capability",
+      "label": "ticket-todo module",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`.\n\nInferred by rule `S1-module-is-a-capability`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "locator": "module directory",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "S1-module-is-a-capability",
+        "source": "packages/backend/src/modules/ticket-todo",
+        "support": "S-implemented",
+        "ts-files": "5"
+      },
+      "provenance": {
+        "source": "capability-tickettodo.md"
+      }
+    },
+    {
+      "id": "Concept.TableBusinessHours",
+      "type": "Concept",
+      "label": "business_hours table",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "locator": "pgTable('business_hours')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "S1-pgtable-is-a-concept",
+        "source": "packages/backend/src/common/database/schema/business-hours.ts",
+        "support": "S-implemented",
+        "tenant-scoped": "true"
+      },
+      "provenance": {
+        "source": "concept-tablebusinesshours.md"
+      }
+    },
+    {
+      "id": "Concept.TableRefreshTokens",
+      "type": "Concept",
+      "label": "refresh_tokens table",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "locator": "pgTable('refresh_tokens')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "S1-pgtable-is-a-concept",
+        "source": "packages/backend/src/common/database/schema/refresh-tokens.ts",
+        "support": "S-implemented",
+        "tenant-scoped": "false"
+      },
+      "provenance": {
+        "source": "concept-tablerefreshtokens.md"
+      }
+    },
+    {
+      "id": "Concept.TableSlaPolicies",
+      "type": "Concept",
+      "label": "sla_policies table",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "locator": "pgTable('sla_policies')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "S1-pgtable-is-a-concept",
+        "source": "packages/backend/src/common/database/schema/sla-policies.ts",
+        "support": "S-implemented",
+        "tenant-scoped": "true"
+      },
+      "provenance": {
+        "source": "concept-tableslapolicies.md"
+      }
+    },
+    {
+      "id": "Concept.TableTicketAuditLog",
+      "type": "Concept",
+      "label": "ticket_audit_log table",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "locator": "pgTable('ticket_audit_log')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "S1-pgtable-is-a-concept",
+        "source": "packages/backend/src/common/database/schema/ticket-audit-log.ts",
+        "support": "S-implemented",
+        "tenant-scoped": "true"
+      },
+      "provenance": {
+        "source": "concept-tableticketauditlog.md"
+      }
+    },
+    {
+      "id": "Concept.TableTicketForms",
+      "type": "Concept",
+      "label": "ticket_forms table",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "locator": "pgTable('ticket_forms')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "S1-pgtable-is-a-concept",
+        "source": "packages/backend/src/common/database/schema/ticket-forms.ts",
+        "support": "S-implemented",
+        "tenant-scoped": "true"
+      },
+      "provenance": {
+        "source": "concept-tableticketforms.md"
+      }
+    },
+    {
+      "id": "Concept.TableTicketLinks",
+      "type": "Concept",
+      "label": "ticket_links table",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "locator": "pgTable('ticket_links')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "S1-pgtable-is-a-concept",
+        "source": "packages/backend/src/common/database/schema/ticket-links.ts",
+        "support": "S-implemented",
+        "tenant-scoped": "true"
+      },
+      "provenance": {
+        "source": "concept-tableticketlinks.md"
+      }
+    },
+    {
+      "id": "Concept.TableTicketTags",
+      "type": "Concept",
+      "label": "ticket_tags table",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "locator": "pgTable('ticket_tags')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "S1-pgtable-is-a-concept",
+        "source": "packages/backend/src/common/database/schema/ticket-tags.ts",
+        "support": "S-implemented",
+        "tenant-scoped": "false"
+      },
+      "provenance": {
+        "source": "concept-tabletickettags.md"
+      }
+    },
+    {
+      "id": "Concept.TableTicketTodos",
+      "type": "Concept",
+      "label": "ticket_todos table",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "locator": "pgTable('ticket_todos')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "S1-pgtable-is-a-concept",
+        "source": "packages/backend/src/common/database/schema/ticket-todos.ts",
+        "support": "S-implemented",
+        "tenant-scoped": "true"
+      },
+      "provenance": {
+        "source": "concept-tabletickettodos.md"
+      }
+    },
+    {
+      "id": "Concept.TableTicketWatchers",
+      "type": "Concept",
+      "label": "ticket_watchers table",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "locator": "pgTable('ticket_watchers')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "S1-pgtable-is-a-concept",
+        "source": "packages/backend/src/common/database/schema/ticket-watchers.ts",
+        "support": "S-implemented",
+        "tenant-scoped": "true"
+      },
+      "provenance": {
+        "source": "concept-tableticketwatchers.md"
+      }
+    },
+    {
+      "id": "Concept.TableTickets",
+      "type": "Concept",
+      "label": "tickets table",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "locator": "pgTable('tickets')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "S1-pgtable-is-a-concept",
+        "source": "packages/backend/src/common/database/schema/tickets.ts",
+        "support": "S-implemented",
+        "tenant-scoped": "true"
+      },
+      "provenance": {
+        "source": "concept-tabletickets.md"
+      }
+    },
+    {
+      "id": "Invariant.ATicketCannotTransitionToItselfNoOpViaIsvali",
+      "type": "Invariant",
+      "label": "a ticket cannot transition to itself (no-op) via isValidTransition",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`.\n\nInferred by rule `R4-both-levels`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "granularity": "guarantee",
+        "locator": "it('a ticket cannot transition to itself (no-op) via isValidTransition')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "R4-both-levels",
+        "source": "packages/backend/src/modules/ticket/__tests__/status-transitions.spec.ts",
+        "support": "S-inferred"
+      },
+      "provenance": {
+        "source": "invariant-aticketcannottransitiontoitselfnoopviaisvali.md"
+      }
+    },
+    {
+      "id": "Invariant.AccountLockoutBruteForceProtection",
+      "type": "Invariant",
+      "label": "account lockout & brute-force protection",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`.\n\nInferred by rule `R4-both-levels`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "established-by-cases": "3",
+        "granularity": "concept",
+        "locator": "describe('account lockout & brute-force protection')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "R4-both-levels",
+        "source": "packages/backend/src/modules/auth/__tests__/account-lockout.spec.ts",
+        "support": "S-inferred"
+      },
+      "provenance": {
+        "source": "invariant-accountlockoutbruteforceprotection.md"
+      }
+    },
+    {
+      "id": "Invariant.Addbusinessminutes",
+      "type": "Invariant",
+      "label": "addBusinessMinutes",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-constraint-interpreter` in task `T-continuous` and accepted through review. Support: `S-inferred`.\n\nInferred by rule `C1-new-suite`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "granularity": "concept",
+        "locator": "describe('addBusinessMinutes')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T-continuous",
+        "rule": "C1-new-suite",
+        "source": "packages/backend/src/common/utils/__tests__/business-hours-calc.spec.ts",
+        "support": "S-inferred"
+      },
+      "provenance": {
+        "source": "invariant-addbusinessminutes.md"
+      }
+    },
+    {
+      "id": "Invariant.Calculatebusinessminutes",
+      "type": "Invariant",
+      "label": "calculateBusinessMinutes",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-constraint-interpreter` in task `T-continuous` and accepted through review. Support: `S-inferred`.\n\nInferred by rule `C1-new-suite`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "granularity": "concept",
+        "locator": "describe('calculateBusinessMinutes')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T-continuous",
+        "rule": "C1-new-suite",
+        "source": "packages/backend/src/common/utils/__tests__/business-hours-calc.spec.ts",
+        "support": "S-inferred"
+      },
+      "provenance": {
+        "source": "invariant-calculatebusinessminutes.md"
+      }
+    },
+    {
+      "id": "Invariant.JwtSecurity",
+      "type": "Invariant",
+      "label": "JWT security",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`.\n\nInferred by rule `R4-both-levels`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "established-by-cases": "7",
+        "granularity": "concept",
+        "locator": "describe('JWT security')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "R4-both-levels",
+        "source": "packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts",
+        "support": "S-inferred"
+      },
+      "provenance": {
+        "source": "invariant-jwtsecurity.md"
+      }
+    },
+    {
+      "id": "Invariant.JwtstrategySurfacesMissingFieldsAsUndefinedD",
+      "type": "Invariant",
+      "label": "JwtStrategy surfaces missing fields as undefined (downstream guards must reject)",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`.\n\nInferred by rule `R4-both-levels`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "granularity": "guarantee",
+        "locator": "it('JwtStrategy surfaces missing fields as undefined (downstream guards mu')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "R4-both-levels",
+        "source": "packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts",
+        "support": "S-inferred"
+      },
+      "provenance": {
+        "source": "invariant-jwtstrategysurfacesmissingfieldsasundefinedd.md"
+      }
+    },
+    {
+      "id": "Invariant.LocksTheAccountOnThe5ThWrongPasswordForExact",
+      "type": "Invariant",
+      "label": "locks the account on the 5th wrong password for exactly 15 minutes",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`.\n\nInferred by rule `R4-both-levels`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "granularity": "guarantee",
+        "locator": "it('locks the account on the 5th wrong password for exactly 15 minutes')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "R4-both-levels",
+        "source": "packages/backend/src/modules/auth/__tests__/account-lockout.spec.ts",
+        "support": "S-inferred"
+      },
+      "provenance": {
+        "source": "invariant-lockstheaccountonthe5thwrongpasswordforexact.md"
+      }
+    },
+    {
+      "id": "Invariant.PasswordPolicyRegisterdto",
+      "type": "Invariant",
+      "label": "Password policy \u2014 RegisterDto",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`.\n\nInferred by rule `R4-both-levels`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "established-by-cases": "5",
+        "granularity": "concept",
+        "locator": "describe('Password policy \u2014 RegisterDto')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "R4-both-levels",
+        "source": "packages/backend/src/modules/auth/__tests__/password-security.spec.ts",
+        "support": "S-inferred"
+      },
+      "provenance": {
+        "source": "invariant-passwordpolicyregisterdto.md"
+      }
+    },
+    {
+      "id": "Invariant.RefreshTokenRotation",
+      "type": "Invariant",
+      "label": "Refresh token rotation",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`.\n\nInferred by rule `R4-both-levels`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "established-by-cases": "3",
+        "granularity": "concept",
+        "locator": "describe('Refresh token rotation')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "R4-both-levels",
+        "source": "packages/backend/src/modules/auth/__tests__/refresh-token-rotation.spec.ts",
+        "support": "S-inferred"
+      },
+      "provenance": {
+        "source": "invariant-refreshtokenrotation.md"
+      }
+    },
+    {
+      "id": "Invariant.RejectsA7CharPasswordBelowMinimum",
+      "type": "Invariant",
+      "label": "rejects a 7-char password (below minimum)",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`.\n\nInferred by rule `R4-both-levels`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "granularity": "guarantee",
+        "locator": "it('rejects a 7-char password (below minimum)')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "R4-both-levels",
+        "source": "packages/backend/src/modules/auth/__tests__/password-security.spec.ts",
+        "support": "S-inferred"
+      },
+      "provenance": {
+        "source": "invariant-rejectsa7charpasswordbelowminimum.md"
+      }
+    },
+    {
+      "id": "Invariant.RejectsANonStringPasswordTypeConfusionAttemp",
+      "type": "Invariant",
+      "label": "rejects a non-string password (type confusion attempt)",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`.\n\nInferred by rule `R4-both-levels`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "granularity": "guarantee",
+        "locator": "it('rejects a non-string password (type confusion attempt)')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "R4-both-levels",
+        "source": "packages/backend/src/modules/auth/__tests__/password-security.spec.ts",
+        "support": "S-inferred"
+      },
+      "provenance": {
+        "source": "invariant-rejectsanonstringpasswordtypeconfusionattemp.md"
+      }
+    },
+    {
+      "id": "Invariant.RejectsAnEmptyPassword",
+      "type": "Invariant",
+      "label": "rejects an empty password",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`.\n\nInferred by rule `R4-both-levels`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "granularity": "guarantee",
+        "locator": "it('rejects an empty password')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "R4-both-levels",
+        "source": "packages/backend/src/modules/auth/__tests__/password-security.spec.ts",
+        "support": "S-inferred"
+      },
+      "provenance": {
+        "source": "invariant-rejectsanemptypassword.md"
+      }
+    },
+    {
+      "id": "Invariant.RejectsMergingATicketIntoItselfSameId",
+      "type": "Invariant",
+      "label": "rejects merging a ticket into itself (same id)",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`.\n\nInferred by rule `R4-both-levels`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "granularity": "guarantee",
+        "locator": "it('rejects merging a ticket into itself (same id)')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "R4-both-levels",
+        "source": "packages/backend/src/modules/ticket/__tests__/ticket-merge-extra.spec.ts",
+        "support": "S-inferred"
+      },
+      "provenance": {
+        "source": "invariant-rejectsmergingaticketintoitselfsameid.md"
+      }
+    },
+    {
+      "id": "Invariant.RejectsMergingFromAClosedSecondaryTicket",
+      "type": "Invariant",
+      "label": "rejects merging FROM a closed secondary ticket",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`.\n\nInferred by rule `R4-both-levels`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "granularity": "guarantee",
+        "locator": "it('rejects merging FROM a closed secondary ticket')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "R4-both-levels",
+        "source": "packages/backend/src/modules/ticket/__tests__/ticket-merge-extra.spec.ts",
+        "support": "S-inferred"
+      },
+      "provenance": {
+        "source": "invariant-rejectsmergingfromaclosedsecondaryticket.md"
+      }
+    },
+    {
+      "id": "Invariant.RejectsMissingPassword",
+      "type": "Invariant",
+      "label": "rejects missing password",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`.\n\nInferred by rule `R4-both-levels`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "granularity": "guarantee",
+        "locator": "it('rejects missing password')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "R4-both-levels",
+        "source": "packages/backend/src/modules/auth/__tests__/password-security.spec.ts",
+        "support": "S-inferred"
+      },
+      "provenance": {
+        "source": "invariant-rejectsmissingpassword.md"
+      }
+    },
+    {
+      "id": "Invariant.RejectsReopenWhenTicketIsNotResolved",
+      "type": "Invariant",
+      "label": "rejects reopen when ticket is not resolved",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`.\n\nInferred by rule `R4-both-levels`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "granularity": "guarantee",
+        "locator": "it('rejects reopen when ticket is not resolved')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "R4-both-levels",
+        "source": "packages/backend/src/modules/ticket/__tests__/ticket.service.spec.ts",
+        "support": "S-inferred"
+      },
+      "provenance": {
+        "source": "invariant-rejectsreopenwhenticketisnotresolved.md"
+      }
+    },
+    {
+      "id": "Invariant.RejectsTheCorrectPasswordWhileTheLockoutWind",
+      "type": "Invariant",
+      "label": "rejects the CORRECT password while the lockout window is active",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`.\n\nInferred by rule `R4-both-levels`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "granularity": "guarantee",
+        "locator": "it('rejects the CORRECT password while the lockout window is active')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "R4-both-levels",
+        "source": "packages/backend/src/modules/auth/__tests__/account-lockout.spec.ts",
+        "support": "S-inferred"
+      },
+      "provenance": {
+        "source": "invariant-rejectsthecorrectpasswordwhilethelockoutwind.md"
+      }
+    },
+    {
+      "id": "Invariant.RejectsWhenUserHasNoRoleFieldOnJwt",
+      "type": "Invariant",
+      "label": "rejects when user has no role field on JWT",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "granularity": "guarantee",
+        "locator": "it('rejects when user has no role field on JWT')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "R4-both-levels",
+        "source": "packages/backend/src/common/guards/__tests__/roles.guard.spec.ts",
+        "support": "S-inferred"
+      },
+      "provenance": {
+        "source": "invariant-rejectswhenuserhasnorolefieldonjwt.md"
+      }
+    },
+    {
+      "id": "Invariant.ResumedTicketDoesNotOverwriteSlafirstrespons",
+      "type": "Invariant",
+      "label": "resumed ticket does not overwrite slaFirstResponseDueAt if first response already met",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`.\n\nInferred by rule `R4-both-levels`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "granularity": "guarantee",
+        "locator": "it('resumed ticket does not overwrite slaFirstResponseDueAt if first respo')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "R4-both-levels",
+        "source": "packages/backend/src/modules/sla/__tests__/sla-timer.service.spec.ts",
+        "support": "S-inferred"
+      },
+      "provenance": {
+        "source": "invariant-resumedticketdoesnotoverwriteslafirstrespons.md"
+      }
+    },
+    {
+      "id": "Invariant.ReturnsTheSameDateFor0Minutes",
+      "type": "Invariant",
+      "label": "returns the same date for 0 minutes",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-constraint-interpreter` in task `T-continuous` and accepted through review. Support: `S-inferred`.\n\nInferred by rule `C1-new-suite`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "granularity": "guarantee",
+        "locator": "it('returns the same date for 0 minutes')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T-continuous",
+        "rule": "C1-new-suite",
+        "source": "packages/backend/src/common/utils/__tests__/business-hours-calc.spec.ts",
+        "support": "S-inferred"
+      },
+      "provenance": {
+        "source": "invariant-returnsthesamedatefor0minutes.md"
+      }
+    },
+    {
+      "id": "Invariant.RlsTenantIsolationIntegration",
+      "type": "Invariant",
+      "label": "RLS tenant isolation (integration)",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`.\n\nInferred by rule `R4-both-levels`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "established-by-cases": "1",
+        "granularity": "concept",
+        "locator": "describe('RLS tenant isolation (integration)')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "R4-both-levels",
+        "source": "packages/backend/src/common/database/__tests__/tenant-isolation.integration.spec.ts",
+        "support": "S-inferred"
+      },
+      "provenance": {
+        "source": "invariant-rlstenantisolationintegration.md"
+      }
+    },
+    {
+      "id": "Invariant.ScopesTheTagLookupByTenantidTenantIsolation",
+      "type": "Invariant",
+      "label": "scopes the tag lookup by tenantId (tenant isolation)",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "granularity": "guarantee",
+        "locator": "it('scopes the tag lookup by tenantId (tenant isolation)')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "R4-both-levels",
+        "source": "packages/backend/src/modules/tag/__tests__/tag-by-name.spec.ts",
+        "support": "S-inferred"
+      },
+      "provenance": {
+        "source": "invariant-scopesthetaglookupbytenantidtenantisolation.md"
+      }
+    },
+    {
+      "id": "Invariant.SlatimerservicePauseResumeEdgeCases",
+      "type": "Invariant",
+      "label": "SlaTimerService \u2014 pause/resume edge cases",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`.\n\nInferred by rule `R4-both-levels`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "established-by-cases": "1",
+        "granularity": "concept",
+        "locator": "describe('SlaTimerService \u2014 pause/resume edge cases')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "R4-both-levels",
+        "source": "packages/backend/src/modules/sla/__tests__/sla-timer.service.spec.ts",
+        "support": "S-inferred"
+      },
+      "provenance": {
+        "source": "invariant-slatimerservicepauseresumeedgecases.md"
+      }
+    },
+    {
+      "id": "Invariant.ThrowsNotfoundexceptionWhenTheTicketDoesNotE",
+      "type": "Invariant",
+      "label": "throws NotFoundException when the ticket does not exist",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "granularity": "guarantee",
+        "locator": "it('throws NotFoundException when the ticket does not exist')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "R4-both-levels",
+        "source": "packages/backend/src/modules/tag/__tests__/tag-by-name.spec.ts",
+        "support": "S-inferred"
+      },
+      "provenance": {
+        "source": "invariant-throwsnotfoundexceptionwhentheticketdoesnote.md"
+      }
+    },
+    {
+      "id": "Invariant.TicketStatusTransitionMatrixExhaustive",
+      "type": "Invariant",
+      "label": "ticket status transition matrix (exhaustive)",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`.\n\nInferred by rule `R4-both-levels`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "established-by-cases": "1",
+        "granularity": "concept",
+        "locator": "describe('ticket status transition matrix (exhaustive)')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "R4-both-levels",
+        "source": "packages/backend/src/modules/ticket/__tests__/status-transitions.spec.ts",
+        "support": "S-inferred"
+      },
+      "provenance": {
+        "source": "invariant-ticketstatustransitionmatrixexhaustive.md"
+      }
+    },
+    {
+      "id": "Invariant.TicketcontrollerListNewAndMineQuickFilte",
+      "type": "Invariant",
+      "label": "TicketController.list \u2014 new-and-mine quick filter",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`.\n\nInferred by rule `R4-both-levels`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "established-by-cases": "1",
+        "granularity": "concept",
+        "locator": "describe('TicketController.list \u2014 new-and-mine quick filter')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "R4-both-levels",
+        "source": "packages/backend/src/modules/ticket/__tests__/pr-a-quick-wins.spec.ts",
+        "support": "S-inferred"
+      },
+      "provenance": {
+        "source": "invariant-ticketcontrollerlistnewandminequickfilte.md"
+      }
+    },
+    {
+      "id": "Invariant.Ticketcorrelationservice",
+      "type": "Invariant",
+      "label": "TicketCorrelationService",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`.\n\nInferred by rule `R4-both-levels`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "established-by-cases": "1",
+        "granularity": "concept",
+        "locator": "describe('TicketCorrelationService')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "R4-both-levels",
+        "source": "packages/backend/src/modules/channel/correlation/ticket-correlation.service.spec.ts",
+        "support": "S-inferred"
+      },
+      "provenance": {
+        "source": "invariant-ticketcorrelationservice.md"
+      }
+    },
+    {
+      "id": "Invariant.Ticketformservice",
+      "type": "Invariant",
+      "label": "TicketFormService",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`.\n\nInferred by rule `R4-both-levels`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "established-by-cases": "1",
+        "granularity": "concept",
+        "locator": "describe('TicketFormService')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "R4-both-levels",
+        "source": "packages/backend/src/modules/ticket-form/__tests__/ticket-form.service.spec.ts",
+        "support": "S-inferred"
+      },
+      "provenance": {
+        "source": "invariant-ticketformservice.md"
+      }
+    },
+    {
+      "id": "Invariant.Ticketservice",
+      "type": "Invariant",
+      "label": "TicketService",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`.\n\nInferred by rule `R4-both-levels`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "established-by-cases": "6",
+        "granularity": "concept",
+        "locator": "describe('TicketService')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "R4-both-levels",
+        "source": "packages/backend/src/modules/ticket/__tests__/ticket.service.spec.ts",
+        "support": "S-inferred"
+      },
+      "provenance": {
+        "source": "invariant-ticketservice.md"
+      }
+    },
+    {
+      "id": "Invariant.TicketserviceListNewFilterSurface",
+      "type": "Invariant",
+      "label": "TicketService.list \u2014 new filter surface",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`.\n\nInferred by rule `R4-both-levels`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "established-by-cases": "2",
+        "granularity": "concept",
+        "locator": "describe('TicketService.list \u2014 new filter surface')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "R4-both-levels",
+        "source": "packages/backend/src/modules/ticket/__tests__/list-filters.spec.ts",
+        "support": "S-inferred"
+      },
+      "provenance": {
+        "source": "invariant-ticketservicelistnewfiltersurface.md"
+      }
+    },
+    {
+      "id": "Invariant.TicketserviceMergeAdditionalScenarios",
+      "type": "Invariant",
+      "label": "TicketService.merge \u2014 additional scenarios",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`.\n\nInferred by rule `R4-both-levels`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "established-by-cases": "3",
+        "granularity": "concept",
+        "locator": "describe('TicketService.merge \u2014 additional scenarios')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "R4-both-levels",
+        "source": "packages/backend/src/modules/ticket/__tests__/ticket-merge-extra.spec.ts",
+        "support": "S-inferred"
+      },
+      "provenance": {
+        "source": "invariant-ticketservicemergeadditionalscenarios.md"
+      }
+    },
+    {
+      "id": "Invariant.TicketserviceUpdateAssignmentTags",
+      "type": "Invariant",
+      "label": "TicketService.update \u2014 assignment + tags",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`.\n\nInferred by rule `R4-both-levels`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "established-by-cases": "2",
+        "granularity": "concept",
+        "locator": "describe('TicketService.update \u2014 assignment + tags')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "R4-both-levels",
+        "source": "packages/backend/src/modules/ticket/__tests__/update-assignment-tags.spec.ts",
+        "support": "S-inferred"
+      },
+      "provenance": {
+        "source": "invariant-ticketserviceupdateassignmenttags.md"
+      }
+    },
+    {
+      "id": "Invariant.TicketserviceUpdateCustomFieldsMerge",
+      "type": "Invariant",
+      "label": "TicketService.update \u2014 custom_fields merge",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`.\n\nInferred by rule `R4-both-levels`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "established-by-cases": "1",
+        "granularity": "concept",
+        "locator": "describe('TicketService.update \u2014 custom_fields merge')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "R4-both-levels",
+        "source": "packages/backend/src/modules/ticket/__tests__/update-custom-fields.spec.ts",
+        "support": "S-inferred"
+      },
+      "provenance": {
+        "source": "invariant-ticketserviceupdatecustomfieldsmerge.md"
+      }
+    },
+    {
+      "id": "Invariant.Tickettodoservice",
+      "type": "Invariant",
+      "label": "TicketTodoService",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`.\n\nInferred by rule `R4-both-levels`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "established-by-cases": "5",
+        "granularity": "concept",
+        "locator": "describe('TicketTodoService')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "R4-both-levels",
+        "source": "packages/backend/src/modules/ticket-todo/__tests__/ticket-todo.service.spec.ts",
+        "support": "S-inferred"
+      },
+      "provenance": {
+        "source": "invariant-tickettodoservice.md"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "Artifact.AccountLockoutSpec",
+      "predicate": "validates",
+      "to": "Capability.Auth",
+      "core": "validates",
+      "category": "behavioral"
+    },
+    {
+      "from": "Artifact.AuthController",
+      "predicate": "implements",
+      "to": "Capability.Auth",
+      "core": "implements",
+      "category": "structural"
+    },
+    {
+      "from": "Artifact.AuthServiceSpec",
+      "predicate": "validates",
+      "to": "Capability.Auth",
+      "core": "validates",
+      "category": "behavioral"
+    },
+    {
+      "from": "Artifact.BusinessHoursUtilSpec",
+      "predicate": "validates",
+      "to": "Capability.Sla",
+      "core": "validates",
+      "category": "behavioral"
+    },
+    {
+      "from": "Artifact.JwtSecuritySpec",
+      "predicate": "validates",
+      "to": "Capability.Auth",
+      "core": "validates",
+      "category": "behavioral"
+    },
+    {
+      "from": "Artifact.PasswordSecuritySpec",
+      "predicate": "validates",
+      "to": "Capability.Auth",
+      "core": "validates",
+      "category": "behavioral"
+    },
+    {
+      "from": "Artifact.RefreshTokenRotationSpec",
+      "predicate": "validates",
+      "to": "Capability.Auth",
+      "core": "validates",
+      "category": "behavioral"
+    },
+    {
+      "from": "Artifact.SlaController",
+      "predicate": "implements",
+      "to": "Capability.Sla",
+      "core": "implements",
+      "category": "structural"
+    },
+    {
+      "from": "Artifact.SlaServiceSpec",
+      "predicate": "validates",
+      "to": "Capability.Sla",
+      "core": "validates",
+      "category": "behavioral"
+    },
+    {
+      "from": "Artifact.SlaTimerServiceSpec",
+      "predicate": "validates",
+      "to": "Capability.Sla",
+      "core": "validates",
+      "category": "behavioral"
+    },
+    {
+      "from": "Artifact.TicketAuditServiceSpec",
+      "predicate": "validates",
+      "to": "Capability.Ticket",
+      "core": "validates",
+      "category": "behavioral"
+    },
+    {
+      "from": "Artifact.TicketController",
+      "predicate": "implements",
+      "to": "Capability.Ticket",
+      "core": "implements",
+      "category": "structural"
+    },
+    {
+      "from": "Artifact.TicketFormController",
+      "predicate": "implements",
+      "to": "Capability.TicketForm",
+      "core": "implements",
+      "category": "structural"
+    },
+    {
+      "from": "Artifact.TicketFormServiceSpec",
+      "predicate": "validates",
+      "to": "Capability.TicketForm",
+      "core": "validates",
+      "category": "behavioral"
+    },
+    {
+      "from": "Artifact.TicketLinkController",
+      "predicate": "implements",
+      "to": "Capability.TicketLink",
+      "core": "implements",
+      "category": "structural"
+    },
+    {
+      "from": "Artifact.TicketLinkServiceSpec",
+      "predicate": "validates",
+      "to": "Capability.TicketLink",
+      "core": "validates",
+      "category": "behavioral"
+    },
+    {
+      "from": "Artifact.TicketMergeExtraSpec",
+      "predicate": "validates",
+      "to": "Capability.Ticket",
+      "core": "validates",
+      "category": "behavioral"
+    },
+    {
+      "from": "Artifact.TicketMergeSpec",
+      "predicate": "validates",
+      "to": "Capability.Ticket",
+      "core": "validates",
+      "category": "behavioral"
+    },
+    {
+      "from": "Artifact.TicketServiceSpec",
+      "predicate": "validates",
+      "to": "Capability.Ticket",
+      "core": "validates",
+      "category": "behavioral"
+    },
+    {
+      "from": "Artifact.TicketTodoController",
+      "predicate": "implements",
+      "to": "Capability.TicketTodo",
+      "core": "implements",
+      "category": "structural"
+    },
+    {
+      "from": "Artifact.TicketTodoServiceSpec",
+      "predicate": "validates",
+      "to": "Capability.TicketTodo",
+      "core": "validates",
+      "category": "behavioral"
+    },
+    {
+      "from": "Capability.Auth",
+      "predicate": "scoped-to",
+      "to": "BoundedContext.Backend",
+      "core": "contained-by",
+      "category": "structural"
+    },
+    {
+      "from": "Capability.Sla",
+      "predicate": "scoped-to",
+      "to": "BoundedContext.Backend",
+      "core": "contained-by",
+      "category": "structural"
+    },
+    {
+      "from": "Capability.Ticket",
+      "predicate": "scoped-to",
+      "to": "BoundedContext.Backend",
+      "core": "contained-by",
+      "category": "structural"
+    },
+    {
+      "from": "Capability.TicketForm",
+      "predicate": "scoped-to",
+      "to": "BoundedContext.Backend",
+      "core": "contained-by",
+      "category": "structural"
+    },
+    {
+      "from": "Capability.TicketLink",
+      "predicate": "scoped-to",
+      "to": "BoundedContext.Backend",
+      "core": "contained-by",
+      "category": "structural"
+    },
+    {
+      "from": "Capability.TicketTodo",
+      "predicate": "scoped-to",
+      "to": "BoundedContext.Backend",
+      "core": "contained-by",
+      "category": "structural"
+    },
+    {
+      "from": "Invariant.ATicketCannotTransitionToItselfNoOpViaIsvali",
+      "predicate": "specializes",
+      "to": "Invariant.TicketStatusTransitionMatrixExhaustive",
+      "core": "specializes",
+      "category": "structural"
+    },
+    {
+      "from": "Invariant.AccountLockoutBruteForceProtection",
+      "predicate": "constrains",
+      "to": "Capability.Auth",
+      "core": "governs",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.AccountLockoutBruteForceProtection",
+      "predicate": "enforced-at",
+      "to": "Artifact.AccountLockoutSpec",
+      "core": "validated-by",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.Addbusinessminutes",
+      "predicate": "enforced-at",
+      "to": "Artifact.BusinessHoursCalcSpec",
+      "core": "validated-by",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.Calculatebusinessminutes",
+      "predicate": "enforced-at",
+      "to": "Artifact.BusinessHoursCalcSpec",
+      "core": "validated-by",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.JwtSecurity",
+      "predicate": "constrains",
+      "to": "Capability.Auth",
+      "core": "governs",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.JwtSecurity",
+      "predicate": "enforced-at",
+      "to": "Artifact.JwtSecuritySpec",
+      "core": "validated-by",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.JwtstrategySurfacesMissingFieldsAsUndefinedD",
+      "predicate": "enforced-at",
+      "to": "Artifact.JwtSecuritySpec",
+      "core": "validated-by",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.JwtstrategySurfacesMissingFieldsAsUndefinedD",
+      "predicate": "specializes",
+      "to": "Invariant.JwtSecurity",
+      "core": "specializes",
+      "category": "structural"
+    },
+    {
+      "from": "Invariant.LocksTheAccountOnThe5ThWrongPasswordForExact",
+      "predicate": "enforced-at",
+      "to": "Artifact.AccountLockoutSpec",
+      "core": "validated-by",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.LocksTheAccountOnThe5ThWrongPasswordForExact",
+      "predicate": "specializes",
+      "to": "Invariant.AccountLockoutBruteForceProtection",
+      "core": "specializes",
+      "category": "structural"
+    },
+    {
+      "from": "Invariant.PasswordPolicyRegisterdto",
+      "predicate": "constrains",
+      "to": "Capability.Auth",
+      "core": "governs",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.PasswordPolicyRegisterdto",
+      "predicate": "enforced-at",
+      "to": "Artifact.PasswordSecuritySpec",
+      "core": "validated-by",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.RefreshTokenRotation",
+      "predicate": "constrains",
+      "to": "Capability.Auth",
+      "core": "governs",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.RefreshTokenRotation",
+      "predicate": "enforced-at",
+      "to": "Artifact.RefreshTokenRotationSpec",
+      "core": "validated-by",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.RejectsA7CharPasswordBelowMinimum",
+      "predicate": "enforced-at",
+      "to": "Artifact.PasswordSecuritySpec",
+      "core": "validated-by",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.RejectsA7CharPasswordBelowMinimum",
+      "predicate": "specializes",
+      "to": "Invariant.PasswordPolicyRegisterdto",
+      "core": "specializes",
+      "category": "structural"
+    },
+    {
+      "from": "Invariant.RejectsANonStringPasswordTypeConfusionAttemp",
+      "predicate": "enforced-at",
+      "to": "Artifact.PasswordSecuritySpec",
+      "core": "validated-by",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.RejectsANonStringPasswordTypeConfusionAttemp",
+      "predicate": "specializes",
+      "to": "Invariant.PasswordPolicyRegisterdto",
+      "core": "specializes",
+      "category": "structural"
+    },
+    {
+      "from": "Invariant.RejectsAnEmptyPassword",
+      "predicate": "enforced-at",
+      "to": "Artifact.PasswordSecuritySpec",
+      "core": "validated-by",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.RejectsAnEmptyPassword",
+      "predicate": "specializes",
+      "to": "Invariant.PasswordPolicyRegisterdto",
+      "core": "specializes",
+      "category": "structural"
+    },
+    {
+      "from": "Invariant.RejectsMergingATicketIntoItselfSameId",
+      "predicate": "enforced-at",
+      "to": "Artifact.TicketMergeExtraSpec",
+      "core": "validated-by",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.RejectsMergingATicketIntoItselfSameId",
+      "predicate": "specializes",
+      "to": "Invariant.TicketserviceMergeAdditionalScenarios",
+      "core": "specializes",
+      "category": "structural"
+    },
+    {
+      "from": "Invariant.RejectsMergingFromAClosedSecondaryTicket",
+      "predicate": "enforced-at",
+      "to": "Artifact.TicketMergeExtraSpec",
+      "core": "validated-by",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.RejectsMergingFromAClosedSecondaryTicket",
+      "predicate": "specializes",
+      "to": "Invariant.TicketserviceMergeAdditionalScenarios",
+      "core": "specializes",
+      "category": "structural"
+    },
+    {
+      "from": "Invariant.RejectsMissingPassword",
+      "predicate": "enforced-at",
+      "to": "Artifact.PasswordSecuritySpec",
+      "core": "validated-by",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.RejectsMissingPassword",
+      "predicate": "specializes",
+      "to": "Invariant.PasswordPolicyRegisterdto",
+      "core": "specializes",
+      "category": "structural"
+    },
+    {
+      "from": "Invariant.RejectsReopenWhenTicketIsNotResolved",
+      "predicate": "enforced-at",
+      "to": "Artifact.TicketServiceSpec",
+      "core": "validated-by",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.RejectsReopenWhenTicketIsNotResolved",
+      "predicate": "specializes",
+      "to": "Invariant.Ticketservice",
+      "core": "specializes",
+      "category": "structural"
+    },
+    {
+      "from": "Invariant.RejectsTheCorrectPasswordWhileTheLockoutWind",
+      "predicate": "enforced-at",
+      "to": "Artifact.AccountLockoutSpec",
+      "core": "validated-by",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.RejectsTheCorrectPasswordWhileTheLockoutWind",
+      "predicate": "specializes",
+      "to": "Invariant.AccountLockoutBruteForceProtection",
+      "core": "specializes",
+      "category": "structural"
+    },
+    {
+      "from": "Invariant.ResumedTicketDoesNotOverwriteSlafirstrespons",
+      "predicate": "enforced-at",
+      "to": "Artifact.SlaTimerServiceSpec",
+      "core": "validated-by",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.ResumedTicketDoesNotOverwriteSlafirstrespons",
+      "predicate": "specializes",
+      "to": "Invariant.SlatimerservicePauseResumeEdgeCases",
+      "core": "specializes",
+      "category": "structural"
+    },
+    {
+      "from": "Invariant.ReturnsTheSameDateFor0Minutes",
+      "predicate": "specializes",
+      "to": "Invariant.Calculatebusinessminutes",
+      "core": "specializes",
+      "category": "structural"
+    },
+    {
+      "from": "Invariant.RlsTenantIsolationIntegration",
+      "predicate": "enforced-at",
+      "to": "Artifact.TenantIsolationIntegrationSpec",
+      "core": "validated-by",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.SlatimerservicePauseResumeEdgeCases",
+      "predicate": "constrains",
+      "to": "Capability.Sla",
+      "core": "governs",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.SlatimerservicePauseResumeEdgeCases",
+      "predicate": "enforced-at",
+      "to": "Artifact.SlaTimerServiceSpec",
+      "core": "validated-by",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.TicketStatusTransitionMatrixExhaustive",
+      "predicate": "constrains",
+      "to": "Capability.Ticket",
+      "core": "governs",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.TicketcontrollerListNewAndMineQuickFilte",
+      "predicate": "constrains",
+      "to": "Capability.Ticket",
+      "core": "governs",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.Ticketcorrelationservice",
+      "predicate": "enforced-at",
+      "to": "Artifact.TicketCorrelationServiceSpec",
+      "core": "validated-by",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.Ticketformservice",
+      "predicate": "constrains",
+      "to": "Capability.TicketForm",
+      "core": "governs",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.Ticketformservice",
+      "predicate": "enforced-at",
+      "to": "Artifact.TicketFormServiceSpec",
+      "core": "validated-by",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.Ticketservice",
+      "predicate": "constrains",
+      "to": "Capability.Ticket",
+      "core": "governs",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.Ticketservice",
+      "predicate": "enforced-at",
+      "to": "Artifact.TicketServiceSpec",
+      "core": "validated-by",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.TicketserviceListNewFilterSurface",
+      "predicate": "constrains",
+      "to": "Capability.Ticket",
+      "core": "governs",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.TicketserviceMergeAdditionalScenarios",
+      "predicate": "constrains",
+      "to": "Capability.Ticket",
+      "core": "governs",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.TicketserviceMergeAdditionalScenarios",
+      "predicate": "enforced-at",
+      "to": "Artifact.TicketMergeExtraSpec",
+      "core": "validated-by",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.TicketserviceUpdateAssignmentTags",
+      "predicate": "constrains",
+      "to": "Capability.Ticket",
+      "core": "governs",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.TicketserviceUpdateCustomFieldsMerge",
+      "predicate": "constrains",
+      "to": "Capability.Ticket",
+      "core": "governs",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.Tickettodoservice",
+      "predicate": "constrains",
+      "to": "Capability.TicketTodo",
+      "core": "governs",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.Tickettodoservice",
+      "predicate": "enforced-at",
+      "to": "Artifact.TicketTodoServiceSpec",
+      "core": "validated-by",
+      "category": "behavioral"
+    }
+  ],
+  "vocabulary": {
+    "contained-by": {
+      "category": "structural",
+      "means": "inverse of contains",
+      "inverse": "contains"
+    },
+    "governs": {
+      "category": "behavioral",
+      "means": "A constrains B normatively",
+      "inverse": "governed-by"
+    },
+    "implements": {
+      "category": "structural",
+      "means": "A realises what B describes",
+      "inverse": "implemented-by"
+    },
+    "specializes": {
+      "category": "structural",
+      "means": "A is a narrower kind of B",
+      "inverse": "specialized-by"
+    },
+    "validated-by": {
+      "category": "behavioral",
+      "means": "inverse of validates",
+      "inverse": "validates"
+    },
+    "validates": {
+      "category": "behavioral",
+      "means": "A checks that B holds",
+      "inverse": "validated-by"
+    }
+  },
+  "statistics": {
+    "nodes": 76,
+    "edges": 78,
+    "byType": {
+      "ADR": 1,
+      "Artifact": 24,
+      "BoundedContext": 1,
+      "Capability": 6,
+      "Concept": 10,
+      "Invariant": 34
+    },
+    "byFamily": {
+      "descriptive": 75,
+      "operational": 1
+    },
+    "byCategory": {
+      "behavioral": 53,
+      "structural": 25
+    },
+    "byCoreType": {
+      "contained-by": 6,
+      "governs": 14,
+      "implements": 6,
+      "specializes": 13,
+      "validated-by": 24,
+      "validates": 15
+    }
+  }
+}

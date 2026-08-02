@@ -1,0 +1,1210 @@
+{
+  "mode": "periodic-reacquisition",
+  "note": "Reacquisition validates and challenges the maintained model. It does not replace it. EVERY ITEM IS A PROPOSAL REQUIRING REVIEW (ADR-0112).",
+  "candidateDigest": "30a9a7207f45cc16",
+  "authoritativeNodes": 76,
+  "candidateProposals": 302,
+  "items": {
+    "D-new-knowledge": [
+      {
+        "subject": "ADR.0002",
+        "type": "ADR",
+        "evidence": "docs/adr/ADR-0002-channel-abstraction-architecture.md"
+      },
+      {
+        "subject": "ADR.0003",
+        "type": "ADR",
+        "evidence": "docs/adr/ADR-0003-real-time-architecture.md"
+      },
+      {
+        "subject": "ADR.0004",
+        "type": "ADR",
+        "evidence": "docs/adr/ADR-0004-custom-fields-system.md"
+      },
+      {
+        "subject": "ADR.0005",
+        "type": "ADR",
+        "evidence": "docs/adr/ADR-0005-sla-timer-engine.md"
+      },
+      {
+        "subject": "BoundedContext.Frontend",
+        "type": "BoundedContext",
+        "evidence": "packages/frontend/package.json"
+      },
+      {
+        "subject": "BoundedContext.Shared",
+        "type": "BoundedContext",
+        "evidence": "packages/shared/package.json"
+      },
+      {
+        "subject": "BoundedContext.Widget",
+        "type": "BoundedContext",
+        "evidence": "packages/widget/package.json"
+      },
+      {
+        "subject": "Invariant.AgentDoesNotPassSupervisorOnlyCheck",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/common/guards/__tests__/roles.guard.spec.ts"
+      },
+      {
+        "subject": "Invariant.AideskAppWithoutAnyTenantContextCannotReadTi",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/common/database/__tests__/tenant-isolation.integration.spec.ts"
+      },
+      {
+        "subject": "Invariant.AlwaysReturnsTrue",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/channel/adapters/email/providers/in-memory-email.provider.spec.ts"
+      },
+      {
+        "subject": "Invariant.ApikeyserviceSecurity",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/api-key/__tests__/api-key-security.spec.ts"
+      },
+      {
+        "subject": "Invariant.Attachmentservice",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/attachment/__tests__/attachment.service.spec.ts"
+      },
+      {
+        "subject": "Invariant.Automationservice",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/automation/__tests__/automation.service.spec.ts"
+      },
+      {
+        "subject": "Invariant.Contactservice",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/contact/__tests__/contact.service.spec.ts"
+      },
+      {
+        "subject": "Invariant.CreateconversationdtoCcEmailsBccEmails",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/conversation/__tests__/create-conversation-dto.spec.ts"
+      },
+      {
+        "subject": "Invariant.Createticketdto",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts"
+      },
+      {
+        "subject": "Invariant.Customfieldservice",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/custom-field/__tests__/custom-field.service.spec.ts"
+      },
+      {
+        "subject": "Invariant.DatabaseSchema",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/common/database/schema/__tests__/schema.spec.ts"
+      },
+      {
+        "subject": "Invariant.DoesNotAddAPriorityConditionWhenTheArrayIsEm",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/ticket/__tests__/list-filters.spec.ts"
+      },
+      {
+        "subject": "Invariant.DoesNotHaveUpdatedAtImmutable",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/common/database/schema/__tests__/schema.spec.ts"
+      },
+      {
+        "subject": "Invariant.DoesNotHaveUpdatedAtOrDeletedAt",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/common/database/schema/__tests__/schema.spec.ts"
+      },
+      {
+        "subject": "Invariant.DoesNotReStampCompletedatWhenAlreadyDone",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/ticket-todo/__tests__/ticket-todo.service.spec.ts"
+      },
+      {
+        "subject": "Invariant.DoesNotRestampFirstassignedatWhenItAlreadyEx",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/ticket/__tests__/update-assignment-tags.spec.ts"
+      },
+      {
+        "subject": "Invariant.DoesNotTouchCustomfieldsWhenTheKeyIsOmitted",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/ticket/__tests__/update-custom-fields.spec.ts"
+      },
+      {
+        "subject": "Invariant.FailsAllWhenOneConditionMisses",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/automation/__tests__/automation.service.spec.ts"
+      },
+      {
+        "subject": "Invariant.FindsAnExistingTagByNameAndDoesNotCreateADup",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/tag/__tests__/tag-by-name.spec.ts"
+      },
+      {
+        "subject": "Invariant.FirstRefreshSucceedsAndRotatesSecondUseOfThe",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts"
+      },
+      {
+        "subject": "Invariant.Inmemoryemailprovider",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/channel/adapters/email/providers/in-memory-email.provider.spec.ts"
+      },
+      {
+        "subject": "Invariant.IssuetokensStoresTheSha256HashOfTheRefreshTo",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/auth/__tests__/refresh-token-rotation.spec.ts"
+      },
+      {
+        "subject": "Invariant.ListReturnsOnlyMaskedKeysNeverTheFullRawSecr",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/api-key/__tests__/api-key-security.spec.ts"
+      },
+      {
+        "subject": "Invariant.LogoutRevokesTheTokenSubsequentRefreshMustFa",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/auth/__tests__/refresh-token-rotation.spec.ts"
+      },
+      {
+        "subject": "Invariant.NestedScrScriptIptAttackCannotReformIntoAScr",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/common/utils/__tests__/sanitize-html.spec.ts"
+      },
+      {
+        "subject": "Invariant.PerAgentIsolationLockingAgentADoesNotAffectA",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/auth/__tests__/account-lockout.spec.ts"
+      },
+      {
+        "subject": "Invariant.QuickFilterMineWithoutACurrentAgentIdDoesNot",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/ticket/__tests__/list-filters.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsAKeyThatDoesNotStartWithAidkWithoutHi",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/api-key/__tests__/api-key-security.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsANonUuidAssignedAgentId",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/ticket/__tests__/update-dto-allowlist.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsANonUuidAssignedGroupId",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/ticket/__tests__/update-dto-allowlist.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsATagLongerThan50Characters",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/ticket/__tests__/update-dto-allowlist.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsATamperedKeyCorrectPrefixWrongHash",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/api-key/__tests__/api-key-security.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsATokenSignedWithADifferentSecret",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsATokenWithATamperedPayloadModifiedTid",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsATokenWithAlgorithm",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsAgentNonAdmin",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/common/guards/__tests__/roles.guard.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsAnEntirelyMalformedToken",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsAnExpiredToken",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsAnInvalidAdminEmail",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/auth/__tests__/password-security.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsAnInvalidPriorityValue",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsAnInvalidStatusValue",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsAnUnknownQuickFilterAfterNewAndMineWa",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/ticket/__tests__/pr-a-quick-wins.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsAssignedAgentIdThatIsNotAUuid",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsAssignedGroupIdThatIsNotAUuid",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsBccEmailsContainingAnInvalidEmailAddr",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/conversation/__tests__/create-conversation-dto.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsBccEmailsLongerThan20Entries",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/conversation/__tests__/create-conversation-dto.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsBlankTitle",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/ticket-todo/__tests__/ticket-todo.service.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsCcEmailsContainingAnInvalidEmailAddre",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/conversation/__tests__/create-conversation-dto.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsCcEmailsLongerThan20EntriesArraymaxsi",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/conversation/__tests__/create-conversation-dto.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsCcEmailsThatIsNotAnArray",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/conversation/__tests__/create-conversation-dto.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsCcEmailsWithANumericElementIsemailEac",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/conversation/__tests__/create-conversation-dto.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsClosedOpenViaUpdateClosedIsTerminal",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/ticket/__tests__/ticket.service.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsContactIdThatIsNotAUuid",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsCustomFieldsWhenItIsNotAnObject",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/ticket/__tests__/update-dto-allowlist.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsDisallowedMimeTypes",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/attachment/__tests__/attachment.service.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsEmptyIds",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/ticket-todo/__tests__/ticket-todo.service.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsEmptySubject",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsInvalidStatusTransitionWithHelpfulErr",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/ticket/__tests__/ticket.service.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsMergeIntoASoftDeletedPrimaryNotfoundB",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/ticket/__tests__/ticket-merge-extra.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsMissingSubject",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsMoreThan20Tags",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/ticket/__tests__/update-dto-allowlist.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsMoreThan20TagsArraymaxsizeGuard",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsNewPendingOnHoldResolved",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/ticket/__tests__/ticket.service.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsNonUuidAssignedAgentId",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsOpenClosedMustGoViaResolved",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/ticket/__tests__/ticket.service.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsOversizedFilesForAgentContext",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/attachment/__tests__/attachment.service.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsOversizedFilesForWidgetContext",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/attachment/__tests__/attachment.service.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsPendingClosed",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/ticket/__tests__/ticket.service.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsPriorityOutsideTheAllowedSet",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsRolesNotInTheAllowList",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/common/guards/__tests__/roles.guard.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsSourceOutsideTheAllowedSet",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsSqlInjectionLikeContactId",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsStatusOutsideTheAllowedEnum",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsSubjectLongerThan500CharactersMatches",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsTagsWithANonStringElement",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsUnknownIds",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/ticket-todo/__tests__/ticket-todo.service.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsUnknownRoleStringsNoRoleEscalationVia",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/common/guards/__tests__/roles.guard.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsViewer",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/common/guards/__tests__/roles.guard.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsWhen50FormsExist",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/ticket-form/__tests__/ticket-form.service.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsWhenRoleIsANonStringTypeInjectionAtte",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/common/guards/__tests__/roles.guard.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsWhenRoleIsNullUndefined",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/common/guards/__tests__/roles.guard.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsWhenUserIsMissingFromTheRequest",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/common/guards/__tests__/roles.guard.spec.ts"
+      },
+      {
+        "subject": "Invariant.RejectsWithSenderMismatchWhenSenderDiffersFr",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/channel/correlation/ticket-correlation.service.spec.ts"
+      },
+      {
+        "subject": "Invariant.RemovesStyleBlocksEntirelyBlocksCssExpressio",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/common/utils/__tests__/sanitize-html.spec.ts"
+      },
+      {
+        "subject": "Invariant.ReplayingARevokedTokenFailsLookupFilterExclu",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/auth/__tests__/refresh-token-rotation.spec.ts"
+      },
+      {
+        "subject": "Invariant.RevokeThrowsNotfoundexceptionWhenKeyDoesNotE",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/api-key/__tests__/api-key-security.spec.ts"
+      },
+      {
+        "subject": "Invariant.Rolesguard",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/common/guards/__tests__/roles.guard.spec.ts"
+      },
+      {
+        "subject": "Invariant.RoundRobinDistributionFairness",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/group/__tests__/round-robin-distribution.spec.ts"
+      },
+      {
+        "subject": "Invariant.SanitizehtmlXssPrevention",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/common/utils/__tests__/sanitize-html.spec.ts"
+      },
+      {
+        "subject": "Invariant.ShouldCreateContactWithoutCompanyWhenDomainD",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/contact/__tests__/contact.service.spec.ts"
+      },
+      {
+        "subject": "Invariant.ShouldEnforceRequiredFields",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/custom-field/__tests__/custom-field.service.spec.ts"
+      },
+      {
+        "subject": "Invariant.SkippingDeactivatedAgentsDoesNotBreakRotatio",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/group/__tests__/round-robin-distribution.spec.ts"
+      },
+      {
+        "subject": "Invariant.StillRejectsUnknownFieldsGuardsAgainstSilent",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/ticket/__tests__/update-dto-allowlist.spec.ts"
+      },
+      {
+        "subject": "Invariant.SupervisorDoesNotPassAdminOnlyCheck",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/common/guards/__tests__/roles.guard.spec.ts"
+      },
+      {
+        "subject": "Invariant.TagsEmptyArrayClearsAllTagsAndDoesNotInsertA",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/ticket/__tests__/update-assignment-tags.spec.ts"
+      },
+      {
+        "subject": "Invariant.TagserviceAddtoticketbyname",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/tag/__tests__/tag-by-name.spec.ts"
+      },
+      {
+        "subject": "Invariant.UpdateticketdtoAllowlist",
+        "type": "Invariant",
+        "evidence": "packages/backend/src/modules/ticket/__tests__/update-dto-allowlist.spec.ts"
+      }
+    ],
+    "D-unsupported-assertion": [
+      {
+        "subject": "Invariant.Addbusinessminutes",
+        "type": "Invariant",
+        "was-evidenced-by": "packages/backend/src/common/utils/__tests__/business-hours-calc.spec.ts"
+      }
+    ],
+    "D-implementation-without-knowledge": [
+      {
+        "subject": "Artifact.AgentController",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/agent/agent.controller.ts"
+      },
+      {
+        "subject": "Artifact.AgentGatewaySpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/realtime/agent.gateway.spec.ts"
+      },
+      {
+        "subject": "Artifact.AgentServiceSpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/agent/__tests__/agent.service.spec.ts"
+      },
+      {
+        "subject": "Artifact.ApiKeyController",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/api-key/api-key.controller.ts"
+      },
+      {
+        "subject": "Artifact.ApiKeySecuritySpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/api-key/__tests__/api-key-security.spec.ts"
+      },
+      {
+        "subject": "Artifact.ApiKeyServiceSpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/api-key/__tests__/api-key.service.spec.ts"
+      },
+      {
+        "subject": "Artifact.AttachmentController",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/attachment/attachment.controller.ts"
+      },
+      {
+        "subject": "Artifact.AttachmentServiceSpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/attachment/__tests__/attachment.service.spec.ts"
+      },
+      {
+        "subject": "Artifact.AuditLogController",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/audit-log/audit-log.controller.ts"
+      },
+      {
+        "subject": "Artifact.AuditLogServiceSpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/audit-log/__tests__/audit-log.service.spec.ts"
+      },
+      {
+        "subject": "Artifact.AutoCloseExtraSpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/ticket/__tests__/auto-close-extra.spec.ts"
+      },
+      {
+        "subject": "Artifact.AutoCloseProcessorSpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/ticket/__tests__/auto-close.processor.spec.ts"
+      },
+      {
+        "subject": "Artifact.AutomationController",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/automation/automation.controller.ts"
+      },
+      {
+        "subject": "Artifact.AutomationServiceSpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/automation/__tests__/automation.service.spec.ts"
+      },
+      {
+        "subject": "Artifact.CannedResponseController",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/canned-response/canned-response.controller.ts"
+      },
+      {
+        "subject": "Artifact.CannedResponseServiceSpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/canned-response/__tests__/canned-response.service.spec.ts"
+      },
+      {
+        "subject": "Artifact.ChannelController",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/channel/channel.controller.ts"
+      },
+      {
+        "subject": "Artifact.ChannelRegistrySpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/channel/channel-registry.spec.ts"
+      },
+      {
+        "subject": "Artifact.ChannelWebhookController",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/channel/channel-webhook.controller.ts"
+      },
+      {
+        "subject": "Artifact.ChatGatewaySpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/realtime/chat.gateway.spec.ts"
+      },
+      {
+        "subject": "Artifact.CompanyController",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/company/company.controller.ts"
+      },
+      {
+        "subject": "Artifact.CompanyServiceSpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/company/__tests__/company.service.spec.ts"
+      },
+      {
+        "subject": "Artifact.ContactController",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/contact/contact.controller.ts"
+      },
+      {
+        "subject": "Artifact.ContactServiceSpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/contact/__tests__/contact.service.spec.ts"
+      },
+      {
+        "subject": "Artifact.ConversationCcBccSpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/conversation/__tests__/conversation-cc-bcc.spec.ts"
+      },
+      {
+        "subject": "Artifact.ConversationController",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/conversation/conversation.controller.ts"
+      },
+      {
+        "subject": "Artifact.ConversationServiceSpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/conversation/__tests__/conversation.service.spec.ts"
+      },
+      {
+        "subject": "Artifact.CreateConversationDtoSpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/conversation/__tests__/create-conversation-dto.spec.ts"
+      },
+      {
+        "subject": "Artifact.CsatController",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/csat/csat.controller.ts"
+      },
+      {
+        "subject": "Artifact.CursorPaginationSpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/common/utils/__tests__/cursor-pagination.spec.ts"
+      },
+      {
+        "subject": "Artifact.CustomFieldController",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/custom-field/custom-field.controller.ts"
+      },
+      {
+        "subject": "Artifact.CustomFieldServiceSpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/custom-field/__tests__/custom-field.service.spec.ts"
+      },
+      {
+        "subject": "Artifact.DevMailController",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/channel/dev-mail.controller.ts"
+      },
+      {
+        "subject": "Artifact.DtoValidationSpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts"
+      },
+      {
+        "subject": "Artifact.EmailChannelAdapterSpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/channel/adapters/email/email-channel.adapter.spec.ts"
+      },
+      {
+        "subject": "Artifact.EmailIngestFlowSpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/channel/__tests__/email-ingest-flow.spec.ts"
+      },
+      {
+        "subject": "Artifact.GroupController",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/group/group.controller.ts"
+      },
+      {
+        "subject": "Artifact.GroupServiceSpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/group/__tests__/group.service.spec.ts"
+      },
+      {
+        "subject": "Artifact.HealthController",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/health.controller.ts"
+      },
+      {
+        "subject": "Artifact.InMemoryEmailProviderSpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/channel/adapters/email/providers/in-memory-email.provider.spec.ts"
+      },
+      {
+        "subject": "Artifact.ListControllerSpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/ticket/__tests__/list-controller.spec.ts"
+      },
+      {
+        "subject": "Artifact.ListFiltersSpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/ticket/__tests__/list-filters.spec.ts"
+      },
+      {
+        "subject": "Artifact.NotificationController",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/notification/notification.controller.ts"
+      },
+      {
+        "subject": "Artifact.PrAQuickWinsSpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/ticket/__tests__/pr-a-quick-wins.spec.ts"
+      },
+      {
+        "subject": "Artifact.RealtimeE2ESpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/realtime/realtime.e2e.spec.ts"
+      },
+      {
+        "subject": "Artifact.RoleController",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/role/role.controller.ts"
+      },
+      {
+        "subject": "Artifact.RoleServiceSpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/role/__tests__/role.service.spec.ts"
+      },
+      {
+        "subject": "Artifact.RolesGuardSpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/common/guards/__tests__/roles.guard.spec.ts"
+      },
+      {
+        "subject": "Artifact.RoundRobinDistributionSpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/group/__tests__/round-robin-distribution.spec.ts"
+      },
+      {
+        "subject": "Artifact.RoundRobinSpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/group/__tests__/round-robin.spec.ts"
+      },
+      {
+        "subject": "Artifact.SanitizeHtmlSpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/common/utils/__tests__/sanitize-html.spec.ts"
+      },
+      {
+        "subject": "Artifact.SavedViewController",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/saved-view/saved-view.controller.ts"
+      },
+      {
+        "subject": "Artifact.SavedViewServiceSpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/saved-view/__tests__/saved-view.service.spec.ts"
+      },
+      {
+        "subject": "Artifact.ScenarioController",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/scenario/scenario.controller.ts"
+      },
+      {
+        "subject": "Artifact.ScenarioServiceSpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/scenario/__tests__/scenario.service.spec.ts"
+      },
+      {
+        "subject": "Artifact.SchemaSpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/common/database/schema/__tests__/schema.spec.ts"
+      },
+      {
+        "subject": "Artifact.SoftDeleteRestoreSpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/ticket/__tests__/soft-delete-restore.spec.ts"
+      },
+      {
+        "subject": "Artifact.SplitChildrenSpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/ticket/__tests__/split-children.spec.ts"
+      },
+      {
+        "subject": "Artifact.StatusTransitionsSpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/ticket/__tests__/status-transitions.spec.ts"
+      },
+      {
+        "subject": "Artifact.SubjectTokenServiceSpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/channel/email/subject-token.service.spec.ts"
+      },
+      {
+        "subject": "Artifact.TagByNameSpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/tag/__tests__/tag-by-name.spec.ts"
+      },
+      {
+        "subject": "Artifact.TagController",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/tag/tag.controller.ts"
+      },
+      {
+        "subject": "Artifact.TagServiceSpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/tag/__tests__/tag.service.spec.ts"
+      },
+      {
+        "subject": "Artifact.TenantController",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/tenant/tenant.controller.ts"
+      },
+      {
+        "subject": "Artifact.TenantServiceSpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/tenant/__tests__/tenant.service.spec.ts"
+      },
+      {
+        "subject": "Artifact.TenantSettingsController",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/tenant/tenant-settings.controller.ts"
+      },
+      {
+        "subject": "Artifact.ThrottleSpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/common/guards/__tests__/throttle.spec.ts"
+      },
+      {
+        "subject": "Artifact.TimeLogController",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/time-log/time-log.controller.ts"
+      },
+      {
+        "subject": "Artifact.TimeLogServiceSpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/time-log/__tests__/time-log.service.spec.ts"
+      },
+      {
+        "subject": "Artifact.UpdateAssignmentTagsSpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/ticket/__tests__/update-assignment-tags.spec.ts"
+      },
+      {
+        "subject": "Artifact.UpdateCustomFieldsSpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/ticket/__tests__/update-custom-fields.spec.ts"
+      },
+      {
+        "subject": "Artifact.UpdateDtoAllowlistSpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/ticket/__tests__/update-dto-allowlist.spec.ts"
+      },
+      {
+        "subject": "Artifact.WatcherController",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/watcher/watcher.controller.ts"
+      },
+      {
+        "subject": "Artifact.WatcherServiceSpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/watcher/__tests__/watcher.service.spec.ts"
+      },
+      {
+        "subject": "Artifact.WebChatAdapterSpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/channel/adapters/web-chat.adapter.spec.ts"
+      },
+      {
+        "subject": "Artifact.WebhookIdempotencySpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/channel/__tests__/webhook-idempotency.spec.ts"
+      },
+      {
+        "subject": "Artifact.WebhookReplaySpec",
+        "type": "Artifact",
+        "evidence": "packages/backend/src/modules/channel/__tests__/webhook-replay.spec.ts"
+      },
+      {
+        "subject": "Capability.Agent",
+        "type": "Capability",
+        "evidence": "packages/backend/src/modules/agent"
+      },
+      {
+        "subject": "Capability.ApiKey",
+        "type": "Capability",
+        "evidence": "packages/backend/src/modules/api-key"
+      },
+      {
+        "subject": "Capability.Attachment",
+        "type": "Capability",
+        "evidence": "packages/backend/src/modules/attachment"
+      },
+      {
+        "subject": "Capability.AuditLog",
+        "type": "Capability",
+        "evidence": "packages/backend/src/modules/audit-log"
+      },
+      {
+        "subject": "Capability.Automation",
+        "type": "Capability",
+        "evidence": "packages/backend/src/modules/automation"
+      },
+      {
+        "subject": "Capability.CannedResponse",
+        "type": "Capability",
+        "evidence": "packages/backend/src/modules/canned-response"
+      },
+      {
+        "subject": "Capability.Channel",
+        "type": "Capability",
+        "evidence": "packages/backend/src/modules/channel"
+      },
+      {
+        "subject": "Capability.Company",
+        "type": "Capability",
+        "evidence": "packages/backend/src/modules/company"
+      },
+      {
+        "subject": "Capability.Contact",
+        "type": "Capability",
+        "evidence": "packages/backend/src/modules/contact"
+      },
+      {
+        "subject": "Capability.Conversation",
+        "type": "Capability",
+        "evidence": "packages/backend/src/modules/conversation"
+      },
+      {
+        "subject": "Capability.Csat",
+        "type": "Capability",
+        "evidence": "packages/backend/src/modules/csat"
+      },
+      {
+        "subject": "Capability.CustomField",
+        "type": "Capability",
+        "evidence": "packages/backend/src/modules/custom-field"
+      },
+      {
+        "subject": "Capability.Group",
+        "type": "Capability",
+        "evidence": "packages/backend/src/modules/group"
+      },
+      {
+        "subject": "Capability.Notification",
+        "type": "Capability",
+        "evidence": "packages/backend/src/modules/notification"
+      },
+      {
+        "subject": "Capability.Realtime",
+        "type": "Capability",
+        "evidence": "packages/backend/src/modules/realtime"
+      },
+      {
+        "subject": "Capability.Role",
+        "type": "Capability",
+        "evidence": "packages/backend/src/modules/role"
+      },
+      {
+        "subject": "Capability.SavedView",
+        "type": "Capability",
+        "evidence": "packages/backend/src/modules/saved-view"
+      },
+      {
+        "subject": "Capability.Scenario",
+        "type": "Capability",
+        "evidence": "packages/backend/src/modules/scenario"
+      },
+      {
+        "subject": "Capability.Tag",
+        "type": "Capability",
+        "evidence": "packages/backend/src/modules/tag"
+      },
+      {
+        "subject": "Capability.Tenant",
+        "type": "Capability",
+        "evidence": "packages/backend/src/modules/tenant"
+      },
+      {
+        "subject": "Capability.TimeLog",
+        "type": "Capability",
+        "evidence": "packages/backend/src/modules/time-log"
+      },
+      {
+        "subject": "Capability.Watcher",
+        "type": "Capability",
+        "evidence": "packages/backend/src/modules/watcher"
+      },
+      {
+        "subject": "Concept.TableAgentGroups",
+        "type": "Concept",
+        "evidence": "packages/backend/src/common/database/schema/agent-groups.ts"
+      },
+      {
+        "subject": "Concept.TableAgents",
+        "type": "Concept",
+        "evidence": "packages/backend/src/common/database/schema/agents.ts"
+      },
+      {
+        "subject": "Concept.TableApiKeys",
+        "type": "Concept",
+        "evidence": "packages/backend/src/common/database/schema/api-keys.ts"
+      },
+      {
+        "subject": "Concept.TableAttachments",
+        "type": "Concept",
+        "evidence": "packages/backend/src/common/database/schema/attachments.ts"
+      },
+      {
+        "subject": "Concept.TableAuditLogs",
+        "type": "Concept",
+        "evidence": "packages/backend/src/common/database/schema/audit-logs.ts"
+      },
+      {
+        "subject": "Concept.TableAutomationRules",
+        "type": "Concept",
+        "evidence": "packages/backend/src/common/database/schema/automation-rules.ts"
+      },
+      {
+        "subject": "Concept.TableCannedResponseFolders",
+        "type": "Concept",
+        "evidence": "packages/backend/src/common/database/schema/canned-response-folders.ts"
+      },
+      {
+        "subject": "Concept.TableCannedResponses",
+        "type": "Concept",
+        "evidence": "packages/backend/src/common/database/schema/canned-responses.ts"
+      },
+      {
+        "subject": "Concept.TableChannels",
+        "type": "Concept",
+        "evidence": "packages/backend/src/common/database/schema/channels.ts"
+      },
+      {
+        "subject": "Concept.TableCompanies",
+        "type": "Concept",
+        "evidence": "packages/backend/src/common/database/schema/companies.ts"
+      },
+      {
+        "subject": "Concept.TableContacts",
+        "type": "Concept",
+        "evidence": "packages/backend/src/common/database/schema/contacts.ts"
+      },
+      {
+        "subject": "Concept.TableConversations",
+        "type": "Concept",
+        "evidence": "packages/backend/src/common/database/schema/conversations.ts"
+      },
+      {
+        "subject": "Concept.TableCsatResponses",
+        "type": "Concept",
+        "evidence": "packages/backend/src/common/database/schema/csat-surveys.ts"
+      },
+      {
+        "subject": "Concept.TableCsatSurveys",
+        "type": "Concept",
+        "evidence": "packages/backend/src/common/database/schema/csat-surveys.ts"
+      },
+      {
+        "subject": "Concept.TableCustomFieldDefinitions",
+        "type": "Concept",
+        "evidence": "packages/backend/src/common/database/schema/custom-field-definitions.ts"
+      },
+      {
+        "subject": "Concept.TableGroups",
+        "type": "Concept",
+        "evidence": "packages/backend/src/common/database/schema/groups.ts"
+      },
+      {
+        "subject": "Concept.TableInboundWebhookEvents",
+        "type": "Concept",
+        "evidence": "packages/backend/src/common/database/schema/inbound-webhook-events.ts"
+      },
+      {
+        "subject": "Concept.TableNotifications",
+        "type": "Concept",
+        "evidence": "packages/backend/src/common/database/schema/notifications.ts"
+      },
+      {
+        "subject": "Concept.TableRoles",
+        "type": "Concept",
+        "evidence": "packages/backend/src/common/database/schema/roles.ts"
+      },
+      {
+        "subject": "Concept.TableSavedViews",
+        "type": "Concept",
+        "evidence": "packages/backend/src/common/database/schema/saved-views.ts"
+      },
+      {
+        "subject": "Concept.TableScenarios",
+        "type": "Concept",
+        "evidence": "packages/backend/src/common/database/schema/scenarios.ts"
+      },
+      {
+        "subject": "Concept.TableTags",
+        "type": "Concept",
+        "evidence": "packages/backend/src/common/database/schema/tags.ts"
+      },
+      {
+        "subject": "Concept.TableTenants",
+        "type": "Concept",
+        "evidence": "packages/backend/src/common/database/schema/tenants.ts"
+      },
+      {
+        "subject": "Concept.TableTimeLogs",
+        "type": "Concept",
+        "evidence": "packages/backend/src/common/database/schema/time-logs.ts"
+      }
+    ],
+    "D-invariant-without-enforcement": [
+      {
+        "subject": "Invariant.ATicketCannotTransitionToItselfNoOpViaIsvali",
+        "why": "nothing is recorded as enforcing it"
+      },
+      {
+        "subject": "Invariant.RejectsWhenUserHasNoRoleFieldOnJwt",
+        "why": "nothing is recorded as enforcing it"
+      },
+      {
+        "subject": "Invariant.ReturnsTheSameDateFor0Minutes",
+        "why": "nothing is recorded as enforcing it"
+      },
+      {
+        "subject": "Invariant.ScopesTheTagLookupByTenantidTenantIsolation",
+        "why": "nothing is recorded as enforcing it"
+      },
+      {
+        "subject": "Invariant.ThrowsNotfoundexceptionWhenTheTicketDoesNotE",
+        "why": "nothing is recorded as enforcing it"
+      },
+      {
+        "subject": "Invariant.TicketStatusTransitionMatrixExhaustive",
+        "why": "nothing is recorded as enforcing it"
+      },
+      {
+        "subject": "Invariant.TicketcontrollerListNewAndMineQuickFilte",
+        "why": "nothing is recorded as enforcing it"
+      },
+      {
+        "subject": "Invariant.TicketserviceListNewFilterSurface",
+        "why": "nothing is recorded as enforcing it"
+      },
+      {
+        "subject": "Invariant.TicketserviceUpdateAssignmentTags",
+        "why": "nothing is recorded as enforcing it"
+      },
+      {
+        "subject": "Invariant.TicketserviceUpdateCustomFieldsMerge",
+        "why": "nothing is recorded as enforcing it"
+      }
+    ]
+  },
+  "statistics": {
+    "D-boundary-change": 0,
+    "D-conflicting-interpretation": 0,
+    "D-dependency-change": 0,
+    "D-implementation-without-knowledge": 123,
+    "D-invariant-without-enforcement": 10,
+    "D-knowledge-without-implementation": 0,
+    "D-missed-incremental-update": 0,
+    "D-new-knowledge": 104,
+    "D-stale-provenance": 0,
+    "D-unexplained-divergence": 0,
+    "D-unsupported-assertion": 1
+  }
+}

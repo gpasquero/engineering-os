@@ -1,0 +1,169 @@
+{
+  "candidateModelVersion": "1.0.0",
+  "repository": "/Users/willy/Localsources/ai-desk",
+  "bootstrap": "continuous",
+  "note": "A PROPOSAL. Nothing here is authoritative until reviewed and applied (ADR-0105, ADR-0106).",
+  "proposals": {
+    "entities": [
+      {
+        "id": "Artifact.BusinessHoursCalcSpec",
+        "type": "Artifact",
+        "label": "business-hours-calc.spec.spec.ts",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/common/utils/__tests__/business-hours-calc.spec.ts",
+          "locator": "11 cases"
+        },
+        "origin": {
+          "worker": "W-domain-interpreter",
+          "task": "T-continuous"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "C1-new-suite",
+          "cases": "11"
+        }
+      },
+      {
+        "id": "Invariant.Addbusinessminutes",
+        "type": "Invariant",
+        "label": "addBusinessMinutes",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/common/utils/__tests__/business-hours-calc.spec.ts",
+          "locator": "describe('addBusinessMinutes')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T-continuous"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "C1-new-suite",
+          "granularity": "concept"
+        }
+      },
+      {
+        "id": "Invariant.Calculatebusinessminutes",
+        "type": "Invariant",
+        "label": "calculateBusinessMinutes",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/common/utils/__tests__/business-hours-calc.spec.ts",
+          "locator": "describe('calculateBusinessMinutes')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T-continuous"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "C1-new-suite",
+          "granularity": "concept"
+        }
+      },
+      {
+        "id": "Invariant.ReturnsTheSameDateFor0Minutes",
+        "type": "Invariant",
+        "label": "returns the same date for 0 minutes",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/common/utils/__tests__/business-hours-calc.spec.ts",
+          "locator": "it('returns the same date for 0 minutes')"
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T-continuous"
+        },
+        "attributes": {
+          "origin": "O-deterministic-rule",
+          "rule": "C1-new-suite",
+          "granularity": "guarantee"
+        }
+      }
+    ],
+    "relationships": [
+      {
+        "from": "Invariant.Addbusinessminutes",
+        "predicate": "enforced-at",
+        "to": "Artifact.BusinessHoursCalcSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/common/utils/__tests__/business-hours-calc.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T-continuous",
+          "rule": "C1-new-suite"
+        }
+      },
+      {
+        "from": "Invariant.Calculatebusinessminutes",
+        "predicate": "enforced-at",
+        "to": "Artifact.BusinessHoursCalcSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/common/utils/__tests__/business-hours-calc.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T-continuous",
+          "rule": "C1-new-suite"
+        }
+      },
+      {
+        "from": "Invariant.ReturnsTheSameDateFor0Minutes",
+        "predicate": "specializes",
+        "to": "Invariant.Calculatebusinessminutes",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/common/utils/__tests__/business-hours-calc.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T-continuous",
+          "rule": "C1-new-suite"
+        }
+      }
+    ],
+    "classifications": []
+  },
+  "unsettled": {
+    "ambiguities": [],
+    "conflicts": [],
+    "gaps": []
+  },
+  "statistics": {
+    "entities": 4,
+    "relationships": 3,
+    "classifications": 0,
+    "ambiguities": 0,
+    "conflicts": 0,
+    "gaps": 0,
+    "bySupport": {
+      "S-inferred": 4,
+      "S-tested": 3
+    },
+    "byType": {
+      "Artifact": 1,
+      "Invariant": 3
+    },
+    "byWorker": {
+      "W-constraint-interpreter": 6,
+      "W-domain-interpreter": 1
+    },
+    "byOrigin": {
+      "O-deterministic-rule": 7
+    },
+    "byRule": {
+      "C1-new-suite": 4
+    }
+  },
+  "digest": "5bbc24e32f4d8489",
+  "mechanicalModelDigest": "30a9a7207f45cc16",
+  "previousMechanicalDigest": "01087455d80543f2",
+  "mode": "continuous"
+}

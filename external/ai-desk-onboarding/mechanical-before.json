@@ -1,0 +1,4349 @@
+{
+  "packages": [
+    {
+      "name": "backend",
+      "path": "packages/backend",
+      "source": "packages/backend/package.json"
+    },
+    {
+      "name": "frontend",
+      "path": "packages/frontend",
+      "source": "packages/frontend/package.json"
+    },
+    {
+      "name": "shared",
+      "path": "packages/shared",
+      "source": "packages/shared/package.json"
+    },
+    {
+      "name": "widget",
+      "path": "packages/widget",
+      "source": "packages/widget/package.json"
+    }
+  ],
+  "dependencies": [
+    {
+      "package": "backend",
+      "name": "@ai-desk/shared",
+      "source": "packages/backend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "backend",
+      "name": "@aws-sdk/client-s3",
+      "source": "packages/backend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "backend",
+      "name": "@aws-sdk/s3-request-presigner",
+      "source": "packages/backend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "backend",
+      "name": "@nestjs/common",
+      "source": "packages/backend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "backend",
+      "name": "@nestjs/core",
+      "source": "packages/backend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "backend",
+      "name": "@nestjs/jwt",
+      "source": "packages/backend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "backend",
+      "name": "@nestjs/passport",
+      "source": "packages/backend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "backend",
+      "name": "@nestjs/platform-express",
+      "source": "packages/backend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "backend",
+      "name": "@nestjs/platform-socket.io",
+      "source": "packages/backend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "backend",
+      "name": "@nestjs/throttler",
+      "source": "packages/backend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "backend",
+      "name": "@nestjs/websockets",
+      "source": "packages/backend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "backend",
+      "name": "@socket.io/redis-adapter",
+      "source": "packages/backend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "backend",
+      "name": "@types/multer",
+      "source": "packages/backend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "backend",
+      "name": "bcrypt",
+      "source": "packages/backend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "backend",
+      "name": "bullmq",
+      "source": "packages/backend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "backend",
+      "name": "class-transformer",
+      "source": "packages/backend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "backend",
+      "name": "class-validator",
+      "source": "packages/backend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "backend",
+      "name": "dotenv",
+      "source": "packages/backend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "backend",
+      "name": "drizzle-orm",
+      "source": "packages/backend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "backend",
+      "name": "ioredis",
+      "source": "packages/backend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "backend",
+      "name": "multer",
+      "source": "packages/backend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "backend",
+      "name": "passport",
+      "source": "packages/backend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "backend",
+      "name": "passport-jwt",
+      "source": "packages/backend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "backend",
+      "name": "postgres",
+      "source": "packages/backend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "backend",
+      "name": "reflect-metadata",
+      "source": "packages/backend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "backend",
+      "name": "rxjs",
+      "source": "packages/backend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "backend",
+      "name": "socket.io",
+      "source": "packages/backend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "frontend",
+      "name": "@ai-desk/shared",
+      "source": "packages/frontend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "frontend",
+      "name": "@radix-ui/react-avatar",
+      "source": "packages/frontend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "frontend",
+      "name": "@radix-ui/react-checkbox",
+      "source": "packages/frontend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "frontend",
+      "name": "@radix-ui/react-dialog",
+      "source": "packages/frontend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "frontend",
+      "name": "@radix-ui/react-dropdown-menu",
+      "source": "packages/frontend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "frontend",
+      "name": "@radix-ui/react-label",
+      "source": "packages/frontend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "frontend",
+      "name": "@radix-ui/react-popover",
+      "source": "packages/frontend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "frontend",
+      "name": "@radix-ui/react-scroll-area",
+      "source": "packages/frontend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "frontend",
+      "name": "@radix-ui/react-select",
+      "source": "packages/frontend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "frontend",
+      "name": "@radix-ui/react-separator",
+      "source": "packages/frontend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "frontend",
+      "name": "@radix-ui/react-slot",
+      "source": "packages/frontend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "frontend",
+      "name": "@radix-ui/react-switch",
+      "source": "packages/frontend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "frontend",
+      "name": "@radix-ui/react-tabs",
+      "source": "packages/frontend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "frontend",
+      "name": "@radix-ui/react-tooltip",
+      "source": "packages/frontend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "frontend",
+      "name": "@tanstack/react-table",
+      "source": "packages/frontend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "frontend",
+      "name": "@tiptap/extension-link",
+      "source": "packages/frontend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "frontend",
+      "name": "@tiptap/extension-placeholder",
+      "source": "packages/frontend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "frontend",
+      "name": "@tiptap/extension-underline",
+      "source": "packages/frontend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "frontend",
+      "name": "@tiptap/pm",
+      "source": "packages/frontend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "frontend",
+      "name": "@tiptap/react",
+      "source": "packages/frontend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "frontend",
+      "name": "@tiptap/starter-kit",
+      "source": "packages/frontend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "frontend",
+      "name": "class-variance-authority",
+      "source": "packages/frontend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "frontend",
+      "name": "clsx",
+      "source": "packages/frontend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "frontend",
+      "name": "cmdk",
+      "source": "packages/frontend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "frontend",
+      "name": "isomorphic-dompurify",
+      "source": "packages/frontend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "frontend",
+      "name": "lucide-react",
+      "source": "packages/frontend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "frontend",
+      "name": "next",
+      "source": "packages/frontend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "frontend",
+      "name": "react",
+      "source": "packages/frontend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "frontend",
+      "name": "react-dom",
+      "source": "packages/frontend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "frontend",
+      "name": "react-hotkeys-hook",
+      "source": "packages/frontend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "frontend",
+      "name": "socket.io-client",
+      "source": "packages/frontend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "frontend",
+      "name": "sonner",
+      "source": "packages/frontend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "frontend",
+      "name": "tailwind-merge",
+      "source": "packages/frontend/package.json",
+      "locator": "dependencies"
+    },
+    {
+      "package": "widget",
+      "name": "socket.io-client",
+      "source": "packages/widget/package.json",
+      "locator": "dependencies"
+    }
+  ],
+  "moduleDirs": [
+    {
+      "name": "agent",
+      "path": "packages/backend/src/modules/agent",
+      "files": 6
+    },
+    {
+      "name": "api-key",
+      "path": "packages/backend/src/modules/api-key",
+      "files": 6
+    },
+    {
+      "name": "attachment",
+      "path": "packages/backend/src/modules/attachment",
+      "files": 4
+    },
+    {
+      "name": "audit-log",
+      "path": "packages/backend/src/modules/audit-log",
+      "files": 4
+    },
+    {
+      "name": "auth",
+      "path": "packages/backend/src/modules/auth",
+      "files": 11
+    },
+    {
+      "name": "automation",
+      "path": "packages/backend/src/modules/automation",
+      "files": 5
+    },
+    {
+      "name": "canned-response",
+      "path": "packages/backend/src/modules/canned-response",
+      "files": 7
+    },
+    {
+      "name": "channel",
+      "path": "packages/backend/src/modules/channel",
+      "files": 23
+    },
+    {
+      "name": "company",
+      "path": "packages/backend/src/modules/company",
+      "files": 6
+    },
+    {
+      "name": "contact",
+      "path": "packages/backend/src/modules/contact",
+      "files": 6
+    },
+    {
+      "name": "conversation",
+      "path": "packages/backend/src/modules/conversation",
+      "files": 7
+    },
+    {
+      "name": "csat",
+      "path": "packages/backend/src/modules/csat",
+      "files": 3
+    },
+    {
+      "name": "custom-field",
+      "path": "packages/backend/src/modules/custom-field",
+      "files": 6
+    },
+    {
+      "name": "group",
+      "path": "packages/backend/src/modules/group",
+      "files": 9
+    },
+    {
+      "name": "notification",
+      "path": "packages/backend/src/modules/notification",
+      "files": 3
+    },
+    {
+      "name": "realtime",
+      "path": "packages/backend/src/modules/realtime",
+      "files": 7
+    },
+    {
+      "name": "role",
+      "path": "packages/backend/src/modules/role",
+      "files": 5
+    },
+    {
+      "name": "saved-view",
+      "path": "packages/backend/src/modules/saved-view",
+      "files": 6
+    },
+    {
+      "name": "scenario",
+      "path": "packages/backend/src/modules/scenario",
+      "files": 5
+    },
+    {
+      "name": "sla",
+      "path": "packages/backend/src/modules/sla",
+      "files": 13
+    },
+    {
+      "name": "tag",
+      "path": "packages/backend/src/modules/tag",
+      "files": 8
+    },
+    {
+      "name": "tenant",
+      "path": "packages/backend/src/modules/tenant",
+      "files": 7
+    },
+    {
+      "name": "ticket",
+      "path": "packages/backend/src/modules/ticket",
+      "files": 27
+    },
+    {
+      "name": "ticket-form",
+      "path": "packages/backend/src/modules/ticket-form",
+      "files": 5
+    },
+    {
+      "name": "ticket-link",
+      "path": "packages/backend/src/modules/ticket-link",
+      "files": 5
+    },
+    {
+      "name": "ticket-todo",
+      "path": "packages/backend/src/modules/ticket-todo",
+      "files": 5
+    },
+    {
+      "name": "time-log",
+      "path": "packages/backend/src/modules/time-log",
+      "files": 5
+    },
+    {
+      "name": "watcher",
+      "path": "packages/backend/src/modules/watcher",
+      "files": 5
+    }
+  ],
+  "routes": [
+    {
+      "verb": "GET",
+      "path": "",
+      "prefix": "health",
+      "moduleDir": "src",
+      "source": "packages/backend/src/health.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": "me",
+      "prefix": "agents",
+      "moduleDir": "agent",
+      "source": "packages/backend/src/modules/agent/agent.controller.ts"
+    },
+    {
+      "verb": "PATCH",
+      "path": "me",
+      "prefix": "agents",
+      "moduleDir": "agent",
+      "source": "packages/backend/src/modules/agent/agent.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": "",
+      "prefix": "agents",
+      "moduleDir": "agent",
+      "source": "packages/backend/src/modules/agent/agent.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": "invite",
+      "prefix": "agents",
+      "moduleDir": "agent",
+      "source": "packages/backend/src/modules/agent/agent.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": ":id",
+      "prefix": "agents",
+      "moduleDir": "agent",
+      "source": "packages/backend/src/modules/agent/agent.controller.ts"
+    },
+    {
+      "verb": "PATCH",
+      "path": ":id",
+      "prefix": "agents",
+      "moduleDir": "agent",
+      "source": "packages/backend/src/modules/agent/agent.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": ":id/deactivate",
+      "prefix": "agents",
+      "moduleDir": "agent",
+      "source": "packages/backend/src/modules/agent/agent.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": ":id/reactivate",
+      "prefix": "agents",
+      "moduleDir": "agent",
+      "source": "packages/backend/src/modules/agent/agent.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": "",
+      "prefix": "api-keys",
+      "moduleDir": "api-key",
+      "source": "packages/backend/src/modules/api-key/api-key.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": "",
+      "prefix": "api-keys",
+      "moduleDir": "api-key",
+      "source": "packages/backend/src/modules/api-key/api-key.controller.ts"
+    },
+    {
+      "verb": "DELETE",
+      "path": ":id",
+      "prefix": "api-keys",
+      "moduleDir": "api-key",
+      "source": "packages/backend/src/modules/api-key/api-key.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": "upload",
+      "prefix": "attachments",
+      "moduleDir": "attachment",
+      "source": "packages/backend/src/modules/attachment/attachment.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": ":id/download",
+      "prefix": "attachments",
+      "moduleDir": "attachment",
+      "source": "packages/backend/src/modules/attachment/attachment.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": "ticket/:ticketId",
+      "prefix": "attachments",
+      "moduleDir": "attachment",
+      "source": "packages/backend/src/modules/attachment/attachment.controller.ts"
+    },
+    {
+      "verb": "DELETE",
+      "path": ":id",
+      "prefix": "attachments",
+      "moduleDir": "attachment",
+      "source": "packages/backend/src/modules/attachment/attachment.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": "",
+      "prefix": "tickets/:ticketId/audit-log",
+      "moduleDir": "audit-log",
+      "source": "packages/backend/src/modules/audit-log/audit-log.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": "login",
+      "prefix": "auth",
+      "moduleDir": "auth",
+      "source": "packages/backend/src/modules/auth/auth.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": "refresh",
+      "prefix": "auth",
+      "moduleDir": "auth",
+      "source": "packages/backend/src/modules/auth/auth.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": "logout",
+      "prefix": "auth",
+      "moduleDir": "auth",
+      "source": "packages/backend/src/modules/auth/auth.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": "",
+      "prefix": "automation-rules",
+      "moduleDir": "automation",
+      "source": "packages/backend/src/modules/automation/automation.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": ":id",
+      "prefix": "automation-rules",
+      "moduleDir": "automation",
+      "source": "packages/backend/src/modules/automation/automation.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": "",
+      "prefix": "automation-rules",
+      "moduleDir": "automation",
+      "source": "packages/backend/src/modules/automation/automation.controller.ts"
+    },
+    {
+      "verb": "PATCH",
+      "path": ":id",
+      "prefix": "automation-rules",
+      "moduleDir": "automation",
+      "source": "packages/backend/src/modules/automation/automation.controller.ts"
+    },
+    {
+      "verb": "DELETE",
+      "path": ":id",
+      "prefix": "automation-rules",
+      "moduleDir": "automation",
+      "source": "packages/backend/src/modules/automation/automation.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": "",
+      "prefix": "canned-responses",
+      "moduleDir": "canned-response",
+      "source": "packages/backend/src/modules/canned-response/canned-response.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": "",
+      "prefix": "canned-responses",
+      "moduleDir": "canned-response",
+      "source": "packages/backend/src/modules/canned-response/canned-response.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": ":id",
+      "prefix": "canned-responses",
+      "moduleDir": "canned-response",
+      "source": "packages/backend/src/modules/canned-response/canned-response.controller.ts"
+    },
+    {
+      "verb": "PATCH",
+      "path": ":id",
+      "prefix": "canned-responses",
+      "moduleDir": "canned-response",
+      "source": "packages/backend/src/modules/canned-response/canned-response.controller.ts"
+    },
+    {
+      "verb": "DELETE",
+      "path": ":id",
+      "prefix": "canned-responses",
+      "moduleDir": "canned-response",
+      "source": "packages/backend/src/modules/canned-response/canned-response.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": ":id/substitute",
+      "prefix": "canned-responses",
+      "moduleDir": "canned-response",
+      "source": "packages/backend/src/modules/canned-response/canned-response.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": "folders/list",
+      "prefix": "canned-responses",
+      "moduleDir": "canned-response",
+      "source": "packages/backend/src/modules/canned-response/canned-response.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": "folders",
+      "prefix": "canned-responses",
+      "moduleDir": "canned-response",
+      "source": "packages/backend/src/modules/canned-response/canned-response.controller.ts"
+    },
+    {
+      "verb": "PATCH",
+      "path": "folders/:folderId",
+      "prefix": "canned-responses",
+      "moduleDir": "canned-response",
+      "source": "packages/backend/src/modules/canned-response/canned-response.controller.ts"
+    },
+    {
+      "verb": "DELETE",
+      "path": "folders/:folderId",
+      "prefix": "canned-responses",
+      "moduleDir": "canned-response",
+      "source": "packages/backend/src/modules/canned-response/canned-response.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": ":tenantSlug/:channelType/webhook",
+      "prefix": "channels",
+      "moduleDir": "channel",
+      "source": "packages/backend/src/modules/channel/channel-webhook.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": "",
+      "prefix": "channels",
+      "moduleDir": "channel",
+      "source": "packages/backend/src/modules/channel/channel.controller.ts"
+    },
+    {
+      "verb": "PATCH",
+      "path": ":id",
+      "prefix": "channels",
+      "moduleDir": "channel",
+      "source": "packages/backend/src/modules/channel/channel.controller.ts"
+    },
+    {
+      "verb": "PATCH",
+      "path": ":id/enable",
+      "prefix": "channels",
+      "moduleDir": "channel",
+      "source": "packages/backend/src/modules/channel/channel.controller.ts"
+    },
+    {
+      "verb": "PATCH",
+      "path": ":id/disable",
+      "prefix": "channels",
+      "moduleDir": "channel",
+      "source": "packages/backend/src/modules/channel/channel.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": "inbound",
+      "prefix": "dev/mail",
+      "moduleDir": "channel",
+      "source": "packages/backend/src/modules/channel/dev-mail.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": "outbox",
+      "prefix": "dev/mail",
+      "moduleDir": "channel",
+      "source": "packages/backend/src/modules/channel/dev-mail.controller.ts"
+    },
+    {
+      "verb": "DELETE",
+      "path": "outbox",
+      "prefix": "dev/mail",
+      "moduleDir": "channel",
+      "source": "packages/backend/src/modules/channel/dev-mail.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": "",
+      "prefix": "companies",
+      "moduleDir": "company",
+      "source": "packages/backend/src/modules/company/company.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": "",
+      "prefix": "companies",
+      "moduleDir": "company",
+      "source": "packages/backend/src/modules/company/company.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": ":id",
+      "prefix": "companies",
+      "moduleDir": "company",
+      "source": "packages/backend/src/modules/company/company.controller.ts"
+    },
+    {
+      "verb": "PATCH",
+      "path": ":id",
+      "prefix": "companies",
+      "moduleDir": "company",
+      "source": "packages/backend/src/modules/company/company.controller.ts"
+    },
+    {
+      "verb": "DELETE",
+      "path": ":id",
+      "prefix": "companies",
+      "moduleDir": "company",
+      "source": "packages/backend/src/modules/company/company.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": "",
+      "prefix": "contacts",
+      "moduleDir": "contact",
+      "source": "packages/backend/src/modules/contact/contact.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": "",
+      "prefix": "contacts",
+      "moduleDir": "contact",
+      "source": "packages/backend/src/modules/contact/contact.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": ":id",
+      "prefix": "contacts",
+      "moduleDir": "contact",
+      "source": "packages/backend/src/modules/contact/contact.controller.ts"
+    },
+    {
+      "verb": "PATCH",
+      "path": ":id",
+      "prefix": "contacts",
+      "moduleDir": "contact",
+      "source": "packages/backend/src/modules/contact/contact.controller.ts"
+    },
+    {
+      "verb": "DELETE",
+      "path": ":id",
+      "prefix": "contacts",
+      "moduleDir": "contact",
+      "source": "packages/backend/src/modules/contact/contact.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": ":id/tickets",
+      "prefix": "contacts",
+      "moduleDir": "contact",
+      "source": "packages/backend/src/modules/contact/contact.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": "",
+      "prefix": "tickets/:ticketId/conversations",
+      "moduleDir": "conversation",
+      "source": "packages/backend/src/modules/conversation/conversation.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": "",
+      "prefix": "tickets/:ticketId/conversations",
+      "moduleDir": "conversation",
+      "source": "packages/backend/src/modules/conversation/conversation.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": ":ticketId/check",
+      "prefix": "tickets/:ticketId/conversations",
+      "moduleDir": "conversation",
+      "source": "packages/backend/src/modules/conversation/conversation.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": "csat/surveys",
+      "prefix": "",
+      "moduleDir": "csat",
+      "source": "packages/backend/src/modules/csat/csat.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": "csat/surveys/active",
+      "prefix": "",
+      "moduleDir": "csat",
+      "source": "packages/backend/src/modules/csat/csat.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": "csat/surveys",
+      "prefix": "",
+      "moduleDir": "csat",
+      "source": "packages/backend/src/modules/csat/csat.controller.ts"
+    },
+    {
+      "verb": "PATCH",
+      "path": "csat/surveys/:id",
+      "prefix": "",
+      "moduleDir": "csat",
+      "source": "packages/backend/src/modules/csat/csat.controller.ts"
+    },
+    {
+      "verb": "DELETE",
+      "path": "csat/surveys/:id",
+      "prefix": "",
+      "moduleDir": "csat",
+      "source": "packages/backend/src/modules/csat/csat.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": "csat/respond/:surveyId/:ticketId",
+      "prefix": "",
+      "moduleDir": "csat",
+      "source": "packages/backend/src/modules/csat/csat.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": "tickets/:ticketId/csat",
+      "prefix": "",
+      "moduleDir": "csat",
+      "source": "packages/backend/src/modules/csat/csat.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": "csat/surveys/:id/stats",
+      "prefix": "",
+      "moduleDir": "csat",
+      "source": "packages/backend/src/modules/csat/csat.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": "",
+      "prefix": "custom-fields",
+      "moduleDir": "custom-field",
+      "source": "packages/backend/src/modules/custom-field/custom-field.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": "",
+      "prefix": "custom-fields",
+      "moduleDir": "custom-field",
+      "source": "packages/backend/src/modules/custom-field/custom-field.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": ":id",
+      "prefix": "custom-fields",
+      "moduleDir": "custom-field",
+      "source": "packages/backend/src/modules/custom-field/custom-field.controller.ts"
+    },
+    {
+      "verb": "PATCH",
+      "path": ":id",
+      "prefix": "custom-fields",
+      "moduleDir": "custom-field",
+      "source": "packages/backend/src/modules/custom-field/custom-field.controller.ts"
+    },
+    {
+      "verb": "DELETE",
+      "path": ":id",
+      "prefix": "custom-fields",
+      "moduleDir": "custom-field",
+      "source": "packages/backend/src/modules/custom-field/custom-field.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": "",
+      "prefix": "groups",
+      "moduleDir": "group",
+      "source": "packages/backend/src/modules/group/group.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": "",
+      "prefix": "groups",
+      "moduleDir": "group",
+      "source": "packages/backend/src/modules/group/group.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": ":id",
+      "prefix": "groups",
+      "moduleDir": "group",
+      "source": "packages/backend/src/modules/group/group.controller.ts"
+    },
+    {
+      "verb": "PATCH",
+      "path": ":id",
+      "prefix": "groups",
+      "moduleDir": "group",
+      "source": "packages/backend/src/modules/group/group.controller.ts"
+    },
+    {
+      "verb": "DELETE",
+      "path": ":id",
+      "prefix": "groups",
+      "moduleDir": "group",
+      "source": "packages/backend/src/modules/group/group.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": ":id/agents",
+      "prefix": "groups",
+      "moduleDir": "group",
+      "source": "packages/backend/src/modules/group/group.controller.ts"
+    },
+    {
+      "verb": "DELETE",
+      "path": ":id/agents/:agentId",
+      "prefix": "groups",
+      "moduleDir": "group",
+      "source": "packages/backend/src/modules/group/group.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": ":id/agents",
+      "prefix": "groups",
+      "moduleDir": "group",
+      "source": "packages/backend/src/modules/group/group.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": "",
+      "prefix": "notifications",
+      "moduleDir": "notification",
+      "source": "packages/backend/src/modules/notification/notification.controller.ts"
+    },
+    {
+      "verb": "PATCH",
+      "path": ":id/read",
+      "prefix": "notifications",
+      "moduleDir": "notification",
+      "source": "packages/backend/src/modules/notification/notification.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": "mark-all-read",
+      "prefix": "notifications",
+      "moduleDir": "notification",
+      "source": "packages/backend/src/modules/notification/notification.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": "",
+      "prefix": "roles",
+      "moduleDir": "role",
+      "source": "packages/backend/src/modules/role/role.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": ":id",
+      "prefix": "roles",
+      "moduleDir": "role",
+      "source": "packages/backend/src/modules/role/role.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": "",
+      "prefix": "roles",
+      "moduleDir": "role",
+      "source": "packages/backend/src/modules/role/role.controller.ts"
+    },
+    {
+      "verb": "PATCH",
+      "path": ":id",
+      "prefix": "roles",
+      "moduleDir": "role",
+      "source": "packages/backend/src/modules/role/role.controller.ts"
+    },
+    {
+      "verb": "DELETE",
+      "path": ":id",
+      "prefix": "roles",
+      "moduleDir": "role",
+      "source": "packages/backend/src/modules/role/role.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": "",
+      "prefix": "saved-views",
+      "moduleDir": "saved-view",
+      "source": "packages/backend/src/modules/saved-view/saved-view.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": "",
+      "prefix": "saved-views",
+      "moduleDir": "saved-view",
+      "source": "packages/backend/src/modules/saved-view/saved-view.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": ":id",
+      "prefix": "saved-views",
+      "moduleDir": "saved-view",
+      "source": "packages/backend/src/modules/saved-view/saved-view.controller.ts"
+    },
+    {
+      "verb": "PATCH",
+      "path": ":id",
+      "prefix": "saved-views",
+      "moduleDir": "saved-view",
+      "source": "packages/backend/src/modules/saved-view/saved-view.controller.ts"
+    },
+    {
+      "verb": "DELETE",
+      "path": ":id",
+      "prefix": "saved-views",
+      "moduleDir": "saved-view",
+      "source": "packages/backend/src/modules/saved-view/saved-view.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": ":id/favorite",
+      "prefix": "saved-views",
+      "moduleDir": "saved-view",
+      "source": "packages/backend/src/modules/saved-view/saved-view.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": "scenarios",
+      "prefix": "",
+      "moduleDir": "scenario",
+      "source": "packages/backend/src/modules/scenario/scenario.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": "scenarios/all",
+      "prefix": "",
+      "moduleDir": "scenario",
+      "source": "packages/backend/src/modules/scenario/scenario.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": "scenarios/:id",
+      "prefix": "",
+      "moduleDir": "scenario",
+      "source": "packages/backend/src/modules/scenario/scenario.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": "scenarios",
+      "prefix": "",
+      "moduleDir": "scenario",
+      "source": "packages/backend/src/modules/scenario/scenario.controller.ts"
+    },
+    {
+      "verb": "PATCH",
+      "path": "scenarios/:id",
+      "prefix": "",
+      "moduleDir": "scenario",
+      "source": "packages/backend/src/modules/scenario/scenario.controller.ts"
+    },
+    {
+      "verb": "DELETE",
+      "path": "scenarios/:id",
+      "prefix": "",
+      "moduleDir": "scenario",
+      "source": "packages/backend/src/modules/scenario/scenario.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": "tickets/:ticketId/execute-scenario/:scenarioId",
+      "prefix": "",
+      "moduleDir": "scenario",
+      "source": "packages/backend/src/modules/scenario/scenario.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": "sla-policies",
+      "prefix": "",
+      "moduleDir": "sla",
+      "source": "packages/backend/src/modules/sla/sla.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": "sla-policies",
+      "prefix": "",
+      "moduleDir": "sla",
+      "source": "packages/backend/src/modules/sla/sla.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": "sla-policies/:id",
+      "prefix": "",
+      "moduleDir": "sla",
+      "source": "packages/backend/src/modules/sla/sla.controller.ts"
+    },
+    {
+      "verb": "PATCH",
+      "path": "sla-policies/:id",
+      "prefix": "",
+      "moduleDir": "sla",
+      "source": "packages/backend/src/modules/sla/sla.controller.ts"
+    },
+    {
+      "verb": "DELETE",
+      "path": "sla-policies/:id",
+      "prefix": "",
+      "moduleDir": "sla",
+      "source": "packages/backend/src/modules/sla/sla.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": "business-hours",
+      "prefix": "",
+      "moduleDir": "sla",
+      "source": "packages/backend/src/modules/sla/sla.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": "business-hours",
+      "prefix": "",
+      "moduleDir": "sla",
+      "source": "packages/backend/src/modules/sla/sla.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": "business-hours/:id",
+      "prefix": "",
+      "moduleDir": "sla",
+      "source": "packages/backend/src/modules/sla/sla.controller.ts"
+    },
+    {
+      "verb": "PATCH",
+      "path": "business-hours/:id",
+      "prefix": "",
+      "moduleDir": "sla",
+      "source": "packages/backend/src/modules/sla/sla.controller.ts"
+    },
+    {
+      "verb": "DELETE",
+      "path": "business-hours/:id",
+      "prefix": "",
+      "moduleDir": "sla",
+      "source": "packages/backend/src/modules/sla/sla.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": "tags",
+      "prefix": "",
+      "moduleDir": "tag",
+      "source": "packages/backend/src/modules/tag/tag.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": "tags",
+      "prefix": "",
+      "moduleDir": "tag",
+      "source": "packages/backend/src/modules/tag/tag.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": "tickets/:ticketId/tags",
+      "prefix": "",
+      "moduleDir": "tag",
+      "source": "packages/backend/src/modules/tag/tag.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": "tickets/:ticketId/tags/by-name",
+      "prefix": "",
+      "moduleDir": "tag",
+      "source": "packages/backend/src/modules/tag/tag.controller.ts"
+    },
+    {
+      "verb": "DELETE",
+      "path": "tickets/:ticketId/tags/:tagId",
+      "prefix": "",
+      "moduleDir": "tag",
+      "source": "packages/backend/src/modules/tag/tag.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": "tickets/:ticketId/tags",
+      "prefix": "",
+      "moduleDir": "tag",
+      "source": "packages/backend/src/modules/tag/tag.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": "",
+      "prefix": "settings",
+      "moduleDir": "tenant",
+      "source": "packages/backend/src/modules/tenant/tenant-settings.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": ":section",
+      "prefix": "settings",
+      "moduleDir": "tenant",
+      "source": "packages/backend/src/modules/tenant/tenant-settings.controller.ts"
+    },
+    {
+      "verb": "PATCH",
+      "path": "general",
+      "prefix": "settings",
+      "moduleDir": "tenant",
+      "source": "packages/backend/src/modules/tenant/tenant-settings.controller.ts"
+    },
+    {
+      "verb": "PATCH",
+      "path": "storage",
+      "prefix": "settings",
+      "moduleDir": "tenant",
+      "source": "packages/backend/src/modules/tenant/tenant-settings.controller.ts"
+    },
+    {
+      "verb": "PATCH",
+      "path": "email",
+      "prefix": "settings",
+      "moduleDir": "tenant",
+      "source": "packages/backend/src/modules/tenant/tenant-settings.controller.ts"
+    },
+    {
+      "verb": "PATCH",
+      "path": "notifications",
+      "prefix": "settings",
+      "moduleDir": "tenant",
+      "source": "packages/backend/src/modules/tenant/tenant-settings.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": "register",
+      "prefix": "auth",
+      "moduleDir": "tenant",
+      "source": "packages/backend/src/modules/tenant/tenant.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": "",
+      "prefix": "tickets",
+      "moduleDir": "ticket",
+      "source": "packages/backend/src/modules/ticket/ticket.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": "",
+      "prefix": "tickets",
+      "moduleDir": "ticket",
+      "source": "packages/backend/src/modules/ticket/ticket.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": ":id",
+      "prefix": "tickets",
+      "moduleDir": "ticket",
+      "source": "packages/backend/src/modules/ticket/ticket.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": ":id/audit-log",
+      "prefix": "tickets",
+      "moduleDir": "ticket",
+      "source": "packages/backend/src/modules/ticket/ticket.controller.ts"
+    },
+    {
+      "verb": "PATCH",
+      "path": ":id",
+      "prefix": "tickets",
+      "moduleDir": "ticket",
+      "source": "packages/backend/src/modules/ticket/ticket.controller.ts"
+    },
+    {
+      "verb": "DELETE",
+      "path": ":id",
+      "prefix": "tickets",
+      "moduleDir": "ticket",
+      "source": "packages/backend/src/modules/ticket/ticket.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": ":id/restore",
+      "prefix": "tickets",
+      "moduleDir": "ticket",
+      "source": "packages/backend/src/modules/ticket/ticket.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": ":id/assign",
+      "prefix": "tickets",
+      "moduleDir": "ticket",
+      "source": "packages/backend/src/modules/ticket/ticket.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": ":id/reopen",
+      "prefix": "tickets",
+      "moduleDir": "ticket",
+      "source": "packages/backend/src/modules/ticket/ticket.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": ":id/spam",
+      "prefix": "tickets",
+      "moduleDir": "ticket",
+      "source": "packages/backend/src/modules/ticket/ticket.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": ":id/unspam",
+      "prefix": "tickets",
+      "moduleDir": "ticket",
+      "source": "packages/backend/src/modules/ticket/ticket.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": ":id/merge",
+      "prefix": "tickets",
+      "moduleDir": "ticket",
+      "source": "packages/backend/src/modules/ticket/ticket.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": ":id/split",
+      "prefix": "tickets",
+      "moduleDir": "ticket",
+      "source": "packages/backend/src/modules/ticket/ticket.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": ":id/children",
+      "prefix": "tickets",
+      "moduleDir": "ticket",
+      "source": "packages/backend/src/modules/ticket/ticket.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": "",
+      "prefix": "ticket-forms",
+      "moduleDir": "ticket-form",
+      "source": "packages/backend/src/modules/ticket-form/ticket-form.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": "all",
+      "prefix": "ticket-forms",
+      "moduleDir": "ticket-form",
+      "source": "packages/backend/src/modules/ticket-form/ticket-form.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": ":id",
+      "prefix": "ticket-forms",
+      "moduleDir": "ticket-form",
+      "source": "packages/backend/src/modules/ticket-form/ticket-form.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": "",
+      "prefix": "ticket-forms",
+      "moduleDir": "ticket-form",
+      "source": "packages/backend/src/modules/ticket-form/ticket-form.controller.ts"
+    },
+    {
+      "verb": "PATCH",
+      "path": ":id",
+      "prefix": "ticket-forms",
+      "moduleDir": "ticket-form",
+      "source": "packages/backend/src/modules/ticket-form/ticket-form.controller.ts"
+    },
+    {
+      "verb": "DELETE",
+      "path": ":id",
+      "prefix": "ticket-forms",
+      "moduleDir": "ticket-form",
+      "source": "packages/backend/src/modules/ticket-form/ticket-form.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": "",
+      "prefix": "tickets/:ticketId/links",
+      "moduleDir": "ticket-link",
+      "source": "packages/backend/src/modules/ticket-link/ticket-link.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": "",
+      "prefix": "tickets/:ticketId/links",
+      "moduleDir": "ticket-link",
+      "source": "packages/backend/src/modules/ticket-link/ticket-link.controller.ts"
+    },
+    {
+      "verb": "DELETE",
+      "path": ":linkId",
+      "prefix": "tickets/:ticketId/links",
+      "moduleDir": "ticket-link",
+      "source": "packages/backend/src/modules/ticket-link/ticket-link.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": "tickets/:ticketId/todos",
+      "prefix": "",
+      "moduleDir": "ticket-todo",
+      "source": "packages/backend/src/modules/ticket-todo/ticket-todo.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": "tickets/:ticketId/todos",
+      "prefix": "",
+      "moduleDir": "ticket-todo",
+      "source": "packages/backend/src/modules/ticket-todo/ticket-todo.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": "tickets/:ticketId/todos/reorder",
+      "prefix": "",
+      "moduleDir": "ticket-todo",
+      "source": "packages/backend/src/modules/ticket-todo/ticket-todo.controller.ts"
+    },
+    {
+      "verb": "PATCH",
+      "path": "ticket-todos/:id",
+      "prefix": "",
+      "moduleDir": "ticket-todo",
+      "source": "packages/backend/src/modules/ticket-todo/ticket-todo.controller.ts"
+    },
+    {
+      "verb": "DELETE",
+      "path": "ticket-todos/:id",
+      "prefix": "",
+      "moduleDir": "ticket-todo",
+      "source": "packages/backend/src/modules/ticket-todo/ticket-todo.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": "tickets/:ticketId/time-logs",
+      "prefix": "",
+      "moduleDir": "time-log",
+      "source": "packages/backend/src/modules/time-log/time-log.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": "tickets/:ticketId/time-logs",
+      "prefix": "",
+      "moduleDir": "time-log",
+      "source": "packages/backend/src/modules/time-log/time-log.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": "tickets/:ticketId/time-logs/timer/start",
+      "prefix": "",
+      "moduleDir": "time-log",
+      "source": "packages/backend/src/modules/time-log/time-log.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": "tickets/:ticketId/time-logs/timer/stop",
+      "prefix": "",
+      "moduleDir": "time-log",
+      "source": "packages/backend/src/modules/time-log/time-log.controller.ts"
+    },
+    {
+      "verb": "PATCH",
+      "path": "time-logs/:id",
+      "prefix": "",
+      "moduleDir": "time-log",
+      "source": "packages/backend/src/modules/time-log/time-log.controller.ts"
+    },
+    {
+      "verb": "DELETE",
+      "path": "time-logs/:id",
+      "prefix": "",
+      "moduleDir": "time-log",
+      "source": "packages/backend/src/modules/time-log/time-log.controller.ts"
+    },
+    {
+      "verb": "GET",
+      "path": "",
+      "prefix": "tickets/:ticketId/watchers",
+      "moduleDir": "watcher",
+      "source": "packages/backend/src/modules/watcher/watcher.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": "",
+      "prefix": "tickets/:ticketId/watchers",
+      "moduleDir": "watcher",
+      "source": "packages/backend/src/modules/watcher/watcher.controller.ts"
+    },
+    {
+      "verb": "DELETE",
+      "path": "",
+      "prefix": "tickets/:ticketId/watchers",
+      "moduleDir": "watcher",
+      "source": "packages/backend/src/modules/watcher/watcher.controller.ts"
+    },
+    {
+      "verb": "POST",
+      "path": ":agentId",
+      "prefix": "tickets/:ticketId/watchers",
+      "moduleDir": "watcher",
+      "source": "packages/backend/src/modules/watcher/watcher.controller.ts"
+    },
+    {
+      "verb": "DELETE",
+      "path": ":agentId",
+      "prefix": "tickets/:ticketId/watchers",
+      "moduleDir": "watcher",
+      "source": "packages/backend/src/modules/watcher/watcher.controller.ts"
+    }
+  ],
+  "tables": [
+    {
+      "name": "agent_groups",
+      "source": "packages/backend/src/common/database/schema/agent-groups.ts",
+      "columns": [
+        "agentId",
+        "createdAt",
+        "groupId"
+      ]
+    },
+    {
+      "name": "agents",
+      "source": "packages/backend/src/common/database/schema/agents.ts",
+      "columns": [
+        "avatarUrl",
+        "createdAt",
+        "deletedAt",
+        "email",
+        "failedLoginAttempts",
+        "id",
+        "isActive",
+        "isAvailable",
+        "lastLoginAt",
+        "lockedUntil",
+        "name",
+        "passwordHash",
+        "role",
+        "roleId",
+        "tenantId",
+        "ticketScope",
+        "updatedAt"
+      ]
+    },
+    {
+      "name": "api_keys",
+      "source": "packages/backend/src/common/database/schema/api-keys.ts",
+      "columns": [
+        "createdAt",
+        "description",
+        "id",
+        "isActive",
+        "keyHash",
+        "keyLastFour",
+        "keyPrefix",
+        "lastUsedAt",
+        "name",
+        "revokedAt",
+        "tenantId"
+      ]
+    },
+    {
+      "name": "attachments",
+      "source": "packages/backend/src/common/database/schema/attachments.ts",
+      "columns": [
+        "conversationId",
+        "createdAt",
+        "filename",
+        "id",
+        "mimeType",
+        "sizeBytes",
+        "storagePath",
+        "tenantId",
+        "ticketId"
+      ]
+    },
+    {
+      "name": "audit_logs",
+      "source": "packages/backend/src/common/database/schema/audit-logs.ts",
+      "columns": [
+        "action",
+        "agentId",
+        "changes",
+        "createdAt",
+        "entityId",
+        "entityType",
+        "id",
+        "tenantId"
+      ]
+    },
+    {
+      "name": "automation_rules",
+      "source": "packages/backend/src/common/database/schema/automation-rules.ts",
+      "columns": [
+        "actions",
+        "conditions",
+        "createdAt",
+        "description",
+        "displayOrder",
+        "executionCount",
+        "id",
+        "isActive",
+        "lastExecutedAt",
+        "matchType",
+        "name",
+        "tenantId",
+        "triggerType",
+        "updatedAt"
+      ]
+    },
+    {
+      "name": "business_hours",
+      "source": "packages/backend/src/common/database/schema/business-hours.ts",
+      "columns": [
+        "createdAt",
+        "deletedAt",
+        "holidays",
+        "id",
+        "isDefault",
+        "name",
+        "schedule",
+        "tenantId",
+        "timezone",
+        "updatedAt"
+      ]
+    },
+    {
+      "name": "canned_response_folders",
+      "source": "packages/backend/src/common/database/schema/canned-response-folders.ts",
+      "columns": [
+        "createdAt",
+        "displayOrder",
+        "id",
+        "name",
+        "tenantId",
+        "updatedAt"
+      ]
+    },
+    {
+      "name": "canned_responses",
+      "source": "packages/backend/src/common/database/schema/canned-responses.ts",
+      "columns": [
+        "agentId",
+        "body",
+        "createdAt",
+        "deletedAt",
+        "folderId",
+        "id",
+        "tenantId",
+        "title",
+        "updatedAt"
+      ]
+    },
+    {
+      "name": "channels",
+      "source": "packages/backend/src/common/database/schema/channels.ts",
+      "columns": [
+        "channelType",
+        "config",
+        "createdAt",
+        "deletedAt",
+        "id",
+        "isEnabled",
+        "name",
+        "tenantId",
+        "updatedAt"
+      ]
+    },
+    {
+      "name": "companies",
+      "source": "packages/backend/src/common/database/schema/companies.ts",
+      "columns": [
+        "createdAt",
+        "customFields",
+        "deletedAt",
+        "domains",
+        "id",
+        "name",
+        "notes",
+        "tenantId",
+        "updatedAt"
+      ]
+    },
+    {
+      "name": "contacts",
+      "source": "packages/backend/src/common/database/schema/contacts.ts",
+      "columns": [
+        "companyId",
+        "createdAt",
+        "customFields",
+        "deletedAt",
+        "email",
+        "id",
+        "name",
+        "phone",
+        "tenantId",
+        "updatedAt"
+      ]
+    },
+    {
+      "name": "conversations",
+      "source": "packages/backend/src/common/database/schema/conversations.ts",
+      "columns": [
+        "agentId",
+        "body",
+        "bodyHtml",
+        "channelMetadata",
+        "channelType",
+        "contactId",
+        "createdAt",
+        "deletedAt",
+        "deliveredAt",
+        "deliveryState",
+        "direction",
+        "externalInReplyTo",
+        "externalMessageId",
+        "externalReferences",
+        "failedAt",
+        "failureReason",
+        "id",
+        "providerMessageId",
+        "tenantId",
+        "ticketId",
+        "type",
+        "updatedAt"
+      ]
+    },
+    {
+      "name": "csat_surveys",
+      "source": "packages/backend/src/common/database/schema/csat-surveys.ts",
+      "columns": [
+        "createdAt",
+        "id",
+        "isActive",
+        "labels",
+        "name",
+        "question",
+        "scaleType",
+        "sendOnResolved",
+        "tenantId",
+        "updatedAt"
+      ]
+    },
+    {
+      "name": "csat_responses",
+      "source": "packages/backend/src/common/database/schema/csat-surveys.ts",
+      "columns": [
+        "comment",
+        "contactId",
+        "createdAt",
+        "id",
+        "rating",
+        "surveyId",
+        "tenantId",
+        "ticketId"
+      ]
+    },
+    {
+      "name": "custom_field_definitions",
+      "source": "packages/backend/src/common/database/schema/custom-field-definitions.ts",
+      "columns": [
+        "createdAt",
+        "deletedAt",
+        "displayOrder",
+        "entityType",
+        "fieldLabel",
+        "fieldName",
+        "fieldType",
+        "id",
+        "isRequired",
+        "options",
+        "parentFieldName",
+        "showWhenValue",
+        "tenantId",
+        "updatedAt"
+      ]
+    },
+    {
+      "name": "groups",
+      "source": "packages/backend/src/common/database/schema/groups.ts",
+      "columns": [
+        "autoAssignEnabled",
+        "createdAt",
+        "deletedAt",
+        "description",
+        "id",
+        "isDefault",
+        "name",
+        "roundRobinIndex",
+        "tenantId",
+        "updatedAt"
+      ]
+    },
+    {
+      "name": "inbound_webhook_events",
+      "source": "packages/backend/src/common/database/schema/inbound-webhook-events.ts",
+      "columns": [
+        "id",
+        "processedAt",
+        "provider",
+        "providerEventId",
+        "receivedAt",
+        "tenantId"
+      ]
+    },
+    {
+      "name": "notifications",
+      "source": "packages/backend/src/common/database/schema/notifications.ts",
+      "columns": [
+        "agentId",
+        "body",
+        "createdAt",
+        "data",
+        "id",
+        "isRead",
+        "tenantId",
+        "title",
+        "type"
+      ]
+    },
+    {
+      "name": "refresh_tokens",
+      "source": "packages/backend/src/common/database/schema/refresh-tokens.ts",
+      "columns": [
+        "agentId",
+        "createdAt",
+        "expiresAt",
+        "id",
+        "revokedAt",
+        "tokenHash"
+      ]
+    },
+    {
+      "name": "roles",
+      "source": "packages/backend/src/common/database/schema/roles.ts",
+      "columns": [
+        "createdAt",
+        "description",
+        "id",
+        "isSystem",
+        "name",
+        "permissions",
+        "tenantId",
+        "updatedAt"
+      ]
+    },
+    {
+      "name": "saved_views",
+      "source": "packages/backend/src/common/database/schema/saved-views.ts",
+      "columns": [
+        "agentId",
+        "createdAt",
+        "description",
+        "filters",
+        "id",
+        "isDefaultSystem",
+        "isFavorite",
+        "name",
+        "position",
+        "sortBy",
+        "sortDir",
+        "tenantId",
+        "updatedAt"
+      ]
+    },
+    {
+      "name": "scenarios",
+      "source": "packages/backend/src/common/database/schema/scenarios.ts",
+      "columns": [
+        "actions",
+        "createdAt",
+        "createdById",
+        "description",
+        "displayOrder",
+        "id",
+        "isActive",
+        "name",
+        "tenantId",
+        "updatedAt"
+      ]
+    },
+    {
+      "name": "sla_policies",
+      "source": "packages/backend/src/common/database/schema/sla-policies.ts",
+      "columns": [
+        "createdAt",
+        "deletedAt",
+        "description",
+        "id",
+        "isDefault",
+        "name",
+        "targets",
+        "tenantId",
+        "updatedAt"
+      ]
+    },
+    {
+      "name": "tags",
+      "source": "packages/backend/src/common/database/schema/tags.ts",
+      "columns": [
+        "createdAt",
+        "id",
+        "name",
+        "tenantId"
+      ]
+    },
+    {
+      "name": "tenants",
+      "source": "packages/backend/src/common/database/schema/tenants.ts",
+      "columns": [
+        "createdAt",
+        "deletedAt",
+        "id",
+        "name",
+        "settings",
+        "slug",
+        "updatedAt"
+      ]
+    },
+    {
+      "name": "ticket_audit_log",
+      "source": "packages/backend/src/common/database/schema/ticket-audit-log.ts",
+      "columns": [
+        "actorId",
+        "actorType",
+        "createdAt",
+        "eventType",
+        "fromValue",
+        "id",
+        "metadata",
+        "tenantId",
+        "ticketId",
+        "toValue"
+      ]
+    },
+    {
+      "name": "ticket_forms",
+      "source": "packages/backend/src/common/database/schema/ticket-forms.ts",
+      "columns": [
+        "createdAt",
+        "defaultValues",
+        "description",
+        "displayOrder",
+        "fields",
+        "id",
+        "isActive",
+        "isDefault",
+        "name",
+        "tenantId",
+        "updatedAt"
+      ]
+    },
+    {
+      "name": "ticket_links",
+      "source": "packages/backend/src/common/database/schema/ticket-links.ts",
+      "columns": [
+        "createdAt",
+        "createdBy",
+        "id",
+        "linkType",
+        "sourceTicketId",
+        "targetTicketId",
+        "tenantId"
+      ]
+    },
+    {
+      "name": "ticket_tags",
+      "source": "packages/backend/src/common/database/schema/ticket-tags.ts",
+      "columns": [
+        "createdAt",
+        "tagId",
+        "ticketId"
+      ]
+    },
+    {
+      "name": "ticket_todos",
+      "source": "packages/backend/src/common/database/schema/ticket-todos.ts",
+      "columns": [
+        "completedAt",
+        "completedById",
+        "createdAt",
+        "createdById",
+        "id",
+        "isDone",
+        "position",
+        "tenantId",
+        "ticketId",
+        "title",
+        "updatedAt"
+      ]
+    },
+    {
+      "name": "ticket_watchers",
+      "source": "packages/backend/src/common/database/schema/ticket-watchers.ts",
+      "columns": [
+        "agentId",
+        "createdAt",
+        "id",
+        "tenantId",
+        "ticketId"
+      ]
+    },
+    {
+      "name": "tickets",
+      "source": "packages/backend/src/common/database/schema/tickets.ts",
+      "columns": [
+        "assignedAgentId",
+        "assignedGroupId",
+        "autoCloseAt",
+        "channelId",
+        "contactId",
+        "createdAt",
+        "customFields",
+        "deletedAt",
+        "description",
+        "externalConversationId",
+        "firstAssignedAt",
+        "id",
+        "lastCustomerReplyAt",
+        "mergedIntoTicketId",
+        "parentTicketId",
+        "priority",
+        "reopenCount",
+        "slaBreached",
+        "slaElapsedBusinessMinutes",
+        "slaFirstResponseAt",
+        "slaFirstResponseDueAt",
+        "slaFirstResponseMet",
+        "slaPausedAt",
+        "slaPolicyId",
+        "slaResolutionAt",
+        "slaResolutionDueAt",
+        "slaResolutionMet",
+        "source",
+        "status",
+        "subject",
+        "subjectTokenHash",
+        "tenantId",
+        "ticketNumber",
+        "type",
+        "updatedAt"
+      ]
+    },
+    {
+      "name": "time_logs",
+      "source": "packages/backend/src/common/database/schema/time-logs.ts",
+      "columns": [
+        "agentId",
+        "createdAt",
+        "id",
+        "isBillable",
+        "loggedAt",
+        "minutes",
+        "note",
+        "tenantId",
+        "ticketId",
+        "timerStartedAt",
+        "updatedAt"
+      ]
+    }
+  ],
+  "testSuites": [
+    {
+      "file": "packages/backend/src/common/database/__tests__/tenant-isolation.integration.spec.ts",
+      "name": "tenant-isolation.integration.spec",
+      "moduleDir": "database",
+      "describes": [
+        "RLS tenant isolation (integration)"
+      ],
+      "cases": [
+        "postgres is reachable",
+        "tenant A context sees only tenant A tickets",
+        "tenant B context sees only tenant B tickets",
+        "aidesk_app without any tenant context cannot read tickets",
+        "attempting INSERT with tenant_id=A while in tenant B context is rejected by WITH CHECK",
+        "attempting UPDATE of tenant A ticket while in tenant B context affects zero rows",
+        "attempting DELETE of tenant A ticket while in tenant B context affects zero rows",
+        "session variable is scoped to the transaction \u2014 next query has no context",
+        "cross-tenant ticket lookup by id returns empty (not 404 with a leak)"
+      ]
+    },
+    {
+      "file": "packages/backend/src/common/database/schema/__tests__/schema.spec.ts",
+      "name": "schema.spec",
+      "moduleDir": "schema",
+      "describes": [
+        "Database Schema",
+        "all tables are exported from barrel",
+        "tenants table",
+        "agents table",
+        "tickets table",
+        "conversations table",
+        "attachments table",
+        "agent_groups join table",
+        "ticket_tags join table",
+        "api_keys table",
+        "audit_logs table",
+        "notifications table",
+        "refresh_tokens table",
+        "custom_field_definitions table",
+        "tenant_id presence on tenant-scoped tables"
+      ],
+      "cases": [
+        "exports exactly 20 tables",
+        "has required columns",
+        "has all required columns",
+        "has tenant_id as not null",
+        "has all SLA tracking fields",
+        "has ticket_number column",
+        "has merge tracking field",
+        "has external conversation id",
+        "has custom_fields jsonb column",
+        "has required columns",
+        "has required columns",
+        "does not have updated_at (immutable)",
+        "has composite key columns",
+        "has composite key columns",
+        "has key security columns",
+        "does not have updated_at or deleted_at",
+        "has audit fields",
+        "is immutable (no updated_at or deleted_at)",
+        "has required columns",
+        "has required columns",
+        "has required columns"
+      ]
+    },
+    {
+      "file": "packages/backend/src/common/guards/__tests__/roles.guard.spec.ts",
+      "name": "roles.guard.spec",
+      "moduleDir": "guards",
+      "describes": [
+        "RolesGuard",
+        "no role metadata",
+        "admin-only endpoints",
+        "multi-role endpoints",
+        "missing / malformed user",
+        "role hierarchy"
+      ],
+      "cases": [
+        "allows any user when no roles metadata is set",
+        "allows any user when roles metadata is an empty array",
+        "allows admin",
+        "rejects agent (non-admin)",
+        "rejects viewer",
+        "rejects unknown role strings (no role escalation via typos)",
+        "allows admin and agent",
+        "rejects roles not in the allow list",
+        "rejects when user is missing from the request",
+        "rejects when user has no role field on JWT",
+        "rejects when role is null/undefined",
+        "rejects when role is a non-string type (injection attempt)",
+        "account_admin passes admin-only check",
+        "account_admin passes supervisor-only check",
+        "admin passes supervisor-only check",
+        "supervisor does NOT pass admin-only check",
+        "agent does NOT pass supervisor-only check"
+      ]
+    },
+    {
+      "file": "packages/backend/src/common/guards/__tests__/throttle.spec.ts",
+      "name": "throttle.spec",
+      "moduleDir": "guards",
+      "describes": [
+        "Throttle decorators"
+      ],
+      "cases": [
+        "AgentThrottle sets limit=100 / ttl=60000 on the agent tracker",
+        "WidgetThrottle sets a stricter limit=30 / ttl=60000 on the widget tracker",
+        "NoThrottle sets skip metadata (health checks etc.)",
+        "undecorated classes carry no throttle metadata",
+        "widget limit is strictly less than the agent limit (stricter by design)",
+        "rate-limit time windows are exactly one minute",
+        "AgentThrottle and WidgetThrottle do not clobber each other when stacked"
+      ]
+    },
+    {
+      "file": "packages/backend/src/common/utils/__tests__/cursor-pagination.spec.ts",
+      "name": "cursor-pagination.spec",
+      "moduleDir": "utils",
+      "describes": [
+        "cursor-pagination",
+        "encodeCursor",
+        "decodeCursor"
+      ],
+      "cases": [
+        "should encode cursor data to base64",
+        "should decode a valid cursor",
+        "should return null for invalid base64",
+        "should return null for valid base64 but invalid JSON",
+        "should return null for valid JSON missing required fields",
+        "should roundtrip correctly"
+      ]
+    },
+    {
+      "file": "packages/backend/src/common/utils/__tests__/sanitize-html.spec.ts",
+      "name": "sanitize-html.spec",
+      "moduleDir": "utils",
+      "describes": [
+        "sanitizeHtml \u2014 XSS prevention",
+        "block dangerous tags",
+        "strip event handler attributes",
+        "URL protocol filtering",
+        "obfuscated / encoded payloads",
+        "preserves safe formatting",
+        "edge cases"
+      ],
+      "cases": [
+        "removes <script> tags and their contents",
+        "removes <script> even with attributes",
+        "removes <style> blocks entirely (blocks CSS expression attacks)",
+        "removes <iframe> tags and contents",
+        "strips unknown/unsafe tags like <svg>, <img>, <object>",
+        "removes onclick",
+        "removes onerror/onload/onmouseover on allowed tags",
+        "preserves allowed href when event handlers are stripped alongside",
+        "strips javascript: URLs in href",
+        "strips javascript: URLs regardless of case",
+        "strips data: URIs with script content",
+        "strips base64-encoded data: URI payloads",
+        "allows http(s) and mailto URLs",
+        "strips unknown/vbscript: protocols",
+        "nested <scr<script>ipt> attack cannot reform into a script tag",
+        "HTML entity encoded script is rendered as inert text, not executed",
+        "mixed-case and whitespace script open tags are stripped",
+        "strips tags whose name contains a NULL byte and leaves only inert text",
+        "preserves NULL bytes in plain text but text is not executable",
+        "keeps bold, italic, underline, emphasis, strong",
+        "keeps lists, paragraphs, headings, blockquotes",
+        "keeps table structure and colspan/rowspan",
+        "keeps safe links with title and rel",
+        "returns empty string for empty input",
+        "returns plain text unchanged",
+        "handles malformed / unclosed tags without throwing"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/agent/__tests__/agent.service.spec.ts",
+      "name": "agent.service.spec",
+      "moduleDir": "agent",
+      "describes": [
+        "AgentService",
+        "list",
+        "findById",
+        "invite",
+        "update",
+        "deactivate",
+        "reactivate"
+      ],
+      "cases": [
+        "should return a list of agents without passwordHash",
+        "should return agent without passwordHash",
+        "should throw NotFoundException when agent not found",
+        "should create a new agent and return without passwordHash",
+        "should throw ConflictException when email exists",
+        "should update agent fields",
+        "should throw NotFoundException when agent not found",
+        "should deactivate an active agent",
+        "should throw BadRequestException when already deactivated",
+        "should reactivate a deactivated agent",
+        "should throw BadRequestException when already active"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/api-key/__tests__/api-key-security.spec.ts",
+      "name": "api-key-security.spec",
+      "moduleDir": "api-key",
+      "describes": [
+        "ApiKeyService \u2014 security",
+        "key generation",
+        "validation",
+        "revocation"
+      ],
+      "cases": [
+        "returns a raw key exactly once at create time with aidk_ prefix",
+        "generates highly unique keys across many iterations (entropy sanity)",
+        "list() returns only masked keys \u2014 never the full raw secret",
+        "rejects a key that does not start with aidk_ without hitting the DB",
+        "rejects a tampered key (correct prefix, wrong hash)",
+        "accepts a valid active key and updates lastUsedAt",
+        "revoked / inactive keys are excluded by the isActive filter",
+        "uses crypto.timingSafeEqual (constant-time) not == for hash compare",
+        "revokes a key by id and sets isActive=false and revokedAt",
+        "revoke throws NotFoundException when key does not exist"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/api-key/__tests__/api-key.service.spec.ts",
+      "name": "api-key.service.spec",
+      "moduleDir": "api-key",
+      "describes": [
+        "ApiKeyService",
+        "create",
+        "list",
+        "revoke",
+        "validate",
+        "key format"
+      ],
+      "cases": [
+        "should generate key with aidk_ prefix",
+        "should store SHA-256 hash, not the full key",
+        "should store last 4 characters",
+        "should return masked keys",
+        "should revoke an active key",
+        "should throw NotFoundException when key not found",
+        "should return null for invalid prefix",
+        "should validate a correct key and return tenant context",
+        "should return null for wrong key",
+        "should not match revoked keys (isActive filter)",
+        "should generate unique keys on each creation"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/attachment/__tests__/attachment.service.spec.ts",
+      "name": "attachment.service.spec",
+      "moduleDir": "attachment",
+      "describes": [
+        "AttachmentService",
+        "upload",
+        "uploadMany",
+        "getDownloadUrl",
+        "remove",
+        "linkToConversation"
+      ],
+      "cases": [
+        "uploads file and returns row with URL",
+        "rejects disallowed MIME types",
+        "rejects oversized files for agent context",
+        "rejects oversized files for widget context",
+        "allows video MIME types",
+        "allows audio MIME types",
+        "uploads multiple files",
+        "returns row with signed URL",
+        "throws NotFound on missing id",
+        "deletes from storage and DB",
+        "throws NotFound on missing id",
+        "updates conversation_id on each attachment"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/audit-log/__tests__/audit-log.service.spec.ts",
+      "name": "audit-log.service.spec",
+      "moduleDir": "audit-log",
+      "describes": [
+        "AuditLogService",
+        "log",
+        "listForEntity",
+        "computeDiff"
+      ],
+      "cases": [
+        "should create an audit log entry",
+        "should create entry without agentId",
+        "should return audit log entries for an entity",
+        "should return empty array when no entries exist",
+        "should compute field-level differences",
+        "should return empty diff when no fields changed"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/auth/__tests__/account-lockout.spec.ts",
+      "name": "account-lockout.spec",
+      "moduleDir": "auth",
+      "describes": [
+        "account lockout & brute-force protection"
+      ],
+      "cases": [
+        "increments the failed counter on wrong password",
+        "locks the account on the 5th wrong password for exactly 15 minutes",
+        "rejects the CORRECT password while the lockout window is active",
+        "allows login once the lockout window has expired, even with 5 prior failures",
+        "per-agent isolation: locking agent A does not affect agent B",
+        "wrong password and wrong email return the same",
+        "wrong tenant and wrong credentials return the same error (no tenant enumeration)",
+        "deactivated account returns ForbiddenException (distinct from invalid creds)"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/auth/__tests__/auth.service.spec.ts",
+      "name": "auth.service.spec",
+      "moduleDir": "auth",
+      "describes": [
+        "AuthService",
+        "login",
+        "refresh",
+        "logout",
+        "issueTokens"
+      ],
+      "cases": [
+        "should return tokens and agent info on successful login",
+        "should throw UnauthorizedException when tenant not found",
+        "should throw UnauthorizedException when agent not found",
+        "should throw ForbiddenException when account is deactivated",
+        "should throw ForbiddenException when account is locked",
+        "should throw UnauthorizedException on wrong password and increment failed attempts",
+        "should lock account after 5 failed attempts",
+        "should return new tokens for valid refresh token",
+        "should throw UnauthorizedException for invalid refresh token",
+        "should throw UnauthorizedException for expired refresh token",
+        "should revoke the refresh token",
+        "should create access token and refresh token"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts",
+      "name": "jwt-security.spec",
+      "moduleDir": "auth",
+      "describes": [
+        "JWT security",
+        "signature verification",
+        "payload / expiry enforcement",
+        "refresh token replay prevention"
+      ],
+      "cases": [
+        "rejects a token signed with a different secret",
+        "rejects a token with a tampered payload (modified tid)",
+        "rejects a token with algorithm",
+        "rejects an entirely malformed token",
+        "rejects an expired token",
+        "JwtStrategy.validate extracts sub/tid/role/name from the payload",
+        "JwtStrategy surfaces missing fields as undefined (downstream guards must reject)",
+        "accepts a well-formed, non-expired token",
+        "first refresh succeeds and rotates; second use of the same raw refresh token fails",
+        "refresh for deactivated agent is rejected",
+        "refresh token hash at rest is sha256, not the raw value"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/auth/__tests__/password-security.spec.ts",
+      "name": "password-security.spec",
+      "moduleDir": "auth",
+      "describes": [
+        "Password policy \u2014 RegisterDto",
+        "bcrypt hashing guarantees"
+      ],
+      "cases": [
+        "accepts an 8+ character password",
+        "rejects a 7-char password (below minimum)",
+        "rejects an empty password",
+        "rejects missing password",
+        "rejects a non-string password (type confusion attempt)",
+        "rejects an invalid admin email",
+        "produces hashes with the $2b$12$ cost prefix (>= 12 rounds)",
+        "different calls produce different hashes for the same password (unique salt)",
+        "bcrypt.compare is constant-time and returns true for matching password",
+        "cost factor below 12 would produce a different prefix \u2014 lock 12 as the floor"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/auth/__tests__/refresh-token-rotation.spec.ts",
+      "name": "refresh-token-rotation.spec",
+      "moduleDir": "auth",
+      "describes": [
+        "Refresh token rotation"
+      ],
+      "cases": [
+        "refresh returns a new access+refresh pair AND revokes the old token (rotation)",
+        "replaying a revoked token fails (lookup filter excludes revoked rows)",
+        "expired refresh token is rejected and auto-revoked on the way out",
+        "refresh for a deactivated agent is rejected",
+        "refresh for a soft-deleted agent is rejected",
+        "logout revokes the token (subsequent refresh must fail)",
+        "issueTokens stores the sha256 hash of the refresh token, never the raw value"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/automation/__tests__/automation.service.spec.ts",
+      "name": "automation.service.spec",
+      "moduleDir": "automation",
+      "describes": [
+        "AutomationService",
+        "CRUD",
+        "evaluateConditions",
+        "executeDispatchRules",
+        "executeObserverRules"
+      ],
+      "cases": [
+        "creates a rule",
+        "throws NotFound on update with missing id",
+        "deletes a rule",
+        "matches ALL conditions",
+        "fails ALL when one condition misses",
+        "matches ANY condition",
+        "evaluates is_not operator",
+        "evaluates contains operator",
+        "evaluates starts_with operator",
+        "returns actions from matching rules and updates stats",
+        "skips non-matching rules",
+        "fires ALL matching observer rules"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/canned-response/__tests__/canned-response.service.spec.ts",
+      "name": "canned-response.service.spec",
+      "moduleDir": "canned-response",
+      "describes": [
+        "CannedResponseService",
+        "create",
+        "findById",
+        "update",
+        "delete",
+        "substitutePlaceholders"
+      ],
+      "cases": [
+        "should create a shared canned response as admin",
+        "should create a personal canned response as agent",
+        "should throw ForbiddenException when agent tries to create shared",
+        "should return a canned response",
+        "should throw NotFoundException when not found",
+        "should allow admin to update shared response",
+        "should throw ForbiddenException when agent tries to update shared",
+        "should allow owner to update personal response",
+        "should throw ForbiddenException when non-owner tries to update personal",
+        "should allow admin to delete shared response",
+        "should allow owner to delete personal response",
+        "should replace contact.name and ticket.number placeholders",
+        "should handle missing context gracefully"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/channel/__tests__/email-ingest-flow.spec.ts",
+      "name": "email-ingest-flow.spec",
+      "moduleDir": "channel",
+      "describes": [
+        "Email ingest flow (PR 5b)",
+        "ChannelOutboundDispatcher"
+      ],
+      "cases": [
+        "creates a new ticket, contact, and conversation for a fresh inbound email",
+        "appends to an existing ticket when correlation returns a hit",
+        "passes subject token through correlation input so sender-mismatch can be rejected",
+        "sends outbound via the email adapter when an agent replies on an email ticket",
+        "returns null for non-email tickets (web_chat stays on realtime path)"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/channel/__tests__/webhook-idempotency.spec.ts",
+      "name": "webhook-idempotency.spec",
+      "moduleDir": "channel",
+      "describes": [
+        "WebhookIdempotencyService",
+        "claim",
+        "markProcessed",
+        "hasProcessed"
+      ],
+      "cases": [
+        "returns true when the event is new (row inserted)",
+        "returns false when the event already exists (conflict do nothing)",
+        "accepts null tenantId for pre-tenant-resolution claims",
+        "updates processed_at for the given event",
+        "returns true when a row exists",
+        "returns false when no row exists"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/channel/__tests__/webhook-replay.spec.ts",
+      "name": "webhook-replay.spec",
+      "moduleDir": "channel",
+      "describes": [
+        "Webhook replay / idempotency"
+      ],
+      "cases": [
+        "has a deterministic provider event identifier contract (expected shape)"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/channel/adapters/email/email-channel.adapter.spec.ts",
+      "name": "email-channel.adapter.spec",
+      "moduleDir": "email",
+      "describes": [
+        "EmailChannelAdapter",
+        "normalizeInbound",
+        "sendOutbound",
+        "verifyWebhook",
+        "onModuleInit",
+        "stripQuotes"
+      ],
+      "cases": [
+        "maps a single email to a single UnifiedMessage",
+        "includes CC recipients",
+        "extracts the subject token into channelMetadata and strips it from subject",
+        "passes external thread headers through",
+        "appends the subject token to the outbound subject",
+        "generates a messageId derived from the conversation id",
+        "passes inReplyTo and composes references chain",
+        "delegates the actual send to the provider",
+        "sends the correct recipient shape",
+        "delegates to the provider",
+        "self-registers with the channel registry",
+        "removes",
+        "removes the",
+        "removes runs of 3+ > prefixed lines",
+        "passes a clean body through unchanged",
+        "returns empty string for empty input"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/channel/adapters/email/providers/in-memory-email.provider.spec.ts",
+      "name": "in-memory-email.provider.spec",
+      "moduleDir": "providers",
+      "describes": [
+        "InMemoryEmailProvider",
+        "send",
+        "verifyWebhookSignature",
+        "parseWebhook",
+        "simulateInbound",
+        "enableAutoDelivery",
+        "clear"
+      ],
+      "cases": [
+        "captures the email into the outbox and returns an id",
+        "preserves FIFO order",
+        "drainOutbox empties the outbox",
+        "emits a sent event to subscribers",
+        "always returns true",
+        "parses a JSON array of InboundEmails",
+        "parses a single InboundEmail object as an array of one",
+        "returns an empty array for empty body",
+        "restores Buffer-serialized attachment bytes",
+        "emits an inbound event to subscribers",
+        "unsubscribing stops further delivery",
+        "emits a delivery event after send",
+        "empties the outbox and removes listeners"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/channel/adapters/web-chat.adapter.spec.ts",
+      "name": "web-chat.adapter.spec",
+      "moduleDir": "adapters",
+      "describes": [
+        "WebChatAdapter"
+      ],
+      "cases": [
+        "should have channel type web_chat",
+        "should self-register on module init",
+        "should normalize inbound message",
+        "should normalize inbound message with attachments",
+        "should send outbound message to session",
+        "should validate config"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/channel/channel-registry.spec.ts",
+      "name": "channel-registry.spec",
+      "moduleDir": "channel",
+      "describes": [
+        "ChannelRegistryService"
+      ],
+      "cases": [
+        "should register an adapter",
+        "should throw when registering duplicate adapter",
+        "should retrieve a registered adapter",
+        "should throw when getting unregistered adapter",
+        "should list supported channels",
+        "should return false for unregistered channel"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/channel/correlation/ticket-correlation.service.spec.ts",
+      "name": "ticket-correlation.service.spec",
+      "moduleDir": "correlation",
+      "describes": [
+        "TicketCorrelationService",
+        "subject_token strategy",
+        "external_in_reply_to strategy",
+        "external_references strategy",
+        "open_ticket_for_contact strategy",
+        "recent_closed_for_contact strategy",
+        "none"
+      ],
+      "cases": [
+        "returns high confidence when token matches and sender is valid",
+        "rejects with sender_mismatch when sender differs from contact",
+        "falls through on token_invalid (no ticket found)",
+        "matches a conversation by In-Reply-To",
+        "falls through when no conversation matches",
+        "walks references newest-first and returns the first match",
+        "returns the most recent non-terminal ticket on this channel",
+        "returns none when no open ticket and no recent resolved",
+        "matches a resolved ticket inside the reopen window",
+        "returns none when there is no signal at all"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/channel/email/subject-token.service.spec.ts",
+      "name": "subject-token.service.spec",
+      "moduleDir": "email",
+      "describes": [
+        "SubjectTokenService",
+        "generate",
+        "hashFor / hashToken",
+        "extractFromSubject",
+        "appendToSubject",
+        "stripFromSubject",
+        "construction"
+      ],
+      "cases": [
+        "is deterministic for the same ticket id",
+        "produces an 8-char base62 token",
+        "differs across distinct ticket ids with no collisions over 1000 samples",
+        "changes when the secret changes",
+        "hashFor equals hashToken(generate)",
+        "produces a 64-char hex string",
+        "extracts from a plain subject",
+        "extracts from a Re: subject",
+        "extracts from a Fw: subject",
+        "extracts from nested Re: Re: Re: prefixes",
+        "returns null when no token is present",
+        "is tolerant of extra whitespace inside the marker",
+        "appends a marker when none is present",
+        "is idempotent for the same ticket",
+        "replaces a mismatched token with the correct one",
+        "removes the marker at the end",
+        "removes the marker at the start",
+        "removes the marker in the middle",
+        "returns the subject unchanged if no marker is present",
+        "throws in production when the secret is unset"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/company/__tests__/company.service.spec.ts",
+      "name": "company.service.spec",
+      "moduleDir": "company",
+      "describes": [
+        "CompanyService",
+        "create",
+        "findById",
+        "update",
+        "softDelete",
+        "findByDomain"
+      ],
+      "cases": [
+        "should create a company with domains",
+        "should return company with contacts count",
+        "should throw NotFoundException when company not found",
+        "should update company fields",
+        "should throw NotFoundException when company not found",
+        "should soft delete a company",
+        "should throw NotFoundException when company not found",
+        "should return company matching domain",
+        "should return null when no company matches domain"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/contact/__tests__/contact.service.spec.ts",
+      "name": "contact.service.spec",
+      "moduleDir": "contact",
+      "describes": [
+        "ContactService",
+        "create",
+        "findById",
+        "update",
+        "softDelete",
+        "getTimeline"
+      ],
+      "cases": [
+        "should create contact with auto-association to company by email domain",
+        "should create contact without company when domain does not match",
+        "should return contact with company info",
+        "should throw NotFoundException when contact not found",
+        "should update contact name",
+        "should re-check company association when email changes",
+        "should throw NotFoundException when contact not found",
+        "should soft delete a contact",
+        "should throw NotFoundException when contact not found",
+        "should return tickets for a contact",
+        "should throw NotFoundException when contact not found"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/conversation/__tests__/conversation-cc-bcc.spec.ts",
+      "name": "conversation-cc-bcc.spec",
+      "moduleDir": "conversation",
+      "describes": [
+        "ConversationService.create \u2014 cc_emails / bcc_emails persistence"
+      ],
+      "cases": [
+        "persists cc_emails into channel_metadata on an agent reply",
+        "persists both cc_emails and bcc_emails together",
+        "omits cc/bcc from channel_metadata entirely when neither is provided"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/conversation/__tests__/conversation.service.spec.ts",
+      "name": "conversation.service.spec",
+      "moduleDir": "conversation",
+      "describes": [
+        "ConversationService",
+        "create",
+        "listForTicket",
+        "createSystemMessage"
+      ],
+      "cases": [
+        "should create a reply conversation",
+        "should set sla_first_response_at on first agent reply",
+        "should NOT set sla_first_response_at if already set",
+        "should auto-reopen resolved ticket on customer reply",
+        "should create a note conversation",
+        "should throw NotFoundException when ticket not found",
+        "should return conversations in chronological order",
+        "should throw NotFoundException when ticket not found",
+        "should create a system message"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/conversation/__tests__/create-conversation-dto.spec.ts",
+      "name": "create-conversation-dto.spec",
+      "moduleDir": "conversation",
+      "describes": [
+        "CreateConversationDto \u2014 cc_emails / bcc_emails"
+      ],
+      "cases": [
+        "accepts a reply with no cc/bcc at all",
+        "accepts an explicit empty cc_emails array",
+        "accepts a list of valid cc emails",
+        "accepts a list of valid bcc emails",
+        "rejects cc_emails that is not an array",
+        "rejects cc_emails containing an invalid email address",
+        "rejects bcc_emails containing an invalid email address",
+        "rejects cc_emails longer than 20 entries (ArrayMaxSize guard)",
+        "accepts exactly 20 cc_emails (upper bound inclusive)",
+        "rejects bcc_emails longer than 20 entries",
+        "accepts a reply with both cc and bcc populated together",
+        "rejects cc_emails with a numeric element (IsEmail each)",
+        "preserves rejection for a malformed email even when the list is otherwise short"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/custom-field/__tests__/custom-field.service.spec.ts",
+      "name": "custom-field.service.spec",
+      "moduleDir": "custom-field",
+      "describes": [
+        "CustomFieldService",
+        "create",
+        "findById",
+        "delete",
+        "validateCustomFields"
+      ],
+      "cases": [
+        "should create a custom field definition",
+        "should throw ConflictException when field name exists",
+        "should throw BadRequestException for dropdown without options",
+        "should return a field definition",
+        "should throw NotFoundException when not found",
+        "should soft delete a field definition",
+        "should validate dropdown value against options",
+        "should reject invalid dropdown value",
+        "should validate text field accepts strings",
+        "should reject non-string for text field",
+        "should validate number field",
+        "should reject non-number for number field",
+        "should validate checkbox field accepts boolean",
+        "should reject non-boolean for checkbox field",
+        "should validate date field accepts valid date string",
+        "should reject invalid date string",
+        "should throw for unknown custom field",
+        "should enforce required fields",
+        "should allow null value for non-required fields"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/group/__tests__/group.service.spec.ts",
+      "name": "group.service.spec",
+      "moduleDir": "group",
+      "describes": [
+        "GroupService",
+        "create",
+        "findById",
+        "softDelete",
+        "addAgent",
+        "removeAgent"
+      ],
+      "cases": [
+        "should create a new group",
+        "should return group with member count",
+        "should throw NotFoundException when group not found",
+        "should throw BadRequestException when deleting default group",
+        "should soft delete a non-default group",
+        "should throw NotFoundException when group not found",
+        "should add an agent to a group",
+        "should throw ConflictException when agent is already a member",
+        "should throw NotFoundException when group not found",
+        "should remove agent from group",
+        "should throw NotFoundException when membership not found"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/group/__tests__/round-robin-distribution.spec.ts",
+      "name": "round-robin-distribution.spec",
+      "moduleDir": "group",
+      "describes": [
+        "Round-robin distribution fairness"
+      ],
+      "cases": [
+        "distributes 99 tickets to a 3-agent group as 33/33/33",
+        "distributes 100 tickets to a 3-agent group as 34/33/33 (remainder to agent at index 0)",
+        "skipping deactivated agents does not break rotation",
+        "returns null when all agents are offline/deactivated",
+        "roundRobinIndex grows monotonically even past Number.MAX_SAFE_INTEGER boundaries"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/group/__tests__/round-robin.spec.ts",
+      "name": "round-robin.spec",
+      "moduleDir": "group",
+      "describes": [
+        "GroupService - Round Robin",
+        "getNextAssignee"
+      ],
+      "cases": [
+        "should return the first agent when index is 0",
+        "should return null when auto_assign is disabled",
+        "should return null when group not found",
+        "should return null when no active agents",
+        "should return null when no members in group",
+        "should wrap around with modular index",
+        "should skip deactivated agents and pick next active"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/realtime/agent.gateway.spec.ts",
+      "name": "agent.gateway.spec",
+      "moduleDir": "realtime",
+      "describes": [
+        "AgentGateway",
+        "handleConnection",
+        "handleTicketJoin",
+        "handleTicketLeave",
+        "handleAgentStatus",
+        "emitChatMessage",
+        "emitTicketUpdated",
+        "collision detection",
+        "hasOnlineAgents"
+      ],
+      "cases": [
+        "should reject connection without token",
+        "should reject connection with invalid JWT",
+        "should accept connection with valid JWT and join rooms",
+        "should join ticket room and emit collision",
+        "should leave ticket room and update collision",
+        "should track online agents",
+        "should emit to ticket room",
+        "should emit to tenant room",
+        "should detect multiple agents on same ticket",
+        "should return false for unknown tenant"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/realtime/chat.gateway.spec.ts",
+      "name": "chat.gateway.spec",
+      "moduleDir": "realtime",
+      "describes": [
+        "ChatGateway - Session Management"
+      ],
+      "cases": [
+        "should create a session and associate it with a tenant",
+        "should track ticket and contact on session update",
+        "should not return expired sessions",
+        "should extend activity on session access"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/realtime/realtime.e2e.spec.ts",
+      "name": "realtime.e2e.spec",
+      "moduleDir": "realtime",
+      "describes": [
+        "SessionService"
+      ],
+      "cases": [
+        "should create a session with unique ID",
+        "should retrieve an existing session",
+        "should return null for non-existent session",
+        "should update session properties",
+        "should delete a session",
+        "should create multiple independent sessions",
+        "should cleanup expired sessions"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/role/__tests__/role.service.spec.ts",
+      "name": "role.service.spec",
+      "moduleDir": "role",
+      "describes": [
+        "RoleService"
+      ],
+      "cases": [
+        "creates a custom role",
+        "lists roles",
+        "finds a role by ID",
+        "throws NotFound on missing role",
+        "updates a custom role",
+        "refuses to edit a system role",
+        "deletes a custom role",
+        "refuses to delete a system role"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/saved-view/__tests__/saved-view.service.spec.ts",
+      "name": "saved-view.service.spec",
+      "moduleDir": "saved-view",
+      "describes": [
+        "SavedViewService",
+        "create",
+        "findById",
+        "remove"
+      ],
+      "cases": [
+        "should create a personal view by default",
+        "should return view when agent owns it",
+        "should return shared view (agentId null) to any agent",
+        "should throw ForbiddenException for other agent personal view",
+        "should throw NotFoundException when missing",
+        "should forbid deleting system default view",
+        "should throw NotFoundException when missing"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/scenario/__tests__/scenario.service.spec.ts",
+      "name": "scenario.service.spec",
+      "moduleDir": "scenario",
+      "describes": [
+        "ScenarioService",
+        "CRUD",
+        "execute"
+      ],
+      "cases": [
+        "creates a scenario",
+        "lists active scenarios",
+        "updates a scenario",
+        "throws NotFound on update with missing id",
+        "deletes a scenario",
+        "throws NotFound on delete with missing id",
+        "applies property changes and note",
+        "throws NotFound on missing scenario",
+        "throws NotFound on missing ticket",
+        "throws BadRequest when actions are empty",
+        "adds and removes tags"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/sla/__tests__/business-hours.util.spec.ts",
+      "name": "business-hours.util.spec",
+      "moduleDir": "sla",
+      "describes": [
+        "computeBusinessDeadline",
+        "same-day computation",
+        "cross-day computation",
+        "cross-weekend computation",
+        "holiday handling",
+        "before business hours",
+        "after business hours",
+        "full business day computation",
+        "ADR-0005 example",
+        "computeElapsedBusinessMinutes"
+      ],
+      "cases": [
+        "should compute deadline within same business day",
+        "should compute deadline for partial hour",
+        "should handle zero duration",
+        "should span to next business day when hours overflow",
+        "should handle start at end of business day",
+        "should skip weekend days",
+        "should handle start on Saturday",
+        "should handle start on Sunday",
+        "should skip holidays",
+        "should skip consecutive holidays",
+        "should advance to business hours start when starting before",
+        "should advance to next business day when starting after hours",
+        "should handle full 8-hour business day",
+        "should handle more than one full business day",
+        "should correctly compute the Friday 4PM + 8h example",
+        "should compute elapsed minutes within same day",
+        "should compute elapsed minutes across days",
+        "should return 0 when end is before start",
+        "should skip weekends",
+        "should skip holidays"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/sla/__tests__/sla-timer.service.spec.ts",
+      "name": "sla-timer.service.spec",
+      "moduleDir": "sla",
+      "describes": [
+        "SlaTimerService \u2014 pause/resume edge cases"
+      ],
+      "cases": [
+        "pause immediately after create records ~0 elapsed business minutes",
+        "multiple pause/resume cycles accumulate elapsed minutes monotonically",
+        "resumed ticket does not overwrite slaFirstResponseDueAt if first response already met",
+        "resolution MET when the ticket is resolved before its deadline",
+        "resolution MISSED when the ticket is resolved after its deadline",
+        "onFirstResponse marks met=true when stamped before the deadline",
+        "onFirstResponse is a no-op if already met",
+        "resume with 0 policy priority targets silently no-ops (guard)"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/sla/__tests__/sla.service.spec.ts",
+      "name": "sla.service.spec",
+      "moduleDir": "sla",
+      "describes": [
+        "SlaService",
+        "createPolicy",
+        "findPolicyById",
+        "listPolicies",
+        "updatePolicy",
+        "deletePolicy",
+        "createBusinessHours",
+        "findBusinessHoursById",
+        "deleteBusinessHours"
+      ],
+      "cases": [
+        "should create a new SLA policy",
+        "should return a policy by id",
+        "should throw NotFoundException when policy not found",
+        "should return all policies",
+        "should update a policy",
+        "should throw NotFoundException when policy not found",
+        "should soft delete a policy",
+        "should throw BadRequestException when deleting default policy",
+        "should throw NotFoundException when policy not found",
+        "should create business hours",
+        "should return business hours by id",
+        "should throw NotFoundException when not found",
+        "should soft delete business hours",
+        "should throw BadRequestException when deleting default"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/tag/__tests__/tag-by-name.spec.ts",
+      "name": "tag-by-name.spec",
+      "moduleDir": "tag",
+      "describes": [
+        "TagService.addToTicketByName"
+      ],
+      "cases": [
+        "creates a new tag when the name is not yet taken and attaches it",
+        "finds an existing tag by name and does not create a duplicate",
+        "is idempotent when the ticket is already tagged with the same name",
+        "trims whitespace from the submitted name before lookup",
+        "throws when the name is an empty string",
+        "throws NotFoundException when the ticket does not exist",
+        "scopes the tag lookup by tenantId (tenant isolation)",
+        "uses onConflictDoNothing on the ticket_tags association insert"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/tag/__tests__/tag.service.spec.ts",
+      "name": "tag.service.spec",
+      "moduleDir": "tag",
+      "describes": [
+        "TagService",
+        "create",
+        "list",
+        "addToTicket",
+        "removeFromTicket",
+        "listForTicket"
+      ],
+      "cases": [
+        "should create a new tag",
+        "should throw ConflictException when tag name exists",
+        "should return all tags",
+        "should filter tags by search",
+        "should add a tag to a ticket",
+        "should throw ConflictException when tag already applied",
+        "should throw NotFoundException when ticket not found",
+        "should remove a tag from a ticket",
+        "should throw NotFoundException when association not found",
+        "should return tags for a ticket",
+        "should throw NotFoundException when ticket not found"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/tenant/__tests__/tenant.service.spec.ts",
+      "name": "tenant.service.spec",
+      "moduleDir": "tenant",
+      "describes": [
+        "TenantService",
+        "register"
+      ],
+      "cases": [
+        "should create tenant with all default resources and return tokens",
+        "should append random suffix when slug is taken",
+        "should hash password with 12 salt rounds",
+        "should call issueTokens to auto-login after registration"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/ticket/__tests__/auto-close-extra.spec.ts",
+      "name": "auto-close-extra.spec",
+      "moduleDir": "ticket",
+      "describes": [
+        "AutoCloseProcessor \u2014 survivability"
+      ],
+      "cases": [
+        "autoCloseJobId is stable (used for deduplication)",
+        "no-op when ticket was manually closed before the job fires",
+        "no-op when ticket was reopened (open) before the job fires",
+        "no-op when autoCloseAt has been pushed into the future (rescheduled)",
+        "no-op when ticket was soft-deleted while job was in flight (WHERE filter excludes it)",
+        "handles concurrent fire: second run sees cleared autoCloseAt and skips",
+        "records an audit entry with"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/ticket/__tests__/auto-close.processor.spec.ts",
+      "name": "auto-close.processor.spec",
+      "moduleDir": "ticket",
+      "describes": [
+        "AutoCloseProcessor"
+      ],
+      "cases": [
+        "closes a resolved ticket whose grace window has elapsed",
+        "skips when ticket not found",
+        "skips when ticket is no longer resolved",
+        "skips stale job when autoCloseAt is in the future",
+        "skips when autoCloseAt is null"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/ticket/__tests__/dto-validation.spec.ts",
+      "name": "dto-validation.spec",
+      "moduleDir": "ticket",
+      "describes": [
+        "CreateTicketDto",
+        "UpdateTicketDto",
+        "AssignTicketDto"
+      ],
+      "cases": [
+        "accepts a minimal valid payload",
+        "rejects missing subject",
+        "rejects empty subject",
+        "rejects contact_id that is not a UUID",
+        "rejects SQL-injection-like contact_id (",
+        "rejects status outside the allowed enum",
+        "rejects priority outside the allowed set",
+        "rejects source outside the allowed set",
+        "rejects assigned_agent_id that is not a UUID",
+        "rejects assigned_group_id that is not a UUID",
+        "rejects more than 20 tags (ArrayMaxSize guard)",
+        "rejects tags with a non-string element",
+        "accepts unicode subject (non-ASCII legitimate text)",
+        "rejects subject longer than 500 characters (matches DB varchar limit)",
+        "accepts subject exactly at the 500 character limit",
+        "accepts an empty update",
+        "rejects an invalid status value",
+        "rejects an invalid priority value",
+        "accepts valid status values",
+        "rejects non-UUID assigned_agent_id",
+        "accepts valid UUIDs for agent and group"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/ticket/__tests__/list-controller.spec.ts",
+      "name": "list-controller.spec",
+      "moduleDir": "ticket",
+      "describes": [
+        "TicketController.list \u2014 query parsing"
+      ],
+      "cases": [
+        "splits comma-separated status",
+        "splits comma-separated priority",
+        "splits comma-separated source",
+        "trims whitespace around CSV values and drops empties",
+        "treats an empty CSV as undefined (no filter)",
+        "assigned_agent_ids (plural) takes precedence over legacy assigned_agent_id",
+        "falls back to legacy assigned_agent_id when plural is absent",
+        "supports multiple legacy values via CSV in the singular param",
+        "assigned_group_ids plural takes precedence over singular",
+        "throws BadRequestException for invalid created_after",
+        "throws BadRequestException for invalid updated_before",
+        "accepts a valid ISO string for updated_after",
+        "throws BadRequestException for an unknown quick_filter value",
+        "accepts quick_filter=overdue and passes current_agent_id through",
+        "accepts quick_filter=mine and passes the current agent id",
+        "maps sort=sla_due to sla_resolution_due_at",
+        "leaves other sort values untouched",
+        "trims search whitespace and drops it when empty",
+        "forwards tag_ids as a parsed array"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/ticket/__tests__/list-filters.spec.ts",
+      "name": "list-filters.spec",
+      "moduleDir": "ticket",
+      "describes": [
+        "TicketService.list \u2014 new filter surface"
+      ],
+      "cases": [
+        "uses inArray for multi-value priority",
+        "uses inArray for multi-value source",
+        "uses inArray for multi-value assigned_agent_ids",
+        "uses inArray for multi-value assigned_group_ids",
+        "does NOT add a priority condition when the array is empty",
+        "uses inArray for status (regression from existing contract)",
+        "registers gte/lte for updated_after and updated_before",
+        "registers gte/lte for created_after and created_before",
+        "combines search with ilike on subject OR description",
+        "trims whitespace-only search to a no-op",
+        "quick_filter=overdue pushes isNotNull + lt + eq on SLA columns",
+        "quick_filter=due-today pushes a 24h window on slaResolutionDueAt",
+        "quick_filter=unassigned pushes isNull on assigned_agent_id",
+        "quick_filter=mine with a current agent id pushes eq on assigned_agent_id",
+        "quick_filter=mine without a current agent id does not bind the agent column",
+        "quick_filter=new-and-mine with a current agent id binds status whitelist + (new OR me)",
+        "quick_filter=new-and-mine without a current agent id falls back to status=new only",
+        "quick_filter=new-and-mine populates requester on each returned row",
+        "returns hasMore=false and empty data for an empty result set",
+        "pagination still works when multiple filters are combined",
+        "sort=sla_resolution_due_at orders by the SLA due column descending by default",
+        "order=asc wraps the sort column with asc()",
+        "limit is capped at 100 even when 500 is requested",
+        "default limit is 25 (26 requested under the hood)",
+        "attaches requester (id/name/email) from the contacts join to every returned row",
+        "nulls the requester when the contacts join returns no match"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/ticket/__tests__/pr-a-quick-wins.spec.ts",
+      "name": "pr-a-quick-wins.spec",
+      "moduleDir": "ticket",
+      "describes": [
+        "TicketController.list \u2014 new-and-mine quick filter"
+      ],
+      "cases": [
+        "accepts quick_filter=new-and-mine and forwards current_agent_id",
+        "rejects an unknown quick_filter after new-and-mine was added",
+        "still accepts legacy quick_filter values (mine) after the whitelist update"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/ticket/__tests__/soft-delete-restore.spec.ts",
+      "name": "soft-delete-restore.spec",
+      "moduleDir": "ticket",
+      "describes": [
+        "Soft Delete and Restore",
+        "softDelete",
+        "restore",
+        "list - soft-deleted records excluded",
+        "findById - soft-deleted records excluded"
+      ],
+      "cases": [
+        "should soft delete an existing ticket",
+        "should throw NotFoundException for non-existent ticket",
+        "should throw NotFoundException for already-deleted ticket",
+        "should restore a soft-deleted ticket",
+        "should throw NotFoundException for non-existent ticket",
+        "should throw BadRequestException if ticket is not deleted",
+        "should set deletedAt to null when restoring",
+        "should only return non-deleted tickets",
+        "should throw NotFoundException for soft-deleted ticket"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/ticket/__tests__/split-children.spec.ts",
+      "name": "split-children.spec",
+      "moduleDir": "ticket",
+      "describes": [
+        "TicketService \u2014 split & children",
+        "split",
+        "listChildren"
+      ],
+      "cases": [
+        "creates children with sequential ticket numbers",
+        "throws NotFound on missing parent",
+        "returns children ordered by ticketNumber",
+        "throws NotFound on missing ticket"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/ticket/__tests__/status-transitions.spec.ts",
+      "name": "status-transitions.spec",
+      "moduleDir": "ticket",
+      "describes": [
+        "ticket status transition matrix (exhaustive)"
+      ],
+      "cases": [
+        "closed is terminal \u2014 every outgoing transition is rejected",
+        "unknown",
+        "unknown",
+        "a ticket cannot transition to itself (no-op) via isValidTransition"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/ticket/__tests__/ticket-audit.service.spec.ts",
+      "name": "ticket-audit.service.spec",
+      "moduleDir": "ticket",
+      "describes": [
+        "TicketAuditService"
+      ],
+      "cases": [
+        "records an event, JSON-serializing from/to values",
+        "handles null from/to values without serialising",
+        "listForTicket applies limit/offset and orders desc"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/ticket/__tests__/ticket-merge-extra.spec.ts",
+      "name": "ticket-merge-extra.spec",
+      "moduleDir": "ticket",
+      "describes": [
+        "TicketService.merge \u2014 additional scenarios"
+      ],
+      "cases": [
+        "rejects merging a ticket into itself (same id)",
+        "rejects merge into a soft-deleted primary (NotFound because of isNull(deletedAt) filter)",
+        "rejects merging FROM a closed secondary ticket",
+        "allows merging FROM a resolved secondary ticket (not closed)",
+        "records a merged audit entry when an audit service is wired",
+        "cancels the auto-close job for the secondary when merging",
+        "setting mergedIntoTicketId persists on the secondary"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/ticket/__tests__/ticket-merge.spec.ts",
+      "name": "ticket-merge.spec",
+      "moduleDir": "ticket",
+      "describes": [
+        "TicketService - merge"
+      ],
+      "cases": [
+        "should throw NotFoundException when primary ticket not found",
+        "should throw NotFoundException when secondary ticket not found",
+        "should throw BadRequestException when merging ticket into itself",
+        "should throw BadRequestException when secondary ticket is closed",
+        "should perform merge operations (move conversations, close secondary, add notes)",
+        "should close the secondary ticket after merge",
+        "should create system notes for both tickets"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/ticket/__tests__/ticket.service.spec.ts",
+      "name": "ticket.service.spec",
+      "moduleDir": "ticket",
+      "describes": [
+        "TicketService",
+        "isValidTransition (PR-1 matrix)",
+        "create",
+        "update",
+        "reopen",
+        "markSpam / unmarkSpam",
+        "handleCustomerReply",
+        "SLA pause/resume timestamps on update",
+        "assign",
+        "softDelete",
+        "restore",
+        "list"
+      ],
+      "cases": [
+        "allows new -> open, spam, closed",
+        "rejects new -> pending/on_hold/resolved",
+        "allows open -> pending/on_hold/resolved/spam",
+        "rejects open -> closed (must go via resolved)",
+        "allows pending -> open/on_hold/resolved",
+        "rejects pending -> closed",
+        "allows on_hold -> open/resolved only",
+        "allows resolved -> open (reopen) and resolved -> closed",
+        "closed is terminal (no transitions allowed)",
+        "allows spam -> open only",
+        "defaults new tickets to status=new",
+        "throws NotFoundException when contact not found",
+        "updates status with a valid transition",
+        "rejects invalid status transition with helpful error mentioning states",
+        "rejects closed -> open via update (closed is terminal)",
+        "throws NotFoundException when ticket not found",
+        "reopens a resolved ticket, increments reopenCount, clears autoCloseAt",
+        "rejects reopen when ticket is not resolved",
+        "marks an open ticket as spam",
+        "refuses markSpam from invalid state (resolved)",
+        "unmarks spam back to open",
+        "refuses unmarkSpam when not in spam state",
+        "pending -> open (resume)",
+        "resolved within window -> reopen",
+        "closed ticket is not touched",
+        "open ticket just stamps lastCustomerReplyAt",
+        "open -> pending sets slaPausedAt and open -> pending -> open clears it",
+        "open -> resolved stamps slaResolutionAt and schedules autoCloseAt",
+        "assigns agent and group to ticket",
+        "throws NotFoundException when ticket not found",
+        "soft deletes a ticket",
+        "restores a soft-deleted ticket",
+        "throws BadRequestException when ticket is not deleted",
+        "returns paginated results with hasMore and nextCursor",
+        "returns hasMore false when fewer results than limit"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/ticket/__tests__/update-assignment-tags.spec.ts",
+      "name": "update-assignment-tags.spec",
+      "moduleDir": "ticket",
+      "describes": [
+        "TicketService.update \u2014 assignment + tags"
+      ],
+      "cases": [
+        "persists assigned_agent_id on PATCH",
+        "persists assigned_group_id on PATCH",
+        "sets assignedAgentId to null when the caller passes null (unassign)",
+        "records an",
+        "records an",
+        "records a",
+        "stamps firstAssignedAt the first time an agent is bound",
+        "does not restamp firstAssignedAt when it already exists",
+        "tags: replace flow clears existing then attaches new tags",
+        "tags: empty array clears all tags and does not insert anything new"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/ticket/__tests__/update-custom-fields.spec.ts",
+      "name": "update-custom-fields.spec",
+      "moduleDir": "ticket",
+      "describes": [
+        "TicketService.update \u2014 custom_fields merge"
+      ],
+      "cases": [
+        "merges new keys into the existing customFields map",
+        "overwrites existing keys",
+        "clears keys when the value is null",
+        "does not touch customFields when the key is omitted",
+        "handles missing existing.customFields (null)"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/ticket/__tests__/update-dto-allowlist.spec.ts",
+      "name": "update-dto-allowlist.spec",
+      "moduleDir": "ticket",
+      "describes": [
+        "UpdateTicketDto allowlist"
+      ],
+      "cases": [
+        "accepts assigned_agent_id as a UUID",
+        "accepts assigned_group_id as a UUID",
+        "rejects a non-UUID assigned_agent_id",
+        "rejects a non-UUID assigned_group_id",
+        "accepts explicit null for assigned_agent_id (unassign signal)",
+        "accepts explicit null for assigned_group_id (unassign signal)",
+        "accepts tags as an array of short strings",
+        "rejects tags with a non-string element",
+        "rejects more than 20 tags",
+        "rejects a tag longer than 50 characters",
+        "accepts a combined payload with status + agent + tags",
+        "still rejects unknown fields (guards against silent misuses)",
+        "accepts custom_fields as a plain object",
+        "accepts null values inside custom_fields (clear signal)",
+        "rejects custom_fields when it is not an object"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/ticket-form/__tests__/ticket-form.service.spec.ts",
+      "name": "ticket-form.service.spec",
+      "moduleDir": "ticket-form",
+      "describes": [
+        "TicketFormService"
+      ],
+      "cases": [
+        "creates a form",
+        "rejects when 50 forms exist",
+        "lists active forms",
+        "updates a form",
+        "throws NotFound on update with missing id",
+        "deletes a form",
+        "throws NotFound on delete with missing id"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/ticket-link/__tests__/ticket-link.service.spec.ts",
+      "name": "ticket-link.service.spec",
+      "moduleDir": "ticket-link",
+      "describes": [
+        "TicketLinkService",
+        "create",
+        "remove"
+      ],
+      "cases": [
+        "should create a link",
+        "should reject self-linking",
+        "should throw NotFoundException when source missing",
+        "should throw ConflictException when link exists",
+        "should throw NotFoundException when link missing",
+        "should remove link"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/ticket-todo/__tests__/ticket-todo.service.spec.ts",
+      "name": "ticket-todo.service.spec",
+      "moduleDir": "ticket-todo",
+      "describes": [
+        "TicketTodoService",
+        "list",
+        "create",
+        "update",
+        "remove",
+        "reorder"
+      ],
+      "cases": [
+        "returns items, total and completed count",
+        "throws NotFound when ticket missing",
+        "assigns position 0 when list is empty",
+        "assigns position max+1 when items exist",
+        "rejects blank title",
+        "throws NotFound when ticket missing",
+        "marks as done with completedAt + completedBy",
+        "clears completedAt when un-checking",
+        "does not re-stamp completedAt when already done",
+        "updates title",
+        "rejects blank title",
+        "throws NotFound on missing id",
+        "deletes existing",
+        "throws NotFound on missing id",
+        "rejects unknown ids",
+        "rejects empty ids",
+        "writes sequential positions"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/time-log/__tests__/time-log.service.spec.ts",
+      "name": "time-log.service.spec",
+      "moduleDir": "time-log",
+      "describes": [
+        "TimeLogService",
+        "list",
+        "create",
+        "update",
+        "remove"
+      ],
+      "cases": [
+        "should list entries and total minutes",
+        "should throw NotFoundException when ticket missing",
+        "should create an entry",
+        "should throw NotFoundException when ticket missing",
+        "should forbid editing another agent entry",
+        "should allow admin to edit any entry",
+        "should throw NotFoundException when entry missing",
+        "should remove entry when owned by agent",
+        "should throw NotFoundException when missing"
+      ]
+    },
+    {
+      "file": "packages/backend/src/modules/watcher/__tests__/watcher.service.spec.ts",
+      "name": "watcher.service.spec",
+      "moduleDir": "watcher",
+      "describes": [
+        "WatcherService",
+        "list",
+        "add",
+        "remove"
+      ],
+      "cases": [
+        "should return watchers joined with agents",
+        "should throw NotFoundException when ticket missing",
+        "should add a watcher",
+        "should return existing watcher when already watching",
+        "should throw NotFoundException when ticket missing",
+        "should remove a watcher",
+        "should throw NotFoundException when not watching"
+      ]
+    }
+  ],
+  "envRefs": [
+    {
+      "name": "BACKEND_PORT",
+      "source": "packages/backend/src/main.ts"
+    },
+    {
+      "name": "CORS_ORIGINS",
+      "source": "packages/backend/src/common/websocket/socket-io.adapter.ts"
+    },
+    {
+      "name": "DB_HOST",
+      "source": "packages/backend/src/common/database/__tests__/tenant-isolation.integration.spec.ts"
+    },
+    {
+      "name": "DB_NAME",
+      "source": "packages/backend/src/common/database/__tests__/tenant-isolation.integration.spec.ts"
+    },
+    {
+      "name": "DB_PASSWORD",
+      "source": "packages/backend/src/common/database/__tests__/tenant-isolation.integration.spec.ts"
+    },
+    {
+      "name": "DB_POOL_SIZE",
+      "source": "packages/backend/src/common/database/database.service.ts"
+    },
+    {
+      "name": "DB_PORT",
+      "source": "packages/backend/src/common/database/__tests__/tenant-isolation.integration.spec.ts"
+    },
+    {
+      "name": "DB_SYSTEM_PASSWORD",
+      "source": "packages/backend/src/common/database/__tests__/tenant-isolation.integration.spec.ts"
+    },
+    {
+      "name": "DB_SYSTEM_USER",
+      "source": "packages/backend/src/common/database/__tests__/tenant-isolation.integration.spec.ts"
+    },
+    {
+      "name": "DB_USER",
+      "source": "packages/backend/src/common/database/__tests__/tenant-isolation.integration.spec.ts"
+    },
+    {
+      "name": "EMAIL_FROM_ADDRESS",
+      "source": "packages/backend/src/modules/channel/channel-outbound-dispatcher.service.ts"
+    },
+    {
+      "name": "EMAIL_REPLY_ADDRESS",
+      "source": "packages/backend/src/modules/channel/channel-outbound-dispatcher.service.ts"
+    },
+    {
+      "name": "EMAIL_SUBJECT_TOKEN_SECRET",
+      "source": "packages/backend/src/modules/channel/__tests__/email-ingest-flow.spec.ts"
+    },
+    {
+      "name": "JWT_ACCESS_SECRET",
+      "source": "packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts"
+    },
+    {
+      "name": "NEXT_PUBLIC_API_URL",
+      "source": "packages/frontend/src/lib/api-client.ts"
+    },
+    {
+      "name": "NEXT_PUBLIC_SOCKET_URL",
+      "source": "packages/frontend/src/lib/socket-client.ts"
+    },
+    {
+      "name": "NODE_ENV",
+      "source": "packages/backend/src/modules/auth/auth.module.ts"
+    },
+    {
+      "name": "REDIS_HOST",
+      "source": "packages/backend/src/modules/sla/sla-timer.service.ts"
+    },
+    {
+      "name": "REDIS_PASSWORD",
+      "source": "packages/backend/src/modules/sla/sla-timer.service.ts"
+    },
+    {
+      "name": "REDIS_PORT",
+      "source": "packages/backend/src/modules/sla/sla-timer.service.ts"
+    },
+    {
+      "name": "REDIS_URL",
+      "source": "packages/backend/src/common/websocket/socket-io.adapter.ts"
+    },
+    {
+      "name": "S3_ACCESS_KEY",
+      "source": "packages/backend/src/common/storage/storage.service.ts"
+    },
+    {
+      "name": "S3_BUCKET",
+      "source": "packages/backend/src/common/storage/storage.service.ts"
+    },
+    {
+      "name": "S3_ENDPOINT",
+      "source": "packages/backend/src/common/storage/storage.service.ts"
+    },
+    {
+      "name": "S3_FORCE_PATH_STYLE",
+      "source": "packages/backend/src/common/storage/storage.service.ts"
+    },
+    {
+      "name": "S3_REGION",
+      "source": "packages/backend/src/common/storage/storage.service.ts"
+    },
+    {
+      "name": "S3_SECRET_KEY",
+      "source": "packages/backend/src/common/storage/storage.service.ts"
+    }
+  ],
+  "documents": [
+    {
+      "file": "docs/adr/ADR-0001-multi-tenancy-strategy.md",
+      "heading": "ADR-0001: Multi-tenancy Strategy",
+      "fields": {
+        "status": "Proposed",
+        "date": "2026-04-09",
+        "decision": "Shared Schema + PostgreSQL Row-Level Security"
+      },
+      "kind": "adr"
+    },
+    {
+      "file": "docs/adr/ADR-0002-channel-abstraction-architecture.md",
+      "heading": "ADR-0002: Channel Abstraction Architecture",
+      "fields": {
+        "status": "Proposed",
+        "date": "2026-04-09",
+        "decision": "Adapter Registry Pattern with Normalized Message Model"
+      },
+      "kind": "adr"
+    },
+    {
+      "file": "docs/adr/ADR-0003-real-time-architecture.md",
+      "heading": "ADR-0003: Real-time Architecture",
+      "fields": {
+        "status": "Proposed",
+        "date": "2026-04-09",
+        "decision": "Socket.io with Redis Sharded Pub/Sub Adapter"
+      },
+      "kind": "adr"
+    },
+    {
+      "file": "docs/adr/ADR-0004-custom-fields-system.md",
+      "heading": "ADR-0004: Custom Fields System",
+      "fields": {
+        "status": "Proposed",
+        "date": "2026-04-09",
+        "decision": "JSONB Column with CustomFieldDefinition Metadata Table"
+      },
+      "kind": "adr"
+    },
+    {
+      "file": "docs/adr/ADR-0005-sla-timer-engine.md",
+      "heading": "ADR-0005: SLA Timer Engine",
+      "fields": {
+        "status": "Proposed",
+        "date": "2026-04-09",
+        "decision": "BullMQ Delayed Jobs with Database-Computed Business Hours"
+      },
+      "kind": "adr"
+    },
+    {
+      "file": "docs/design-doc.md",
+      "heading": "ai-desk Phase 1: Design Document",
+      "fields": {
+        "status": "Proposed",
+        "date": "2026-04-09"
+      },
+      "kind": "doc"
+    },
+    {
+      "file": "docs/docker-and-ci.md",
+      "heading": "Docker images and CI/CD",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/freshdesk-parity-gap-analysis.md",
+      "heading": "Freshdesk Parity Gap Analysis \u2014 ai-desk Customer Support Module",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/_overview-work-plan.md",
+      "heading": "Overall Design Document: ai-desk Phase 1",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-backend-task-01.md",
+      "heading": "Task A.1: Monorepo scaffold and tooling setup",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-backend-task-02.md",
+      "heading": "Task A.2: Docker Compose and dev infrastructure",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-backend-task-03.md",
+      "heading": "Task A.3: Shared package with types and constants",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-backend-task-04.md",
+      "heading": "Task A.4: Database schema with Drizzle ORM",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-backend-task-05.md",
+      "heading": "Task A.5: RLS policies and tenant context interceptor",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-backend-task-06.md",
+      "heading": "Task A.6: Auth module (login, JWT, refresh)",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-backend-task-07.md",
+      "heading": "Task A.7: Tenant registration with default setup",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-backend-task-08.md",
+      "heading": "Task B.1: Contact and Company CRUD with auto-association",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-backend-task-09.md",
+      "heading": "Task B.2: Group CRUD and agent-group management",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-backend-task-10.md",
+      "heading": "Task B.3: Ticket CRUD with all fields and lifecycle",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-backend-task-11.md",
+      "heading": "Task B.4: Conversation CRUD (replies and notes)",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-backend-task-12.md",
+      "heading": "Task B.5: Audit log service",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-backend-task-13.md",
+      "heading": "Task B.6: Tags CRUD and ticket tagging",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-backend-task-14.md",
+      "heading": "Task B.7: Cursor-based pagination for ticket listing",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-backend-task-15.md",
+      "heading": "Task C.1: Socket.io server setup with Redis sharded adapter",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-backend-task-16.md",
+      "heading": "Task C.2: Chat gateway for widget connections",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-backend-task-17.md",
+      "heading": "Task C.3: Agent gateway for workspace connections",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-backend-task-18.md",
+      "heading": "Task C.4: Channel abstraction layer and WebChat adapter",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-backend-task-20.md",
+      "heading": "Task C.6: End-to-end message flow verification",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-backend-task-29.md",
+      "heading": "Task E.1: SLA policy and business hours CRUD",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-backend-task-30.md",
+      "heading": "Task E.2: SLA timer engine with BullMQ",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-backend-task-32.md",
+      "heading": "Task E.4: Round-robin auto-assignment",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-backend-task-33.md",
+      "heading": "Task E.5: Canned responses CRUD",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-backend-task-34.md",
+      "heading": "Task E.6: Custom fields definition and rendering",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-backend-task-35.md",
+      "heading": "Task E.7: API key management",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-backend-task-37.md",
+      "heading": "Task F.1: Rate limiting",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-backend-task-38.md",
+      "heading": "Task F.2: Error handling and edge cases",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-backend-task-39.md",
+      "heading": "Task F.3: Soft deletes and restore",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-backend-task-40.md",
+      "heading": "Task F.4: Ticket merge",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-backend-task-42.md",
+      "heading": "Task F.6: Performance profiling and bundle optimization",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-backend-task-43.md",
+      "heading": "Task F.7: Security review",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-backend-task-44.md",
+      "heading": "Task F.8: Final integration test and sign-off",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-frontend-task-21.md",
+      "heading": "Task D.1: Next.js application shell",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-frontend-task-22.md",
+      "heading": "Task D.2: Auth pages (login and register)",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-frontend-task-23.md",
+      "heading": "Task D.3: Inbox page with filters, sorting, and real-time updates",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-frontend-task-24.md",
+      "heading": "Task D.4: Ticket detail view with conversation thread",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-frontend-task-25.md",
+      "heading": "Task D.5: Collision detection in ticket view",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-frontend-task-26.md",
+      "heading": "Task D.6: Live chat integration in ticket view",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-frontend-task-27.md",
+      "heading": "Task D.7: Agent dashboard page",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-frontend-task-28.md",
+      "heading": "Task D.8: Contact and Company management pages",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-frontend-task-31.md",
+      "heading": "Task E.3: SLA visual indicators in frontend",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-frontend-task-36.md",
+      "heading": "Task E.8: Admin settings pages",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-frontend-task-41.md",
+      "heading": "Task F.5: Accessibility audit and fixes",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-phaseA-completion.md",
+      "heading": "Phase A Completion: Foundation Verification",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-phaseB-completion.md",
+      "heading": "Phase B Completion: Ticket Core Verification",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-phaseC-completion.md",
+      "heading": "Phase C Completion: Real-time + Widget Verification",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-phaseD-completion.md",
+      "heading": "Phase D Completion: Agent Workspace Verification",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-phaseE-completion.md",
+      "heading": "Phase E Completion: SLA + Groups + Settings Verification",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-phaseF-completion.md",
+      "heading": "Phase F Completion: Polish + Hardening Verification",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/tasks/work-plan-widget-task-19.md",
+      "heading": "Task C.5: Widget application (Vite + vanilla TypeScript)",
+      "fields": {},
+      "kind": "doc"
+    },
+    {
+      "file": "docs/plans/work-plan.md",
+      "heading": "ai-desk Phase 1: Work Plan",
+      "fields": {
+        "status": "Active"
+      },
+      "kind": "doc"
+    },
+    {
+      "file": "docs/prd.md",
+      "heading": "Product Requirements Document: ai-desk",
+      "fields": {
+        "status": "Draft"
+      },
+      "kind": "doc"
+    },
+    {
+      "file": "docs/ui-spec.md",
+      "heading": "UI Specification: ai-desk",
+      "fields": {
+        "status": "Draft"
+      },
+      "kind": "doc"
+    }
+  ],
+  "fileCounts": {
+    ".ts": 312,
+    ".tsx": 154,
+    ".md": 64,
+    ".json": 13,
+    ".sql": 4,
+    ".yml": 3,
+    ".mjs": 2,
+    ".yaml": 2,
+    ".css": 1,
+    ".example": 1,
+    ".html": 1
+  },
+  "fileTotal": 564,
+  "statistics": {
+    "packages": 4,
+    "dependencies": 61,
+    "moduleDirs": 28,
+    "routes": 161,
+    "tables": 34,
+    "testSuites": 69,
+    "envRefs": 27,
+    "documents": 62
+  },
+  "repository": "/tmp/ai-desk-before",
+  "vocabularyVersion": "1.1.0",
+  "origin": "O-mechanical-extraction",
+  "note": "Mechanical Engineering Model. Facts about what the repository contains. Nothing here is named as engineering knowledge \u2014 that is Interpretive Discovery (ADR-0108).",
+  "digest": "01087455d80543f2"
+}
