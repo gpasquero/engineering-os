@@ -1,0 +1,136 @@
+{
+  "formatVersion": "1.0.0",
+  "metamodelVersion": "0.4.0-skeleton",
+  "project": "parallel-edges",
+  "note": "Canonical Knowledge Model. Every edge was asserted; none inferred (ADR-0044, ADR-0061). Serializations are projections of this model, not the model (ADR-0076).",
+  "nodes": [
+    {
+      "id": "ADR.Twice",
+      "type": "ADR",
+      "label": "A decision related twice to one invariant",
+      "family": "operational",
+      "position": null,
+      "description": "**Two predicates, one target.** `establishes` is what `Q-rationale` follows;\n`references` is the parallel edge that must not be mistaken for it.",
+      "provenance": {
+        "source": "adr.md"
+      }
+    },
+    {
+      "id": "Artifact.Impl",
+      "type": "Artifact",
+      "label": "Implementation",
+      "family": "descriptive",
+      "position": null,
+      "description": "Two predicates, one target. `Q-tests` follows `validates` only.",
+      "provenance": {
+        "source": "impl.md"
+      }
+    },
+    {
+      "id": "Concept.Target",
+      "type": "Concept",
+      "label": "Target concept",
+      "family": "descriptive",
+      "position": null,
+      "description": "Reached by two predicates from one artifact.",
+      "provenance": {
+        "source": "concept.md"
+      }
+    },
+    {
+      "id": "Invariant.Both",
+      "type": "Invariant",
+      "label": "An invariant reached by two predicates",
+      "family": "descriptive",
+      "position": null,
+      "description": "Two different edges arrive here from the same node.",
+      "provenance": {
+        "source": "inv.md"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "ADR.Twice",
+      "predicate": "establishes",
+      "to": "Invariant.Both",
+      "core": "establishes",
+      "category": "traceability"
+    },
+    {
+      "from": "ADR.Twice",
+      "predicate": "references",
+      "to": "Invariant.Both",
+      "core": "references",
+      "category": "structural"
+    },
+    {
+      "from": "Artifact.Impl",
+      "predicate": "references",
+      "to": "Concept.Target",
+      "core": "references",
+      "category": "structural"
+    },
+    {
+      "from": "Artifact.Impl",
+      "predicate": "validates",
+      "to": "Concept.Target",
+      "core": "validates",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.Both",
+      "predicate": "constrains",
+      "to": "Concept.Target",
+      "core": "governs",
+      "category": "behavioral"
+    }
+  ],
+  "vocabulary": {
+    "establishes": {
+      "category": "traceability",
+      "means": "inverse of established-by",
+      "inverse": "established-by"
+    },
+    "governs": {
+      "category": "behavioral",
+      "means": "A constrains B normatively",
+      "inverse": "governed-by"
+    },
+    "references": {
+      "category": "structural",
+      "means": "A points at B without owning it",
+      "inverse": "referenced-by"
+    },
+    "validates": {
+      "category": "behavioral",
+      "means": "A checks that B holds",
+      "inverse": "validated-by"
+    }
+  },
+  "statistics": {
+    "nodes": 4,
+    "edges": 5,
+    "byType": {
+      "ADR": 1,
+      "Artifact": 1,
+      "Concept": 1,
+      "Invariant": 1
+    },
+    "byFamily": {
+      "descriptive": 3,
+      "operational": 1
+    },
+    "byCategory": {
+      "behavioral": 2,
+      "structural": 2,
+      "traceability": 1
+    },
+    "byCoreType": {
+      "establishes": 1,
+      "governs": 1,
+      "references": 2,
+      "validates": 1
+    }
+  }
+}

@@ -70,81 +70,151 @@ function esc(s){const d=document.createElement('div');d.textContent=s==null?'':s
 function link(id){const o=byId[id];return `<a class="link" onclick="show('${id}')">${esc(o?o.label:id)}</a>`}
 function pill(c){return `<span class="pill ${esc(c)}">${esc(c)}</span>`}
 
-/* ---- the query engine, executing declared queries (ADR-0086) ---------- */
-/* The SAME declarations tools/ask.py executes. Two engines, one language.  */
+/* ---- the query engine (ADR-0086), result contract per ADR-0088 -------- */
+/* The SAME declarations tools/ask.py executes. Parity is a public invariant. */
 
-const QUERIES = {"Q-impact": {"id": "Q-impact", "question": "What breaks if I change this?", "subject": "required", "rationale": "Anything reachable by an incoming edge depends on this node, directly or transitively. This is the question ADR-0082 names first.\n", "steps": [{"traverse": {"direction": "in", "transitive": true}}]}, "Q-why": {"id": "Q-why", "question": "Why does this relationship exist?", "subject": "required", "output": "edges", "rationale": "Every edge carries its core type and category, and the model carries the vocabulary that defines them. The answer needs no access to the metamodel.\n", "steps": [{"traverse": {"direction": "both", "max-hops": 1}}]}, "Q-rationale": {"id": "Q-rationale", "question": "Which ADR established this, and does that decision still stand?", "subject": "required", "rationale": "An invariant whose establishing decision has been superseded is a finding that no document states.\n", "steps": [{"traverse": {"direction": "in", "core": "establishes", "node-type": "ADR"}}, {"with": {"superseded-by": {"direction": "out", "predicate": "superseded-by"}}}]}, "Q-provenance": {"id": "Q-provenance", "question": "Where did this come from?", "subject": "required", "rationale": "Provenance is carried by the model, not remembered. Source revision is not yet recorded; ADR-0064 wants (artifact-id, revision-id).\n", "steps": [{"select": {"subject": true}}]}, "Q-dependents": {"id": "Q-dependents", "question": "Which Capabilities depend on this?", "subject": "required", "rationale": "A Workflow's dependents are not all direct \u2014 a Capability may reach it only through a shared Skill.\n", "steps": [{"traverse": {"direction": "both", "transitive": true}}, {"keep": {"type": "Capability"}}]}, "Q-tests": {"id": "Q-tests", "question": "Which Tests must change?", "subject": "required", "rationale": "A test is an Artifact that `validates` another. No Test entity exists, and none is needed \u2014 it would introduce no relationship `validates` lacks.\n", "steps": [{"traverse": {"direction": "in", "transitive": true}}, {"keep": {"has-edge": {"direction": "out", "core": "validates"}}}]}, "Q-specifications": {"id": "Q-specifications", "question": "Which Specifications become inconsistent?", "subject": "required", "rationale": "A specification is an Artifact that `represents` a Concept. No Specification entity exists, for the same reason.\n", "steps": [{"traverse": {"direction": "in", "core": "represents"}}]}, "Q-status": {"id": "Q-status", "question": "What is the implementation status?", "subject": "required", "rationale": "Acceptance confers Active status; commits do not (ADR-0018). A revision with no AcceptanceRecord is not Active, whatever the repository says.\n", "steps": [{"traverse": {"direction": "out", "predicate": "has-active-revision", "or-self": true}}, {"with": {"accepted-by": {"direction": "in", "node-type": "AcceptanceRecord"}}}]}, "Q-unenforced": {"id": "Q-unenforced", "question": "Which Invariants have no enforcement point?", "subject": "none", "rationale": "`enforced-at` is zero-or-more by decision. The empty case is the finding \u2014 a rule the domain asserts and nothing checks.\n", "steps": [{"select": {"type": "Invariant"}}, {"reject": {"has-edge": {"direction": "out", "predicate": "enforced-at"}}}]}, "Q-unaccepted": {"id": "Q-unaccepted", "question": "Which revisions are not Active?", "subject": "none", "rationale": "The inverse of Q-status across the whole model. Answers \"what is in this repository that nobody has accepted?\" without reading any document.\n", "steps": [{"select": {"type": "ArtifactRevision"}}, {"reject": {"has-edge": {"direction": "in", "node-type": "AcceptanceRecord"}}}]}, "Q-orphan-concepts": {"id": "Q-orphan-concepts", "question": "Which Concepts does nothing realise or reference?", "subject": "none", "rationale": "A Concept nothing points at is either dead vocabulary or an undocumented dependency. Both are worth surfacing; neither is visible by reading.\n", "steps": [{"select": {"type": "Concept"}}, {"reject": {"has-edge": {"direction": "in"}}}]}};
+const QUERIES = {"Q-impact": {"id": "Q-impact", "question": "What breaks if I change this?", "subject": "required", "rationale": "Anything reachable by an incoming edge depends on this node, directly or transitively. This is the question ADR-0082 names first.\n", "steps": [{"traverse": {"direction": "in", "transitive": true}}]}, "Q-why": {"id": "Q-why", "question": "Why does this relationship exist?", "subject": "required", "output": "edges", "rationale": "Every edge carries its core type and category, and the model carries the vocabulary that defines them. The answer needs no access to the metamodel.\n", "steps": [{"traverse": {"direction": "both", "max-hops": 1}}]}, "Q-rationale": {"id": "Q-rationale", "question": "Which ADR established this, and does that decision still stand?", "subject": "required", "applies-to": ["Invariant", "Policy", "Concept", "Capability"], "rationale": "An invariant whose establishing decision has been superseded is a finding that no document states.\n", "steps": [{"traverse": {"direction": "in", "core": "establishes", "node-type": "ADR"}}, {"with": {"superseded-by": {"direction": "out", "predicate": "superseded-by"}}}]}, "Q-provenance": {"id": "Q-provenance", "question": "Where did this come from?", "subject": "required", "rationale": "Provenance is carried by the model, not remembered. Source revision is not yet recorded; ADR-0064 wants (artifact-id, revision-id).\n", "steps": [{"select": {"subject": true}}]}, "Q-dependents": {"id": "Q-dependents", "question": "Which Capabilities depend on this?", "subject": "required", "applies-to": ["Workflow", "Skill", "Artifact", "Concept"], "rationale": "A Workflow's dependents are not all direct \u2014 a Capability may reach it only through a shared Skill.\n", "steps": [{"traverse": {"direction": "both", "transitive": true}}, {"keep": {"type": "Capability"}}]}, "Q-tests": {"id": "Q-tests", "question": "Which Tests must change?", "subject": "required", "rationale": "A test is an Artifact that `validates` another. No Test entity exists, and none is needed \u2014 it would introduce no relationship `validates` lacks.\n", "steps": [{"traverse": {"direction": "in", "transitive": true}}, {"keep": {"has-edge": {"direction": "out", "core": "validates"}}}]}, "Q-specifications": {"id": "Q-specifications", "question": "Which Specifications become inconsistent?", "subject": "required", "applies-to": ["Concept", "Capability", "Invariant"], "rationale": "A specification is an Artifact that `represents` a Concept. No Specification entity exists, for the same reason.\n", "steps": [{"traverse": {"direction": "in", "core": "represents"}}]}, "Q-status": {"id": "Q-status", "question": "What is the implementation status?", "subject": "required", "applies-to": ["Artifact", "ArtifactRevision"], "rationale": "Acceptance confers Active status; commits do not (ADR-0018). A revision with no AcceptanceRecord is not Active, whatever the repository says.\n", "steps": [{"traverse": {"direction": "out", "predicate": "has-active-revision", "or-self": true}}, {"with": {"accepted-by": {"direction": "in", "node-type": "AcceptanceRecord"}}}]}, "Q-unenforced": {"id": "Q-unenforced", "question": "Which Invariants have no enforcement point?", "subject": "none", "rationale": "`enforced-at` is zero-or-more by decision. The empty case is the finding \u2014 a rule the domain asserts and nothing checks.\n", "steps": [{"select": {"type": "Invariant"}}, {"reject": {"has-edge": {"direction": "out", "predicate": "enforced-at"}}}]}, "Q-unaccepted": {"id": "Q-unaccepted", "question": "Which revisions are not Active?", "subject": "none", "rationale": "The inverse of Q-status across the whole model. Answers \"what is in this repository that nobody has accepted?\" without reading any document.\n", "steps": [{"select": {"type": "ArtifactRevision"}}, {"reject": {"has-edge": {"direction": "in", "node-type": "AcceptanceRecord"}}}]}, "Q-orphan-concepts": {"id": "Q-orphan-concepts", "question": "Which Concepts does nothing realise or reference?", "subject": "none", "rationale": "A Concept nothing points at is either dead vocabulary or an undocumented dependency. Both are worth surfacing; neither is visible by reading.\n", "steps": [{"select": {"type": "Concept"}}, {"reject": {"has-edge": {"direction": "in"}}}]}};
+const MAX_DEPTH = 16, MAX_RESULTS = 1000;
 
 function edgesOf(id, dir){
-  const o = out(id).map(e => [e, e.to]), i = inc(id).map(e => [e, e.from]);
+  const o = out(id).map(e => [e, e.to, 'out']), i = inc(id).map(e => [e, e.from, 'in']);
   return dir === 'out' ? o : dir === 'in' ? i : o.concat(i);
 }
-function edgeMatches(e, other, s){
-  if (s.predicate && e.predicate !== s.predicate) return false;
-  if (s.core && e.core !== s.core) return false;
-  if (s.category && e.category !== s.category) return false;
-  if (s['node-type'] && (byId[other]||{}).type !== s['node-type']) return false;
-  return true;
+function matchEdge(e, other, s){
+  const why = [];
+  for (const f of ['predicate','core','category']) {
+    if (s[f] != null) { if (e[f] !== s[f]) return null; why.push(f + '=' + e[f]); }
+  }
+  if (s['node-type'] != null) {
+    const a = (byId[other]||{}).type;
+    if (a !== s['node-type']) return null;
+    why.push('node-type=' + a);
+  }
+  return why.length ? why : ['any'];
 }
 function mkRow(id, extra){
   const n = byId[id] || {};
   return Object.assign({id, type: n.type, label: n.label}, extra || {});
 }
+function hop(e, other, dir, why){
+  return {from: e.from, predicate: e.predicate, to: e.to, core: e.core,
+          category: e.category, direction: dir, matched: why, reached: other};
+}
+function pathKey(p){ return JSON.stringify([p.map(h => h.predicate), p.map(h => h.reached)]) }
+/* Codepoint order, NOT localeCompare: the Python engine sorts by codepoint and
+   parity is a public invariant (ADR-0088 §7). */
+function cmp(a, b){ return a < b ? -1 : a > b ? 1 : 0 }
 function hasEdge(id, s){
-  return edgesOf(id, s.direction || 'out').some(([e, o]) => edgeMatches(e, o, s));
+  return edgesOf(id, s.direction || 'out').some(([e, o]) => matchEdge(e, o, s) !== null);
 }
 function rowMatches(r, s){
-  if (s.type) return r.type === s.type;
-  if (s['has-edge']) return hasEdge(r.id, s['has-edge']);
-  return false;
+  if (s.type != null) return r.type === s.type;
+  return hasEdge(r.id, s['has-edge']);
 }
 const OPS = {
-  select(rows, s, subject){
-    if (s.all) return CKM.nodes.map(n => mkRow(n.id));
-    if (s.subject) return byId[subject] ? [mkRow(subject)] : [];
-    if (s.id) return byId[s.id] ? [mkRow(s.id)] : [];
-    if (s.type) return CKM.nodes.filter(n => n.type === s.type).map(n => mkRow(n.id));
+  select(rows, s, ctx){
+    const mk = id => mkRow(id, {hops: 0, origin: id, path: []});
+    if (s.all) return CKM.nodes.map(n => mk(n.id));
+    if (s.subject) return byId[ctx.subject] ? [mk(ctx.subject)] : [];
+    if (s.id) return byId[s.id] ? [mk(s.id)] : [];
+    if (s.type) return CKM.nodes.filter(n => n.type === s.type).map(n => mk(n.id));
     return rows;
   },
-  traverse(rows, s, subject){
-    const starts = rows.length ? rows.map(r => r.id) : (byId[subject] ? [subject] : []);
-    const dir = s.direction || 'out', origin = new Set(starts);
-    const seen = new Map(), queue = starts.map(x => [x, 0, null]);
+  traverse(rows, s, ctx){
+    const starts = rows.length ? rows.map(r => r.id)
+                               : (byId[ctx.subject] ? [ctx.subject] : []);
+    const dir = s.direction || 'out';
+    const cap = ctx.maxDepth;
+    const limit = Math.min((s.transitive ? cap : (s['max-hops'] || 1)) || 1, cap);
+    const origin = new Set(starts), best = new Map();
+    const queue = starts.map(x => [x, x, 0, []]);
+    let truncated = false;
     while (queue.length) {
-      const [id, hops, via] = queue.shift();
-      if (!s.transitive && hops >= (s['max-hops'] || 1)) continue;
-      for (const [e, other] of edgesOf(id, dir)) {
-        if (!edgeMatches(e, other, s) || origin.has(other) || seen.has(other)) continue;
-        seen.set(other, mkRow(other, {hops: hops + 1, via: via || e.predicate}));
-        queue.push([other, hops + 1, via || e.predicate]);
+      const [id, start, hops, path] = queue.shift();
+      if (hops >= limit) {
+        if (s.transitive && edgesOf(id, dir).length && hops >= cap) truncated = true;
+        continue;
+      }
+      for (const [e, other, edir] of edgesOf(id, dir)) {
+        const why = matchEdge(e, other, s);
+        if (why === null || origin.has(other)) continue;
+        const cand = path.concat([hop(e, other, edir, why)]);
+        const prior = best.get(other);
+        if (prior && (prior.path.length < cand.length ||
+            (prior.path.length === cand.length && pathKey(prior.path) <= pathKey(cand)))) continue;
+        best.set(other, mkRow(other, {hops: cand.length, origin: start, path: cand,
+                                      via: cand[0].predicate}));
+        queue.push([other, start, cand.length, cand]);
       }
     }
-    const outRows = [...seen.values()].sort((a,b) => a.hops - b.hops || a.id.localeCompare(b.id));
-    if (!outRows.length && s['or-self'])
-      return starts.map(x => mkRow(x, {hops: 0, via: null}));
-    return outRows;
+    if (truncated) ctx.diagnostics.push({phase: 'projection', source: null,
+      message: 'traversal truncated at max-depth ' + cap, rule: ctx.query.id});
+    const res = [...best.values()].sort((a,b) => a.hops - b.hops || cmp(a.id, b.id));
+    if (!res.length && s['or-self'])
+      return starts.map(x => mkRow(x, {hops: 0, origin: x, path: [], via: null}));
+    return res;
   },
   keep(rows, s){ return rows.filter(r => rowMatches(r, s)) },
   reject(rows, s){ return rows.filter(r => !rowMatches(r, s)) },
   with(rows, s){
     rows.forEach(r => Object.entries(s).forEach(([name, sub]) => {
-      r[name] = edgesOf(r.id, sub.direction || 'out')
-        .filter(([e, o]) => edgeMatches(e, o, sub)).map(([, o]) => o);
+      const found = [];
+      for (const [e, other, edir] of edgesOf(r.id, sub.direction || 'out')) {
+        const why = matchEdge(e, other, sub);
+        if (why !== null) found.push({id: other, predicate: e.predicate,
+                                      direction: edir, matched: why});
+      }
+      r[name] = found.sort((a,b) => cmp(a.id, b.id) || cmp(a.predicate, b.predicate));
     }));
     return rows;
   }
 };
+function applicable(q, subject){
+  if (q.subject !== 'required') return null;
+  if (!subject) return 'this question requires a subject';
+  if (!byId[subject]) return `no node '${subject}' in this model`;
+  const allowed = q['applies-to'];
+  if (allowed && !allowed.includes(byId[subject].type))
+    return `applies to ${allowed.join(', ')}; ${subject} is a ${byId[subject].type}`;
+  return null;
+}
 function runQuery(q, subject){
+  const result = {query: q.id, question: q.question, subject: subject || null,
+                  status: 'ok', rows: [], edges: [], diagnostics: []};
+  const reason = applicable(q, subject);
+  if (reason) {
+    result.status = 'not-applicable';
+    result.diagnostics = [{phase: 'projection', message: reason, rule: q.id}];
+    return result;
+  }
+  const ctx = {subject, query: q, diagnostics: [], maxDepth: q['max-depth'] || MAX_DEPTH};
   let rows = [];
-  for (const step of q.steps)
-    for (const [name, spec] of Object.entries(step))
-      rows = OPS[name](rows, spec, subject);
-  if (q.output === 'edges') {
+  for (const step of q.steps) {
+    const name = Object.keys(step)[0];
+    rows = OPS[name](rows, step[name] || {}, ctx);
+  }
+  const limit = q['max-results'] || MAX_RESULTS;
+  if (rows.length > limit) {
+    ctx.diagnostics.push({phase: 'projection', source: null,
+      message: `result truncated at max-results ${limit} (${rows.length} found)`, rule: q.id});
+    rows = rows.slice(0, limit);
+  }
+  const mode = q.output || 'nodes';
+  if (mode === 'edges') {
+    const seen = new Set();
+    rows.forEach(r => r.path.forEach(h => {
+      const k = h.from + '|' + h.predicate + '|' + h.to;
+      if (!seen.has(k)) { seen.add(k); result.edges.push(h); }
+    }));
+  } else if (mode === 'induced-subgraph') {
     const ids = new Set(rows.map(r => r.id));
     if (subject) ids.add(subject);
-    return CKM.edges.filter(e => ids.has(e.from) && ids.has(e.to));
+    result.edges = CKM.edges.filter(e => ids.has(e.from) && ids.has(e.to));
   }
-  return rows;
+  result.rows = rows;
+  result.diagnostics = ctx.diagnostics;
+  if (!rows.length && !result.edges.length) result.status = 'empty';
+  return result;
 }
 
 /* ---- rendering ------------------------------------------------------- */
@@ -172,16 +242,35 @@ function renderEdges(edges){
          <td>${link(e.to)}</td></tr>`;
      }).join('') + '</table></div>';
 }
+function renderPath(path){
+  if (!path || !path.length) return '<span class="hop">start</span>';
+  return path.map(h => `<div class="hop"><code>${esc(h.from)}</code> &mdash;
+    <b>${esc(h.predicate)}</b> (${esc(h.direction)}) &rarr;
+    <code>${esc(h.to)}</code> <i>${esc(h.matched.join(', '))}</i></div>`).join('');
+}
+function renderResult(res){
+  if (res.status === 'not-applicable')
+    return `<p class="empty"><b>Not applicable.</b> ${esc(res.diagnostics[0].message)}</p>`;
+  const diag = res.diagnostics.length
+    ? `<p class="empty">${res.diagnostics.map(d => esc(d.message)).join('; ')}</p>` : '';
+  const body = (res.query && QUERIES[res.query] || {}).output === 'edges'
+    ? renderEdges(res.edges) : renderRows(res.rows);
+  return diag + body;
+}
 function renderRows(rows){
   if (!rows.length) return '<p class="empty">No results. That is often the finding.</p>';
   const extra = [...new Set(rows.flatMap(r => Object.keys(r)))]
-    .filter(k => !['id','type','label'].includes(k));
-  return '<div class="tbl-wrap"><table><tr><th>Node</th><th>Type</th>'
+    .filter(k => !['id','type','label','path','via','origin'].includes(k));
+  const cell = v => Array.isArray(v)
+    ? (v.length ? v.map(x => typeof x === 'object'
+        ? `${link(x.id)} <span class="hop">${esc(x.predicate)}</span>` : link(x)).join('<br/>')
+      : '<span class="empty">none</span>')
+    : (v == null ? '' : esc(v));
+  return '<div class="tbl-wrap"><table><tr><th>Node</th><th>Type</th><th>Path</th>'
    + extra.map(k => `<th>${esc(k)}</th>`).join('') + '</tr>'
-   + rows.map(r => `<tr><td>${link(r.id)}</td><td class="hop">${esc(r.type)}</td>`
-       + extra.map(k => `<td>${Array.isArray(r[k])
-           ? (r[k].length ? r[k].map(link).join(', ') : '<span class="empty">none</span>')
-           : (r[k] == null ? '' : esc(r[k]))}</td>`).join('') + '</tr>').join('')
+   + rows.map(r => `<tr><td>${link(r.id)}</td><td class="hop">${esc(r.type)}</td>
+       <td>${renderPath(r.path)}</td>`
+       + extra.map(k => `<td>${cell(r[k])}</td>`).join('') + '</tr>').join('')
    + '</table></div>';
 }
 function show(id, q){
@@ -193,7 +282,7 @@ function show(id, q){
   const bar = usable.map(x =>
     `<button class="${x.id === query ? 'on' : ''}" onclick="show('${id}','${x.id}')">${esc(x.question)}</button>`).join('');
   const active = QUERIES[query];
-  const result = runQuery(active, id);
+  const res = runQuery(active, id);
   main.innerHTML = `<h2>${esc(n.label)}</h2>
     <p><code>${esc(n.id)}</code> &middot; <span class="pill">${esc(n.type)}</span>
        <span class="pill">${esc(n.family)}</span>
@@ -202,19 +291,21 @@ function show(id, q){
     <div class="qbar">${bar}</div>
     <h3>${esc(active.question)}</h3>
     <div class="why">${esc((active.rationale || '').trim())}</div>
-    ${active.output === 'edges' ? renderEdges(result) : renderRows(result)}
-    <p class="hop">${result.length} row(s) &middot; <code>${esc(active.id)}</code> &middot;
+    ${renderResult(res)}
+    <p class="hop">status <b>${esc(res.status)}</b> &middot; ${res.rows.length} row(s),
+    ${res.edges.length} edge(s) &middot; <code>${esc(active.id)}</code> &middot;
     provenance: <code>${esc((n.provenance||{}).source)}</code></p>`;
   main.scrollTop = 0;
 }
 function showGlobal(qid){
   query = qid;
   document.querySelectorAll('button.node').forEach(b => b.classList.remove('sel'));
-  const q = QUERIES[qid], rows = runQuery(q, null);
+  const q = QUERIES[qid], res = runQuery(q, null);
   main.innerHTML = `<h2>${esc(q.question)}</h2>
     <div class="why">${esc((q.rationale || '').trim())}</div>
-    ${renderRows(rows)}
-    <p class="hop">${rows.length} row(s) &middot; <code>${esc(q.id)}</code></p>
+    ${renderResult(res)}
+    <p class="hop">status <b>${esc(res.status)}</b> &middot; ${res.rows.length} row(s)
+    &middot; <code>${esc(q.id)}</code></p>
     <p><a class="link" onclick="home()">&larr; back</a></p>`;
   main.scrollTop = 0;
 }

@@ -28,12 +28,37 @@ is a data change; adding an operator is an engine change and should be rare.
 | `traverse` | follow edges — `{direction, predicate, core, category, node-type, transitive, max-hops}` |
 | `keep` | retain rows matching `{type}` or `{has-edge}` |
 | `reject` | drop rows matching `{type}` or `{has-edge}` |
-| `with` | attach a named sub-traversal to every row |
+| `with` | attach a named sub-traversal to every row, reporting **the edge in hand** |
 
-`direction` is `out`, `in` or `both`. `transitive` follows edges to fixpoint and
-records `hops` and `via` — the first predicate on the path.
+`direction` is `out`, `in` or `both`. `transitive` follows edges to a bounded
+fixpoint.
 
-Output is `nodes` (default) or `edges`.
+## The result contract (`ADR-0088`)
+
+Every execution returns a **status**, and an empty result never hides an
+applicability error:
+
+| Status | Means |
+|---|---|
+| `ok` | valid query, results |
+| `empty` | valid query, no results — **often the finding** |
+| `not-applicable` | the query does not apply to this subject type |
+| `invalid` | the declaration or subject is malformed |
+
+**Every row carries its complete ordered path** — every traversed edge with its
+direction and the reason it matched — plus `hops` and `origin`. `via` remains as
+the first predicate of that path and is a convenience, never the explanation.
+
+Output modes: `nodes` (default) · `edges`, which returns **the edges the
+traversal actually walked** · `induced-subgraph`, which returns every edge
+between result nodes and is **never the default** because it includes
+relationships the query never followed.
+
+Bounded by default: **depth 16, results 1000**, both overridable per query, and
+**truncation emits a diagnostic**.
+
+`applies-to` declares which subject types a question supports. Omitting it means
+any type.
 
 ## The questions
 
@@ -61,6 +86,7 @@ queries:
   - id: Q-rationale
     question: Which ADR established this, and does that decision still stand?
     subject: required
+    applies-to: [Invariant, Policy, Concept, Capability]
     rationale: >
       An invariant whose establishing decision has been superseded is a finding
       that no document states.
@@ -81,6 +107,7 @@ queries:
   - id: Q-dependents
     question: Which Capabilities depend on this?
     subject: required
+    applies-to: [Workflow, Skill, Artifact, Concept]
     rationale: >
       A Workflow's dependents are not all direct — a Capability may reach it only
       through a shared Skill.
@@ -101,6 +128,7 @@ queries:
   - id: Q-specifications
     question: Which Specifications become inconsistent?
     subject: required
+    applies-to: [Concept, Capability, Invariant]
     rationale: >
       A specification is an Artifact that `represents` a Concept. No
       Specification entity exists, for the same reason.
@@ -110,6 +138,7 @@ queries:
   - id: Q-status
     question: What is the implementation status?
     subject: required
+    applies-to: [Artifact, ArtifactRevision]
     rationale: >
       Acceptance confers Active status; commits do not (ADR-0018). A revision
       with no AcceptanceRecord is not Active, whatever the repository says.
@@ -173,3 +202,10 @@ for every Concept. At 28 nodes this is irrelevant and it will not stay so.
 
 **`subject: none` queries ignore any subject given.** That is silent rather than
 an error.
+
+**`applies-to` is declared on four queries and omitted on the rest.** Omission
+means *any type*, which is right for `Q-impact` and lazy for `Q-tests` — nothing
+yet forces the question.
+
+**Paths are larger than the rows carrying them.** A five-hop result carries five
+edge records per row and nothing prunes them.

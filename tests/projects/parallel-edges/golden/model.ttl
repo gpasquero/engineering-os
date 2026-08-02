@@ -1,0 +1,33 @@
+@prefix ex:   <https://example.org/engineering-os/example#> .
+@prefix eos:  <https://example.org/engineering-os/metamodel#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+# A PROJECTION of the Canonical Knowledge Model (ADR-0072). Generated; do not edit.
+
+<https://example.org/engineering-os/example> a owl:Ontology ;
+    rdfs:comment "Layer B model expressed in the Layer A metamodel." ;
+    owl:imports <https://example.org/engineering-os/metamodel> .
+
+ex:ADR_Twice a eos:ADR ;
+    rdfs:label "A decision related twice to one invariant" ;
+    rdfs:comment "**Two predicates, one target.** `establishes` is what `Q-rationale` follows;" .
+
+ex:Artifact_Impl a eos:Artifact ;
+    rdfs:label "Implementation" ;
+    rdfs:comment "Two predicates, one target. `Q-tests` follows `validates` only." .
+
+ex:Concept_Target a eos:Concept ;
+    rdfs:label "Target concept" ;
+    rdfs:comment "Reached by two predicates from one artifact." .
+
+ex:Invariant_Both a eos:Invariant ;
+    rdfs:label "An invariant reached by two predicates" ;
+    rdfs:comment "Two different edges arrive here from the same node." .
+
+ex:ADR_Twice eos:establishes ex:Invariant_Both .
+ex:ADR_Twice eos:references ex:Invariant_Both .
+ex:Artifact_Impl eos:references ex:Concept_Target .
+ex:Artifact_Impl eos:validates ex:Concept_Target .
+ex:Invariant_Both eos:constrains ex:Concept_Target .

@@ -7,7 +7,9 @@
 Every fixture verifies:
 
     CKM  ·  OWL  ·  Explorer  ·  Graph  ·  deterministic rebuild  ·  diagnostics
-    ·  declared query results  ·  agreement between both query engines
+    ·  declared query results, status and paths
+    ·  rejection of malformed query declarations
+    ·  full-fidelity agreement between both query engines
 
 Golden outputs live in `tests/projects/<name>/golden/`. A change to any emitter
 that alters output shows up as a diff in every affected fixture.
@@ -93,10 +95,19 @@ def check(project, accept=False):
             bad.append(f"expected-queries names unknown query {qid!r}")
             continue
         subject = want.get("subject")
-        got = sorted(r.get("id") or f"{r['from']}>{r['to']}"
-                     for r in run_query(Model(ckm), query, subject))
-        if sorted(want.get("rows", [])) != got:
-            bad.append(f"{qid}({subject}): expected {sorted(want.get('rows', []))}, got {got}")
+        res = run_query(Model(ckm), query, subject)
+        got = [r["id"] for r in res["rows"]]
+        if want.get("rows") is not None and list(want["rows"]) != got:
+            bad.append(f"{qid}({subject}): expected rows {list(want['rows'])}, got {got}")
+        if want.get("status") and res["status"] != want["status"]:
+            bad.append(f"{qid}({subject}): expected status {want['status']!r}, "
+                       f"got {res['status']!r}")
+        if want.get("paths"):
+            paths = {r["id"]: [h["predicate"] for h in r["path"]] for r in res["rows"]}
+            for node, expect in want["paths"].items():
+                if paths.get(node) != list(expect):
+                    bad.append(f"{qid}({subject}) path to {node}: expected "
+                               f"{list(expect)}, got {paths.get(node)}")
 
     # deterministic rebuild
     again, _ = compile_project(project)
@@ -142,6 +153,13 @@ def main(argv):
         for b in bad:
             print(f"        {RED}{b}{OFF}")
             failures += 1
+
+    print()
+    schema = subprocess.run([sys.executable, str(ROOT / "tools/check-query-schema.py")],
+                            capture_output=True, text=True)
+    print("  " + schema.stdout.strip().splitlines()[-1])
+    if schema.returncode:
+        failures += 1
 
     print()
     engines = subprocess.run([sys.executable, str(ROOT / "tools/check-engines.py")],

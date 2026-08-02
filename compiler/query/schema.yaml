@@ -1,0 +1,54 @@
+# Grammar for a declared semantic query (ADR-0088 §4).
+# An unknown field FAILS. It is never silently ignored.
+
+query:
+  required: [id, question, subject, rationale, steps]
+  fields:
+    id:           {type: str,  pattern: "^Q-[a-z0-9-]+$"}
+    question:     {type: str}
+    subject:      {type: str,  enum: [required, none]}
+    applies-to:   {type: list, item: node-type}
+    rationale:    {type: str}
+    output:       {type: str,  enum: [nodes, edges, induced-subgraph]}
+    max-depth:    {type: posint}
+    max-results:  {type: posint}
+    steps:        {type: list}
+
+operators:
+  select:
+    fields:
+      all:     {type: bool}
+      subject: {type: bool}
+      id:      {type: str}
+      type:    {type: node-type}
+    exactly-one-of: [all, subject, id, type]
+  traverse:
+    fields:
+      direction:  {type: str, enum: [in, out, both]}
+      predicate:  {type: predicate}
+      core:       {type: core-type}
+      category:   {type: str, enum: [structural, behavioral, semantic, traceability]}
+      node-type:  {type: node-type}
+      transitive: {type: bool}
+      max-hops:   {type: posint}
+      or-self:    {type: bool}
+  keep:
+    fields:
+      type:     {type: node-type}
+      has-edge: {type: edge-spec}
+    exactly-one-of: [type, has-edge]
+  reject:
+    fields:
+      type:     {type: node-type}
+      has-edge: {type: edge-spec}
+    exactly-one-of: [type, has-edge]
+  with:
+    free-form: edge-spec
+
+edge-spec:
+  fields:
+    direction: {type: str, enum: [in, out, both]}
+    predicate: {type: predicate}
+    core:      {type: core-type}
+    category:  {type: str, enum: [structural, behavioral, semantic, traceability]}
+    node-type: {type: node-type}

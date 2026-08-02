@@ -16,7 +16,7 @@ same session the decision is made.
 > a rule exists; the rule that must be followed lives in a Policy under
 > `shared/policies/`. Agents consume policies; humans read ADRs for rationale.
 
-**Highest allocated ID: `ADR-0087`.** IDs are sequential and never reused.
+**Highest allocated ID: `ADR-0088`.** IDs are sequential and never reused.
 
 > This index table is a hand-maintained projection of ADR front matter. It is
 > listed in the transitional-debt register, `ISSUE-0037`.
@@ -182,6 +182,7 @@ Read these before designing anything that produces an artifact:
 | [ADR-0085](ADR-0085-question-driven-development.md) | **Work begins with questions, not entities** | accepted | — |
 | [ADR-0086](ADR-0086-query-engine-is-the-semantic-api.md) | **The query engine is the semantic API; every question is an executable query** | accepted | — |
 | [ADR-0087](ADR-0087-model-a-real-external-system.md) | **The next milestone is modeling one large external software system** | accepted | — |
+| [ADR-0088](ADR-0088-the-query-result-contract.md) | **The query result contract — path provenance, applicability, limits and parity** | accepted | — |
 
 ## Supersessions
 

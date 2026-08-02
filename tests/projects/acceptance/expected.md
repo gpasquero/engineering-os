@@ -13,6 +13,13 @@ expected-queries:
   Q-impact:
     subject: Actor.Reviewer
     rows: [AcceptanceRecord.1]
+    status: ok
+    paths:
+      AcceptanceRecord.1: [reviewed-by]
+  Q-status:
+    subject: Actor.Reviewer
+    status: not-applicable
+    rows: []
 ---
 **`expected-queries` pins the answers, not just the shape.** The first attempt
 declared `Q-impact(Actor.Reviewer)` as empty; it is not — changing the reviewer

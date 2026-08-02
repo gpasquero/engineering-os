@@ -30,6 +30,21 @@ Engineering Question → Required semantic capability
   → Metamodel extension (only if necessary) → Compiler → Explorer → Regression test
 ```
 
+## Completed — semantic API hardening
+
+`ADR-0088`. The query engine is part of the product contract, so its semantics
+were made precise **before** real-system findings depend on it.
+
+| Defect | Fixed |
+|---|---|
+| Path provenance reduced to one predicate | Rows carry the complete ordered path, every edge with direction and match reason |
+| Edge output returned an induced subgraph | `output: edges` returns what the traversal walked; `induced-subgraph` is explicit and never the default |
+| `with` could evaluate the wrong parallel edge | It evaluates the edge in hand; a fixture has two predicates between one pair of nodes |
+| Query declarations unvalidated | A schema; **12 malformed declarations, all rejected** |
+| Emptiness hid applicability errors | Four statuses: `ok`, `empty`, `not-applicable`, `invalid` |
+| Determinism and limits undefined | Cycles, ties, ordering, depth 16, results 1000, truncation diagnostics |
+| Parity compared only identifiers | Status, rows, paths, ordering, edges and diagnostics — **334 pairs** |
+
 ## Current milestone — model one large external software system
 
 `ADR-0087`. **Not a toy example. Not another Engineering OS repository.**
@@ -42,11 +57,30 @@ history, bugs and design decisions.
 > **Does Engineering OS reveal relationships that existing documentation
 > cannot?**
 
-**Recommended: Kubernetes** — KEPs are the only candidate whose design decisions
-are already an indexed, first-class corpus, which is what *which decision
-established this?* most needs. The choice is the Project Owner's.
+**Kubernetes**, confirmed by the Project Owner.
 
-**One subsystem modelled deeply beats the whole system modelled shallowly.**
+**One bounded, decision-rich subsystem, modelled deeply.** Not all of Kubernetes
+superficially. The subsystem must have multiple KEPs, source implementation,
+public documentation, tests, lifecycle or state transitions, known behavioural
+changes, and dependencies on other components.
+
+### Required questions for the external validation
+
+1. Which design decision introduced this behaviour?
+2. Which source components implement it?
+3. Which tests protect it?
+4. What changes if the behaviour changes?
+5. Which invariants or compatibility promises constrain it?
+6. Which later decisions superseded or refined the original decision?
+7. **What information was not discoverable from any single existing document?**
+
+> **The seventh is the primary proof-of-value result.** The first success
+> criterion is not repository size — it is whether Engineering OS can answer
+> questions that require connecting information currently scattered across KEPs,
+> documentation, source and tests.
+
+**Do not optimise the Explorer visually during this milestone.** The next product
+proof comes from the quality of the answers, not from interface polish.
 
 ## Delivered
 

@@ -53,6 +53,7 @@ ADRs answer "why".
 | [SESSION-0028](SESSION-0028-2026-08-02.md) | 2026-08-02 | B1 | `ACCEPT-0023`; **compiler refactored into modules**; `CanonicalKnowledgeModel` is Layer A (`ADR-0076`); **declarative validation** (`ADR-0077`); schema-validated parsing (`ADR-0078`); Explorer as primary interface (`ADR-0079`); **13 fixtures with golden outputs** |
 | [SESSION-0029](SESSION-0029-2026-08-02.md) | 2026-08-02 | slice | `ACCEPT-0024`; **the product is semantic answers** (`ADR-0080`); **CKM is the semantic IR** (`ADR-0081`); **the vertical slice replaces metamodel completion** (`ADR-0082`); declared registries (`ADR-0083`); **6 of 7 developer questions answered** |
 | [SESSION-0030](SESSION-0030-2026-08-02.md) | 2026-08-02 | usefulness | `ACCEPT-0025`; **prove-usefulness phase** (`ADR-0084`); **question-driven development** (`ADR-0085`); **the query engine is the semantic API** (`ADR-0086`); external-system milestone (`ADR-0087`); **11 declared queries, two engines verified to agree** |
+| [SESSION-0031](SESSION-0031-2026-08-02.md) | 2026-08-02 | usefulness | `ACCEPT-0026`; **semantic API hardening** (`ADR-0088`) — path provenance, traversed-edge output, parallel-edge correctness, declaration schema, applicability, bounded traversal, full-fidelity parity; **a real ordering divergence found between the engines** |
 
 ## Reading
 
