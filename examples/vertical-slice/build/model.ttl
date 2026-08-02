@@ -1,0 +1,178 @@
+@prefix ex:   <https://example.org/engineering-os/example#> .
+@prefix eos:  <https://example.org/engineering-os/metamodel#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+# A PROJECTION of the Canonical Knowledge Model (ADR-0072). Generated; do not edit.
+
+<https://example.org/engineering-os/example> a owl:Ontology ;
+    rdfs:comment "Layer B model expressed in the Layer A metamodel." ;
+    owl:imports <https://example.org/engineering-os/metamodel> .
+
+ex:ADR_004 a eos:ADR ;
+    rdfs:label "Orders are single-currency" ;
+    rdfs:comment "Superseded, and still readable. A superseded ADR is a correct record of what was" .
+
+ex:ADR_011 a eos:ADR ;
+    rdfs:label "Payment is settled synchronously at checkout" ;
+    rdfs:comment "**The decision that established the invariant.** This edge is what makes" .
+
+ex:AcceptanceRecord_014 a eos:AcceptanceRecord ;
+    rdfs:label "Acceptance of checkout r7" ;
+    rdfs:comment "Confers Active status. Commits do not." .
+
+ex:Actor_Customer a eos:Actor ;
+    rdfs:label "Customer" ;
+    rdfs:comment "Submits orders." .
+
+ex:Actor_Reviewer a eos:Actor ;
+    rdfs:label "Reviewer" ;
+    rdfs:comment "Decides at the gate and reviews acceptances." .
+
+ex:Artifact_CheckoutService a eos:Artifact ;
+    rdfs:label "Checkout service" ;
+    rdfs:comment "A stable logical identity with no lifecycle of its own." .
+
+ex:Artifact_CheckoutTests a eos:Artifact ;
+    rdfs:label "Checkout test suite" ;
+    rdfs:comment "Tests. Modelled as an Artifact that validates another and references the" .
+
+ex:Artifact_OrderingSpec a eos:Artifact ;
+    rdfs:label "Ordering specification" ;
+    rdfs:comment "A specification document. Becomes inconsistent when what it represents changes." .
+
+ex:Artifact_PaymentService a eos:Artifact ;
+    rdfs:label "Payment service" ;
+    rdfs:comment "Realises the refund capability." .
+
+ex:ArtifactRevision_Checkout_r7 a eos:ArtifactRevision ;
+    rdfs:label "Checkout service r7" ;
+    rdfs:comment "The unit that carries lifecycle state." .
+
+ex:ArtifactRevision_Payment_r3 a eos:ArtifactRevision ;
+    rdfs:label "Payment service r3" ;
+    rdfs:comment "**Not accepted.** No AcceptanceRecord reaches it, so it is not `Active`." .
+
+ex:BC_Ordering a eos:BoundedContext ;
+    rdfs:label "Ordering" ;
+    rdfs:comment "The boundary within which 'Order' means a customer purchase request." .
+
+ex:Capability_PlaceOrder a eos:Capability ;
+    rdfs:label "Place an order" ;
+    rdfs:comment "The system accepts an order and acknowledges it." .
+
+ex:Capability_Refund a eos:Capability ;
+    rdfs:label "Refund an order" ;
+    rdfs:comment "Reverses a settled Payment. **Depends on the checkout workflow** through the" .
+
+ex:Concept_Order a eos:Concept ;
+    rdfs:label "Order" ;
+    rdfs:comment "A customer's request to purchase goods, from submission until fulfilment." .
+
+ex:Concept_Payment a eos:Concept ;
+    rdfs:label "Payment" ;
+    rdfs:comment "An authorised transfer settling an Order." .
+
+ex:Evidence_OrderSchema a eos:Evidence ;
+    rdfs:label "order.sql lines 1-40" ;
+    rdfs:comment "Source reference. Directness rank 2." .
+
+ex:Evidence_PaymentTrace a eos:Evidence ;
+    rdfs:label "Production trace, checkout span" ;
+    rdfs:comment "Runtime observation. Directness rank 1 — the most direct kind." .
+
+ex:Gate_PaymentReview a eos:EngineeringGate ;
+    rdfs:label "Payment review gate" ;
+    rdfs:comment "Holds the questions asked of every payment change." .
+
+ex:Invariant_PaymentBeforeShipping a eos:Invariant ;
+    rdfs:label "An order cannot ship before payment clears" ;
+    rdfs:comment "Stated independently of what enforces it." .
+
+ex:Invariant_SingleCurrency a eos:Invariant ;
+    rdfs:label "An order has exactly one currency" ;
+    rdfs:comment "**No `enforced-at`.** Nothing records where this is checked, which is a finding" .
+
+ex:Issue_023 a eos:Issue ;
+    rdfs:label "Where is single-currency enforced?" ;
+    rdfs:comment "A recorded unknown, blocking a capability." .
+
+ex:Policy_PaymentChangesReviewed a eos:Policy ;
+    rdfs:label "Payment changes require review" ;
+    rdfs:comment "A GovernancePolicy, motivated by a recorded decision." .
+
+ex:Skill_SettlePayment a eos:Skill ;
+    rdfs:label "Settle payment" ;
+    rdfs:comment "Shared by checkout and refund." .
+
+ex:Skill_ValidateOrder a eos:Skill ;
+    rdfs:label "Validate an order" ;
+    rdfs:comment "Methodology with an explicit contract." .
+
+ex:Workflow_Checkout a eos:Workflow ;
+    rdfs:label "Checkout" ;
+    rdfs:comment "Orchestration only." .
+
+ex:WorkflowStep_Checkout_1 a eos:WorkflowStep ;
+    rdfs:label "Validate order" ;
+    eos:hasPosition 1 ;
+    rdfs:comment "Position 1." .
+
+ex:WorkflowStep_Checkout_2 a eos:WorkflowStep ;
+    rdfs:label "Settle payment" ;
+    eos:hasPosition 2 ;
+    rdfs:comment "Position 2." .
+
+ex:ADR_004 eos:establishes ex:Invariant_SingleCurrency .
+ex:ADR_004 eos:supersededBy ex:ADR_011 .
+ex:ADR_011 eos:establishes ex:Invariant_PaymentBeforeShipping .
+ex:ADR_011 eos:resolves ex:Issue_023 .
+ex:AcceptanceRecord_014 eos:accepts ex:ArtifactRevision_Checkout_r7 .
+ex:AcceptanceRecord_014 eos:cites ex:Evidence_PaymentTrace .
+ex:AcceptanceRecord_014 eos:reviewedBy ex:Actor_Reviewer .
+ex:Actor_Customer eos:scopedTo ex:BC_Ordering .
+ex:Actor_Customer eos:uses ex:Capability_PlaceOrder .
+ex:Actor_Reviewer eos:scopedTo ex:BC_Ordering .
+ex:Artifact_CheckoutService eos:hasActiveRevision ex:ArtifactRevision_Checkout_r7 .
+ex:Artifact_CheckoutTests eos:references ex:Concept_Order .
+ex:Artifact_CheckoutTests eos:validates ex:Artifact_CheckoutService .
+ex:Artifact_OrderingSpec eos:references ex:Concept_Payment .
+ex:Artifact_OrderingSpec eos:represents ex:Concept_Order .
+ex:Artifact_PaymentService eos:hasActiveRevision ex:ArtifactRevision_Payment_r3 .
+ex:ArtifactRevision_Checkout_r7 eos:acceptedBy ex:AcceptanceRecord_014 .
+ex:ArtifactRevision_Checkout_r7 eos:revisionOf ex:Artifact_CheckoutService .
+ex:ArtifactRevision_Payment_r3 eos:revisionOf ex:Artifact_PaymentService .
+ex:Capability_PlaceOrder eos:realisedBy ex:Artifact_CheckoutService .
+ex:Capability_PlaceOrder eos:references ex:Concept_Order .
+ex:Capability_PlaceOrder eos:scopedTo ex:BC_Ordering .
+ex:Capability_Refund eos:realisedBy ex:Artifact_PaymentService .
+ex:Capability_Refund eos:references ex:Concept_Payment .
+ex:Capability_Refund eos:scopedTo ex:BC_Ordering .
+ex:Concept_Order eos:evidencedBy ex:Evidence_OrderSchema .
+ex:Concept_Order eos:scopedTo ex:BC_Ordering .
+ex:Concept_Payment eos:references ex:Concept_Order .
+ex:Concept_Payment eos:scopedTo ex:BC_Ordering .
+ex:Gate_PaymentReview eos:decidedBy ex:Actor_Reviewer .
+ex:Gate_PaymentReview eos:reviews ex:Artifact_PaymentService .
+ex:Invariant_PaymentBeforeShipping eos:constrains ex:Concept_Order .
+ex:Invariant_PaymentBeforeShipping eos:enforcedAt ex:Artifact_CheckoutService .
+ex:Invariant_PaymentBeforeShipping eos:evidencedBy ex:Evidence_PaymentTrace .
+ex:Invariant_PaymentBeforeShipping eos:scopedTo ex:BC_Ordering .
+ex:Invariant_SingleCurrency eos:constrains ex:Concept_Order .
+ex:Invariant_SingleCurrency eos:scopedTo ex:BC_Ordering .
+ex:Issue_023 eos:blocks ex:Capability_Refund .
+ex:Issue_023 eos:evidencedBy ex:Evidence_OrderSchema .
+ex:Policy_PaymentChangesReviewed eos:establishedBy ex:ADR_011 .
+ex:Policy_PaymentChangesReviewed eos:governs ex:Workflow_Checkout .
+ex:Skill_SettlePayment eos:produces ex:Artifact_PaymentService .
+ex:Skill_SettlePayment eos:requires ex:Concept_Payment .
+ex:Skill_ValidateOrder eos:produces ex:Artifact_CheckoutService .
+ex:Skill_ValidateOrder eos:requires ex:Concept_Order .
+ex:Workflow_Checkout eos:hasStep ex:WorkflowStep_Checkout_1 .
+ex:Workflow_Checkout eos:hasStep ex:WorkflowStep_Checkout_2 .
+ex:Workflow_Checkout eos:passesThrough ex:Gate_PaymentReview .
+ex:WorkflowStep_Checkout_1 eos:executes ex:Skill_ValidateOrder .
+ex:WorkflowStep_Checkout_1 eos:stepOf ex:Workflow_Checkout .
+ex:WorkflowStep_Checkout_2 eos:executes ex:Skill_SettlePayment .
+ex:WorkflowStep_Checkout_2 eos:stepOf ex:Workflow_Checkout .

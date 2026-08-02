@@ -5,7 +5,7 @@
 
 Edges are the `relationships` tables of every entity specification, restricted to targets that are themselves specified entities.
 
-**22 entities, 60 internal edges.**
+**23 entities, 62 internal edges.**
 
 ```mermaid
 graph LR
@@ -72,6 +72,9 @@ graph LR
   Policy -->|governs| Artifact
   ValidationRule[ValidationRule]
   Policy -->|enforced-by| ValidationRule
+  Registry[Registry]
+  Registry -->|defined-in| Artifact
+  Registry -->|validated-by| ValidationRule
   RelationshipType[RelationshipType]
   RelationshipType -->|scoped-to| BoundedContext
   RelationshipType -->|constrained-by| Invariant
@@ -92,14 +95,14 @@ graph LR
   Workflow -->|passes-through| EngineeringGate
   Workflow -->|produces| Artifact
   class Actor,ArtifactRevision,Artifact,BoundedContext,CanonicalKnowledgeModel,Capability,Concept,DimensionAssignment,Dimension,Evidence,Invariant,RelationshipType,StateMachineSpecification descriptive;
-  class AcceptanceRecord,ADR,EngineeringGate,Issue,Policy,Skill,ValidationRule,WorkflowStep,Workflow operational;
+  class AcceptanceRecord,ADR,EngineeringGate,Issue,Policy,Registry,Skill,ValidationRule,WorkflowStep,Workflow operational;
   classDef descriptive fill:#e8f0fe,stroke:#4285f4;
   classDef operational fill:#fce8e6,stroke:#ea4335;
 ```
 
 ## Structural metrics
 
-**22 nodes.** Computed from the graph, not read from the specifications.
+**23 nodes.** Computed from the graph, not read from the specifications.
 
 ### Isolated and near-isolated
 
@@ -111,17 +114,20 @@ No isolated nodes.
 
 | Node | Degree |
 |---|---|
-| `Artifact` | 10 |
+| `Artifact` | 11 |
 | `Workflow` | 6 |
 | `Invariant` | 6 |
 | `Evidence` | 6 |
 | `Capability` | 6 |
 | `BoundedContext` | 6 |
+| `ValidationRule` | 5 |
 | `Concept` | 5 |
 
 ### Near-identical neighbourhoods (Jaccard ≥ 0.6)
 
-None above threshold.
+| Similarity | A | B | Shared neighbours |
+|---|---|---|---|
+| 1.0 | `CanonicalKnowledgeModel` | `Registry` | `Artifact`, `ValidationRule` |
 
 ### Chains (in-degree 1, out-degree 1)
 

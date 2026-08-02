@@ -16,7 +16,7 @@ same session the decision is made.
 > a rule exists; the rule that must be followed lives in a Policy under
 > `shared/policies/`. Agents consume policies; humans read ADRs for rationale.
 
-**Highest allocated ID: `ADR-0079`.** IDs are sequential and never reused.
+**Highest allocated ID: `ADR-0083`.** IDs are sequential and never reused.
 
 > This index table is a hand-maintained projection of ADR front matter. It is
 > listed in the transitional-debt register, `ISSUE-0037`.
@@ -174,6 +174,10 @@ Read these before designing anything that produces an artifact:
 | [ADR-0077](ADR-0077-declarative-validation.md) | **The compiler executes ValidationRules; it does not contain them** | accepted | — |
 | [ADR-0078](ADR-0078-schema-validated-parsing.md) | Authoring sources are parsed with a real parser and schema-validated before semantic resolution | accepted | — |
 | [ADR-0079](ADR-0079-explorer-is-the-primary-interface.md) | The Knowledge Explorer is the primary interface to the Canonical Knowledge Model | accepted | — |
+| [ADR-0080](ADR-0080-the-product-is-semantic-answers.md) | **The product is semantic answers to engineering questions** | accepted | — |
+| [ADR-0081](ADR-0081-ckm-is-the-semantic-ir.md) | **The Canonical Knowledge Model is the platform's semantic intermediate representation** | accepted | — |
+| [ADR-0082](ADR-0082-the-vertical-slice-replaces-metamodel-completion.md) | **The first vertical slice replaces metamodel completion as the milestone** | accepted | — |
+| [ADR-0083](ADR-0083-registries-are-declared.md) | Registries are declared; the compiler knows extraction kinds, not registry shapes | accepted | — |
 
 ## Supersessions
 

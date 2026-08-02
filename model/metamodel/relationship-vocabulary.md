@@ -92,6 +92,7 @@ specializes.
 | `controls-lifecycle-of` | `governs` | behavioral |
 | `constrains` | `governs` | behavioral |
 | `constrained-by` | `governed-by` | behavioral |
+| `validated-by` | `validated-by` | behavioral |
 | `enforced-at` | `validated-by` | behavioral |
 | `enforced-by` | `validated-by` | behavioral |
 | `validates` | `validates` | behavioral |
@@ -124,6 +125,7 @@ specializes.
 | `revision-of` | `derives-from` | semantic |
 | `has-revision` | `derived-into` | semantic |
 | `has-active-revision` | `derived-into` | semantic |
+| `established-by` | `established-by` | traceability |
 | `motivated-by` | `established-by` | traceability |
 | `establishes` | `establishes` | traceability |
 | `accepts` | `accepts` | traceability |

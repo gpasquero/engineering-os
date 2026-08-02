@@ -1,0 +1,844 @@
+{
+  "formatVersion": "1.0.0",
+  "metamodelVersion": "0.4.0-skeleton",
+  "project": "vertical-slice",
+  "note": "Canonical Knowledge Model. Every edge was asserted; none inferred (ADR-0044, ADR-0061). Serializations are projections of this model, not the model (ADR-0076).",
+  "nodes": [
+    {
+      "id": "ADR.004",
+      "type": "ADR",
+      "label": "Orders are single-currency",
+      "family": "operational",
+      "position": null,
+      "description": "Superseded, and still readable. A superseded ADR is a correct record of what was\ndecided then.",
+      "provenance": {
+        "source": "adr-004.md"
+      }
+    },
+    {
+      "id": "ADR.011",
+      "type": "ADR",
+      "label": "Payment is settled synchronously at checkout",
+      "family": "operational",
+      "position": null,
+      "description": "**The decision that established the invariant.** This edge is what makes\n*which ADR established this Invariant?* answerable.",
+      "provenance": {
+        "source": "adr-011.md"
+      }
+    },
+    {
+      "id": "AcceptanceRecord.014",
+      "type": "AcceptanceRecord",
+      "label": "Acceptance of checkout r7",
+      "family": "operational",
+      "position": null,
+      "description": "Confers Active status. Commits do not.",
+      "provenance": {
+        "source": "accept-014.md"
+      }
+    },
+    {
+      "id": "Actor.Customer",
+      "type": "Actor",
+      "label": "Customer",
+      "family": "descriptive",
+      "position": null,
+      "description": "Submits orders.",
+      "provenance": {
+        "source": "actor-customer.md"
+      }
+    },
+    {
+      "id": "Actor.Reviewer",
+      "type": "Actor",
+      "label": "Reviewer",
+      "family": "descriptive",
+      "position": null,
+      "description": "Decides at the gate and reviews acceptances.",
+      "provenance": {
+        "source": "actor-reviewer.md"
+      }
+    },
+    {
+      "id": "Artifact.CheckoutService",
+      "type": "Artifact",
+      "label": "Checkout service",
+      "family": "descriptive",
+      "position": null,
+      "description": "A stable logical identity with no lifecycle of its own.",
+      "provenance": {
+        "source": "artifact-checkout.md"
+      }
+    },
+    {
+      "id": "Artifact.CheckoutTests",
+      "type": "Artifact",
+      "label": "Checkout test suite",
+      "family": "descriptive",
+      "position": null,
+      "description": "Tests. Modelled as an Artifact that validates another and references the\nConcepts it exercises \u2014 which is what makes *which tests must change* answerable.",
+      "provenance": {
+        "source": "artifact-test.md"
+      }
+    },
+    {
+      "id": "Artifact.OrderingSpec",
+      "type": "Artifact",
+      "label": "Ordering specification",
+      "family": "descriptive",
+      "position": null,
+      "description": "A specification document. Becomes inconsistent when what it represents changes.",
+      "provenance": {
+        "source": "artifact-spec.md"
+      }
+    },
+    {
+      "id": "Artifact.PaymentService",
+      "type": "Artifact",
+      "label": "Payment service",
+      "family": "descriptive",
+      "position": null,
+      "description": "Realises the refund capability.",
+      "provenance": {
+        "source": "artifact-payment.md"
+      }
+    },
+    {
+      "id": "ArtifactRevision.Checkout.r7",
+      "type": "ArtifactRevision",
+      "label": "Checkout service r7",
+      "family": "descriptive",
+      "position": null,
+      "description": "The unit that carries lifecycle state.",
+      "provenance": {
+        "source": "rev-checkout.md"
+      }
+    },
+    {
+      "id": "ArtifactRevision.Payment.r3",
+      "type": "ArtifactRevision",
+      "label": "Payment service r3",
+      "family": "descriptive",
+      "position": null,
+      "description": "**Not accepted.** No AcceptanceRecord reaches it, so it is not `Active`.",
+      "provenance": {
+        "source": "rev-payment.md"
+      }
+    },
+    {
+      "id": "BC.Ordering",
+      "type": "BoundedContext",
+      "label": "Ordering",
+      "family": "descriptive",
+      "position": null,
+      "description": "The boundary within which \"Order\" means a customer purchase request.",
+      "provenance": {
+        "source": "bc-ordering.md"
+      }
+    },
+    {
+      "id": "Capability.PlaceOrder",
+      "type": "Capability",
+      "label": "Place an order",
+      "family": "descriptive",
+      "position": null,
+      "description": "The system accepts an order and acknowledges it.",
+      "provenance": {
+        "source": "cap-place-order.md"
+      }
+    },
+    {
+      "id": "Capability.Refund",
+      "type": "Capability",
+      "label": "Refund an order",
+      "family": "descriptive",
+      "position": null,
+      "description": "Reverses a settled Payment. **Depends on the checkout workflow** through the\nSkill it shares.",
+      "provenance": {
+        "source": "cap-refund.md"
+      }
+    },
+    {
+      "id": "Concept.Order",
+      "type": "Concept",
+      "label": "Order",
+      "family": "descriptive",
+      "position": null,
+      "description": "A customer's request to purchase goods, from submission until fulfilment.",
+      "provenance": {
+        "source": "concept-order.md"
+      }
+    },
+    {
+      "id": "Concept.Payment",
+      "type": "Concept",
+      "label": "Payment",
+      "family": "descriptive",
+      "position": null,
+      "description": "An authorised transfer settling an Order.",
+      "provenance": {
+        "source": "concept-payment.md"
+      }
+    },
+    {
+      "id": "Evidence.OrderSchema",
+      "type": "Evidence",
+      "label": "order.sql lines 1-40",
+      "family": "descriptive",
+      "position": null,
+      "description": "Source reference. Directness rank 2.",
+      "provenance": {
+        "source": "evidence-schema.md"
+      }
+    },
+    {
+      "id": "Evidence.PaymentTrace",
+      "type": "Evidence",
+      "label": "Production trace, checkout span",
+      "family": "descriptive",
+      "position": null,
+      "description": "Runtime observation. Directness rank 1 \u2014 the most direct kind.",
+      "provenance": {
+        "source": "evidence-trace.md"
+      }
+    },
+    {
+      "id": "Gate.PaymentReview",
+      "type": "EngineeringGate",
+      "label": "Payment review gate",
+      "family": "operational",
+      "position": null,
+      "description": "Holds the questions asked of every payment change.",
+      "provenance": {
+        "source": "gate-payment.md"
+      }
+    },
+    {
+      "id": "Invariant.PaymentBeforeShipping",
+      "type": "Invariant",
+      "label": "An order cannot ship before payment clears",
+      "family": "descriptive",
+      "position": null,
+      "description": "Stated independently of what enforces it.",
+      "provenance": {
+        "source": "inv-payment.md"
+      }
+    },
+    {
+      "id": "Invariant.SingleCurrency",
+      "type": "Invariant",
+      "label": "An order has exactly one currency",
+      "family": "descriptive",
+      "position": null,
+      "description": "**No `enforced-at`.** Nothing records where this is checked, which is a finding\nrather than an omission.",
+      "provenance": {
+        "source": "inv-single-currency.md"
+      }
+    },
+    {
+      "id": "Issue.023",
+      "type": "Issue",
+      "label": "Where is single-currency enforced?",
+      "family": "operational",
+      "position": null,
+      "description": "A recorded unknown, blocking a capability.",
+      "provenance": {
+        "source": "issue-currency.md"
+      }
+    },
+    {
+      "id": "Policy.PaymentChangesReviewed",
+      "type": "Policy",
+      "label": "Payment changes require review",
+      "family": "operational",
+      "position": null,
+      "description": "A GovernancePolicy, motivated by a recorded decision.",
+      "provenance": {
+        "source": "policy-review.md"
+      }
+    },
+    {
+      "id": "Skill.SettlePayment",
+      "type": "Skill",
+      "label": "Settle payment",
+      "family": "operational",
+      "position": null,
+      "description": "Shared by checkout and refund.",
+      "provenance": {
+        "source": "skill-settle.md"
+      }
+    },
+    {
+      "id": "Skill.ValidateOrder",
+      "type": "Skill",
+      "label": "Validate an order",
+      "family": "operational",
+      "position": null,
+      "description": "Methodology with an explicit contract.",
+      "provenance": {
+        "source": "skill-validate.md"
+      }
+    },
+    {
+      "id": "Workflow.Checkout",
+      "type": "Workflow",
+      "label": "Checkout",
+      "family": "operational",
+      "position": null,
+      "description": "Orchestration only.",
+      "provenance": {
+        "source": "wf-checkout.md"
+      }
+    },
+    {
+      "id": "WorkflowStep.Checkout.1",
+      "type": "WorkflowStep",
+      "label": "Validate order",
+      "family": "operational",
+      "position": 1,
+      "description": "Position 1.",
+      "provenance": {
+        "source": "step-1.md"
+      }
+    },
+    {
+      "id": "WorkflowStep.Checkout.2",
+      "type": "WorkflowStep",
+      "label": "Settle payment",
+      "family": "operational",
+      "position": 2,
+      "description": "Position 2.",
+      "provenance": {
+        "source": "step-2.md"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "ADR.004",
+      "predicate": "establishes",
+      "to": "Invariant.SingleCurrency",
+      "core": "establishes",
+      "category": "traceability"
+    },
+    {
+      "from": "ADR.004",
+      "predicate": "superseded-by",
+      "to": "ADR.011",
+      "core": "superseded-by",
+      "category": "traceability"
+    },
+    {
+      "from": "ADR.011",
+      "predicate": "establishes",
+      "to": "Invariant.PaymentBeforeShipping",
+      "core": "establishes",
+      "category": "traceability"
+    },
+    {
+      "from": "ADR.011",
+      "predicate": "resolves",
+      "to": "Issue.023",
+      "core": "resolves",
+      "category": "traceability"
+    },
+    {
+      "from": "AcceptanceRecord.014",
+      "predicate": "accepts",
+      "to": "ArtifactRevision.Checkout.r7",
+      "core": "accepts",
+      "category": "traceability"
+    },
+    {
+      "from": "AcceptanceRecord.014",
+      "predicate": "cites",
+      "to": "Evidence.PaymentTrace",
+      "core": "references",
+      "category": "structural"
+    },
+    {
+      "from": "AcceptanceRecord.014",
+      "predicate": "reviewed-by",
+      "to": "Actor.Reviewer",
+      "core": "accepted-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Actor.Customer",
+      "predicate": "scoped-to",
+      "to": "BC.Ordering",
+      "core": "contained-by",
+      "category": "structural"
+    },
+    {
+      "from": "Actor.Customer",
+      "predicate": "uses",
+      "to": "Capability.PlaceOrder",
+      "core": "executes",
+      "category": "behavioral"
+    },
+    {
+      "from": "Actor.Reviewer",
+      "predicate": "scoped-to",
+      "to": "BC.Ordering",
+      "core": "contained-by",
+      "category": "structural"
+    },
+    {
+      "from": "Artifact.CheckoutService",
+      "predicate": "has-active-revision",
+      "to": "ArtifactRevision.Checkout.r7",
+      "core": "derived-into",
+      "category": "semantic"
+    },
+    {
+      "from": "Artifact.CheckoutTests",
+      "predicate": "references",
+      "to": "Concept.Order",
+      "core": "references",
+      "category": "structural"
+    },
+    {
+      "from": "Artifact.CheckoutTests",
+      "predicate": "validates",
+      "to": "Artifact.CheckoutService",
+      "core": "validates",
+      "category": "behavioral"
+    },
+    {
+      "from": "Artifact.OrderingSpec",
+      "predicate": "references",
+      "to": "Concept.Payment",
+      "core": "references",
+      "category": "structural"
+    },
+    {
+      "from": "Artifact.OrderingSpec",
+      "predicate": "represents",
+      "to": "Concept.Order",
+      "core": "represents",
+      "category": "semantic"
+    },
+    {
+      "from": "Artifact.PaymentService",
+      "predicate": "has-active-revision",
+      "to": "ArtifactRevision.Payment.r3",
+      "core": "derived-into",
+      "category": "semantic"
+    },
+    {
+      "from": "ArtifactRevision.Checkout.r7",
+      "predicate": "accepted-by",
+      "to": "AcceptanceRecord.014",
+      "core": "accepted-by",
+      "category": "traceability"
+    },
+    {
+      "from": "ArtifactRevision.Checkout.r7",
+      "predicate": "revision-of",
+      "to": "Artifact.CheckoutService",
+      "core": "derives-from",
+      "category": "semantic"
+    },
+    {
+      "from": "ArtifactRevision.Payment.r3",
+      "predicate": "revision-of",
+      "to": "Artifact.PaymentService",
+      "core": "derives-from",
+      "category": "semantic"
+    },
+    {
+      "from": "Capability.PlaceOrder",
+      "predicate": "realised-by",
+      "to": "Artifact.CheckoutService",
+      "core": "implemented-by",
+      "category": "structural"
+    },
+    {
+      "from": "Capability.PlaceOrder",
+      "predicate": "references",
+      "to": "Concept.Order",
+      "core": "references",
+      "category": "structural"
+    },
+    {
+      "from": "Capability.PlaceOrder",
+      "predicate": "scoped-to",
+      "to": "BC.Ordering",
+      "core": "contained-by",
+      "category": "structural"
+    },
+    {
+      "from": "Capability.Refund",
+      "predicate": "realised-by",
+      "to": "Artifact.PaymentService",
+      "core": "implemented-by",
+      "category": "structural"
+    },
+    {
+      "from": "Capability.Refund",
+      "predicate": "references",
+      "to": "Concept.Payment",
+      "core": "references",
+      "category": "structural"
+    },
+    {
+      "from": "Capability.Refund",
+      "predicate": "scoped-to",
+      "to": "BC.Ordering",
+      "core": "contained-by",
+      "category": "structural"
+    },
+    {
+      "from": "Concept.Order",
+      "predicate": "evidenced-by",
+      "to": "Evidence.OrderSchema",
+      "core": "evidenced-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Concept.Order",
+      "predicate": "scoped-to",
+      "to": "BC.Ordering",
+      "core": "contained-by",
+      "category": "structural"
+    },
+    {
+      "from": "Concept.Payment",
+      "predicate": "references",
+      "to": "Concept.Order",
+      "core": "references",
+      "category": "structural"
+    },
+    {
+      "from": "Concept.Payment",
+      "predicate": "scoped-to",
+      "to": "BC.Ordering",
+      "core": "contained-by",
+      "category": "structural"
+    },
+    {
+      "from": "Gate.PaymentReview",
+      "predicate": "decided-by",
+      "to": "Actor.Reviewer",
+      "core": "accepted-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Gate.PaymentReview",
+      "predicate": "reviews",
+      "to": "Artifact.PaymentService",
+      "core": "validates",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.PaymentBeforeShipping",
+      "predicate": "constrains",
+      "to": "Concept.Order",
+      "core": "governs",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.PaymentBeforeShipping",
+      "predicate": "enforced-at",
+      "to": "Artifact.CheckoutService",
+      "core": "validated-by",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.PaymentBeforeShipping",
+      "predicate": "evidenced-by",
+      "to": "Evidence.PaymentTrace",
+      "core": "evidenced-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Invariant.PaymentBeforeShipping",
+      "predicate": "scoped-to",
+      "to": "BC.Ordering",
+      "core": "contained-by",
+      "category": "structural"
+    },
+    {
+      "from": "Invariant.SingleCurrency",
+      "predicate": "constrains",
+      "to": "Concept.Order",
+      "core": "governs",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.SingleCurrency",
+      "predicate": "scoped-to",
+      "to": "BC.Ordering",
+      "core": "contained-by",
+      "category": "structural"
+    },
+    {
+      "from": "Issue.023",
+      "predicate": "blocks",
+      "to": "Capability.Refund",
+      "core": "depended-on-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Issue.023",
+      "predicate": "evidenced-by",
+      "to": "Evidence.OrderSchema",
+      "core": "evidenced-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Policy.PaymentChangesReviewed",
+      "predicate": "established-by",
+      "to": "ADR.011",
+      "core": "established-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Policy.PaymentChangesReviewed",
+      "predicate": "governs",
+      "to": "Workflow.Checkout",
+      "core": "governs",
+      "category": "behavioral"
+    },
+    {
+      "from": "Skill.SettlePayment",
+      "predicate": "produces",
+      "to": "Artifact.PaymentService",
+      "core": "implements",
+      "category": "structural"
+    },
+    {
+      "from": "Skill.SettlePayment",
+      "predicate": "requires",
+      "to": "Concept.Payment",
+      "core": "depends-on",
+      "category": "traceability"
+    },
+    {
+      "from": "Skill.ValidateOrder",
+      "predicate": "produces",
+      "to": "Artifact.CheckoutService",
+      "core": "implements",
+      "category": "structural"
+    },
+    {
+      "from": "Skill.ValidateOrder",
+      "predicate": "requires",
+      "to": "Concept.Order",
+      "core": "depends-on",
+      "category": "traceability"
+    },
+    {
+      "from": "Workflow.Checkout",
+      "predicate": "has-step",
+      "to": "WorkflowStep.Checkout.1",
+      "core": "contains",
+      "category": "structural"
+    },
+    {
+      "from": "Workflow.Checkout",
+      "predicate": "has-step",
+      "to": "WorkflowStep.Checkout.2",
+      "core": "contains",
+      "category": "structural"
+    },
+    {
+      "from": "Workflow.Checkout",
+      "predicate": "passes-through",
+      "to": "Gate.PaymentReview",
+      "core": "validated-by",
+      "category": "behavioral"
+    },
+    {
+      "from": "WorkflowStep.Checkout.1",
+      "predicate": "executes",
+      "to": "Skill.ValidateOrder",
+      "core": "executes",
+      "category": "behavioral"
+    },
+    {
+      "from": "WorkflowStep.Checkout.1",
+      "predicate": "step-of",
+      "to": "Workflow.Checkout",
+      "core": "contained-by",
+      "category": "structural"
+    },
+    {
+      "from": "WorkflowStep.Checkout.2",
+      "predicate": "executes",
+      "to": "Skill.SettlePayment",
+      "core": "executes",
+      "category": "behavioral"
+    },
+    {
+      "from": "WorkflowStep.Checkout.2",
+      "predicate": "step-of",
+      "to": "Workflow.Checkout",
+      "core": "contained-by",
+      "category": "structural"
+    }
+  ],
+  "vocabulary": {
+    "accepted-by": {
+      "category": "traceability",
+      "means": "A was granted status by act B",
+      "inverse": "accepts"
+    },
+    "accepts": {
+      "category": "traceability",
+      "means": "inverse of accepted-by",
+      "inverse": "accepted-by"
+    },
+    "contained-by": {
+      "category": "structural",
+      "means": "inverse of contains",
+      "inverse": "contains"
+    },
+    "contains": {
+      "category": "structural",
+      "means": "A is a container for B",
+      "inverse": "contained-by"
+    },
+    "depended-on-by": {
+      "category": "traceability",
+      "means": "inverse of depends-on",
+      "inverse": "depends-on"
+    },
+    "depends-on": {
+      "category": "traceability",
+      "means": "A cannot proceed without B",
+      "inverse": "depended-on-by"
+    },
+    "derived-into": {
+      "category": "semantic",
+      "means": "inverse of derives-from",
+      "inverse": "derives-from"
+    },
+    "derives-from": {
+      "category": "semantic",
+      "means": "A is obtained from B",
+      "inverse": "derived-into"
+    },
+    "established-by": {
+      "category": "traceability",
+      "means": "A exists because of decision B",
+      "inverse": "establishes"
+    },
+    "establishes": {
+      "category": "traceability",
+      "means": "inverse of established-by",
+      "inverse": "established-by"
+    },
+    "evidenced-by": {
+      "category": "traceability",
+      "means": "A is supported by observable B",
+      "inverse": "supports"
+    },
+    "executes": {
+      "category": "behavioral",
+      "means": "A carries out B",
+      "inverse": "executed-by"
+    },
+    "governs": {
+      "category": "behavioral",
+      "means": "A constrains B normatively",
+      "inverse": "governed-by"
+    },
+    "implemented-by": {
+      "category": "structural",
+      "means": "inverse of implements",
+      "inverse": "implements"
+    },
+    "implements": {
+      "category": "structural",
+      "means": "A realises what B describes",
+      "inverse": "implemented-by"
+    },
+    "references": {
+      "category": "structural",
+      "means": "A points at B without owning it",
+      "inverse": "referenced-by"
+    },
+    "represents": {
+      "category": "semantic",
+      "means": "A stands for B in another representation",
+      "inverse": "represented-by"
+    },
+    "resolves": {
+      "category": "traceability",
+      "means": "A answers open question B",
+      "inverse": "resolved-by"
+    },
+    "superseded-by": {
+      "category": "traceability",
+      "means": "inverse of supersedes",
+      "inverse": "supersedes"
+    },
+    "validated-by": {
+      "category": "behavioral",
+      "means": "inverse of validates",
+      "inverse": "validates"
+    },
+    "validates": {
+      "category": "behavioral",
+      "means": "A checks that B holds",
+      "inverse": "validated-by"
+    }
+  },
+  "statistics": {
+    "nodes": 28,
+    "edges": 52,
+    "byType": {
+      "ADR": 2,
+      "AcceptanceRecord": 1,
+      "Actor": 2,
+      "Artifact": 4,
+      "ArtifactRevision": 2,
+      "BoundedContext": 1,
+      "Capability": 2,
+      "Concept": 2,
+      "EngineeringGate": 1,
+      "Evidence": 2,
+      "Invariant": 2,
+      "Issue": 1,
+      "Policy": 1,
+      "Skill": 2,
+      "Workflow": 1,
+      "WorkflowStep": 2
+    },
+    "byFamily": {
+      "descriptive": 17,
+      "operational": 11
+    },
+    "byCategory": {
+      "behavioral": 10,
+      "semantic": 5,
+      "structural": 22,
+      "traceability": 15
+    },
+    "byCoreType": {
+      "accepted-by": 3,
+      "accepts": 1,
+      "contained-by": 10,
+      "contains": 2,
+      "depended-on-by": 1,
+      "depends-on": 2,
+      "derived-into": 2,
+      "derives-from": 2,
+      "established-by": 1,
+      "establishes": 2,
+      "evidenced-by": 3,
+      "executes": 3,
+      "governs": 3,
+      "implemented-by": 2,
+      "implements": 2,
+      "references": 6,
+      "represents": 1,
+      "resolves": 1,
+      "superseded-by": 1,
+      "validated-by": 2,
+      "validates": 2
+    }
+  }
+}

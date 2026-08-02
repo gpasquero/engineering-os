@@ -15,7 +15,7 @@ committed.
 
 **Acceptance is an engineering decision, not a Git operation** (`ADR-0020`).
 
-**Highest allocated ID: `ACCEPT-0023`.** IDs are sequential and never reused.
+**Highest allocated ID: `ACCEPT-0024`.** IDs are sequential and never reused.
 
 ## Index
 
@@ -44,6 +44,7 @@ committed.
 | [ACCEPT-0021](ACCEPT-0021-session-0025-decisions.md) | `SESSION-0025` decisions, ordering resolution and generated graph views at `e7a07b8` | Project Owner (`gpasquero`) | accepted | 2026-08-02 |
 | [ACCEPT-0022](ACCEPT-0022-session-0026-decisions.md) | `SESSION-0026` decisions, normalization and first executable pipeline at `f2ba10c` | Project Owner (`gpasquero`) | accepted | 2026-08-02 |
 | [ACCEPT-0023](ACCEPT-0023-session-0027-decisions.md) | `SESSION-0027` decisions, compiler phases and regression suite at `47eebe5` | Project Owner (`gpasquero`) | accepted | 2026-08-02 |
+| [ACCEPT-0024](ACCEPT-0024-session-0028-decisions.md) | `SESSION-0028` decisions, compiler modularization and declarative validation at `c0b0b59` | Project Owner (`gpasquero`) | accepted | 2026-08-02 |
 
 ## The three conditions
 

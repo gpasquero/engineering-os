@@ -3,17 +3,11 @@
 Rule KINDS are mechanisms and live here. RULES are instances of a kind bound to
 model elements, and live in model/metamodel/validation-rules.md.
 """
-import re
-import pathlib
 import collections
-
-import yaml
 
 from ..runtime.phases import feature
 from ..runtime.diagnostics import Diagnostic
-
-RULES_DOC = (pathlib.Path(__file__).resolve().parents[2]
-             / "model/metamodel/validation-rules.md")
+from ..registry import load_all
 
 KINDS = {}
 
@@ -25,16 +19,13 @@ def kind(name):
     return wrap
 
 
-def load_rules(path=RULES_DOC):
-    """Rules are authored data, not code."""
-    block = re.search(r"```yaml\n(.*?)```", path.read_text(), re.S)
-    if not block:
-        raise SystemExit(f"{path}: no rules block")
-    rules = yaml.safe_load(block.group(1))["rules"]
+def load_rules():
+    """Rules are authored data, not code. They arrive through a registry."""
+    rules = sorted(load_all()["REG-validation-rules"].values(), key=lambda r: r["id"])
     unknown = [r["id"] for r in rules if r["kind"] not in KINDS]
     if unknown:
         raise SystemExit(f"rules naming unimplemented kinds: {unknown}")
-    return sorted(rules, key=lambda r: r["id"])
+    return rules
 
 
 # ------------------------------------------------------------------- kinds

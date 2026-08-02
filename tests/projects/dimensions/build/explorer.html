@@ -150,6 +150,52 @@ const QUERIES = {
           <td>${f.hops}</td><td><code>${esc(f.via)}</code></td></tr>`).join('') + '</table></div>';
     }
   },
+  rationale: {
+    label: 'Rationale',
+    why: 'Which decision established this, and whether that decision still stands.',
+    render(id){
+      const adrs = inc(id).filter(e => e.core === 'establishes'
+        && (byId[e.from]||{}).type === 'ADR');
+      if (!adrs.length) return `<p class="empty">No ADR establishes this node.
+        Its reason is unrecorded.</p>`;
+      return `<div class="tbl-wrap"><table><tr><th>Decision</th><th>Via</th><th>Still stands?</th></tr>`
+        + adrs.map(e => {
+            const sup = out(e.from).find(x => x.predicate === 'superseded-by');
+            return `<tr><td>${link(e.from)}</td><td><code>${esc(e.predicate)}</code></td>
+              <td>${sup ? 'superseded by ' + link(sup.to) : 'yes'}</td></tr>`;
+          }).join('') + '</table></div>';
+    }
+  },
+  status: {
+    label: 'Implementation status',
+    why: 'Whether the revisions of this node are Active. Acceptance confers Active status; commits do not (ADR-0018).',
+    render(id){
+      let revs = out(id).filter(e => e.predicate === 'has-active-revision').map(e => e.to);
+      if (!revs.length) revs = [id];
+      return `<div class="tbl-wrap"><table><tr><th>Revision</th><th>Accepted by</th><th>Active</th></tr>`
+        + revs.map(r => {
+            const acc = inc(r).filter(e => (byId[e.from]||{}).type === 'AcceptanceRecord');
+            return `<tr><td>${link(r)}</td>
+              <td>${acc.length ? acc.map(e => link(e.from)).join(', ') : '<span class="empty">none</span>'}</td>
+              <td>${acc.length ? 'yes' : '<b>no</b>'}</td></tr>`;
+          }).join('') + '</table></div>';
+    }
+  },
+  affected: {
+    label: 'Affected artifacts',
+    why: 'Tests that validate this, and specifications that represent it. Both become inconsistent when it changes.',
+    render(id){
+      const reach = new Set([id, ...closure(id, inc).map(f => f.id)]);
+      const tests = CKM.nodes.filter(n => out(n.id).some(e => e.core === 'validates' && reach.has(e.to)));
+      const specs = inc(id).filter(e => e.core === 'represents').map(e => byId[e.from]).filter(Boolean);
+      const sect = (title, list, note) => `<h3>${title}</h3>` + (list.length
+        ? '<div class="tbl-wrap"><table>' + list.map(n =>
+            `<tr><td>${link(n.id)}</td><td class="hop">${esc(n.type)}</td></tr>`).join('') + '</table></div>'
+        : '<p class="empty">None.</p>') + `<div class="hop">${note}</div>`;
+      return sect('Tests', tests, 'A test is an Artifact that <code>validates</code> another. There is no Test entity.')
+           + sect('Specifications', specs, 'A specification is an Artifact that <code>represents</code> a Concept.');
+    }
+  },
   acceptance: {
     label: 'Acceptance history',
     why: 'The acceptance chain reaching this node. Acceptance confers Active status; commits do not (ADR-0018).',

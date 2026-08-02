@@ -21,7 +21,7 @@ using this metamodel**. Adopters never modify it — they instantiate it
 
 ## Status
 
-**22 of 27 entities specified.** One remains in scope; two are deferred
+**23 of 27 entities specified.** One remains in scope; two are deferred
 (`ADR-0075`). Both entities added most recently were **demanded by the
 implementation**, not by the inventory. `entity-inventory.md` records the current state.
 
@@ -53,6 +53,7 @@ model/metamodel/
 ├── entity-inventory.md    all entities, with specification status
 ├── relationship-vocabulary.md   the registered core relationship types
 ├── validation-rules.md          the rules the compiler executes (ADR-0077)
+├── registries.md                every registry the compiler reads (ADR-0083)
 ├── entities/              one specification per entity
 ├── ontology/              the OWL skeleton, and what writing it exposed
 └── views/                 generated graph views, and what inspecting them showed

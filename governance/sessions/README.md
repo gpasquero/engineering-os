@@ -51,6 +51,7 @@ ADRs answer "why".
 | [SESSION-0026](SESSION-0026-2026-08-02.md) | 2026-08-02 | B1 | `ACCEPT-0021`; **normalization not entity reduction** (`ADR-0069`); **the Specification criterion** (`ADR-0070`) resolving `ISSUE-0074`; **relationship vocabulary** (`ADR-0071`); **first end-to-end compilation** — CKM, OWL, graph, explorer |
 | [SESSION-0027](SESSION-0027-2026-08-02.md) | 2026-08-02 | B1 | `ACCEPT-0022`; **the semantic model is the product** (`ADR-0072`); compiler phases first-class (`ADR-0073`); `RelationshipType` as a type system (`ADR-0074`); entities justified by compiler need (`ADR-0075`); **10 compiler test projects, 4 of them negative** |
 | [SESSION-0028](SESSION-0028-2026-08-02.md) | 2026-08-02 | B1 | `ACCEPT-0023`; **compiler refactored into modules**; `CanonicalKnowledgeModel` is Layer A (`ADR-0076`); **declarative validation** (`ADR-0077`); schema-validated parsing (`ADR-0078`); Explorer as primary interface (`ADR-0079`); **13 fixtures with golden outputs** |
+| [SESSION-0029](SESSION-0029-2026-08-02.md) | 2026-08-02 | slice | `ACCEPT-0024`; **the product is semantic answers** (`ADR-0080`); **CKM is the semantic IR** (`ADR-0081`); **the vertical slice replaces metamodel completion** (`ADR-0082`); declared registries (`ADR-0083`); **6 of 7 developer questions answered** |
 
 ## Reading
 

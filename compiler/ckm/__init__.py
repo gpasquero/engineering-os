@@ -17,7 +17,8 @@ METAMODEL_VERSION = "0.4.0-skeleton"
                      "node and edge order is stable",
                      "no statistic is stored that cannot be recomputed from nodes and edges",
                      "provenance names the source of every node",
-                     "the model carries the vocabulary needed to explain its own edges"],
+                     "the model carries the vocabulary needed to explain its own edges",
+                     "field order is normalised; extraction order never reaches the product"],
          determinism="fully determined by the resolved assertion set; carries no timestamp")
 def build(nodes, edges, entities, core_types, project_name):
     nodes = sorted(nodes, key=lambda n: n["id"])
@@ -35,8 +36,12 @@ def build(nodes, edges, entities, core_types, project_name):
                    "position": n["position"], "description": n["body"],
                    "provenance": {"source": n["source"]}} for n in nodes],
         "edges": edges,
-        "vocabulary": {c: core_types[c] for c in sorted({e["core"] for e in edges})
-                       if c in core_types},
+        # Key order is normalised: how a registry happened to extract a field must
+        # not leak into the product.
+        "vocabulary": {c: {"category": core_types[c].get("category"),
+                           "means": core_types[c].get("means"),
+                           "inverse": core_types[c].get("inverse")}
+                       for c in sorted({e["core"] for e in edges}) if c in core_types},
         "statistics": {
             "nodes": len(nodes), "edges": len(edges),
             "byType": dict(sorted(by_type.items())),

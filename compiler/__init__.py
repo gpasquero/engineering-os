@@ -9,6 +9,7 @@ Module layout mirrors the phases (ADR-0073). `tools/compile.py` is orchestration
 only and holds no compiler logic.
 """
 from .runtime import phases, diagnostics
+from .registry import load_all as load_registries
 from .discovery import discover
 from .parser import parse
 from .resolver import resolve, load_metamodel
@@ -26,8 +27,11 @@ EMITTERS = {
 
 def compile_project(project, log=lambda m: None):
     """Returns (ckm, diagnostics). Diagnostics are non-empty iff compilation failed."""
+    registries = load_registries()
+    log(f"[registries] {len(registries)} registries: "
+        + ", ".join(f"{k.replace('REG-', '')} {len(v)}" for k, v in sorted(registries.items())))
+
     entities, predicates, core_types = load_metamodel()
-    log(f"[metamodel]  {len(entities)} entity types, {len(predicates)} registered predicates")
 
     paths = discover(project)
     log(f"[discovery]  {len(paths)} authoring sources")

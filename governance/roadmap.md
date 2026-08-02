@@ -10,96 +10,73 @@ related: [ADR-0062]
 
 # Roadmap
 
-**Restructured under `ADR-0062`: architecture through implementation.**
+**The goal is no longer to finish B1** (`ADR-0082`).
 
-The criterion is now:
+Every milestone is evaluated against one question (`ADR-0080`):
 
-1. If an existing decision permits building, **build**.
-2. Stop building only when a **real contradiction** prevents continuing.
-3. Avoid new architectural concepts unless **strictly necessary** for the next
-   step.
+> **How does this improve a developer's ability to understand, modify or evolve a
+> real software system?**
 
-Every new question is tested against *"do we need this to build the next
-deliverable?"* A negative answer produces architectural debt, recorded as a
-`deferred` issue, and building continues.
+## Current milestone — the first vertical slice
 
-## The build sequence
+```text
+Authoritative Repository → Compiler → Canonical Knowledge Model
+        → Knowledge Explorer → Developer Question → Semantic Answer
+```
 
-Six deliverables, in order. Each is expected to reveal architectural defects;
-that is the point.
+**Substantially delivered** in `examples/vertical-slice/`. Six of the seven
+questions `ADR-0082` names are answered from the model; the seventh is not, and
+the reason is recorded.
 
-### B1 — Engineering OS Metamodel
-
-**In progress.** `model/metamodel/`.
-
-Entity inventory complete: 25 entities. Two specified. The remainder are written
-one at a time, each declaring the eight properties `ADR-0035` requires.
-
-Blockers: none. Every entity has an establishing decision.
-
-### B2 — First OWL ontologies
-
-Formalize the metamodel inventory in OWL 2 DL. The inherited decision that OWL
-models semantics is binding and awaits an ADR (`ISSUE-0027`) — which does not
-block using it.
-
-### B3 — First Canonical Knowledge Model
-
-Compile the metamodel and the governance corpus into a graph conforming to the
-metamodel (`ADR-0036`). The first test of whether the architecture produces
-anything.
-
-### B4 — Knowledge Compiler specification
-
-Language-independent (`ADR-0017`). Defines the interface a conforming
-implementation satisfies, and the stages: parsing, normalization, validation,
-semantic linking.
-
-Only **Mechanical Discovery** is in scope — traceability, dependency graphs,
-impact graphs, registry projections, consistency checks (`ADR-0060`).
-
-### B5 — First compilation pipeline
-
-The first executable code in the repository. Requires un-deferring `ISSUE-0036`
-(reference implementation language).
-
-### B6 — First navigable Knowledge Explorer
-
-A projection of this repository's Canonical Knowledge Model (`ADR-0034`). The
-first deliverable a non-engineer would see.
-
-## Milestones, restated
-
-The earlier M1–M13 sequence is preserved as the eventual scope. The build
-sequence above cuts a vertical slice through it rather than completing each
-milestone in turn.
-
-| Milestone | Scope | Status |
+| # | Question | State |
 |---|---|---|
-| M1 | Repository architecture and documentation system | **Complete** |
-| M2 | Metamodel, contracts, manifests, compiler interface | B1–B4 are its core |
-| M3 | Shared policies — Modeling, Governance, Process | Deferred behind the build sequence |
-| M4–M7 | Skills | Unchanged |
-| M8 | Workflows | Blocked by `ISSUE-0002` (deferred) |
-| M9 | Schemas, validation, reference implementation | B5 |
-| M10 | Scenario tests | Blocked by `ISSUE-0006` (deferred) |
-| M11 | Engineering OS self-model | Largely delivered by B1 |
-| M12 | Documentation, adapters, v1 | B6 contributes |
-| M13 | Knowledge Packages and federation | Unchanged |
+| 1 | What breaks if I change this Concept? | ✅ |
+| 2 | Why does this relationship exist? | ✅ |
+| 3 | Which ADR established this Invariant? | ✅ |
+| 4 | Which Capabilities depend on this Workflow? | ✅ |
+| 5 | Which Tests must change? | ✅ via `validates`; no `Test` entity |
+| 6 | Which Specifications become inconsistent? | ✅ via `represents`; no `Specification` entity |
+| 7 | Which AI workflow should execute? | ❌ **no trigger concept exists** |
 
-## Architectural debt
+## Next — model a real software system
 
-**23 deferred issues.** Each is a real question that does not block the next
-deliverable. They are reopened when implementation requires them, not on a
-schedule.
+**A metamodel that only models Engineering OS is unproven.**
 
-Two remain open because they are not architectural:
+Self-modeling is cheaper and weaker evidence: the metamodel was designed against
+this repository. **An external system is what demonstrates the architecture
+generalizes.**
 
-- `ISSUE-0011` — the repository is public with no licence. A legal exposure, not
-  a design question.
-- `ISSUE-0037` — five hand-maintained projections. Operational debt that B5
-  discharges.
+Candidates: a full self-model of Engineering OS · GEAI · GeneXus · Kubernetes ·
+PostgreSQL.
 
-The debt most likely to be met early is `ISSUE-0073`: "runtime" names both a
-compiler artifact kind and target-system telemetry, and both will appear in the
-metamodel.
+## Then — the CKM as the platform's IR
+
+`ADR-0081` commits the Canonical Knowledge Model to becoming the semantic
+intermediate representation. What that still requires:
+
+- **queryability** — consumers scan lists today; there is no index
+- **provenance at revision granularity** (`ADR-0064`)
+- **a stability contract with real consumers** to break it
+
+## Deferred metamodel work
+
+Three entities remain, built **when the slice or a real model needs them**
+(`ADR-0075`, `ADR-0082`): `Manifest`, `Vocabulary`, and whatever the trigger
+concept turns out to be.
+
+`Principle` and `KnowledgePackage` stay deferred — the compiler compiles no ADRs,
+and there is one repository.
+
+## Completed build deliverables
+
+| | |
+|---|---|
+| **B1** | Engineering OS Metamodel — **23 of 27 entities**; scope unchanged, priority superseded by `ADR-0082` |
+| **B2** | First OWL ontology — 0.4.0, 660 triples, generated from the metamodel by hand |
+| **B3** | First Canonical Knowledge Model — delivered |
+| **B4** | Knowledge Compiler specification — delivered as an executable modular compiler |
+| **B5** | First compilation pipeline — delivered, with a 13-fixture regression suite |
+| **B6** | First navigable Knowledge Explorer — delivered, question-oriented |
+
+**M1–M13** from the original plan remain eventual scope. They are not the
+objective; the questions above are.

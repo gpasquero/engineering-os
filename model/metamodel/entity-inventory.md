@@ -64,6 +64,7 @@ real. It held — see `ontology/FINDINGS.md`.
 | 23 | **Issue** | A recorded unknown | `ADR-0003` | [✓](entities/issue.md) |
 | 24 | **WorkflowStep** | The reified association between a Workflow and a Skill, carrying its position | `ADR-0068` | [✓](entities/workflow-step.md) |
 | 25 | **ValidationRule** | A constraint a model must satisfy, stated so a compiler can execute it | `ADR-0048`, `ADR-0077` | [✓](entities/validation-rule.md) |
+| 26 | **Registry** | A declared, extensible set whose membership rule is stated | `ADR-0032`, `ADR-0083` | [✓](entities/registry.md) |
 
 ### Family unassigned
 
@@ -73,10 +74,14 @@ Recorded by `ADR-0065` as not classifying cleanly. Each describes structure
 
 | # | Entity | Purpose | Established by | Spec |
 |---|---|---|---|---|
-| 26 | **Registry** | Identity, membership rules, extension rules. **Not `RegistrySpecification`** — a registry has no independent existence (`ADR-0070`) | `ADR-0032`, `ADR-0070` | — |
+
 | 27 | **Manifest** | A root declaration of composition, status or semantics | `ADR-0013` | — |
 
-**22 of 27 specified. One remains in scope; two are deferred** (`ADR-0075`).
+**23 of 27 specified.** `Registry` was the last entity the compiler needed.
+
+**The metamodel is no longer the objective** (`ADR-0082`). `Manifest` and
+`Vocabulary` are built when the vertical slice or a real system model needs them;
+`Principle` and `KnowledgePackage` stay deferred.
 
 Both entities added this session were **demanded by the implementation**:
 `CanonicalKnowledgeModel` because the product had no specification, and
@@ -90,7 +95,7 @@ whether the metamodel needs it either.*
 | Entity | What the compiler would do differently | Status |
 |---|---|---|
 | `ValidationRule` | Own the checks hard-coded in `resolve()` | **specified** ✓ |
-| `Registry` | Hold the vocabulary the compiler reads by regex today | **needed now** |
+| `Registry` | Replace three ad-hoc readers with declared registries | **specified** ✓ |
 | `Manifest` | Declare what a project is, replacing the `model/*.md` assumption | needed soon |
 | `Vocabulary` | Type the closed enumerations scattered as bare strings | needed soon |
 | `Principle` | Nothing — the compiler compiles no ADRs | **deferred** |
