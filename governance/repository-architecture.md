@@ -97,10 +97,40 @@ Owner: Domain / Compiler Phase: Input.
 
 This is the general form of a fix applied five times locally: every earlier
 vocabulary collision came from one classification being asked to do several
-jobs. **The metamodel models dimensions explicitly.**
+jobs.
 
-How an artifact declares its classification is unresolved (`ISSUE-0058`), now
-that paths no longer imply it.
+**Dimensions are first-class entities, added by registration** (`ADR-0041`) —
+never by modifying compiler logic. A Dimension Registry Specification is
+authoritative; its Projection is generated.
+
+**Artifacts do not contain dimension values.** They are classified by
+**Dimension Assignments** — explicit semantic relationships (`ADR-0042`):
+
+```text
+Artifact → Dimension Assignment → Dimension → Dimension Value
+```
+
+Assignments are versioned and may change without changing artifact identity;
+validation targets assignments, not artifacts. The Canonical Knowledge Model
+represents them as graph relationships rather than embedded metadata. Where they
+are authored is unresolved — `ISSUE-0060`.
+
+## Three semantic levels
+
+A different axis from the four layers (`ADR-0043`):
+
+| Level | Defines | Examples |
+|---|---|---|
+| **1 — Metamodel** | entity *types* | `Artifact`, `Dimension`, `Registry`, `Policy`, `Workflow`, `Skill` |
+| **2 — Model** | *instances* | `ADR-0040`, a `GovernancePolicy`, a workflow |
+| **3 — Classification** | *assertions about instances* | *belongs to Layer A*, *is Active*, *owned by Architecture* |
+
+**This prevents classification systems from becoming part of the object model
+itself**, and lets dimensions, classifications and assertions evolve
+independently. The Knowledge Graph represents the three as distinct node types.
+
+> Levels classify *what kind of statement*; layers classify *where in the
+> pipeline*. Both begin with the metamodel — `ISSUE-0061`.
 
 ## Knowledge ownership
 
@@ -499,10 +529,11 @@ These are recorded as issues and must not be silently assumed:
 
 - `ISSUE-0049` — where state machine specifications live, and their boundary
   with `shared/vocabularies/`. Blocks `shared/vocabularies/`.
-- `ISSUE-0057` — the dimension and infrastructure sets are examples, and four
-  dimensions are undefined. **Blocks M2**, since the metamodel must model them.
-- `ISSUE-0058` — how an artifact declares its classification. **Blocks M2**,
-  since every contract depends on it.
+- `ISSUE-0059` — dimension independence versus declared relationships, and four
+  undefined dimensions. **Blocks the Dimension Registry.**
+- `ISSUE-0060` — where Dimension Assignments are authored, and whether
+  classification stays readable without the compiler. **Blocks M2.**
+- `ISSUE-0061` — "Level" and "Layer" are confusable ordinal schemes.
 - `ISSUE-0048` — no mechanism for correcting part of an `Active` ADR.
 - `ISSUE-0007` — versioning granularity, now also covering what identifies a
   **revision**.

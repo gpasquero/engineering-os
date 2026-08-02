@@ -2,7 +2,7 @@
 id: ISSUE-0057
 title: The set of Architectural Dimensions is examples, and four of them are undefined
 type: gap
-status: open
+status: resolved
 severity: blocking
 created: 2026-08-02
 updated: 2026-08-02
@@ -11,7 +11,7 @@ evidence:
   - governance/adr/ADR-0040-architectural-dimensions.md
   - governance/adr/ADR-0039-layers-classify-artifacts-not-directories.md
   - governance/adr/ADR-0027-state-machine-registration-model.md
-resolved-by: null
+resolved-by: ADR-0041
 ---
 
 # ISSUE-0057 — The dimension set is not fixed
@@ -69,9 +69,34 @@ was written to prevent, appearing inside `ADR-0040`.
 produce proliferating axes, and that the remedy is undefined. Without a test, a
 dimension becomes the easy answer to any classification difficulty.
 
-## Resolution criteria
+## Resolution
 
-An ADR stating whether dimensions are enumerated or registered, defining the
-four undefined dimensions or removing them, resolving whether `Governance
-Status` and `Lifecycle` are one axis, and giving a test for when a new dimension
-is justified.
+`ADR-0041`. **Dimensions are first-class semantic entities, added by
+registration.**
+
+> A Dimension is not merely a taxonomy. It is a semantic construct that defines
+> one independent axis of classification.
+
+Each declares identifier, purpose, governed entity types, value domain,
+cardinality, constraints, relationships to other dimensions, and its
+authoritative specification. A **Dimension Registry Specification**
+(authoritative) and a generated **Dimension Registry Projection** follow the
+Registry Pattern.
+
+> **Future dimensions are added by registration, never by modifying compiler
+> logic.**
+
+This confirms problem 1 as suspected: the answer is registration, exactly as
+`ADR-0027` answered it for state machines, and it discharges the compliance
+obligation `ADR-0031` had created. **Fifth instance of the Registry Pattern**,
+and the first adopted because a rule required it rather than because the shape
+was noticed again.
+
+Problem 3 is answered implicitly: a dimension is justified when all eight fields
+can be filled. An axis with no cardinality or no governed entity types is not a
+dimension.
+
+**Problem 2 is not answered.** The four undefined dimensions become registration
+work, and the `Governance Status` / `Lifecycle` overlap is untouched — carried
+into `ISSUE-0059`, together with a new tension between `ADR-0040`'s
+independence claim and `ADR-0041`'s "relationships to other dimensions" field.

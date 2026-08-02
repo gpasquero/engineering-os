@@ -289,13 +289,54 @@ are not themselves layers. ADRs, Issues, Acceptance Records and Sessions are
 governance artifacts — inputs to the Engineering OS process, not part of any
 target domain's semantic model. Their Semantic Layer is `None (Not Applicable)`.
 
-**Architectural Dimension** — an independent classification axis. **Every
-artifact is classified along several simultaneously** (`ADR-0040`): Semantic
-Layer, Artifact Taxonomy, Lifecycle, Governance Status, Ownership, Authority,
-Visibility, Compilation Phase. A value on one dimension never implies a value on
-another. The metamodel models dimensions explicitly rather than forcing every
-classification into a single hierarchy. The set is examples rather than closed,
-and four of the eight are undefined — `ISSUE-0057`.
+**Architectural Dimension** — a **first-class semantic entity** defining one
+independent axis of classification. Not merely a taxonomy (`ADR-0041`). Each
+declares identifier, purpose, governed entity types, value domain, cardinality,
+constraints, relationships to other dimensions, and its authoritative
+specification.
+
+**Dimensions are added by registration, never by modifying compiler logic** — a
+**Dimension Registry Specification** (authoritative) with a generated
+**Dimension Registry Projection**, following the Registry Pattern.
+
+Examples: Semantic Layer · Artifact Taxonomy · Lifecycle · Governance Status ·
+Ownership · Authority · Visibility · Compilation Phase. Four are undefined, and
+`ADR-0040`'s independence claim sits uneasily with declared inter-dimension
+relationships — `ISSUE-0059`.
+
+**Dimension Assignment** — the explicit semantic relationship by which an
+artifact is classified. **Artifacts do not contain dimension values**
+(`ADR-0042`):
+
+```text
+Artifact → Dimension Assignment → Dimension → Dimension Value
+```
+
+Assignments are versioned, may change without changing artifact identity, and
+are what validation targets. The Canonical Knowledge Model represents them as
+**graph relationships rather than embedded metadata**. Where they are *authored*
+is unresolved — `ISSUE-0060`.
+
+## The three semantic levels
+
+Distinct from the four layers, and a different axis (`ADR-0043`).
+
+**Level 1 — Metamodel.** Defines entity *types*: `Artifact`, `Dimension`,
+`Registry`, `Policy`, `Workflow`, `Skill`.
+
+**Level 2 — Model.** Defines *instances*: `ADR-0040`, a specific
+`GovernancePolicy`, the Compiler Interface Workflow.
+
+**Level 3 — Classification.** Defines *semantic assertions about instances*:
+*belongs to Layer A*, *is Authoritative*, *is Active*, *owned by Architecture*.
+
+**This separation prevents classification systems from becoming part of the
+object model itself.** The Knowledge Graph represents the three as distinct node
+types rather than flattening them into object properties.
+
+> **Levels are not layers.** Levels classify *what kind of statement* something
+> is; layers classify *where in the compilation pipeline* it sits. Both begin
+> with the metamodel, which invites conflation — `ISSUE-0061`.
 
 > **The term was redefined.** Under `ADR-0010`, "Layer A" meant the methodology
 > and "Layer B" the knowledge model. `ADR-0037` redefines Layer A as the

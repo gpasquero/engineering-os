@@ -16,7 +16,7 @@ same session the decision is made.
 > a rule exists; the rule that must be followed lives in a Policy under
 > `shared/policies/`. Agents consume policies; humans read ADRs for rationale.
 
-**Highest allocated ID: `ADR-0040`.** IDs are sequential and never reused.
+**Highest allocated ID: `ADR-0043`.** IDs are sequential and never reused.
 
 > This index table is a hand-maintained projection of ADR front matter. It is
 > listed in the transitional-debt register, `ISSUE-0037`.
@@ -56,6 +56,10 @@ Read these before designing anything that produces an artifact:
   and infrastructure are cross-cutting, not layers.
 - **`ADR-0040`** — **Architectural Dimensions**. Artifacts are classified along
   multiple independent axes; the metamodel models them explicitly.
+- **`ADR-0042`** — artifacts are classified by **Dimension Assignments**, not by
+  embedded values.
+- **`ADR-0043`** — **three semantic levels**: Metamodel, Model, Classification.
+  Read with `ADR-0037`; levels are not layers.
 - **`ADR-0017`** — reference architecture, not reference implementation.
 - **`ADR-0019`** — Knowledge Packages are a published interface.
 
@@ -103,6 +107,9 @@ Read these before designing anything that produces an artifact:
 | [ADR-0038](ADR-0038-four-questions-for-every-new-artifact-type.md) | **Four questions for every new artifact type** | accepted | — |
 | [ADR-0039](ADR-0039-layers-classify-artifacts-not-directories.md) | **Layers classify artifacts, not directories** | accepted | ISSUE-0056 |
 | [ADR-0040](ADR-0040-architectural-dimensions.md) | **Architectural Dimensions** | accepted | — |
+| [ADR-0041](ADR-0041-dimensions-are-registered-first-class-entities.md) | Dimensions are registered first-class entities | accepted | ISSUE-0057 |
+| [ADR-0042](ADR-0042-dimension-assignments.md) | **Dimension Assignments** | accepted | ISSUE-0058 |
+| [ADR-0043](ADR-0043-three-semantic-levels.md) | **Three semantic levels** | accepted | — |
 
 ## Supersessions
 
