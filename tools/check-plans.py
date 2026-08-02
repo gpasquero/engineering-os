@@ -44,6 +44,25 @@ def main():
     queries, recommendations = load_queries(), load_recommendations()
     dead, hollow = [], []
 
+    # A subject-scoped recommendation whose step uses a `subject: none` query
+    # gives every subject the same answer for that step, and that answer moves
+    # whenever the REST of the model moves. Found by Guidance Preservation:
+    # two untouched artifacts received different advice across ten commits
+    # because the model had grown around them (SESSION-0050).
+    #
+    # Third appearance of one authoring error — after EQ-09 scoring 216/216 and
+    # EQ-05's mixed mapping. Each time a new consumer was built, the same
+    # mistake was waiting in a new place. Reported, not failed: whether the step
+    # BELONGS there is the author's call, and being unable to see it was not.
+    leaks = []
+    for rid, rec in sorted(recommendations.items()):
+        if not rec.get("applies-to"):
+            continue
+        for step in rec.get("steps") or []:
+            q = queries.get(step.get("query"))
+            if q is not None and q.get("subject") == "none":
+                leaks.append((rid, step["action"], step["query"]))
+
     for pid, plan in sorted(plans.items()):
         subjects = plan.get("applies-to") or []
         for phase in plan.get("phases") or []:
@@ -75,12 +94,19 @@ def main():
         print(f"          {DIM}produces nothing for {', '.join(empty_for)}"
               f" — {', '.join(qs)}{OFF}")
 
+    for rid, action, qid in leaks:
+        print(f"  {YELLOW}MODEL-WIDE{OFF}  {rid}.{action}")
+        print(f"          {DIM}{qid} is declared `subject: none`; every subject "
+              f"gets the same answer{OFF}")
+
     print()
     if dead:
         print(f"{RED}{len(dead)} phase(s) can never produce an action{OFF}")
         return 1
     note = (f" — {len(hollow)} hollow for some subject type, each named by the planner"
             if hollow else "")
+    if leaks:
+        note += f"; {len(leaks)} model-wide step(s) inside subject-scoped advice"
     print(f"{GREEN}every plan phase can act on at least one of its subject types{OFF}{note}")
     return 0
 

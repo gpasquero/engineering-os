@@ -16,7 +16,7 @@ same session the decision is made.
 > a rule exists; the rule that must be followed lives in a Policy under
 > `shared/policies/`. Agents consume policies; humans read ADRs for rationale.
 
-**Highest allocated ID: `ADR-0136`.** IDs are sequential and never reused.
+**Highest allocated ID: `ADR-0141`.** IDs are sequential and never reused.
 
 > This index table is a hand-maintained projection of ADR front matter. It is
 > listed in the transitional-debt register, `ISSUE-0037`.
@@ -231,6 +231,11 @@ Read these before designing anything that produces an artifact:
 | [ADR-0134](ADR-0134-questions-are-the-product-contract.md) | **Engineering Questions are the product contract; predicates are implementation detail** | accepted | — |
 | [ADR-0135](ADR-0135-acquisition-and-guidance-are-two-products.md) | **Engineering Acquisition and Engineering Guidance are two products sharing an implementation** | accepted | — |
 | [ADR-0136](ADR-0136-north-star-correct-decisions.md) | **The North Star is preserving an engineering team's ability to make correct decisions as software evolves** | accepted | — |
+| [ADR-0137](ADR-0137-question-set-is-a-stable-contract.md) | **The Engineering Question Set is a stable contract and changes only under review** | accepted | — |
+| [ADR-0138](ADR-0138-decision-preservation.md) | **Decision Preservation is what the customer buys and it is not Understanding Preservation** | accepted | — |
+| [ADR-0139](ADR-0139-benchmark-measures-guidance.md) | **The longitudinal benchmark measures Guidance, over subjects nobody touched** | accepted | — |
+| [ADR-0140](ADR-0140-brownfield-onboarding-skill.md) | **The next capability is a non-deterministic Brownfield Onboarding Skill that proposes, never decides** | accepted | — |
+| [ADR-0141](ADR-0141-customer-lifecycle.md) | **The customer lifecycle is the product experience and outranks the compiler architecture** | accepted | — |
 
 ## Supersessions
 

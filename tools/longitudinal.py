@@ -34,14 +34,15 @@ sys.path.insert(0, str(ROOT))
 from discovery.mechanical import extract                    # noqa: E402
 from discovery.interpretive import interpret                # noqa: E402
 from discovery.candidate import Candidate                   # noqa: E402
-from discovery.continuous import acquire, delta             # noqa: E402
+from discovery.continuous import acquire, delta, _index      # noqa: E402
 from discovery import drift                                 # noqa: E402
 from compiler.apply import authorize, apply                 # noqa: E402
 from compiler import compile_project                        # noqa: E402
 from compiler.registry import load_all                      # noqa: E402
 from compiler.query import load_queries                     # noqa: E402
 sys.path.insert(0, str(ROOT / "tools"))
-from measure import score_all, retention                               # noqa: E402
+from measure import score_all, retention
+from guidance import guidance                               # noqa: E402
 
 REACQUIRE_EVERY = 4
 BAR = "─" * 74
@@ -112,6 +113,8 @@ def main(argv):
                            reviewer="Project Owner (gpasquero)")
     apply(auth, project)
     scores, err = measure(project, questions, queries)
+    ckm_t0, _ = compile_project(project)
+    touched = set()          # every source the repository changed after t0
     print(f"   proposed {proposed}   curated {len(auth['entities'])}   "
           f"answered {scores['answered']}/{scores['total']}")
     timeline.append({"step": "t0", "commit": commits[0], "kind": "initial",
@@ -127,6 +130,20 @@ def main(argv):
         ckm_before, _ = compile_project(project)
         auth_ids = {n["id"] for n in ckm_before["nodes"]}
         inc, inc_report = acquire(prev_mech, mech, auth_ids)
+        # Resolve each delta key to the SOURCE PATH it concerns. The keys are
+        # heterogeneous — a suite is a path, a table is a name, a route is a
+        # verb and a path — and substring-matching them against provenance
+        # over-matched badly enough to leave two untouched subjects out of ten.
+        d = delta(prev_mech, mech)
+        idx_a, idx_b = _index(mech), _index(prev_mech)
+        for kind, key in (("suites", "file"), ("tables", "source"),
+                          ("modules", "path"), ("routes", "source"),
+                          ("docs", "file")):
+            for bucket in ("added", "removed", "changed"):
+                for k in d[kind].get(bucket) or []:
+                    item = idx_a[kind].get(k) or idx_b[kind].get(k) or {}
+                    if item.get(key):
+                        touched.add(item[key])
         ents = inc["proposals"]["entities"]
         ids = {e["id"] for e in ents if keep(e["id"])}
         auth, _, _ = authorize(inc, accept_ids=ids,
@@ -195,6 +212,23 @@ def main(argv):
                       "degraded": YELLOW, "lost": RED}[move]
             print(f"      {colour}{move:9}{OFF} {qid}")
 
+    # Guidance Preservation, over subjects whose evidence nobody touched. A
+    # subject the repository changed SHOULD get different advice; only an
+    # untouched one makes drift meaningful (ADR-0139).
+    ckm_t9, _ = compile_project(project)
+    untouched = {n["id"] for n in ckm_t0["nodes"]
+                 if (n.get("attributes") or {}).get("source") not in touched}
+    g = guidance(ckm_t0, ckm_t9, untouched)
+    grate = "—" if g["rate"] is None else f"{100 * g['rate']:.0f}%"
+    print(f"   {'Guidance Preservation':<24} {grate}   "
+          f"{DIM}{g['judged']} pairs over {g['subjects']} untouched subjects: "
+          f"{g['counts']['stable']} stable, {g['counts']['changed']} changed, "
+          f"{g['counts']['lost']} lost{OFF}")
+    for row in g["rows"]:
+        if row["state"] in ("changed", "lost"):
+            print(f"      {YELLOW if row['state'] == 'changed' else RED}"
+                  f"{row['state']:9}{OFF} {row['subject']}  {row['recommendation']}")
+
     first, last = timeline[0], timeline[-1]
     maint = [r for r in timeline if r["kind"] == "continuous"]
     total_maint = sum(r["cost"] for r in maint)
@@ -217,7 +251,8 @@ def main(argv):
           f"{last['answered']}/{last['total']}   {verdict}")
 
     (project / "longitudinal.json").write_text(json.dumps(
-        {"repository": str(repo), "timeline": timeline, "retention": r},
+        {"repository": str(repo), "timeline": timeline, "retention": r,
+         "guidance": {k: v for k, v in g.items() if k != "rows"}},
         indent=2) + "\n")
     return 0
 

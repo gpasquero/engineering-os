@@ -269,5 +269,16 @@
     "lost": 0,
     "gained": 1,
     "rate": 1.0
+  },
+  "guidance": {
+    "counts": {
+      "stable": 8,
+      "changed": 2,
+      "lost": 0,
+      "gained": 0
+    },
+    "subjects": 8,
+    "judged": 10,
+    "rate": 0.8
   }
 }
