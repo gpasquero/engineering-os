@@ -9,8 +9,8 @@ related: [ISSUE-0037]
 
 # Issue Index
 
-**45 recorded · 22 open · 22 resolved · 1 deferred.** Highest allocated ID:
-`ISSUE-0045`.
+**48 recorded · 23 open · 24 resolved · 1 deferred.** Highest allocated ID:
+`ISSUE-0048`.
 
 > **Hand-maintained projection.** Under `ADR-0016` this is a projection of issue
 > front matter, which is authoritative. No generator exists yet (`ISSUE-0036`),
@@ -26,8 +26,8 @@ related: [ISSUE-0037]
 | [0002](ISSUE-0002-composition-primitive-undefined.md) | How a workflow invokes a skill is undefined | M8 |
 | [0006](ISSUE-0006-scenario-testing-method-undefined.md) | How a prompt-based methodology is tested is undefined | M10 |
 
-**M2 is unblocked.** Two issues gate `shared/vocabularies/` rather than the
-milestone: `ISSUE-0044` and `ISSUE-0045`.
+**M2 is unblocked.** `ISSUE-0047` gates the State Machine Registry and
+`shared/vocabularies/` rather than the milestone.
 
 ## Open, by milestone
 
@@ -35,8 +35,8 @@ milestone: `ISSUE-0044` and `ISSUE-0045`.
 
 | ID | Title | Type | Severity |
 |---|---|---|---|
-| [0044](ISSUE-0044-artifact-versus-revision-lifecycle-naming.md) | `ArtifactLifecycle` conflicts with `ADR-0020`'s revision framing | inconsistency | high |
-| [0045](ISSUE-0045-state-machine-inventory-not-fixed.md) | The state machine inventory is not fixed | gap | high |
+| [0047](ISSUE-0047-state-machine-registry-location.md) | Where the State Machine Registry lives | question | high |
+| [0048](ISSUE-0048-no-mechanism-for-correcting-an-active-adr.md) | No mechanism for correcting part of an `Active` ADR | gap | medium |
 | [0007](ISSUE-0007-versioning-granularity-undefined.md) | Versioning granularity; what identifies a revision | question | high |
 | [0011](ISSUE-0011-audience-licence-distribution-undefined.md) | Repository is public with no licence | question | high |
 | [0013](ISSUE-0013-three-conflicting-impact-analysis-templates.md) | Three conflicting impact-analysis templates | inconsistency | high |
@@ -53,6 +53,7 @@ milestone: `ISSUE-0044` and `ISSUE-0045`.
 | [0010](ISSUE-0010-definition-of-done-missing.md) | Definition of Done asserted but never stated | gap | high |
 | [0020](ISSUE-0020-three-conflicting-autonomy-policies.md) | Three incompatible autonomy policies | inconsistency | high |
 | [0021](ISSUE-0021-write-scope-conflict-on-composition.md) | Write scope conflicts on composition | risk | high |
+| [0046](ISSUE-0046-modeling-guidelines-have-no-home.md) | Core modeling guidelines have no home document | gap | high |
 | [0027](ISSUE-0027-inherited-decisions-lack-context.md) | Ten inherited decisions have no rationale | gap | medium |
 
 ### M4 — Discovery skills
@@ -127,3 +128,5 @@ milestone: `ISSUE-0044` and `ISSUE-0045`.
 | [0041](ISSUE-0041-acceptance-record-undefined.md) | Acceptance record undefined | `ADR-0021` |
 | [0042](ISSUE-0042-acceptance-record-regress.md) | Acceptance Record regress | `ADR-0024` |
 | [0043](ISSUE-0043-document-status-vocabularies-overlap-lifecycle.md) | Status vocabularies overlap the lifecycle | `ADR-0025` |
+| [0044](ISSUE-0044-artifact-versus-revision-lifecycle-naming.md) | Artifact versus revision lifecycle naming | `ADR-0026` |
+| [0045](ISSUE-0045-state-machine-inventory-not-fixed.md) | State machine inventory not fixed | `ADR-0027` |

@@ -69,7 +69,7 @@ that an issue's status is not a revision lifecycle — has not been confirmed.
 of "state."** State names may coincide only if explicitly namespaced:
 
 ```text
-ArtifactLifecycle.Active     IssueLifecycle.Open
+ArtifactRevisionLifecycle.Active   IssueLifecycle.Open
 ADRLifecycle.Accepted        AcceptanceLifecycle.Recorded
 ```
 
@@ -86,7 +86,7 @@ just issue status, but *every* vocabulary is its own machine.
 
 The live contradiction dissolves without renaming anything. Nineteen ADRs marked
 `ADRLifecycle.Accepted` never conflicted with one revision being
-`ArtifactLifecycle.Active`; the two were never the same state.
+`ArtifactRevisionLifecycle.Active`; the two were never the same state.
 
 This is now a **fundamental modeling rule for the entire Engineering OS**,
 governing how skills model state machines in target domains as well.

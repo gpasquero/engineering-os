@@ -2,14 +2,14 @@
 id: ISSUE-0045
 title: The inventory of state machines is not fixed
 type: gap
-status: open
+status: resolved
 severity: high
 created: 2026-08-02
 updated: 2026-08-02
 blocks: [M2]
 evidence:
   - governance/adr/ADR-0025-every-state-belongs-to-exactly-one-state-machine.md
-resolved-by: null
+resolved-by: ADR-0027
 ---
 
 # ISSUE-0045 — The state machine inventory is not fixed
@@ -60,8 +60,26 @@ a registration rule.
 - How does a target repository declare its own machines without colliding with
   the framework's?
 
-## Resolution criteria
+## Resolution
 
-An ADR fixing the machines this repository owns, deferring those whose subject
-does not exist, and defining how a new state machine is introduced — in this
-repository and in an adopting one.
+`ADR-0027`. **Do not maintain a fixed catalog. State machines are registered,
+not enumerated.**
+
+The suspicion recorded above was right: the answer is a registration rule, not a
+list.
+
+Every state machine registers nine fields — identifier, owner, governed entity,
+purpose, vocabulary, transition rules, authoritative specification, related
+ontology concepts, related workflows.
+
+The repository contains only the machines that exist today. **The framework
+validates registrations rather than enumerating every possible lifecycle**, which
+makes the architecture extensible by design. The registry becomes the source of
+truth, and documentation, visualizations, ontology navigation and validation are
+generated from it rather than from hand-maintained lists.
+
+**The same mechanism serves Engineering OS and every adopting repository** —
+mirroring `ADR-0013`, where three manifests serve both.
+
+Opened by this answer: `ISSUE-0047` — where the registry lives, given that
+`ADR-0013` already assigns state machines to `KNOWLEDGE-MANIFEST.yaml`.

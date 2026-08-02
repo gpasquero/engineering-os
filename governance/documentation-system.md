@@ -98,7 +98,7 @@ branch: feat/repository-bootstrap
 
 **Each of these is a distinct state machine** (`ADR-0025`). There is no global
 concept of "state" in this project. `ADRLifecycle.Accepted` and
-`ArtifactLifecycle.Accepted` are different states that happen to share an
+`ArtifactRevisionLifecycle.Accepted` are different states that happen to share an
 English word; the label implies no equivalence.
 
 In front matter the machine is determined by document type, so the bare value is
@@ -130,7 +130,7 @@ index or status document), `proposal` (a design note, not binding),
 These three predate the revision lifecycle defined in `ADR-0020` (`Draft`,
 `Under Review`, `Accepted`, `Active`, `Superseded`, `Archived`) and appeared to
 overlap it. Under `ADR-0025` they do not: each is its own state machine, and
-`ADRLifecycle.Accepted` never meant `ArtifactLifecycle.Active`.
+`ADRLifecycle.Accepted` never meant `ArtifactRevisionLifecycle.Active`.
 
 The naming of the artifact/revision machine is still open (`ISSUE-0044`), as is
 the full inventory of machines this repository owns (`ISSUE-0045`).

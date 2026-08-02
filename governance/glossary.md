@@ -104,14 +104,31 @@ checks. Is itself knowledge, and traceable. See `ADR-0018`.
 **State machine** — the owner of a state vocabulary. **Every state belongs to
 exactly one state machine, and there is no global concept of "state"**
 (`ADR-0025`). State names may coincide across machines only when explicitly
-namespaced — `ADRLifecycle.Accepted`, `ArtifactLifecycle.Active`,
+namespaced — `ADRLifecycle.Accepted`, `ArtifactRevisionLifecycle.Active`,
 `IssueLifecycle.Open`. **The same textual label never implies semantic
 equivalence across machines.** This is a fundamental modeling rule for the whole
 Engineering OS, including how skills model state in target domains.
 
+**Artifact** — an **identity** that may own many Revisions. It has metadata —
+identifier, ownership, revision history — and **no lifecycle of its own**. Only
+its revisions transition through states (`ADR-0026`).
+
 **Revision** — an identifiable version of an artifact. The unit the lifecycle
-applies to, and the unit that is accepted. What identifies a revision is
-undefined — `ISSUE-0007`.
+applies to, and the unit that is accepted. A revision has exactly one lifecycle
+state. What identifies a revision is undefined — `ISSUE-0007`.
+
+**`ArtifactRevisionLifecycle`** — the state machine governing revisions. Named
+after the entity it governs, per the naming rule in `ADR-0026`, which applies to
+every versioned object in Engineering OS.
+
+**State Machine Registry** — the source of truth for state machines. Machines
+are **registered, not enumerated**: each registers its identifier, owner,
+governed entity, purpose, vocabulary, transition rules, authoritative
+specification, related ontology concepts and related workflows. The framework
+validates registrations rather than enumerating every possible lifecycle, and
+documentation, visualizations, ontology navigation and validation are generated
+from it. The same mechanism serves Engineering OS and every adopting repository
+(`ADR-0027`). Its location is open — `ISSUE-0047`.
 
 **Revision lifecycle** — a closed vocabulary of six states (`ADR-0020`):
 `Draft` → `Under Review` → `Accepted` → `Active` → `Superseded` → `Archived`.

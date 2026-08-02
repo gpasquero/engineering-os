@@ -30,10 +30,9 @@ recorded as issues. No skills, policies or contracts.
 resolved by `ADR-0020` through `ADR-0023`, and the trust root `ACCEPT-0001`
 exists.
 
-Two issues gate `shared/vocabularies/` rather than the milestone: `ISSUE-0044`
-(the artifact/revision machine name) and `ISSUE-0045` (which state machines this
-repository owns). Other M2 work — the compiler interface specification,
-`model-spec/`, the manifests, the remaining contracts — can proceed in parallel.
+`ISSUE-0047` gates the State Machine Registry and `shared/vocabularies/`. Other
+M2 work — the compiler interface specification, `model-spec/`, the manifests,
+the remaining contracts — can proceed in parallel.
 
 - **Compiler interface specification** (`ADR-0017`) — language-independent, and
   the substitute for shipping executable tooling in this milestone
@@ -45,10 +44,14 @@ repository owns). Other M2 work — the compiler interface specification,
 - Skill contract and workflow contract, including write-scope declaration
 - Evidence record, conflict record, traceability record contracts
 - **Acceptance Record contract** (`ADR-0021`, `ISSUE-0042`)
+- **State Machine Registry** (`ADR-0027`) — the registration model and the
+  machines that exist today. Includes defining the shape of three fields that do
+  not yet have one: transition rules, related ontology concepts, authoritative
+  specification.
 - `shared/vocabularies/` — **grouped by state machine** (`ADR-0025`), never as
   one global list. Covers assertion statuses, confidence, risk, gate decisions,
-  change types, **artifact kinds** (`ADR-0012`) and the **revision lifecycle**
-  (`ADR-0020`)
+  change types, **artifact kinds** (`ADR-0012`) and
+  **`ArtifactRevisionLifecycle`** (`ADR-0020`, `ADR-0026`)
 - One canonical impact-analysis template
 
 **No executable tooling.** `ADR-0017` defers the implementation language, so
@@ -71,6 +74,10 @@ knowledge-update policies.
 Also the **first governance policy** (`ADR-0023`). Being an Authoritative
 Artifact, it is accepted under the trust root `ACCEPT-0001`, and thereafter
 governs the acceptance of its own successor.
+
+And the **core modeling guidelines** (`ISSUE-0046`) — the rules declared across
+`ADR-0025` and `ADR-0026` that govern modeling in target domains, collected
+where skills can reference them.
 
 ## M4 — Discovery skills
 

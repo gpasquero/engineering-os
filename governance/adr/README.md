@@ -12,7 +12,7 @@ related: [ISSUE-0037]
 A decision that is not recorded here will be re-litigated. Write the ADR in the
 same session the decision is made.
 
-**Highest allocated ID: `ADR-0025`.** IDs are sequential and never reused.
+**Highest allocated ID: `ADR-0027`.** IDs are sequential and never reused.
 
 > This index table is a hand-maintained projection of ADR front matter. It is
 > listed in the transitional-debt register, `ISSUE-0037`.
@@ -28,6 +28,9 @@ Read these before designing anything that produces an artifact:
 - **`ADR-0023`** — governance is self-hosting but never self-certifying.
 - **`ADR-0025`** — every state belongs to exactly one state machine. A modeling
   rule for the whole Engineering OS, not only for this repository.
+- **`ADR-0026`** — the lifecycle belongs to a Revision; an Artifact is an
+  identity with no lifecycle of its own.
+- **`ADR-0027`** — state machines are registered, not enumerated.
 - **`ADR-0017`** — reference architecture, not reference implementation.
 - **`ADR-0019`** — Knowledge Packages are a published interface.
 
@@ -60,6 +63,8 @@ Read these before designing anything that produces an artifact:
 | [ADR-0023](ADR-0023-governance-is-self-hosting-never-self-certifying.md) | **Governance is self-hosting but never self-certifying** | accepted | ISSUE-0039 |
 | [ADR-0024](ADR-0024-acceptance-terminates-at-the-acceptance-record.md) | The acceptance process terminates at the Acceptance Record | accepted | ISSUE-0042 |
 | [ADR-0025](ADR-0025-every-state-belongs-to-exactly-one-state-machine.md) | **Every state belongs to exactly one state machine** | accepted | ISSUE-0043 |
+| [ADR-0026](ADR-0026-artifact-revision-lifecycle.md) | **The lifecycle belongs to a Revision** | accepted | ISSUE-0044 |
+| [ADR-0027](ADR-0027-state-machine-registration-model.md) | **State machines are registered, not enumerated** | accepted | ISSUE-0045 |
 
 ## Supersessions
 
@@ -77,6 +82,15 @@ superseding ADR for the current rule.
 The acceptance chain `ADR-0015` → `ADR-0018` → `ADR-0020` is three deep in two
 sessions. That depth is honest evidence that this area is still settling, not a
 defect in the mechanism.
+
+## Corrections
+
+Distinct from supersession: the ADR's decision stands, but a detail within it is
+wrong. There is no front-matter mechanism for this — `ISSUE-0048`.
+
+| Corrected | By | What |
+|---|---|---|
+| `ADR-0025` | `ADR-0026` | Examples only. `ArtifactLifecycle` should read `ArtifactRevisionLifecycle`. The state-machine rule is untouched and remains `Active`. |
 
 ## Rules
 

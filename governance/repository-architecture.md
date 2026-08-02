@@ -118,10 +118,17 @@ a commit** (`ADR-0020`).
 Draft → Under Review → Accepted → Active → Superseded → Archived
 ```
 
-This is the lifecycle of a **revision**, and it is independent of the artifact
-taxonomy. An artifact is *authoritative* because of its taxonomy; a revision is
-*Active* because of its lifecycle. Exactly one revision of an artifact is
-`Active` at a time.
+This is `ArtifactRevisionLifecycle`, the lifecycle of a **revision**, and it is
+independent of the artifact taxonomy (`ADR-0026`).
+
+**An Artifact is an identity that may own many Revisions, and has no lifecycle
+of its own** — only metadata: identifier, ownership, revision history. A
+Revision has exactly one lifecycle state. "What state is this artifact in?" is a
+malformed question.
+
+An artifact is *authoritative* because of its taxonomy; a revision is *Active*
+because of its lifecycle. Exactly one revision of an artifact is `Active` at a
+time.
 
 Acceptance is an engineering decision, not a Git operation. It requires all
 three of:
@@ -162,9 +169,9 @@ state machines, each owning its own vocabulary. State names may coincide only
 when explicitly namespaced:
 
 ```text
-ArtifactLifecycle.Active     ADRLifecycle.Accepted
-IssueLifecycle.Open          AcceptanceLifecycle.Recorded
-CompilerExecution.Completed
+ArtifactRevisionLifecycle.Active    ADRLifecycle.Accepted
+IssueLifecycle.Open                 AcceptanceLifecycle.Recorded
+CompilerExecutionLifecycle.Completed
 ```
 
 **The same textual label never implies semantic equivalence across machines.**
@@ -178,8 +185,15 @@ this repository names its own. It exists because the project caught the same
 class of collision three times — "skill", "authoritative", and the document
 status vocabularies — and the third time identified the shared root cause.
 
-The naming of the artifact/revision machine (`ISSUE-0044`) and the inventory of
-machines this repository owns (`ISSUE-0045`) are open.
+**State machines are registered, not enumerated** (`ADR-0027`). Every machine
+registers its identifier, owner, governed entity, purpose, vocabulary,
+transition rules, authoritative specification, related ontology concepts and
+related workflows. The framework validates registrations rather than
+enumerating every possible lifecycle, and documentation, visualizations,
+ontology navigation and validation are generated from the registry.
+
+The same mechanism serves Engineering OS and every adopting repository. Where
+the registry lives is open — `ISSUE-0047`.
 
 ## Reference architecture, not reference implementation
 
@@ -338,10 +352,11 @@ current state and proposed state. See `ADR-0005`.
 
 These are recorded as issues and must not be silently assumed:
 
-- `ISSUE-0044` — whether the state machine is `ArtifactLifecycle` or
-  `RevisionLifecycle`. Blocks `shared/vocabularies/`.
-- `ISSUE-0045` — the inventory of state machines, and how a new one is
-  introduced in this repository and in an adopting one.
+- `ISSUE-0047` — where the State Machine Registry lives, and its relationship to
+  `KNOWLEDGE-MANIFEST.yaml`. Blocks `shared/vocabularies/`.
+- `ISSUE-0046` — core modeling guidelines are declared across scattered ADRs
+  with no home document.
+- `ISSUE-0048` — no mechanism for correcting part of an `Active` ADR.
 - `ISSUE-0007` — versioning granularity, now also covering what identifies a
   **revision**.
 - `ISSUE-0031` — the scope of this repository's own `model/`, and its overlap

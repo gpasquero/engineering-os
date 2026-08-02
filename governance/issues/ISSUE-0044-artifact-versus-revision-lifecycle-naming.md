@@ -2,7 +2,7 @@
 id: ISSUE-0044
 title: ArtifactLifecycle conflicts with ADR-0020's revision framing
 type: inconsistency
-status: open
+status: resolved
 severity: high
 created: 2026-08-02
 updated: 2026-08-02
@@ -10,7 +10,7 @@ blocks: [M2]
 evidence:
   - governance/adr/ADR-0025-every-state-belongs-to-exactly-one-state-machine.md
   - governance/adr/ADR-0020-artifact-taxonomy-and-revision-lifecycle-are-independent.md
-resolved-by: null
+resolved-by: ADR-0026
 ---
 
 # ISSUE-0044 — `ArtifactLifecycle` versus the revision framing
@@ -57,7 +57,26 @@ The first is the most consistent with what is already decided. The name in
 `ADR-0025` was given among examples rather than as a definitive inventory
 (`ISSUE-0045`), which suggests it was illustrative.
 
-## Resolution criteria
+## Resolution
 
-An ADR naming the state machine definitively and confirming whether states
-attach to revisions or to artifacts. Must precede `shared/vocabularies/`.
+`ADR-0026`. **`ADR-0020` is correct — the lifecycle belongs to a Revision.**
+
+- An **Artifact** is an *identity* that may own many Revisions.
+- A **Revision** has exactly one lifecycle state.
+- **The Artifact itself has no lifecycle.** It has metadata: identifier,
+  ownership, revision history. Only revisions transition.
+
+The machine is named after the entity that owns it:
+`ArtifactRevisionLifecycle.Draft`, `.UnderReview`, `.Accepted`, `.Active`,
+`.Superseded`, `.Archived`.
+
+Neither option listed above was taken as written. The first would have kept the
+implicit indirection; the third (`RevisionLifecycle`) drops the entity prefix and
+breaks the naming rule, since other kinds of revision will exist.
+
+`ADR-0026` also **corrects the examples in `ADR-0025`** without superseding it —
+that ADR's rule is untouched. The documentation system has no mechanism for a
+partial correction, which is recorded as `ISSUE-0048`.
+
+The identity/revision distinction is now a **core modeling guideline** applying
+to every versioned object in Engineering OS.
