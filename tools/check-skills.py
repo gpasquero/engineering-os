@@ -53,10 +53,20 @@ def main():
                       for i in (skill.get("required-inputs") or []))
         if depends and sid not in MAY_DEPEND:
             problems.append("requires another skill's output; not independently runnable")
-        if skill.get("kind") not in ("general", "domain"):
-            problems.append(f"kind must be 'general' or 'domain', got {skill.get('kind')!r}")
-        if skill.get("kind") == "domain" and not skill.get("domain"):
-            problems.append("a domain skill must name its domain")
+        kind = skill.get("kind")
+        if kind not in ("general", "technology", "domain"):
+            problems.append(f"kind must be general, technology or domain, "
+                            f"got {kind!r}")
+        if kind == "domain" and not skill.get("domain"):
+            problems.append("a domain skill must name its business domain")
+        if kind == "technology" and not skill.get("technology"):
+            problems.append("a technology skill must name its technology")
+        # A skill reads the Mechanical Engineering Model. One that reads the
+        # repository is a Stack Profile wearing a skill's name (ADR-0121).
+        for tool in skill.get("permitted-tools") or []:
+            if "repositor" in tool or "file" in tool or "grep" in tool:
+                problems.append(f"permitted-tool {tool!r} reads the repository; "
+                                f"a skill reads the Mechanical Model (ADR-0121)")
 
         # proposal-types must name real metamodel entities. A blind worker
         # reported that nothing flagged a proposal typed outside the list; the

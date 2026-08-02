@@ -19,6 +19,19 @@ structurally rather than by promise: Interpretive Discovery reads the Mechanical
 Engineering Model **exclusively** (`ADR-0108`), and the Mechanical Model contains
 only what the declared Stack Profile extracted.
 
+## The product metric
+
+**2 of 9 engineering questions answered — 22 %** (`ADR-0120`). Measured after
+this report was first written, and it leads now because counts do not.
+
+```text
+wa-b2b     2/9   22%      453 nodes, 324 edges
+ai-desk    3/9   33%       76 nodes,  78 edges
+```
+
+**The six-times-larger model understands less.** Everything below is the detail
+behind that sentence.
+
 ## What was observed
 
 | | `ai-desk` | `wa-b2b` |

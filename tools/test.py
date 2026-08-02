@@ -156,7 +156,8 @@ def main(argv):
 
     print()
     for checker in ("tools/check-query-schema.py", "tools/check-skills.py",
-                    "tools/check-plans.py", "tools/check-governance.py"):
+                    "tools/check-plans.py", "tools/check-governance.py",
+                    "tools/check-questions.py"):
         proc = subprocess.run([sys.executable, str(ROOT / checker)],
                               capture_output=True, text=True)
         print("  " + proc.stdout.strip().splitlines()[-1])

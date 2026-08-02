@@ -118,6 +118,20 @@ registries:
       queries. No plan logic is written in code, and no language model
       participates in producing a plan (ADR-0092, ADR-0094).
 
+  - id: REG-engineering-questions
+    registers: the engineering questions the product is measured by
+    source: ../engineering-questions.md
+    extraction: yaml-block
+    collection: engineering-questions
+    membership: >
+      A question is registered by appearing with an id, the question itself, its
+      author, why it matters, the declared queries that would answer it, the
+      subject types it is asked about, and a threshold. A question with an empty
+      answered-by is registered and unanswerable — which is the finding.
+    extension: >
+      An adopting repository declares its own questions. A question is never
+      added by the party building what it measures (ADR-0120).
+
   - id: REG-engineering-intents
     registers: why a developer entered the system
     source: ../engineering-intents.md

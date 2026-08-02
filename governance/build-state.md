@@ -4,7 +4,7 @@ title: Build State
 status: current
 created: 2026-08-02
 updated: 2026-08-02
-milestone: generalization
+milestone: engineering-memory
 ---
 
 # Build State
@@ -17,8 +17,35 @@ milestone: generalization
 
 ## Current work
 
-**Generalization.** The lifecycle runs on more than the repository it was built
-against — measured, not assumed (`ADR-0119`).
+**Engineering memory.** Discovery exists so that six months later an engineer can
+ask a difficult question and receive an answer nobody had to rediscover
+(`ADR-0122`).
+
+## The product metric
+
+**The percentage of engineering questions answered** (`ADR-0120`). Entities,
+predicates, graph size and proposal count are implementation metrics.
+
+```sh
+python3 tools/measure.py external/wa-b2b-onboarding external/ai-desk-lifecycle
+```
+
+```text
+wa-b2b     2/9   22%      453 nodes, 324 edges
+ai-desk    3/9   33%       76 nodes,  78 edges
+```
+
+**The six-times-larger model understands less.** No count this project published
+in forty-five sessions could have said that.
+
+| Unanswered | State | Meaning |
+|---|---|---|
+| *Why does this system work this way?* | `no-data` **in both** | repeated evidence (`ADR-0119`) |
+| *Which architectural decisions still matter?* | `no-data` **in both** | repeated evidence |
+| *Who is allowed to perform this operation?* | **`no-query`** | a constant — **more benchmarks cannot advance it** |
+
+The question set is **authored by the reviewer**, and the implementer may not add
+a question they know passes.
 
 ## Two repositories, one interpreter
 
@@ -151,7 +178,8 @@ a proposal like any other.
 | `external/wa-b2b-onboarding/` | **The first benchmark of an unseen system** — 453 sources, `BENCHMARK.md` |
 | `external/…/experiment/blind/` | The blind benchmark |
 | `tools/check-governance.py` | The corpus check, **committed at last** — 271 records |
-| Registries | 19 |
+| `model/engineering-questions.md` | **The product metric** — 9 questions, reviewer-authored |
+| Registries | **20** |
 | `model/metamodel/` | 23 of 27 entities — **unchanged for twelve milestones** |
 
 ## What the maintained model does not contain
@@ -180,6 +208,15 @@ unspent.**
 
 **Runtime evidence.** No mode consumes it.
 
+**Any measurement of the claim `ADR-0122` makes.** The architecture claims
+*cumulative* improvement. Continuous and Periodic Reacquisition have run against
+**one engineering change, in one repository, over one commit.** A longitudinal
+test is missing infrastructure, not a nice-to-have.
+
+**A domain Discovery Skill.** The category is empty again — `DS-multitenant-saas`
+was reclassified as `technology`, because multi-tenancy is an architectural
+pattern and not a business (`ADR-0121`).
+
 **Any knowledge of authorization.** The highest-value gap found, and deliberately
 not built: one repository is not evidence (`ADR-0119`).
 
@@ -207,6 +244,8 @@ catalogue. Six more were deferred by the test written in the same session.
 | **Consumption is a stronger test than validation** — three defects now found by running output, none by checking it | `SESSION-0044` |
 | **The same five metamodel entities in two unrelated repositories** — repeated evidence, and it points at the interpreter | `BENCHMARK.md` |
 | **369 migrations and 135 documents unread** — the system's decision history is in the repository and not in the model | `BENCHMARK.md` |
+| **A metric is a query too** — three scoring defects, all flattering, two found by hand and the third by a check | `tools/check-questions.py` |
+| **No strong event-driven repository is available locally** — the only one with a broker has three test classes | `SESSION-0046` |
 | **`apply()` never asks whose model is already in the directory** — pointed at another project's model it merged the two and reported success | `SESSION-0045` |
 | **A check retyped each session is not a check** — three records had unparseable front matter for many sessions | `tools/check-governance.py` |
 | Synchronized is not the same as useful; only running the Director against both states would show it | `LIFECYCLE.md` |
@@ -216,12 +255,14 @@ catalogue. Six more were deferred by the test written in the same session.
 
 ## Next action
 
-**The second repository: an event-driven service.**
+**The event-driven benchmark — and the repository is a decision for the Project
+Owner.** The local inventory contains one repository with a message broker, and
+it has three test classes; it would measure the extractor, not the engineering
+shape.
 
-Three findings are one observation short of being actionable, and this is the
-cheapest way to buy the second: **authorization across a message boundary**,
-decisions recorded outside an `adr/` directory, and whether five entities is a
-property of interpreters or of these two repositories.
+If none is available, the higher-value alternative is **the longitudinal test**:
+the same repository, several real commits apart, asking whether the second answer
+cost anything. It is the one claim `ADR-0122` makes and nothing verifies.
 
 Still untested, and still where getting it wrong destroys curated knowledge:
 **a change that removes evidence.**
