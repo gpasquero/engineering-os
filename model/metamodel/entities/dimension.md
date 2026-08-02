@@ -7,32 +7,53 @@ updated: 2026-08-02
 semantic-layer: A
 entity-family: descriptive
 artifact-kind: authoritative
-established-by: [ADR-0040, ADR-0041, ADR-0048]
+established-by: [ADR-0040, ADR-0041, ADR-0048, ADR-0049, ADR-0070]
+supersedes: METAMODEL-DimensionSpecification
 ---
 
 # Dimension
 
-**An independent axis of classification**, instantiated from a
-[DimensionSpecification](dimension-specification.md).
+**An independent axis of classification.**
+
+> **One entity, not two.** `DimensionSpecification` was merged in by `ADR-0070`:
+> a Dimension has no instances that exist independently of the repository, so
+> there is nothing for a Specification to be a specification *of*.
+
+## What new semantics does this introduce?
+
+**Orthogonal classification.** The ability to say that an artifact is several
+things at once, along axes that do not derive from one another.
+
+`Concept` names meanings and `RelationshipType` names associations; neither can
+express that a set of values forms an axis, or that two axes are independent.
 
 ## identity
 
-The identifier declared by its DimensionSpecification. A Dimension does not have
-an identity separate from the specification that defines it — it is the axis
-that specification describes.
+A stable identifier, allocated when the Dimension is accepted, and registered in
+the Dimension Registry — a section of `KNOWLEDGE-MANIFEST.yaml` (`ADR-0028`).
 
 ## purpose
 
-To let artifacts be classified along several independent axes simultaneously
-rather than being forced into a single hierarchy (`ADR-0040`).
+To let artifacts be classified along several independent axes simultaneously,
+rather than forcing every classification into a single hierarchy (`ADR-0040`).
 
-**Independence is not isolation** (`ADR-0044`). Dimension values are never
-derived from one another, but a Dimension may declare relationships describing
-compatibility, applicability or constraints. Those relationships are
-**descriptive, never inferential** — they never imply automatic classification.
+**Dimensions are a scarce architectural resource.** A concept becomes a Dimension
+only if all five conditions hold (`ADR-0049`):
 
-No Dimension derives another's value unless an explicit Inference Rule exists,
-and Inference Rules, if ever introduced, are their own first-class artifact type.
+1. It classifies many independent artifact types.
+2. Its values are **orthogonal to other classifications**.
+3. It is expected to evolve independently.
+4. It is useful for querying, navigation or validation.
+5. Multiple values can exist across repository artifacts.
+
+Otherwise it is modelled as metadata, a property, a relationship, or another
+metamodel entity.
+
+**Independence is not isolation** (`ADR-0044`). A Dimension may declare
+relationships describing compatibility, applicability or constraints. Those are
+**descriptive, never inferential** — no Dimension derives another's value unless
+an explicit Inference Rule exists, and Inference Rules, if ever introduced, are
+their own first-class artifact type.
 
 ## ownership
 
@@ -41,33 +62,40 @@ register its own** without forking the framework (`ADR-0041`).
 
 ## lifecycle owner
 
-`ArtifactRevisionLifecycle`, through its DimensionSpecification.
+`ArtifactRevisionLifecycle`.
 
-A Dimension enters the metamodel **only through a Dimension Review**
-(`ADR-0051`) — an EngineeringGate producing one of four outcomes: accepted as a
+**A Dimension enters the metamodel only through a Dimension Review**
+(`ADR-0051`) — an Engineering Gate producing one of four outcomes: accepted as a
 Dimension, or rejected and modelled as metadata, a relationship, or another
 metamodel entity.
 
 ## authoritative representation
 
-None of its own. A Dimension is manifested by its DimensionSpecification, which
-declares the ten fields `ADR-0048` requires.
+A declaration of ten fields (`ADR-0048`):
+
+identifier · purpose · governed entity types · **value model** · **assignment
+semantics** · cardinality · constraints · relationships · **serialization
+strategy** · **validation rules**
 
 ## derived representations
 
-- An entry in the **Dimension Registry Projection**, generated from the registry
-  section of `KNOWLEDGE-MANIFEST.yaml` (`ADR-0028`).
+- An entry in the **Dimension Registry Projection**, generated from the registry.
 - Nodes and edges in the Canonical Knowledge Model.
 - Filter and grouping axes in the Knowledge Explorer.
 
 ## relationships
 
-| Relationship | Target | Notes |
+| Relationship | Target | Cardinality |
 |---|---|---|
-| specified-by | DimensionSpecification | exactly one |
 | assigns-via | DimensionAssignment | zero or more |
-| governs | ArtifactType | which types it may classify |
-| relates-to | Dimension | descriptive only, never inferential |
+| classifies | entity type | one or more |
+| relates-to | Dimension | zero or more, descriptive only |
+
+**`classifies` replaces the former `governs`.** `governs` named three different
+relationships across the metamodel — constrains normatively, controls the
+lifecycle of, and may classify — and the ontology had already been forced to
+rename one occurrence to avoid a clash (`views/README.md` #4). This is the
+occurrence that meant *may classify*.
 
 ## extension points
 
@@ -77,15 +105,15 @@ framework, because it constrains the implementation rather than only the data.
 
 ## Debt
 
-**No Dimension has passed a Dimension Review.** Nine candidates exist and five
-are in active use across the corpus — Semantic Layer, Artifact Taxonomy,
-Lifecycle, Compilation Phase, Abstraction Level — without ever having been
-tested against the five conditions that now govern them.
+**No Dimension has passed a Dimension Review.** Nine candidates exist — Semantic
+Layer, Artifact Taxonomy, Lifecycle, Compilation Phase, Abstraction Level,
+Governance Status, Ownership, Authority, Visibility — and five are in active use
+across the corpus without ever having been tested against the five conditions.
 
 Two are expected to fail. `Compilation Phase` classifies artifacts by when a
 compiler touches them, which places a compiler concept in the semantic model
 (`ADR-0053`). `Governance Status` appears to duplicate
 `ArtifactRevisionLifecycle`, failing the orthogonality condition.
 
-**This specification therefore describes a shape with no instances.** That is a
-real state and worth naming: the mechanism is defined and unexercised.
+**This specification describes a shape with no instances.** The mechanism is
+defined and unexercised.

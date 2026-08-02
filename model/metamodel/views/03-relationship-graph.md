@@ -5,7 +5,7 @@
 
 Every `owl:ObjectProperty` with a declared domain and a named range. Properties whose range was deliberately omitted do not appear — that omission is itself a finding (`FINDINGS.md` #8).
 
-**21 classes connected by 28 properties.**
+**19 classes connected by 26 properties.**
 
 ```mermaid
 graph LR
@@ -28,11 +28,9 @@ graph LR
   Evidence -->|ofKind| EvidenceKind
   ArtifactRevision -->|revisionOf| Artifact
   Artifact -->|hasActiveRevision| ArtifactRevision
-  Dimension[Dimension]
-  DimensionSpecification[DimensionSpecification]
-  Dimension -->|specifiedBy| DimensionSpecification
   DimensionAssignment[DimensionAssignment]
   DimensionAssignment -->|classifies| ArtifactRevision
+  Dimension[Dimension]
   DimensionAssignment -->|along| Dimension
   Skill[Skill]
   Skill -->|produces| Artifact
@@ -54,21 +52,19 @@ graph LR
   ADR -->|corrects| ADR
   Issue[Issue]
   ADR -->|resolves| Issue
-  StateMachine[StateMachine]
   StateMachineSpecification[StateMachineSpecification]
-  StateMachine -->|specifiedByMachine| StateMachineSpecification
   StateMachineSpecification -->|drivenBy| Workflow
 ```
 
 ## Structural metrics
 
-**21 nodes.** Computed from the graph, not read from the specifications.
+**19 nodes.** Computed from the graph, not read from the specifications.
 
 ### Isolated and near-isolated
 
 No isolated nodes.
 
-**Pendant (degree 1):** `ContextualEntity`, `DimensionSpecification`, `EvidenceKind`, `Invariant`, `Issue`, `StateMachine`
+**Pendant (degree 1):** `ContextualEntity`, `Dimension`, `EvidenceKind`, `Invariant`, `Issue`, `StateMachineSpecification`
 
 ### Hubs (degree ≥ 5)
 
@@ -82,7 +78,7 @@ None above threshold.
 
 ### Chains (in-degree 1, out-degree 1)
 
-`Capability`, `ContextualEntity`, `Dimension`, `EngineeringGate`, `Skill`, `StateMachineSpecification`, `WorkflowStep`
+`Capability`, `ContextualEntity`, `EngineeringGate`, `Skill`, `WorkflowStep`
 
 ### Repeated motifs (relation used ≥ 3 times)
 

@@ -21,8 +21,8 @@ using this metamodel**. Adopters never modify it — they instantiate it
 
 ## Status
 
-**22 of 28 entities specified**, past the simplification review threshold
-(`ISSUE-0074`). `entity-inventory.md` records the current state.
+**20 of 26 entities specified.** The simplification review is complete
+(`ADR-0070`). `entity-inventory.md` records the current state.
 
 This is being built under `ADR-0062`: where an existing decision permits
 building, we build, and open questions that do not block the next deliverable
@@ -50,6 +50,7 @@ Every metamodel entity declares nine properties (`ADR-0035`, `ADR-0067`):
 model/metamodel/
 ├── README.md              this file
 ├── entity-inventory.md    all entities, with specification status
+├── relationship-vocabulary.md   the registered core relationship types
 ├── entities/              one specification per entity
 ├── ontology/              the OWL skeleton, and what writing it exposed
 └── views/                 generated graph views, and what inspecting them showed
@@ -75,6 +76,12 @@ mechanically produced projection in the repository (`ISSUE-0037`).
   cardinalities, inference and identity.
 - **The metamodel defines `RelationshipType`, not `Relationship`** (`ADR-0066`).
   It declares the vocabulary of edges; it does not model every edge as an entity.
+- **Every predicate specializes a registered core type** (`ADR-0071`). Four
+  categories — structural, behavioral, semantic, traceability. Classification,
+  not collapse: specific predicates stay distinct.
+- **A `Specification` is justified by independent existence** (`ADR-0070`): only
+  when it defines something whose instances exist beyond the repository.
+- **Optimize semantic independence, not entity count** (`ADR-0069`).
 - **Ordering is intrinsic or extrinsic** (`ADR-0068`). Intrinsic ordering is a
   comparable property of the ordered things; extrinsic ordering belongs to the
   association and requires reifying it. `RelationshipType` is never extended.

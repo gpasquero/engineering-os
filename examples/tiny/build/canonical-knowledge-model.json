@@ -1,0 +1,249 @@
+{
+  "metamodelVersion": "0.4.0-skeleton",
+  "note": "Canonical Knowledge Model. Every edge was asserted; none inferred (ADR-0061).",
+  "nodes": [
+    {
+      "id": "AcceptanceRecord.0001",
+      "type": "AcceptanceRecord",
+      "label": "Acceptance of checkout service r2",
+      "family": "operational",
+      "position": null,
+      "description": "The act that confers Active status. Commits do not."
+    },
+    {
+      "id": "Actor.Customer",
+      "type": "Actor",
+      "label": "Customer",
+      "family": "descriptive",
+      "position": null,
+      "description": "The role that submits orders. A role, not a person."
+    },
+    {
+      "id": "ADR.0001",
+      "type": "ADR",
+      "label": "Verify payment synchronously at checkout",
+      "family": "operational",
+      "position": null,
+      "description": "Decision with alternatives considered. Never edited once accepted; superseded."
+    },
+    {
+      "id": "Artifact.CheckoutService",
+      "type": "Artifact",
+      "label": "Checkout service",
+      "family": "descriptive",
+      "position": null,
+      "description": "A stable logical identity. It has no lifecycle of its own."
+    },
+    {
+      "id": "ArtifactRevision.CheckoutService.r2",
+      "type": "ArtifactRevision",
+      "label": "Checkout service r2",
+      "family": "descriptive",
+      "position": null,
+      "description": "The unit that carries lifecycle state and the unit that is accepted."
+    },
+    {
+      "id": "BoundedContext.Sales",
+      "type": "BoundedContext",
+      "label": "Sales",
+      "family": "descriptive",
+      "position": null,
+      "description": "The boundary within which \"Order\" means a customer's purchase request."
+    },
+    {
+      "id": "Capability.PlaceOrder",
+      "type": "Capability",
+      "label": "Place an order",
+      "family": "descriptive",
+      "position": null,
+      "description": "The system accepts an order from a Customer and acknowledges it."
+    },
+    {
+      "id": "Concept.Order",
+      "type": "Concept",
+      "label": "Order",
+      "family": "descriptive",
+      "position": null,
+      "description": "A customer's request to purchase goods, from submission until fulfilment."
+    },
+    {
+      "id": "Invariant.PaymentBeforeShipping",
+      "type": "Invariant",
+      "label": "An order cannot ship before payment clears",
+      "family": "descriptive",
+      "position": null,
+      "description": "Stated independently of whatever enforces it. Note that `enforced-at` is absent:\nthis invariant has no recorded enforcement point, which is a finding rather than\nan omission."
+    },
+    {
+      "id": "Issue.0001",
+      "type": "Issue",
+      "label": "Should payment be verified synchronously?",
+      "family": "operational",
+      "position": null,
+      "description": "A recorded unknown."
+    },
+    {
+      "id": "Skill.ValidateOrder",
+      "type": "Skill",
+      "label": "Validate an order",
+      "family": "operational",
+      "position": null,
+      "description": "Check that an order references known goods and a reachable customer."
+    },
+    {
+      "id": "Workflow.Checkout",
+      "type": "Workflow",
+      "label": "Checkout",
+      "family": "operational",
+      "position": null,
+      "description": "Orchestration only. Holds no methodology of its own."
+    },
+    {
+      "id": "WorkflowStep.Checkout.1",
+      "type": "WorkflowStep",
+      "label": "Checkout step 1",
+      "family": "operational",
+      "position": "1",
+      "description": "The reified association. The position lives here, not on the Skill."
+    }
+  ],
+  "edges": [
+    {
+      "from": "AcceptanceRecord.0001",
+      "predicate": "accepts",
+      "to": "ArtifactRevision.CheckoutService.r2",
+      "core": "accepts",
+      "category": "traceability"
+    },
+    {
+      "from": "AcceptanceRecord.0001",
+      "predicate": "reviewed-by",
+      "to": "Actor.Customer",
+      "core": "accepted-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Actor.Customer",
+      "predicate": "scoped-to",
+      "to": "BoundedContext.Sales",
+      "core": "contained-by",
+      "category": "structural"
+    },
+    {
+      "from": "Actor.Customer",
+      "predicate": "uses",
+      "to": "Capability.PlaceOrder",
+      "core": "executes",
+      "category": "behavioral"
+    },
+    {
+      "from": "ADR.0001",
+      "predicate": "resolves",
+      "to": "Issue.0001",
+      "core": "resolves",
+      "category": "traceability"
+    },
+    {
+      "from": "Artifact.CheckoutService",
+      "predicate": "has-active-revision",
+      "to": "ArtifactRevision.CheckoutService.r2",
+      "core": "derived-into",
+      "category": "semantic"
+    },
+    {
+      "from": "ArtifactRevision.CheckoutService.r2",
+      "predicate": "revision-of",
+      "to": "Artifact.CheckoutService",
+      "core": "derives-from",
+      "category": "semantic"
+    },
+    {
+      "from": "Capability.PlaceOrder",
+      "predicate": "scoped-to",
+      "to": "BoundedContext.Sales",
+      "core": "contained-by",
+      "category": "structural"
+    },
+    {
+      "from": "Capability.PlaceOrder",
+      "predicate": "realised-by",
+      "to": "Artifact.CheckoutService",
+      "core": "implemented-by",
+      "category": "structural"
+    },
+    {
+      "from": "Concept.Order",
+      "predicate": "scoped-to",
+      "to": "BoundedContext.Sales",
+      "core": "contained-by",
+      "category": "structural"
+    },
+    {
+      "from": "Invariant.PaymentBeforeShipping",
+      "predicate": "scoped-to",
+      "to": "BoundedContext.Sales",
+      "core": "contained-by",
+      "category": "structural"
+    },
+    {
+      "from": "Invariant.PaymentBeforeShipping",
+      "predicate": "constrains",
+      "to": "Concept.Order",
+      "core": "governs",
+      "category": "behavioral"
+    },
+    {
+      "from": "Skill.ValidateOrder",
+      "predicate": "produces",
+      "to": "Artifact.CheckoutService",
+      "core": "implements",
+      "category": "structural"
+    },
+    {
+      "from": "Workflow.Checkout",
+      "predicate": "has-step",
+      "to": "WorkflowStep.Checkout.1",
+      "core": "contains",
+      "category": "structural"
+    },
+    {
+      "from": "WorkflowStep.Checkout.1",
+      "predicate": "step-of",
+      "to": "Workflow.Checkout",
+      "core": "contained-by",
+      "category": "structural"
+    },
+    {
+      "from": "WorkflowStep.Checkout.1",
+      "predicate": "executes",
+      "to": "Skill.ValidateOrder",
+      "core": "executes",
+      "category": "behavioral"
+    }
+  ],
+  "statistics": {
+    "nodes": 13,
+    "edges": 16,
+    "byType": {
+      "ADR": 1,
+      "AcceptanceRecord": 1,
+      "Actor": 1,
+      "Artifact": 1,
+      "ArtifactRevision": 1,
+      "BoundedContext": 1,
+      "Capability": 1,
+      "Concept": 1,
+      "Invariant": 1,
+      "Issue": 1,
+      "Skill": 1,
+      "Workflow": 1,
+      "WorkflowStep": 1
+    },
+    "byCategory": {
+      "behavioral": 3,
+      "semantic": 2,
+      "structural": 8,
+      "traceability": 3
+    }
+  }
+}

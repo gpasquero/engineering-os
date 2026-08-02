@@ -88,7 +88,8 @@ dimension (`ADR-0042`), serialized into front matter as interchange syntax
 | Relationship | Target | Notes |
 |---|---|---|
 | revises | Artifact | many revisions per artifact identity |
-| supersedes / superseded-by | ArtifactRevision | forms the supersession chain |
+| supersedes | ArtifactRevision | forms the supersession chain |
+| superseded-by | ArtifactRevision | the inverse; both directions are mandatory |
 | accepted-by | AcceptanceRecord | exactly one for an `Active` revision |
 | classified-by | DimensionAssignment | zero or more |
 | has-provenance | external revision reference | zero or more — Git commit, content digest |

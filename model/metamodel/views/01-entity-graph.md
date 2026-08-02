@@ -5,7 +5,7 @@
 
 Edges are the `relationships` tables of every entity specification, restricted to targets that are themselves specified entities.
 
-**22 entities, 58 internal edges.**
+**20 entities, 55 internal edges.**
 
 ```mermaid
 graph LR
@@ -50,9 +50,6 @@ graph LR
   DimensionAssignment -->|classifies| ArtifactRevision
   Dimension[Dimension]
   DimensionAssignment -->|along| Dimension
-  DimensionSpecification[DimensionSpecification]
-  DimensionSpecification -->|instantiated-by| Dimension
-  Dimension -->|specified-by| DimensionSpecification
   Dimension -->|assigns-via| DimensionAssignment
   EngineeringGate[EngineeringGate]
   EngineeringGate -->|reviews| Artifact
@@ -82,14 +79,12 @@ graph LR
   StateMachineSpecification[StateMachineSpecification]
   StateMachineSpecification -->|driven-by| Workflow
   StateMachineSpecification -->|scoped-to| BoundedContext
-  StateMachine[StateMachine]
-  StateMachine -->|specified-by| StateMachineSpecification
   WorkflowStep -->|step-of| Workflow
   WorkflowStep -->|executes| Skill
   Workflow -->|has-step| WorkflowStep
   Workflow -->|passes-through| EngineeringGate
   Workflow -->|produces| Artifact
-  class Actor,ArtifactRevision,Artifact,BoundedContext,Capability,Concept,DimensionAssignment,DimensionSpecification,Dimension,Evidence,Invariant,RelationshipType,StateMachineSpecification,StateMachine descriptive;
+  class Actor,ArtifactRevision,Artifact,BoundedContext,Capability,Concept,DimensionAssignment,Dimension,Evidence,Invariant,RelationshipType,StateMachineSpecification descriptive;
   class AcceptanceRecord,ADR,EngineeringGate,Issue,Policy,Skill,WorkflowStep,Workflow operational;
   classDef descriptive fill:#e8f0fe,stroke:#4285f4;
   classDef operational fill:#fce8e6,stroke:#ea4335;
@@ -97,13 +92,13 @@ graph LR
 
 ## Structural metrics
 
-**22 nodes.** Computed from the graph, not read from the specifications.
+**20 nodes.** Computed from the graph, not read from the specifications.
 
 ### Isolated and near-isolated
 
 No isolated nodes.
 
-**Pendant (degree 1):** `ADR`, `DimensionSpecification`, `StateMachine`
+**Pendant (degree 1):** `ADR`, `Dimension`
 
 ### Hubs (degree ≥ 5)
 
@@ -125,7 +120,7 @@ No isolated nodes.
 
 ### Chains (in-degree 1, out-degree 1)
 
-`ADR`, `DimensionSpecification`
+`ADR`, `Dimension`
 
 ### Repeated motifs (relation used ≥ 3 times)
 

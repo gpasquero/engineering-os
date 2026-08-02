@@ -5,7 +5,7 @@
 
 `rdfs:subClassOf` between named classes. Restrictions are blank nodes and do not appear.
 
-**30 classes, 28 subclass edges.**
+**28 classes, 26 subclass edges.**
 
 ```mermaid
 graph BT
@@ -24,16 +24,12 @@ graph BT
   Artifact -->|is-a| DescriptiveEntity
   ArtifactRevision[ArtifactRevision]
   ArtifactRevision -->|is-a| DescriptiveEntity
-  DimensionSpecification[DimensionSpecification]
-  DimensionSpecification -->|is-a| DescriptiveEntity
   Dimension[Dimension]
   Dimension -->|is-a| DescriptiveEntity
   DimensionAssignment[DimensionAssignment]
   DimensionAssignment -->|is-a| DescriptiveEntity
   StateMachineSpecification[StateMachineSpecification]
   StateMachineSpecification -->|is-a| DescriptiveEntity
-  StateMachine[StateMachine]
-  StateMachine -->|is-a| DescriptiveEntity
   Concept[Concept]
   Concept -->|is-a| ContextualEntity
   Capability[Capability]
@@ -70,20 +66,20 @@ graph BT
 
 ## Structural metrics
 
-**30 nodes.** Computed from the graph, not read from the specifications.
+**28 nodes.** Computed from the graph, not read from the specifications.
 
 ### Isolated and near-isolated
 
 **Isolated (degree 0):** `EvidenceKind`
 
-**Pendant (degree 1):** `ADR`, `AcceptanceRecord`, `Actor`, `Artifact`, `ArtifactRevision`, `BoundedContext`, `Capability`, `Concept`, `Dimension`, `DimensionAssignment`, `DimensionSpecification`, `EngineeringGate`, `Evidence`, `GovernancePolicy`, `Invariant`, `Issue`, `ModelingPolicy`, `ProcessPolicy`, `RelationshipType`, `Skill`, `StateMachine`, `StateMachineSpecification`, `Workflow`, `WorkflowStep`
+**Pendant (degree 1):** `ADR`, `AcceptanceRecord`, `Actor`, `Artifact`, `ArtifactRevision`, `BoundedContext`, `Capability`, `Concept`, `Dimension`, `DimensionAssignment`, `EngineeringGate`, `Evidence`, `GovernancePolicy`, `Invariant`, `Issue`, `ModelingPolicy`, `ProcessPolicy`, `RelationshipType`, `Skill`, `StateMachineSpecification`, `Workflow`, `WorkflowStep`
 
 ### Hubs (degree ≥ 5)
 
 | Node | Degree |
 |---|---|
-| `DescriptiveEntity` | 11 |
 | `OperationalEntity` | 9 |
+| `DescriptiveEntity` | 9 |
 | `ContextualEntity` | 6 |
 
 ### Near-identical neighbourhoods (Jaccard ≥ 0.6)
@@ -91,7 +87,6 @@ graph BT
 | Similarity | A | B | Shared neighbours |
 |---|---|---|---|
 | 1.0 | `Workflow` | `WorkflowStep` | `OperationalEntity` |
-| 1.0 | `StateMachine` | `StateMachineSpecification` | `DescriptiveEntity` |
 | 1.0 | `Skill` | `WorkflowStep` | `OperationalEntity` |
 | 1.0 | `Skill` | `Workflow` | `OperationalEntity` |
 | 1.0 | `ModelingPolicy` | `ProcessPolicy` | `Policy` |
@@ -102,9 +97,10 @@ graph BT
 | 1.0 | `GovernancePolicy` | `ProcessPolicy` | `Policy` |
 | 1.0 | `GovernancePolicy` | `ModelingPolicy` | `Policy` |
 | 1.0 | `Evidence` | `StateMachineSpecification` | `DescriptiveEntity` |
-| 1.0 | `Evidence` | `StateMachine` | `DescriptiveEntity` |
 | 1.0 | `EngineeringGate` | `WorkflowStep` | `OperationalEntity` |
 | 1.0 | `EngineeringGate` | `Workflow` | `OperationalEntity` |
+| 1.0 | `EngineeringGate` | `Skill` | `OperationalEntity` |
+| 1.0 | `EngineeringGate` | `Issue` | `OperationalEntity` |
 
 ### Chains (in-degree 1, out-degree 1)
 
@@ -114,4 +110,4 @@ None.
 
 | Count | Relation |
 |---|---|
-| 28 | `is-a` |
+| 26 | `is-a` |

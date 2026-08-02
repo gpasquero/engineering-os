@@ -2,7 +2,7 @@
 id: ISSUE-0074
 title: Metamodel simplification review at approximately 75% completion
 type: gap
-status: deferred
+status: resolved
 severity: medium
 created: 2026-08-02
 updated: 2026-08-02
@@ -12,19 +12,20 @@ evidence:
   - model/metamodel/entity-inventory.md
   - model/metamodel/views/README.md
   - governance/adr/ADR-0067-the-relationship-is-the-design-unit.md
-resolved-by: null
+resolved-by: [ADR-0070]
 defers-to: [B1]
 debt: architectural
 ---
 
 # ISSUE-0074 — Metamodel simplification review
 
-> **Scheduled work, deferred by decision** (`ADR-0062`). Not blocking. The
-> trigger is a completion threshold, not a contradiction.
+> **Resolved by `ADR-0070`.** The review was performed against the generated
+> graph views, and its objective was corrected first by `ADR-0069`: normalization,
+> not entity reduction.
 >
-> **The trigger has been met** — 22 of 28 entities, and the three graph views the
-> review is to be performed against exist (`model/metamodel/views/`). The review
-> itself has not been performed.
+> Outcome: `StateMachine` removed, `DimensionSpecification` merged into
+> `Dimension`, `RegistrySpecification` renamed `Registry`. **26 confirmed
+> entities, no expressible statement lost.**
 
 ## Statement
 

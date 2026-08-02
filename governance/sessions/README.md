@@ -48,6 +48,7 @@ ADRs answer "why".
 | [SESSION-0023](SESSION-0023-2026-08-02.md) | 2026-08-02 | B1 | `ACCEPT-0018`; **descriptive vs operational entities** (`ADR-0065`); semantic backbone completed — 12 of 27 specified; **first OWL skeleton**, and six findings from writing it |
 | [SESSION-0024](SESSION-0024-2026-08-02.md) | 2026-08-02 | B1 | `ACCEPT-0019`; **`RelationshipType` replaces `Relationship`** (`ADR-0066`); **the relationship is the design unit** (`ADR-0067`); operational family complete — 19 of 27; second OWL checkpoint; `ISSUE-0074` |
 | [SESSION-0025](SESSION-0025-2026-08-02.md) | 2026-08-02 | B1 | `ACCEPT-0020`; **ordering is intrinsic or extrinsic** (`ADR-0068`); state machines specified; **the Specification/Instance pattern failed its second domain**; three generated graph views; 22 of 28 |
+| [SESSION-0026](SESSION-0026-2026-08-02.md) | 2026-08-02 | B1 | `ACCEPT-0021`; **normalization not entity reduction** (`ADR-0069`); **the Specification criterion** (`ADR-0070`) resolving `ISSUE-0074`; **relationship vocabulary** (`ADR-0071`); **first end-to-end compilation** — CKM, OWL, graph, explorer |
 
 ## Reading
 

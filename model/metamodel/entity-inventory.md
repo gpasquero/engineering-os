@@ -40,14 +40,12 @@ remaining entity derives from it.
 | # | Entity | Purpose | Established by | Spec |
 |---|---|---|---|---|
 | 9 | **ArtifactRevision** | An immutable revision of an Artifact; the unit accepted and the unit carrying lifecycle state | `ADR-0026`, `ADR-0064` | [✓](entities/artifact-revision.md) |
-| 10 | **DimensionSpecification** | Defines one independent axis of classification | `ADR-0048` | [✓](entities/dimension-specification.md) |
-| 11 | **Dimension** | An instance of a DimensionSpecification | `ADR-0041` | [✓](entities/dimension.md) |
-| 12 | **DimensionAssignment** | The relationship classifying an artifact along a dimension | `ADR-0042` | [✓](entities/dimension-assignment.md) |
-| 13 | **StateMachineSpecification** | Defines a state machine: states, transitions, what it governs | `ADR-0027` | [✓](entities/state-machine-specification.md) |
-| 14 | **StateMachine** | An instance of a StateMachineSpecification. **Fails the `ADR-0067` test** | `ADR-0025` | [✓](entities/state-machine.md) |
-| 15 | **Vocabulary** | A closed enumeration with exactly one definition | `ADR-0008` | — |
-| 16 | **Principle** | A semantic relationship emerging from accepted knowledge. **Not an artifact** | `ADR-0058` | — |
-| 17 | **KnowledgePackage** | A published interface between repositories | `ADR-0019` | — |
+| 10 | **Dimension** | An independent axis of classification, holding the ten fields `ADR-0048` requires | `ADR-0041`, `ADR-0070` | [✓](entities/dimension.md) |
+| 11 | **DimensionAssignment** | The relationship classifying an artifact along a dimension | `ADR-0042` | [✓](entities/dimension-assignment.md) |
+| 12 | **StateMachineSpecification** | Defines a state machine: states, transitions, what it governs | `ADR-0027`, `ADR-0070` | [✓](entities/state-machine-specification.md) |
+| 13 | **Vocabulary** | A closed enumeration with exactly one definition | `ADR-0008` | — |
+| 14 | **Principle** | A semantic relationship emerging from accepted knowledge. **Not an artifact** | `ADR-0058` | — |
+| 15 | **KnowledgePackage** | A published interface between repositories | `ADR-0019` | — |
 
 ### Operational
 
@@ -56,14 +54,14 @@ real. It held — see `ontology/FINDINGS.md`.
 
 | # | Entity | Purpose | Established by | Spec |
 |---|---|---|---|---|
-| 18 | **Policy** | A normative rule motivated by Principles — `GovernancePolicy`, `ModelingPolicy`, `ProcessPolicy` | `ADR-0029`, `ADR-0030` | [✓](entities/policy.md) |
-| 19 | **Workflow** | Executable orchestration; sequences skills, holds no methodology | `ADR-0033` | [✓](entities/workflow.md) |
-| 20 | **Skill** | A composable unit of methodology with an explicit contract | `ADR-0033` | [✓](entities/skill.md) |
-| 21 | **EngineeringGate** | An Engineering Process reviewing the introduction or modification of a concept | `ADR-0054` | [✓](entities/engineering-gate.md) |
-| 22 | **AcceptanceRecord** | The act conferring `Active` status on a revision | `ADR-0021` | [✓](entities/acceptance-record.md) |
-| 23 | **ADR** | A recorded architectural decision | `ADR-0002` | [✓](entities/adr.md) |
-| 24 | **Issue** | A recorded unknown | `ADR-0003` | [✓](entities/issue.md) |
-| 25 | **WorkflowStep** | The reified association between a Workflow and a Skill, carrying its position | `ADR-0068` | [✓](entities/workflow-step.md) |
+| 16 | **Policy** | A normative rule motivated by Principles — `GovernancePolicy`, `ModelingPolicy`, `ProcessPolicy` | `ADR-0029`, `ADR-0030` | [✓](entities/policy.md) |
+| 17 | **Workflow** | Executable orchestration; sequences skills, holds no methodology | `ADR-0033` | [✓](entities/workflow.md) |
+| 18 | **Skill** | A composable unit of methodology with an explicit contract | `ADR-0033` | [✓](entities/skill.md) |
+| 19 | **EngineeringGate** | An Engineering Process reviewing the introduction or modification of a concept | `ADR-0054` | [✓](entities/engineering-gate.md) |
+| 20 | **AcceptanceRecord** | The act conferring `Active` status on a revision | `ADR-0021` | [✓](entities/acceptance-record.md) |
+| 21 | **ADR** | A recorded architectural decision | `ADR-0002` | [✓](entities/adr.md) |
+| 22 | **Issue** | A recorded unknown | `ADR-0003` | [✓](entities/issue.md) |
+| 23 | **WorkflowStep** | The reified association between a Workflow and a Skill, carrying its position | `ADR-0068` | [✓](entities/workflow-step.md) |
 
 ### Family unassigned
 
@@ -72,23 +70,25 @@ Recorded by `ADR-0065` as not classifying cleanly. Each describes structure
 
 | # | Entity | Purpose | Established by | Spec |
 |---|---|---|---|---|
-| 26 | **RegistrySpecification** | Defines a registry: identity, membership rules, extension rules | `ADR-0032` | — |
-| 27 | **Manifest** | A root declaration of composition, status or semantics | `ADR-0013` | — |
-| 28 | **ValidationRule** | A constraint a semantic model must satisfy | `ADR-0048` | — |
+| 24 | **Registry** | Identity, membership rules, extension rules. **Not `RegistrySpecification`** — a registry has no independent existence (`ADR-0070`) | `ADR-0032`, `ADR-0070` | — |
+| 25 | **Manifest** | A root declaration of composition, status or semantics | `ADR-0013` | — |
+| 26 | **ValidationRule** | A constraint a semantic model must satisfy | `ADR-0048` | — |
 
-**22 of 28 specified — past the simplification review threshold** (`ISSUE-0074`).
+**20 of 26 specified.** The simplification review is **complete** (`ISSUE-0074`,
+resolved by `ADR-0070`).
 
-Two merge candidates are now confirmed, both by the `ADR-0067` test and
-independently by the generated graphs (`views/README.md`):
+The criterion was not structural similarity but **independent existence**: does a
+Specification define something whose instances may exist outside Engineering OS?
 
-| Candidate | Evidence |
+| Outcome | Why |
 |---|---|
-| `StateMachine` / `StateMachineSpecification` | Introduces no relationship its specification does not declare. **Pendant in every view.** The stronger of the two — nothing points at it |
-| `Dimension` / `DimensionSpecification` | Same 1:1 shape. **A pass-through chain node in two independent views** |
+| `StateMachine` **removed**, `StateMachineSpecification` kept | Instances exist — runtime executions, outside the repository. The redundant half was the phantom middle layer, not the Specification |
+| `DimensionSpecification` **merged** into `Dimension` | No independent existence, so nothing is being specified *for* anything |
+| `RegistrySpecification` **renamed** `Registry` | Same, decided before the entity was written |
 
-**The Specification/Instance pattern did not survive a second domain.** That was
-the test, and the conclusion may be larger than two merges — see
-`entities/state-machine.md`.
+**Two opposite directions**, which structural similarity could not have
+distinguished. Two entities disappear and **no expressible statement is lost**
+(`ADR-0069`).
 
 ## Compiler-architecture concepts
 
@@ -156,6 +156,11 @@ preceded the decision.
 the engineering process rather than by a BoundedContext, all seven carry
 provenance about who acted, and two have lifecycles that are not
 `ArtifactRevisionLifecycle` — `AcceptanceRecord` has none at all.
+
+**The `Specification` suffix survived, and the pattern did not.** The conclusion
+`SESSION-0025` was heading toward — that `Specification` is applied where no
+distinction exists — would have deleted the one specification that is real and
+kept the empty halves. The independence criterion inverted it.
 
 **`Relationship` existed for exactly one session.** Specified in `SESSION-0023`,
 replaced by `RelationshipType` in `SESSION-0024` because the OWL checkpoint showed
