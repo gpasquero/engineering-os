@@ -65,155 +65,87 @@ const inc = id => CKM.edges.filter(e => e.to === id);
 const nav = document.getElementById('nav'), main = document.getElementById('main');
 let current = null, query = 'relationships';
 
-const DERIVES = new Set(['derives-from', 'derived-into', 'implements', 'implemented-by']);
 
 function esc(s){const d=document.createElement('div');d.textContent=s==null?'':s;return d.innerHTML}
 function link(id){const o=byId[id];return `<a class="link" onclick="show('${id}')">${esc(o?o.label:id)}</a>`}
 function pill(c){return `<span class="pill ${esc(c)}">${esc(c)}</span>`}
 
-/* ---- semantic navigation (ADR-0079) ---------------------------------- */
+/* ---- the query engine, executing declared queries (ADR-0086) ---------- */
+/* The SAME declarations tools/ask.py executes. Two engines, one language.  */
 
-// Transitive closure. Returns [{id, hops, via}] excluding the start node.
-function closure(startId, step){
-  const seen = new Map(), queue = [[startId, 0, null]];
-  while (queue.length) {
-    const [id, hops, via] = queue.shift();
-    for (const e of step(id)) {
-      const next = e.from === id ? e.to : e.from;
-      if (next === startId || seen.has(next)) continue;
-      seen.set(next, {id: next, hops: hops + 1, via: via || e.predicate});
-      queue.push([next, hops + 1, via || e.predicate]);
-    }
-  }
-  return [...seen.values()].sort((a,b) => a.hops - b.hops || a.id.localeCompare(b.id));
+const QUERIES = __QUERIES__;
+
+function edgesOf(id, dir){
+  const o = out(id).map(e => [e, e.to]), i = inc(id).map(e => [e, e.from]);
+  return dir === 'out' ? o : dir === 'in' ? i : o.concat(i);
 }
-
-const QUERIES = {
-  relationships: {
-    label: 'Relationships',
-    why: 'Every edge, with the core type and category that explain why it exists.',
-    render(id){
-      const rows = dir => {
-        const list = dir === 'out' ? out(id) : inc(id);
-        if (!list.length) return '<p class="empty">None.</p>';
-        return `<div class="tbl-wrap"><table><tr><th>Predicate</th><th>Why it exists</th>
-          <th>${dir === 'out' ? 'Target' : 'Source'}</th></tr>` + list.map(e => {
-            const other = dir === 'out' ? e.to : e.from;
-            const v = VOC[e.core] || {};
-            return `<tr><td><code>${esc(e.predicate)}</code></td>
-              <td>${pill(e.category)} specializes <code>${esc(e.core)}</code>
-              <div class="hop">${esc(v.means || '')}</div></td>
-              <td>${link(other)} <span class="hop">${esc((byId[other]||{}).type)}</span></td></tr>`;
-          }).join('') + '</table></div>';
-      };
-      return `<h3>Outgoing</h3>${rows('out')}<h3>Incoming</h3>${rows('in')}`;
-    }
+function edgeMatches(e, other, s){
+  if (s.predicate && e.predicate !== s.predicate) return false;
+  if (s.core && e.core !== s.core) return false;
+  if (s.category && e.category !== s.category) return false;
+  if (s['node-type'] && (byId[other]||{}).type !== s['node-type']) return false;
+  return true;
+}
+function mkRow(id, extra){
+  const n = byId[id] || {};
+  return Object.assign({id, type: n.type, label: n.label}, extra || {});
+}
+function hasEdge(id, s){
+  return edgesOf(id, s.direction || 'out').some(([e, o]) => edgeMatches(e, o, s));
+}
+function rowMatches(r, s){
+  if (s.type) return r.type === s.type;
+  if (s['has-edge']) return hasEdge(r.id, s['has-edge']);
+  return false;
+}
+const OPS = {
+  select(rows, s, subject){
+    if (s.all) return CKM.nodes.map(n => mkRow(n.id));
+    if (s.subject) return byId[subject] ? [mkRow(subject)] : [];
+    if (s.id) return byId[s.id] ? [mkRow(s.id)] : [];
+    if (s.type) return CKM.nodes.filter(n => n.type === s.type).map(n => mkRow(n.id));
+    return rows;
   },
-  provenance: {
-    label: 'Provenance',
-    why: 'Which authoring source asserted this node. Provenance is carried by the model, not remembered.',
-    render(id){
-      const n = byId[id];
-      return `<div class="tbl-wrap"><table>
-        <tr><th>Source</th><td><code>${esc(n.provenance && n.provenance.source)}</code></td></tr>
-        <tr><th>Project</th><td>${esc(CKM.project)}</td></tr>
-        <tr><th>Metamodel</th><td><code>${esc(CKM.metamodelVersion)}</code></td></tr>
-        <tr><th>Format</th><td><code>${esc(CKM.formatVersion)}</code></td></tr>
-        </table></div>
-        <p class="hop">Source revision is <b>not</b> recorded. <code>ADR-0064</code> defines
-        identity as (artifact-id, revision-id) and the compiler carries only the path &mdash;
-        a gap this query exists to expose.</p>`;
+  traverse(rows, s, subject){
+    const starts = rows.length ? rows.map(r => r.id) : (byId[subject] ? [subject] : []);
+    const dir = s.direction || 'out', origin = new Set(starts);
+    const seen = new Map(), queue = starts.map(x => [x, 0, null]);
+    while (queue.length) {
+      const [id, hops, via] = queue.shift();
+      if (!s.transitive && hops >= (s['max-hops'] || 1)) continue;
+      for (const [e, other] of edgesOf(id, dir)) {
+        if (!edgeMatches(e, other, s) || origin.has(other) || seen.has(other)) continue;
+        seen.set(other, mkRow(other, {hops: hops + 1, via: via || e.predicate}));
+        queue.push([other, hops + 1, via || e.predicate]);
+      }
     }
+    const outRows = [...seen.values()].sort((a,b) => a.hops - b.hops || a.id.localeCompare(b.id));
+    if (!outRows.length && s['or-self'])
+      return starts.map(x => mkRow(x, {hops: 0, via: null}));
+    return outRows;
   },
-  derived: {
-    label: 'Derived from this',
-    why: 'Everything obtained from this node, transitively, following derivation and realisation edges.',
-    render(id){
-      const found = closure(id, nid => inc(nid).filter(e => DERIVES.has(e.core)));
-      if (!found.length) return '<p class="empty">Nothing derives from this node.</p>';
-      return `<div class="tbl-wrap"><table><tr><th>Node</th><th>Type</th><th>Hops</th><th>Via</th></tr>`
-        + found.map(f => `<tr><td>${link(f.id)}</td><td>${esc(byId[f.id].type)}</td>
-          <td>${f.hops}</td><td><code>${esc(f.via)}</code></td></tr>`).join('') + '</table></div>';
-    }
-  },
-  impact: {
-    label: 'Impact if changed',
-    why: 'Everything that references this node, transitively. Anything reachable by an incoming edge may be affected.',
-    render(id){
-      const found = closure(id, inc);
-      if (!found.length) return '<p class="empty">Nothing references this node. Changing it affects nothing else in the model.</p>';
-      const direct = found.filter(f => f.hops === 1).length;
-      return `<p class="hop"><b>${found.length}</b> node(s) affected &mdash; ${direct} directly,
-        ${found.length - direct} transitively.</p>
-        <div class="tbl-wrap"><table><tr><th>Node</th><th>Type</th><th>Hops</th><th>First edge</th></tr>`
-        + found.map(f => `<tr><td>${link(f.id)}</td><td>${esc(byId[f.id].type)}</td>
-          <td>${f.hops}</td><td><code>${esc(f.via)}</code></td></tr>`).join('') + '</table></div>';
-    }
-  },
-  rationale: {
-    label: 'Rationale',
-    why: 'Which decision established this, and whether that decision still stands.',
-    render(id){
-      const adrs = inc(id).filter(e => e.core === 'establishes'
-        && (byId[e.from]||{}).type === 'ADR');
-      if (!adrs.length) return `<p class="empty">No ADR establishes this node.
-        Its reason is unrecorded.</p>`;
-      return `<div class="tbl-wrap"><table><tr><th>Decision</th><th>Via</th><th>Still stands?</th></tr>`
-        + adrs.map(e => {
-            const sup = out(e.from).find(x => x.predicate === 'superseded-by');
-            return `<tr><td>${link(e.from)}</td><td><code>${esc(e.predicate)}</code></td>
-              <td>${sup ? 'superseded by ' + link(sup.to) : 'yes'}</td></tr>`;
-          }).join('') + '</table></div>';
-    }
-  },
-  status: {
-    label: 'Implementation status',
-    why: 'Whether the revisions of this node are Active. Acceptance confers Active status; commits do not (ADR-0018).',
-    render(id){
-      let revs = out(id).filter(e => e.predicate === 'has-active-revision').map(e => e.to);
-      if (!revs.length) revs = [id];
-      return `<div class="tbl-wrap"><table><tr><th>Revision</th><th>Accepted by</th><th>Active</th></tr>`
-        + revs.map(r => {
-            const acc = inc(r).filter(e => (byId[e.from]||{}).type === 'AcceptanceRecord');
-            return `<tr><td>${link(r)}</td>
-              <td>${acc.length ? acc.map(e => link(e.from)).join(', ') : '<span class="empty">none</span>'}</td>
-              <td>${acc.length ? 'yes' : '<b>no</b>'}</td></tr>`;
-          }).join('') + '</table></div>';
-    }
-  },
-  affected: {
-    label: 'Affected artifacts',
-    why: 'Tests that validate this, and specifications that represent it. Both become inconsistent when it changes.',
-    render(id){
-      const reach = new Set([id, ...closure(id, inc).map(f => f.id)]);
-      const tests = CKM.nodes.filter(n => out(n.id).some(e => e.core === 'validates' && reach.has(e.to)));
-      const specs = inc(id).filter(e => e.core === 'represents').map(e => byId[e.from]).filter(Boolean);
-      const sect = (title, list, note) => `<h3>${title}</h3>` + (list.length
-        ? '<div class="tbl-wrap"><table>' + list.map(n =>
-            `<tr><td>${link(n.id)}</td><td class="hop">${esc(n.type)}</td></tr>`).join('') + '</table></div>'
-        : '<p class="empty">None.</p>') + `<div class="hop">${note}</div>`;
-      return sect('Tests', tests, 'A test is an Artifact that <code>validates</code> another. There is no Test entity.')
-           + sect('Specifications', specs, 'A specification is an Artifact that <code>represents</code> a Concept.');
-    }
-  },
-  acceptance: {
-    label: 'Acceptance history',
-    why: 'The acceptance chain reaching this node. Acceptance confers Active status; commits do not (ADR-0018).',
-    render(id){
-      const reach = new Set([id, ...closure(id, nid => inc(nid).concat(out(nid))).map(f => f.id)]);
-      const records = CKM.nodes.filter(n => n.type === 'AcceptanceRecord'
-        && out(n.id).some(e => e.predicate === 'accepts' && reach.has(e.to)));
-      if (!records.length) return `<p class="empty">No acceptance record reaches this node.
-        Under <code>ADR-0020</code> its revisions are not Active.</p>`;
-      return `<div class="tbl-wrap"><table><tr><th>Record</th><th>Accepts</th><th>Reviewer</th></tr>`
-        + records.map(r => {
-            const acc = out(r.id).filter(e => e.predicate === 'accepts').map(e => link(e.to)).join(', ');
-            const rev = out(r.id).filter(e => e.predicate === 'reviewed-by').map(e => link(e.to)).join(', ');
-            return `<tr><td>${link(r.id)}</td><td>${acc || '—'}</td><td>${rev || '<span class="empty">none</span>'}</td></tr>`;
-          }).join('') + '</table></div>';
-    }
+  keep(rows, s){ return rows.filter(r => rowMatches(r, s)) },
+  reject(rows, s){ return rows.filter(r => !rowMatches(r, s)) },
+  with(rows, s){
+    rows.forEach(r => Object.entries(s).forEach(([name, sub]) => {
+      r[name] = edgesOf(r.id, sub.direction || 'out')
+        .filter(([e, o]) => edgeMatches(e, o, sub)).map(([, o]) => o);
+    }));
+    return rows;
   }
 };
+function runQuery(q, subject){
+  let rows = [];
+  for (const step of q.steps)
+    for (const [name, spec] of Object.entries(step))
+      rows = OPS[name](rows, spec, subject);
+  if (q.output === 'edges') {
+    const ids = new Set(rows.map(r => r.id));
+    if (subject) ids.add(subject);
+    return CKM.edges.filter(e => ids.has(e.from) && ids.has(e.to));
+  }
+  return rows;
+}
 
 /* ---- rendering ------------------------------------------------------- */
 
@@ -228,32 +160,80 @@ Object.keys(groups).sort().forEach(type => {
   });
 });
 
+function renderEdges(edges){
+  if (!edges.length) return '<p class="empty">None.</p>';
+  return '<div class="tbl-wrap"><table><tr><th>From</th><th>Predicate</th>'
+   + '<th>Why it exists</th><th>To</th></tr>'
+   + edges.map(e => {
+       const v = (CKM.vocabulary || {})[e.core] || {};
+       return `<tr><td>${link(e.from)}</td><td><code>${esc(e.predicate)}</code></td>
+         <td>${pill(e.category)} specializes <code>${esc(e.core)}</code>
+         <div class="hop">${esc(v.means || '')}</div></td>
+         <td>${link(e.to)}</td></tr>`;
+     }).join('') + '</table></div>';
+}
+function renderRows(rows){
+  if (!rows.length) return '<p class="empty">No results. That is often the finding.</p>';
+  const extra = [...new Set(rows.flatMap(r => Object.keys(r)))]
+    .filter(k => !['id','type','label'].includes(k));
+  return '<div class="tbl-wrap"><table><tr><th>Node</th><th>Type</th>'
+   + extra.map(k => `<th>${esc(k)}</th>`).join('') + '</tr>'
+   + rows.map(r => `<tr><td>${link(r.id)}</td><td class="hop">${esc(r.type)}</td>`
+       + extra.map(k => `<td>${Array.isArray(r[k])
+           ? (r[k].length ? r[k].map(link).join(', ') : '<span class="empty">none</span>')
+           : (r[k] == null ? '' : esc(r[k]))}</td>`).join('') + '</tr>').join('')
+   + '</table></div>';
+}
 function show(id, q){
   const n = byId[id]; if (!n) return;
-  current = id; query = q || query;
+  current = id;
+  const usable = Object.values(QUERIES).filter(x => x.subject === 'required');
+  query = q || (usable.some(x => x.id === query) ? query : usable[0].id);
   document.querySelectorAll('button.node').forEach(b => b.classList.toggle('sel', b.dataset.id === id));
-  const bar = Object.entries(QUERIES).map(([k, v]) =>
-    `<button class="${k === query ? 'on' : ''}" onclick="show('${id}','${k}')">${v.label}</button>`).join('');
+  const bar = usable.map(x =>
+    `<button class="${x.id === query ? 'on' : ''}" onclick="show('${id}','${x.id}')">${esc(x.question)}</button>`).join('');
+  const active = QUERIES[query];
+  const result = runQuery(active, id);
   main.innerHTML = `<h2>${esc(n.label)}</h2>
     <p><code>${esc(n.id)}</code> &middot; <span class="pill">${esc(n.type)}</span>
        <span class="pill">${esc(n.family)}</span>
        ${n.position != null ? `<span class="pill">position ${n.position}</span>` : ''}</p>
     <p>${esc(n.description)}</p>
     <div class="qbar">${bar}</div>
-    <div class="why">${esc(QUERIES[query].why)}</div>
-    ${QUERIES[query].render(id)}`;
+    <h3>${esc(active.question)}</h3>
+    <div class="why">${esc((active.rationale || '').trim())}</div>
+    ${active.output === 'edges' ? renderEdges(result) : renderRows(result)}
+    <p class="hop">${result.length} row(s) &middot; <code>${esc(active.id)}</code> &middot;
+    provenance: <code>${esc((n.provenance||{}).source)}</code></p>`;
   main.scrollTop = 0;
 }
-
+function showGlobal(qid){
+  query = qid;
+  document.querySelectorAll('button.node').forEach(b => b.classList.remove('sel'));
+  const q = QUERIES[qid], rows = runQuery(q, null);
+  main.innerHTML = `<h2>${esc(q.question)}</h2>
+    <div class="why">${esc((q.rationale || '').trim())}</div>
+    ${renderRows(rows)}
+    <p class="hop">${rows.length} row(s) &middot; <code>${esc(q.id)}</code></p>
+    <p><a class="link" onclick="home()">&larr; back</a></p>`;
+  main.scrollTop = 0;
+}
+function home(){
+  const global = Object.values(QUERIES).filter(q => q.subject === 'none');
+  main.innerHTML = `<h2>What are you trying to accomplish?</h2>
+  <p>Every answer is computed from the Canonical Knowledge Model. Nothing here was
+  written by hand.</p>
+  <h3>Ask about the whole system</h3>
+  <div class="qbar">${global.map(q =>
+    `<button onclick="showGlobal('${q.id}')">${esc(q.question)}</button>`).join('')}</div>
+  <h3>Ask about one thing</h3>
+  <p class="hop">Select a node on the left, then choose a question.
+  ${Object.values(QUERIES).filter(q => q.subject === 'required').length} questions
+  are available per node.</p>
+  <h3>What is in the model</h3>${tbl(CKM.statistics.byType)}
+  <h3>Edges by relationship category</h3>${tbl(CKM.statistics.byCategory)}`;
+}
 function tbl(o){return '<div class="tbl-wrap"><table>' + Object.entries(o).map(([k,v]) =>
   `<tr><td><code>${esc(k)}</code></td><td>${v}</td></tr>`).join('') + '</table></div>'}
-
-main.innerHTML = `<h2>Canonical Knowledge Model</h2>
-  <p>${CKM.statistics.nodes} nodes, ${CKM.statistics.edges} edges in <b>${esc(CKM.project)}</b>.
-  Every edge was asserted in the sources; none was inferred.</p>
-  <h3>Nodes by metamodel type</h3>${tbl(CKM.statistics.byType)}
-  <h3>Nodes by family</h3>${tbl(CKM.statistics.byFamily)}
-  <h3>Edges by relationship category</h3>${tbl(CKM.statistics.byCategory)}
-  <h3>Edges by core relationship type</h3>${tbl(CKM.statistics.byCoreType)}
-  <p class="empty">Select a node to explore. Each node answers five questions.</p>`;
+home();
 </script></body></html>

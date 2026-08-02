@@ -4,7 +4,7 @@ title: Build State
 status: current
 created: 2026-08-02
 updated: 2026-08-02
-milestone: vertical-slice
+milestone: prove-usefulness
 ---
 
 # Build State
@@ -17,112 +17,115 @@ milestone: vertical-slice
 
 ## Current work
 
-**The first vertical slice** (`ADR-0082`). Finishing B1 is no longer the goal.
+**The prove-usefulness phase** (`ADR-0084`). The prove-the-architecture phase
+closed with `ACCEPT-0025`.
 
-Every capability is evaluated against one question (`ADR-0080`): *how does this
-improve a developer's ability to understand, modify or evolve a real software
-system?*
+> Success is measured by **the quality of the engineering questions Engineering
+> OS can answer**, about **real software systems**.
 
-## The slice runs
+Work begins with a question, never with an entity (`ADR-0085`).
+
+## The semantic API
 
 ```sh
-python3 tools/compile.py examples/vertical-slice
-python3 tools/ask.py examples/vertical-slice impact Concept.Order
-python3 tools/ask.py examples/vertical-slice rationale Invariant.PaymentBeforeShipping --json
+python3 tools/ask.py examples/vertical-slice questions
+python3 tools/ask.py examples/vertical-slice Q-rationale Invariant.SingleCurrency --json
+python3 tools/check-engines.py
 open examples/vertical-slice/build/explorer.html
 ```
 
-**Six of the seven questions `ADR-0082` names are answered from the model.**
+**11 questions, declared as data** in `model/queries.md`. The CLI implements
+none of them; the Explorer implements none of them. Both execute the same
+declarations (`ADR-0086`).
 
-| # | Question | State |
-|---|---|---|
-| 1 | What breaks if I change this Concept? | ✅ |
-| 2 | Why does this relationship exist? | ✅ |
-| 3 | Which ADR established this Invariant? | ✅ — and whether it still stands |
-| 4 | Which Capabilities depend on this Workflow? | ✅ |
-| 5 | Which Tests must change? | ✅ via `validates`; **no `Test` entity needed** |
-| 6 | Which Specifications become inconsistent? | ✅ via `represents` |
-| 7 | Which AI workflow should execute? | ❌ **no trigger concept exists** |
+```text
+both engines agree on every declared query
+  examples/vertical-slice — 227 query/subject pairs agree
+  examples/tiny           — 107 query/subject pairs agree
+```
 
 ## What exists
 
 | Area | State |
 |---|---|
-| **`examples/vertical-slice/`** | **28 nodes, 52 edges.** The product demonstration |
-| **`tools/ask.py`** | **9 questions**, every one with `--json`. A CKM consumer that parses no source |
-| **`compiler/emitters/explorer/`** | **8 question-oriented screens** |
-| **`compiler/registry/`** | **4 declared registries, 3 extraction kinds.** Three ad-hoc readers removed |
-| `compiler/` | 10 features, each declaring input, output, invariants, determinism |
-| `compiler/validator/` | 6 rule kinds executing 7 declared rules |
-| `tests/` | 13 fixtures — 6 pass, 7 must fail — with golden outputs for four emitters |
-| **`model/metamodel/`** | **23 of 27 entities specified** |
-| `model/metamodel/ontology/` | OWL 0.4.0 — 660 triples |
-| ADRs | 83 — 75 accepted, 8 superseded |
+| **`model/queries.md`** | **11 declared queries**, each with a rationale. Adding a question is a data change |
+| **`compiler/query/`** | 5 operators — `select`, `traverse`, `keep`, `reject`, `with` |
+| **`tools/check-engines.py`** | Runs every query through both engines for every node. **334 pairs, all agree** |
+| **`compiler/emitters/explorer/`** | Question-driven. Home page asks *what are you trying to accomplish?* |
+| `tools/ask.py` | A thin executor. Implements no question |
+| `examples/vertical-slice/` | 28 nodes, 52 edges |
+| `compiler/` | 11 features, six declared phases, declarative validation, declared registries |
+| `tests/` | 13 fixtures — 6 pass, 7 must fail — golden outputs, determinism, **query assertions, engine equivalence** |
+| `model/metamodel/` | 23 of 27 entities. **No longer the objective** |
+| ADRs | 87 — 79 accepted, 8 superseded |
 | Issues | 74 — 1 open, 51 resolved, 22 deferred |
-| Acceptance Records | 24 |
-| Session journal | 29 entries |
+| Acceptance Records | 25 |
+| Session journal | 30 entries |
 
 ## What does not exist
 
-**No trigger concept**, so question 7 is unanswerable. `triggers` is a registered
-core relationship type and **no entity uses it**.
+**No real system has been modelled.** 28 nodes is the largest model, in a domain
+invented to exercise the metamodel. **This is the gap `ADR-0087` exists to
+close**, and until it does, every claim is verifiable only by reading this
+repository.
 
-No `Manifest` — a project is still *whatever is in `model/*.md`*. No
-`Vocabulary`. `Principle` and `KnowledgePackage` deferred.
+**No answer to *which AI workflow should execute?*** `triggers` is a registered
+core relationship type that **no entity uses**.
 
-**No queryability.** Consumers scan lists; there is no index, and the Explorer
-computes transitive closures in the browser. Nobody knows where that stops.
+No index — **every query scans**. `Q-orphan-concepts` walks every edge for every
+Concept. At 28 nodes that is invisible.
 
-**Provenance is a path, not a revision** (`ADR-0064` wants
-`(artifact-id, revision-id)`).
-
-**No real system has been modelled.** 28 nodes is the largest model that exists.
+No `Manifest`, no `Vocabulary`. `Principle` and `KnowledgePackage` deferred.
+Provenance is a path, not a revision (`ADR-0064`).
 
 ## Blocking
 
-**Nothing blocks the slice.**
+**Nothing blocks the milestone.**
 
 | Issue | Why it is open |
 |---|---|
-| `ISSUE-0037` | Hand-maintained projections — an architectural violation under `ADR-0072`. Now measurable: **4 registries, 4 hand-maintained sources, 0 generated.** Plus four governance indexes, the corrections table, the ontology and the parser schemas |
+| `ISSUE-0037` | Hand-maintained projections — an architectural violation under `ADR-0072`. **Five registries, five hand-maintained sources, zero generated**, plus four governance indexes, the corrections table, the ontology and the parser schemas |
 
 ## Architectural debt
 
 **22 deferred issues.** Nearest: `ISSUE-0073` (Operational Knowledge),
-`ISSUE-0048` (`ADR.corrects` has no mechanism), `ISSUE-0063`.
+`ISSUE-0048`, `ISSUE-0063`.
 
 ## Debt discovered while building
 
 | Question | Where |
 |---|---|
-| **Question 7 has no answer** — nothing connects a kind of change to a workflow | `examples/vertical-slice/README.md` |
-| Nothing validates a registry against its own `membership` rule; rule and mechanism can disagree silently | `registry.md` |
-| No Registry Projection is generated; the specification/projection split is half-built | `registry.md` |
-| The CKM's compatibility policy is written and unexercised; nothing diffs two models | `canonical-knowledge-model.md` |
-| `VR-0007` has no fixture of its own | `tests/README.md` |
-| Severity is declared and unused | `validation-rules.md` |
+| **Two engines execute the query language.** Divergence is now *detected*, not prevented — and only where `node` is installed | `ADR-0086`, `check-engines.py` |
+| No query is parameterised beyond `subject` — *impact limited to two hops* is inexpressible | `queries.md` |
+| `subject: none` queries silently ignore a subject | `queries.md` |
+| Every query scans; there is no index | `queries.md` |
+| Nothing validates a registry against its own `membership` rule | `registry.md` |
+| The CKM compatibility policy is unexercised; nothing diffs two models | `canonical-knowledge-model.md` |
 | 441 field declarations required by `ADR-0074`; fewer than a third exist | `relationship-vocabulary.md` |
 
 ## Acceptance status
 
-`ACCEPT-0001` (trust root) through `ACCEPT-0024`, covering `SESSION-0006`
-through `SESSION-0028`.
+`ACCEPT-0001` (trust root) through `ACCEPT-0025`, covering `SESSION-0006`
+through `SESSION-0029`.
 
-**`ADR-0080`–`ADR-0083`, the vertical slice, `tools/ask.py`, declared registries,
-the question-oriented Explorer and the `Registry` specification are
+**`ADR-0084`–`ADR-0087`, `model/queries.md`, the query engine, the rewritten
+`ask.py`, the question-driven Explorer and `tools/check-engines.py` are
 `Under Review`.**
 
 ## Next action
 
-**Model a real software system** (`ADR-0082`).
+**Model one large external software system** (`ADR-0087`).
 
-A metamodel that only models Engineering OS is unproven. Self-modeling is the
-cheaper first target and the weaker evidence — the metamodel was designed against
-this repository. **An external system is what demonstrates the architecture
-generalizes**, and is therefore the one that matters.
+The success criterion is **not** *can it represent the system*. It is:
 
-Candidates: a full self-model of Engineering OS · GEAI · GeneXus · Kubernetes ·
-PostgreSQL.
+> **Does Engineering OS reveal relationships that existing documentation
+> cannot?**
+
+Recommended: **Kubernetes** — KEPs are the only candidate whose design decisions
+are already an indexed corpus, which is what *which decision established this?*
+most needs. **The choice is the Project Owner's.**
+
+One subsystem modelled deeply beats the whole system modelled shallowly.
 
 ## Repository state
 

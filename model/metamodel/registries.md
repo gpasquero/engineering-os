@@ -67,6 +67,19 @@ registries:
       Registered, not enumerated (ADR-0031), but adding a core type is a
       metamodel change and should be rare.
 
+  - id: REG-queries
+    registers: the engineering questions Engineering OS can answer
+    source: ../queries.md
+    extraction: yaml-block
+    collection: queries
+    membership: >
+      A query is registered by appearing in the queries block with an id, a
+      question, a subject mode, a rationale and a list of steps whose operators
+      the engine implements.
+    extension: >
+      An adopting repository declares additional queries using registered
+      operators. Adding an operator is an engine change (ADR-0086).
+
   - id: REG-validation-rules
     registers: the rules the compiler executes
     source: validation-rules.md

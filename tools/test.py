@@ -7,6 +7,7 @@
 Every fixture verifies:
 
     CKM  ·  OWL  ·  Explorer  ·  Graph  ·  deterministic rebuild  ·  diagnostics
+    ·  declared query results  ·  agreement between both query engines
 
 Golden outputs live in `tests/projects/<name>/golden/`. A change to any emitter
 that alters output shows up as a diff in every affected fixture.
@@ -22,6 +23,7 @@ import re
 import sys
 import difflib
 import pathlib
+import subprocess
 
 import yaml
 
@@ -29,6 +31,9 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 from compiler import compile_project, emit_all, EMITTERS  # noqa: E402
+from compiler.query import Model, run as run_query, load_queries  # noqa: E402
+
+QUERIES = load_queries()
 
 PROJECTS = ROOT / "tests/projects"
 GREEN, RED, YELLOW, DIM, OFF = "\033[32m", "\033[31m", "\033[33m", "\033[2m", "\033[0m"
@@ -81,6 +86,18 @@ def check(project, accept=False):
         if cat not in s["byCategory"]:
             bad.append(f"expected relationship category '{cat}', absent")
 
+    # declared query results (ADR-0086): a question is answered only if a fixture says so
+    for qid, want in (exp.get("expected-queries") or {}).items():
+        query = QUERIES.get(qid)
+        if not query:
+            bad.append(f"expected-queries names unknown query {qid!r}")
+            continue
+        subject = want.get("subject")
+        got = sorted(r.get("id") or f"{r['from']}>{r['to']}"
+                     for r in run_query(Model(ckm), query, subject))
+        if sorted(want.get("rows", [])) != got:
+            bad.append(f"{qid}({subject}): expected {sorted(want.get('rows', []))}, got {got}")
+
     # deterministic rebuild
     again, _ = compile_project(project)
     if again != ckm:
@@ -125,6 +142,14 @@ def main(argv):
         for b in bad:
             print(f"        {RED}{b}{OFF}")
             failures += 1
+
+    print()
+    engines = subprocess.run([sys.executable, str(ROOT / "tools/check-engines.py")],
+                             capture_output=True, text=True)
+    for line in engines.stdout.strip().splitlines():
+        print("  " + line)
+    if engines.returncode:
+        failures += 1
 
     print()
     if failures:

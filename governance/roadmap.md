@@ -10,73 +10,65 @@ related: [ADR-0062]
 
 # Roadmap
 
-**The goal is no longer to finish B1** (`ADR-0082`).
+**The project has left the "prove the architecture" phase and entered the
+"prove usefulness" phase** (`ADR-0084`).
 
-Every milestone is evaluated against one question (`ADR-0080`):
+> **Success is measured by the quality of the engineering questions Engineering
+> OS can answer** — not by the sophistication of the metamodel.
 
-> **How does this improve a developer's ability to understand, modify or evolve a
-> real software system?**
+Every proposal is evaluated by one criterion:
 
-## Current milestone — the first vertical slice
+> **Does this allow Engineering OS to answer better engineering questions about
+> real software systems?** If not, it should probably wait.
+
+## How work begins
+
+`ADR-0085`. **Never with "we need another entity."**
 
 ```text
-Authoritative Repository → Compiler → Canonical Knowledge Model
-        → Knowledge Explorer → Developer Question → Semantic Answer
+Engineering Question → Required semantic capability
+  → Metamodel extension (only if necessary) → Compiler → Explorer → Regression test
 ```
 
-**Substantially delivered** in `examples/vertical-slice/`. Six of the seven
-questions `ADR-0082` names are answered from the model; the seventh is not, and
-the reason is recorded.
+## Current milestone — model one large external software system
 
-| # | Question | State |
-|---|---|---|
-| 1 | What breaks if I change this Concept? | ✅ |
-| 2 | Why does this relationship exist? | ✅ |
-| 3 | Which ADR established this Invariant? | ✅ |
-| 4 | Which Capabilities depend on this Workflow? | ✅ |
-| 5 | Which Tests must change? | ✅ via `validates`; no `Test` entity |
-| 6 | Which Specifications become inconsistent? | ✅ via `represents`; no `Specification` entity |
-| 7 | Which AI workflow should execute? | ❌ **no trigger concept exists** |
+`ADR-0087`. **Not a toy example. Not another Engineering OS repository.**
 
-## Next — model a real software system
+The system must already have architecture, source code, documentation, evolution
+history, bugs and design decisions.
 
-**A metamodel that only models Engineering OS is unproven.**
+**The success criterion is not "can it represent the system."** It is:
 
-Self-modeling is cheaper and weaker evidence: the metamodel was designed against
-this repository. **An external system is what demonstrates the architecture
-generalizes.**
+> **Does Engineering OS reveal relationships that existing documentation
+> cannot?**
 
-Candidates: a full self-model of Engineering OS · GEAI · GeneXus · Kubernetes ·
-PostgreSQL.
+**Recommended: Kubernetes** — KEPs are the only candidate whose design decisions
+are already an indexed, first-class corpus, which is what *which decision
+established this?* most needs. The choice is the Project Owner's.
 
-## Then — the CKM as the platform's IR
+**One subsystem modelled deeply beats the whole system modelled shallowly.**
 
-`ADR-0081` commits the Canonical Knowledge Model to becoming the semantic
-intermediate representation. What that still requires:
-
-- **queryability** — consumers scan lists today; there is no index
-- **provenance at revision granularity** (`ADR-0064`)
-- **a stability contract with real consumers** to break it
-
-## Deferred metamodel work
-
-Three entities remain, built **when the slice or a real model needs them**
-(`ADR-0075`, `ADR-0082`): `Manifest`, `Vocabulary`, and whatever the trigger
-concept turns out to be.
-
-`Principle` and `KnowledgePackage` stay deferred — the compiler compiles no ADRs,
-and there is one repository.
-
-## Completed build deliverables
+## Delivered
 
 | | |
 |---|---|
-| **B1** | Engineering OS Metamodel — **23 of 27 entities**; scope unchanged, priority superseded by `ADR-0082` |
-| **B2** | First OWL ontology — 0.4.0, 660 triples, generated from the metamodel by hand |
-| **B3** | First Canonical Knowledge Model — delivered |
-| **B4** | Knowledge Compiler specification — delivered as an executable modular compiler |
-| **B5** | First compilation pipeline — delivered, with a 13-fixture regression suite |
-| **B6** | First navigable Knowledge Explorer — delivered, question-oriented |
+| **The vertical slice** | Repository → Compiler → CKM → Explorer → question → answer. 6 of 7 questions from `ADR-0082` |
+| **The semantic API** | 11 declared queries, executed by two engines, **verified to agree on 334 query/subject pairs** |
+| **The compiler** | 11 features, six declared phases, declarative validation, declared registries |
+| **The regression suite** | 13 fixtures, 7 negative, golden outputs, deterministic rebuild, query assertions, engine equivalence |
+| **The metamodel** | 23 of 27 entities. **No longer the objective** |
+
+## Known unanswered
+
+| Question | Why |
+|---|---|
+| **Which AI workflow should execute?** | Nothing connects a *kind of change* to a workflow. `triggers` is a registered core relationship type **no entity uses**. `ADR-0084` frames this as semantic workflow orchestration, not a missing `Trigger` entity |
+
+## Deferred
+
+`Manifest`, `Vocabulary` — built when a question needs them (`ADR-0085`).
+`Principle`, `KnowledgePackage` — the compiler compiles no ADRs, and there is one
+repository.
 
 **M1–M13** from the original plan remain eventual scope. They are not the
-objective; the questions above are.
+objective; the questions are.
