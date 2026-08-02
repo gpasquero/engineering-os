@@ -4,7 +4,7 @@ title: Repository Architecture
 status: accepted
 created: 2026-08-02
 updated: 2026-08-02
-related: [ADR-0004, ADR-0005, ADR-0006]
+related: [ADR-0004, ADR-0005, ADR-0009, ADR-0010]
 ---
 
 # Repository Architecture
@@ -20,28 +20,67 @@ below. `governance/build-state.md` records which parts exist today.
 
 The single most important structural rule in this project.
 
-**Layer A — the product.** This repository. It contains the methodology:
-contracts, policies, skills, workflows, schemas, tests.
+**Layer A — the methodology.** Contracts, policies, skills, workflows, schemas,
+tests. Authored here.
 
-**Layer B — the output.** The `model/` tree that the Engineering OS produces
-*inside a target repository* when it is applied: ontology, glossary, bounded
-contexts, specifications, traceability, impact analyses.
+**Layer B — the knowledge model.** The `model/` tree the methodology produces:
+ontology, glossary, bounded contexts, specifications, traceability, impact
+analyses.
 
 These are different things and are never mixed.
 
-This repository therefore contains **`model-spec/`** — the specification and a
-copyable scaffold of the `model/` tree — and never a live `model/` directory of
-its own. Confusing the two was the central ambiguity in the inherited design
-documents. See `ADR-0006`.
+**Both layers exist in every repository that adopts Engineering OS, including
+this one.** What distinguishes this repository is not that it lacks Layer B — it
+is that this repository *also authors* Layer A.
+
+So this repository contains both:
+
+- **`model-spec/`** — the Layer A specification and copyable scaffold *of* the
+  Layer B tree. Part of the methodology; ships to adopters.
+- **`model/`** — this repository's own Layer B instance, describing Engineering
+  OS itself.
+
+`model-spec/` is the specification; `model/` is an instance of it. They are
+adjacent and similarly named, and they will be confused unless the distinction
+is restated wherever both appear. See `ADR-0010`, which supersedes `ADR-0006`.
+
+## Knowledge ownership
+
+`model/` is **always repository-local**. Knowledge is owned by the repository
+that owns the domain.
+
+```text
+engineering-os/     model/  -> describes Engineering OS itself
+banking-system/     model/  -> describes the banking domain
+crm/                model/  -> describes the CRM domain
+```
+
+There is no shared central model directory. Multi-repository environments
+**federate** through versioned Knowledge Packages — exports of ontology, graph,
+glossary, specifications and metadata that let one repository reference another
+without sharing its internal source of truth.
+
+Federation does not exist yet (`ISSUE-0029`), but nothing built in `model-spec/`
+or `MANIFEST.yaml` may preclude it.
+
+## The machine entry point
+
+`MANIFEST.yaml` is the root composition manifest: it describes the architecture
+and composition of an Engineering OS project, and **everything else in the
+repository is discoverable from it**.
+
+It is the machine entry point, as `governance/` is the entry point for a human
+or agent reconstructing context. Every adopting repository has one. It is not a
+dependency lock file. See `ADR-0009`.
 
 ## Target structure
 
 ```text
 engineering-os/
-├── README.md                   Entry point
+├── README.md                   Human entry point
 ├── AGENTS.md                   Agent entry point; points at the session protocol
+├── MANIFEST.yaml               Machine entry point; root composition manifest (M2)
 ├── GLOSSARY.md                 -> governance/glossary.md (root pointer, M2)
-├── MANIFEST.yaml               Registry of skills, workflows, contracts (M2)
 │
 ├── governance/                 PERSISTENT MEMORY — the subject of M1
 │   ├── vision.md               Why this exists
@@ -65,7 +104,8 @@ engineering-os/
 │
 ├── skills/                     M4–M7 — one directory per skill
 ├── workflows/                  M8 — one directory per workflow
-├── model-spec/                 M2 — specification + scaffold of the Layer B tree
+├── model-spec/                 M2 — Layer A specification + scaffold of the Layer B tree
+├── model/                      M11 — this repository's own Layer B knowledge model
 ├── templates/                  Document templates used by skills
 ├── schemas/                    M9 — JSON Schema for machine validation
 ├── validation/                 M9 — rules and scripts
@@ -112,7 +152,9 @@ current state and proposed state. See `ADR-0005`.
 
 ## What must never appear here
 
-- A live `model/` directory. This repository is Layer A. See `ADR-0006`.
+- A knowledge model belonging to another repository. `model/` here describes
+  Engineering OS and nothing else. Cross-repository knowledge arrives through
+  federation, never by copying another repository's model. See `ADR-0010`.
 - Secrets, credentials, tokens, personal data or production identifiers, in any
   directory, including examples and fixtures.
 - Methodology content inside `adapters/`.
@@ -123,9 +165,15 @@ current state and proposed state. See `ADR-0005`.
 
 These are recorded as issues and must not be silently assumed:
 
-- `ISSUE-0001` — runtime target, which determines whether `adapters/` is real.
 - `ISSUE-0002` — the composition primitive, which determines whether
   `workflows/` holds prose or executable definitions.
-- `ISSUE-0003` — what `MANIFEST.yaml` actually is.
-- `ISSUE-0004` — where the Layer B `model/` tree lives for a target system.
-- `ISSUE-0005` — whether this repository ships executable code at all.
+- `ISSUE-0005` — whether this repository ships executable code at all. Strongly
+  informed by `ADR-0009`, which requires build pipelines and generators.
+- `ISSUE-0030` — whether one manifest schema serves both this repository and
+  adopting repositories.
+- `ISSUE-0031` — the scope of this repository's own `model/`, and whether
+  `governance/` overlaps it.
+- `ISSUE-0029` — the Knowledge Package format that federation depends on.
+- `ISSUE-0001` — runtime target, which determines whether `adapters/` is real.
+
+`ISSUE-0003` and `ISSUE-0004` were resolved by `ADR-0009` and `ADR-0010`.

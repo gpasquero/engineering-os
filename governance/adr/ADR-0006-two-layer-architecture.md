@@ -1,10 +1,10 @@
 ---
 id: ADR-0006
 title: Separate the product layer from the model artifact layer
-status: accepted
+status: superseded
 date: 2026-08-02
 supersedes: null
-superseded-by: null
+superseded-by: ADR-0010
 resolves: []
 related: [ADR-0004, ISSUE-0004, ISSUE-0014]
 ---

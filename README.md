@@ -59,10 +59,17 @@ that fill them arrive. Directories are not created empty.
 
 ## A note on the two layers
 
-This repository is **Layer A** — the methodology. What the methodology produces
-inside a target system is **Layer B** — a `model/` tree of ontology, glossary,
-specifications and traceability. This repository specifies and scaffolds that
-tree in `model-spec/`; it never contains a live `model/` of its own.
+**Layer A** is the methodology — contracts, policies, skills, workflows.
+**Layer B** is the knowledge model it produces: a `model/` tree of ontology,
+glossary, specifications and traceability.
 
-Confusing the two was the central ambiguity in the inherited design. See
-`governance/adr/ADR-0006-two-layer-architecture.md`.
+Both layers exist in every repository that adopts Engineering OS. This one is
+distinguished by *also authoring* Layer A: it contains `model-spec/` (the
+specification of the tree, which ships to adopters) and `model/` (its own
+instance, describing Engineering OS itself).
+
+Knowledge is **repository-local**. Every repository owns the model of its own
+domain; there is no central shared model, and multi-repository environments
+federate through versioned Knowledge Packages.
+
+See `governance/adr/ADR-0010-repository-local-knowledge-ownership.md`.

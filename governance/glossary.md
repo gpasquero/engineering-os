@@ -52,22 +52,47 @@ definition, for example assertion statuses or risk levels.
 **Adapter** — packaging of the methodology for a specific agent runtime.
 Contains zero methodology.
 
-**Manifest** — the registry of skills, workflows and contracts with their
-versions. Its exact content is unresolved — see `ISSUE-0003`.
+**Manifest** — `MANIFEST.yaml`, the root composition manifest of an Engineering
+OS project. Describes the project's architecture and composition; everything
+else in the repository is discoverable from it. The machine entry point.
+Explicitly *not* a dependency lock file or package-manager manifest. Every
+adopting repository has one. See `ADR-0009`.
 
 ## The two layers
 
-**Layer A / the product** — this repository. The methodology itself.
+**Layer A / the methodology** — contracts, policies, skills, workflows, schemas,
+tests. Authored in this repository.
 
-**Layer B / the model** — the `model/` artifact tree the methodology produces
-*inside a target repository*: ontology, glossary, bounded contexts,
-specifications, traceability, impact analyses.
+**Layer B / the knowledge model** — the `model/` tree the methodology produces:
+ontology, glossary, bounded contexts, specifications, traceability, impact
+analyses.
 
-**`model-spec/`** — the Layer A specification and scaffold *of* the Layer B tree.
-This repository contains `model-spec/` and never a live `model/`.
+Both layers exist in **every** repository that adopts Engineering OS, including
+this one. This repository is distinguished by also *authoring* Layer A.
+
+**`model-spec/`** — the Layer A specification and copyable scaffold *of* the
+Layer B tree. Part of the methodology; ships to adopters.
+
+**`model/`** — a Layer B instance. Always repository-local. This repository's
+`model/` describes Engineering OS itself.
+
+> **Disambiguation.** `model-spec/` is the specification; `model/` is an
+> instance of it. Both live here and are one character apart in prose. State
+> which one you mean.
 
 **Target repository** — the software system the Engineering OS is applied to.
-Distinct from this repository in every case.
+May be this repository, when the methodology is applied to itself.
+
+**Knowledge ownership** — the rule that knowledge is owned by the repository
+that owns the domain. There is no shared central model. See `ADR-0010`.
+
+**Federation** — how multi-repository environments exchange knowledge without
+sharing a model: by exporting and referencing Knowledge Packages.
+
+**Knowledge Package** — a versioned export of a repository's ontology, graph,
+glossary, specifications and metadata, letting another repository reference it
+without access to its internal source of truth. Format undefined —
+`ISSUE-0029`.
 
 ## Epistemic terms
 

@@ -6,7 +6,7 @@ status: open
 severity: high
 created: 2026-08-02
 updated: 2026-08-02
-blocks: [M11]
+blocks: [M12]
 evidence:
   - sources/handoff/BOOTSTRAP.md
   - imports/reconstruct-system-knowledge/SKILL.md

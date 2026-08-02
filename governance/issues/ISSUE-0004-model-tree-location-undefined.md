@@ -2,7 +2,7 @@
 id: ISSUE-0004
 title: Where the Layer B model tree lives for a target system is undefined
 type: question
-status: open
+status: resolved
 severity: blocking
 created: 2026-08-02
 updated: 2026-08-02
@@ -11,7 +11,7 @@ evidence:
   - imports/reconstruct-system-knowledge/SKILL.md
   - imports/reconstruct-system-knowledge/references/repository-structure.md
   - imports/ontology-driven-development-v2/README.md
-resolved-by: null
+resolved-by: ADR-0010
 ---
 
 # ISSUE-0004 — Where the Layer B `model/` tree lives is undefined
@@ -49,7 +49,21 @@ paths relative to a target repository do not survive a move to a central store.
   resolve a configured root rather than a fixed path, which interacts with
   `ISSUE-0015`.
 
-## Resolution criteria
+## Resolution
 
-An ADR naming the default location, whether it is configurable, and how
-traceability references are expressed so they survive relocation.
+`ADR-0010`. **`model/` is always repository-local.** Every repository adopting
+Engineering OS owns its own knowledge model; knowledge is owned by the
+repository that owns the domain. There is no shared central model directory, and
+multi-repository environments federate rather than share.
+
+The sibling-repository, central-store and configurable options were all
+rejected. Federation via versioned **Knowledge Packages** handles the
+cross-repository case that a central store was meant to solve.
+
+This answer **superseded `ADR-0006`**, which had asserted that this repository
+never contains a live `model/`. Engineering OS has its own `model/` describing
+the framework; Layer A and Layer B coexist in every adopting repository,
+including this one.
+
+Newly opened by this answer: `ISSUE-0029` (Knowledge Package format and
+federation protocol) and `ISSUE-0031` (Engineering OS self-model scope).

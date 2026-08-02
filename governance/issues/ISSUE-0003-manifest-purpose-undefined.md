@@ -2,7 +2,7 @@
 id: ISSUE-0003
 title: The purpose and schema of MANIFEST.yaml are undefined
 type: question
-status: open
+status: resolved
 severity: blocking
 created: 2026-08-02
 updated: 2026-08-02
@@ -10,7 +10,7 @@ blocks: [M2]
 evidence:
   - sources/handoff/ROADMAP.md
   - governance/design/proposed-architecture.md
-resolved-by: null
+resolved-by: ADR-0009
 ---
 
 # ISSUE-0003 — The purpose of `MANIFEST.yaml` is undefined
@@ -45,6 +45,19 @@ determines the first schema in `schemas/` and interacts with versioning
 These are not mutually exclusive; the risk is building one and discovering
 another was meant.
 
-## Resolution criteria
+## Resolution
 
-An ADR stating the manifest's purpose, its consumers, and its top-level fields.
+`ADR-0009`. `MANIFEST.yaml` is the **root composition manifest** of an
+Engineering OS project — the equivalent of `package.json` or `Cargo.toml`, but
+for Engineering OS composition rather than source-code dependencies. It is
+explicitly not a dependency lock file, package-manager manifest or distribution
+descriptor.
+
+Governing property: everything else in the repository is discoverable from it.
+
+All four candidate readings above were rejected as too narrow or as the wrong
+category. See `ADR-0009` for the fifteen concerns it defines.
+
+Newly opened by this answer: `ISSUE-0030` (does one schema serve both this
+repository and adopting repositories?). `ISSUE-0005` is now strongly informed,
+because build pipelines and documentation generators imply executable tooling.

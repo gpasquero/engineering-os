@@ -5,6 +5,7 @@ status: accepted
 created: 2026-08-02
 updated: 2026-08-02
 supersedes: sources/handoff/ROADMAP.md (pre-M1, ten "Deliveries")
+related: [ADR-0009, ADR-0010]
 ---
 
 # Roadmap
@@ -17,37 +18,36 @@ A milestone must not start while an issue marked `blocking` names it in
 
 ## M1 — Repository architecture and documentation system
 
-**Status: in progress.** Define how this project remembers.
+**Complete.** Define how this project remembers.
 
-- Repository architecture and the two-layer rule
-- Documentation system: document types, IDs, front matter, lifecycle
-- Session protocol
-- Governance skeleton: vision, principles, glossary, roadmap, build state
-- ADRs for decisions made
-- All known open questions and inconsistencies recorded as issues
-
-No skills, policies or contracts. Explicitly out of scope.
+Repository architecture and the two-layer rule; documentation system; session
+protocol; governance skeleton; ADRs for decisions made; all known open questions
+recorded as issues. No skills, policies or contracts.
 
 ## M2 — Foundational contracts and manifest
 
-**Blocked by `ISSUE-0003` and `ISSUE-0004`.** `ISSUE-0007`, `ISSUE-0013`,
-`ISSUE-0014`, `ISSUE-0015`, `ISSUE-0018` and `ISSUE-0019` must be resolved
-within it. `ADR-0007` removed `ISSUE-0001` as a blocker by fixing the
-runtime-neutral boundary.
+**Unblocked.** `ISSUE-0003` and `ISSUE-0004` are resolved by `ADR-0009` and
+`ADR-0010`.
 
-- `MANIFEST.yaml` and its meaning
-- Skill contract and workflow contract
+- `MANIFEST.yaml` — the root composition manifest (`ADR-0009`)
+- Skill contract and workflow contract, including write-scope declaration
 - Evidence record, conflict record, traceability record contracts
 - `shared/vocabularies/` — single-source assertion statuses, confidence, risk,
   gate decisions, change types
 - `model-spec/` — the Layer B tree specification and scaffold
 - One canonical impact-analysis template
 
+Must be resolved within this milestone: `ISSUE-0005`, `ISSUE-0007`,
+`ISSUE-0013`, `ISSUE-0014`, `ISSUE-0015`, `ISSUE-0018`, `ISSUE-0019`,
+`ISSUE-0030`.
+
+Design constraint: nothing built here may preclude federation (`ISSUE-0029`).
+
 ## M3 — Shared policies
 
-- Evidence, research, ontology, constraint-placement, write-scope,
-  autonomy and escalation, secrets and privacy, traceability, verification,
-  knowledge-update policies
+Evidence, research, ontology, constraint-placement, write-scope, autonomy and
+escalation, secrets and privacy, traceability, verification and
+knowledge-update policies.
 
 ## M4 — Discovery skills
 
@@ -70,26 +70,43 @@ runtime-neutral boundary.
 `feature`, `bug`, `behavior-change`, `refactoring`, `integration`,
 `architecture-evolution`
 
-Depends on `ISSUE-0016` (three conflicting change-type taxonomies).
+Blocked by `ISSUE-0002`. Depends on `ISSUE-0016`.
 
 ## M9 — Schemas and validation
 
-JSON Schema for manifest, skills, workflows and records; validation rules;
+JSON Schema for the manifest, skills, workflows and records; validation rules;
 issue-index generator (`ISSUE-0028`).
 
 ## M10 — Scenario tests
 
-Depends on `ISSUE-0006` — how a prompt-based methodology is tested is unsolved.
+Blocked by `ISSUE-0006`.
 
-## M11 — Documentation, adapters and v1
+## M11 — Engineering OS self-model
+
+Apply Engineering OS to itself: build this repository's own `model/` describing
+the framework (`ADR-0010`).
+
+This precedes the v1 release deliberately. If the methodology cannot produce a
+coherent knowledge model of itself, it does not work, and that must be
+discovered before release rather than after. Scope is open — `ISSUE-0031`,
+which includes the unresolved question of whether `governance/` overlaps
+`model/`.
+
+## M12 — Documentation, adapters and v1 release
 
 User guides, `adapters/`, licence, changelog. Depends on `ISSUE-0001` and
 `ISSUE-0011`.
 
+## M13 — Knowledge Packages and federation
+
+The versioned export format and exchange protocol that let repositories
+reference one another without sharing their source of truth. Blocked by
+`ISSUE-0029`.
+
 ## Mapping from the inherited roadmap
 
-The pre-M1 `sources/handoff/ROADMAP.md` numbered ten "Deliveries". They are preserved here as
-milestones, offset by one because M1 did not previously exist.
+The pre-M1 `sources/handoff/ROADMAP.md` numbered ten "Deliveries". They are
+preserved here as milestones, offset by one because M1 did not previously exist.
 
 | Inherited | Now |
 |---|---|
@@ -102,6 +119,10 @@ milestones, offset by one because M1 did not previously exist.
 | Delivery 7 — Workflows | M8 |
 | Delivery 8 — Schemas | M9 |
 | Delivery 9 — Scenario tests | M10 |
-| Delivery 10 — Documentation and v1 release | M11 |
+| Delivery 10 — Documentation and v1 release | M12 |
+
+M11 and M13 are new, added when `ADR-0010` established repository-local
+knowledge ownership and federation. The former Delivery 10 moved from M11 to
+M12 so that the self-model precedes the release.
 
 The term "Delivery" is deprecated. See `governance/glossary.md`.

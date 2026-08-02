@@ -36,10 +36,14 @@ doing so does not yet exist.
 
 ## What we know
 
-- `ADR-0006` names the two layers, which gives the vocabulary for a resolution
-  rule but not the rule itself.
-- `ISSUE-0004` may make the Layer B root configurable, which would require path
-  resolution rather than fixed paths.
+- `ADR-0006` named the two layers, which gave the vocabulary for a resolution
+  rule but not the rule itself. It is superseded by `ADR-0010`, which keeps the
+  two-layer distinction.
+- **`ADR-0010` narrows this issue.** `model/` is always repository-local, so the
+  Layer B root is fixed at the repository root and is never configurable. The
+  ambiguity that remains is only on the Layer A side: a skill referencing its own
+  `templates/`, a shared policy in `shared/policies/`, or a file in the
+  repository that invoked it.
 
 ## Resolution criteria
 
