@@ -64,6 +64,29 @@ legitimately be software engineering rather than Engineering OS the artifact.
 
 This must be settled before `KNOWLEDGE-MANIFEST.yaml` is written, not at M11.
 
+## Made urgent by ADR-0035
+
+`ADR-0035` establishes the Engineering OS Metamodel as "the ontology of
+Engineering OS itself" — which is close to what this issue asks `model/` to
+contain, at a different level.
+
+Two readings, and they lead to different repository structures:
+
+- **The metamodel *is* the self-model.** Engineering OS's `model/` contains the
+  metamodel and little else, because the framework's domain *is* how systems are
+  described.
+- **They are different levels.** The metamodel describes how Engineering OS
+  describes systems; `model/` describes Engineering OS as a system — its
+  capabilities, invariants, bounded contexts, workflows. The metamodel would then
+  be Layer A and `model/` Layer B.
+
+The second preserves `ADR-0014`'s layer separation; the first collapses it for
+this repository only.
+
+This is the same question as `ISSUE-0055`, approached from the other side. **The
+two should be resolved together**, and the answer determines whether M11's
+self-model is a large piece of work or largely already done.
+
 ## Resolution criteria
 
 An ADR defining the scope of the self-model and its relationship to

@@ -104,7 +104,8 @@ knowledge describing the domain. `model/` belongs here, as does `governance/`.
 Artifact kind `authoritative`; always human-readable; never generated.
 
 **Canonical Knowledge Model** — tier 2. The compiler's internal representation,
-produced by compilation. **Never edited by humans.** Always reproducible from
+produced by compilation, and **a graph conforming to the Metamodel** rather than
+an arbitrary one (`ADR-0036`). **Never edited by humans.** Always reproducible from
 the authoritative assets. Lives under generated artifacts and **never inside
 `model/`**. Its serialization is an implementation decision. Artifact kind
 `derived`.

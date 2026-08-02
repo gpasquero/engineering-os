@@ -96,6 +96,23 @@ Derived Artifacts          DERIVED — website, indexes, graph, reports, caches,
 
 Compiler stages: parsing → normalization → validation → semantic linking.
 
+**The Canonical Knowledge Model is not an arbitrary graph. It is a graph
+conforming to the Engineering OS Metamodel** (`ADR-0036`):
+
+```text
+Engineering OS Metamodel  →  Canonical Knowledge Model  →  projections
+```
+
+The Metamodel is **the ontology of Engineering OS itself** — its purpose is not
+to describe software systems but to describe *how Engineering OS describes
+software systems* (`ADR-0035`). It is the **contract between authoring and
+compilation**, and it must exist before the compiler interface is finalized, so
+that the compiler compiles into it rather than inventing its own structure.
+
+**Process gate:** every new concept is positioned in the metamodel before a new
+artifact type is introduced. Where the metamodel lives is unresolved —
+`ISSUE-0055`.
+
 Derived artifacts are produced *from the canonical model*, never directly from
 the authoritative assets. Consumers include the knowledge graph, search index,
 cross-reference index, impact database, validation reports, agent context,
@@ -427,8 +444,10 @@ These are recorded as issues and must not be silently assumed:
 
 - `ISSUE-0049` — where state machine specifications live, and their boundary
   with `shared/vocabularies/`. Blocks `shared/vocabularies/`.
-- `ISSUE-0054` — the Engineering OS metamodel is named but undefined. Likely the
-  same question as `ISSUE-0031`'s self-model, approached from another direction.
+- `ISSUE-0055` — where the Metamodel lives, and whether it is Layer A or Layer B.
+  **Blocks M2**, since the metamodel is now its first deliverable.
+- `ISSUE-0031` — the scope of this repository's own `model/`. The same question
+  as `ISSUE-0055` from the other side; the two should be resolved together.
 - `ISSUE-0048` — no mechanism for correcting part of an `Active` ADR.
 - `ISSUE-0007` — versioning granularity, now also covering what identifies a
   **revision**.

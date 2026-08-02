@@ -16,7 +16,7 @@ same session the decision is made.
 > a rule exists; the rule that must be followed lives in a Policy under
 > `shared/policies/`. Agents consume policies; humans read ADRs for rationale.
 
-**Highest allocated ID: `ADR-0034`.** IDs are sequential and never reused.
+**Highest allocated ID: `ADR-0036`.** IDs are sequential and never reused.
 
 > This index table is a hand-maintained projection of ADR front matter. It is
 > listed in the transitional-debt register, `ISSUE-0037`.
@@ -42,6 +42,11 @@ Read these before designing anything that produces an artifact:
   live separately. Evaluate every extensible concept against it.
 - **`ADR-0032`** — a Registry **Specification** is authoritative; a Registry
   **Projection** is derived. Read with `ADR-0031`.
+- **`ADR-0035`** — the **Engineering OS Metamodel**: the ontology of the
+  framework itself, and its semantic backbone. **Position every new concept in
+  it before introducing a new artifact type.**
+- **`ADR-0036`** — the Canonical Knowledge Model is a graph **conforming to the
+  Metamodel**. The Metamodel is the contract between authoring and compilation.
 - **`ADR-0017`** — reference architecture, not reference implementation.
 - **`ADR-0019`** — Knowledge Packages are a published interface.
 
@@ -83,6 +88,8 @@ Read these before designing anything that produces an artifact:
 | [ADR-0032](ADR-0032-registry-specification-versus-registry-projection.md) | **Registry Specification versus Registry Projection** | accepted | ISSUE-0053 |
 | [ADR-0033](ADR-0033-process-policy-governs-workflow.md) | A `ProcessPolicy` governs a Workflow | accepted | ISSUE-0051 |
 | [ADR-0034](ADR-0034-knowledge-explorer-is-a-per-repository-projection.md) | The Knowledge Explorer is a per-repository projection | accepted | ISSUE-0052 |
+| [ADR-0035](ADR-0035-engineering-os-metamodel.md) | **The Engineering OS Metamodel** | accepted | ISSUE-0054 |
+| [ADR-0036](ADR-0036-canonical-model-conforms-to-the-metamodel.md) | **The Canonical Knowledge Model conforms to the Metamodel** | accepted | — |
 
 ## Supersessions
 

@@ -9,8 +9,8 @@ related: [ISSUE-0037]
 
 # Issue Index
 
-**54 recorded · 23 open · 30 resolved · 1 deferred.** Highest allocated ID:
-`ISSUE-0054`.
+**55 recorded · 23 open · 31 resolved · 1 deferred.** Highest allocated ID:
+`ISSUE-0055`.
 
 > **Hand-maintained projection.** Under `ADR-0016` this is a projection of issue
 > front matter, which is authoritative. No generator exists yet (`ISSUE-0036`),
@@ -23,12 +23,13 @@ related: [ISSUE-0037]
 
 | ID | Title | Blocks |
 |---|---|---|
+| [0055](ISSUE-0055-metamodel-location-and-distribution.md) | Where the Metamodel lives, and how adopters obtain it | **M2** |
 | [0002](ISSUE-0002-composition-primitive-undefined.md) | How a workflow invokes a skill is undefined | M8 |
 | [0006](ISSUE-0006-scenario-testing-method-undefined.md) | How a prompt-based methodology is tested is undefined | M10 |
 
-**M2 and M3 are both unblocked.** `ISSUE-0049` gates the state machine
-specifications and `shared/vocabularies/`; `ISSUE-0054` gates anything depending
-on the metamodel.
+The Metamodel is now M2's **first** deliverable (`ADR-0036`), so `ISSUE-0055`
+blocks the milestone. `ISSUE-0049` gates the state machine specifications and
+`shared/vocabularies/`. **M3 is unblocked.**
 
 ## Open, by milestone
 
@@ -37,7 +38,7 @@ on the metamodel.
 | ID | Title | Type | Severity |
 |---|---|---|---|
 | [0049](ISSUE-0049-state-machine-specification-location.md) | Where state machine specifications live | question | high |
-| [0054](ISSUE-0054-metamodel-undefined.md) | The Engineering OS metamodel is named but undefined | gap | high |
+| [0055](ISSUE-0055-metamodel-location-and-distribution.md) | Where the Metamodel lives, and how adopters obtain it | question | blocking |
 | [0048](ISSUE-0048-no-mechanism-for-correcting-an-active-adr.md) | No mechanism for correcting part of an `Active` ADR | gap | medium |
 | [0007](ISSUE-0007-versioning-granularity-undefined.md) | Versioning granularity; what identifies a revision | question | high |
 | [0011](ISSUE-0011-audience-licence-distribution-undefined.md) | Repository is public with no licence | question | high |
@@ -137,3 +138,4 @@ on the metamodel.
 | [0051](ISSUE-0051-process-policy-overlaps-workflows.md) | `ProcessPolicy` versus Workflow | `ADR-0033` |
 | [0052](ISSUE-0052-knowledge-explorer-undefined.md) | Knowledge Explorer undefined | `ADR-0034` |
 | [0053](ISSUE-0053-are-registries-authoritative-or-derived.md) | Registry authoritative or derived | `ADR-0032` |
+| [0054](ISSUE-0054-metamodel-undefined.md) | The Engineering OS metamodel was undefined | `ADR-0035` |

@@ -2,14 +2,14 @@
 id: ISSUE-0054
 title: The Engineering OS metamodel is named but undefined
 type: gap
-status: open
+status: resolved
 severity: high
 created: 2026-08-02
 updated: 2026-08-02
 blocks: [M2]
 evidence:
   - governance/adr/ADR-0032-registry-specification-versus-registry-projection.md
-resolved-by: null
+resolved-by: ADR-0035
 ---
 
 # ISSUE-0054 — The Engineering OS metamodel is undefined
@@ -59,8 +59,32 @@ layer beneath both the glossary and the policies.
 these are the same question approached from two directions and should be
 resolved together.
 
-## Resolution criteria
+## Resolution
 
-An ADR defining what the metamodel is, where it lives, its artifact kind, and
-its relationship to the glossary, to `ModelingPolicy` artifacts and to
-`ISSUE-0031`'s self-model.
+`ADR-0035`. **Engineering OS has an explicit Metamodel: the ontology of
+Engineering OS itself.**
+
+> Its purpose is not to describe software systems. Its purpose is to describe
+> **how Engineering OS describes software systems.**
+
+A meta-level ontology defining the core semantic entities of the framework —
+Artifact Type, Artifact Revision, Registry Specification, Registry Projection,
+Manifest, Policy, Workflow, Skill, Capability, Vocabulary, State Machine,
+Ontology, Concept, Knowledge Package, Compiler, Projection, Validation,
+Acceptance Record, ADR, Issue — each declaring identity, purpose, ownership,
+lifecycle owner, authoritative representation, derived representations,
+relationships and extension points.
+
+**The process gate is the operative part:** from this point onward, every new
+concept must be positioned within the metamodel *before* a new artifact type is
+introduced. This inverts eleven sessions of practice and is the structural
+remedy for naming after the fact — the defect behind five vocabulary collisions.
+
+The reading suggested above — that a `ModelingPolicy` states metamodel rules
+normatively while the metamodel is the structure those rules constrain — is
+consistent with `ADR-0035` but not stated by it.
+
+**Two sub-questions are not answered.** Where the metamodel lives is
+`ISSUE-0055`, now blocking M2. Its relationship to `ISSUE-0031`'s self-model
+becomes urgent rather than academic, since both describe Engineering OS at
+different levels.
