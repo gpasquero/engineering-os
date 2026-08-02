@@ -1,10 +1,10 @@
 ---
 id: ADR-0015
 title: Authoring is non-deterministic; compilation is deterministic
-status: accepted
+status: superseded
 date: 2026-08-02
 supersedes: null
-superseded-by: null
+superseded-by: ADR-0018
 resolves: [ISSUE-0033]
 related: [ADR-0012, ADR-0014, ISSUE-0009]
 ---

@@ -19,7 +19,7 @@ milestone: M2
 ## Current milestone
 
 **M2 — Foundational contracts, manifests and the compiler interface. Not
-started, and unblocked.**
+started, and blocked.**
 
 M1 is complete.
 
@@ -31,56 +31,55 @@ M1 is complete.
 | Documentation system, session protocol | Defined and accepted |
 | Vision, principles, glossary | Written |
 | Roadmap | M1–M13 |
-| ADRs | 17 — 14 accepted, 3 superseded |
-| Issues | 37 recorded — 22 open, 14 resolved, 1 deferred |
-| Session journal | 4 entries |
+| ADRs | 19 — 15 accepted, 4 superseded |
+| Issues | 41 recorded — 24 open, 16 resolved, 1 deferred |
+| Session journal | 5 entries |
 | Frozen provenance | `imports/` (3 prototypes), `sources/` (requirements, archives, original handoff) |
 
 ## What does not exist
 
-No executable code of any kind, and none is planned before M9. `ADR-0017`
-defers the implementation language until architectural stabilization
-(`ISSUE-0036`), so M2 produces a **compiler interface specification** instead of
-tooling.
+No executable code, and none is planned before M9 (`ADR-0017`, `ISSUE-0036`).
 
 Nothing has been built in `shared/`, `skills/`, `workflows/`, `model-spec/`,
 `model/`, `templates/`, `schemas/`, `validation/`, `tests/`, `adapters/` or
-`docs/`.
+`docs/`. None of the three manifests exist.
 
-None of the three manifests exist.
+**No acceptance records exist**, and no mechanism defines them.
 
-## Blocking
+## Blocking M2
 
-**Nothing blocks M2.** Two issues block later milestones: `ISSUE-0002` (M8) and
-`ISSUE-0006` (M10).
+All three follow from `ADR-0018`, which made acceptance architectural.
+
+| Issue | Question |
+|---|---|
+| `ISSUE-0038` | `authoritative` names both a lifecycle state and an artifact kind. Both vocabularies are early M2 deliverables; renaming afterwards is expensive. |
+| `ISSUE-0041` | What an acceptance record is — fields, location, artifact kind, and whether condition 3 can be satisfied before validation tooling exists. |
+| `ISSUE-0040` | Every artifact here was self-certified and has no acceptance record, including `ADR-0018` itself. Depends on `ISSUE-0041`. |
+
+`ISSUE-0002` (M8) and `ISSUE-0006` (M10) block later milestones.
 
 ## Must be resolved within M2
 
-`ISSUE-0007`, `ISSUE-0009`, `ISSUE-0011`, `ISSUE-0013`, `ISSUE-0014`,
-`ISSUE-0015`, `ISSUE-0018`, `ISSUE-0019`, `ISSUE-0031`.
+`ISSUE-0007`, `ISSUE-0011`, `ISSUE-0013`, `ISSUE-0014`, `ISSUE-0015`,
+`ISSUE-0018`, `ISSUE-0019`, `ISSUE-0031`.
 
-`ISSUE-0009` is the most consequential. Since `ADR-0015`, human acceptance is a
-hard architectural requirement — an artifact becomes authoritative only when
-accepted and committed — yet nothing defines who accepts, on what basis, or what
-review consists of. **Nothing currently prevents an agent from committing its
-own output and self-certifying it as authoritative.**
+## Known debt and compliance gaps
 
-## Known debt
-
-`ISSUE-0037` — every governance projection is hand-maintained, because no
-generator can exist until `ISSUE-0036` is un-deferred. The register lists five
-projections. This is sanctioned by `ADR-0016` as transitional, and grows with
-every record added.
+- **`ISSUE-0040`** — the repository does not satisfy `ADR-0018`. The
+  authoritative tier currently rests on nothing, because nothing in it was
+  accepted by anyone other than its author.
+- **`ISSUE-0037`** — five hand-maintained projections, because no generator can
+  exist until `ISSUE-0036` is un-deferred. The counts in
+  `governance/issues/index.md` already drifted once, in `SESSION-0004`.
+- **`ISSUE-0039`** — the governance policy mechanism that `ADR-0018` names as
+  the only route to automated acceptance does not exist.
 
 ## Next action
 
-Begin M2 with `shared/vocabularies/`. Extracting the assertion statuses and the
-artifact kinds to single sources closes `ISSUE-0018` and gives everything later
-a stable vocabulary to reference.
+Resolve `ISSUE-0041` first — it is the dependency for `ISSUE-0040`, and until an
+acceptance record exists there is nowhere to record that anything was accepted.
 
-Then the compiler interface specification, which is the M2 deliverable that
-unblocks M9 and is the hardest thing in the milestone — `ADR-0017` records the
-risk of specifying seams before an implementation exists to learn from.
+Then `ISSUE-0038`, before `shared/vocabularies/` is written.
 
 ## Repository state
 

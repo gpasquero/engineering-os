@@ -91,10 +91,32 @@ the authoritative assets. Lives under generated artifacts and **never inside
 > ambiguous and should not be used unqualified — say *authoritative knowledge
 > model*, *canonical knowledge model*, or `model/`.
 
-**Authoring** — producing an authoritative artifact. Non-deterministic. Done by
-humans **and by AI agents, which are authors in exactly the same sense**. An
-authored artifact becomes authoritative only after human acceptance and version
-control. See `ADR-0015`.
+**Authoring** — producing an artifact. Non-deterministic. Done by humans **and
+by AI agents, which are authors in exactly the same sense**. Authoring alone
+confers no authority.
+
+**Acceptance** — the explicit engineering decision that confers authoritative
+status. **Not a Git operation**; a commit alone does not make an artifact
+authoritative. Requires explicit reviewer approval, traceability to the
+motivating issue or ADR, and successful validation of applicable deterministic
+checks. Is itself knowledge, and traceable. See `ADR-0018`.
+
+**Artifact lifecycle** — a closed vocabulary of six states (`ADR-0018`):
+`Draft` → `Under Review` → `Accepted` → `Authoritative` → `Superseded` →
+`Archived`.
+
+> **Disambiguation, unresolved.** `Authoritative` is a *lifecycle state* here and
+> an *artifact kind* in the taxonomy below. They are different concepts sharing
+> one word — the same defect as the overloaded "skill". See `ISSUE-0038`. What
+> distinguishes `Accepted` from `Authoritative` is also unsettled.
+
+**Self-certification** — an author accepting its own work. **Prohibited** unless
+an explicit governance policy enables it. Engineering OS never assumes an AI
+agent may accept its own output by default.
+
+**Reviewer** — whoever grants explicit approval during acceptance. A human
+today. Automated acceptance is possible only through explicitly configured
+governance rules, a mechanism that does not yet exist (`ISSUE-0039`).
 
 **Projection** — any artifact derived from the canonical knowledge model:
 knowledge graph, search index, cross-reference index, impact database,
@@ -155,10 +177,16 @@ that owns the domain. There is no shared central model. See `ADR-0010`.
 **Federation** — how multi-repository environments exchange knowledge without
 sharing a model: by exporting and referencing Knowledge Packages.
 
-**Knowledge Package** — a versioned export of a repository's ontology, graph,
-glossary, specifications and metadata, letting another repository reference it
-without access to its internal source of truth. Format undefined —
-`ISSUE-0029`.
+**Knowledge Package** — a **published interface between repositories**, and a
+derived artifact. It exports a stable projection derived from the Canonical
+Knowledge Model, and **never** exports authoritative assets, which stay editable
+only in their owning repository. Its purpose is interoperability, not editing.
+
+Its format is a **stable, versioned specification independent of the compiler
+implementation**: compilers may evolve provided they emit conforming packages,
+as different compilers emit binaries conforming to one published specification.
+Packages version the specification, the exported knowledge model and
+compatibility information, and never expose compiler internals. See `ADR-0019`.
 
 ## Epistemic terms
 

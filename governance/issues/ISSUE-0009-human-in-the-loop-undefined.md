@@ -2,7 +2,7 @@
 id: ISSUE-0009
 title: Human-in-the-loop authority and gate approval are undefined
 type: question
-status: open
+status: resolved
 severity: high
 created: 2026-08-02
 updated: 2026-08-02
@@ -10,7 +10,7 @@ blocks: [M2, M3]
 evidence:
   - imports/ontology-driven-development-v2/SKILL.md
   - imports/reconstruct-system-knowledge/SKILL.md
-resolved-by: null
+resolved-by: ADR-0018
 ---
 
 # ISSUE-0009 — Human-in-the-loop authority is undefined
@@ -66,7 +66,36 @@ output and thereby self-certifying it as authoritative.
 
 That gap is the practical risk, and it exists today.
 
-## Resolution criteria
+## Resolution
+
+`ADR-0018`. **Acceptance is a first-class engineering concept, modeled
+explicitly.** The question was reframed: it is not about gate authority, it is
+about what acceptance *is*.
+
+Authoritative status is determined by an explicit acceptance process, **not by
+who created the artifact**. Lifecycle:
+
+```text
+Draft → Under Review → Accepted → Authoritative → Superseded → Archived
+```
+
+**Acceptance is an engineering decision, not a Git operation. A commit alone
+does not make an artifact authoritative** — which corrects the boundary marker
+that `ADR-0015` had claimed, and is why `ADR-0018` supersedes it.
+
+Three conditions: explicit reviewer approval; traceability to the motivating
+issue, ADR or requirement; successful validation of applicable deterministic
+checks.
+
+**Self-certification is prohibited** unless an explicit governance policy
+enables it. Engineering OS never assumes an AI agent can accept its own work by
+default.
+
+Opened by this answer: `ISSUE-0038` (`authoritative` names two things),
+`ISSUE-0039` (the governance policy mechanism does not exist), `ISSUE-0040` (the
+existing corpus was self-certified), `ISSUE-0041` (acceptance record undefined).
+
+## Original resolution criteria
 
 An ADR defining who holds authority for each gate outcome and each class of
 model change, and what an agent does when authority is unavailable. Feeds the

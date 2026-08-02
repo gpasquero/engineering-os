@@ -26,8 +26,8 @@ recorded as issues. No skills, policies or contracts.
 
 ## M2 — Foundational contracts, manifests and the compiler interface
 
-**Unblocked.** `ISSUE-0032`, `ISSUE-0033`, `ISSUE-0034` and `ISSUE-0035` are
-resolved by `ADR-0014` through `ADR-0017`.
+**Blocked by `ISSUE-0038`, `ISSUE-0040` and `ISSUE-0041`** — all consequences of
+`ADR-0018`, which made acceptance architectural.
 
 - **Compiler interface specification** (`ADR-0017`) — language-independent, and
   the substitute for shipping executable tooling in this milestone
@@ -38,16 +38,18 @@ resolved by `ADR-0014` through `ADR-0017`.
   (`ADR-0014`)
 - Skill contract and workflow contract, including write-scope declaration
 - Evidence record, conflict record, traceability record contracts
+- **Acceptance record contract** (`ADR-0018`, `ISSUE-0041`)
 - `shared/vocabularies/` — single-source assertion statuses, confidence, risk,
-  gate decisions, change types, **artifact kinds** (`ADR-0012`)
+  gate decisions, change types, **artifact kinds** (`ADR-0012`) and **artifact
+  lifecycle states** (`ADR-0018`)
 - One canonical impact-analysis template
 
 **No executable tooling.** `ADR-0017` defers the implementation language, so
 manifest validation and index generation move to M9.
 
-Must be resolved within this milestone: `ISSUE-0007`, `ISSUE-0009`,
-`ISSUE-0011` (the licence gap), `ISSUE-0013`, `ISSUE-0014`, `ISSUE-0015`,
-`ISSUE-0018`, `ISSUE-0019`, `ISSUE-0031`.
+Must be resolved within this milestone: `ISSUE-0007`, `ISSUE-0011` (the licence
+gap), `ISSUE-0013`, `ISSUE-0014`, `ISSUE-0015`, `ISSUE-0018`, `ISSUE-0019`,
+`ISSUE-0031`.
 
 Design constraints: nothing built here may preclude federation (`ISSUE-0029`);
 every artifact declares its kind (`ADR-0012`); every authoritative artifact
@@ -112,9 +114,12 @@ User guides, `adapters/`, licence, changelog. Depends on `ISSUE-0001` and
 
 ## M13 — Knowledge Packages and federation
 
-The versioned export format and exchange protocol that let repositories
-reference one another without sharing their source of truth. Blocked by
-`ISSUE-0029`.
+The **published package specification** — versioned, and independent of any
+compiler implementation (`ADR-0019`) — plus the exchange protocol that lets
+repositories reference one another without sharing their source of truth.
+
+Conformance to the specification is what makes `ADR-0017`'s
+multiple-implementations promise testable.
 
 ## Mapping from the inherited roadmap
 

@@ -2,14 +2,14 @@
 id: ISSUE-0029
 title: Knowledge Package format and federation protocol are undefined
 type: question
-status: open
+status: resolved
 severity: high
 created: 2026-08-02
 updated: 2026-08-02
 blocks: [M13]
 evidence:
   - governance/adr/ADR-0010-repository-local-knowledge-ownership.md
-resolved-by: null
+resolved-by: ADR-0019
 ---
 
 # ISSUE-0029 — Knowledge Package format and federation protocol are undefined
@@ -73,7 +73,25 @@ is an export of exactly one of:
 
 The second or third is far more likely than the first. Nothing has been decided.
 
-## Resolution criteria
+## Resolution
+
+`ADR-0019`. **A Knowledge Package is a published interface between
+repositories** — the third option listed above, a dedicated projection.
+
+It **never exports authoritative repository assets**: authoritative knowledge
+belongs to its repository and remains editable only there. It exports a stable
+projection derived from the Canonical Knowledge Model, and is itself a derived
+artifact. Its purpose is interoperability, not editing.
+
+The coupling hazard identified above is answered directly: **the package format
+is a stable, versioned specification independent of the compiler
+implementation.** Compilers may evolve provided they emit conforming packages,
+analogous to different compilers producing binaries that conform to one
+published specification. Packages version the specification, the exported
+knowledge model and compatibility information — and never expose compiler
+internals.
+
+## Original resolution criteria
 
 A Knowledge Package specification and a federation protocol, recorded by ADR.
 Until then, M2 decisions that could constrain federation must say so explicitly.

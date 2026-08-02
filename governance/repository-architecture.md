@@ -56,12 +56,24 @@ crm/                model/  -> describes the CRM domain
 ```
 
 There is no shared central model directory. Multi-repository environments
-**federate** through versioned Knowledge Packages — exports of ontology, graph,
-glossary, specifications and metadata that let one repository reference another
-without sharing its internal source of truth.
+**federate** through Knowledge Packages.
 
-Federation does not exist yet (`ISSUE-0029`), but nothing built in `model-spec/`
-or `MANIFEST.yaml` may preclude it.
+A **Knowledge Package is a published interface between repositories**
+(`ADR-0019`). It never exports authoritative assets — those stay editable only
+in their owning repository. It exports a stable projection derived from the
+canonical model:
+
+```text
+Authoritative Assets → Compiler → Canonical Model → Knowledge Package → Consumer
+```
+
+Its format is a **stable, versioned specification independent of the compiler
+implementation**, so compilers may evolve provided they emit conforming
+packages. Packages version the specification, the exported knowledge model and
+compatibility information, and never expose compiler internals.
+
+The specification itself is M13 work. What earlier milestones must respect is
+only that nothing couples the eventual package format to compiler internals.
 
 ## Engineering OS is a knowledge compiler
 
@@ -88,7 +100,7 @@ Derived artifacts are produced *from the canonical model*, never directly from
 the authoritative assets. The documentation website is one projection among many.
 **No consumer is privileged.**
 
-## Authoring versus compilation
+## Authoring, acceptance and compilation
 
 ```text
 Authoring    → non-deterministic
@@ -96,11 +108,32 @@ Compilation  → deterministic
 ```
 
 AI agents are **authors, exactly like human engineers**, and authors are
-inherently non-deterministic. An authored artifact becomes authoritative only
-after **human acceptance and version control**; from that point the compiler
-must produce identical outputs from identical authoritative state (`ADR-0015`).
+inherently non-deterministic. A generator may never invoke an agent — that would
+make it non-deterministic.
 
-A generator may never invoke an agent — that would make it non-deterministic.
+**Authoritative status is conferred by acceptance, not by authorship and not by
+a commit** (`ADR-0018`).
+
+```text
+Draft → Under Review → Accepted → Authoritative → Superseded → Archived
+```
+
+Acceptance is an engineering decision, not a Git operation. It requires all
+three of:
+
+1. explicit reviewer approval
+2. traceability to the motivating issue, ADR or requirement
+3. successful validation of all applicable deterministic checks
+
+**Self-certification is prohibited.** Engineering OS never assumes an AI agent
+can accept its own work; automated acceptance is possible only through an
+explicitly configured governance policy, and that mechanism does not yet exist
+(`ISSUE-0039`).
+
+Acceptance itself is knowledge, and is traceable.
+
+> The lifecycle state `Authoritative` and the artifact kind `authoritative` are
+> different concepts sharing one word. Unresolved — `ISSUE-0038`.
 
 ## Reference architecture, not reference implementation
 
@@ -258,15 +291,18 @@ current state and proposed state. See `ADR-0005`.
 
 These are recorded as issues and must not be silently assumed:
 
-- `ISSUE-0009` — who accepts an artifact, and what review means. Load-bearing
-  for the architecture since `ADR-0015`, because the authoritative tier is only
-  as trustworthy as acceptance makes it.
+- `ISSUE-0038` — `authoritative` names both a lifecycle state and an artifact
+  kind. Blocks both vocabularies.
+- `ISSUE-0040` — every artifact here was self-certified and has no acceptance
+  record, including `ADR-0018` itself.
+- `ISSUE-0041` — the shape and location of an acceptance record.
+- `ISSUE-0039` — the governance policy mechanism that would permit automated
+  acceptance.
 - `ISSUE-0031` — the scope of this repository's own `model/`, and its overlap
   with `governance/`.
 - `ISSUE-0037` — hand-maintained projections, until generators exist.
 - `ISSUE-0002` — the composition primitive, which determines whether
   `workflows/` holds prose or executable definitions.
-- `ISSUE-0029` — the Knowledge Package format that federation depends on.
 - `ISSUE-0001` — runtime target, which determines whether `adapters/` is real.
 - `ISSUE-0036` — reference implementation language. **Deferred**, not open.
 
