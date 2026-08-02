@@ -38,6 +38,10 @@ ex:Artifact_CheckoutTests a eos:Artifact ;
     rdfs:label "Checkout test suite" ;
     rdfs:comment "Tests. Modelled as an Artifact that validates another and references the" .
 
+ex:Artifact_CurrencyCheck a eos:Artifact ;
+    rdfs:label "Legacy currency checker" ;
+    rdfs:comment "**Implements a rationale that no longer stands.** `Invariant.SingleCurrency` was" .
+
 ex:Artifact_OrderingSpec a eos:Artifact ;
     rdfs:label "Ordering specification" ;
     rdfs:comment "A specification document. Becomes inconsistent when what it represents changes." .
@@ -137,6 +141,8 @@ ex:Actor_Reviewer eos:scopedTo ex:BC_Ordering .
 ex:Artifact_CheckoutService eos:hasActiveRevision ex:ArtifactRevision_Checkout_r7 .
 ex:Artifact_CheckoutTests eos:references ex:Concept_Order .
 ex:Artifact_CheckoutTests eos:validates ex:Artifact_CheckoutService .
+ex:Artifact_CurrencyCheck eos:represents ex:Invariant_SingleCurrency .
+ex:Artifact_CurrencyCheck eos:validates ex:Artifact_CheckoutService .
 ex:Artifact_OrderingSpec eos:references ex:Concept_Payment .
 ex:Artifact_OrderingSpec eos:represents ex:Concept_Order .
 ex:Artifact_PaymentService eos:hasActiveRevision ex:ArtifactRevision_Payment_r3 .

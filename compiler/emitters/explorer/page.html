@@ -107,8 +107,21 @@ function cmp(a, b){ return a < b ? -1 : a > b ? 1 : 0 }
 function hasEdge(id, s){
   return edgesOf(id, s.direction || 'out').some(([e, o]) => matchEdge(e, o, s) !== null);
 }
+function hasPath(id, chain){
+  let frontier = new Set([id]);
+  for (const s of chain) {
+    const next = new Set();
+    for (const cur of frontier)
+      for (const [e, o] of edgesOf(cur, s.direction || 'out'))
+        if (matchEdge(e, o, s) !== null) next.add(o);
+    if (!next.size) return false;
+    frontier = next;
+  }
+  return true;
+}
 function rowMatches(r, s){
   if (s.type != null) return r.type === s.type;
+  if (s['has-path'] != null) return hasPath(r.id, s['has-path']);
   return hasEdge(r.id, s['has-edge']);
 }
 const OPS = {

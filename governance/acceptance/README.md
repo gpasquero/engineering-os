@@ -15,7 +15,7 @@ committed.
 
 **Acceptance is an engineering decision, not a Git operation** (`ADR-0020`).
 
-**Highest allocated ID: `ACCEPT-0027`.** IDs are sequential and never reused.
+**Highest allocated ID: `ACCEPT-0028`.** IDs are sequential and never reused.
 
 ## Index
 
@@ -48,6 +48,7 @@ committed.
 | [ACCEPT-0025](ACCEPT-0025-session-0029-decisions.md) | `SESSION-0029` decisions and the first vertical slice at `17ab3fd` | Project Owner (`gpasquero`) | accepted | 2026-08-02 |
 | [ACCEPT-0026](ACCEPT-0026-session-0030-decisions.md) | `SESSION-0030` decisions and the semantic query API at `a55f5f6` | Project Owner (`gpasquero`) | accepted | 2026-08-02 |
 | [ACCEPT-0027](ACCEPT-0027-session-0031-decisions.md) | `SESSION-0031` decisions and query-result hardening at `c655fd7` | Project Owner (`gpasquero`) | accepted | 2026-08-02 |
+| [ACCEPT-0028](ACCEPT-0028-session-0032-decisions.md) | `SESSION-0032` — the external Kubernetes validation at `6d5da52` | Project Owner (`gpasquero`) | accepted | 2026-08-02 |
 
 ## The three conditions
 

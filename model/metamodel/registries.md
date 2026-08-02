@@ -80,6 +80,30 @@ registries:
       An adopting repository declares additional queries using registered
       operators. Adding an operator is an engine change (ADR-0086).
 
+  - id: REG-finding-kinds
+    registers: the taxonomy classifying discoveries by strength
+    source: ../finding-kinds.md
+    extraction: yaml-block
+    collection: finding-kinds
+    membership: >
+      A finding kind is registered by appearing in the taxonomy with an id, a
+      rank, a strength, what it claims and what it requires.
+    extension: >
+      An adopting repository may add kinds. It may not weaken the requirements of
+      a framework kind (ADR-0090).
+
+  - id: REG-recommendations
+    registers: engineering recommendations, composed of semantic queries
+    source: ../recommendations.md
+    extraction: yaml-block
+    collection: recommendations
+    membership: >
+      A recommendation is registered by appearing with an id, an intent, the
+      subject types it applies to, a rationale and steps whose queries exist.
+    extension: >
+      An adopting repository declares recommendations from registered queries.
+      Recommendation logic is never written in code (ADR-0091).
+
   - id: REG-validation-rules
     registers: the rules the compiler executes
     source: validation-rules.md

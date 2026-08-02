@@ -55,6 +55,7 @@ ADRs answer "why".
 | [SESSION-0030](SESSION-0030-2026-08-02.md) | 2026-08-02 | usefulness | `ACCEPT-0025`; **prove-usefulness phase** (`ADR-0084`); **question-driven development** (`ADR-0085`); **the query engine is the semantic API** (`ADR-0086`); external-system milestone (`ADR-0087`); **11 declared queries, two engines verified to agree** |
 | [SESSION-0031](SESSION-0031-2026-08-02.md) | 2026-08-02 | usefulness | `ACCEPT-0026`; **semantic API hardening** (`ADR-0088`) — path provenance, traversed-edge output, parallel-edge correctness, declaration schema, applicability, bounded traversal, full-fidelity parity; **a real ordering divergence found between the engines** |
 | [SESSION-0032](SESSION-0032-2026-08-02.md) | 2026-08-02 | k8s-ssa | `ACCEPT-0027`; **Kubernetes Server-Side Apply modelled** — charter, 41 nodes, four source classes, reviewed ground truth; **cross-source finding: a `managedFields` timestamp is not the time that entry last changed**; one domain-neutral compiler correction |
+| [SESSION-0033](SESSION-0033-2026-08-02.md) | 2026-08-02 | exploit | `ACCEPT-0028`; **engineering value is the target** (`ADR-0089`); **finding taxonomy, no confidence scores** (`ADR-0090`); **Engineering Recommendation** (`ADR-0091`); `has-path`; six maintainer questions; `tools/advise.py` |
 
 ## Reading
 

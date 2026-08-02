@@ -26,8 +26,8 @@ is a data change; adding an operator is an engine change and should be rare.
 |---|---|
 | `select` | start a result set — `{type}`, `{id}`, `{subject}`, or `{all: true}` |
 | `traverse` | follow edges — `{direction, predicate, core, category, node-type, transitive, max-hops}` |
-| `keep` | retain rows matching `{type}` or `{has-edge}` |
-| `reject` | drop rows matching `{type}` or `{has-edge}` |
+| `keep` | retain rows matching `{type}`, `{has-edge}` or `{has-path}` |
+| `reject` | drop rows matching `{type}`, `{has-edge}` or `{has-path}` |
 | `with` | attach a named sub-traversal to every row, reporting **the edge in hand** |
 
 `direction` is `out`, `in` or `both`. `transitive` follows edges to a bounded
@@ -178,6 +178,50 @@ queries:
       - select: {type: Invariant}
       - reject: {has-edge: {direction: out, core: evidenced-by}}
 
+  - id: Q-assumptions
+    question: What assumptions does this implementation depend on?
+    subject: required
+    applies-to: [Artifact]
+    rationale: >
+      An implementation depends on what must remain true of the concepts it
+      represents. Those constraints are stated elsewhere, by someone else, and an
+      engineer changing the implementation rarely reads them.
+    steps:
+      - select: {subject: true}
+      - traverse: {direction: out, core: represents}
+      - traverse: {direction: in, core: governs, node-type: Invariant}
+
+  - id: Q-obsolete-decisions
+    question: Which decisions became obsolete but are still reflected in code?
+    subject: none
+    rationale: >
+      A superseded decision whose established concepts are still implemented is
+      the most expensive kind of stale knowledge: the code is right, the
+      rationale someone will read is wrong, and nothing connects them.
+    steps:
+      - select: {type: ADR}
+      - keep: {has-edge: {direction: out, predicate: superseded-by}}
+      - keep:
+          has-path:
+            - {direction: out, core: establishes}
+            - {direction: in, core: represents}
+
+  - id: Q-stale-implementation
+    question: Which implementation artifacts no longer match their original design rationale?
+    subject: none
+    rationale: >
+      The same gap seen from the code. An artifact whose represented concept was
+      established by a decision that has since been superseded is implementing a
+      rationale that no longer stands — and this is the question that required
+      `has-path`, because the filter is two hops away from the row returned.
+    steps:
+      - select: {type: Artifact}
+      - keep:
+          has-path:
+            - {direction: out, core: represents}
+            - {direction: in, core: establishes, node-type: ADR}
+            - {direction: out, predicate: superseded-by}
+
   - id: Q-unenforced
     question: Which Invariants have no enforcement point?
     subject: none
@@ -230,6 +274,12 @@ JavaScript — and **nothing checks that they agree** (`ADR-0086`).
 
 **Every query scans.** There is no index; `Q-orphan-concepts` walks every edge
 for every Concept. At 28 nodes this is irrelevant and it will not stay so.
+
+**`has-path` exists because a question could not be expressed.** *Which
+implementation artifacts no longer match their original design rationale?*
+filters a row on a property two hops away while still returning the row, and the
+pipeline cannot return to an earlier stage. `has-edge` was single-hop. The
+correction is domain-neutral and the fixture that covers it mentions no domain.
 
 **`subject: none` queries ignore any subject given.** That is silent rather than
 an error.

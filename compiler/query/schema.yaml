@@ -36,12 +36,14 @@ operators:
     fields:
       type:     {type: node-type}
       has-edge: {type: edge-spec}
-    exactly-one-of: [type, has-edge]
+      has-path: {type: edge-spec-list}
+    exactly-one-of: [type, has-edge, has-path]
   reject:
     fields:
       type:     {type: node-type}
       has-edge: {type: edge-spec}
-    exactly-one-of: [type, has-edge]
+      has-path: {type: edge-spec-list}
+    exactly-one-of: [type, has-edge, has-path]
   with:
     free-form: edge-spec
 

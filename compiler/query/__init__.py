@@ -74,6 +74,15 @@ def _check_fields(mapping, definition, where, vocab, out):
             continue
         if fields[key]["type"] == "edge-spec":
             _check_fields(value, SCHEMA["edge-spec"], f"{where}.{key}", vocab, out)
+        elif fields[key]["type"] == "edge-spec-list":
+            if not isinstance(value, list) or not value:
+                out.append(f"{where}.{key}: must be a non-empty list of edge specs")
+            else:
+                for i, step in enumerate(value):
+                    if not isinstance(step, dict):
+                        out.append(f"{where}.{key}[{i}]: must be a mapping")
+                        continue
+                    _check_fields(step, SCHEMA["edge-spec"], f"{where}.{key}[{i}]", vocab, out)
         elif fields[key]["type"] == "list" and fields[key].get("item"):
             for i, item in enumerate(value):
                 _check_value(item, {"type": fields[key]["item"]},
@@ -250,9 +259,33 @@ def _has_edge(m, node_id, spec):
                for e, o, _ in m.edges(node_id, spec.get("direction", "out")))
 
 
+def _has_path(m, node_id, chain):
+    """Does a path exist from node_id matching this ordered sequence of edge specs?
+
+    Added because a real engineering question could not be expressed: *which
+    implementation artifacts no longer match their original design rationale?*
+    requires filtering a row on a property reached two hops away while still
+    returning the row. `has-edge` is single-hop, and the pipeline cannot return
+    to an earlier stage.
+    """
+    frontier = {node_id}
+    for spec in chain:
+        nxt = set()
+        for current in frontier:
+            for edge, other, _ in m.edges(current, spec.get("direction", "out")):
+                if m.match(edge, other, spec) is not None:
+                    nxt.add(other)
+        if not nxt:
+            return False
+        frontier = nxt
+    return True
+
+
 def _row_matches(m, row, spec):
     if spec.get("type") is not None:
         return row["type"] == spec["type"]
+    if spec.get("has-path") is not None:
+        return _has_path(m, row["id"], spec["has-path"])
     return _has_edge(m, row["id"], spec["has-edge"])
 
 

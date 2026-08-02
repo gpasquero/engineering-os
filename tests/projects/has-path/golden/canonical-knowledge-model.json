@@ -1,0 +1,118 @@
+{
+  "formatVersion": "1.0.0",
+  "metamodelVersion": "0.4.0-skeleton",
+  "project": "has-path",
+  "note": "Canonical Knowledge Model. Every edge was asserted; none inferred (ADR-0044, ADR-0061). Serializations are projections of this model, not the model (ADR-0076).",
+  "nodes": [
+    {
+      "id": "ADR.New",
+      "type": "ADR",
+      "label": "The replacing decision",
+      "family": "operational",
+      "position": null,
+      "description": "Replaces the old one.",
+      "attributes": {},
+      "provenance": {
+        "source": "adr-new.md"
+      }
+    },
+    {
+      "id": "ADR.Old",
+      "type": "ADR",
+      "label": "A superseded decision",
+      "family": "operational",
+      "position": null,
+      "description": "Superseded, and still readable.",
+      "attributes": {},
+      "provenance": {
+        "source": "adr-old.md"
+      }
+    },
+    {
+      "id": "Artifact.Stale",
+      "type": "Artifact",
+      "label": "An implementation of a superseded rationale",
+      "family": "descriptive",
+      "position": null,
+      "description": "Three hops from the supersession that invalidates its reason.",
+      "attributes": {},
+      "provenance": {
+        "source": "artifact.md"
+      }
+    },
+    {
+      "id": "Concept.Rationale",
+      "type": "Concept",
+      "label": "A concept established by the old decision",
+      "family": "descriptive",
+      "position": null,
+      "description": "Its reason no longer stands.",
+      "attributes": {},
+      "provenance": {
+        "source": "concept.md"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "ADR.Old",
+      "predicate": "establishes",
+      "to": "Concept.Rationale",
+      "core": "establishes",
+      "category": "traceability"
+    },
+    {
+      "from": "ADR.Old",
+      "predicate": "superseded-by",
+      "to": "ADR.New",
+      "core": "superseded-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Artifact.Stale",
+      "predicate": "represents",
+      "to": "Concept.Rationale",
+      "core": "represents",
+      "category": "semantic"
+    }
+  ],
+  "vocabulary": {
+    "establishes": {
+      "category": "traceability",
+      "means": "inverse of established-by",
+      "inverse": "established-by"
+    },
+    "represents": {
+      "category": "semantic",
+      "means": "A stands for B in another representation",
+      "inverse": "represented-by"
+    },
+    "superseded-by": {
+      "category": "traceability",
+      "means": "inverse of supersedes",
+      "inverse": "supersedes"
+    }
+  },
+  "statistics": {
+    "nodes": 4,
+    "edges": 3,
+    "byType": {
+      "ADR": 2,
+      "Artifact": 1,
+      "Concept": 1
+    },
+    "byFamily": {
+      "descriptive": 2,
+      "operational": 2
+    },
+    "byCategory": {
+      "semantic": 1,
+      "traceability": 2
+    },
+    "byCoreType": {
+      "establishes": 1,
+      "represents": 1,
+      "superseded-by": 1
+    }
+  }
+}

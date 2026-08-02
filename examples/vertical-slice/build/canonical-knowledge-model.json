@@ -89,6 +89,18 @@
       }
     },
     {
+      "id": "Artifact.CurrencyCheck",
+      "type": "Artifact",
+      "label": "Legacy currency checker",
+      "family": "descriptive",
+      "position": null,
+      "description": "**Implements a rationale that no longer stands.** `Invariant.SingleCurrency` was\nestablished by `ADR.004`, which `ADR.011` superseded. The code is still here and\nnothing in the repository connects it to the decision that replaced its reason.\n\nThis is what `Q-stale-implementation` finds.",
+      "attributes": {},
+      "provenance": {
+        "source": "artifact-currency-check.md"
+      }
+    },
+    {
       "id": "Artifact.OrderingSpec",
       "type": "Artifact",
       "label": "Ordering specification",
@@ -428,6 +440,20 @@
     },
     {
       "from": "Artifact.CheckoutTests",
+      "predicate": "validates",
+      "to": "Artifact.CheckoutService",
+      "core": "validates",
+      "category": "behavioral"
+    },
+    {
+      "from": "Artifact.CurrencyCheck",
+      "predicate": "represents",
+      "to": "Invariant.SingleCurrency",
+      "core": "represents",
+      "category": "semantic"
+    },
+    {
+      "from": "Artifact.CurrencyCheck",
       "predicate": "validates",
       "to": "Artifact.CheckoutService",
       "core": "validates",
@@ -815,13 +841,13 @@
     }
   },
   "statistics": {
-    "nodes": 28,
-    "edges": 52,
+    "nodes": 29,
+    "edges": 54,
     "byType": {
       "ADR": 2,
       "AcceptanceRecord": 1,
       "Actor": 2,
-      "Artifact": 4,
+      "Artifact": 5,
       "ArtifactRevision": 2,
       "BoundedContext": 1,
       "Capability": 2,
@@ -836,12 +862,12 @@
       "WorkflowStep": 2
     },
     "byFamily": {
-      "descriptive": 17,
+      "descriptive": 18,
       "operational": 11
     },
     "byCategory": {
-      "behavioral": 10,
-      "semantic": 5,
+      "behavioral": 11,
+      "semantic": 6,
       "structural": 22,
       "traceability": 15
     },
@@ -862,11 +888,11 @@
       "implemented-by": 2,
       "implements": 2,
       "references": 6,
-      "represents": 1,
+      "represents": 2,
       "resolves": 1,
       "superseded-by": 1,
       "validated-by": 2,
-      "validates": 2
+      "validates": 3
     }
   }
 }
