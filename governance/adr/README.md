@@ -16,7 +16,7 @@ same session the decision is made.
 > a rule exists; the rule that must be followed lives in a Policy under
 > `shared/policies/`. Agents consume policies; humans read ADRs for rationale.
 
-**Highest allocated ID: `ADR-0141`.** IDs are sequential and never reused.
+**Highest allocated ID: `ADR-0146`.** IDs are sequential and never reused.
 
 > This index table is a hand-maintained projection of ADR front matter. It is
 > listed in the transitional-debt register, `ISSUE-0037`.
@@ -236,6 +236,11 @@ Read these before designing anything that produces an artifact:
 | [ADR-0139](ADR-0139-benchmark-measures-guidance.md) | **The longitudinal benchmark measures Guidance, over subjects nobody touched** | accepted | — |
 | [ADR-0140](ADR-0140-brownfield-onboarding-skill.md) | **The next capability is a non-deterministic Brownfield Onboarding Skill that proposes, never decides** | accepted | — |
 | [ADR-0141](ADR-0141-customer-lifecycle.md) | **The customer lifecycle is the product experience and outranks the compiler architecture** | accepted | — |
+| [ADR-0142](ADR-0142-two-onboarding-deliverables.md) | **Brownfield Onboarding produces two deliverables — a Candidate Model and an Engineering Review** | accepted | — |
+| [ADR-0143](ADR-0143-five-responsibilities.md) | **Five responsibilities stay sharply separated — extract, hypothesize, authorize, preserve, consume** | accepted | — |
+| [ADR-0144](ADR-0144-reviewer-efficiency.md) | **Onboarding is optimized for reviewer efficiency, and the benchmark that matters requires humans** | accepted | — |
+| [ADR-0145](ADR-0145-curation-is-a-product.md) | **Human Curation is a first-class product and a user-experience problem** | accepted | — |
+| [ADR-0146](ADR-0146-guidance-becomes-the-center.md) | **The product question moves from what we know to what an engineer should do next** | accepted | — |
 
 ## Supersessions
 

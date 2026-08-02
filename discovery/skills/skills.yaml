@@ -263,3 +263,47 @@ skills:
       Individual, and with more scrutiny than a general skill. A technology or
       domain skill knows what it expects to find, which is exactly the bias that
       makes it useful and the bias that makes it dangerous (ADR-0121).
+
+  # ── Brownfield Onboarding ────────────────────────────────────────────────
+  # The first NON-DETERMINISTIC skill (ADR-0140). Level 1: one repository,
+  # disposable, written to find out what a real onboarding partner needs.
+  #
+  # It produces TWO deliverables (ADR-0142). The Candidate Engineering Model
+  # proposes engineering facts; the Engineering Review argues why each should or
+  # should not become authoritative. One updates the model. The other
+  # accelerates Human Curation, and it is the deliverable a reviewer's time is
+  # actually spent against.
+
+  - id: DS-brownfield-onboarding
+    kind: general
+    level: 1
+    nondeterministic: true
+    objective: >
+      Help a human engineering team produce an Authoritative Engineering Model
+      faster and with higher quality — not to produce one.
+    required-inputs: [mechanical-model]
+    evidence: [documents, testSuites, routes, tables, moduleDirs, envRefs]
+    questions:
+      - Which decisions does this repository's prose record, and what did each establish?
+      - Which business rules are stated in documents but enforced nowhere the model can see?
+      - Which of the mechanical facts are load-bearing, and which are incidental?
+      - Where do the documents and the code disagree?
+      - What would a new engineer need explained that nothing here explains?
+    permitted-tools: [read-mechanical-model]
+    proposal-types: [Concept, Capability, Invariant, ADR, Actor, Evidence]
+    provenance: >
+      Every proposal cites a document, file and locator a human can open. A
+      proposal whose support is the model's own judgement is rejected at intake
+      (ADR-0104) — a non-deterministic worker may add scrutiny and never remove
+      it.
+    uncertainty: high | medium | low, per proposal. NEVER a score (ADR-0090).
+    stopping: >
+      When every declared question is answered or recorded as unanswerable from
+      the Mechanical Model alone.
+    output-schema: candidate-proposals-v1 + engineering-review-v1
+    proposal-count: >
+      Not optimized. 500 confident proposals a team cannot review is a worse
+      partner than 40 it can (ADR-0144).
+    review: >
+      Individual, and every proposal carries an Engineering Review entry stating
+      the case for and against. Measured by reviewer efficiency, never by volume.

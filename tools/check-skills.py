@@ -58,6 +58,15 @@ def main():
             problems.append(f"level must be 1, 2 or 3, got {level!r}")
         if level == 3 and skill.get("kind") != "domain":
             problems.append("level 3 is reserved for domain skills")
+        # A non-deterministic skill must say so. A maintained model has to be
+        # answerable about which of its assertions came from a producer that
+        # would not repeat itself (ADR-0140).
+        if skill.get("nondeterministic") and skill.get("level") != 1:
+            problems.append("a non-deterministic skill starts at level 1")
+        if skill.get("nondeterministic") and "engineering-review" not in str(
+                skill.get("output-schema", "")):
+            problems.append("a non-deterministic skill must also produce an "
+                            "Engineering Review (ADR-0142)")
         kind = skill.get("kind")
         if kind not in ("general", "technology", "domain"):
             problems.append(f"kind must be general, technology or domain, "

@@ -81,8 +81,19 @@ or from a frontier model — enters the model here or not at all.
 `ai-desk`: **72 of 299 proposals authorized.** The 227 that were not are a
 recorded choice, and the drift report states the size of that choice.
 
-**State: the weakest stage in the lifecycle.** It has only ever run as a filter
-function in a script. **No human has curated a model in this system.**
+**`tools/curate.py`** is its first implementation: one proposal at a time with
+its evidence, its relationships, its Engineering Review and whether its producer
+was non-deterministic. **`authorize · reject · correct · defer`**, resumable.
+
+**`correct` is what makes it a partner rather than a gate** — *right idea, wrong
+words*, kept with the reviewer's own statement.
+
+Six figures are recorded per session, and the headline is **accepted per minute
+of review** (`ADR-0144`). **It refuses to run without a terminal**: a scripted
+session would generate exactly those numbers.
+
+**State: the instrument exists; the reading does not.**
+`wa-b2b: 453 proposals generated · 0 reviewed`.
 
 ---
 

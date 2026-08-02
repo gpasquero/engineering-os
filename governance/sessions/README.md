@@ -73,6 +73,7 @@ ADRs answer "why".
 | [SESSION-0048](SESSION-0048-2026-08-02.md) | 2026-08-02 | preservation | `ACCEPT-0043`; **Understanding Retention** (`ADR-0128`) — 0%, and coverage had hidden it; knowledge ≠ understanding (`ADR-0127`); the suite made permanent (`ADR-0129`); **the North Star** (`ADR-0131`) |
 | [SESSION-0049](SESSION-0049-2026-08-02.md) | 2026-08-02 | preservation | `ACCEPT-0044`; **semantic preservation delivered** — retention 0 % → **100 %**, coverage 1/9 → 2/9 on frozen commits; the metric admission test (`ADR-0132`); two products (`ADR-0135`); **the North Star moves to the team** (`ADR-0136`) |
 | [SESSION-0050](SESSION-0050-2026-08-02.md) | 2026-08-02 | guidance | `ACCEPT-0045`; **the benchmark begins measuring Guidance** (`ADR-0139`) — 80 %, disagreeing with 100 % understanding on the same run; the question set becomes a stable contract; the **Brownfield Onboarding Skill** specified (`ADR-0140`); the customer lifecycle (`ADR-0141`) |
+| [SESSION-0051](SESSION-0051-2026-08-02.md) | 2026-08-02 | curation | `ACCEPT-0046`; **Human Curation becomes a product** (`ADR-0145`) — `tools/curate.py`, which refuses to run without a human; two onboarding deliverables (`ADR-0142`); the five responsibilities (`ADR-0143`); **guidance becomes the center** (`ADR-0146`) |
 
 ## Reading
 
