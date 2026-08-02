@@ -30,10 +30,10 @@ M1 is complete. **M3 is unblocked.**
 | Documentation system, session protocol | Defined and accepted |
 | Vision, principles, glossary | Written |
 | Roadmap | M1–M13 |
-| ADRs | 53 — 46 accepted, 7 superseded |
-| Issues | 68 recorded — 24 open, 43 resolved, 1 deferred |
-| Acceptance Records | 13 — `ACCEPT-0001` (trust root) through `ACCEPT-0013` |
-| Session journal | 18 entries |
+| ADRs | 56 — 48 accepted, 8 superseded |
+| Issues | 70 recorded — 24 open, 45 resolved, 1 deferred |
+| Acceptance Records | 14 — `ACCEPT-0001` (trust root) through `ACCEPT-0014` |
+| Session journal | 19 entries |
 | Frozen provenance | `imports/` (3 prototypes), `sources/` (requirements, archives, original handoff) |
 
 ## What does not exist
@@ -101,36 +101,39 @@ requires an ADR.
 |---|---|
 | `ACCEPT-0001` | Bootstrap corpus at `2b6484f` — trust root, the only retrospective acceptance |
 | `ACCEPT-0002` | `SESSION-0006` at `aed6d89` — first under the normal workflow |
-| `ACCEPT-0003`–`ACCEPT-0013` | `SESSION-0007` through `SESSION-0017` |
+| `ACCEPT-0003`–`ACCEPT-0014` | `SESSION-0007` through `SESSION-0018` |
 
-**`ADR-0051`–`ADR-0053`, `ISSUE-0067`, `ISSUE-0068` and this session's
+**`ADR-0054`–`ADR-0056`, `ISSUE-0069`, `ISSUE-0070` and this session's
 propagation are `Under Review`**, not `Active`.
 
 ## A note for agents reading this repository
 
-**The ADR corpus is history, not specification** (`ADR-0029`). **Fifty-three
-decisions**, seven superseded, five partially corrected.
+**The ADR corpus is history, not specification** (`ADR-0029`). **Fifty-six
+decisions**, eight superseded, five partially corrected.
 
-**Two process gates are in force:**
+`ADR-0056` now explains why: ADRs record how content came to be; **Policies**
+hold the rules; **Gates** are the processes. None exists yet.
 
-- Position every new concept in the Metamodel before introducing a new artifact
-  type (`ADR-0035`). The Metamodel does not exist yet.
-- Answer four questions before accepting a new artifact type (`ADR-0038`):
-  layer, artifact kind, metamodel entity, compiler phase. `None (Not
-  Applicable)` is a valid layer for cross-cutting artifacts; a genuinely
-  undetermined answer is a rejection.
-- Answer three more (`ADR-0053`): semantic concept, compilation concept, or
-  both?
+**Gates are now a first-class concept** (`ADR-0054`), and **questions belong to
+Gates rather than to artifacts** (`ADR-0055`). A gate applies when triggered;
+its questions are part of its definition.
 
-**These three gates overlap and nothing states how they compose** —
-`ISSUE-0068`.
+| Gate | Asks |
+|---|---|
+| Metamodel Position Gate | metamodel entity, semantic layer |
+| Compiler Impact Review *(future)* | consuming and producing compiler phases |
+| Dimension Review | the five Dimension criteria; is another construct better? |
+| Acceptance Review | authoritative? reviewed? validation satisfied? |
+
+**Triggering conditions are now the entire enforcement surface**, and nothing
+says what may appear in one.
 
 ## Blocking
 
 | Issue | Blocks |
 |---|---|
-| `ISSUE-0067` | **M2.** Whether a Dimension Review is a distinct artifact type or a structured ADR. **The first time the metamodel-first gate has bound on a concept the project needs** — the metamodel does not exist, so `ADR-0035` cannot be satisfied. |
-| `ISSUE-0068` | **M2.** `ADR-0038`'s mandatory compiler-phase question conflicts with `ADR-0053`'s separation, and three gates now overlap with no composition rule. |
+| `ISSUE-0069` | **M2.** "Level" and "Process" are reused for new schemes — the **seventh** terminology collision, arriving in the ADR that establishes an organizing principle. The metamodel must not inherit it. |
+| `ISSUE-0070` | **M2 and M3.** Whether Principles are a first-class artifact type. Three named principles are currently `Active` ADRs, and M3's policies must cite the principles they derive from. |
 | `ISSUE-0063` | The minimum classifications every artifact must serialize. `ADR-0038` says what must be knowable; `ADR-0045` says what may be visible; nothing connects them. |
 | `ISSUE-0002` | M8 |
 | `ISSUE-0006` | M10 |
@@ -152,9 +155,9 @@ decisions**, seven superseded, five partially corrected.
 
 Accept or return this session's work.
 
-Then `ISSUE-0067` and `ISSUE-0068` together. Both are about the gates governing
-new concepts, and `ISSUE-0067` is the first case where those gates have bound on
-something the project actually needs.
+Then `ISSUE-0069` and `ISSUE-0070`. Both must be settled before the metamodel is
+written, and `ISSUE-0070` also shapes M3 — a policy cannot cite a principle that
+has no form.
 
 ## Repository state
 

@@ -9,8 +9,8 @@ related: [ISSUE-0037]
 
 # Issue Index
 
-**68 recorded · 24 open · 43 resolved · 1 deferred.** Highest allocated ID:
-`ISSUE-0068`.
+**70 recorded · 24 open · 45 resolved · 1 deferred.** Highest allocated ID:
+`ISSUE-0070`.
 
 > **Hand-maintained projection.** Under `ADR-0016` this is a projection of issue
 > front matter, which is authoritative. No generator exists yet (`ISSUE-0036`),
@@ -23,15 +23,14 @@ related: [ISSUE-0037]
 
 | ID | Title | Blocks |
 |---|---|---|
-| [0067](ISSUE-0067-dimension-review-artifact-type.md) | Is a Dimension Review an artifact type or an ADR? | **M2** |
-| [0068](ISSUE-0068-compiler-phase-question-conflicts-with-separation.md) | The compiler-phase question conflicts with the separation | **M2** |
+| [0069](ISSUE-0069-level-and-process-reused.md) | "Level" and "Process" are reused for new schemes | **M2** |
+| [0070](ISSUE-0070-are-principles-a-first-class-artifact-type.md) | Are Principles a first-class artifact type? | **M2**, M3 |
 | [0002](ISSUE-0002-composition-primitive-undefined.md) | How a workflow invokes a skill is undefined | M8 |
 | [0006](ISSUE-0006-scenario-testing-method-undefined.md) | How a prompt-based methodology is tested is undefined | M10 |
 
-The Dimension Reviews cannot start while the Review's artifact type is
-undecided (`ISSUE-0067`), and three overlapping gates now govern new concepts
-with no statement of how they compose (`ISSUE-0068`). `ISSUE-0063` gates the
-front-matter contracts. **M3 is unblocked.**
+The metamodel must not inherit a seventh terminology collision (`ISSUE-0069`),
+and whether Principles are an artifact type shapes both the metamodel and M3's
+policies (`ISSUE-0070`). `ISSUE-0063` gates the front-matter contracts.
 
 ## Open, by milestone
 
@@ -40,8 +39,8 @@ front-matter contracts. **M3 is unblocked.**
 | ID | Title | Type | Severity |
 |---|---|---|---|
 | [0049](ISSUE-0049-state-machine-specification-location.md) | Where state machine specifications live | question | high |
-| [0067](ISSUE-0067-dimension-review-artifact-type.md) | Is a Dimension Review an artifact type or an ADR? | question | blocking |
-| [0068](ISSUE-0068-compiler-phase-question-conflicts-with-separation.md) | Compiler-phase question versus the separation | inconsistency | blocking |
+| [0069](ISSUE-0069-level-and-process-reused.md) | "Level" and "Process" reused for new schemes | inconsistency | blocking |
+| [0070](ISSUE-0070-are-principles-a-first-class-artifact-type.md) | Are Principles a first-class artifact type? | question | blocking |
 | [0063](ISSUE-0063-minimum-serialized-classifications.md) | The minimum serialized classification set | gap | high |
 | [0048](ISSUE-0048-no-mechanism-for-correcting-an-active-adr.md) | No mechanism for correcting part of an `Active` ADR | gap | medium |
 | [0007](ISSUE-0007-versioning-granularity-undefined.md) | Versioning granularity; what identifies a revision | question | high |
@@ -59,6 +58,7 @@ front-matter contracts. **M3 is unblocked.**
 | [0010](ISSUE-0010-definition-of-done-missing.md) | Definition of Done asserted but never stated | gap | high |
 | [0020](ISSUE-0020-three-conflicting-autonomy-policies.md) | Three incompatible autonomy policies | inconsistency | high |
 | [0021](ISSUE-0021-write-scope-conflict-on-composition.md) | Write scope conflicts on composition | risk | high |
+| [0070](ISSUE-0070-are-principles-a-first-class-artifact-type.md) | Are Principles a first-class artifact type? | question | blocking |
 | [0027](ISSUE-0027-inherited-decisions-lack-context.md) | Ten inherited decisions have no rationale | gap | medium |
 
 ### M4 — Discovery skills
@@ -148,3 +148,5 @@ front-matter contracts. **M3 is unblocked.**
 | [0064](ISSUE-0064-representation-versus-semantic-layer.md) | Representation versus Semantic Layer | `ADR-0049` |
 | [0065](ISSUE-0065-initial-dimensions-not-evaluated.md) | Dimension candidates not evaluated | `ADR-0051` |
 | [0066](ISSUE-0066-registry-specification-in-the-hierarchy.md) | Registry Specification in the hierarchy | `ADR-0052` |
+| [0067](ISSUE-0067-dimension-review-artifact-type.md) | Dimension Review artifact type | `ADR-0054` |
+| [0068](ISSUE-0068-compiler-phase-question-conflicts-with-separation.md) | Compiler-phase question versus separation | `ADR-0055` |

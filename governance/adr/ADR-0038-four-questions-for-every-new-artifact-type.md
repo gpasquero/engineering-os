@@ -1,10 +1,10 @@
 ---
 id: ADR-0038
 title: Every new artifact type must answer four questions before acceptance
-status: accepted
+status: superseded
 date: 2026-08-02
 supersedes: null
-superseded-by: null
+superseded-by: ADR-0055
 resolves: []
 related: [ADR-0029, ADR-0030, ADR-0035, ADR-0037, ISSUE-0056]
 ---

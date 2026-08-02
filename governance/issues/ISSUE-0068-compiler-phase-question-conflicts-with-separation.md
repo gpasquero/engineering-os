@@ -2,7 +2,7 @@
 id: ISSUE-0068
 title: ADR-0038's mandatory compiler-phase question conflicts with the semantic/compiler separation
 type: inconsistency
-status: open
+status: resolved
 severity: blocking
 created: 2026-08-02
 updated: 2026-08-02
@@ -11,7 +11,7 @@ evidence:
   - governance/adr/ADR-0053-semantic-architecture-is-separate-from-compiler-architecture.md
   - governance/adr/ADR-0038-four-questions-for-every-new-artifact-type.md
   - governance/adr/ADR-0035-engineering-os-metamodel.md
-resolved-by: null
+resolved-by: ADR-0055
 ---
 
 # ISSUE-0068 — The compiler-phase question conflicts with the separation
@@ -72,8 +72,33 @@ correct replacement for `ADR-0038`'s framing rather than an addition to it.
 Nothing states how they compose, whether they are applied in order, or what
 happens when one admits a concept another rejects.
 
-## Resolution criteria
+## Resolution
 
-An ADR reconciling the gates: whether `None` is valid for question 4, whether
-`ADR-0038`'s four questions survive `ADR-0053` unchanged, and how the three
-gates compose into one procedure.
+`ADR-0055`, which takes the deeper reading this issue offered rather than the
+narrower fix.
+
+> **The questions defined by `ADR-0038` are not mandatory for every artifact.
+> They are conditional. Every Gate declares which questions apply.**
+
+| Gate | Questions |
+|---|---|
+| Metamodel Position Gate | Which metamodel entity does it instantiate? Which semantic layer owns it? |
+| Compiler Impact Review | Which compiler phase consumes it? Which produces it? |
+| Dimension Review | Does it satisfy the Dimension criteria? Is another construct more appropriate? |
+| Acceptance Review | Is it authoritative? Has it been reviewed? Does it satisfy applicable validation? |
+
+**Questions belong to Gates rather than to artifacts.** A purely semantic
+concept never encounters a compiler question, because the Compiler Impact Review
+is not triggered for it.
+
+Extending `ADR-0039`'s `None (Not Applicable)` precedent — this issue's likely
+answer — was rejected as the smaller fix: it would still ask the question.
+
+The three-gate overlap resolves into **triggering** rather than composition:
+which gates apply, not how they combine.
+
+`ADR-0038` is superseded. Its four questions survive, redistributed to the gates
+that own them.
+
+**Newly load-bearing:** triggering conditions are now the entire enforcement
+surface, and `ADR-0054` lists the field without saying what may appear in one.

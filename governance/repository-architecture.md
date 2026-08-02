@@ -111,8 +111,40 @@ querying or validation, and takes multiple values across artifacts.
 
 **Dimensions enter the metamodel only through a Dimension Review** (`ADR-0051`),
 producing one of four outcomes: accepted, or rejected and modelled as metadata,
-a relationship, or another metamodel entity. The five criteria are mandatory,
-and the decision becomes an authoritative artifact.
+a relationship, or another metamodel entity.
+
+## Engineering Gates
+
+A **Gate** is a review process applied to the introduction or modification of an
+architectural concept — a first-class metamodel concept (`ADR-0054`). Each
+defines purpose, scope, triggering conditions, required evidence, evaluation
+criteria, resulting decision and produced artifacts.
+
+| Gate | Questions it declares |
+|---|---|
+| Metamodel Position Gate | Which metamodel entity does it instantiate? Which semantic layer owns it? |
+| Compiler Impact Review *(future)* | Which compiler phase consumes it? Which produces it? |
+| Dimension Review | Does it satisfy the Dimension criteria? Is another construct more appropriate? |
+| Acceptance Review | Is it authoritative? Has it been reviewed? Does it satisfy applicable validation? |
+
+**Questions belong to Gates, not to artifacts** (`ADR-0055`). A purely semantic
+concept never encounters a compiler question, because that gate is not triggered
+for it. **Triggering conditions are the enforcement surface.**
+
+The metamodel models Gate **independently from the rules a gate executes**.
+
+## Principle → Policy → Process → Artifact
+
+Three levels of engineering knowledge (`ADR-0056`):
+
+- **Principles** — stable architectural truths.
+- **Policies** — normative rules derived from them.
+- **Processes** — operational procedures implementing those policies.
+
+This is why ADRs, Policies and Gates exist without overlapping
+responsibilities: ADRs record how content came to be, Policies hold the rules,
+Gates are the processes. Every policy cites its principle; every process cites
+its policy.
 
 **Artifacts do not contain dimension values.** They are classified by
 **Dimension Assignments** — explicit semantic relationships (`ADR-0042`):
@@ -599,11 +631,10 @@ These are recorded as issues and must not be silently assumed:
 
 - `ISSUE-0049` — where state machine specifications live, and their boundary
   with `shared/vocabularies/`. Blocks `shared/vocabularies/`.
-- `ISSUE-0067` — whether a Dimension Review is a distinct artifact type or a
-  structured ADR. **Blocks the reviews**, and is the first time the
-  metamodel-first gate has bound on a concept the project needs.
-- `ISSUE-0068` — `ADR-0038`'s mandatory compiler-phase question conflicts with
-  the semantic/compiler separation, and three gates now overlap.
+- `ISSUE-0069` — "Level" and "Process" are reused for new schemes. **Seventh
+  terminology collision**, and the metamodel must not inherit it.
+- `ISSUE-0070` — whether Principles are a first-class artifact type, and how
+  they relate to the ADRs currently recording them.
 - `ISSUE-0063` — the minimum set of classifications that must be serialized.
 - `ISSUE-0048` — no mechanism for correcting part of an `Active` ADR.
 - `ISSUE-0007` — versioning granularity, now also covering what identifies a

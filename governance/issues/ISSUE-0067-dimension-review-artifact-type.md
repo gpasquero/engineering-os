@@ -2,7 +2,7 @@
 id: ISSUE-0067
 title: Whether a Dimension Review is a distinct artifact type or a structured ADR
 type: question
-status: open
+status: resolved
 severity: blocking
 created: 2026-08-02
 updated: 2026-08-02
@@ -12,7 +12,7 @@ evidence:
   - governance/adr/ADR-0049-dimensions-are-a-scarce-architectural-resource.md
   - governance/adr/ADR-0038-four-questions-for-every-new-artifact-type.md
   - governance/adr/ADR-0035-engineering-os-metamodel.md
-resolved-by: null
+resolved-by: ADR-0054
 ---
 
 # ISSUE-0067 — Is a Dimension Review an artifact type or an ADR?
@@ -65,8 +65,28 @@ setting a precedent that the gate is advisory.
   the outcome becomes a registered fact. Consistent with `ADR-0052`'s separation,
   and it may be what "becomes an authoritative artifact" already means.
 
-## Resolution criteria
+## Resolution
 
-An ADR stating whether a Dimension Review is a distinct artifact type, and if
-so, how `ADR-0035`'s and `ADR-0038`'s gates are satisfied before the metamodel
-exists.
+`ADR-0054`. **All three options above answer the wrong question.**
+
+Each asked how to classify one review. The answer classifies the *category*:
+
+> **The project now has multiple architectural gates that evolved
+> independently. This indicates that "gate" is itself a first-class metamodel
+> concept.**
+
+An **Engineering Gate** is a review process applied to the introduction or
+modification of an architectural concept, defining purpose, scope, triggering
+conditions, required evidence, evaluation criteria, resulting decision and
+produced artifacts.
+
+**Dimension Review is an instance of Gate.** So are the Metamodel Position Gate,
+the Artifact Definition Review, and a future Compiler Impact Review.
+
+**The deadlock dissolves.** Dimension Review is not a new artifact type that must
+pass the metamodel-first gate; it is an instance of a concept that goes *into*
+the metamodel. The gate binds on `Gate`, once.
+
+`ADR-0054` also requires the metamodel to model **Gate independently from the
+rules executed by that Gate**, so review logic stops being scattered across
+ADRs.

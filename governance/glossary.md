@@ -397,12 +397,47 @@ are compilation products, not semantic concepts.** Future extensible concepts
 are evaluated against the semantic hierarchy before new modeling structures are
 introduced.
 
-**Dimension Review** — the standard procedure by which a proposed Dimension
-enters the metamodel (`ADR-0051`). Produces one of four outcomes: accepted as a
+**Engineering Gate** — a **review process applied to the introduction or
+modification of an architectural concept** (`ADR-0054`). A first-class metamodel
+concept. Every Gate defines purpose, scope, triggering conditions, required
+evidence, evaluation criteria, resulting decision and produced artifacts. The
+metamodel models Gate **independently from the rules executed by that Gate**.
+
+Instances: **Metamodel Position Gate** (`ADR-0035`), **Dimension Review**
+(`ADR-0051`), **Artifact Definition Review** (`ADR-0038`→`ADR-0055`),
+**Acceptance Review** (`ADR-0020`), **Compiler Impact Review** *(future)*.
+
+> **Evaluation questions belong to Gates, not to artifacts** (`ADR-0055`). Every
+> Gate declares which questions apply, so a purely semantic concept never
+> encounters a compiler question. Triggering conditions decide what is asked.
+
+**Dimension Review** — an instance of Gate: the standard procedure by which a
+proposed Dimension enters the metamodel (`ADR-0051`). Produces one of four outcomes: accepted as a
 Dimension, or rejected and modelled as metadata, as a relationship, or as
 another metamodel entity. `ADR-0049`'s five criteria are **mandatory**
 evaluation criteria. Whether a Review is a distinct artifact type or a
 structured ADR is unresolved — `ISSUE-0067`.
+
+## The three levels of engineering knowledge
+
+`Principle → Policy → Process → Artifact` (`ADR-0056`).
+
+**Principles** — stable architectural truths. The Registry Pattern,
+`Definition → Instance → Assignment`, semantic versus compilation architecture.
+
+**Policies** — normative engineering rules derived from principles. Naming
+Policy, Dimension Review Policy, Acceptance Policy.
+
+**Processes** — operational procedures implementing policies. Dimension Review,
+Acceptance Review, Metamodel Position Gate.
+
+This explains why ADRs, Policies and Gates all exist without overlapping
+responsibilities: ADRs record how content came to be, Policies hold rules,
+Gates are processes.
+
+> **Unresolved.** "Level" is used here for a second scheme after Abstraction
+> Level, and "Process" for a second concept after `ADR-0033`'s — `ISSUE-0069`.
+> Whether Principles are a first-class artifact type is open — `ISSUE-0070`.
 
 ## Semantic architecture versus compiler architecture
 
