@@ -140,3 +140,15 @@ this experiment is the first thing in the project that could tell the two apart.
 
 **What survives time today is the model. What does not yet accumulate is the
 understanding.**
+
+## This suite is permanent
+
+`ADR-0129`. The ten commits are **frozen** and may not be changed — not to add a
+more interesting change, not to drop a slow one, not to make a result cleaner.
+
+Every significant architectural change reruns it and reports coverage,
+retention, knowledge, maintenance cost and drift.
+
+**The baseline to beat is the table above.** The next change to Continuous
+Acquisition has its acceptance criterion written before it starts: **`EQ-06`
+answered at `t9`, and retention at 100 %.**

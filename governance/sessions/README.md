@@ -70,6 +70,7 @@ ADRs answer "why".
 | [SESSION-0045](SESSION-0045-2026-08-02.md) | 2026-08-02 | generalization | `ACCEPT-0040`; **Stack Profiles** (`ADR-0117`) — extraction becomes data; the three **acquisition capabilities** (`ADR-0118`); **a repository is a benchmark** (`ADR-0119`); first run against an unseen Spring Boot system, and a rule caught fabricating 67 invariants |
 | [SESSION-0046](SESSION-0046-2026-08-02.md) | 2026-08-02 | engineering-memory | `ACCEPT-0041`; **engineering understanding becomes the product metric** (`ADR-0120`) — 22% and 33%; three kinds of Discovery Skill (`ADR-0121`); **engineering memory is the product** (`ADR-0122`) |
 | [SESSION-0047](SESSION-0047-2026-08-02.md) | 2026-08-02 | understanding-system | `ACCEPT-0042`; **the longitudinal experiment** — ten real commits, understanding flat at 1/9 and one question *lost*; `ADR-0123` supersedes `ADR-0122`; skill maturity levels; repositories are one evidence source |
+| [SESSION-0048](SESSION-0048-2026-08-02.md) | 2026-08-02 | preservation | `ACCEPT-0043`; **Understanding Retention** (`ADR-0128`) — 0%, and coverage had hidden it; knowledge ≠ understanding (`ADR-0127`); the suite made permanent (`ADR-0129`); **the North Star** (`ADR-0131`) |
 
 ## Reading
 

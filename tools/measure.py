@@ -90,6 +90,47 @@ def score_all(ckm, questions, queries):
             "rows": rows}
 
 
+# ── Understanding Retention (ADR-0128) ────────────────────────────────────
+#
+# Coverage says how much is answered. **Retention says whether what was once
+# answered still is** — and the two can move independently. The longitudinal run
+# held coverage at 1/9 for ten steps while the ONE question answered at t0 was
+# lost and a different one gained. Coverage called that stability.
+
+RANK = {"no-query": 0, "no-data": 1, "partial": 2, "answered": 3}
+
+
+def retention(before, after):
+    """Compare two `score_all` results. Returns per-question movement.
+
+    The three states the reviewer named — remained answered, degraded to
+    partial, became unanswered — are reported over the questions that WERE
+    answered. Gains are reported separately: a gain is Understanding Growth, and
+    counting it as retention would let a system that forgets everything and
+    learns something else score perfectly.
+    """
+    moves, was = {}, [q for q, s in before.items() if s == "answered"]
+    for qid, prev in before.items():
+        now = after.get(qid, "no-data")
+        if prev == "answered":
+            moves[qid] = ("retained" if now == "answered" else
+                          "degraded" if now == "partial" else "lost")
+        elif now == "answered":
+            moves[qid] = "gained"
+        elif RANK[now] > RANK[prev]:
+            moves[qid] = "improved"
+        elif RANK[now] < RANK[prev]:
+            moves[qid] = "weakened"
+        else:
+            moves[qid] = "unchanged"
+    retained = sum(1 for q in was if moves[q] == "retained")
+    return {"moves": moves, "previouslyAnswered": len(was), "retained": retained,
+            "degraded": sum(1 for q in was if moves[q] == "degraded"),
+            "lost": sum(1 for q in was if moves[q] == "lost"),
+            "gained": sum(1 for m in moves.values() if m == "gained"),
+            "rate": (retained / len(was)) if was else None}
+
+
 def measure(project, questions, queries):
     ckm, problems = compile_project(project)
     if problems:

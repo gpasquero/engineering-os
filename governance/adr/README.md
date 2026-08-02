@@ -16,7 +16,7 @@ same session the decision is made.
 > a rule exists; the rule that must be followed lives in a Policy under
 > `shared/policies/`. Agents consume policies; humans read ADRs for rationale.
 
-**Highest allocated ID: `ADR-0126`.** IDs are sequential and never reused.
+**Highest allocated ID: `ADR-0131`.** IDs are sequential and never reused.
 
 > This index table is a hand-maintained projection of ADR front matter. It is
 > listed in the transitional-debt register, `ISSUE-0037`.
@@ -221,6 +221,11 @@ Read these before designing anything that produces an artifact:
 | [ADR-0124](ADR-0124-discovery-skill-maturity.md) | **Discovery Skills have three maturity levels and only two are catalog assets** | accepted | — |
 | [ADR-0125](ADR-0125-repositories-are-one-evidence-source.md) | **The Engineering Model is the stable representation; a repository is one evidence source** | accepted | — |
 | [ADR-0126](ADR-0126-question-levels.md) | **Engineering Questions exist at repository and organization level; only the first is built** | accepted | — |
+| [ADR-0127](ADR-0127-knowledge-is-not-understanding.md) | **Engineering Knowledge and Engineering Understanding are different things and are never conflated** | accepted | — |
+| [ADR-0128](ADR-0128-understanding-retention.md) | **Understanding Retention is a first-class product metric alongside coverage** | accepted | — |
+| [ADR-0129](ADR-0129-longitudinal-suite-is-permanent.md) | **The ten-commit longitudinal experiment is a permanent benchmark suite** | accepted | — |
+| [ADR-0130](ADR-0130-preserve-understanding.md) | **Continuous Acquisition preserves understanding; inference is a mechanism, not the objective** | accepted | — |
+| [ADR-0131](ADR-0131-north-star.md) | **The North Star is whether Engineering OS preserves engineering understanding as software evolves** | accepted | — |
 
 ## Supersessions
 

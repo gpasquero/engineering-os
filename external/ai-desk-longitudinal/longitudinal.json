@@ -253,5 +253,24 @@
       },
       "reacquired": 302
     }
-  ]
+  ],
+  "retention": {
+    "moves": {
+      "EQ-01-why": "unchanged",
+      "EQ-02-enforced-rules": "unchanged",
+      "EQ-03-safe-to-change": "unchanged",
+      "EQ-04-unsafe-to-change": "unchanged",
+      "EQ-05-decisions-that-matter": "unchanged",
+      "EQ-06-affected-capabilities": "degraded",
+      "EQ-07-protecting-invariants": "unchanged",
+      "EQ-08-authorization": "unchanged",
+      "EQ-09-unsupported-assumptions": "gained"
+    },
+    "previouslyAnswered": 1,
+    "retained": 0,
+    "degraded": 1,
+    "lost": 0,
+    "gained": 1,
+    "rate": 0.0
+  }
 }

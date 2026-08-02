@@ -41,7 +41,7 @@ from compiler import compile_project                        # noqa: E402
 from compiler.registry import load_all                      # noqa: E402
 from compiler.query import load_queries                     # noqa: E402
 sys.path.insert(0, str(ROOT / "tools"))
-from measure import score_all                               # noqa: E402
+from measure import score_all, retention                               # noqa: E402
 
 REACQUIRE_EVERY = 4
 BAR = "─" * 74
@@ -87,7 +87,11 @@ def main(argv):
     project = ROOT / argv[2]
     commits = argv[3:]
 
-    shutil.rmtree(project, ignore_errors=True)
+    # Reset the MODEL, never the project. The first version removed the whole
+    # directory and deleted `LONGITUDINAL.md` — the report the suite exists to
+    # produce — on its second run. A permanent benchmark may not destroy its own
+    # record (ADR-0129).
+    shutil.rmtree(project / "model", ignore_errors=True)
     (project / "model").mkdir(parents=True, exist_ok=True)
     questions = load_all()["REG-engineering-questions"]
     queries = load_queries()
@@ -171,21 +175,50 @@ def main(argv):
         print(f"   {row['step']:5} {row['kind']:11} {row['cost']:6} "
               f"{full if full else '—':>6} {pct:>6}  "
               f"{row['answered']}/{row['total']}")
+    # Knowledge Growth and Understanding Growth are different things and are
+    # never again reported as one (ADR-0127).
+    r = retention(timeline[0]["states"], timeline[-1]["states"])
+    print(f"\n   {'Knowledge Growth':<24} "
+          f"{timeline[0]['accepted']} → {len(list((project / 'model').glob('*.md')))} "
+          f"curated sources   {DIM}implementation telemetry{OFF}")
+    print(f"   {'Understanding Growth':<24} "
+          f"{timeline[0]['answered']}/{timeline[0]['total']} → "
+          f"{timeline[-1]['answered']}/{timeline[-1]['total']} questions answered")
+    rate = "—" if r["rate"] is None else f"{100 * r['rate']:.0f}%"
+    print(f"   {'Understanding Retention':<24} {rate}   "
+          f"{DIM}of {r['previouslyAnswered']} answered at t0: "
+          f"{r['retained']} retained, {r['degraded']} degraded, "
+          f"{r['lost']} lost; {r['gained']} gained{OFF}")
+    for qid, move in sorted(r["moves"].items()):
+        if move in ("retained", "degraded", "lost", "gained"):
+            colour = {"retained": GREEN, "gained": GREEN,
+                      "degraded": YELLOW, "lost": RED}[move]
+            print(f"      {colour}{move:9}{OFF} {qid}")
+
     first, last = timeline[0], timeline[-1]
     maint = [r for r in timeline if r["kind"] == "continuous"]
     total_maint = sum(r["cost"] for r in maint)
     print(f"\n   acquired once at {first['cost']} proposals; "
           f"maintained across {len(maint)} changes at {total_maint} more "
           f"({100 * total_maint / first['cost']:.0f}% of one acquisition)")
+    # The verdict may NOT be read off coverage alone. Coverage was flat at 1/9
+    # for ten steps while retention was 0% — the one question answered at t0 was
+    # lost and a different one gained. "Understanding held" would have been a
+    # true sentence about a false thing (ADR-0128).
     delta_q = last["answered"] - first["answered"]
-    verdict = (f"{GREEN}understanding grew{OFF}" if delta_q > 0 else
-               f"{YELLOW}understanding held{OFF}" if delta_q == 0 else
-               f"{RED}understanding decayed{OFF}")
+    if r["rate"] is not None and r["rate"] < 1:
+        verdict = (f"{RED}understanding did not survive{OFF} — coverage moved "
+                   f"{delta_q:+d} and retention is {100 * r['rate']:.0f}%")
+    else:
+        verdict = (f"{GREEN}understanding grew{OFF}" if delta_q > 0 else
+                   f"{YELLOW}understanding held{OFF}" if delta_q == 0 else
+                   f"{RED}understanding decayed{OFF}")
     print(f"   engineering questions: {first['answered']}/{first['total']} → "
           f"{last['answered']}/{last['total']}   {verdict}")
 
-    (project / "longitudinal.json").write_text(
-        json.dumps({"repository": str(repo), "timeline": timeline}, indent=2) + "\n")
+    (project / "longitudinal.json").write_text(json.dumps(
+        {"repository": str(repo), "timeline": timeline, "retention": r},
+        indent=2) + "\n")
     return 0
 
 
