@@ -11,6 +11,7 @@
       "family": "descriptive",
       "position": null,
       "description": "Decides.",
+      "attributes": {},
       "provenance": {
         "source": "actor.md"
       }
@@ -22,6 +23,7 @@
       "family": "descriptive",
       "position": null,
       "description": "Reviewed.",
+      "attributes": {},
       "provenance": {
         "source": "artifact.md"
       }
@@ -33,6 +35,7 @@
       "family": "operational",
       "position": null,
       "description": "Holds the questions. Outcomes are a closed enumeration per gate.",
+      "attributes": {},
       "provenance": {
         "source": "gate.md"
       }
@@ -44,6 +47,7 @@
       "family": "operational",
       "position": null,
       "description": "GovernancePolicy. Constrains normatively.",
+      "attributes": {},
       "provenance": {
         "source": "policy.md"
       }
@@ -55,6 +59,7 @@
       "family": "operational",
       "position": null,
       "description": "Passes a gate.",
+      "attributes": {},
       "provenance": {
         "source": "wf.md"
       }

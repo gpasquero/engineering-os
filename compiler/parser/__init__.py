@@ -63,6 +63,7 @@ def validate_against(schema, data, source):
          invariants=["front matter is parsed as YAML, never by pattern matching",
                      "every source is validated against its schema before Resolution",
                      "a structural error is reported at Parsing, never at Resolution",
+                     "attribute values are scalar and carried verbatim",
                      "parsing never consults another source"],
          determinism="parsing is a pure function of one file's bytes and one schema")
 def parse(paths):
@@ -100,9 +101,19 @@ def parse(paths):
             (predicate, target), = item.items()
             rels.append((str(predicate), str(target)))
 
+        attributes = data.get("attributes") or {}
+        bad_attr = [k for k, v in attributes.items()
+                    if not isinstance(v, (str, int, float, bool))]
+        if bad_attr:
+            diagnostics.append(Diagnostic(
+                "parsing", source,
+                f"attributes must be scalar; {sorted(bad_attr)} are not"))
+            continue
+
         nodes.append({"id": data["id"], "type": data["type"],
                       "label": data.get("label") or data["id"],
                       "position": data.get("position"),
+                      "attributes": {k: str(v) for k, v in sorted(attributes.items())},
                       "relationships": rels,
                       "body": m.group(2).strip(),
                       "source": source})

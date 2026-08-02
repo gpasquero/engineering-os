@@ -11,6 +11,7 @@
       "family": "operational",
       "position": null,
       "description": "**Two predicates, one target.** `establishes` is what `Q-rationale` follows;\n`references` is the parallel edge that must not be mistaken for it.",
+      "attributes": {},
       "provenance": {
         "source": "adr.md"
       }
@@ -22,6 +23,7 @@
       "family": "descriptive",
       "position": null,
       "description": "Two predicates, one target. `Q-tests` follows `validates` only.",
+      "attributes": {},
       "provenance": {
         "source": "impl.md"
       }
@@ -33,6 +35,7 @@
       "family": "descriptive",
       "position": null,
       "description": "Reached by two predicates from one artifact.",
+      "attributes": {},
       "provenance": {
         "source": "concept.md"
       }
@@ -44,6 +47,7 @@
       "family": "descriptive",
       "position": null,
       "description": "Two different edges arrive here from the same node.",
+      "attributes": {},
       "provenance": {
         "source": "inv.md"
       }

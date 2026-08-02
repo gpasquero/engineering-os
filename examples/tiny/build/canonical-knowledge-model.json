@@ -11,6 +11,7 @@
       "family": "operational",
       "position": null,
       "description": "Decision with alternatives considered. Never edited once accepted; superseded.",
+      "attributes": {},
       "provenance": {
         "source": "adr-0001.md"
       }
@@ -22,6 +23,7 @@
       "family": "operational",
       "position": null,
       "description": "The act that confers Active status. Commits do not.",
+      "attributes": {},
       "provenance": {
         "source": "accept-0001.md"
       }
@@ -33,6 +35,7 @@
       "family": "descriptive",
       "position": null,
       "description": "The role that submits orders. A role, not a person.",
+      "attributes": {},
       "provenance": {
         "source": "actor-customer.md"
       }
@@ -44,6 +47,7 @@
       "family": "descriptive",
       "position": null,
       "description": "A stable logical identity. It has no lifecycle of its own.",
+      "attributes": {},
       "provenance": {
         "source": "artifact-checkout-service.md"
       }
@@ -55,6 +59,7 @@
       "family": "descriptive",
       "position": null,
       "description": "The unit that carries lifecycle state and the unit that is accepted.",
+      "attributes": {},
       "provenance": {
         "source": "artifact-revision-checkout-r2.md"
       }
@@ -66,6 +71,7 @@
       "family": "descriptive",
       "position": null,
       "description": "The boundary within which \"Order\" means a customer's purchase request.",
+      "attributes": {},
       "provenance": {
         "source": "bounded-context-sales.md"
       }
@@ -77,6 +83,7 @@
       "family": "descriptive",
       "position": null,
       "description": "The system accepts an order from a Customer and acknowledges it.",
+      "attributes": {},
       "provenance": {
         "source": "capability-place-order.md"
       }
@@ -88,6 +95,7 @@
       "family": "descriptive",
       "position": null,
       "description": "A customer's request to purchase goods, from submission until fulfilment.",
+      "attributes": {},
       "provenance": {
         "source": "concept-order.md"
       }
@@ -99,6 +107,7 @@
       "family": "descriptive",
       "position": null,
       "description": "Stated independently of whatever enforces it. Note that `enforced-at` is absent:\nthis invariant has no recorded enforcement point, which is a finding rather than\nan omission.",
+      "attributes": {},
       "provenance": {
         "source": "invariant-payment-before-shipping.md"
       }
@@ -110,6 +119,7 @@
       "family": "operational",
       "position": null,
       "description": "A recorded unknown.",
+      "attributes": {},
       "provenance": {
         "source": "issue-0001.md"
       }
@@ -121,6 +131,7 @@
       "family": "operational",
       "position": null,
       "description": "Check that an order references known goods and a reachable customer.",
+      "attributes": {},
       "provenance": {
         "source": "skill-validate-order.md"
       }
@@ -132,6 +143,7 @@
       "family": "operational",
       "position": null,
       "description": "Orchestration only. Holds no methodology of its own.",
+      "attributes": {},
       "provenance": {
         "source": "workflow-checkout.md"
       }
@@ -143,6 +155,7 @@
       "family": "operational",
       "position": 1,
       "description": "The reified association. The position lives here, not on the Skill.",
+      "attributes": {},
       "provenance": {
         "source": "workflow-step-checkout-1.md"
       }

@@ -21,3 +21,10 @@ properties:
     type: list
     items: mapping
     description: A list of single-key mappings, predicate to target id.
+  attributes:
+    type: mapping
+    description: >
+      Domain-neutral key/value facts about this node, carried verbatim into the
+      Canonical Knowledge Model. The compiler assigns them no meaning; a Layer B
+      model uses them for things like a source URI, a locator or a support
+      status. Keys and values are strings.

@@ -242,6 +242,18 @@ function renderEdges(edges){
          <td>${link(e.to)}</td></tr>`;
      }).join('') + '</table></div>';
 }
+function renderAttributes(n){
+  const a = n.attributes || {};
+  const keys = Object.keys(a).sort();
+  if (!keys.length) return '<p class="empty">No provenance recorded for this node.</p>';
+  return '<div class="tbl-wrap"><table>' + keys.map(k => {
+    const v = a[k];
+    const cell = /^https?:\/\//.test(v)
+      ? `<a class="link" href="${esc(v)}" target="_blank" rel="noopener">${esc(v)}</a>`
+      : esc(v);
+    return `<tr><th>${esc(k)}</th><td>${cell}</td></tr>`;
+  }).join('') + '</table></div>';
+}
 function renderPath(path){
   if (!path || !path.length) return '<span class="hop">start</span>';
   return path.map(h => `<div class="hop"><code>${esc(h.from)}</code> &mdash;
@@ -288,6 +300,7 @@ function show(id, q){
        <span class="pill">${esc(n.family)}</span>
        ${n.position != null ? `<span class="pill">position ${n.position}</span>` : ''}</p>
     <p>${esc(n.description)}</p>
+    ${renderAttributes(n)}
     <div class="qbar">${bar}</div>
     <h3>${esc(active.question)}</h3>
     <div class="why">${esc((active.rationale || '').trim())}</div>

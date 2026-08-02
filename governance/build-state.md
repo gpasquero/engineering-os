@@ -4,7 +4,7 @@ title: Build State
 status: current
 created: 2026-08-02
 updated: 2026-08-02
-milestone: prove-usefulness
+milestone: kubernetes-ssa
 ---
 
 # Build State
@@ -17,111 +17,95 @@ milestone: prove-usefulness
 
 ## Current work
 
-**The prove-usefulness phase** (`ADR-0084`). Work begins with a question, never
-with an entity (`ADR-0085`).
+**The Kubernetes Server-Side Apply validation** (`ADR-0087`) — **executed**.
 
-**Semantic API hardening is complete** (`ADR-0088`). The next milestone is
-Kubernetes.
-
-## The semantic API
+## The result
 
 ```sh
-python3 tools/ask.py examples/vertical-slice Q-impact Concept.Order --paths
-python3 tools/ask.py examples/vertical-slice Q-status Concept.Order    # not-applicable
-python3 tools/check-query-schema.py
-python3 tools/check-engines.py
+python3 tools/compile.py external/kubernetes-ssa
+python3 tools/ask.py external/kubernetes-ssa Q-evidence Invariant.TimestampNotUpdatedOnTakeover
 ```
 
-**11 questions declared as data.** The CLI implements none; the Explorer
-implements none. Both execute the same declarations, and **parity is a public
-invariant** compared on status, rows, paths, ordering, edges and diagnostics.
+> **A `managedFields` entry's `time` is not the time that entry last changed.**
 
-```text
-every malformed declaration was rejected
-both engines agree on every declared query
-  examples/vertical-slice — 227 pairs
-  examples/tiny           — 107 pairs
-```
+The API type comment states that a timestamp does not update when another manager
+takes a field over. The documentation states that `force` removes the field from
+all other managers' entries. **Neither mentions the other.** `conflict.go` renders
+that timestamp in the message a user reads while reasoning about ownership.
 
-## The result contract (`ADR-0088`)
+**No fetched document contains the conclusion.** It exists only in the join —
+which is what `ADR-0087` set out to test.
 
-| | |
-|---|---|
-| **Path provenance** | Every row carries the complete ordered path — each edge with direction and the reason it matched. `via` is the first predicate, never the explanation |
-| **Edge output** | `edges` returns what the traversal walked. `induced-subgraph` is explicit and never the default |
-| **Parallel edges** | `with` evaluates the edge in hand and reports `{id, predicate}` |
-| **Declarations** | Validated against a schema. **An unknown field fails** |
-| **Applicability** | `ok` · `empty` · `not-applicable` · `invalid`. An empty result never hides an applicability error |
-| **Limits** | depth 16, results 1000, per-query override, **truncation emits a diagnostic** |
+**Honest strength:** a documentation-and-observability finding, not a correctness
+bug. The weakest form of the claim that still counts.
 
 ## What exists
 
 | Area | State |
 |---|---|
-| `model/queries.md` | 11 declared queries; 4 declare `applies-to` |
-| `compiler/query/` | 5 operators, a declaration schema, the result contract |
-| **`tools/check-query-schema.py`** | **12 malformed declarations, all rejected** |
-| **`tools/check-engines.py`** | Full-fidelity parity — **334 pairs** |
-| `tests/` | **14 fixtures** — 6 pass, 8 must fail — golden outputs, determinism, query rows, status and paths |
-| `compiler/` | 11 features, six declared phases, declarative validation, declared registries |
-| `examples/vertical-slice/` | 28 nodes, 52 edges |
-| `model/metamodel/` | 23 of 27 entities. **Not the objective** |
-| ADRs | 88 — 80 accepted, 8 superseded |
+| **`external/kubernetes-ssa/`** | Charter · **41 nodes, 75 edges** · reviewed ground truth · findings |
+| | Four source classes: **KEP-555, kubernetes.io docs, three source files, the integration test file** — every one fetched and verified |
+| | **18 Evidence nodes**, each with source URI, locator and kind |
+| `model/queries.md` | **14 declared queries** — `Q-constraints`, `Q-evidence`, `Q-unsupported` added, all domain-neutral |
+| `compiler/parser/` | Nodes carry an **uninterpreted `attributes` mapping** — the one gap the milestone found |
+| `tests/` | **16 fixtures**, 9 negative, golden outputs, determinism, query rows/status/paths |
+| Parity | **832 query/subject pairs** across three projects, full fidelity |
+| `model/metamodel/` | 23 of 27 entities — **unchanged this milestone** |
+| ADRs | 88 — 80 accepted, 8 superseded. **No new ADR** |
 | Issues | 74 — 1 open, 51 resolved, 22 deferred |
-| Acceptance Records | 26 |
-| Session journal | 31 entries |
+| Acceptance Records | 27 |
+| Session journal | 32 entries |
 
-## What does not exist
+**No Kubernetes-specific entity, predicate, operator or compiler behaviour was
+added.** The domain arrived entirely as Layer B data.
 
-**No real system has been modelled.** 28 nodes remains the largest model, in a
-domain invented to exercise the metamodel. **Every claim is still verifiable only
-by reading this repository.**
+## Completion criteria (`ADR-0087`)
 
-**No answer to *which engineering workflow should execute?*** It stays a product
-requirement until a real external model demonstrates the minimum semantics needed
-(`ADR-0084`). **No `Trigger`, no AI workflow selection, no speculative concepts.**
+| Criterion | State |
+|---|---|
+| one subsystem modelled deeply | ✅ SSA and managed fields |
+| all four source classes connected | ✅ KEPs, docs, source, tests |
+| the seven required questions execute | ✅ through the shared query engine |
+| expected answers reviewed | ✅ `ground-truth.md`, classified confirmed/incomplete/ambiguous |
+| at least one cross-source insight | ✅ the timestamp finding |
+| limitations documented | ✅ six, including the sharpest one |
+| all fixtures green | ✅ 16 projects |
+| build deterministic | ✅ |
+| no Kubernetes leakage into compiler core | ✅ |
 
-No index — every query scans. No `Manifest`, no `Vocabulary`. `Principle` and
-`KnowledgePackage` deferred. Provenance is a path, not a revision.
+## Limitations found
+
+| Limitation | Consequence |
+|---|---|
+| **Test granularity is the file** | `Q-tests` names a file of 30 test functions, not the test protecting a behaviour. **The sharpest limitation** |
+| KEP granularity is the document | KEP-555 establishes six things; `Q-rationale` is correspondingly blunt |
+| Only KEP-555 read in full | Q5's refinement edges mean *same subsystem*, not *verified refinement*; classified **ambiguous** |
+| Hop distance is not severity | Q6 returns 9 nodes at 1–4 hops with no ranking |
+| 41 nodes | Traversal limits never fired; scale is untested |
+
+## Path selection — the predicted question did not arise
+
+`ADR-0088` notes that retaining the best deterministic path is not the same as
+preserving all valid explanations. **In this model it did not matter**: every
+multi-hop result reached its target by one materially distinct evidence path.
+**Recorded, not acted on**, as directed.
 
 ## Blocking
 
-**Nothing blocks the milestone.**
+**Nothing.**
 
 | Issue | Why it is open |
 |---|---|
-| `ISSUE-0037` | Hand-maintained projections. Five registries, five hand-maintained sources, zero generated, plus four governance indexes, the corrections table, the ontology and the parser schemas |
-
-## Debt discovered while building
-
-| Question | Where |
-|---|---|
-| **Paths are larger than the rows carrying them** — a 5-hop result carries 5 edge records per row, and nothing prunes them | `ADR-0088` |
-| `applies-to` is declared on 4 of 11 queries; omission means *any type*, which is right for `Q-impact` and lazy for `Q-tests` | `queries.md` |
-| `subject: none` queries silently ignore a subject given | `queries.md` |
-| Every query scans; there is no index | `queries.md` |
-| Parity is verified only where `node` is installed; it skips loudly otherwise | `check-engines.py` |
-| Nothing validates a registry against its own `membership` rule | `registry.md` |
-
-## Acceptance status
-
-`ACCEPT-0001` (trust root) through `ACCEPT-0026`, covering `SESSION-0006`
-through `SESSION-0030`.
-
-**`ADR-0088`, the hardened query engine, the declaration schema, the parallel-edge
-fixture and the full-fidelity parity check are `Under Review`.**
+| `ISSUE-0037` | Hand-maintained projections. Five registries, five hand-maintained sources, zero generated |
 
 ## Next action
 
-**Kubernetes** (`ADR-0087`, confirmed). One bounded, decision-rich subsystem
-modelled deeply — multiple KEPs, source, documentation, tests, lifecycle
-transitions, known behavioural changes, dependencies on other components.
+**The Project Owner's decision.** The milestone's completion criteria are met and
+`ADR-0084` says framework expansion waits until the proof is complete.
 
-Seven required questions, and **the seventh is the proof-of-value result**:
-
-> **What information was not discoverable from any single existing document?**
-
-**Do not optimise the Explorer visually.** The proof comes from the answers.
+If a second iteration is wanted, `FINDINGS.md` ranks three changes, and the first
+is worth more than the other two together: **model individual test functions** —
+it makes Q3 precise and costs 30 nodes.
 
 ## Repository state
 

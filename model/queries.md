@@ -147,6 +147,37 @@ queries:
       - with:
           accepted-by: {direction: in, node-type: AcceptanceRecord}
 
+  - id: Q-constraints
+    question: Which invariants or guarantees constrain this?
+    subject: required
+    rationale: >
+      A capability is bounded by what must remain true of it. Answering this
+      requires the constraint to be modelled separately from the thing it
+      constrains, which is why Invariant is its own entity.
+    steps:
+      - traverse: {direction: in, core: governs, node-type: Invariant}
+
+  - id: Q-evidence
+    question: What evidence supports this, and where does it come from?
+    subject: required
+    rationale: >
+      An assertion without a citation is a claim. This is the query that makes
+      "insufficient evidence" a visible answer rather than an empty one, and it
+      is how an answer whose support spans several source classes is recognised.
+    steps:
+      - traverse: {direction: out, core: evidenced-by, node-type: Evidence}
+
+  - id: Q-unsupported
+    question: Which assertions carry no evidence at all?
+    subject: none
+    rationale: >
+      A confident fabricated connection is worse than an incomplete result.
+      This lists every Concept, Capability and Invariant that nothing cites —
+      the model's own honesty check.
+    steps:
+      - select: {type: Invariant}
+      - reject: {has-edge: {direction: out, core: evidenced-by}}
+
   - id: Q-unenforced
     question: Which Invariants have no enforcement point?
     subject: none

@@ -1,0 +1,1294 @@
+{
+  "formatVersion": "1.0.0",
+  "metamodelVersion": "0.4.0-skeleton",
+  "project": "kubernetes-ssa",
+  "note": "Canonical Knowledge Model. Every edge was asserted; none inferred (ADR-0044, ADR-0061). Serializations are projections of this model, not the model (ADR-0076).",
+  "nodes": [
+    {
+      "id": "Artifact.ApplyIntegrationTest",
+      "type": "Artifact",
+      "label": "test/integration/apiserver/apply/apply_test.go",
+      "family": "descriptive",
+      "position": null,
+      "description": "Integration tests including `TestApplyUpdateApplyConflictForced`,\n`TestApplyManagedFields`, `TestApplyRequiresFieldManager`,\n`TestClearManagedFieldsWith{Update,MergePatch,StrategicMergePatch,JSONPatch}`,\n`TestApplyDoesNotChangeManagedFieldsViaSubresources`.",
+      "attributes": {
+        "locator": "30 Test functions",
+        "source": "https://github.com/kubernetes/kubernetes/blob/master/test/integration/apiserver/apply/apply_test.go",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "art-tests.md"
+      }
+    },
+    {
+      "id": "Artifact.ConflictGo",
+      "type": "Artifact",
+      "label": "managedfields/internal/conflict.go",
+      "family": "descriptive",
+      "position": null,
+      "description": "Formats `\"Apply failed with 1 conflict: conflict with %v: %v\"`. `printManager`\nrenders manager name, apiVersion, operation, **time** and subresource.",
+      "attributes": {
+        "locator": "NewConflictError, getConflictMessage, printManager",
+        "source": "https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/apimachinery/pkg/util/managedfields/internal/conflict.go",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "art-conflict.md"
+      }
+    },
+    {
+      "id": "Artifact.FieldManagerGo",
+      "type": "Artifact",
+      "label": "managedfields/internal/fieldmanager.go",
+      "family": "descriptive",
+      "position": null,
+      "description": "`FieldManager.Apply` takes `force bool`; `Update` handles non-apply operations;\n`UpdateNoErrors` preserves the live object's managedFields on error.",
+      "attributes": {
+        "locator": "FieldManager.Apply(liveObj, appliedObj runtime.Object, manager string, force bool)",
+        "source": "https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/apimachinery/pkg/util/managedfields/internal/fieldmanager.go",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "art-fieldmanager.md"
+      }
+    },
+    {
+      "id": "Artifact.MetaV1Types",
+      "type": "Artifact",
+      "label": "apimachinery meta/v1/types.go",
+      "family": "descriptive",
+      "position": null,
+      "description": "The API type. Its `Time` doc comment is where the takeover-timestamp rule lives.",
+      "attributes": {
+        "locator": "type ManagedFieldsEntry struct",
+        "source": "https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/apimachinery/pkg/apis/meta/v1/types.go",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "art-types.md"
+      }
+    },
+    {
+      "id": "Artifact.SsaDocs",
+      "type": "Artifact",
+      "label": "kubernetes.io Server-Side Apply reference",
+      "family": "descriptive",
+      "position": null,
+      "description": "User-facing reference. Describes conflict resolution's three paths and the\nfield-removal rule.",
+      "attributes": {
+        "source": "https://kubernetes.io/docs/reference/using-api/server-side-apply/",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "art-docs.md"
+      }
+    },
+    {
+      "id": "BC.ApiMachinery",
+      "type": "BoundedContext",
+      "label": "Kubernetes API Machinery",
+      "family": "descriptive",
+      "position": null,
+      "description": "The boundary within which \"apply\", \"manager\" and \"field\" have their\nServer-Side Apply meanings.",
+      "attributes": {},
+      "provenance": {
+        "source": "bc.md"
+      }
+    },
+    {
+      "id": "Capability.ConflictDetection",
+      "type": "Capability",
+      "label": "Detect and report field conflicts",
+      "family": "descriptive",
+      "position": null,
+      "description": "Reject an apply that changes a field owned by another manager, naming the\nmanager and the field path.",
+      "attributes": {
+        "locator": "NewConflictError, getConflictMessage",
+        "source": "https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/apimachinery/pkg/util/managedfields/internal/conflict.go",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "cap-conflict.md"
+      }
+    },
+    {
+      "id": "Capability.ServerSideApply",
+      "type": "Capability",
+      "label": "Apply an object server-side",
+      "family": "descriptive",
+      "position": null,
+      "description": "Merge an applied configuration into the live object and update managed fields.",
+      "attributes": {
+        "locator": "func (f *FieldManager) Apply",
+        "source": "https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/apimachinery/pkg/util/managedfields/internal/fieldmanager.go",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "cap-apply.md"
+      }
+    },
+    {
+      "id": "Concept.Conflict",
+      "type": "Concept",
+      "label": "Conflict",
+      "family": "descriptive",
+      "position": null,
+      "description": "\"A conflict occurs when an Apply operation tries to change a field that another\nmanager also claims to manage.\"",
+      "attributes": {
+        "source": "https://kubernetes.io/docs/reference/using-api/server-side-apply/",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "c-conflict.md"
+      }
+    },
+    {
+      "id": "Concept.FieldManagement",
+      "type": "Concept",
+      "label": "Field management",
+      "family": "descriptive",
+      "position": null,
+      "description": "\"The user relies on and expects the value of the field not to change. The user\nwho last made an assertion about the value of a field will be recorded as the\ncurrent field manager.\"",
+      "attributes": {
+        "source": "https://kubernetes.io/docs/reference/using-api/server-side-apply/",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "c-fieldmgmt.md"
+      }
+    },
+    {
+      "id": "Concept.Force",
+      "type": "Concept",
+      "label": "Force",
+      "family": "descriptive",
+      "position": null,
+      "description": "Setting `force=true` \"forces the operation to succeed, changes the value of the\nfield, and **removes the field from all other managers' entries in\nmanagedFields**.\"",
+      "attributes": {
+        "source": "https://kubernetes.io/docs/reference/using-api/server-side-apply/",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "c-force.md"
+      }
+    },
+    {
+      "id": "Concept.LastAppliedAnnotation",
+      "type": "Concept",
+      "label": "last-applied-configuration annotation",
+      "family": "descriptive",
+      "position": null,
+      "description": "The legacy client-side mechanism SSA replaces. Tracks a user's last applied\nstate rather than their field management.",
+      "attributes": {
+        "source": "https://kubernetes.io/docs/reference/using-api/server-side-apply/",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "c-lastapplied.md"
+      }
+    },
+    {
+      "id": "Concept.ManagedFields",
+      "type": "Concept",
+      "label": "managedFields",
+      "family": "descriptive",
+      "position": null,
+      "description": "An entry in `metadata.managedFields` recording `manager`, `operation`\n(`Apply` or `Update`), `apiVersion`, `time`, `fieldsType` (`FieldsV1`) and\n`fieldsV1`.",
+      "attributes": {
+        "locator": "type ManagedFieldsEntry",
+        "source": "https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/apimachinery/pkg/apis/meta/v1/types.go",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "c-managedfields.md"
+      }
+    },
+    {
+      "id": "Concept.OwnershipTransfer",
+      "type": "Concept",
+      "label": "Ownership transfer",
+      "family": "descriptive",
+      "position": null,
+      "description": "\"Whenever a field's value does change, ownership moves from its current manager\nto the manager making the change.\"",
+      "attributes": {
+        "source": "https://kubernetes.io/docs/reference/using-api/server-side-apply/",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "c-ownership-transfer.md"
+      }
+    },
+    {
+      "id": "Evidence.ConflictSymbols",
+      "type": "Evidence",
+      "label": "conflict.go exported symbols",
+      "family": "descriptive",
+      "position": null,
+      "description": "HTTP 200. printManager renders manager, apiVersion, operation, time and\nsubresource.",
+      "attributes": {
+        "fetched": "2026-08-02",
+        "kind": "source-reference",
+        "locator": "NewConflictError, getConflictMessage, printManager",
+        "source": "https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/apimachinery/pkg/util/managedfields/internal/conflict.go",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "ev-cfsym.md"
+      }
+    },
+    {
+      "id": "Evidence.DocsConflict",
+      "type": "Evidence",
+      "label": "Docs \u2014 conflict definition",
+      "family": "descriptive",
+      "position": null,
+      "description": "Defines a conflict and lists the three resolution paths.",
+      "attributes": {
+        "fetched": "2026-08-02",
+        "kind": "artifact-reference",
+        "locator": "Conflicts",
+        "source": "https://kubernetes.io/docs/reference/using-api/server-side-apply/",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "ev-docsconflict.md"
+      }
+    },
+    {
+      "id": "Evidence.DocsFieldManagement",
+      "type": "Evidence",
+      "label": "Docs \u2014 field management definition",
+      "family": "descriptive",
+      "position": null,
+      "description": "Quotes the definition of field management and the current-field-manager rule.",
+      "attributes": {
+        "fetched": "2026-08-02",
+        "kind": "artifact-reference",
+        "locator": "What is field management",
+        "source": "https://kubernetes.io/docs/reference/using-api/server-side-apply/",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "ev-docsfm.md"
+      }
+    },
+    {
+      "id": "Evidence.DocsForce",
+      "type": "Evidence",
+      "label": "Docs \u2014 force semantics",
+      "family": "descriptive",
+      "position": null,
+      "description": "States that force removes the field from all other managers' entries.",
+      "attributes": {
+        "fetched": "2026-08-02",
+        "kind": "artifact-reference",
+        "locator": "Overwrite value, become sole manager",
+        "source": "https://kubernetes.io/docs/reference/using-api/server-side-apply/",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "ev-docsforce.md"
+      }
+    },
+    {
+      "id": "Evidence.DocsLastApplied",
+      "type": "Evidence",
+      "label": "Docs \u2014 comparison with last-applied-configuration",
+      "family": "descriptive",
+      "position": null,
+      "description": "States SSA tracks field management rather than last applied state.",
+      "attributes": {
+        "fetched": "2026-08-02",
+        "kind": "artifact-reference",
+        "locator": "Comparison with client-side apply",
+        "source": "https://kubernetes.io/docs/reference/using-api/server-side-apply/",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "ev-docslast.md"
+      }
+    },
+    {
+      "id": "Evidence.DocsManagedFieldsShape",
+      "type": "Evidence",
+      "label": "Docs \u2014 managedFields entry example",
+      "family": "descriptive",
+      "position": null,
+      "description": "Shows manager, operation, apiVersion, time, fieldsType, fieldsV1.",
+      "attributes": {
+        "fetched": "2026-08-02",
+        "kind": "artifact-reference",
+        "locator": "managedFields YAML example",
+        "source": "https://kubernetes.io/docs/reference/using-api/server-side-apply/",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "ev-docsshape.md"
+      }
+    },
+    {
+      "id": "Evidence.DocsOwnershipTransfer",
+      "type": "Evidence",
+      "label": "Docs \u2014 ownership transfer",
+      "family": "descriptive",
+      "position": null,
+      "description": "'Whenever a field's value does change, ownership moves from its current manager\nto the manager making the change.'",
+      "attributes": {
+        "fetched": "2026-08-02",
+        "kind": "artifact-reference",
+        "locator": "Transferring ownership",
+        "source": "https://kubernetes.io/docs/reference/using-api/server-side-apply/",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "ev-docsown.md"
+      }
+    },
+    {
+      "id": "Evidence.FieldManagerSymbols",
+      "type": "Evidence",
+      "label": "fieldmanager.go exported symbols",
+      "family": "descriptive",
+      "position": null,
+      "description": "HTTP 200. Apply carries force bool. UpdateNoErrors preserves live managedFields\non error 'to prevent clients who don't understand managedFields from deleting it\naccidentally.'",
+      "attributes": {
+        "fetched": "2026-08-02",
+        "kind": "source-reference",
+        "locator": "FieldManager, Apply, Update, UpdateNoErrors",
+        "source": "https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/apimachinery/pkg/util/managedfields/internal/fieldmanager.go",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "ev-fmsym.md"
+      }
+    },
+    {
+      "id": "Evidence.Kep555Readme",
+      "type": "Evidence",
+      "label": "KEP-555 README",
+      "family": "descriptive",
+      "position": null,
+      "description": "Fetched. Yields stage (Alpha v1.14, Beta v1.19, GA v1.22), the managedFields\nreplacement of last-applied-configuration, and the backward-compatibility and\nrollback commitments.",
+      "attributes": {
+        "fetched": "2026-08-02",
+        "kind": "artifact-reference",
+        "locator": "Motivation, Proposal",
+        "source": "https://github.com/kubernetes/enhancements/blob/master/keps/sig-api-machinery/555-server-side-apply/README.md",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "ev-kep555.md"
+      }
+    },
+    {
+      "id": "Evidence.Kep555ResetFields",
+      "type": "Evidence",
+      "label": "KEP-555 \u2014 ResetFieldsProvider",
+      "family": "descriptive",
+      "position": null,
+      "description": "Names the interface protecting status fields from ownership claims.",
+      "attributes": {
+        "fetched": "2026-08-02",
+        "kind": "artifact-reference",
+        "locator": "ResetFieldsProvider interface, PR #86083",
+        "source": "https://github.com/kubernetes/enhancements/blob/master/keps/sig-api-machinery/555-server-side-apply/README.md",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "ev-kep555reset.md"
+      }
+    },
+    {
+      "id": "Evidence.KepDirectoryListing",
+      "type": "Evidence",
+      "label": "keps/sig-api-machinery directory listing",
+      "family": "descriptive",
+      "position": null,
+      "description": "Fetched. Confirms the KEP numbers exist. **Does not confirm their contents** \u2014\nonly 555 and the docs page were read in full.",
+      "attributes": {
+        "fetched": "2026-08-02",
+        "kind": "artifact-reference",
+        "locator": "555, 2155, 2885, 5958",
+        "source": "https://api.github.com/repos/kubernetes/enhancements/contents/keps/sig-api-machinery",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "ev-kepdir.md"
+      }
+    },
+    {
+      "id": "Evidence.ManagedFieldsEntryType",
+      "type": "Evidence",
+      "label": "ManagedFieldsEntry struct",
+      "family": "descriptive",
+      "position": null,
+      "description": "HTTP 200, definition extracted. Operation is documented as 'Apply' or 'Update'\nonly.",
+      "attributes": {
+        "fetched": "2026-08-02",
+        "kind": "source-reference",
+        "locator": "line 1407",
+        "source": "https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/apimachinery/pkg/apis/meta/v1/types.go",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "ev-mfe.md"
+      }
+    },
+    {
+      "id": "Evidence.TestClearManagedFields",
+      "type": "Evidence",
+      "label": "TestClearManagedFieldsWith{Update,MergePatch,StrategicMergePatch,JSONPatch}",
+      "family": "descriptive",
+      "position": null,
+      "description": "Four tests clearing managedFields by four request paths.",
+      "attributes": {
+        "fetched": "2026-08-02",
+        "kind": "source-reference",
+        "locator": "lines 1686-1924",
+        "source": "https://github.com/kubernetes/kubernetes/blob/master/test/integration/apiserver/apply/apply_test.go",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "ev-tclear.md"
+      }
+    },
+    {
+      "id": "Evidence.TestConflictForced",
+      "type": "Evidence",
+      "label": "TestApplyUpdateApplyConflictForced",
+      "family": "descriptive",
+      "position": null,
+      "description": "Exercises apply, update, apply, then forced resolution.",
+      "attributes": {
+        "fetched": "2026-08-02",
+        "kind": "source-reference",
+        "locator": "line 747",
+        "source": "https://github.com/kubernetes/kubernetes/blob/master/test/integration/apiserver/apply/apply_test.go",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "ev-tconf.md"
+      }
+    },
+    {
+      "id": "Evidence.TestFunctionList",
+      "type": "Evidence",
+      "label": "apply_test.go function list",
+      "family": "descriptive",
+      "position": null,
+      "description": "HTTP 200; names extracted by grep.",
+      "attributes": {
+        "fetched": "2026-08-02",
+        "kind": "source-reference",
+        "locator": "30 func Test... declarations",
+        "source": "https://github.com/kubernetes/kubernetes/blob/master/test/integration/apiserver/apply/apply_test.go",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "ev-tfl.md"
+      }
+    },
+    {
+      "id": "Evidence.TestRequiresFieldManager",
+      "type": "Evidence",
+      "label": "TestApplyRequiresFieldManager",
+      "family": "descriptive",
+      "position": null,
+      "description": "Asserts a requirement no fetched document states.",
+      "attributes": {
+        "fetched": "2026-08-02",
+        "kind": "source-reference",
+        "locator": "line 1310",
+        "source": "https://github.com/kubernetes/kubernetes/blob/master/test/integration/apiserver/apply/apply_test.go",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "ev-treq.md"
+      }
+    },
+    {
+      "id": "Evidence.TestSubresources",
+      "type": "Evidence",
+      "label": "TestApplyDoesNotChangeManagedFieldsViaSubresources",
+      "family": "descriptive",
+      "position": null,
+      "description": "Protects the subresource path.",
+      "attributes": {
+        "fetched": "2026-08-02",
+        "kind": "source-reference",
+        "locator": "line 2072",
+        "source": "https://github.com/kubernetes/kubernetes/blob/master/test/integration/apiserver/apply/apply_test.go",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "ev-tsub.md"
+      }
+    },
+    {
+      "id": "Evidence.TimeFieldComment",
+      "type": "Evidence",
+      "label": "ManagedFieldsEntry.Time doc comment",
+      "family": "descriptive",
+      "position": null,
+      "description": "'The timestamp will also be updated if a field is added, the manager changes any\nof the owned fields value or removes a field. **The timestamp does not update\nwhen a field is removed from the entry because another manager took it over.**'",
+      "attributes": {
+        "fetched": "2026-08-02",
+        "kind": "source-reference",
+        "locator": "lines 1419-1424",
+        "source": "https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/apimachinery/pkg/apis/meta/v1/types.go",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "ev-timec.md"
+      }
+    },
+    {
+      "id": "Invariant.ApplyRequiresFieldManager",
+      "type": "Invariant",
+      "label": "An apply request must name a field manager",
+      "family": "descriptive",
+      "position": null,
+      "description": "**Asserted by a test, stated by no fetched document.** The docs describe what a\nmanager is; the requirement that a request carry one is visible in the test\nname.",
+      "attributes": {
+        "locator": "TestApplyRequiresFieldManager",
+        "source": "https://github.com/kubernetes/kubernetes/blob/master/test/integration/apiserver/apply/apply_test.go",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "inv-fieldmanager-required.md"
+      }
+    },
+    {
+      "id": "Invariant.BackwardCompatible",
+      "type": "Invariant",
+      "label": "Changes must be strictly backward compatible",
+      "family": "descriptive",
+      "position": null,
+      "description": "\"All the changes should be strictly backward compatible, and shouldn't break\nexisting automation or users.\"",
+      "attributes": {
+        "source": "https://github.com/kubernetes/enhancements/blob/master/keps/sig-api-machinery/555-server-side-apply/README.md",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "inv-backcompat.md"
+      }
+    },
+    {
+      "id": "Invariant.RollbackClearsManagedFields",
+      "type": "Invariant",
+      "label": "Disabling the feature clears managedFields without affecting workloads",
+      "family": "descriptive",
+      "position": null,
+      "description": "Rollback safety. Four integration tests clear `managedFields` by four different\nrequest paths.",
+      "attributes": {
+        "source": "https://github.com/kubernetes/enhancements/blob/master/keps/sig-api-machinery/555-server-side-apply/README.md",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "inv-rollback.md"
+      }
+    },
+    {
+      "id": "Invariant.StatusFieldsProtected",
+      "type": "Invariant",
+      "label": "Status fields are protected from ownership claims",
+      "family": "descriptive",
+      "position": null,
+      "description": "Protected through a `ResetFieldsProvider` interface that resource strategies\nimplement.",
+      "attributes": {
+        "locator": "ResetFieldsProvider",
+        "source": "https://github.com/kubernetes/enhancements/blob/master/keps/sig-api-machinery/555-server-side-apply/README.md",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "inv-status.md"
+      }
+    },
+    {
+      "id": "Invariant.TimestampNotUpdatedOnTakeover",
+      "type": "Invariant",
+      "label": "An entry's timestamp does not update when another manager takes a field over",
+      "family": "descriptive",
+      "position": null,
+      "description": "\"The timestamp does not update when a field is removed from the entry because\nanother manager took it over.\"\n\n**This invariant is the cross-source finding.** See `../ground-truth.md` Q7.",
+      "attributes": {
+        "locator": "ManagedFieldsEntry.Time doc comment",
+        "source": "https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/apimachinery/pkg/apis/meta/v1/types.go",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "inv-timestamp.md"
+      }
+    },
+    {
+      "id": "KEP.2155",
+      "type": "ADR",
+      "label": "KEP-2155 \u2014 client-go apply configurations",
+      "family": "operational",
+      "position": null,
+      "description": "Typed apply configurations for client-go. **Refines** KEP-555 by giving Go\nclients a way to construct apply requests; does not supersede it.",
+      "attributes": {
+        "source": "https://github.com/kubernetes/enhancements/tree/master/keps/sig-api-machinery/2155-clientgo-apply",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "kep-2155.md"
+      }
+    },
+    {
+      "id": "KEP.2885",
+      "type": "ADR",
+      "label": "KEP-2885 \u2014 server-side unknown field validation",
+      "family": "operational",
+      "position": null,
+      "description": "Moves unknown-field validation to the server. **Refines** the apply request\npath.",
+      "attributes": {
+        "source": "https://github.com/kubernetes/enhancements/blob/master/keps/sig-api-machinery/2885-server-side-unknown-field-validation/README.md",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "kep-2885.md"
+      }
+    },
+    {
+      "id": "KEP.555",
+      "type": "ADR",
+      "label": "KEP-555 \u2014 Server-Side Apply",
+      "family": "operational",
+      "position": null,
+      "description": "Moves apply logic from the client to the server. Replaces the single\n`kubectl.kubernetes.io/last-applied-configuration` annotation with per-field\nownership tracking.",
+      "attributes": {
+        "sig": "sig-api-machinery",
+        "source": "https://github.com/kubernetes/enhancements/blob/master/keps/sig-api-machinery/555-server-side-apply/README.md",
+        "stage": "GA in v1.22 (Alpha v1.14, Beta v1.19)",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "kep-555.md"
+      }
+    },
+    {
+      "id": "KEP.5958",
+      "type": "ADR",
+      "label": "KEP-5958 \u2014 client opt-out of managedFields",
+      "family": "operational",
+      "position": null,
+      "description": "Lets clients opt out of receiving `managedFields`. **Support status:\nincomplete** \u2014 the directory exists and was listed, but its README was not\nfetched, so its stage and exact scope are unverified.",
+      "attributes": {
+        "source": "https://github.com/kubernetes/enhancements/tree/master/keps/sig-api-machinery/5958-client-opt-out-managedfields",
+        "support": "incomplete"
+      },
+      "provenance": {
+        "source": "kep-5958.md"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "Artifact.ApplyIntegrationTest",
+      "predicate": "evidenced-by",
+      "to": "Evidence.TestFunctionList",
+      "core": "evidenced-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Artifact.ApplyIntegrationTest",
+      "predicate": "references",
+      "to": "Concept.Force",
+      "core": "references",
+      "category": "structural"
+    },
+    {
+      "from": "Artifact.ApplyIntegrationTest",
+      "predicate": "references",
+      "to": "Concept.ManagedFields",
+      "core": "references",
+      "category": "structural"
+    },
+    {
+      "from": "Artifact.ApplyIntegrationTest",
+      "predicate": "validates",
+      "to": "Artifact.ConflictGo",
+      "core": "validates",
+      "category": "behavioral"
+    },
+    {
+      "from": "Artifact.ApplyIntegrationTest",
+      "predicate": "validates",
+      "to": "Artifact.FieldManagerGo",
+      "core": "validates",
+      "category": "behavioral"
+    },
+    {
+      "from": "Artifact.ConflictGo",
+      "predicate": "evidenced-by",
+      "to": "Evidence.ConflictSymbols",
+      "core": "evidenced-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Artifact.ConflictGo",
+      "predicate": "represents",
+      "to": "Concept.Conflict",
+      "core": "represents",
+      "category": "semantic"
+    },
+    {
+      "from": "Artifact.FieldManagerGo",
+      "predicate": "evidenced-by",
+      "to": "Evidence.FieldManagerSymbols",
+      "core": "evidenced-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Artifact.FieldManagerGo",
+      "predicate": "represents",
+      "to": "Concept.FieldManagement",
+      "core": "represents",
+      "category": "semantic"
+    },
+    {
+      "from": "Artifact.MetaV1Types",
+      "predicate": "evidenced-by",
+      "to": "Evidence.ManagedFieldsEntryType",
+      "core": "evidenced-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Artifact.MetaV1Types",
+      "predicate": "represents",
+      "to": "Concept.ManagedFields",
+      "core": "represents",
+      "category": "semantic"
+    },
+    {
+      "from": "Artifact.SsaDocs",
+      "predicate": "evidenced-by",
+      "to": "Evidence.DocsFieldManagement",
+      "core": "evidenced-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Artifact.SsaDocs",
+      "predicate": "references",
+      "to": "Concept.Conflict",
+      "core": "references",
+      "category": "structural"
+    },
+    {
+      "from": "Artifact.SsaDocs",
+      "predicate": "references",
+      "to": "Concept.Force",
+      "core": "references",
+      "category": "structural"
+    },
+    {
+      "from": "Artifact.SsaDocs",
+      "predicate": "references",
+      "to": "Concept.LastAppliedAnnotation",
+      "core": "references",
+      "category": "structural"
+    },
+    {
+      "from": "Artifact.SsaDocs",
+      "predicate": "represents",
+      "to": "Concept.FieldManagement",
+      "core": "represents",
+      "category": "semantic"
+    },
+    {
+      "from": "Capability.ConflictDetection",
+      "predicate": "realised-by",
+      "to": "Artifact.ConflictGo",
+      "core": "implemented-by",
+      "category": "structural"
+    },
+    {
+      "from": "Capability.ConflictDetection",
+      "predicate": "references",
+      "to": "Concept.Conflict",
+      "core": "references",
+      "category": "structural"
+    },
+    {
+      "from": "Capability.ConflictDetection",
+      "predicate": "scoped-to",
+      "to": "BC.ApiMachinery",
+      "core": "contained-by",
+      "category": "structural"
+    },
+    {
+      "from": "Capability.ServerSideApply",
+      "predicate": "realised-by",
+      "to": "Artifact.FieldManagerGo",
+      "core": "implemented-by",
+      "category": "structural"
+    },
+    {
+      "from": "Capability.ServerSideApply",
+      "predicate": "references",
+      "to": "Concept.FieldManagement",
+      "core": "references",
+      "category": "structural"
+    },
+    {
+      "from": "Capability.ServerSideApply",
+      "predicate": "scoped-to",
+      "to": "BC.ApiMachinery",
+      "core": "contained-by",
+      "category": "structural"
+    },
+    {
+      "from": "Concept.Conflict",
+      "predicate": "evidenced-by",
+      "to": "Evidence.DocsConflict",
+      "core": "evidenced-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Concept.Conflict",
+      "predicate": "references",
+      "to": "Concept.FieldManagement",
+      "core": "references",
+      "category": "structural"
+    },
+    {
+      "from": "Concept.Conflict",
+      "predicate": "scoped-to",
+      "to": "BC.ApiMachinery",
+      "core": "contained-by",
+      "category": "structural"
+    },
+    {
+      "from": "Concept.FieldManagement",
+      "predicate": "evidenced-by",
+      "to": "Evidence.DocsFieldManagement",
+      "core": "evidenced-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Concept.FieldManagement",
+      "predicate": "scoped-to",
+      "to": "BC.ApiMachinery",
+      "core": "contained-by",
+      "category": "structural"
+    },
+    {
+      "from": "Concept.Force",
+      "predicate": "evidenced-by",
+      "to": "Evidence.DocsForce",
+      "core": "evidenced-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Concept.Force",
+      "predicate": "references",
+      "to": "Concept.Conflict",
+      "core": "references",
+      "category": "structural"
+    },
+    {
+      "from": "Concept.Force",
+      "predicate": "scoped-to",
+      "to": "BC.ApiMachinery",
+      "core": "contained-by",
+      "category": "structural"
+    },
+    {
+      "from": "Concept.LastAppliedAnnotation",
+      "predicate": "evidenced-by",
+      "to": "Evidence.DocsLastApplied",
+      "core": "evidenced-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Concept.LastAppliedAnnotation",
+      "predicate": "scoped-to",
+      "to": "BC.ApiMachinery",
+      "core": "contained-by",
+      "category": "structural"
+    },
+    {
+      "from": "Concept.ManagedFields",
+      "predicate": "evidenced-by",
+      "to": "Evidence.DocsManagedFieldsShape",
+      "core": "evidenced-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Concept.ManagedFields",
+      "predicate": "evidenced-by",
+      "to": "Evidence.ManagedFieldsEntryType",
+      "core": "evidenced-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Concept.ManagedFields",
+      "predicate": "references",
+      "to": "Concept.FieldManagement",
+      "core": "references",
+      "category": "structural"
+    },
+    {
+      "from": "Concept.ManagedFields",
+      "predicate": "scoped-to",
+      "to": "BC.ApiMachinery",
+      "core": "contained-by",
+      "category": "structural"
+    },
+    {
+      "from": "Concept.OwnershipTransfer",
+      "predicate": "evidenced-by",
+      "to": "Evidence.DocsOwnershipTransfer",
+      "core": "evidenced-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Concept.OwnershipTransfer",
+      "predicate": "references",
+      "to": "Concept.FieldManagement",
+      "core": "references",
+      "category": "structural"
+    },
+    {
+      "from": "Concept.OwnershipTransfer",
+      "predicate": "scoped-to",
+      "to": "BC.ApiMachinery",
+      "core": "contained-by",
+      "category": "structural"
+    },
+    {
+      "from": "Invariant.ApplyRequiresFieldManager",
+      "predicate": "constrains",
+      "to": "Capability.ServerSideApply",
+      "core": "governs",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.ApplyRequiresFieldManager",
+      "predicate": "enforced-at",
+      "to": "Artifact.ApplyIntegrationTest",
+      "core": "validated-by",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.ApplyRequiresFieldManager",
+      "predicate": "evidenced-by",
+      "to": "Evidence.TestRequiresFieldManager",
+      "core": "evidenced-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Invariant.ApplyRequiresFieldManager",
+      "predicate": "scoped-to",
+      "to": "BC.ApiMachinery",
+      "core": "contained-by",
+      "category": "structural"
+    },
+    {
+      "from": "Invariant.BackwardCompatible",
+      "predicate": "constrains",
+      "to": "Capability.ServerSideApply",
+      "core": "governs",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.BackwardCompatible",
+      "predicate": "evidenced-by",
+      "to": "Evidence.Kep555Readme",
+      "core": "evidenced-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Invariant.BackwardCompatible",
+      "predicate": "scoped-to",
+      "to": "BC.ApiMachinery",
+      "core": "contained-by",
+      "category": "structural"
+    },
+    {
+      "from": "Invariant.RollbackClearsManagedFields",
+      "predicate": "constrains",
+      "to": "Concept.ManagedFields",
+      "core": "governs",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.RollbackClearsManagedFields",
+      "predicate": "enforced-at",
+      "to": "Artifact.ApplyIntegrationTest",
+      "core": "validated-by",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.RollbackClearsManagedFields",
+      "predicate": "evidenced-by",
+      "to": "Evidence.Kep555Readme",
+      "core": "evidenced-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Invariant.RollbackClearsManagedFields",
+      "predicate": "evidenced-by",
+      "to": "Evidence.TestClearManagedFields",
+      "core": "evidenced-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Invariant.RollbackClearsManagedFields",
+      "predicate": "scoped-to",
+      "to": "BC.ApiMachinery",
+      "core": "contained-by",
+      "category": "structural"
+    },
+    {
+      "from": "Invariant.StatusFieldsProtected",
+      "predicate": "constrains",
+      "to": "Capability.ServerSideApply",
+      "core": "governs",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.StatusFieldsProtected",
+      "predicate": "enforced-at",
+      "to": "Artifact.ApplyIntegrationTest",
+      "core": "validated-by",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.StatusFieldsProtected",
+      "predicate": "evidenced-by",
+      "to": "Evidence.Kep555ResetFields",
+      "core": "evidenced-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Invariant.StatusFieldsProtected",
+      "predicate": "evidenced-by",
+      "to": "Evidence.TestSubresources",
+      "core": "evidenced-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Invariant.StatusFieldsProtected",
+      "predicate": "scoped-to",
+      "to": "BC.ApiMachinery",
+      "core": "contained-by",
+      "category": "structural"
+    },
+    {
+      "from": "Invariant.TimestampNotUpdatedOnTakeover",
+      "predicate": "constrains",
+      "to": "Concept.ManagedFields",
+      "core": "governs",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.TimestampNotUpdatedOnTakeover",
+      "predicate": "evidenced-by",
+      "to": "Evidence.DocsForce",
+      "core": "evidenced-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Invariant.TimestampNotUpdatedOnTakeover",
+      "predicate": "evidenced-by",
+      "to": "Evidence.TimeFieldComment",
+      "core": "evidenced-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Invariant.TimestampNotUpdatedOnTakeover",
+      "predicate": "references",
+      "to": "Concept.Force",
+      "core": "references",
+      "category": "structural"
+    },
+    {
+      "from": "Invariant.TimestampNotUpdatedOnTakeover",
+      "predicate": "references",
+      "to": "Concept.OwnershipTransfer",
+      "core": "references",
+      "category": "structural"
+    },
+    {
+      "from": "Invariant.TimestampNotUpdatedOnTakeover",
+      "predicate": "scoped-to",
+      "to": "BC.ApiMachinery",
+      "core": "contained-by",
+      "category": "structural"
+    },
+    {
+      "from": "KEP.2155",
+      "predicate": "evidenced-by",
+      "to": "Evidence.KepDirectoryListing",
+      "core": "evidenced-by",
+      "category": "traceability"
+    },
+    {
+      "from": "KEP.2155",
+      "predicate": "references",
+      "to": "KEP.555",
+      "core": "references",
+      "category": "structural"
+    },
+    {
+      "from": "KEP.2885",
+      "predicate": "evidenced-by",
+      "to": "Evidence.KepDirectoryListing",
+      "core": "evidenced-by",
+      "category": "traceability"
+    },
+    {
+      "from": "KEP.2885",
+      "predicate": "references",
+      "to": "KEP.555",
+      "core": "references",
+      "category": "structural"
+    },
+    {
+      "from": "KEP.555",
+      "predicate": "establishes",
+      "to": "Concept.Conflict",
+      "core": "establishes",
+      "category": "traceability"
+    },
+    {
+      "from": "KEP.555",
+      "predicate": "establishes",
+      "to": "Concept.FieldManagement",
+      "core": "establishes",
+      "category": "traceability"
+    },
+    {
+      "from": "KEP.555",
+      "predicate": "establishes",
+      "to": "Concept.ManagedFields",
+      "core": "establishes",
+      "category": "traceability"
+    },
+    {
+      "from": "KEP.555",
+      "predicate": "establishes",
+      "to": "Invariant.BackwardCompatible",
+      "core": "establishes",
+      "category": "traceability"
+    },
+    {
+      "from": "KEP.555",
+      "predicate": "establishes",
+      "to": "Invariant.RollbackClearsManagedFields",
+      "core": "establishes",
+      "category": "traceability"
+    },
+    {
+      "from": "KEP.555",
+      "predicate": "establishes",
+      "to": "Invariant.StatusFieldsProtected",
+      "core": "establishes",
+      "category": "traceability"
+    },
+    {
+      "from": "KEP.555",
+      "predicate": "evidenced-by",
+      "to": "Evidence.Kep555Readme",
+      "core": "evidenced-by",
+      "category": "traceability"
+    },
+    {
+      "from": "KEP.5958",
+      "predicate": "evidenced-by",
+      "to": "Evidence.KepDirectoryListing",
+      "core": "evidenced-by",
+      "category": "traceability"
+    },
+    {
+      "from": "KEP.5958",
+      "predicate": "references",
+      "to": "Concept.ManagedFields",
+      "core": "references",
+      "category": "structural"
+    }
+  ],
+  "vocabulary": {
+    "contained-by": {
+      "category": "structural",
+      "means": "inverse of contains",
+      "inverse": "contains"
+    },
+    "establishes": {
+      "category": "traceability",
+      "means": "inverse of established-by",
+      "inverse": "established-by"
+    },
+    "evidenced-by": {
+      "category": "traceability",
+      "means": "A is supported by observable B",
+      "inverse": "supports"
+    },
+    "governs": {
+      "category": "behavioral",
+      "means": "A constrains B normatively",
+      "inverse": "governed-by"
+    },
+    "implemented-by": {
+      "category": "structural",
+      "means": "inverse of implements",
+      "inverse": "implements"
+    },
+    "references": {
+      "category": "structural",
+      "means": "A points at B without owning it",
+      "inverse": "referenced-by"
+    },
+    "represents": {
+      "category": "semantic",
+      "means": "A stands for B in another representation",
+      "inverse": "represented-by"
+    },
+    "validated-by": {
+      "category": "behavioral",
+      "means": "inverse of validates",
+      "inverse": "validates"
+    },
+    "validates": {
+      "category": "behavioral",
+      "means": "A checks that B holds",
+      "inverse": "validated-by"
+    }
+  },
+  "statistics": {
+    "nodes": 41,
+    "edges": 75,
+    "byType": {
+      "ADR": 4,
+      "Artifact": 5,
+      "BoundedContext": 1,
+      "Capability": 2,
+      "Concept": 6,
+      "Evidence": 18,
+      "Invariant": 5
+    },
+    "byFamily": {
+      "descriptive": 37,
+      "operational": 4
+    },
+    "byCategory": {
+      "behavioral": 10,
+      "semantic": 4,
+      "structural": 31,
+      "traceability": 30
+    },
+    "byCoreType": {
+      "contained-by": 13,
+      "establishes": 6,
+      "evidenced-by": 24,
+      "governs": 5,
+      "implemented-by": 2,
+      "references": 16,
+      "represents": 4,
+      "validated-by": 3,
+      "validates": 2
+    }
+  }
+}

@@ -11,6 +11,7 @@
       "family": "descriptive",
       "position": null,
       "description": "Unclassified.",
+      "attributes": {},
       "provenance": {
         "source": "art.md"
       }
@@ -22,6 +23,7 @@
       "family": "descriptive",
       "position": null,
       "description": "Carries no dimension value. `revision-of` was absent until `VR-0007` caught it:\nidentity is the pair (artifact-id, revision-id) (`ADR-0064`), and a revision with\nno artifact has half an identity.",
+      "attributes": {},
       "provenance": {
         "source": "rev.md"
       }
@@ -33,6 +35,7 @@
       "family": "descriptive",
       "position": null,
       "description": "One entity, holding the ten fields. Not a Specification/Instance pair.",
+      "attributes": {},
       "provenance": {
         "source": "dim.md"
       }
@@ -44,6 +47,7 @@
       "family": "descriptive",
       "position": null,
       "description": "A reified association, versioned independently of what it classifies.",
+      "attributes": {},
       "provenance": {
         "source": "assign.md"
       }

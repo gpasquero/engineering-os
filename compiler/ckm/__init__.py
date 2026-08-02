@@ -34,6 +34,7 @@ def build(nodes, edges, entities, core_types, project_name):
         "nodes": [{"id": n["id"], "type": n["type"], "label": n["label"],
                    "family": entities.get(n["type"], "unassigned"),
                    "position": n["position"], "description": n["body"],
+                   "attributes": n.get("attributes") or {},
                    "provenance": {"source": n["source"]}} for n in nodes],
         "edges": edges,
         # Key order is normalised: how a registry happened to extract a field must

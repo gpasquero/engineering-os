@@ -11,6 +11,7 @@
       "family": "descriptive",
       "position": null,
       "description": "Output.",
+      "attributes": {},
       "provenance": {
         "source": "artifact.md"
       }
@@ -22,6 +23,7 @@
       "family": "operational",
       "position": null,
       "description": "Carries no position of its own.",
+      "attributes": {},
       "provenance": {
         "source": "skill.md"
       }
@@ -33,6 +35,7 @@
       "family": "operational",
       "position": null,
       "description": "Sequences steps. Holds no methodology.",
+      "attributes": {},
       "provenance": {
         "source": "wf.md"
       }
@@ -44,6 +47,7 @@
       "family": "operational",
       "position": 1,
       "description": "Position 1.",
+      "attributes": {},
       "provenance": {
         "source": "s1.md"
       }
@@ -55,6 +59,7 @@
       "family": "operational",
       "position": 3,
       "description": "Position 3, same Skill. The position is a fact about the association.",
+      "attributes": {},
       "provenance": {
         "source": "s3.md"
       }

@@ -11,6 +11,7 @@
       "family": "descriptive",
       "position": null,
       "description": "Has no state.",
+      "attributes": {},
       "provenance": {
         "source": "art.md"
       }
@@ -22,6 +23,7 @@
       "family": "descriptive",
       "position": null,
       "description": "Governed by the machine.",
+      "attributes": {},
       "provenance": {
         "source": "rev.md"
       }
@@ -33,6 +35,7 @@
       "family": "descriptive",
       "position": null,
       "description": "Draft, Under Review, Accepted, Active, Superseded, Archived. Every state belongs\nto exactly one machine.",
+      "attributes": {},
       "provenance": {
         "source": "sm.md"
       }
@@ -44,6 +47,7 @@
       "family": "operational",
       "position": null,
       "description": "Drives the machine.",
+      "attributes": {},
       "provenance": {
         "source": "wf.md"
       }

@@ -1,0 +1,251 @@
+@prefix ex:   <https://example.org/engineering-os/example#> .
+@prefix eos:  <https://example.org/engineering-os/metamodel#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+# A PROJECTION of the Canonical Knowledge Model (ADR-0072). Generated; do not edit.
+
+<https://example.org/engineering-os/example> a owl:Ontology ;
+    rdfs:comment "Layer B model expressed in the Layer A metamodel." ;
+    owl:imports <https://example.org/engineering-os/metamodel> .
+
+ex:Artifact_ApplyIntegrationTest a eos:Artifact ;
+    rdfs:label "test/integration/apiserver/apply/apply_test.go" ;
+    rdfs:comment "Integration tests including `TestApplyUpdateApplyConflictForced`," .
+
+ex:Artifact_ConflictGo a eos:Artifact ;
+    rdfs:label "managedfields/internal/conflict.go" ;
+    rdfs:comment "Formats `'Apply failed with 1 conflict: conflict with %v: %v'`. `printManager`" .
+
+ex:Artifact_FieldManagerGo a eos:Artifact ;
+    rdfs:label "managedfields/internal/fieldmanager.go" ;
+    rdfs:comment "`FieldManager.Apply` takes `force bool`; `Update` handles non-apply operations;" .
+
+ex:Artifact_MetaV1Types a eos:Artifact ;
+    rdfs:label "apimachinery meta/v1/types.go" ;
+    rdfs:comment "The API type. Its `Time` doc comment is where the takeover-timestamp rule lives." .
+
+ex:Artifact_SsaDocs a eos:Artifact ;
+    rdfs:label "kubernetes.io Server-Side Apply reference" ;
+    rdfs:comment "User-facing reference. Describes conflict resolution's three paths and the" .
+
+ex:BC_ApiMachinery a eos:BoundedContext ;
+    rdfs:label "Kubernetes API Machinery" ;
+    rdfs:comment "The boundary within which 'apply', 'manager' and 'field' have their" .
+
+ex:Capability_ConflictDetection a eos:Capability ;
+    rdfs:label "Detect and report field conflicts" ;
+    rdfs:comment "Reject an apply that changes a field owned by another manager, naming the" .
+
+ex:Capability_ServerSideApply a eos:Capability ;
+    rdfs:label "Apply an object server-side" ;
+    rdfs:comment "Merge an applied configuration into the live object and update managed fields." .
+
+ex:Concept_Conflict a eos:Concept ;
+    rdfs:label "Conflict" ;
+    rdfs:comment "'A conflict occurs when an Apply operation tries to change a field that another" .
+
+ex:Concept_FieldManagement a eos:Concept ;
+    rdfs:label "Field management" ;
+    rdfs:comment "'The user relies on and expects the value of the field not to change. The user" .
+
+ex:Concept_Force a eos:Concept ;
+    rdfs:label "Force" ;
+    rdfs:comment "Setting `force=true` 'forces the operation to succeed, changes the value of the" .
+
+ex:Concept_LastAppliedAnnotation a eos:Concept ;
+    rdfs:label "last-applied-configuration annotation" ;
+    rdfs:comment "The legacy client-side mechanism SSA replaces. Tracks a user's last applied" .
+
+ex:Concept_ManagedFields a eos:Concept ;
+    rdfs:label "managedFields" ;
+    rdfs:comment "An entry in `metadata.managedFields` recording `manager`, `operation`" .
+
+ex:Concept_OwnershipTransfer a eos:Concept ;
+    rdfs:label "Ownership transfer" ;
+    rdfs:comment "'Whenever a field's value does change, ownership moves from its current manager" .
+
+ex:Evidence_ConflictSymbols a eos:Evidence ;
+    rdfs:label "conflict.go exported symbols" ;
+    rdfs:comment "HTTP 200. printManager renders manager, apiVersion, operation, time and" .
+
+ex:Evidence_DocsConflict a eos:Evidence ;
+    rdfs:label "Docs — conflict definition" ;
+    rdfs:comment "Defines a conflict and lists the three resolution paths." .
+
+ex:Evidence_DocsFieldManagement a eos:Evidence ;
+    rdfs:label "Docs — field management definition" ;
+    rdfs:comment "Quotes the definition of field management and the current-field-manager rule." .
+
+ex:Evidence_DocsForce a eos:Evidence ;
+    rdfs:label "Docs — force semantics" ;
+    rdfs:comment "States that force removes the field from all other managers' entries." .
+
+ex:Evidence_DocsLastApplied a eos:Evidence ;
+    rdfs:label "Docs — comparison with last-applied-configuration" ;
+    rdfs:comment "States SSA tracks field management rather than last applied state." .
+
+ex:Evidence_DocsManagedFieldsShape a eos:Evidence ;
+    rdfs:label "Docs — managedFields entry example" ;
+    rdfs:comment "Shows manager, operation, apiVersion, time, fieldsType, fieldsV1." .
+
+ex:Evidence_DocsOwnershipTransfer a eos:Evidence ;
+    rdfs:label "Docs — ownership transfer" ;
+    rdfs:comment "'Whenever a field's value does change, ownership moves from its current manager" .
+
+ex:Evidence_FieldManagerSymbols a eos:Evidence ;
+    rdfs:label "fieldmanager.go exported symbols" ;
+    rdfs:comment "HTTP 200. Apply carries force bool. UpdateNoErrors preserves live managedFields" .
+
+ex:Evidence_Kep555Readme a eos:Evidence ;
+    rdfs:label "KEP-555 README" ;
+    rdfs:comment "Fetched. Yields stage (Alpha v1.14, Beta v1.19, GA v1.22), the managedFields" .
+
+ex:Evidence_Kep555ResetFields a eos:Evidence ;
+    rdfs:label "KEP-555 — ResetFieldsProvider" ;
+    rdfs:comment "Names the interface protecting status fields from ownership claims." .
+
+ex:Evidence_KepDirectoryListing a eos:Evidence ;
+    rdfs:label "keps/sig-api-machinery directory listing" ;
+    rdfs:comment "Fetched. Confirms the KEP numbers exist. **Does not confirm their contents** —" .
+
+ex:Evidence_ManagedFieldsEntryType a eos:Evidence ;
+    rdfs:label "ManagedFieldsEntry struct" ;
+    rdfs:comment "HTTP 200, definition extracted. Operation is documented as 'Apply' or 'Update'" .
+
+ex:Evidence_TestClearManagedFields a eos:Evidence ;
+    rdfs:label "TestClearManagedFieldsWith{Update,MergePatch,StrategicMergePatch,JSONPatch}" ;
+    rdfs:comment "Four tests clearing managedFields by four request paths." .
+
+ex:Evidence_TestConflictForced a eos:Evidence ;
+    rdfs:label "TestApplyUpdateApplyConflictForced" ;
+    rdfs:comment "Exercises apply, update, apply, then forced resolution." .
+
+ex:Evidence_TestFunctionList a eos:Evidence ;
+    rdfs:label "apply_test.go function list" ;
+    rdfs:comment "HTTP 200; names extracted by grep." .
+
+ex:Evidence_TestRequiresFieldManager a eos:Evidence ;
+    rdfs:label "TestApplyRequiresFieldManager" ;
+    rdfs:comment "Asserts a requirement no fetched document states." .
+
+ex:Evidence_TestSubresources a eos:Evidence ;
+    rdfs:label "TestApplyDoesNotChangeManagedFieldsViaSubresources" ;
+    rdfs:comment "Protects the subresource path." .
+
+ex:Evidence_TimeFieldComment a eos:Evidence ;
+    rdfs:label "ManagedFieldsEntry.Time doc comment" ;
+    rdfs:comment "'The timestamp will also be updated if a field is added, the manager changes any" .
+
+ex:Invariant_ApplyRequiresFieldManager a eos:Invariant ;
+    rdfs:label "An apply request must name a field manager" ;
+    rdfs:comment "**Asserted by a test, stated by no fetched document.** The docs describe what a" .
+
+ex:Invariant_BackwardCompatible a eos:Invariant ;
+    rdfs:label "Changes must be strictly backward compatible" ;
+    rdfs:comment "'All the changes should be strictly backward compatible, and shouldn't break" .
+
+ex:Invariant_RollbackClearsManagedFields a eos:Invariant ;
+    rdfs:label "Disabling the feature clears managedFields without affecting workloads" ;
+    rdfs:comment "Rollback safety. Four integration tests clear `managedFields` by four different" .
+
+ex:Invariant_StatusFieldsProtected a eos:Invariant ;
+    rdfs:label "Status fields are protected from ownership claims" ;
+    rdfs:comment "Protected through a `ResetFieldsProvider` interface that resource strategies" .
+
+ex:Invariant_TimestampNotUpdatedOnTakeover a eos:Invariant ;
+    rdfs:label "An entry's timestamp does not update when another manager takes a field over" ;
+    rdfs:comment "'The timestamp does not update when a field is removed from the entry because" .
+
+ex:KEP_2155 a eos:ADR ;
+    rdfs:label "KEP-2155 — client-go apply configurations" ;
+    rdfs:comment "Typed apply configurations for client-go. **Refines** KEP-555 by giving Go" .
+
+ex:KEP_2885 a eos:ADR ;
+    rdfs:label "KEP-2885 — server-side unknown field validation" ;
+    rdfs:comment "Moves unknown-field validation to the server. **Refines** the apply request" .
+
+ex:KEP_555 a eos:ADR ;
+    rdfs:label "KEP-555 — Server-Side Apply" ;
+    rdfs:comment "Moves apply logic from the client to the server. Replaces the single" .
+
+ex:KEP_5958 a eos:ADR ;
+    rdfs:label "KEP-5958 — client opt-out of managedFields" ;
+    rdfs:comment "Lets clients opt out of receiving `managedFields`. **Support status:" .
+
+ex:Artifact_ApplyIntegrationTest eos:evidencedBy ex:Evidence_TestFunctionList .
+ex:Artifact_ApplyIntegrationTest eos:references ex:Concept_Force .
+ex:Artifact_ApplyIntegrationTest eos:references ex:Concept_ManagedFields .
+ex:Artifact_ApplyIntegrationTest eos:validates ex:Artifact_ConflictGo .
+ex:Artifact_ApplyIntegrationTest eos:validates ex:Artifact_FieldManagerGo .
+ex:Artifact_ConflictGo eos:evidencedBy ex:Evidence_ConflictSymbols .
+ex:Artifact_ConflictGo eos:represents ex:Concept_Conflict .
+ex:Artifact_FieldManagerGo eos:evidencedBy ex:Evidence_FieldManagerSymbols .
+ex:Artifact_FieldManagerGo eos:represents ex:Concept_FieldManagement .
+ex:Artifact_MetaV1Types eos:evidencedBy ex:Evidence_ManagedFieldsEntryType .
+ex:Artifact_MetaV1Types eos:represents ex:Concept_ManagedFields .
+ex:Artifact_SsaDocs eos:evidencedBy ex:Evidence_DocsFieldManagement .
+ex:Artifact_SsaDocs eos:references ex:Concept_Conflict .
+ex:Artifact_SsaDocs eos:references ex:Concept_Force .
+ex:Artifact_SsaDocs eos:references ex:Concept_LastAppliedAnnotation .
+ex:Artifact_SsaDocs eos:represents ex:Concept_FieldManagement .
+ex:Capability_ConflictDetection eos:realisedBy ex:Artifact_ConflictGo .
+ex:Capability_ConflictDetection eos:references ex:Concept_Conflict .
+ex:Capability_ConflictDetection eos:scopedTo ex:BC_ApiMachinery .
+ex:Capability_ServerSideApply eos:realisedBy ex:Artifact_FieldManagerGo .
+ex:Capability_ServerSideApply eos:references ex:Concept_FieldManagement .
+ex:Capability_ServerSideApply eos:scopedTo ex:BC_ApiMachinery .
+ex:Concept_Conflict eos:evidencedBy ex:Evidence_DocsConflict .
+ex:Concept_Conflict eos:references ex:Concept_FieldManagement .
+ex:Concept_Conflict eos:scopedTo ex:BC_ApiMachinery .
+ex:Concept_FieldManagement eos:evidencedBy ex:Evidence_DocsFieldManagement .
+ex:Concept_FieldManagement eos:scopedTo ex:BC_ApiMachinery .
+ex:Concept_Force eos:evidencedBy ex:Evidence_DocsForce .
+ex:Concept_Force eos:references ex:Concept_Conflict .
+ex:Concept_Force eos:scopedTo ex:BC_ApiMachinery .
+ex:Concept_LastAppliedAnnotation eos:evidencedBy ex:Evidence_DocsLastApplied .
+ex:Concept_LastAppliedAnnotation eos:scopedTo ex:BC_ApiMachinery .
+ex:Concept_ManagedFields eos:evidencedBy ex:Evidence_DocsManagedFieldsShape .
+ex:Concept_ManagedFields eos:evidencedBy ex:Evidence_ManagedFieldsEntryType .
+ex:Concept_ManagedFields eos:references ex:Concept_FieldManagement .
+ex:Concept_ManagedFields eos:scopedTo ex:BC_ApiMachinery .
+ex:Concept_OwnershipTransfer eos:evidencedBy ex:Evidence_DocsOwnershipTransfer .
+ex:Concept_OwnershipTransfer eos:references ex:Concept_FieldManagement .
+ex:Concept_OwnershipTransfer eos:scopedTo ex:BC_ApiMachinery .
+ex:Invariant_ApplyRequiresFieldManager eos:constrains ex:Capability_ServerSideApply .
+ex:Invariant_ApplyRequiresFieldManager eos:enforcedAt ex:Artifact_ApplyIntegrationTest .
+ex:Invariant_ApplyRequiresFieldManager eos:evidencedBy ex:Evidence_TestRequiresFieldManager .
+ex:Invariant_ApplyRequiresFieldManager eos:scopedTo ex:BC_ApiMachinery .
+ex:Invariant_BackwardCompatible eos:constrains ex:Capability_ServerSideApply .
+ex:Invariant_BackwardCompatible eos:evidencedBy ex:Evidence_Kep555Readme .
+ex:Invariant_BackwardCompatible eos:scopedTo ex:BC_ApiMachinery .
+ex:Invariant_RollbackClearsManagedFields eos:constrains ex:Concept_ManagedFields .
+ex:Invariant_RollbackClearsManagedFields eos:enforcedAt ex:Artifact_ApplyIntegrationTest .
+ex:Invariant_RollbackClearsManagedFields eos:evidencedBy ex:Evidence_Kep555Readme .
+ex:Invariant_RollbackClearsManagedFields eos:evidencedBy ex:Evidence_TestClearManagedFields .
+ex:Invariant_RollbackClearsManagedFields eos:scopedTo ex:BC_ApiMachinery .
+ex:Invariant_StatusFieldsProtected eos:constrains ex:Capability_ServerSideApply .
+ex:Invariant_StatusFieldsProtected eos:enforcedAt ex:Artifact_ApplyIntegrationTest .
+ex:Invariant_StatusFieldsProtected eos:evidencedBy ex:Evidence_Kep555ResetFields .
+ex:Invariant_StatusFieldsProtected eos:evidencedBy ex:Evidence_TestSubresources .
+ex:Invariant_StatusFieldsProtected eos:scopedTo ex:BC_ApiMachinery .
+ex:Invariant_TimestampNotUpdatedOnTakeover eos:constrains ex:Concept_ManagedFields .
+ex:Invariant_TimestampNotUpdatedOnTakeover eos:evidencedBy ex:Evidence_DocsForce .
+ex:Invariant_TimestampNotUpdatedOnTakeover eos:evidencedBy ex:Evidence_TimeFieldComment .
+ex:Invariant_TimestampNotUpdatedOnTakeover eos:references ex:Concept_Force .
+ex:Invariant_TimestampNotUpdatedOnTakeover eos:references ex:Concept_OwnershipTransfer .
+ex:Invariant_TimestampNotUpdatedOnTakeover eos:scopedTo ex:BC_ApiMachinery .
+ex:KEP_2155 eos:evidencedBy ex:Evidence_KepDirectoryListing .
+ex:KEP_2155 eos:references ex:KEP_555 .
+ex:KEP_2885 eos:evidencedBy ex:Evidence_KepDirectoryListing .
+ex:KEP_2885 eos:references ex:KEP_555 .
+ex:KEP_555 eos:establishes ex:Concept_Conflict .
+ex:KEP_555 eos:establishes ex:Concept_FieldManagement .
+ex:KEP_555 eos:establishes ex:Concept_ManagedFields .
+ex:KEP_555 eos:establishes ex:Invariant_BackwardCompatible .
+ex:KEP_555 eos:establishes ex:Invariant_RollbackClearsManagedFields .
+ex:KEP_555 eos:establishes ex:Invariant_StatusFieldsProtected .
+ex:KEP_555 eos:evidencedBy ex:Evidence_Kep555Readme .
+ex:KEP_5958 eos:evidencedBy ex:Evidence_KepDirectoryListing .
+ex:KEP_5958 eos:references ex:Concept_ManagedFields .

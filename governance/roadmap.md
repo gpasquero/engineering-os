@@ -45,7 +45,20 @@ were made precise **before** real-system findings depend on it.
 | Determinism and limits undefined | Cycles, ties, ordering, depth 16, results 1000, truncation diagnostics |
 | Parity compared only identifiers | Status, rows, paths, ordering, edges and diagnostics — **334 pairs** |
 
-## Current milestone — model one large external software system
+## Current milestone — Kubernetes Server-Side Apply · **executed**
+
+`external/kubernetes-ssa/` — charter, 41-node model, reviewed ground truth,
+findings. All seven required questions execute through the shared query engine.
+
+**The proof-of-value result:** a `managedFields` entry's `time` is not the time
+that entry last changed. The API type comment and the SSA documentation each
+state half of it and neither mentions the other.
+
+**One compiler gap found and corrected**, domain-neutrally: nodes now carry an
+uninterpreted `attributes` mapping so an assertion can cite its exact source.
+**No Kubernetes-specific behaviour entered the compiler or query language.**
+
+## Milestone definition (retained)
 
 `ADR-0087`. **Not a toy example. Not another Engineering OS repository.**
 

@@ -1,0 +1,72 @@
+{
+  "formatVersion": "1.0.0",
+  "metamodelVersion": "0.4.0-skeleton",
+  "project": "node-attributes",
+  "note": "Canonical Knowledge Model. Every edge was asserted; none inferred (ADR-0044, ADR-0061). Serializations are projections of this model, not the model (ADR-0076).",
+  "nodes": [
+    {
+      "id": "Concept.Documented",
+      "type": "Concept",
+      "label": "A concept with provenance",
+      "family": "descriptive",
+      "position": null,
+      "description": "Attributes are carried verbatim and are not interpreted by the compiler.",
+      "attributes": {
+        "locator": "section 4.2",
+        "source": "https://example.org/spec.html",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "a.md"
+      }
+    },
+    {
+      "id": "Evidence.Citation",
+      "type": "Evidence",
+      "label": "A citation",
+      "family": "descriptive",
+      "position": null,
+      "description": "A scalar attribute may be a number; it is stringified on the way in.",
+      "attributes": {
+        "directness-rank": "4",
+        "kind": "external-reference"
+      },
+      "provenance": {
+        "source": "b.md"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "Concept.Documented",
+      "predicate": "evidenced-by",
+      "to": "Evidence.Citation",
+      "core": "evidenced-by",
+      "category": "traceability"
+    }
+  ],
+  "vocabulary": {
+    "evidenced-by": {
+      "category": "traceability",
+      "means": "A is supported by observable B",
+      "inverse": "supports"
+    }
+  },
+  "statistics": {
+    "nodes": 2,
+    "edges": 1,
+    "byType": {
+      "Concept": 1,
+      "Evidence": 1
+    },
+    "byFamily": {
+      "descriptive": 2
+    },
+    "byCategory": {
+      "traceability": 1
+    },
+    "byCoreType": {
+      "evidenced-by": 1
+    }
+  }
+}

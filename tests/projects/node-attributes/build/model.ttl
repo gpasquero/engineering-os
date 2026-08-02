@@ -1,0 +1,21 @@
+@prefix ex:   <https://example.org/engineering-os/example#> .
+@prefix eos:  <https://example.org/engineering-os/metamodel#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+# A PROJECTION of the Canonical Knowledge Model (ADR-0072). Generated; do not edit.
+
+<https://example.org/engineering-os/example> a owl:Ontology ;
+    rdfs:comment "Layer B model expressed in the Layer A metamodel." ;
+    owl:imports <https://example.org/engineering-os/metamodel> .
+
+ex:Concept_Documented a eos:Concept ;
+    rdfs:label "A concept with provenance" ;
+    rdfs:comment "Attributes are carried verbatim and are not interpreted by the compiler." .
+
+ex:Evidence_Citation a eos:Evidence ;
+    rdfs:label "A citation" ;
+    rdfs:comment "A scalar attribute may be a number; it is stringified on the way in." .
+
+ex:Concept_Documented eos:evidencedBy ex:Evidence_Citation .

@@ -11,6 +11,7 @@
       "family": "operational",
       "position": null,
       "description": "Superseded, and still readable. A superseded ADR is a correct record of what was\ndecided then.",
+      "attributes": {},
       "provenance": {
         "source": "adr-004.md"
       }
@@ -22,6 +23,7 @@
       "family": "operational",
       "position": null,
       "description": "**The decision that established the invariant.** This edge is what makes\n*which ADR established this Invariant?* answerable.",
+      "attributes": {},
       "provenance": {
         "source": "adr-011.md"
       }
@@ -33,6 +35,7 @@
       "family": "operational",
       "position": null,
       "description": "Confers Active status. Commits do not.",
+      "attributes": {},
       "provenance": {
         "source": "accept-014.md"
       }
@@ -44,6 +47,7 @@
       "family": "descriptive",
       "position": null,
       "description": "Submits orders.",
+      "attributes": {},
       "provenance": {
         "source": "actor-customer.md"
       }
@@ -55,6 +59,7 @@
       "family": "descriptive",
       "position": null,
       "description": "Decides at the gate and reviews acceptances.",
+      "attributes": {},
       "provenance": {
         "source": "actor-reviewer.md"
       }
@@ -66,6 +71,7 @@
       "family": "descriptive",
       "position": null,
       "description": "A stable logical identity with no lifecycle of its own.",
+      "attributes": {},
       "provenance": {
         "source": "artifact-checkout.md"
       }
@@ -77,6 +83,7 @@
       "family": "descriptive",
       "position": null,
       "description": "Tests. Modelled as an Artifact that validates another and references the\nConcepts it exercises \u2014 which is what makes *which tests must change* answerable.",
+      "attributes": {},
       "provenance": {
         "source": "artifact-test.md"
       }
@@ -88,6 +95,7 @@
       "family": "descriptive",
       "position": null,
       "description": "A specification document. Becomes inconsistent when what it represents changes.",
+      "attributes": {},
       "provenance": {
         "source": "artifact-spec.md"
       }
@@ -99,6 +107,7 @@
       "family": "descriptive",
       "position": null,
       "description": "Realises the refund capability.",
+      "attributes": {},
       "provenance": {
         "source": "artifact-payment.md"
       }
@@ -110,6 +119,7 @@
       "family": "descriptive",
       "position": null,
       "description": "The unit that carries lifecycle state.",
+      "attributes": {},
       "provenance": {
         "source": "rev-checkout.md"
       }
@@ -121,6 +131,7 @@
       "family": "descriptive",
       "position": null,
       "description": "**Not accepted.** No AcceptanceRecord reaches it, so it is not `Active`.",
+      "attributes": {},
       "provenance": {
         "source": "rev-payment.md"
       }
@@ -132,6 +143,7 @@
       "family": "descriptive",
       "position": null,
       "description": "The boundary within which \"Order\" means a customer purchase request.",
+      "attributes": {},
       "provenance": {
         "source": "bc-ordering.md"
       }
@@ -143,6 +155,7 @@
       "family": "descriptive",
       "position": null,
       "description": "The system accepts an order and acknowledges it.",
+      "attributes": {},
       "provenance": {
         "source": "cap-place-order.md"
       }
@@ -154,6 +167,7 @@
       "family": "descriptive",
       "position": null,
       "description": "Reverses a settled Payment. **Depends on the checkout workflow** through the\nSkill it shares.",
+      "attributes": {},
       "provenance": {
         "source": "cap-refund.md"
       }
@@ -165,6 +179,7 @@
       "family": "descriptive",
       "position": null,
       "description": "A customer's request to purchase goods, from submission until fulfilment.",
+      "attributes": {},
       "provenance": {
         "source": "concept-order.md"
       }
@@ -176,6 +191,7 @@
       "family": "descriptive",
       "position": null,
       "description": "An authorised transfer settling an Order.",
+      "attributes": {},
       "provenance": {
         "source": "concept-payment.md"
       }
@@ -187,6 +203,7 @@
       "family": "descriptive",
       "position": null,
       "description": "Source reference. Directness rank 2.",
+      "attributes": {},
       "provenance": {
         "source": "evidence-schema.md"
       }
@@ -198,6 +215,7 @@
       "family": "descriptive",
       "position": null,
       "description": "Runtime observation. Directness rank 1 \u2014 the most direct kind.",
+      "attributes": {},
       "provenance": {
         "source": "evidence-trace.md"
       }
@@ -209,6 +227,7 @@
       "family": "operational",
       "position": null,
       "description": "Holds the questions asked of every payment change.",
+      "attributes": {},
       "provenance": {
         "source": "gate-payment.md"
       }
@@ -220,6 +239,7 @@
       "family": "descriptive",
       "position": null,
       "description": "Stated independently of what enforces it.",
+      "attributes": {},
       "provenance": {
         "source": "inv-payment.md"
       }
@@ -231,6 +251,7 @@
       "family": "descriptive",
       "position": null,
       "description": "**No `enforced-at`.** Nothing records where this is checked, which is a finding\nrather than an omission.",
+      "attributes": {},
       "provenance": {
         "source": "inv-single-currency.md"
       }
@@ -242,6 +263,7 @@
       "family": "operational",
       "position": null,
       "description": "A recorded unknown, blocking a capability.",
+      "attributes": {},
       "provenance": {
         "source": "issue-currency.md"
       }
@@ -253,6 +275,7 @@
       "family": "operational",
       "position": null,
       "description": "A GovernancePolicy, motivated by a recorded decision.",
+      "attributes": {},
       "provenance": {
         "source": "policy-review.md"
       }
@@ -264,6 +287,7 @@
       "family": "operational",
       "position": null,
       "description": "Shared by checkout and refund.",
+      "attributes": {},
       "provenance": {
         "source": "skill-settle.md"
       }
@@ -275,6 +299,7 @@
       "family": "operational",
       "position": null,
       "description": "Methodology with an explicit contract.",
+      "attributes": {},
       "provenance": {
         "source": "skill-validate.md"
       }
@@ -286,6 +311,7 @@
       "family": "operational",
       "position": null,
       "description": "Orchestration only.",
+      "attributes": {},
       "provenance": {
         "source": "wf-checkout.md"
       }
@@ -297,6 +323,7 @@
       "family": "operational",
       "position": 1,
       "description": "Position 1.",
+      "attributes": {},
       "provenance": {
         "source": "step-1.md"
       }
@@ -308,6 +335,7 @@
       "family": "operational",
       "position": 2,
       "description": "Position 2.",
+      "attributes": {},
       "provenance": {
         "source": "step-2.md"
       }
