@@ -1,0 +1,199 @@
+@prefix ex:   <https://example.org/engineering-os/example#> .
+@prefix eos:  <https://example.org/engineering-os/metamodel#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+# A PROJECTION of the Canonical Knowledge Model (ADR-0072). Generated; do not edit.
+
+<https://example.org/engineering-os/example> a owl:Ontology ;
+    rdfs:comment "Layer B model expressed in the Layer A metamodel." ;
+    owl:imports <https://example.org/engineering-os/metamodel> .
+
+ex:ADR_0001 a eos:ADR ;
+    rdfs:label "ADR-0001 — Multi-tenancy: shared schema + PostgreSQL RLS" ;
+    rdfs:comment "'All tenants share the same tables… PostgreSQL RLS policies enforce isolation at" .
+
+ex:Artifact_AccountLockoutTests a eos:Artifact ;
+    rdfs:label "account-lockout.spec.ts" ;
+    rdfs:comment "8 test cases. One node per suite, with its case count — the granularity the" .
+
+ex:Artifact_AuthService a eos:Artifact ;
+    rdfs:label "auth.service.ts" ;
+    rdfs:comment "Four public methods. Every authentication path in the backend passes through it." .
+
+ex:Artifact_AuthServiceTests a eos:Artifact ;
+    rdfs:label "auth.service.spec.ts" ;
+    rdfs:comment "12 cases. **No invariant in this model is traced to it** — the suite exists and" .
+
+ex:Artifact_JwtGuard a eos:Artifact ;
+    rdfs:label "jwt-auth.guard.ts" ;
+    rdfs:comment "A one-line subclass. **All verification behaviour is inherited**, so nothing" .
+
+ex:Artifact_JwtSecurityTests a eos:Artifact ;
+    rdfs:label "jwt-security.spec.ts" ;
+    rdfs:comment "12 test cases. One node per suite, with its case count — the granularity the" .
+
+ex:Artifact_PasswordSecurityTests a eos:Artifact ;
+    rdfs:label "password-security.spec.ts" ;
+    rdfs:comment "11 cases. Same gap: no invariant is traced to it." .
+
+ex:Artifact_RefreshRotationTests a eos:Artifact ;
+    rdfs:label "refresh-token-rotation.spec.ts" ;
+    rdfs:comment "7 test cases. One node per suite, with its case count — the granularity the" .
+
+ex:Artifact_RefreshTokenSchema a eos:Artifact ;
+    rdfs:label "refresh-tokens.ts" ;
+    rdfs:comment "Revocation is a lookup-time exclusion, not a delete." .
+
+ex:BC_Auth a eos:BoundedContext ;
+    rdfs:label "ai-desk authentication" ;
+    rdfs:comment "The boundary within which 'agent', 'tenant', 'token' and 'session' have their" .
+
+ex:Capability_Login a eos:Capability ;
+    rdfs:label "Authenticate an agent into a workspace" ;
+    rdfs:comment "Resolve the tenant by slug, verify the password, issue tokens." .
+
+ex:Capability_RefreshSession a eos:Capability ;
+    rdfs:label "Exchange a refresh token for a new pair" ;
+    rdfs:comment "Rotates: issues a new pair and revokes the presented token." .
+
+ex:Concept_AccessToken a eos:Concept ;
+    rdfs:label "Access token" ;
+    rdfs:comment "A JWT carrying agent, tenant, role, name and ticket scope." .
+
+ex:Concept_Agent a eos:Concept ;
+    rdfs:label "Agent" ;
+    rdfs:comment "A human user authenticating into a workspace. Identified by email within a" .
+
+ex:Concept_RefreshToken a eos:Concept ;
+    rdfs:label "Refresh token" ;
+    rdfs:comment "A persisted, revocable credential. The partial index filters on" .
+
+ex:Concept_Tenant a eos:Concept ;
+    rdfs:label "Tenant" ;
+    rdfs:comment "A workspace. Resolved by slug at login and carried in every token as `tid`." .
+
+ex:Evidence_Adr0001 a eos:Evidence ;
+    rdfs:label "ADR-0001 multi-tenancy" ;
+    rdfs:comment "Read from the working tree. Yields the RLS decision, the isolation guarantee and" .
+
+ex:Evidence_GuardSymbols a eos:Evidence ;
+    rdfs:label "jwt-auth.guard.ts" ;
+    rdfs:comment "One line: export class JwtAuthGuard extends AuthGuard('jwt') {}. No local behaviour." .
+
+ex:Evidence_IssueTokensSignature a eos:Evidence ;
+    rdfs:label "auth.service.ts issueTokens" ;
+    rdfs:comment "issueTokens(agentId, tenantId, role, name, ticketScope='global'). Five claims." .
+
+ex:Evidence_JwtTests a eos:Evidence ;
+    rdfs:label "jwt-security.spec.ts case names" ;
+    rdfs:comment "Wrong secret, tampered tid, alg=none, malformed, expired." .
+
+ex:Evidence_LockoutTests a eos:Evidence ;
+    rdfs:label "account-lockout.spec.ts case names" ;
+    rdfs:comment "Extracted by grep. Includes the exact 15-minute window, per-agent isolation and" .
+
+ex:Evidence_LoginSignature a eos:Evidence ;
+    rdfs:label "auth.service.ts login signature" ;
+    rdfs:comment "grep -nE 'async login'. Signature (email, password, workspaceSlug) shows the" .
+
+ex:Evidence_RefreshTokenSchema a eos:Evidence ;
+    rdfs:label "refresh-tokens.ts" ;
+    rdfs:comment "pgTable with expiresAt, revokedAt, and a partial index WHERE revoked_at IS NULL." .
+
+ex:Evidence_RotationTests a eos:Evidence ;
+    rdfs:label "refresh-token-rotation.spec.ts case names" ;
+    rdfs:comment "Rotation, replay rejection, expiry auto-revoke, deactivated and soft-deleted agents." .
+
+ex:Evidence_TestInventory a eos:Evidence ;
+    rdfs:label "auth test suite inventory" ;
+    rdfs:comment "grep -c 'it(' across the directory: 8 + 12 + 12 + 11 + 7 = 50 cases in 5 suites." .
+
+ex:Invariant_AccountLockout a eos:Invariant ;
+    rdfs:label "Five wrong passwords lock the account for exactly 15 minutes" ;
+    rdfs:comment "**Asserted by a test and by no fetched document.** The correct password is" .
+
+ex:Invariant_NoUserEnumeration a eos:Invariant ;
+    rdfs:label "Wrong password and wrong email return the same error" ;
+    rdfs:comment "A security guarantee stated only as a test case." .
+
+ex:Invariant_RefreshRotation a eos:Invariant ;
+    rdfs:label "Refresh rotates and revokes; a replayed token fails" ;
+    rdfs:comment "Also: expired tokens auto-revoke, and refresh is rejected for deactivated or" .
+
+ex:Invariant_TenantIdOnEveryConnection a eos:Invariant ;
+    rdfs:label "tenant_id must be set on every connection" ;
+    rdfs:comment "**No `enforced-at`.** The ADR calls it 'discipline'; no artifact in the modelled" .
+
+ex:Invariant_TenantIsolation a eos:Invariant ;
+    rdfs:label "No tenant can read or modify another tenant's data" ;
+    rdfs:comment "'RLS policies are enforced by PostgreSQL itself, making cross-tenant data leakage" .
+
+ex:Invariant_TokenIntegrity a eos:Invariant ;
+    rdfs:label "Tokens with a wrong secret, tampered payload or alg=none are rejected" ;
+    rdfs:comment "**'modified `tid`' is tenant isolation enforced at the token layer** — the test" .
+
+ex:ADR_0001 eos:establishes ex:Invariant_TenantIdOnEveryConnection .
+ex:ADR_0001 eos:establishes ex:Invariant_TenantIsolation .
+ex:ADR_0001 eos:evidencedBy ex:Evidence_Adr0001 .
+ex:Artifact_AccountLockoutTests eos:evidencedBy ex:Evidence_TestInventory .
+ex:Artifact_AccountLockoutTests eos:references ex:Invariant_AccountLockout .
+ex:Artifact_AccountLockoutTests eos:validates ex:Artifact_AuthService .
+ex:Artifact_AuthService eos:evidencedBy ex:Evidence_IssueTokensSignature .
+ex:Artifact_AuthService eos:evidencedBy ex:Evidence_LoginSignature .
+ex:Artifact_AuthService eos:references ex:Concept_RefreshToken .
+ex:Artifact_AuthService eos:represents ex:Capability_Login .
+ex:Artifact_AuthServiceTests eos:evidencedBy ex:Evidence_TestInventory .
+ex:Artifact_AuthServiceTests eos:validates ex:Artifact_AuthService .
+ex:Artifact_JwtGuard eos:evidencedBy ex:Evidence_GuardSymbols .
+ex:Artifact_JwtGuard eos:represents ex:Concept_AccessToken .
+ex:Artifact_JwtSecurityTests eos:evidencedBy ex:Evidence_TestInventory .
+ex:Artifact_JwtSecurityTests eos:references ex:Invariant_TokenIntegrity .
+ex:Artifact_JwtSecurityTests eos:validates ex:Artifact_AuthService .
+ex:Artifact_PasswordSecurityTests eos:evidencedBy ex:Evidence_TestInventory .
+ex:Artifact_PasswordSecurityTests eos:validates ex:Artifact_AuthService .
+ex:Artifact_RefreshRotationTests eos:evidencedBy ex:Evidence_TestInventory .
+ex:Artifact_RefreshRotationTests eos:references ex:Invariant_RefreshRotation .
+ex:Artifact_RefreshRotationTests eos:validates ex:Artifact_AuthService .
+ex:Artifact_RefreshTokenSchema eos:evidencedBy ex:Evidence_RefreshTokenSchema .
+ex:Artifact_RefreshTokenSchema eos:represents ex:Concept_RefreshToken .
+ex:Capability_Login eos:realisedBy ex:Artifact_AuthService .
+ex:Capability_Login eos:references ex:Concept_Agent .
+ex:Capability_Login eos:scopedTo ex:BC_Auth .
+ex:Capability_RefreshSession eos:realisedBy ex:Artifact_AuthService .
+ex:Capability_RefreshSession eos:references ex:Concept_RefreshToken .
+ex:Capability_RefreshSession eos:scopedTo ex:BC_Auth .
+ex:Concept_AccessToken eos:evidencedBy ex:Evidence_IssueTokensSignature .
+ex:Concept_AccessToken eos:references ex:Concept_Tenant .
+ex:Concept_AccessToken eos:scopedTo ex:BC_Auth .
+ex:Concept_Agent eos:evidencedBy ex:Evidence_LoginSignature .
+ex:Concept_Agent eos:scopedTo ex:BC_Auth .
+ex:Concept_RefreshToken eos:evidencedBy ex:Evidence_RefreshTokenSchema .
+ex:Concept_RefreshToken eos:references ex:Concept_AccessToken .
+ex:Concept_RefreshToken eos:scopedTo ex:BC_Auth .
+ex:Concept_Tenant eos:evidencedBy ex:Evidence_Adr0001 .
+ex:Concept_Tenant eos:scopedTo ex:BC_Auth .
+ex:Invariant_AccountLockout eos:constrains ex:Capability_Login .
+ex:Invariant_AccountLockout eos:enforcedAt ex:Artifact_AccountLockoutTests .
+ex:Invariant_AccountLockout eos:evidencedBy ex:Evidence_LockoutTests .
+ex:Invariant_AccountLockout eos:scopedTo ex:BC_Auth .
+ex:Invariant_NoUserEnumeration eos:constrains ex:Capability_Login .
+ex:Invariant_NoUserEnumeration eos:enforcedAt ex:Artifact_AccountLockoutTests .
+ex:Invariant_NoUserEnumeration eos:evidencedBy ex:Evidence_LockoutTests .
+ex:Invariant_NoUserEnumeration eos:scopedTo ex:BC_Auth .
+ex:Invariant_RefreshRotation eos:constrains ex:Capability_RefreshSession .
+ex:Invariant_RefreshRotation eos:enforcedAt ex:Artifact_RefreshRotationTests .
+ex:Invariant_RefreshRotation eos:evidencedBy ex:Evidence_RotationTests .
+ex:Invariant_RefreshRotation eos:scopedTo ex:BC_Auth .
+ex:Invariant_TenantIdOnEveryConnection eos:constrains ex:Concept_Tenant .
+ex:Invariant_TenantIdOnEveryConnection eos:evidencedBy ex:Evidence_Adr0001 .
+ex:Invariant_TenantIdOnEveryConnection eos:scopedTo ex:BC_Auth .
+ex:Invariant_TenantIsolation eos:constrains ex:Capability_Login .
+ex:Invariant_TenantIsolation eos:enforcedAt ex:Artifact_AuthService .
+ex:Invariant_TenantIsolation eos:evidencedBy ex:Evidence_Adr0001 .
+ex:Invariant_TenantIsolation eos:scopedTo ex:BC_Auth .
+ex:Invariant_TokenIntegrity eos:constrains ex:Concept_AccessToken .
+ex:Invariant_TokenIntegrity eos:enforcedAt ex:Artifact_JwtSecurityTests .
+ex:Invariant_TokenIntegrity eos:evidencedBy ex:Evidence_JwtTests .
+ex:Invariant_TokenIntegrity eos:scopedTo ex:BC_Auth .

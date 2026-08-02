@@ -1,0 +1,1041 @@
+{
+  "formatVersion": "1.0.0",
+  "metamodelVersion": "0.4.0-skeleton",
+  "project": "ai-desk-auth",
+  "note": "Canonical Knowledge Model. Every edge was asserted; none inferred (ADR-0044, ADR-0061). Serializations are projections of this model, not the model (ADR-0076).",
+  "nodes": [
+    {
+      "id": "ADR.0001",
+      "type": "ADR",
+      "label": "ADR-0001 \u2014 Multi-tenancy: shared schema + PostgreSQL RLS",
+      "family": "operational",
+      "position": null,
+      "description": "\"All tenants share the same tables\u2026 PostgreSQL RLS policies enforce isolation at\nthe database engine level.\"\n\n**Status is `Proposed`, not accepted** \u2014 a decision the codebase already\nimplements.",
+      "attributes": {
+        "date": "2026-04-09",
+        "source": "docs/adr/ADR-0001-multi-tenancy-strategy.md",
+        "status": "Proposed",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "adr-0001.md"
+      }
+    },
+    {
+      "id": "Artifact.AccountLockoutTests",
+      "type": "Artifact",
+      "label": "account-lockout.spec.ts",
+      "family": "descriptive",
+      "position": null,
+      "description": "8 test cases. One node per suite, with its case count \u2014 the granularity the\nKubernetes findings recommended.",
+      "attributes": {
+        "cases": "8",
+        "source": "packages/backend/src/modules/auth/__tests__/account-lockout.spec.ts",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "art-test-account-lockout.md"
+      }
+    },
+    {
+      "id": "Artifact.AuthService",
+      "type": "Artifact",
+      "label": "auth.service.ts",
+      "family": "descriptive",
+      "position": null,
+      "description": "Four public methods. Every authentication path in the backend passes through it.",
+      "attributes": {
+        "locator": "login, issueTokens, refresh, logout",
+        "source": "packages/backend/src/modules/auth/auth.service.ts",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "art-authservice.md"
+      }
+    },
+    {
+      "id": "Artifact.AuthServiceTests",
+      "type": "Artifact",
+      "label": "auth.service.spec.ts",
+      "family": "descriptive",
+      "position": null,
+      "description": "12 cases. **No invariant in this model is traced to it** \u2014 the suite exists and\nnothing records what it guarantees.",
+      "attributes": {
+        "cases": "12",
+        "source": "packages/backend/src/modules/auth/__tests__/auth.service.spec.ts",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "art-test-auth-service.md"
+      }
+    },
+    {
+      "id": "Artifact.JwtGuard",
+      "type": "Artifact",
+      "label": "jwt-auth.guard.ts",
+      "family": "descriptive",
+      "position": null,
+      "description": "A one-line subclass. **All verification behaviour is inherited**, so nothing\nlocal expresses what it enforces.",
+      "attributes": {
+        "locator": "export class JwtAuthGuard extends AuthGuard('jwt')",
+        "source": "packages/backend/src/common/guards/jwt-auth.guard.ts",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "art-guard.md"
+      }
+    },
+    {
+      "id": "Artifact.JwtSecurityTests",
+      "type": "Artifact",
+      "label": "jwt-security.spec.ts",
+      "family": "descriptive",
+      "position": null,
+      "description": "12 test cases. One node per suite, with its case count \u2014 the granularity the\nKubernetes findings recommended.",
+      "attributes": {
+        "cases": "12",
+        "source": "packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "art-test-jwt-security.md"
+      }
+    },
+    {
+      "id": "Artifact.PasswordSecurityTests",
+      "type": "Artifact",
+      "label": "password-security.spec.ts",
+      "family": "descriptive",
+      "position": null,
+      "description": "11 cases. Same gap: no invariant is traced to it.",
+      "attributes": {
+        "cases": "11",
+        "source": "packages/backend/src/modules/auth/__tests__/password-security.spec.ts",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "art-test-password.md"
+      }
+    },
+    {
+      "id": "Artifact.RefreshRotationTests",
+      "type": "Artifact",
+      "label": "refresh-token-rotation.spec.ts",
+      "family": "descriptive",
+      "position": null,
+      "description": "7 test cases. One node per suite, with its case count \u2014 the granularity the\nKubernetes findings recommended.",
+      "attributes": {
+        "cases": "7",
+        "source": "packages/backend/src/modules/auth/__tests__/refresh-token-rotation.spec.ts",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "art-test-refresh-token-rotation.md"
+      }
+    },
+    {
+      "id": "Artifact.RefreshTokenSchema",
+      "type": "Artifact",
+      "label": "refresh-tokens.ts",
+      "family": "descriptive",
+      "position": null,
+      "description": "Revocation is a lookup-time exclusion, not a delete.",
+      "attributes": {
+        "locator": "partial index WHERE revoked_at IS NULL",
+        "source": "packages/backend/src/common/database/schema/refresh-tokens.ts",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "art-schema.md"
+      }
+    },
+    {
+      "id": "BC.Auth",
+      "type": "BoundedContext",
+      "label": "ai-desk authentication",
+      "family": "descriptive",
+      "position": null,
+      "description": "The boundary within which \"agent\", \"tenant\", \"token\" and \"session\" have their\nai-desk authentication meanings.",
+      "attributes": {},
+      "provenance": {
+        "source": "bc.md"
+      }
+    },
+    {
+      "id": "Capability.Login",
+      "type": "Capability",
+      "label": "Authenticate an agent into a workspace",
+      "family": "descriptive",
+      "position": null,
+      "description": "Resolve the tenant by slug, verify the password, issue tokens.",
+      "attributes": {
+        "locator": "async login",
+        "source": "packages/backend/src/modules/auth/auth.service.ts",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "cap-login.md"
+      }
+    },
+    {
+      "id": "Capability.RefreshSession",
+      "type": "Capability",
+      "label": "Exchange a refresh token for a new pair",
+      "family": "descriptive",
+      "position": null,
+      "description": "Rotates: issues a new pair and revokes the presented token.",
+      "attributes": {
+        "locator": "async refresh",
+        "source": "packages/backend/src/modules/auth/auth.service.ts",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "cap-refresh.md"
+      }
+    },
+    {
+      "id": "Concept.AccessToken",
+      "type": "Concept",
+      "label": "Access token",
+      "family": "descriptive",
+      "position": null,
+      "description": "A JWT carrying agent, tenant, role, name and ticket scope.",
+      "attributes": {
+        "locator": "issueTokens(agentId, tenantId, role, name, ticketScope)",
+        "source": "packages/backend/src/modules/auth/auth.service.ts",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "c-accesstoken.md"
+      }
+    },
+    {
+      "id": "Concept.Agent",
+      "type": "Concept",
+      "label": "Agent",
+      "family": "descriptive",
+      "position": null,
+      "description": "A human user authenticating into a workspace. Identified by email within a\ntenant, never globally.",
+      "attributes": {
+        "locator": "login(email, password, workspaceSlug)",
+        "source": "packages/backend/src/modules/auth/auth.service.ts",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "c-agent.md"
+      }
+    },
+    {
+      "id": "Concept.RefreshToken",
+      "type": "Concept",
+      "label": "Refresh token",
+      "family": "descriptive",
+      "position": null,
+      "description": "A persisted, revocable credential. The partial index filters on\n`revoked_at IS NULL`, so revocation is a lookup-time exclusion.",
+      "attributes": {
+        "locator": "pgTable refreshTokens: expiresAt, revokedAt",
+        "source": "packages/backend/src/common/database/schema/refresh-tokens.ts",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "c-refreshtoken.md"
+      }
+    },
+    {
+      "id": "Concept.Tenant",
+      "type": "Concept",
+      "label": "Tenant",
+      "family": "descriptive",
+      "position": null,
+      "description": "A workspace. Resolved by slug at login and carried in every token as `tid`.",
+      "attributes": {
+        "source": "docs/adr/ADR-0001-multi-tenancy-strategy.md",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "c-tenant.md"
+      }
+    },
+    {
+      "id": "Evidence.Adr0001",
+      "type": "Evidence",
+      "label": "ADR-0001 multi-tenancy",
+      "family": "descriptive",
+      "position": null,
+      "description": "Read from the working tree. Yields the RLS decision, the isolation guarantee and\nthe SET app.current_tenant_id discipline requirement.",
+      "attributes": {
+        "extracted": "2026-08-02",
+        "kind": "artifact-reference",
+        "locator": "Decision, Rationale",
+        "source": "docs/adr/ADR-0001-multi-tenancy-strategy.md",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "ev-adr.md"
+      }
+    },
+    {
+      "id": "Evidence.GuardSymbols",
+      "type": "Evidence",
+      "label": "jwt-auth.guard.ts",
+      "family": "descriptive",
+      "position": null,
+      "description": "One line: export class JwtAuthGuard extends AuthGuard('jwt') {}. No local behaviour.",
+      "attributes": {
+        "extracted": "2026-08-02",
+        "kind": "source-reference",
+        "locator": "line 5",
+        "source": "packages/backend/src/common/guards/jwt-auth.guard.ts",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "ev-guard.md"
+      }
+    },
+    {
+      "id": "Evidence.IssueTokensSignature",
+      "type": "Evidence",
+      "label": "auth.service.ts issueTokens",
+      "family": "descriptive",
+      "position": null,
+      "description": "issueTokens(agentId, tenantId, role, name, ticketScope='global'). Five claims.",
+      "attributes": {
+        "extracted": "2026-08-02",
+        "kind": "source-reference",
+        "locator": "line 111",
+        "source": "packages/backend/src/modules/auth/auth.service.ts",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "ev-issue.md"
+      }
+    },
+    {
+      "id": "Evidence.JwtTests",
+      "type": "Evidence",
+      "label": "jwt-security.spec.ts case names",
+      "family": "descriptive",
+      "position": null,
+      "description": "Wrong secret, tampered tid, alg=none, malformed, expired.",
+      "attributes": {
+        "extracted": "2026-08-02",
+        "kind": "source-reference",
+        "locator": "12 it() cases",
+        "source": "packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "ev-jwt.md"
+      }
+    },
+    {
+      "id": "Evidence.LockoutTests",
+      "type": "Evidence",
+      "label": "account-lockout.spec.ts case names",
+      "family": "descriptive",
+      "position": null,
+      "description": "Extracted by grep. Includes the exact 15-minute window, per-agent isolation and\nthe no-enumeration guarantee.",
+      "attributes": {
+        "extracted": "2026-08-02",
+        "kind": "source-reference",
+        "locator": "8 it() cases",
+        "source": "packages/backend/src/modules/auth/__tests__/account-lockout.spec.ts",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "ev-lockout.md"
+      }
+    },
+    {
+      "id": "Evidence.LoginSignature",
+      "type": "Evidence",
+      "label": "auth.service.ts login signature",
+      "family": "descriptive",
+      "position": null,
+      "description": "grep -nE 'async login'. Signature (email, password, workspaceSlug) shows the\ntenant is resolved by slug, not carried.",
+      "attributes": {
+        "extracted": "2026-08-02",
+        "kind": "source-reference",
+        "locator": "line 31",
+        "source": "packages/backend/src/modules/auth/auth.service.ts",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "ev-login.md"
+      }
+    },
+    {
+      "id": "Evidence.RefreshTokenSchema",
+      "type": "Evidence",
+      "label": "refresh-tokens.ts",
+      "family": "descriptive",
+      "position": null,
+      "description": "pgTable with expiresAt, revokedAt, and a partial index WHERE revoked_at IS NULL.",
+      "attributes": {
+        "extracted": "2026-08-02",
+        "kind": "source-reference",
+        "locator": "lines 11-27",
+        "source": "packages/backend/src/common/database/schema/refresh-tokens.ts",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "ev-schema.md"
+      }
+    },
+    {
+      "id": "Evidence.RotationTests",
+      "type": "Evidence",
+      "label": "refresh-token-rotation.spec.ts case names",
+      "family": "descriptive",
+      "position": null,
+      "description": "Rotation, replay rejection, expiry auto-revoke, deactivated and soft-deleted agents.",
+      "attributes": {
+        "extracted": "2026-08-02",
+        "kind": "source-reference",
+        "locator": "7 it() cases",
+        "source": "packages/backend/src/modules/auth/__tests__/refresh-token-rotation.spec.ts",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "ev-rotation.md"
+      }
+    },
+    {
+      "id": "Evidence.TestInventory",
+      "type": "Evidence",
+      "label": "auth test suite inventory",
+      "family": "descriptive",
+      "position": null,
+      "description": "grep -c 'it(' across the directory: 8 + 12 + 12 + 11 + 7 = 50 cases in 5 suites.",
+      "attributes": {
+        "extracted": "2026-08-02",
+        "kind": "source-reference",
+        "locator": "5 suites, 50 cases",
+        "source": "packages/backend/src/modules/auth/__tests__/",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "ev-inv.md"
+      }
+    },
+    {
+      "id": "Invariant.AccountLockout",
+      "type": "Invariant",
+      "label": "Five wrong passwords lock the account for exactly 15 minutes",
+      "family": "descriptive",
+      "position": null,
+      "description": "**Asserted by a test and by no fetched document.** The correct password is\nrejected while the window is active, and lockout is per-agent.",
+      "attributes": {
+        "locator": "locks the account on the 5th wrong password for exactly 15 minutes",
+        "source": "packages/backend/src/modules/auth/__tests__/account-lockout.spec.ts",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "inv-lockout.md"
+      }
+    },
+    {
+      "id": "Invariant.NoUserEnumeration",
+      "type": "Invariant",
+      "label": "Wrong password and wrong email return the same error",
+      "family": "descriptive",
+      "position": null,
+      "description": "A security guarantee stated only as a test case.",
+      "attributes": {
+        "locator": "wrong password and wrong email return the same \"Invalid credentials\" error",
+        "source": "packages/backend/src/modules/auth/__tests__/account-lockout.spec.ts",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "inv-noenum.md"
+      }
+    },
+    {
+      "id": "Invariant.RefreshRotation",
+      "type": "Invariant",
+      "label": "Refresh rotates and revokes; a replayed token fails",
+      "family": "descriptive",
+      "position": null,
+      "description": "Also: expired tokens auto-revoke, and refresh is rejected for deactivated or\nsoft-deleted agents.",
+      "attributes": {
+        "locator": "refresh returns a new access+refresh pair AND revokes the old token",
+        "source": "packages/backend/src/modules/auth/__tests__/refresh-token-rotation.spec.ts",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "inv-rotation.md"
+      }
+    },
+    {
+      "id": "Invariant.TenantIdOnEveryConnection",
+      "type": "Invariant",
+      "label": "tenant_id must be set on every connection",
+      "family": "descriptive",
+      "position": null,
+      "description": "**No `enforced-at`.** The ADR calls it \"discipline\"; no artifact in the modelled\nscope is recorded as enforcing it. **The gap is the finding.**",
+      "attributes": {
+        "locator": "Requires discipline: SET app.current_tenant_id",
+        "source": "docs/adr/ADR-0001-multi-tenancy-strategy.md",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "inv-setconn.md"
+      }
+    },
+    {
+      "id": "Invariant.TenantIsolation",
+      "type": "Invariant",
+      "label": "No tenant can read or modify another tenant's data",
+      "family": "descriptive",
+      "position": null,
+      "description": "\"RLS policies are enforced by PostgreSQL itself, making cross-tenant data leakage\nimpossible even if application code has bugs.\"",
+      "attributes": {
+        "source": "docs/adr/ADR-0001-multi-tenancy-strategy.md",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "inv-tenant.md"
+      }
+    },
+    {
+      "id": "Invariant.TokenIntegrity",
+      "type": "Invariant",
+      "label": "Tokens with a wrong secret, tampered payload or alg=none are rejected",
+      "family": "descriptive",
+      "position": null,
+      "description": "**\"modified `tid`\" is tenant isolation enforced at the token layer** \u2014 the test\nsuite protects the multi-tenancy invariant without naming it.",
+      "attributes": {
+        "locator": "rejects a token with a tampered payload (modified tid)",
+        "source": "packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts",
+        "support": "confirmed"
+      },
+      "provenance": {
+        "source": "inv-jwt.md"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "ADR.0001",
+      "predicate": "establishes",
+      "to": "Invariant.TenantIdOnEveryConnection",
+      "core": "establishes",
+      "category": "traceability"
+    },
+    {
+      "from": "ADR.0001",
+      "predicate": "establishes",
+      "to": "Invariant.TenantIsolation",
+      "core": "establishes",
+      "category": "traceability"
+    },
+    {
+      "from": "ADR.0001",
+      "predicate": "evidenced-by",
+      "to": "Evidence.Adr0001",
+      "core": "evidenced-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Artifact.AccountLockoutTests",
+      "predicate": "evidenced-by",
+      "to": "Evidence.TestInventory",
+      "core": "evidenced-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Artifact.AccountLockoutTests",
+      "predicate": "references",
+      "to": "Invariant.AccountLockout",
+      "core": "references",
+      "category": "structural"
+    },
+    {
+      "from": "Artifact.AccountLockoutTests",
+      "predicate": "validates",
+      "to": "Artifact.AuthService",
+      "core": "validates",
+      "category": "behavioral"
+    },
+    {
+      "from": "Artifact.AuthService",
+      "predicate": "evidenced-by",
+      "to": "Evidence.IssueTokensSignature",
+      "core": "evidenced-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Artifact.AuthService",
+      "predicate": "evidenced-by",
+      "to": "Evidence.LoginSignature",
+      "core": "evidenced-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Artifact.AuthService",
+      "predicate": "references",
+      "to": "Concept.RefreshToken",
+      "core": "references",
+      "category": "structural"
+    },
+    {
+      "from": "Artifact.AuthService",
+      "predicate": "represents",
+      "to": "Capability.Login",
+      "core": "represents",
+      "category": "semantic"
+    },
+    {
+      "from": "Artifact.AuthServiceTests",
+      "predicate": "evidenced-by",
+      "to": "Evidence.TestInventory",
+      "core": "evidenced-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Artifact.AuthServiceTests",
+      "predicate": "validates",
+      "to": "Artifact.AuthService",
+      "core": "validates",
+      "category": "behavioral"
+    },
+    {
+      "from": "Artifact.JwtGuard",
+      "predicate": "evidenced-by",
+      "to": "Evidence.GuardSymbols",
+      "core": "evidenced-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Artifact.JwtGuard",
+      "predicate": "represents",
+      "to": "Concept.AccessToken",
+      "core": "represents",
+      "category": "semantic"
+    },
+    {
+      "from": "Artifact.JwtSecurityTests",
+      "predicate": "evidenced-by",
+      "to": "Evidence.TestInventory",
+      "core": "evidenced-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Artifact.JwtSecurityTests",
+      "predicate": "references",
+      "to": "Invariant.TokenIntegrity",
+      "core": "references",
+      "category": "structural"
+    },
+    {
+      "from": "Artifact.JwtSecurityTests",
+      "predicate": "validates",
+      "to": "Artifact.AuthService",
+      "core": "validates",
+      "category": "behavioral"
+    },
+    {
+      "from": "Artifact.PasswordSecurityTests",
+      "predicate": "evidenced-by",
+      "to": "Evidence.TestInventory",
+      "core": "evidenced-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Artifact.PasswordSecurityTests",
+      "predicate": "validates",
+      "to": "Artifact.AuthService",
+      "core": "validates",
+      "category": "behavioral"
+    },
+    {
+      "from": "Artifact.RefreshRotationTests",
+      "predicate": "evidenced-by",
+      "to": "Evidence.TestInventory",
+      "core": "evidenced-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Artifact.RefreshRotationTests",
+      "predicate": "references",
+      "to": "Invariant.RefreshRotation",
+      "core": "references",
+      "category": "structural"
+    },
+    {
+      "from": "Artifact.RefreshRotationTests",
+      "predicate": "validates",
+      "to": "Artifact.AuthService",
+      "core": "validates",
+      "category": "behavioral"
+    },
+    {
+      "from": "Artifact.RefreshTokenSchema",
+      "predicate": "evidenced-by",
+      "to": "Evidence.RefreshTokenSchema",
+      "core": "evidenced-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Artifact.RefreshTokenSchema",
+      "predicate": "represents",
+      "to": "Concept.RefreshToken",
+      "core": "represents",
+      "category": "semantic"
+    },
+    {
+      "from": "Capability.Login",
+      "predicate": "realised-by",
+      "to": "Artifact.AuthService",
+      "core": "implemented-by",
+      "category": "structural"
+    },
+    {
+      "from": "Capability.Login",
+      "predicate": "references",
+      "to": "Concept.Agent",
+      "core": "references",
+      "category": "structural"
+    },
+    {
+      "from": "Capability.Login",
+      "predicate": "scoped-to",
+      "to": "BC.Auth",
+      "core": "contained-by",
+      "category": "structural"
+    },
+    {
+      "from": "Capability.RefreshSession",
+      "predicate": "realised-by",
+      "to": "Artifact.AuthService",
+      "core": "implemented-by",
+      "category": "structural"
+    },
+    {
+      "from": "Capability.RefreshSession",
+      "predicate": "references",
+      "to": "Concept.RefreshToken",
+      "core": "references",
+      "category": "structural"
+    },
+    {
+      "from": "Capability.RefreshSession",
+      "predicate": "scoped-to",
+      "to": "BC.Auth",
+      "core": "contained-by",
+      "category": "structural"
+    },
+    {
+      "from": "Concept.AccessToken",
+      "predicate": "evidenced-by",
+      "to": "Evidence.IssueTokensSignature",
+      "core": "evidenced-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Concept.AccessToken",
+      "predicate": "references",
+      "to": "Concept.Tenant",
+      "core": "references",
+      "category": "structural"
+    },
+    {
+      "from": "Concept.AccessToken",
+      "predicate": "scoped-to",
+      "to": "BC.Auth",
+      "core": "contained-by",
+      "category": "structural"
+    },
+    {
+      "from": "Concept.Agent",
+      "predicate": "evidenced-by",
+      "to": "Evidence.LoginSignature",
+      "core": "evidenced-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Concept.Agent",
+      "predicate": "scoped-to",
+      "to": "BC.Auth",
+      "core": "contained-by",
+      "category": "structural"
+    },
+    {
+      "from": "Concept.RefreshToken",
+      "predicate": "evidenced-by",
+      "to": "Evidence.RefreshTokenSchema",
+      "core": "evidenced-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Concept.RefreshToken",
+      "predicate": "references",
+      "to": "Concept.AccessToken",
+      "core": "references",
+      "category": "structural"
+    },
+    {
+      "from": "Concept.RefreshToken",
+      "predicate": "scoped-to",
+      "to": "BC.Auth",
+      "core": "contained-by",
+      "category": "structural"
+    },
+    {
+      "from": "Concept.Tenant",
+      "predicate": "evidenced-by",
+      "to": "Evidence.Adr0001",
+      "core": "evidenced-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Concept.Tenant",
+      "predicate": "scoped-to",
+      "to": "BC.Auth",
+      "core": "contained-by",
+      "category": "structural"
+    },
+    {
+      "from": "Invariant.AccountLockout",
+      "predicate": "constrains",
+      "to": "Capability.Login",
+      "core": "governs",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.AccountLockout",
+      "predicate": "enforced-at",
+      "to": "Artifact.AccountLockoutTests",
+      "core": "validated-by",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.AccountLockout",
+      "predicate": "evidenced-by",
+      "to": "Evidence.LockoutTests",
+      "core": "evidenced-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Invariant.AccountLockout",
+      "predicate": "scoped-to",
+      "to": "BC.Auth",
+      "core": "contained-by",
+      "category": "structural"
+    },
+    {
+      "from": "Invariant.NoUserEnumeration",
+      "predicate": "constrains",
+      "to": "Capability.Login",
+      "core": "governs",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.NoUserEnumeration",
+      "predicate": "enforced-at",
+      "to": "Artifact.AccountLockoutTests",
+      "core": "validated-by",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.NoUserEnumeration",
+      "predicate": "evidenced-by",
+      "to": "Evidence.LockoutTests",
+      "core": "evidenced-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Invariant.NoUserEnumeration",
+      "predicate": "scoped-to",
+      "to": "BC.Auth",
+      "core": "contained-by",
+      "category": "structural"
+    },
+    {
+      "from": "Invariant.RefreshRotation",
+      "predicate": "constrains",
+      "to": "Capability.RefreshSession",
+      "core": "governs",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.RefreshRotation",
+      "predicate": "enforced-at",
+      "to": "Artifact.RefreshRotationTests",
+      "core": "validated-by",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.RefreshRotation",
+      "predicate": "evidenced-by",
+      "to": "Evidence.RotationTests",
+      "core": "evidenced-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Invariant.RefreshRotation",
+      "predicate": "scoped-to",
+      "to": "BC.Auth",
+      "core": "contained-by",
+      "category": "structural"
+    },
+    {
+      "from": "Invariant.TenantIdOnEveryConnection",
+      "predicate": "constrains",
+      "to": "Concept.Tenant",
+      "core": "governs",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.TenantIdOnEveryConnection",
+      "predicate": "evidenced-by",
+      "to": "Evidence.Adr0001",
+      "core": "evidenced-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Invariant.TenantIdOnEveryConnection",
+      "predicate": "scoped-to",
+      "to": "BC.Auth",
+      "core": "contained-by",
+      "category": "structural"
+    },
+    {
+      "from": "Invariant.TenantIsolation",
+      "predicate": "constrains",
+      "to": "Capability.Login",
+      "core": "governs",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.TenantIsolation",
+      "predicate": "enforced-at",
+      "to": "Artifact.AuthService",
+      "core": "validated-by",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.TenantIsolation",
+      "predicate": "evidenced-by",
+      "to": "Evidence.Adr0001",
+      "core": "evidenced-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Invariant.TenantIsolation",
+      "predicate": "scoped-to",
+      "to": "BC.Auth",
+      "core": "contained-by",
+      "category": "structural"
+    },
+    {
+      "from": "Invariant.TokenIntegrity",
+      "predicate": "constrains",
+      "to": "Concept.AccessToken",
+      "core": "governs",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.TokenIntegrity",
+      "predicate": "enforced-at",
+      "to": "Artifact.JwtSecurityTests",
+      "core": "validated-by",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.TokenIntegrity",
+      "predicate": "evidenced-by",
+      "to": "Evidence.JwtTests",
+      "core": "evidenced-by",
+      "category": "traceability"
+    },
+    {
+      "from": "Invariant.TokenIntegrity",
+      "predicate": "scoped-to",
+      "to": "BC.Auth",
+      "core": "contained-by",
+      "category": "structural"
+    }
+  ],
+  "vocabulary": {
+    "contained-by": {
+      "category": "structural",
+      "means": "inverse of contains",
+      "inverse": "contains"
+    },
+    "establishes": {
+      "category": "traceability",
+      "means": "inverse of established-by",
+      "inverse": "established-by"
+    },
+    "evidenced-by": {
+      "category": "traceability",
+      "means": "A is supported by observable B",
+      "inverse": "supports"
+    },
+    "governs": {
+      "category": "behavioral",
+      "means": "A constrains B normatively",
+      "inverse": "governed-by"
+    },
+    "implemented-by": {
+      "category": "structural",
+      "means": "inverse of implements",
+      "inverse": "implements"
+    },
+    "references": {
+      "category": "structural",
+      "means": "A points at B without owning it",
+      "inverse": "referenced-by"
+    },
+    "represents": {
+      "category": "semantic",
+      "means": "A stands for B in another representation",
+      "inverse": "represented-by"
+    },
+    "validated-by": {
+      "category": "behavioral",
+      "means": "inverse of validates",
+      "inverse": "validates"
+    },
+    "validates": {
+      "category": "behavioral",
+      "means": "A checks that B holds",
+      "inverse": "validated-by"
+    }
+  },
+  "statistics": {
+    "nodes": 31,
+    "edges": 63,
+    "byType": {
+      "ADR": 1,
+      "Artifact": 8,
+      "BoundedContext": 1,
+      "Capability": 2,
+      "Concept": 4,
+      "Evidence": 9,
+      "Invariant": 6
+    },
+    "byFamily": {
+      "descriptive": 30,
+      "operational": 1
+    },
+    "byCategory": {
+      "behavioral": 16,
+      "semantic": 3,
+      "structural": 22,
+      "traceability": 22
+    },
+    "byCoreType": {
+      "contained-by": 12,
+      "establishes": 2,
+      "evidenced-by": 20,
+      "governs": 6,
+      "implemented-by": 2,
+      "references": 8,
+      "represents": 3,
+      "validated-by": 5,
+      "validates": 5
+    }
+  }
+}

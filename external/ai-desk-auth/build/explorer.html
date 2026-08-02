@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Knowledge Explorer</title>
+<style>
+:root{--bg:#fff;--fg:#1f1f1f;--mut:#5f6368;--line:#dadce0;--acc:#1a73e8;--d:#4285f4;--o:#ea4335}
+@media(prefers-color-scheme:dark){:root{--bg:#17181a;--fg:#e8eaed;--mut:#9aa0a6;--line:#3c4043;--acc:#8ab4f8}}
+:root[data-theme="dark"]{--bg:#17181a;--fg:#e8eaed;--mut:#9aa0a6;--line:#3c4043;--acc:#8ab4f8}
+:root[data-theme="light"]{--bg:#fff;--fg:#1f1f1f;--mut:#5f6368;--line:#dadce0;--acc:#1a73e8}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+background:var(--bg);color:var(--fg)}
+header{padding:1.1rem 1.5rem;border-bottom:1px solid var(--line)}
+h1{margin:0;font-size:1.05rem}
+h2{font-size:1.3rem;margin:0 0 .4rem}
+h3{font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);
+margin:1.6rem 0 .4rem;font-weight:600}
+.sub{color:var(--mut);font-size:.84rem;margin-top:.25rem}
+.wrap{display:grid;grid-template-columns:minmax(220px,290px) 1fr;min-height:calc(100vh - 88px)}
+@media(max-width:760px){.wrap{grid-template-columns:1fr}nav{max-height:40vh}}
+nav{border-right:1px solid var(--line);padding:1rem;overflow-y:auto}
+main{padding:1.4rem 1.6rem;overflow-x:auto;min-width:0}
+.grp{font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:var(--mut);margin:1rem 0 .3rem}
+button.node{display:block;width:100%;text-align:left;background:none;border:0;color:inherit;
+font:inherit;padding:.28rem .5rem;border-radius:6px;cursor:pointer;border-left:3px solid transparent}
+button.node:hover{background:color-mix(in srgb,var(--fg) 8%,transparent)}
+button.node.sel{background:color-mix(in srgb,var(--acc) 18%,transparent);font-weight:600}
+button.node.descriptive{border-left-color:var(--d)}
+button.node.operational{border-left-color:var(--o)}
+table{border-collapse:collapse;margin:.3rem 0 .6rem;font-size:.9rem;min-width:100%}
+th,td{border-bottom:1px solid var(--line);padding:.42rem .7rem;text-align:left;vertical-align:top}
+th{color:var(--mut);font-weight:500;font-size:.74rem;text-transform:uppercase;letter-spacing:.05em}
+code{background:color-mix(in srgb,var(--fg) 9%,transparent);padding:.08rem .35rem;
+border-radius:4px;font-size:.85em}
+a.link{color:var(--acc);text-decoration:none;cursor:pointer;border-bottom:1px solid transparent}
+a.link:hover{border-bottom-color:currentColor}
+.pill{display:inline-block;font-size:.68rem;padding:.08rem .5rem;border-radius:999px;
+border:1px solid var(--line);color:var(--mut)}
+.pill.structural{border-color:#4285f4;color:#4285f4}
+.pill.behavioral{border-color:#ea4335;color:#ea4335}
+.pill.semantic{border-color:#a142f4;color:#a142f4}
+.pill.traceability{border-color:#0f9d58;color:#0f9d58}
+.empty{color:var(--mut);font-style:italic}
+.tbl-wrap{overflow-x:auto}
+.why{color:var(--mut);font-size:.85rem;margin:.1rem 0 .9rem;padding-left:.8rem;
+border-left:2px solid var(--line)}
+.hop{color:var(--mut);font-size:.78rem}
+.qbar{display:flex;flex-wrap:wrap;gap:.4rem;margin:.6rem 0 0}
+.qbar button{font:inherit;font-size:.82rem;padding:.25rem .7rem;border-radius:999px;
+border:1px solid var(--line);background:none;color:inherit;cursor:pointer}
+.qbar button:hover{border-color:var(--acc);color:var(--acc)}
+.qbar button.on{background:var(--acc);border-color:var(--acc);color:var(--bg)}
+</style></head><body>
+<header><h1>Knowledge Explorer</h1>
+<div class="sub">The primary interface to the Canonical Knowledge Model, which is the product
+(<code>ADR-0072</code>, <code>ADR-0079</code>). A projection &mdash; never a source of truth.</div>
+</header>
+<div class="wrap"><nav id="nav"></nav><main id="main"></main></div>
+<script>
+const CKM = {"formatVersion": "1.0.0", "metamodelVersion": "0.4.0-skeleton", "project": "ai-desk-auth", "note": "Canonical Knowledge Model. Every edge was asserted; none inferred (ADR-0044, ADR-0061). Serializations are projections of this model, not the model (ADR-0076).", "nodes": [{"id": "ADR.0001", "type": "ADR", "label": "ADR-0001 \u2014 Multi-tenancy: shared schema + PostgreSQL RLS", "family": "operational", "position": null, "description": "\"All tenants share the same tables\u2026 PostgreSQL RLS policies enforce isolation at\nthe database engine level.\"\n\n**Status is `Proposed`, not accepted** \u2014 a decision the codebase already\nimplements.", "attributes": {"date": "2026-04-09", "source": "docs/adr/ADR-0001-multi-tenancy-strategy.md", "status": "Proposed", "support": "confirmed"}, "provenance": {"source": "adr-0001.md"}}, {"id": "Artifact.AccountLockoutTests", "type": "Artifact", "label": "account-lockout.spec.ts", "family": "descriptive", "position": null, "description": "8 test cases. One node per suite, with its case count \u2014 the granularity the\nKubernetes findings recommended.", "attributes": {"cases": "8", "source": "packages/backend/src/modules/auth/__tests__/account-lockout.spec.ts", "support": "confirmed"}, "provenance": {"source": "art-test-account-lockout.md"}}, {"id": "Artifact.AuthService", "type": "Artifact", "label": "auth.service.ts", "family": "descriptive", "position": null, "description": "Four public methods. Every authentication path in the backend passes through it.", "attributes": {"locator": "login, issueTokens, refresh, logout", "source": "packages/backend/src/modules/auth/auth.service.ts", "support": "confirmed"}, "provenance": {"source": "art-authservice.md"}}, {"id": "Artifact.AuthServiceTests", "type": "Artifact", "label": "auth.service.spec.ts", "family": "descriptive", "position": null, "description": "12 cases. **No invariant in this model is traced to it** \u2014 the suite exists and\nnothing records what it guarantees.", "attributes": {"cases": "12", "source": "packages/backend/src/modules/auth/__tests__/auth.service.spec.ts", "support": "confirmed"}, "provenance": {"source": "art-test-auth-service.md"}}, {"id": "Artifact.JwtGuard", "type": "Artifact", "label": "jwt-auth.guard.ts", "family": "descriptive", "position": null, "description": "A one-line subclass. **All verification behaviour is inherited**, so nothing\nlocal expresses what it enforces.", "attributes": {"locator": "export class JwtAuthGuard extends AuthGuard('jwt')", "source": "packages/backend/src/common/guards/jwt-auth.guard.ts", "support": "confirmed"}, "provenance": {"source": "art-guard.md"}}, {"id": "Artifact.JwtSecurityTests", "type": "Artifact", "label": "jwt-security.spec.ts", "family": "descriptive", "position": null, "description": "12 test cases. One node per suite, with its case count \u2014 the granularity the\nKubernetes findings recommended.", "attributes": {"cases": "12", "source": "packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts", "support": "confirmed"}, "provenance": {"source": "art-test-jwt-security.md"}}, {"id": "Artifact.PasswordSecurityTests", "type": "Artifact", "label": "password-security.spec.ts", "family": "descriptive", "position": null, "description": "11 cases. Same gap: no invariant is traced to it.", "attributes": {"cases": "11", "source": "packages/backend/src/modules/auth/__tests__/password-security.spec.ts", "support": "confirmed"}, "provenance": {"source": "art-test-password.md"}}, {"id": "Artifact.RefreshRotationTests", "type": "Artifact", "label": "refresh-token-rotation.spec.ts", "family": "descriptive", "position": null, "description": "7 test cases. One node per suite, with its case count \u2014 the granularity the\nKubernetes findings recommended.", "attributes": {"cases": "7", "source": "packages/backend/src/modules/auth/__tests__/refresh-token-rotation.spec.ts", "support": "confirmed"}, "provenance": {"source": "art-test-refresh-token-rotation.md"}}, {"id": "Artifact.RefreshTokenSchema", "type": "Artifact", "label": "refresh-tokens.ts", "family": "descriptive", "position": null, "description": "Revocation is a lookup-time exclusion, not a delete.", "attributes": {"locator": "partial index WHERE revoked_at IS NULL", "source": "packages/backend/src/common/database/schema/refresh-tokens.ts", "support": "confirmed"}, "provenance": {"source": "art-schema.md"}}, {"id": "BC.Auth", "type": "BoundedContext", "label": "ai-desk authentication", "family": "descriptive", "position": null, "description": "The boundary within which \"agent\", \"tenant\", \"token\" and \"session\" have their\nai-desk authentication meanings.", "attributes": {}, "provenance": {"source": "bc.md"}}, {"id": "Capability.Login", "type": "Capability", "label": "Authenticate an agent into a workspace", "family": "descriptive", "position": null, "description": "Resolve the tenant by slug, verify the password, issue tokens.", "attributes": {"locator": "async login", "source": "packages/backend/src/modules/auth/auth.service.ts", "support": "confirmed"}, "provenance": {"source": "cap-login.md"}}, {"id": "Capability.RefreshSession", "type": "Capability", "label": "Exchange a refresh token for a new pair", "family": "descriptive", "position": null, "description": "Rotates: issues a new pair and revokes the presented token.", "attributes": {"locator": "async refresh", "source": "packages/backend/src/modules/auth/auth.service.ts", "support": "confirmed"}, "provenance": {"source": "cap-refresh.md"}}, {"id": "Concept.AccessToken", "type": "Concept", "label": "Access token", "family": "descriptive", "position": null, "description": "A JWT carrying agent, tenant, role, name and ticket scope.", "attributes": {"locator": "issueTokens(agentId, tenantId, role, name, ticketScope)", "source": "packages/backend/src/modules/auth/auth.service.ts", "support": "confirmed"}, "provenance": {"source": "c-accesstoken.md"}}, {"id": "Concept.Agent", "type": "Concept", "label": "Agent", "family": "descriptive", "position": null, "description": "A human user authenticating into a workspace. Identified by email within a\ntenant, never globally.", "attributes": {"locator": "login(email, password, workspaceSlug)", "source": "packages/backend/src/modules/auth/auth.service.ts", "support": "confirmed"}, "provenance": {"source": "c-agent.md"}}, {"id": "Concept.RefreshToken", "type": "Concept", "label": "Refresh token", "family": "descriptive", "position": null, "description": "A persisted, revocable credential. The partial index filters on\n`revoked_at IS NULL`, so revocation is a lookup-time exclusion.", "attributes": {"locator": "pgTable refreshTokens: expiresAt, revokedAt", "source": "packages/backend/src/common/database/schema/refresh-tokens.ts", "support": "confirmed"}, "provenance": {"source": "c-refreshtoken.md"}}, {"id": "Concept.Tenant", "type": "Concept", "label": "Tenant", "family": "descriptive", "position": null, "description": "A workspace. Resolved by slug at login and carried in every token as `tid`.", "attributes": {"source": "docs/adr/ADR-0001-multi-tenancy-strategy.md", "support": "confirmed"}, "provenance": {"source": "c-tenant.md"}}, {"id": "Evidence.Adr0001", "type": "Evidence", "label": "ADR-0001 multi-tenancy", "family": "descriptive", "position": null, "description": "Read from the working tree. Yields the RLS decision, the isolation guarantee and\nthe SET app.current_tenant_id discipline requirement.", "attributes": {"extracted": "2026-08-02", "kind": "artifact-reference", "locator": "Decision, Rationale", "source": "docs/adr/ADR-0001-multi-tenancy-strategy.md", "support": "confirmed"}, "provenance": {"source": "ev-adr.md"}}, {"id": "Evidence.GuardSymbols", "type": "Evidence", "label": "jwt-auth.guard.ts", "family": "descriptive", "position": null, "description": "One line: export class JwtAuthGuard extends AuthGuard('jwt') {}. No local behaviour.", "attributes": {"extracted": "2026-08-02", "kind": "source-reference", "locator": "line 5", "source": "packages/backend/src/common/guards/jwt-auth.guard.ts", "support": "confirmed"}, "provenance": {"source": "ev-guard.md"}}, {"id": "Evidence.IssueTokensSignature", "type": "Evidence", "label": "auth.service.ts issueTokens", "family": "descriptive", "position": null, "description": "issueTokens(agentId, tenantId, role, name, ticketScope='global'). Five claims.", "attributes": {"extracted": "2026-08-02", "kind": "source-reference", "locator": "line 111", "source": "packages/backend/src/modules/auth/auth.service.ts", "support": "confirmed"}, "provenance": {"source": "ev-issue.md"}}, {"id": "Evidence.JwtTests", "type": "Evidence", "label": "jwt-security.spec.ts case names", "family": "descriptive", "position": null, "description": "Wrong secret, tampered tid, alg=none, malformed, expired.", "attributes": {"extracted": "2026-08-02", "kind": "source-reference", "locator": "12 it() cases", "source": "packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts", "support": "confirmed"}, "provenance": {"source": "ev-jwt.md"}}, {"id": "Evidence.LockoutTests", "type": "Evidence", "label": "account-lockout.spec.ts case names", "family": "descriptive", "position": null, "description": "Extracted by grep. Includes the exact 15-minute window, per-agent isolation and\nthe no-enumeration guarantee.", "attributes": {"extracted": "2026-08-02", "kind": "source-reference", "locator": "8 it() cases", "source": "packages/backend/src/modules/auth/__tests__/account-lockout.spec.ts", "support": "confirmed"}, "provenance": {"source": "ev-lockout.md"}}, {"id": "Evidence.LoginSignature", "type": "Evidence", "label": "auth.service.ts login signature", "family": "descriptive", "position": null, "description": "grep -nE 'async login'. Signature (email, password, workspaceSlug) shows the\ntenant is resolved by slug, not carried.", "attributes": {"extracted": "2026-08-02", "kind": "source-reference", "locator": "line 31", "source": "packages/backend/src/modules/auth/auth.service.ts", "support": "confirmed"}, "provenance": {"source": "ev-login.md"}}, {"id": "Evidence.RefreshTokenSchema", "type": "Evidence", "label": "refresh-tokens.ts", "family": "descriptive", "position": null, "description": "pgTable with expiresAt, revokedAt, and a partial index WHERE revoked_at IS NULL.", "attributes": {"extracted": "2026-08-02", "kind": "source-reference", "locator": "lines 11-27", "source": "packages/backend/src/common/database/schema/refresh-tokens.ts", "support": "confirmed"}, "provenance": {"source": "ev-schema.md"}}, {"id": "Evidence.RotationTests", "type": "Evidence", "label": "refresh-token-rotation.spec.ts case names", "family": "descriptive", "position": null, "description": "Rotation, replay rejection, expiry auto-revoke, deactivated and soft-deleted agents.", "attributes": {"extracted": "2026-08-02", "kind": "source-reference", "locator": "7 it() cases", "source": "packages/backend/src/modules/auth/__tests__/refresh-token-rotation.spec.ts", "support": "confirmed"}, "provenance": {"source": "ev-rotation.md"}}, {"id": "Evidence.TestInventory", "type": "Evidence", "label": "auth test suite inventory", "family": "descriptive", "position": null, "description": "grep -c 'it(' across the directory: 8 + 12 + 12 + 11 + 7 = 50 cases in 5 suites.", "attributes": {"extracted": "2026-08-02", "kind": "source-reference", "locator": "5 suites, 50 cases", "source": "packages/backend/src/modules/auth/__tests__/", "support": "confirmed"}, "provenance": {"source": "ev-inv.md"}}, {"id": "Invariant.AccountLockout", "type": "Invariant", "label": "Five wrong passwords lock the account for exactly 15 minutes", "family": "descriptive", "position": null, "description": "**Asserted by a test and by no fetched document.** The correct password is\nrejected while the window is active, and lockout is per-agent.", "attributes": {"locator": "locks the account on the 5th wrong password for exactly 15 minutes", "source": "packages/backend/src/modules/auth/__tests__/account-lockout.spec.ts", "support": "confirmed"}, "provenance": {"source": "inv-lockout.md"}}, {"id": "Invariant.NoUserEnumeration", "type": "Invariant", "label": "Wrong password and wrong email return the same error", "family": "descriptive", "position": null, "description": "A security guarantee stated only as a test case.", "attributes": {"locator": "wrong password and wrong email return the same \"Invalid credentials\" error", "source": "packages/backend/src/modules/auth/__tests__/account-lockout.spec.ts", "support": "confirmed"}, "provenance": {"source": "inv-noenum.md"}}, {"id": "Invariant.RefreshRotation", "type": "Invariant", "label": "Refresh rotates and revokes; a replayed token fails", "family": "descriptive", "position": null, "description": "Also: expired tokens auto-revoke, and refresh is rejected for deactivated or\nsoft-deleted agents.", "attributes": {"locator": "refresh returns a new access+refresh pair AND revokes the old token", "source": "packages/backend/src/modules/auth/__tests__/refresh-token-rotation.spec.ts", "support": "confirmed"}, "provenance": {"source": "inv-rotation.md"}}, {"id": "Invariant.TenantIdOnEveryConnection", "type": "Invariant", "label": "tenant_id must be set on every connection", "family": "descriptive", "position": null, "description": "**No `enforced-at`.** The ADR calls it \"discipline\"; no artifact in the modelled\nscope is recorded as enforcing it. **The gap is the finding.**", "attributes": {"locator": "Requires discipline: SET app.current_tenant_id", "source": "docs/adr/ADR-0001-multi-tenancy-strategy.md", "support": "confirmed"}, "provenance": {"source": "inv-setconn.md"}}, {"id": "Invariant.TenantIsolation", "type": "Invariant", "label": "No tenant can read or modify another tenant's data", "family": "descriptive", "position": null, "description": "\"RLS policies are enforced by PostgreSQL itself, making cross-tenant data leakage\nimpossible even if application code has bugs.\"", "attributes": {"source": "docs/adr/ADR-0001-multi-tenancy-strategy.md", "support": "confirmed"}, "provenance": {"source": "inv-tenant.md"}}, {"id": "Invariant.TokenIntegrity", "type": "Invariant", "label": "Tokens with a wrong secret, tampered payload or alg=none are rejected", "family": "descriptive", "position": null, "description": "**\"modified `tid`\" is tenant isolation enforced at the token layer** \u2014 the test\nsuite protects the multi-tenancy invariant without naming it.", "attributes": {"locator": "rejects a token with a tampered payload (modified tid)", "source": "packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts", "support": "confirmed"}, "provenance": {"source": "inv-jwt.md"}}], "edges": [{"from": "ADR.0001", "predicate": "establishes", "to": "Invariant.TenantIdOnEveryConnection", "core": "establishes", "category": "traceability"}, {"from": "ADR.0001", "predicate": "establishes", "to": "Invariant.TenantIsolation", "core": "establishes", "category": "traceability"}, {"from": "ADR.0001", "predicate": "evidenced-by", "to": "Evidence.Adr0001", "core": "evidenced-by", "category": "traceability"}, {"from": "Artifact.AccountLockoutTests", "predicate": "evidenced-by", "to": "Evidence.TestInventory", "core": "evidenced-by", "category": "traceability"}, {"from": "Artifact.AccountLockoutTests", "predicate": "references", "to": "Invariant.AccountLockout", "core": "references", "category": "structural"}, {"from": "Artifact.AccountLockoutTests", "predicate": "validates", "to": "Artifact.AuthService", "core": "validates", "category": "behavioral"}, {"from": "Artifact.AuthService", "predicate": "evidenced-by", "to": "Evidence.IssueTokensSignature", "core": "evidenced-by", "category": "traceability"}, {"from": "Artifact.AuthService", "predicate": "evidenced-by", "to": "Evidence.LoginSignature", "core": "evidenced-by", "category": "traceability"}, {"from": "Artifact.AuthService", "predicate": "references", "to": "Concept.RefreshToken", "core": "references", "category": "structural"}, {"from": "Artifact.AuthService", "predicate": "represents", "to": "Capability.Login", "core": "represents", "category": "semantic"}, {"from": "Artifact.AuthServiceTests", "predicate": "evidenced-by", "to": "Evidence.TestInventory", "core": "evidenced-by", "category": "traceability"}, {"from": "Artifact.AuthServiceTests", "predicate": "validates", "to": "Artifact.AuthService", "core": "validates", "category": "behavioral"}, {"from": "Artifact.JwtGuard", "predicate": "evidenced-by", "to": "Evidence.GuardSymbols", "core": "evidenced-by", "category": "traceability"}, {"from": "Artifact.JwtGuard", "predicate": "represents", "to": "Concept.AccessToken", "core": "represents", "category": "semantic"}, {"from": "Artifact.JwtSecurityTests", "predicate": "evidenced-by", "to": "Evidence.TestInventory", "core": "evidenced-by", "category": "traceability"}, {"from": "Artifact.JwtSecurityTests", "predicate": "references", "to": "Invariant.TokenIntegrity", "core": "references", "category": "structural"}, {"from": "Artifact.JwtSecurityTests", "predicate": "validates", "to": "Artifact.AuthService", "core": "validates", "category": "behavioral"}, {"from": "Artifact.PasswordSecurityTests", "predicate": "evidenced-by", "to": "Evidence.TestInventory", "core": "evidenced-by", "category": "traceability"}, {"from": "Artifact.PasswordSecurityTests", "predicate": "validates", "to": "Artifact.AuthService", "core": "validates", "category": "behavioral"}, {"from": "Artifact.RefreshRotationTests", "predicate": "evidenced-by", "to": "Evidence.TestInventory", "core": "evidenced-by", "category": "traceability"}, {"from": "Artifact.RefreshRotationTests", "predicate": "references", "to": "Invariant.RefreshRotation", "core": "references", "category": "structural"}, {"from": "Artifact.RefreshRotationTests", "predicate": "validates", "to": "Artifact.AuthService", "core": "validates", "category": "behavioral"}, {"from": "Artifact.RefreshTokenSchema", "predicate": "evidenced-by", "to": "Evidence.RefreshTokenSchema", "core": "evidenced-by", "category": "traceability"}, {"from": "Artifact.RefreshTokenSchema", "predicate": "represents", "to": "Concept.RefreshToken", "core": "represents", "category": "semantic"}, {"from": "Capability.Login", "predicate": "realised-by", "to": "Artifact.AuthService", "core": "implemented-by", "category": "structural"}, {"from": "Capability.Login", "predicate": "references", "to": "Concept.Agent", "core": "references", "category": "structural"}, {"from": "Capability.Login", "predicate": "scoped-to", "to": "BC.Auth", "core": "contained-by", "category": "structural"}, {"from": "Capability.RefreshSession", "predicate": "realised-by", "to": "Artifact.AuthService", "core": "implemented-by", "category": "structural"}, {"from": "Capability.RefreshSession", "predicate": "references", "to": "Concept.RefreshToken", "core": "references", "category": "structural"}, {"from": "Capability.RefreshSession", "predicate": "scoped-to", "to": "BC.Auth", "core": "contained-by", "category": "structural"}, {"from": "Concept.AccessToken", "predicate": "evidenced-by", "to": "Evidence.IssueTokensSignature", "core": "evidenced-by", "category": "traceability"}, {"from": "Concept.AccessToken", "predicate": "references", "to": "Concept.Tenant", "core": "references", "category": "structural"}, {"from": "Concept.AccessToken", "predicate": "scoped-to", "to": "BC.Auth", "core": "contained-by", "category": "structural"}, {"from": "Concept.Agent", "predicate": "evidenced-by", "to": "Evidence.LoginSignature", "core": "evidenced-by", "category": "traceability"}, {"from": "Concept.Agent", "predicate": "scoped-to", "to": "BC.Auth", "core": "contained-by", "category": "structural"}, {"from": "Concept.RefreshToken", "predicate": "evidenced-by", "to": "Evidence.RefreshTokenSchema", "core": "evidenced-by", "category": "traceability"}, {"from": "Concept.RefreshToken", "predicate": "references", "to": "Concept.AccessToken", "core": "references", "category": "structural"}, {"from": "Concept.RefreshToken", "predicate": "scoped-to", "to": "BC.Auth", "core": "contained-by", "category": "structural"}, {"from": "Concept.Tenant", "predicate": "evidenced-by", "to": "Evidence.Adr0001", "core": "evidenced-by", "category": "traceability"}, {"from": "Concept.Tenant", "predicate": "scoped-to", "to": "BC.Auth", "core": "contained-by", "category": "structural"}, {"from": "Invariant.AccountLockout", "predicate": "constrains", "to": "Capability.Login", "core": "governs", "category": "behavioral"}, {"from": "Invariant.AccountLockout", "predicate": "enforced-at", "to": "Artifact.AccountLockoutTests", "core": "validated-by", "category": "behavioral"}, {"from": "Invariant.AccountLockout", "predicate": "evidenced-by", "to": "Evidence.LockoutTests", "core": "evidenced-by", "category": "traceability"}, {"from": "Invariant.AccountLockout", "predicate": "scoped-to", "to": "BC.Auth", "core": "contained-by", "category": "structural"}, {"from": "Invariant.NoUserEnumeration", "predicate": "constrains", "to": "Capability.Login", "core": "governs", "category": "behavioral"}, {"from": "Invariant.NoUserEnumeration", "predicate": "enforced-at", "to": "Artifact.AccountLockoutTests", "core": "validated-by", "category": "behavioral"}, {"from": "Invariant.NoUserEnumeration", "predicate": "evidenced-by", "to": "Evidence.LockoutTests", "core": "evidenced-by", "category": "traceability"}, {"from": "Invariant.NoUserEnumeration", "predicate": "scoped-to", "to": "BC.Auth", "core": "contained-by", "category": "structural"}, {"from": "Invariant.RefreshRotation", "predicate": "constrains", "to": "Capability.RefreshSession", "core": "governs", "category": "behavioral"}, {"from": "Invariant.RefreshRotation", "predicate": "enforced-at", "to": "Artifact.RefreshRotationTests", "core": "validated-by", "category": "behavioral"}, {"from": "Invariant.RefreshRotation", "predicate": "evidenced-by", "to": "Evidence.RotationTests", "core": "evidenced-by", "category": "traceability"}, {"from": "Invariant.RefreshRotation", "predicate": "scoped-to", "to": "BC.Auth", "core": "contained-by", "category": "structural"}, {"from": "Invariant.TenantIdOnEveryConnection", "predicate": "constrains", "to": "Concept.Tenant", "core": "governs", "category": "behavioral"}, {"from": "Invariant.TenantIdOnEveryConnection", "predicate": "evidenced-by", "to": "Evidence.Adr0001", "core": "evidenced-by", "category": "traceability"}, {"from": "Invariant.TenantIdOnEveryConnection", "predicate": "scoped-to", "to": "BC.Auth", "core": "contained-by", "category": "structural"}, {"from": "Invariant.TenantIsolation", "predicate": "constrains", "to": "Capability.Login", "core": "governs", "category": "behavioral"}, {"from": "Invariant.TenantIsolation", "predicate": "enforced-at", "to": "Artifact.AuthService", "core": "validated-by", "category": "behavioral"}, {"from": "Invariant.TenantIsolation", "predicate": "evidenced-by", "to": "Evidence.Adr0001", "core": "evidenced-by", "category": "traceability"}, {"from": "Invariant.TenantIsolation", "predicate": "scoped-to", "to": "BC.Auth", "core": "contained-by", "category": "structural"}, {"from": "Invariant.TokenIntegrity", "predicate": "constrains", "to": "Concept.AccessToken", "core": "governs", "category": "behavioral"}, {"from": "Invariant.TokenIntegrity", "predicate": "enforced-at", "to": "Artifact.JwtSecurityTests", "core": "validated-by", "category": "behavioral"}, {"from": "Invariant.TokenIntegrity", "predicate": "evidenced-by", "to": "Evidence.JwtTests", "core": "evidenced-by", "category": "traceability"}, {"from": "Invariant.TokenIntegrity", "predicate": "scoped-to", "to": "BC.Auth", "core": "contained-by", "category": "structural"}], "vocabulary": {"contained-by": {"category": "structural", "means": "inverse of contains", "inverse": "contains"}, "establishes": {"category": "traceability", "means": "inverse of established-by", "inverse": "established-by"}, "evidenced-by": {"category": "traceability", "means": "A is supported by observable B", "inverse": "supports"}, "governs": {"category": "behavioral", "means": "A constrains B normatively", "inverse": "governed-by"}, "implemented-by": {"category": "structural", "means": "inverse of implements", "inverse": "implements"}, "references": {"category": "structural", "means": "A points at B without owning it", "inverse": "referenced-by"}, "represents": {"category": "semantic", "means": "A stands for B in another representation", "inverse": "represented-by"}, "validated-by": {"category": "behavioral", "means": "inverse of validates", "inverse": "validates"}, "validates": {"category": "behavioral", "means": "A checks that B holds", "inverse": "validated-by"}}, "statistics": {"nodes": 31, "edges": 63, "byType": {"ADR": 1, "Artifact": 8, "BoundedContext": 1, "Capability": 2, "Concept": 4, "Evidence": 9, "Invariant": 6}, "byFamily": {"descriptive": 30, "operational": 1}, "byCategory": {"behavioral": 16, "semantic": 3, "structural": 22, "traceability": 22}, "byCoreType": {"contained-by": 12, "establishes": 2, "evidenced-by": 20, "governs": 6, "implemented-by": 2, "references": 8, "represents": 3, "validated-by": 5, "validates": 5}}};
+const byId = Object.fromEntries(CKM.nodes.map(n => [n.id, n]));
+const VOC = CKM.vocabulary || {};
+const out = id => CKM.edges.filter(e => e.from === id);
+const inc = id => CKM.edges.filter(e => e.to === id);
+const nav = document.getElementById('nav'), main = document.getElementById('main');
+let current = null, query = 'relationships';
+
+
+function esc(s){const d=document.createElement('div');d.textContent=s==null?'':s;return d.innerHTML}
+function link(id){const o=byId[id];return `<a class="link" onclick="show('${id}')">${esc(o?o.label:id)}</a>`}
+function pill(c){return `<span class="pill ${esc(c)}">${esc(c)}</span>`}
+
+/* ---- the query engine (ADR-0086), result contract per ADR-0088 -------- */
+/* The SAME declarations tools/ask.py executes. Parity is a public invariant. */
+
+const QUERIES = {"Q-impact": {"id": "Q-impact", "question": "What breaks if I change this?", "subject": "required", "rationale": "Anything reachable by an incoming edge depends on this node, directly or transitively. This is the question ADR-0082 names first.\n", "steps": [{"traverse": {"direction": "in", "transitive": true}}]}, "Q-why": {"id": "Q-why", "question": "Why does this relationship exist?", "subject": "required", "output": "edges", "rationale": "Every edge carries its core type and category, and the model carries the vocabulary that defines them. The answer needs no access to the metamodel.\n", "steps": [{"traverse": {"direction": "both", "max-hops": 1}}]}, "Q-rationale": {"id": "Q-rationale", "question": "Which ADR established this, and does that decision still stand?", "subject": "required", "applies-to": ["Invariant", "Policy", "Concept", "Capability"], "rationale": "An invariant whose establishing decision has been superseded is a finding that no document states.\n", "steps": [{"traverse": {"direction": "in", "core": "establishes", "node-type": "ADR"}}, {"with": {"superseded-by": {"direction": "out", "predicate": "superseded-by"}}}]}, "Q-provenance": {"id": "Q-provenance", "question": "Where did this come from?", "subject": "required", "rationale": "Provenance is carried by the model, not remembered. Source revision is not yet recorded; ADR-0064 wants (artifact-id, revision-id).\n", "steps": [{"select": {"subject": true}}]}, "Q-dependents": {"id": "Q-dependents", "question": "Which Capabilities depend on this?", "subject": "required", "applies-to": ["Workflow", "Skill", "Artifact", "Concept"], "rationale": "A Workflow's dependents are not all direct \u2014 a Capability may reach it only through a shared Skill.\n", "steps": [{"traverse": {"direction": "both", "transitive": true}}, {"keep": {"type": "Capability"}}]}, "Q-tests": {"id": "Q-tests", "question": "Which Tests must change?", "subject": "required", "rationale": "A test is an Artifact that `validates` another. No Test entity exists, and none is needed \u2014 it would introduce no relationship `validates` lacks.\n", "steps": [{"traverse": {"direction": "in", "transitive": true}}, {"keep": {"has-edge": {"direction": "out", "core": "validates"}}}]}, "Q-specifications": {"id": "Q-specifications", "question": "Which Specifications become inconsistent?", "subject": "required", "applies-to": ["Concept", "Capability", "Invariant"], "rationale": "A specification is an Artifact that `represents` a Concept. No Specification entity exists, for the same reason.\n", "steps": [{"traverse": {"direction": "in", "core": "represents"}}]}, "Q-status": {"id": "Q-status", "question": "What is the implementation status?", "subject": "required", "applies-to": ["Artifact", "ArtifactRevision"], "rationale": "Acceptance confers Active status; commits do not (ADR-0018). A revision with no AcceptanceRecord is not Active, whatever the repository says.\n", "steps": [{"traverse": {"direction": "out", "predicate": "has-active-revision", "or-self": true}}, {"with": {"accepted-by": {"direction": "in", "node-type": "AcceptanceRecord"}}}]}, "Q-constraints": {"id": "Q-constraints", "question": "Which invariants or guarantees constrain this?", "subject": "required", "rationale": "A capability is bounded by what must remain true of it. Answering this requires the constraint to be modelled separately from the thing it constrains, which is why Invariant is its own entity.\n", "steps": [{"traverse": {"direction": "in", "core": "governs", "node-type": "Invariant"}}]}, "Q-evidence": {"id": "Q-evidence", "question": "What evidence supports this, and where does it come from?", "subject": "required", "rationale": "An assertion without a citation is a claim. This is the query that makes \"insufficient evidence\" a visible answer rather than an empty one, and it is how an answer whose support spans several source classes is recognised.\n", "steps": [{"traverse": {"direction": "out", "core": "evidenced-by", "node-type": "Evidence"}}]}, "Q-unsupported": {"id": "Q-unsupported", "question": "Which assertions carry no evidence at all?", "subject": "none", "rationale": "A confident fabricated connection is worse than an incomplete result. This lists every Concept, Capability and Invariant that nothing cites \u2014 the model's own honesty check.\n", "steps": [{"select": {"type": "Invariant"}}, {"reject": {"has-edge": {"direction": "out", "core": "evidenced-by"}}}]}, "Q-assumptions": {"id": "Q-assumptions", "question": "What assumptions does this implementation depend on?", "subject": "required", "applies-to": ["Artifact"], "rationale": "An implementation depends on what must remain true of the concepts it represents. Those constraints are stated elsewhere, by someone else, and an engineer changing the implementation rarely reads them.\n", "steps": [{"select": {"subject": true}}, {"traverse": {"direction": "out", "core": "represents"}}, {"traverse": {"direction": "in", "core": "governs", "node-type": "Invariant"}}]}, "Q-obsolete-decisions": {"id": "Q-obsolete-decisions", "question": "Which decisions became obsolete but are still reflected in code?", "subject": "none", "rationale": "A superseded decision whose established concepts are still implemented is the most expensive kind of stale knowledge: the code is right, the rationale someone will read is wrong, and nothing connects them.\n", "steps": [{"select": {"type": "ADR"}}, {"keep": {"has-edge": {"direction": "out", "predicate": "superseded-by"}}}, {"keep": {"has-path": [{"direction": "out", "core": "establishes"}, {"direction": "in", "core": "represents"}]}}]}, "Q-stale-implementation": {"id": "Q-stale-implementation", "question": "Which implementation artifacts no longer match their original design rationale?", "subject": "none", "rationale": "The same gap seen from the code. An artifact whose represented concept was established by a decision that has since been superseded is implementing a rationale that no longer stands \u2014 and this is the question that required `has-path`, because the filter is two hops away from the row returned.\n", "steps": [{"select": {"type": "Artifact"}}, {"keep": {"has-path": [{"direction": "out", "core": "represents"}, {"direction": "in", "core": "establishes", "node-type": "ADR"}, {"direction": "out", "predicate": "superseded-by"}]}}]}, "Q-unenforced": {"id": "Q-unenforced", "question": "Which Invariants have no enforcement point?", "subject": "none", "rationale": "`enforced-at` is zero-or-more by decision. The empty case is the finding \u2014 a rule the domain asserts and nothing checks.\n", "steps": [{"select": {"type": "Invariant"}}, {"reject": {"has-edge": {"direction": "out", "predicate": "enforced-at"}}}]}, "Q-unaccepted": {"id": "Q-unaccepted", "question": "Which revisions are not Active?", "subject": "none", "rationale": "The inverse of Q-status across the whole model. Answers \"what is in this repository that nobody has accepted?\" without reading any document.\n", "steps": [{"select": {"type": "ArtifactRevision"}}, {"reject": {"has-edge": {"direction": "in", "node-type": "AcceptanceRecord"}}}]}, "Q-orphan-concepts": {"id": "Q-orphan-concepts", "question": "Which Concepts does nothing realise or reference?", "subject": "none", "rationale": "A Concept nothing points at is either dead vocabulary or an undocumented dependency. Both are worth surfacing; neither is visible by reading.\n", "steps": [{"select": {"type": "Concept"}}, {"reject": {"has-edge": {"direction": "in"}}}]}};
+const MAX_DEPTH = 16, MAX_RESULTS = 1000;
+
+function edgesOf(id, dir){
+  const o = out(id).map(e => [e, e.to, 'out']), i = inc(id).map(e => [e, e.from, 'in']);
+  return dir === 'out' ? o : dir === 'in' ? i : o.concat(i);
+}
+function matchEdge(e, other, s){
+  const why = [];
+  for (const f of ['predicate','core','category']) {
+    if (s[f] != null) { if (e[f] !== s[f]) return null; why.push(f + '=' + e[f]); }
+  }
+  if (s['node-type'] != null) {
+    const a = (byId[other]||{}).type;
+    if (a !== s['node-type']) return null;
+    why.push('node-type=' + a);
+  }
+  return why.length ? why : ['any'];
+}
+function mkRow(id, extra){
+  const n = byId[id] || {};
+  return Object.assign({id, type: n.type, label: n.label}, extra || {});
+}
+function hop(e, other, dir, why){
+  return {from: e.from, predicate: e.predicate, to: e.to, core: e.core,
+          category: e.category, direction: dir, matched: why, reached: other};
+}
+function pathKey(p){ return JSON.stringify([p.map(h => h.predicate), p.map(h => h.reached)]) }
+/* Codepoint order, NOT localeCompare: the Python engine sorts by codepoint and
+   parity is a public invariant (ADR-0088 §7). */
+function cmp(a, b){ return a < b ? -1 : a > b ? 1 : 0 }
+function hasEdge(id, s){
+  return edgesOf(id, s.direction || 'out').some(([e, o]) => matchEdge(e, o, s) !== null);
+}
+function hasPath(id, chain){
+  let frontier = new Set([id]);
+  for (const s of chain) {
+    const next = new Set();
+    for (const cur of frontier)
+      for (const [e, o] of edgesOf(cur, s.direction || 'out'))
+        if (matchEdge(e, o, s) !== null) next.add(o);
+    if (!next.size) return false;
+    frontier = next;
+  }
+  return true;
+}
+function rowMatches(r, s){
+  if (s.type != null) return r.type === s.type;
+  if (s['has-path'] != null) return hasPath(r.id, s['has-path']);
+  return hasEdge(r.id, s['has-edge']);
+}
+const OPS = {
+  select(rows, s, ctx){
+    const mk = id => mkRow(id, {hops: 0, origin: id, path: []});
+    if (s.all) return CKM.nodes.map(n => mk(n.id));
+    if (s.subject) return byId[ctx.subject] ? [mk(ctx.subject)] : [];
+    if (s.id) return byId[s.id] ? [mk(s.id)] : [];
+    if (s.type) return CKM.nodes.filter(n => n.type === s.type).map(n => mk(n.id));
+    return rows;
+  },
+  traverse(rows, s, ctx){
+    const starts = rows.length ? rows.map(r => r.id)
+                               : (byId[ctx.subject] ? [ctx.subject] : []);
+    const dir = s.direction || 'out';
+    const cap = ctx.maxDepth;
+    const limit = Math.min((s.transitive ? cap : (s['max-hops'] || 1)) || 1, cap);
+    const origin = new Set(starts), best = new Map();
+    const queue = starts.map(x => [x, x, 0, []]);
+    let truncated = false;
+    while (queue.length) {
+      const [id, start, hops, path] = queue.shift();
+      if (hops >= limit) {
+        if (s.transitive && edgesOf(id, dir).length && hops >= cap) truncated = true;
+        continue;
+      }
+      for (const [e, other, edir] of edgesOf(id, dir)) {
+        const why = matchEdge(e, other, s);
+        if (why === null || origin.has(other)) continue;
+        const cand = path.concat([hop(e, other, edir, why)]);
+        const prior = best.get(other);
+        if (prior && (prior.path.length < cand.length ||
+            (prior.path.length === cand.length && pathKey(prior.path) <= pathKey(cand)))) continue;
+        best.set(other, mkRow(other, {hops: cand.length, origin: start, path: cand,
+                                      via: cand[0].predicate}));
+        queue.push([other, start, cand.length, cand]);
+      }
+    }
+    if (truncated) ctx.diagnostics.push({phase: 'projection', source: null,
+      message: 'traversal truncated at max-depth ' + cap, rule: ctx.query.id});
+    const res = [...best.values()].sort((a,b) => a.hops - b.hops || cmp(a.id, b.id));
+    if (!res.length && s['or-self'])
+      return starts.map(x => mkRow(x, {hops: 0, origin: x, path: [], via: null}));
+    return res;
+  },
+  keep(rows, s){ return rows.filter(r => rowMatches(r, s)) },
+  reject(rows, s){ return rows.filter(r => !rowMatches(r, s)) },
+  with(rows, s){
+    rows.forEach(r => Object.entries(s).forEach(([name, sub]) => {
+      const found = [];
+      for (const [e, other, edir] of edgesOf(r.id, sub.direction || 'out')) {
+        const why = matchEdge(e, other, sub);
+        if (why !== null) found.push({id: other, predicate: e.predicate,
+                                      direction: edir, matched: why});
+      }
+      r[name] = found.sort((a,b) => cmp(a.id, b.id) || cmp(a.predicate, b.predicate));
+    }));
+    return rows;
+  }
+};
+function applicable(q, subject){
+  if (q.subject !== 'required') return null;
+  if (!subject) return 'this question requires a subject';
+  if (!byId[subject]) return `no node '${subject}' in this model`;
+  const allowed = q['applies-to'];
+  if (allowed && !allowed.includes(byId[subject].type))
+    return `applies to ${allowed.join(', ')}; ${subject} is a ${byId[subject].type}`;
+  return null;
+}
+function runQuery(q, subject){
+  const result = {query: q.id, question: q.question, subject: subject || null,
+                  status: 'ok', rows: [], edges: [], diagnostics: []};
+  const reason = applicable(q, subject);
+  if (reason) {
+    result.status = 'not-applicable';
+    result.diagnostics = [{phase: 'projection', message: reason, rule: q.id}];
+    return result;
+  }
+  const ctx = {subject, query: q, diagnostics: [], maxDepth: q['max-depth'] || MAX_DEPTH};
+  let rows = [];
+  for (const step of q.steps) {
+    const name = Object.keys(step)[0];
+    rows = OPS[name](rows, step[name] || {}, ctx);
+  }
+  const limit = q['max-results'] || MAX_RESULTS;
+  if (rows.length > limit) {
+    ctx.diagnostics.push({phase: 'projection', source: null,
+      message: `result truncated at max-results ${limit} (${rows.length} found)`, rule: q.id});
+    rows = rows.slice(0, limit);
+  }
+  const mode = q.output || 'nodes';
+  if (mode === 'edges') {
+    const seen = new Set();
+    rows.forEach(r => r.path.forEach(h => {
+      const k = h.from + '|' + h.predicate + '|' + h.to;
+      if (!seen.has(k)) { seen.add(k); result.edges.push(h); }
+    }));
+  } else if (mode === 'induced-subgraph') {
+    const ids = new Set(rows.map(r => r.id));
+    if (subject) ids.add(subject);
+    result.edges = CKM.edges.filter(e => ids.has(e.from) && ids.has(e.to));
+  }
+  result.rows = rows;
+  result.diagnostics = ctx.diagnostics;
+  if (!rows.length && !result.edges.length) result.status = 'empty';
+  return result;
+}
+
+/* ---- rendering ------------------------------------------------------- */
+
+const groups = {};
+CKM.nodes.forEach(n => (groups[n.type] ||= []).push(n));
+Object.keys(groups).sort().forEach(type => {
+  const h = document.createElement('div'); h.className='grp'; h.textContent=type; nav.appendChild(h);
+  groups[type].forEach(n => {
+    const b = document.createElement('button');
+    b.className = 'node ' + n.family; b.textContent = n.label; b.dataset.id = n.id;
+    b.onclick = () => show(n.id); nav.appendChild(b);
+  });
+});
+
+function renderEdges(edges){
+  if (!edges.length) return '<p class="empty">None.</p>';
+  return '<div class="tbl-wrap"><table><tr><th>From</th><th>Predicate</th>'
+   + '<th>Why it exists</th><th>To</th></tr>'
+   + edges.map(e => {
+       const v = (CKM.vocabulary || {})[e.core] || {};
+       return `<tr><td>${link(e.from)}</td><td><code>${esc(e.predicate)}</code></td>
+         <td>${pill(e.category)} specializes <code>${esc(e.core)}</code>
+         <div class="hop">${esc(v.means || '')}</div></td>
+         <td>${link(e.to)}</td></tr>`;
+     }).join('') + '</table></div>';
+}
+function renderAttributes(n){
+  const a = n.attributes || {};
+  const keys = Object.keys(a).sort();
+  if (!keys.length) return '<p class="empty">No provenance recorded for this node.</p>';
+  return '<div class="tbl-wrap"><table>' + keys.map(k => {
+    const v = a[k];
+    const cell = /^https?:\/\//.test(v)
+      ? `<a class="link" href="${esc(v)}" target="_blank" rel="noopener">${esc(v)}</a>`
+      : esc(v);
+    return `<tr><th>${esc(k)}</th><td>${cell}</td></tr>`;
+  }).join('') + '</table></div>';
+}
+function renderPath(path){
+  if (!path || !path.length) return '<span class="hop">start</span>';
+  return path.map(h => `<div class="hop"><code>${esc(h.from)}</code> &mdash;
+    <b>${esc(h.predicate)}</b> (${esc(h.direction)}) &rarr;
+    <code>${esc(h.to)}</code> <i>${esc(h.matched.join(', '))}</i></div>`).join('');
+}
+function renderResult(res){
+  if (res.status === 'not-applicable')
+    return `<p class="empty"><b>Not applicable.</b> ${esc(res.diagnostics[0].message)}</p>`;
+  const diag = res.diagnostics.length
+    ? `<p class="empty">${res.diagnostics.map(d => esc(d.message)).join('; ')}</p>` : '';
+  const body = (res.query && QUERIES[res.query] || {}).output === 'edges'
+    ? renderEdges(res.edges) : renderRows(res.rows);
+  return diag + body;
+}
+function renderRows(rows){
+  if (!rows.length) return '<p class="empty">No results. That is often the finding.</p>';
+  const extra = [...new Set(rows.flatMap(r => Object.keys(r)))]
+    .filter(k => !['id','type','label','path','via','origin'].includes(k));
+  const cell = v => Array.isArray(v)
+    ? (v.length ? v.map(x => typeof x === 'object'
+        ? `${link(x.id)} <span class="hop">${esc(x.predicate)}</span>` : link(x)).join('<br/>')
+      : '<span class="empty">none</span>')
+    : (v == null ? '' : esc(v));
+  return '<div class="tbl-wrap"><table><tr><th>Node</th><th>Type</th><th>Path</th>'
+   + extra.map(k => `<th>${esc(k)}</th>`).join('') + '</tr>'
+   + rows.map(r => `<tr><td>${link(r.id)}</td><td class="hop">${esc(r.type)}</td>
+       <td>${renderPath(r.path)}</td>`
+       + extra.map(k => `<td>${cell(r[k])}</td>`).join('') + '</tr>').join('')
+   + '</table></div>';
+}
+function show(id, q){
+  const n = byId[id]; if (!n) return;
+  current = id;
+  const usable = Object.values(QUERIES).filter(x => x.subject === 'required');
+  query = q || (usable.some(x => x.id === query) ? query : usable[0].id);
+  document.querySelectorAll('button.node').forEach(b => b.classList.toggle('sel', b.dataset.id === id));
+  const bar = usable.map(x =>
+    `<button class="${x.id === query ? 'on' : ''}" onclick="show('${id}','${x.id}')">${esc(x.question)}</button>`).join('');
+  const active = QUERIES[query];
+  const res = runQuery(active, id);
+  main.innerHTML = `<h2>${esc(n.label)}</h2>
+    <p><code>${esc(n.id)}</code> &middot; <span class="pill">${esc(n.type)}</span>
+       <span class="pill">${esc(n.family)}</span>
+       ${n.position != null ? `<span class="pill">position ${n.position}</span>` : ''}</p>
+    <p>${esc(n.description)}</p>
+    ${renderAttributes(n)}
+    <div class="qbar">${bar}</div>
+    <h3>${esc(active.question)}</h3>
+    <div class="why">${esc((active.rationale || '').trim())}</div>
+    ${renderResult(res)}
+    <p class="hop">status <b>${esc(res.status)}</b> &middot; ${res.rows.length} row(s),
+    ${res.edges.length} edge(s) &middot; <code>${esc(active.id)}</code> &middot;
+    provenance: <code>${esc((n.provenance||{}).source)}</code></p>`;
+  main.scrollTop = 0;
+}
+function showGlobal(qid){
+  query = qid;
+  document.querySelectorAll('button.node').forEach(b => b.classList.remove('sel'));
+  const q = QUERIES[qid], res = runQuery(q, null);
+  main.innerHTML = `<h2>${esc(q.question)}</h2>
+    <div class="why">${esc((q.rationale || '').trim())}</div>
+    ${renderResult(res)}
+    <p class="hop">status <b>${esc(res.status)}</b> &middot; ${res.rows.length} row(s)
+    &middot; <code>${esc(q.id)}</code></p>
+    <p><a class="link" onclick="home()">&larr; back</a></p>`;
+  main.scrollTop = 0;
+}
+function home(){
+  const global = Object.values(QUERIES).filter(q => q.subject === 'none');
+  main.innerHTML = `<h2>What are you trying to accomplish?</h2>
+  <p>Every answer is computed from the Canonical Knowledge Model. Nothing here was
+  written by hand.</p>
+  <h3>Ask about the whole system</h3>
+  <div class="qbar">${global.map(q =>
+    `<button onclick="showGlobal('${q.id}')">${esc(q.question)}</button>`).join('')}</div>
+  <h3>Ask about one thing</h3>
+  <p class="hop">Select a node on the left, then choose a question.
+  ${Object.values(QUERIES).filter(q => q.subject === 'required').length} questions
+  are available per node.</p>
+  <h3>What is in the model</h3>${tbl(CKM.statistics.byType)}
+  <h3>Edges by relationship category</h3>${tbl(CKM.statistics.byCategory)}`;
+}
+function tbl(o){return '<div class="tbl-wrap"><table>' + Object.entries(o).map(([k,v]) =>
+  `<tr><td><code>${esc(k)}</code></td><td>${v}</td></tr>`).join('') + '</table></div>'}
+home();
+</script></body></html>

@@ -6,7 +6,7 @@ created: 2026-08-02
 updated: 2026-08-02
 semantic-layer: None
 artifact-kind: authoritative
-established-by: [ADR-0044, ADR-0061, ADR-0090, ADR-0100, ADR-0101]
+established-by: [ADR-0044, ADR-0061, ADR-0090, ADR-0100, ADR-0101, ADR-0104]
 ---
 
 # Execution Observation Kinds
@@ -21,6 +21,33 @@ Each kind declares its **intake outcome**:
 | `record` | may enter the model mechanically |
 | `govern` | requires authorization first (`ADR-0100`) |
 | `reject` | cannot enter; recorded as a finding instead |
+
+## The observation envelope (`ADR-0104`)
+
+| Field | Is |
+|---|---|
+| `kind` | a registered kind, below |
+| `statement` | what the worker observed |
+| `evidence` | source and locator |
+| `confidence` | `high` · `medium` · `low` — **an enumeration, never a number** |
+| `reasoning` | why the worker concluded it |
+| `affectedNodes` | model identifiers concerned |
+
+**Confidence is a ratchet.** It may only add scrutiny:
+
+| Declared intake | Confidence | Effective outcome |
+|---|---|---|
+| `record` | high | `record` |
+| `record` | medium or low | **`govern`** |
+| `govern` | any | `govern` |
+| `reject` | any | `reject` |
+
+**High confidence never lowers scrutiny** — the reason an observation is governed
+is a property of the claim, not of the claimant.
+
+**Confidence and reasoning are discarded at the boundary.** They inform intake
+and never enter the Canonical Knowledge Model, so `ADR-0090` holds: no model node
+carries a confidence field.
 
 ```yaml
 observation-kinds:

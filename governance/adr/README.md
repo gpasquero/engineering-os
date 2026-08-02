@@ -16,7 +16,7 @@ same session the decision is made.
 > a rule exists; the rule that must be followed lives in a Policy under
 > `shared/policies/`. Agents consume policies; humans read ADRs for rationale.
 
-**Highest allocated ID: `ADR-0101`.** IDs are sequential and never reused.
+**Highest allocated ID: `ADR-0104`.** IDs are sequential and never reused.
 
 > This index table is a hand-maintained projection of ADR front matter. It is
 > listed in the transitional-debt register, `ISSUE-0037`.
@@ -196,6 +196,9 @@ Read these before designing anything that produces an artifact:
 | [ADR-0099](ADR-0099-workers-are-capabilities.md) | **Workers are capabilities, not vendors; assignment is deterministic matching** | accepted | — |
 | [ADR-0100](ADR-0100-governance-is-not-a-worker.md) | **Human review is a governance gate, not a worker** | accepted | — |
 | [ADR-0101](ADR-0101-context-and-observations.md) | **Execution Context out, Execution Observations back; workers never touch the model** | accepted | — |
+| [ADR-0102](ADR-0102-autonomy-is-the-target.md) | **Autonomy is the target; the KPI becomes decisions that never require an LLM** | accepted | — |
+| [ADR-0103](ADR-0103-smarter-never-less-deterministic.md) | **Engineering OS may become smarter; it may not become less deterministic** | accepted | — |
+| [ADR-0104](ADR-0104-worker-confidence.md) | **Worker confidence is an intake signal that may only add scrutiny, never model content** | accepted | — |
 
 ## Supersessions
 

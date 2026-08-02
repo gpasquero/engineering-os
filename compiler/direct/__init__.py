@@ -97,20 +97,39 @@ def context(model, plan_result, graph, task):
 
 
 # ----------------------------------------------------------- observations
+CONFIDENCE = ("high", "medium", "low")
+
+
+def _ratchet(declared, confidence):
+    """Confidence may only ADD scrutiny, never remove it (ADR-0104).
+
+    High confidence never lowers scrutiny: the reason an observation is governed
+    is a property of the claim, not of the claimant.
+    """
+    if declared == "record" and confidence in ("medium", "low"):
+        return "govern", f"escalated: worker reported {confidence} confidence"
+    return declared, None
+
+
 @feature("observation intake",
          input_phase="projection", output_phase="projection",
          invariants=["a worker never writes to the model (ADR-0101)",
                      "intake produces a proposal, never a model write",
                      "an unknown observation kind is rejected, not ignored",
-                     "only additive kinds may record mechanically"],
-         determinism="a pure function of the declared observation kinds")
+                     "only additive kinds may record mechanically",
+                     "confidence may only add scrutiny, never remove it (ADR-0104)",
+                     "no confidence value enters the model"],
+         determinism="a pure function of the declared kinds and the ratchet")
 def intake(observations):
     registries = load_all()
     kinds = registries["REG-observation-kinds"]
     gates = registries["REG-governance-gates"]
 
     proposal = {"record": [], "govern": [], "reject": [], "diagnostics": []}
-    for obs in observations:
+    for raw in observations:
+        # Confidence and reasoning inform intake and never leave it (ADR-0104).
+        confidence = raw.get("confidence")
+        obs = {k: v for k, v in raw.items() if k not in ("confidence", "reasoning")}
         kind = kinds.get(obs.get("kind"))
         if not kind:
             proposal["reject"].append({
@@ -125,17 +144,31 @@ def intake(observations):
         # the outcome class, and must win. The simulation found this: an
         # assumption-disproved observation was routed to the general
         # knowledge-update gate instead of the decision-record gate.
+        if confidence is not None and confidence not in CONFIDENCE:
+            proposal["reject"].append({
+                **obs, "outcome": "reject",
+                "reason": f"confidence must be one of {list(CONFIDENCE)}, "
+                          f"got {confidence!r}",
+                "produces": "a finding; nothing enters the model"})
+            proposal["diagnostics"].append(
+                f"invalid confidence {confidence!r} from task {obs.get('task')!r}")
+            continue
+
+        outcome, escalation = _ratchet(kind["intake"], confidence)
+
         gate = None
-        if kind["intake"] == "govern":
+        if outcome == "govern":
             gate = next((gid for gid, g in gates.items()
                          if obs["kind"] in (g.get("required-for-observation-kinds") or [])), None)
             if gate is None:
                 gate = next((gid for gid, g in gates.items()
                              if kind["intake"] in
                              (g.get("required-for-observation-outcomes") or [])), None)
-        proposal[kind["intake"]].append({
-            **obs, "outcome": kind["intake"], "produces": kind["produces"].strip(),
-            "gate": gate, "rationale": kind["rationale"].strip()})
+        entry = {**obs, "outcome": outcome, "produces": kind["produces"].strip(),
+                 "gate": gate, "rationale": kind["rationale"].strip()}
+        if escalation:
+            entry["escalation"] = escalation
+        proposal[outcome].append(entry)
     return proposal
 
 

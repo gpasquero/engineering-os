@@ -26,7 +26,7 @@ engineering-intents:
   - id: I-modify-behavior
     label: Modify behaviour
     asks: What am I changing, and what depends on it?
-    selects-plans: [P-change-implementation, P-change-concept]
+    selects-plans: [P-change-implementation, P-change-concept, P-change-capability]
     selects-recommendations: [R-change-implementation, R-change-concept]
 
   - id: I-investigate

@@ -85,6 +85,61 @@ plans:
       - Whether a new invariant should be recorded as a result of the change.
       - The implementation itself.
 
+  - id: P-change-capability
+    objective: Change what {subject} does, and carry it through every realisation
+    applies-to: [Capability]
+    rationale: >
+      Added because a real run could not express the workflow it was given
+      (ADR-0102). "I need to add OAuth" is a change to a capability, and neither
+      existing plan applied to one. A capability is realised by artifacts and
+      bounded by invariants, so changing it means every realisation plus
+      everything that constrains it — and the constraints come first, because
+      they are what a new authentication path is most likely to violate.
+    assumptions:
+      - query: Q-constraints
+        statement: These invariants bound what this capability may do.
+      - query: Q-rationale
+        statement: This decision established the capability; check it still stands.
+    phases:
+      - id: understand
+        goal: Establish what bounds this capability before extending it
+        recommendation: R-change-concept
+        actions: [review, validate]
+      - id: change
+        goal: Carry the change through every realisation
+        recommendation: R-change-concept
+        actions: [update, inspect]
+        requires: [understand]
+      - id: verify
+        goal: Confirm every bound still holds
+        recommendation: R-change-concept
+        actions: [verify]
+        requires: [change]
+    reviews:
+      - at: understand
+        query: Q-constraints
+        because: >
+          A new path through a capability is most likely to violate a constraint
+          nobody re-read.
+      - at: verify
+        query: Q-tests
+        because: an unchanged test suite after a capability change is a warning
+    expected-evidence:
+      - query: Q-tests
+        statement: A test exercising the new behaviour should exist afterwards.
+    completion:
+      - query: Q-constraints
+        expect: non-empty
+        statement: The invariants bounding this capability are known and were reviewed.
+      - query: Q-specifications
+        expect: non-empty
+        statement: The artifacts realising this capability are identified.
+    defers:
+      - Whether the new behaviour belongs in this capability or a new one.
+      - Whether an existing invariant must be weakened, and whether that is acceptable.
+      - Which realisation changes first.
+      - The implementation itself.
+
   - id: P-change-concept
     objective: Change the meaning of {subject} and carry the consequences
     applies-to: [Concept]

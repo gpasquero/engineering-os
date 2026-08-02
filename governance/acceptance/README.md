@@ -15,7 +15,7 @@ committed.
 
 **Acceptance is an engineering decision, not a Git operation** (`ADR-0020`).
 
-**Highest allocated ID: `ACCEPT-0031`.** IDs are sequential and never reused.
+**Highest allocated ID: `ACCEPT-0032`.** IDs are sequential and never reused.
 
 ## Index
 
@@ -52,6 +52,7 @@ committed.
 | [ACCEPT-0029](ACCEPT-0029-session-0033-decisions.md) | `SESSION-0033` — the Engineering Recommendation Engine at `0499e77` | Project Owner (`gpasquero`) | accepted | 2026-08-02 |
 | [ACCEPT-0030](ACCEPT-0030-session-0034-decisions.md) | `SESSION-0034` — the Engineering Planning Engine at `f49b1a1` | Project Owner (`gpasquero`) | accepted | 2026-08-02 |
 | [ACCEPT-0031](ACCEPT-0031-session-0035-decisions.md) | `SESSION-0035` — the Task Graph at `d4954eb` | Project Owner (`gpasquero`) | accepted | 2026-08-02 |
+| [ACCEPT-0032](ACCEPT-0032-session-0036-decisions.md) | `SESSION-0036` — the Engineering Director runtime at `fe7a263` | Project Owner (`gpasquero`) | accepted | 2026-08-02 |
 
 ## The three conditions
 

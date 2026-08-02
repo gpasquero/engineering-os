@@ -59,6 +59,7 @@ ADRs answer "why".
 | [SESSION-0034](SESSION-0034-2026-08-02.md) | 2026-08-02 | director | `ACCEPT-0029`; **the product is an Engineering Director** (`ADR-0092`); **the judgment measure** (`ADR-0093`); **the Engineering Plan** (`ADR-0094`); `tools/plan.py`; `EngineeringIntent` **proposal, not implemented** |
 | [SESSION-0035](SESSION-0035-2026-08-02.md) | 2026-08-02 | taskgraph | `ACCEPT-0030`; **the engineering loop is the architecture** (`ADR-0095`); **`EngineeringIntent` is a registry** (`ADR-0096`); **the Task Graph** (`ADR-0097`); `tools/taskgraph.py`; capabilities, never workers |
 | [SESSION-0036](SESSION-0036-2026-08-02.md) | 2026-08-02 | orchestration | `ACCEPT-0031`; **orchestration is the objective** (`ADR-0098`); **workers are capabilities** (`ADR-0099`); **governance is not a worker** (`ADR-0100`); **context out, observations back** (`ADR-0101`); **end-to-end simulation found two defects** |
+| [SESSION-0037](SESSION-0037-2026-08-02.md) | 2026-08-02 | autonomy | `ACCEPT-0032`; **autonomy is the target** (`ADR-0102`); **smarter, never less deterministic** (`ADR-0103`); **worker confidence resolved against `ADR-0090`** (`ADR-0104`); **first run on a real repository** — ai-desk auth, 54 decisions before the first token |
 
 ## Reading
 
