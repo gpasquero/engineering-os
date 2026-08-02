@@ -1,155 +1,137 @@
 ---
 id: EXTERNAL-AIDESK-ONBOARDING-FINDINGS
-title: Findings — the first Brownfield onboarding
+title: Findings — two-stage Discovery, and a refuted conclusion
 status: draft
 created: 2026-08-02
 updated: 2026-08-02
 semantic-layer: None
 artifact-kind: authoritative
-established-by: [ADR-0090, ADR-0105, ADR-0106, ADR-0107]
+established-by: [ADR-0090, ADR-0105, ADR-0106, ADR-0107, ADR-0108, ADR-0109]
 ---
 
-# Findings — the first Brownfield onboarding
-
-**A complete vertical slice**, from a repository and one bootstrap node to a
-compiled model, generated products and an Engineering Plan.
+# Findings — two-stage Discovery
 
 ```sh
-python3 discovery/run.py /Users/willy/Localsources/ai-desk external/ai-desk-onboarding
-python3 tools/review.py external/ai-desk-onboarding summary
-python3 tools/review.py external/ai-desk-onboarding apply --ids=… --reviewer=…
-python3 tools/compile.py external/ai-desk-onboarding
-python3 tools/direct.py external/ai-desk-onboarding I-modify-behavior Capability.Auth
+python3 discovery/run.py /Users/willy/Localsources/ai-desk external/ai-desk-onboarding \
+    --strategy=suite-level
 ```
 
-## What discovery produced
+## The conclusion this session refutes
 
-**315 entities · 365 relationships · 5 ambiguities · 8 gaps**, from a 469-file
-repository, reproducibly — the candidate model carries a content digest.
+`SESSION-0039` concluded:
 
-| Extracted | |
-|---|---|
-| packages · frameworks | 4 · 18 |
-| NestJS modules | 28 |
-| API endpoints | 161 |
-| database tables | 34 (30 tenant-scoped) |
-| test suites | 70 |
-| environment variables | 27 |
-| external integrations | 5 |
-| existing ADRs | 5 |
-| **invariants inferred** | **94** |
+> *Deterministic extraction is better than a human at coverage and worse at
+> abstraction. That is the deterministic ceiling.*
 
-| Support | Count | Review |
+**That was wrong.** It measured the limit of one rule, not the limit of
+determinism.
+
+The abstraction the human produced was **already in the repository**:
+
+```text
+describe('account lockout & brute-force protection')
+  it('locks the account on the 5th wrong password for exactly 15 minutes')
+  it('per-agent isolation: locking agent A does not affect agent B')
+  ...
+```
+
+Rule `R1` read `it()` names and proposed eight invariants. **Rule `R3` reads the
+`describe` block and proposes one — the same one the human wrote.**
+
+## The measurement, over identical input
+
+One Mechanical Engineering Model, digest `dd47744e6bc66150`. Two interpreters.
+**Neither is probabilistic.**
+
+| | case-level (`R1`) | suite-level (`R3`) |
 |---|---|---|
-| `S-tested` | 234 | batch |
-| `S-inferred` | 218 | **individual** |
-| `S-implemented` | 124 | batch |
-| `S-confirmed-deterministic` | 99 | batch |
-| `S-specified` | 5 | **individual** |
+| entities | 271 | **203** |
+| invariants | 99 | **31** |
+| auth invariants | 19 | **5** |
 
-## The honest comparison
+### Did the deterministic rule recover what a human wrote?
 
-> *Show exactly how the resulting plan is better than the earlier ad hoc
-> grep-based model.*
-
-**In some ways it is not**, and the ways it is not are the finding.
-
-| | grep-based | discovered |
+| Human's invariant | `R1` case-level | `R3` suite-level |
 |---|---|---|
-| invariants surfaced for the OAuth plan | 5 | **7** |
-| test suites named | 5 | 5 |
-| distinct targets | 13 | 13 |
-| tasks | 6 | **5** |
-| decisions before the first LLM token | **54** | 51 |
+| account lockout | no | **YES** |
+| tenant isolation | yes | **YES** |
+| refresh token rotation | no | **YES** |
+| JWT security | no | **YES** |
 
-**The KPI went down.** The discovered plan makes fewer decisions upstream, not
-more.
+**Four of four**, with no language model.
 
-### Where discovery wins
+`R3` proposes `RLS tenant isolation (integration)` — the invariant `SESSION-0039`
+reported as *"missed entirely"* and attributed to a limit of determinism. It was
+missed because `R1` looked at `it()` names and the concept was in a `describe`
+block.
 
-**Coverage and reproducibility.** The hand model covered one module; discovery
-covered 28, found 161 endpoints and 34 tables, and would find them again
-identically. **A human reading source does not scale and does not repeat.**
+## What the two-stage split made possible
 
-It also produced findings no one asked for: **all five ADRs are `Proposed` while
-the codebase implements them**, `refresh_tokens` carries no tenant column in a
-system whose foundational decision is tenant isolation, and two modules have no
-test suite.
+The comparison above is only meaningful because **both interpreters read exactly
+the same input** (`ADR-0108`).
 
-### Where discovery loses, and why
-
-The grep model's invariants are **concepts**: `TenantIsolation`,
-`NoUserEnumeration`, `RefreshRotation`, `TokenIntegrity`.
-
-The discovered model's are **transcriptions**:
-`RejectsA7CharPasswordBelowMinimum`, `RejectsANonStringPasswordTypeConfusio`.
-
-**A human read eight lockout test cases and wrote one invariant. Rule `R1` reads
-eight test names and proposes eight invariants.** More assertions, worse
-abstractions.
-
-**And the most important one was missed.** `TenantIsolation` is stated in ADR
-prose. `R1` reads test names. **A bounded rule cannot find what is not where it
-looks**, and no rule was written for prose because writing one deterministically
-means pattern-matching English.
-
-### What that measures
-
-This is the **deterministic ceiling**, measured rather than assumed
-(`ADR-0107`):
-
-> **Deterministic extraction is better than a human at coverage and worse at
-> abstraction.**
-
-That is the argument for a probabilistic interpreter — and it is now an argument
-from evidence rather than from expectation. `ADR-0103` permits one; this is the
-measurement that would justify building it.
-
-## The applier
-
-**25 entities and 23 relationships authorized** from 315, by an explicit
-reviewer. 290 left unaccepted. **342 relationships were refused** because an
-endpoint was not accepted — an edge to an unaccepted node would compile to a
-dangling reference.
-
-An accepted proposal becomes an **authoring source**, not a model write
-(`ADR-0106`). Each carries its provenance, support classification, originating
-worker and task, and — where inferred — the rule.
-
-**The compiler is unchanged.** It reads a generated source exactly as it reads a
-hand-written one.
-
-## Two defects the pipeline found
-
-**The applier's YAML emission was wrong.** Hand-rolled quoting broke on a label
-containing `:` and on a value beginning with `@`. **A generated source is compiler
-input**, so the fix was to emit with a YAML writer — which `ADR-0106` predicted
-when it recorded that the parser schema becomes load-bearing.
-
-**`implements` was used directly and was not registered.** The fourth instance of
-a core relationship type used directly rather than specialized — the same gap
-`SESSION-0028` found three times.
-
-## Generated products
-
-All deterministic, all from the CKM:
-
-| Product | State |
+| | Stage |
 |---|---|
-| Canonical Knowledge Model | 27 nodes, 24 edges |
-| OWL ontology | `model.ttl`, imports the metamodel |
-| **SHACL shapes** | `shapes.ttl`, 73 triples — **generated from the same registries the compiler reads**, so shapes and compiler cannot disagree |
-| **Search, impact, traceability indexes** | `indexes.json` — **derived by the declared query engine**, so an index and an answer cannot disagree |
-| Navigable Knowledge Explorer | `explorer.html`, self-contained, question-driven |
-| Mermaid graph | `graph.md` |
+| **Mechanical Engineering Model** | facts: 4 packages, 61 dependencies, 28 module directories, 161 routes, 34 tables, 70 test suites with their `describe` blocks and cases, 27 environment references, 62 documents |
+| **Interpretive Discovery** | reads **only** that model; opens no file |
 
-## Limitations
+Before the split, a bad abstraction and a missing fact were the same failure.
+**Now they have different owners**: `R1`'s failure was interpretation — the fact
+it needed was extracted and it did not use it.
 
-**The authorized slice is 25 of 315.** The compiled model is small because
-review is individual for inferred assertions and only auth was authorized.
+## Origin recording
 
-**No workflows were discovered.** No worker extracts them; recorded as a gap.
+Every proposal records **what kind of process produced it** (`ADR-0109`):
 
-**Nothing was observed at runtime.** Discovery read files only; recorded as a gap.
+```text
+[origin]  {'O-deterministic-rule': 394}
+```
 
-**Bounded interpreters are stack-specific.** `R1` reads TypeScript `it()` names.
+**394 of 394 assertions are exactly reproducible.** When a probabilistic
+interpreter is added, that number will fall, and the fall will be visible and
+attributable — which is the point.
+
+Reported as **counts by kind, never a score** (`ADR-0090`). A model that is 100%
+deterministic is not better than one that is 60%; it is differently composed.
+
+## The applied slice
+
+**16 entities authorized** from 203, compiled to an 18-node CKM. The plan for
+*"add OAuth"* now surfaces:
+
+```text
+Invariant.AccountLockoutBruteForceProtection
+Invariant.JwtSecurity
+Invariant.PasswordPolicyRegisterdto
+Invariant.RefreshTokenRotation
+```
+
+**Concepts, not transcriptions** — and derived, not authored.
+
+## What is still genuinely unreachable
+
+**Not proven unreachable — unreached, and recorded as such.**
+
+| Gap | Why |
+|---|---|
+| **prose invariants** | No rule reads document prose. A guarantee stated only in an ADR and asserted by no test is invisible. `Invariant.NoUserEnumeration` — from *"wrong password and wrong email return the same error"* — survives at case level and is absorbed at suite level |
+| workflows | No rule proposes them from the mechanical model |
+| runtime behaviour | The mechanical model contains no runtime observation |
+
+**The suite-level rule loses detail the case-level rule keeps.** Neither
+dominates: `R3` reaches the concept, `R1` reaches the specific guarantee. **A
+third rule proposing both — the concept, with its cases as constituent
+assertions — is the obvious next deterministic step**, and it is not built,
+because this session's purpose was to measure, not to keep optimising.
+
+## What this changes about the argument for a probabilistic interpreter
+
+**It weakens it, honestly.**
+
+`SESSION-0039` argued the case was evidential. It was not: the evidence
+supported *a better rule*, and a better rule delivered it.
+
+**The case must now be made against `R3`, over the same mechanical model, and
+measured the same way.** That is exactly the comparison `ADR-0108` was written to
+make possible — and it is a harder bar than the one this project set for itself
+yesterday.

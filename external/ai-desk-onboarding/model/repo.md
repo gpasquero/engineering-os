@@ -9,4 +9,4 @@ attributes:
 relationships:
   - evidenced-by: Evidence.RepositoryInventory
 ---
-**The seed**, authored by hand. One node, so that discovery has a subject.
+**The seed**, authored by hand. One node, so discovery has a subject.

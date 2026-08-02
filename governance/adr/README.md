@@ -16,7 +16,7 @@ same session the decision is made.
 > a rule exists; the rule that must be followed lives in a Policy under
 > `shared/policies/`. Agents consume policies; humans read ADRs for rationale.
 
-**Highest allocated ID: `ADR-0107`.** IDs are sequential and never reused.
+**Highest allocated ID: `ADR-0109`.** IDs are sequential and never reused.
 
 > This index table is a hand-maintained projection of ADR front matter. It is
 > listed in the transitional-debt register, `ISSUE-0037`.
@@ -202,6 +202,8 @@ Read these before designing anything that produces an artifact:
 | [ADR-0105](ADR-0105-engineering-discovery-is-a-workflow.md) | **Engineering Discovery is the first engineering workflow, not a preprocessing step** | accepted | — |
 | [ADR-0106](ADR-0106-the-proposed-assertion.md) | **A Candidate Engineering Model and an Execution Observation are the same artifact at different scales** | accepted | — |
 | [ADR-0107](ADR-0107-discovery-production.md) | **Discovery production is worker output; orchestration declarations are not a substitute for it** | accepted | — |
+| [ADR-0108](ADR-0108-discovery-has-two-stages.md) | **Discovery has two stages; Interpretive Discovery operates exclusively on the Mechanical Model** | accepted | — |
+| [ADR-0109](ADR-0109-assertion-origin.md) | **Every proposed assertion records its origin kind** | accepted | — |
 
 ## Supersessions
 
@@ -235,6 +237,7 @@ wrong. There is no front-matter mechanism for this — `ISSUE-0048`.
 | `ADR-0041` | `ADR-0048` | The field list. Eight fields become ten: `value domain` becomes `value model`, `authoritative specification` is dropped, and assignment semantics, serialization strategy and validation rules are added. The registration decision is untouched and remains `Active`. |
 | `ADR-0037` | `ADR-0039` | The universality claim. "Every artifact belongs to exactly one layer" should read: every *semantic* artifact does; cross-cutting artifacts belong to none. The four layers are untouched and remain `Active`. |
 | `ADR-0058` | `ADR-0060` | "Extracts" means extracting a *declaration*, which is mechanical. **Recognising** a recurring principle is Interpretive Discovery, and therefore authoring rather than compilation. |
+| `ADR-0107` | `ADR-0108` | The ceiling claim. *Deterministic extraction is worse than a human at abstraction* measured **one rule**, not determinism: rule `R3`, reading `describe` blocks, recovers all four invariants a human wrote. The three worker kinds are untouched and remain `Active`. |
 | `ADR-0031` | `ADR-0032` | The opening definition. "A Registry is an authoritative index" should read: a Registry *Specification* is authoritative; a Registry *Projection* is the derived index. The pattern is untouched and remains `Active`. |
 
 ## Rules

@@ -10,12 +10,13 @@
       "label": "ADR-0001: Multi-tenancy Strategy",
       "family": "operational",
       "position": null,
-      "description": "Proposed by `W-structure-extractor` in task `T01-extract` and accepted through review. Support: `S-specified`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "description": "Proposed by `W-decision-archaeologist` in task `T02-interpret` and accepted through review. Support: `S-specified`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
       "attributes": {
-        "decision": "Shared Schema + PostgreSQL Row-Level Security",
         "locator": "header",
-        "proposed-by": "W-structure-extractor",
-        "proposed-in": "T01-extract",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-decision-archaeologist",
+        "proposed-in": "T02-interpret",
+        "rule": "S3-adr-directory-is-a-decision",
         "source": "docs/adr/ADR-0001-multi-tenancy-strategy.md",
         "status": "Proposed",
         "support": "S-specified"
@@ -27,15 +28,18 @@
     {
       "id": "Artifact.AccountLockoutSpec",
       "type": "Artifact",
-      "label": "account-lockout.spec.ts",
+      "label": "account-lockout.spec.spec.ts",
       "family": "descriptive",
       "position": null,
-      "description": "Proposed by `W-structure-extractor` in task `T01-extract` and accepted through review. Support: `S-tested`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-tested`.\n\nInferred by rule `S4-spec-validates-module`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
       "attributes": {
         "cases": "8",
-        "locator": "8 it() cases",
-        "proposed-by": "W-structure-extractor",
-        "proposed-in": "T01-extract",
+        "describes": "account lockout & brute-force protection",
+        "locator": "8 cases",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "S4-spec-validates-module",
         "source": "packages/backend/src/modules/auth/__tests__/account-lockout.spec.ts",
         "support": "S-tested"
       },
@@ -49,7 +53,7 @@
       "label": "ai-desk repository",
       "family": "descriptive",
       "position": null,
-      "description": "**The seed**, authored by hand. One node, so that discovery has a subject.",
+      "description": "**The seed**, authored by hand. One node, so discovery has a subject.",
       "attributes": {
         "locator": "469 tracked files",
         "source": "/Users/willy/Localsources/ai-desk",
@@ -65,13 +69,14 @@
       "label": "auth.controller.ts",
       "family": "descriptive",
       "position": null,
-      "description": "Proposed by `W-structure-extractor` in task `T01-extract` and accepted through review. Support: `S-implemented`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`.\n\nInferred by rule `S2-controller-implements-module`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
       "attributes": {
-        "locator": "@Controller('auth'), 3 routes",
-        "prefix": "auth",
-        "proposed-by": "W-structure-extractor",
-        "proposed-in": "T01-extract",
+        "locator": "3 routes",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
         "routes": "3",
+        "rule": "S2-controller-implements-module",
         "source": "packages/backend/src/modules/auth/auth.controller.ts",
         "support": "S-implemented"
       },
@@ -82,15 +87,18 @@
     {
       "id": "Artifact.AuthServiceSpec",
       "type": "Artifact",
-      "label": "auth.service.spec.ts",
+      "label": "auth.service.spec.spec.ts",
       "family": "descriptive",
       "position": null,
-      "description": "Proposed by `W-structure-extractor` in task `T01-extract` and accepted through review. Support: `S-tested`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-tested`.\n\nInferred by rule `S4-spec-validates-module`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
       "attributes": {
         "cases": "12",
-        "locator": "12 it() cases",
-        "proposed-by": "W-structure-extractor",
-        "proposed-in": "T01-extract",
+        "describes": "AuthService | login | refresh",
+        "locator": "12 cases",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "S4-spec-validates-module",
         "source": "packages/backend/src/modules/auth/__tests__/auth.service.spec.ts",
         "support": "S-tested"
       },
@@ -101,15 +109,18 @@
     {
       "id": "Artifact.JwtSecuritySpec",
       "type": "Artifact",
-      "label": "jwt-security.spec.ts",
+      "label": "jwt-security.spec.spec.ts",
       "family": "descriptive",
       "position": null,
-      "description": "Proposed by `W-structure-extractor` in task `T01-extract` and accepted through review. Support: `S-tested`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-tested`.\n\nInferred by rule `S4-spec-validates-module`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
       "attributes": {
         "cases": "11",
-        "locator": "11 it() cases",
-        "proposed-by": "W-structure-extractor",
-        "proposed-in": "T01-extract",
+        "describes": "JWT security | signature verification | payload / expiry enforcement",
+        "locator": "11 cases",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "S4-spec-validates-module",
         "source": "packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts",
         "support": "S-tested"
       },
@@ -120,15 +131,18 @@
     {
       "id": "Artifact.PasswordSecuritySpec",
       "type": "Artifact",
-      "label": "password-security.spec.ts",
+      "label": "password-security.spec.spec.ts",
       "family": "descriptive",
       "position": null,
-      "description": "Proposed by `W-structure-extractor` in task `T01-extract` and accepted through review. Support: `S-tested`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-tested`.\n\nInferred by rule `S4-spec-validates-module`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
       "attributes": {
         "cases": "10",
-        "locator": "10 it() cases",
-        "proposed-by": "W-structure-extractor",
-        "proposed-in": "T01-extract",
+        "describes": "Password policy \u2014 RegisterDto | bcrypt hashing guarantees",
+        "locator": "10 cases",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "S4-spec-validates-module",
         "source": "packages/backend/src/modules/auth/__tests__/password-security.spec.ts",
         "support": "S-tested"
       },
@@ -139,15 +153,18 @@
     {
       "id": "Artifact.RefreshTokenRotationSpec",
       "type": "Artifact",
-      "label": "refresh-token-rotation.spec.ts",
+      "label": "refresh-token-rotation.spec.spec.ts",
       "family": "descriptive",
       "position": null,
-      "description": "Proposed by `W-structure-extractor` in task `T01-extract` and accepted through review. Support: `S-tested`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-tested`.\n\nInferred by rule `S4-spec-validates-module`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
       "attributes": {
         "cases": "7",
-        "locator": "7 it() cases",
-        "proposed-by": "W-structure-extractor",
-        "proposed-in": "T01-extract",
+        "describes": "Refresh token rotation",
+        "locator": "7 cases",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "S4-spec-validates-module",
         "source": "packages/backend/src/modules/auth/__tests__/refresh-token-rotation.spec.ts",
         "support": "S-tested"
       },
@@ -156,18 +173,41 @@
       }
     },
     {
+      "id": "Artifact.TenantIsolationIntegrationSpec",
+      "type": "Artifact",
+      "label": "tenant-isolation.integration.spec.spec.ts",
+      "family": "descriptive",
+      "position": null,
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-tested`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "attributes": {
+        "cases": "9",
+        "describes": "RLS tenant isolation (integration)",
+        "locator": "9 cases",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "S4-spec-validates-module",
+        "source": "packages/backend/src/common/database/__tests__/tenant-isolation.integration.spec.ts",
+        "support": "S-tested"
+      },
+      "provenance": {
+        "source": "artifact-tenantisolationintegrationspec.md"
+      }
+    },
+    {
       "id": "BoundedContext.Backend",
       "type": "BoundedContext",
       "label": "backend package",
       "family": "descriptive",
       "position": null,
-      "description": "Proposed by `W-structure-extractor` in task `T01-extract` and accepted through review. Support: `S-confirmed-deterministic`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-confirmed-deterministic`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
       "attributes": {
         "locator": "workspace package",
-        "package": "backend",
-        "proposed-by": "W-structure-extractor",
-        "proposed-in": "T01-extract",
-        "source": "packages/backend",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "S1-package-is-a-context",
+        "source": "packages/backend/package.json",
         "support": "S-confirmed-deterministic"
       },
       "provenance": {
@@ -180,133 +220,19 @@
       "label": "auth module",
       "family": "descriptive",
       "position": null,
-      "description": "Proposed by `W-structure-extractor` in task `T01-extract` and accepted through review. Support: `S-implemented`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`.\n\nInferred by rule `S1-module-is-a-capability`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
       "attributes": {
-        "locator": "NestJS module directory",
-        "module": "auth",
-        "proposed-by": "W-structure-extractor",
-        "proposed-in": "T01-extract",
+        "locator": "module directory",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "S1-module-is-a-capability",
         "source": "packages/backend/src/modules/auth",
-        "support": "S-implemented"
+        "support": "S-implemented",
+        "ts-files": "11"
       },
       "provenance": {
         "source": "capability-auth.md"
-      }
-    },
-    {
-      "id": "Concept.EnvDbPassword",
-      "type": "Concept",
-      "label": "$DB_PASSWORD",
-      "family": "descriptive",
-      "position": null,
-      "description": "Proposed by `W-structure-extractor` in task `T01-extract` and accepted through review. Support: `S-confirmed-deterministic`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
-      "attributes": {
-        "env-var": "DB_PASSWORD",
-        "locator": "process.env.DB_PASSWORD",
-        "proposed-by": "W-structure-extractor",
-        "proposed-in": "T01-extract",
-        "source": "packages/backend/src/common/database/__tests__/tenant-isolation.integration.spec.ts",
-        "support": "S-confirmed-deterministic"
-      },
-      "provenance": {
-        "source": "concept-envdbpassword.md"
-      }
-    },
-    {
-      "id": "Concept.EnvDbSystemPassword",
-      "type": "Concept",
-      "label": "$DB_SYSTEM_PASSWORD",
-      "family": "descriptive",
-      "position": null,
-      "description": "Proposed by `W-structure-extractor` in task `T01-extract` and accepted through review. Support: `S-confirmed-deterministic`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
-      "attributes": {
-        "env-var": "DB_SYSTEM_PASSWORD",
-        "locator": "process.env.DB_SYSTEM_PASSWORD",
-        "proposed-by": "W-structure-extractor",
-        "proposed-in": "T01-extract",
-        "source": "packages/backend/src/common/database/__tests__/tenant-isolation.integration.spec.ts",
-        "support": "S-confirmed-deterministic"
-      },
-      "provenance": {
-        "source": "concept-envdbsystempassword.md"
-      }
-    },
-    {
-      "id": "Concept.EnvJwtAccessSecret",
-      "type": "Concept",
-      "label": "$JWT_ACCESS_SECRET",
-      "family": "descriptive",
-      "position": null,
-      "description": "Proposed by `W-structure-extractor` in task `T01-extract` and accepted through review. Support: `S-confirmed-deterministic`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
-      "attributes": {
-        "env-var": "JWT_ACCESS_SECRET",
-        "locator": "process.env.JWT_ACCESS_SECRET",
-        "proposed-by": "W-structure-extractor",
-        "proposed-in": "T01-extract",
-        "source": "packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts",
-        "support": "S-confirmed-deterministic"
-      },
-      "provenance": {
-        "source": "concept-envjwtaccesssecret.md"
-      }
-    },
-    {
-      "id": "Concept.EnvRedisPassword",
-      "type": "Concept",
-      "label": "$REDIS_PASSWORD",
-      "family": "descriptive",
-      "position": null,
-      "description": "Proposed by `W-structure-extractor` in task `T01-extract` and accepted through review. Support: `S-confirmed-deterministic`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
-      "attributes": {
-        "env-var": "REDIS_PASSWORD",
-        "locator": "process.env.REDIS_PASSWORD",
-        "proposed-by": "W-structure-extractor",
-        "proposed-in": "T01-extract",
-        "source": "packages/backend/src/modules/sla/sla-timer.service.ts",
-        "support": "S-confirmed-deterministic"
-      },
-      "provenance": {
-        "source": "concept-envredispassword.md"
-      }
-    },
-    {
-      "id": "Concept.NestjsJwt",
-      "type": "Concept",
-      "label": "@nestjs/jwt",
-      "family": "descriptive",
-      "position": null,
-      "description": "Proposed by `W-structure-extractor` in task `T01-extract` and accepted through review. Support: `S-confirmed-deterministic`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
-      "attributes": {
-        "framework": "@nestjs/jwt",
-        "locator": "dependencies",
-        "package": "backend",
-        "proposed-by": "W-structure-extractor",
-        "proposed-in": "T01-extract",
-        "source": "packages/backend/package.json",
-        "support": "S-confirmed-deterministic"
-      },
-      "provenance": {
-        "source": "concept-nestjsjwt.md"
-      }
-    },
-    {
-      "id": "Concept.PassportJwt",
-      "type": "Concept",
-      "label": "passport-jwt",
-      "family": "descriptive",
-      "position": null,
-      "description": "Proposed by `W-structure-extractor` in task `T01-extract` and accepted through review. Support: `S-confirmed-deterministic`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
-      "attributes": {
-        "framework": "passport-jwt",
-        "locator": "dependencies",
-        "package": "backend",
-        "proposed-by": "W-structure-extractor",
-        "proposed-in": "T01-extract",
-        "source": "packages/backend/package.json",
-        "support": "S-confirmed-deterministic"
-      },
-      "provenance": {
-        "source": "concept-passportjwt.md"
       }
     },
     {
@@ -315,14 +241,15 @@
       "label": "refresh_tokens table",
       "family": "descriptive",
       "position": null,
-      "description": "Proposed by `W-structure-extractor` in task `T01-extract` and accepted through review. Support: `S-implemented`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "description": "Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-implemented`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
       "attributes": {
         "locator": "pgTable('refresh_tokens')",
-        "proposed-by": "W-structure-extractor",
-        "proposed-in": "T01-extract",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-domain-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "S1-pgtable-is-a-concept",
         "source": "packages/backend/src/common/database/schema/refresh-tokens.ts",
         "support": "S-implemented",
-        "table": "refresh_tokens",
         "tenant-scoped": "false"
       },
       "provenance": {
@@ -347,184 +274,108 @@
       }
     },
     {
-      "id": "Evidence.RepositoryLayout",
-      "type": "Evidence",
-      "label": "Repository layout",
+      "id": "Invariant.AccountLockoutBruteForceProtection",
+      "type": "Invariant",
+      "label": "account lockout & brute-force protection",
       "family": "descriptive",
       "position": null,
-      "description": "Proposed by `W-structure-extractor` in task `T01-extract` and accepted through review. Support: `S-confirmed-deterministic`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "description": "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`.\n\nInferred by rule `R3-describe-names-the-invariant`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
       "attributes": {
-        "kind": "source-reference",
-        "locator": "2442 files, 4 packages",
-        "packages": "backend,frontend,shared,widget",
-        "proposed-by": "W-structure-extractor",
-        "proposed-in": "T01-extract",
-        "source": ".",
-        "support": "S-confirmed-deterministic",
-        "top-languages": ".js:841,.ts:573,.map:477,.json:224,.tsx:155"
+        "asserted-by-cases": "3",
+        "locator": "describe('account lockout & brute-force protection')",
+        "origin": "O-deterministic-rule",
+        "proposed-by": "W-constraint-interpreter",
+        "proposed-in": "T02-interpret",
+        "rule": "R3-describe-names-the-invariant",
+        "source": "packages/backend/src/modules/auth/__tests__/account-lockout.spec.ts",
+        "support": "S-inferred"
       },
       "provenance": {
-        "source": "evidence-repositorylayout.md"
+        "source": "invariant-accountlockoutbruteforceprotection.md"
       }
     },
     {
-      "id": "Invariant.JwtstrategySurfacesMissingFieldsAsUndef",
+      "id": "Invariant.JwtSecurity",
       "type": "Invariant",
-      "label": "JwtStrategy surfaces missing fields as undefined (downstream guards must reject)",
+      "label": "JWT security",
       "family": "descriptive",
       "position": null,
-      "description": "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`.\n\nInferred by rule `R1-test-name-states-a-rule`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "description": "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`.\n\nInferred by rule `R3-describe-names-the-invariant`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
       "attributes": {
-        "asserted-by": "Artifact.JwtSecuritySpec",
-        "locator": "it('JwtStrategy surfaces missing fields as undefined (downstream guards mu')",
+        "asserted-by-cases": "7",
+        "locator": "describe('JWT security')",
+        "origin": "O-deterministic-rule",
         "proposed-by": "W-constraint-interpreter",
         "proposed-in": "T02-interpret",
-        "rule": "R1-test-name-states-a-rule",
+        "rule": "R3-describe-names-the-invariant",
         "source": "packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts",
         "support": "S-inferred"
       },
       "provenance": {
-        "source": "invariant-jwtstrategysurfacesmissingfieldsasundef.md"
+        "source": "invariant-jwtsecurity.md"
       }
     },
     {
-      "id": "Invariant.LocksTheAccountOnThe5ThWrongPassword",
+      "id": "Invariant.PasswordPolicyRegisterdto",
       "type": "Invariant",
-      "label": "locks the account on the 5th wrong password for exactly 15 minutes",
+      "label": "Password policy \u2014 RegisterDto",
       "family": "descriptive",
       "position": null,
-      "description": "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`.\n\nInferred by rule `R1-test-name-states-a-rule`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "description": "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`.\n\nInferred by rule `R3-describe-names-the-invariant`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
       "attributes": {
-        "asserted-by": "Artifact.AccountLockoutSpec",
-        "locator": "it('locks the account on the 5th wrong password for exactly 15 minutes')",
+        "asserted-by-cases": "5",
+        "locator": "describe('Password policy \u2014 RegisterDto')",
+        "origin": "O-deterministic-rule",
         "proposed-by": "W-constraint-interpreter",
         "proposed-in": "T02-interpret",
-        "rule": "R1-test-name-states-a-rule",
-        "source": "packages/backend/src/modules/auth/__tests__/account-lockout.spec.ts",
-        "support": "S-inferred"
-      },
-      "provenance": {
-        "source": "invariant-lockstheaccountonthe5thwrongpassword.md"
-      }
-    },
-    {
-      "id": "Invariant.RejectsA7CharPasswordBelowMinimum",
-      "type": "Invariant",
-      "label": "rejects a 7-char password (below minimum)",
-      "family": "descriptive",
-      "position": null,
-      "description": "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`.\n\nInferred by rule `R1-test-name-states-a-rule`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
-      "attributes": {
-        "asserted-by": "Artifact.PasswordSecuritySpec",
-        "locator": "it('rejects a 7-char password (below minimum)')",
-        "proposed-by": "W-constraint-interpreter",
-        "proposed-in": "T02-interpret",
-        "rule": "R1-test-name-states-a-rule",
+        "rule": "R3-describe-names-the-invariant",
         "source": "packages/backend/src/modules/auth/__tests__/password-security.spec.ts",
         "support": "S-inferred"
       },
       "provenance": {
-        "source": "invariant-rejectsa7charpasswordbelowminimum.md"
+        "source": "invariant-passwordpolicyregisterdto.md"
       }
     },
     {
-      "id": "Invariant.RejectsANonStringPasswordTypeConfusio",
+      "id": "Invariant.RefreshTokenRotation",
       "type": "Invariant",
-      "label": "rejects a non-string password (type confusion attempt)",
+      "label": "Refresh token rotation",
       "family": "descriptive",
       "position": null,
-      "description": "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`.\n\nInferred by rule `R1-test-name-states-a-rule`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "description": "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`.\n\nInferred by rule `R3-describe-names-the-invariant`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
       "attributes": {
-        "asserted-by": "Artifact.PasswordSecuritySpec",
-        "locator": "it('rejects a non-string password (type confusion attempt)')",
+        "asserted-by-cases": "3",
+        "locator": "describe('Refresh token rotation')",
+        "origin": "O-deterministic-rule",
         "proposed-by": "W-constraint-interpreter",
         "proposed-in": "T02-interpret",
-        "rule": "R1-test-name-states-a-rule",
-        "source": "packages/backend/src/modules/auth/__tests__/password-security.spec.ts",
+        "rule": "R3-describe-names-the-invariant",
+        "source": "packages/backend/src/modules/auth/__tests__/refresh-token-rotation.spec.ts",
         "support": "S-inferred"
       },
       "provenance": {
-        "source": "invariant-rejectsanonstringpasswordtypeconfusio.md"
+        "source": "invariant-refreshtokenrotation.md"
       }
     },
     {
-      "id": "Invariant.RejectsAnEmptyPassword",
+      "id": "Invariant.RlsTenantIsolationIntegration",
       "type": "Invariant",
-      "label": "rejects an empty password",
+      "label": "RLS tenant isolation (integration)",
       "family": "descriptive",
       "position": null,
-      "description": "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`.\n\nInferred by rule `R1-test-name-states-a-rule`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
+      "description": "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`.\n\nInferred by rule `R3-describe-names-the-invariant`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
       "attributes": {
-        "asserted-by": "Artifact.PasswordSecuritySpec",
-        "locator": "it('rejects an empty password')",
+        "asserted-by-cases": "1",
+        "locator": "describe('RLS tenant isolation (integration)')",
+        "origin": "O-deterministic-rule",
         "proposed-by": "W-constraint-interpreter",
         "proposed-in": "T02-interpret",
-        "rule": "R1-test-name-states-a-rule",
-        "source": "packages/backend/src/modules/auth/__tests__/password-security.spec.ts",
+        "rule": "R3-describe-names-the-invariant",
+        "source": "packages/backend/src/common/database/__tests__/tenant-isolation.integration.spec.ts",
         "support": "S-inferred"
       },
       "provenance": {
-        "source": "invariant-rejectsanemptypassword.md"
-      }
-    },
-    {
-      "id": "Invariant.RejectsMissingPassword",
-      "type": "Invariant",
-      "label": "rejects missing password",
-      "family": "descriptive",
-      "position": null,
-      "description": "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`.\n\nInferred by rule `R1-test-name-states-a-rule`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
-      "attributes": {
-        "asserted-by": "Artifact.PasswordSecuritySpec",
-        "locator": "it('rejects missing password')",
-        "proposed-by": "W-constraint-interpreter",
-        "proposed-in": "T02-interpret",
-        "rule": "R1-test-name-states-a-rule",
-        "source": "packages/backend/src/modules/auth/__tests__/password-security.spec.ts",
-        "support": "S-inferred"
-      },
-      "provenance": {
-        "source": "invariant-rejectsmissingpassword.md"
-      }
-    },
-    {
-      "id": "Invariant.RejectsTheCorrectPasswordWhileTheLocko",
-      "type": "Invariant",
-      "label": "rejects the CORRECT password while the lockout window is active",
-      "family": "descriptive",
-      "position": null,
-      "description": "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`.\n\nInferred by rule `R1-test-name-states-a-rule`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
-      "attributes": {
-        "asserted-by": "Artifact.AccountLockoutSpec",
-        "locator": "it('rejects the CORRECT password while the lockout window is active')",
-        "proposed-by": "W-constraint-interpreter",
-        "proposed-in": "T02-interpret",
-        "rule": "R1-test-name-states-a-rule",
-        "source": "packages/backend/src/modules/auth/__tests__/account-lockout.spec.ts",
-        "support": "S-inferred"
-      },
-      "provenance": {
-        "source": "invariant-rejectsthecorrectpasswordwhilethelocko.md"
-      }
-    },
-    {
-      "id": "Invariant.RejectsWhenUserHasNoRoleFieldOnJwt",
-      "type": "Invariant",
-      "label": "rejects when user has no role field on JWT",
-      "family": "descriptive",
-      "position": null,
-      "description": "Proposed by `W-constraint-interpreter` in task `T02-interpret` and accepted through review. Support: `S-inferred`.\n\n**Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.",
-      "attributes": {
-        "asserted-by": "Artifact.RolesGuardSpec",
-        "locator": "it('rejects when user has no role field on JWT')",
-        "proposed-by": "W-constraint-interpreter",
-        "proposed-in": "T02-interpret",
-        "rule": "R1-test-name-states-a-rule",
-        "source": "packages/backend/src/common/guards/__tests__/roles.guard.spec.ts",
-        "support": "S-inferred"
-      },
-      "provenance": {
-        "source": "invariant-rejectswhenuserhasnorolefieldonjwt.md"
+        "source": "invariant-rlstenantisolationintegration.md"
       }
     }
   ],
@@ -586,114 +437,65 @@
       "category": "structural"
     },
     {
-      "from": "Concept.NestjsJwt",
-      "predicate": "scoped-to",
-      "to": "BoundedContext.Backend",
-      "core": "contained-by",
-      "category": "structural"
-    },
-    {
-      "from": "Concept.PassportJwt",
-      "predicate": "scoped-to",
-      "to": "BoundedContext.Backend",
-      "core": "contained-by",
-      "category": "structural"
-    },
-    {
-      "from": "Invariant.JwtstrategySurfacesMissingFieldsAsUndef",
+      "from": "Invariant.AccountLockoutBruteForceProtection",
       "predicate": "constrains",
       "to": "Capability.Auth",
       "core": "governs",
       "category": "behavioral"
     },
     {
-      "from": "Invariant.JwtstrategySurfacesMissingFieldsAsUndef",
+      "from": "Invariant.AccountLockoutBruteForceProtection",
+      "predicate": "enforced-at",
+      "to": "Artifact.AccountLockoutSpec",
+      "core": "validated-by",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.JwtSecurity",
+      "predicate": "constrains",
+      "to": "Capability.Auth",
+      "core": "governs",
+      "category": "behavioral"
+    },
+    {
+      "from": "Invariant.JwtSecurity",
       "predicate": "enforced-at",
       "to": "Artifact.JwtSecuritySpec",
       "core": "validated-by",
       "category": "behavioral"
     },
     {
-      "from": "Invariant.LocksTheAccountOnThe5ThWrongPassword",
+      "from": "Invariant.PasswordPolicyRegisterdto",
       "predicate": "constrains",
       "to": "Capability.Auth",
       "core": "governs",
       "category": "behavioral"
     },
     {
-      "from": "Invariant.LocksTheAccountOnThe5ThWrongPassword",
-      "predicate": "enforced-at",
-      "to": "Artifact.AccountLockoutSpec",
-      "core": "validated-by",
-      "category": "behavioral"
-    },
-    {
-      "from": "Invariant.RejectsA7CharPasswordBelowMinimum",
-      "predicate": "constrains",
-      "to": "Capability.Auth",
-      "core": "governs",
-      "category": "behavioral"
-    },
-    {
-      "from": "Invariant.RejectsA7CharPasswordBelowMinimum",
+      "from": "Invariant.PasswordPolicyRegisterdto",
       "predicate": "enforced-at",
       "to": "Artifact.PasswordSecuritySpec",
       "core": "validated-by",
       "category": "behavioral"
     },
     {
-      "from": "Invariant.RejectsANonStringPasswordTypeConfusio",
+      "from": "Invariant.RefreshTokenRotation",
       "predicate": "constrains",
       "to": "Capability.Auth",
       "core": "governs",
       "category": "behavioral"
     },
     {
-      "from": "Invariant.RejectsANonStringPasswordTypeConfusio",
+      "from": "Invariant.RefreshTokenRotation",
       "predicate": "enforced-at",
-      "to": "Artifact.PasswordSecuritySpec",
+      "to": "Artifact.RefreshTokenRotationSpec",
       "core": "validated-by",
       "category": "behavioral"
     },
     {
-      "from": "Invariant.RejectsAnEmptyPassword",
-      "predicate": "constrains",
-      "to": "Capability.Auth",
-      "core": "governs",
-      "category": "behavioral"
-    },
-    {
-      "from": "Invariant.RejectsAnEmptyPassword",
+      "from": "Invariant.RlsTenantIsolationIntegration",
       "predicate": "enforced-at",
-      "to": "Artifact.PasswordSecuritySpec",
-      "core": "validated-by",
-      "category": "behavioral"
-    },
-    {
-      "from": "Invariant.RejectsMissingPassword",
-      "predicate": "constrains",
-      "to": "Capability.Auth",
-      "core": "governs",
-      "category": "behavioral"
-    },
-    {
-      "from": "Invariant.RejectsMissingPassword",
-      "predicate": "enforced-at",
-      "to": "Artifact.PasswordSecuritySpec",
-      "core": "validated-by",
-      "category": "behavioral"
-    },
-    {
-      "from": "Invariant.RejectsTheCorrectPasswordWhileTheLocko",
-      "predicate": "constrains",
-      "to": "Capability.Auth",
-      "core": "governs",
-      "category": "behavioral"
-    },
-    {
-      "from": "Invariant.RejectsTheCorrectPasswordWhileTheLocko",
-      "predicate": "enforced-at",
-      "to": "Artifact.AccountLockoutSpec",
+      "to": "Artifact.TenantIsolationIntegrationSpec",
       "core": "validated-by",
       "category": "behavioral"
     }
@@ -731,32 +533,32 @@
     }
   },
   "statistics": {
-    "nodes": 27,
-    "edges": 24,
+    "nodes": 18,
+    "edges": 17,
     "byType": {
       "ADR": 1,
-      "Artifact": 7,
+      "Artifact": 8,
       "BoundedContext": 1,
       "Capability": 1,
-      "Concept": 7,
-      "Evidence": 2,
-      "Invariant": 8
+      "Concept": 1,
+      "Evidence": 1,
+      "Invariant": 5
     },
     "byFamily": {
-      "descriptive": 26,
+      "descriptive": 17,
       "operational": 1
     },
     "byCategory": {
-      "behavioral": 19,
-      "structural": 4,
+      "behavioral": 14,
+      "structural": 2,
       "traceability": 1
     },
     "byCoreType": {
-      "contained-by": 3,
+      "contained-by": 1,
       "evidenced-by": 1,
-      "governs": 7,
+      "governs": 4,
       "implements": 1,
-      "validated-by": 7,
+      "validated-by": 5,
       "validates": 5
     }
   }

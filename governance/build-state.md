@@ -4,7 +4,7 @@ title: Build State
 status: current
 created: 2026-08-02
 updated: 2026-08-02
-milestone: brownfield
+milestone: discovery-two-stage
 ---
 
 # Build State
@@ -17,92 +17,94 @@ milestone: brownfield
 
 ## Current work
 
-**Brownfield onboarding** — both halves: **discovery production** and **proposal
-intake and application** (`ADR-0107`).
+**Two-stage Discovery** (`ADR-0108`), with **assertion origin recorded**
+(`ADR-0109`).
 
-## The complete slice runs
+## A conclusion was refuted
 
-```sh
-python3 discovery/run.py /Users/willy/Localsources/ai-desk external/ai-desk-onboarding
-python3 tools/review.py external/ai-desk-onboarding summary
-python3 tools/review.py external/ai-desk-onboarding apply --ids=… --reviewer=…
-python3 tools/compile.py external/ai-desk-onboarding
-python3 tools/direct.py external/ai-desk-onboarding I-modify-behavior Capability.Auth
+`SESSION-0039` claimed a **deterministic ceiling**: *better than a human at
+coverage, worse at abstraction.*
+
+**It measured one rule.** The abstraction was already in the repository:
+
+```text
+describe('account lockout & brute-force protection')
 ```
 
-**ai-desk + one bootstrap node → 315 proposals → 25 authorized → CKM → OWL,
-SHACL, indexes, explorer → Engineering Plan.**
-
-## The honest result
-
-| | grep-based | discovered |
+| Human's invariant | `R1` case-level | `R3` suite-level |
 |---|---|---|
-| invariants for the OAuth plan | 5 | **7** |
-| tasks | 6 | 5 |
-| decisions before the first LLM token | **54** | 51 |
+| account lockout | no | **YES** |
+| tenant isolation | yes | **YES** |
+| refresh token rotation | no | **YES** |
+| JWT security | no | **YES** |
 
-**The KPI went down.** Discovery wins on **coverage and reproducibility** — 28
-modules, 161 endpoints, 34 tables, 70 test suites, repeatable with a stable
-digest — and **loses on abstraction**.
+**Four of four, with no language model.** Including the one `SESSION-0039`
+reported as *"missed entirely"* — missed because `R1` read `it()` names and the
+concept was in a `describe` block.
 
-A human read eight lockout tests and wrote **one** invariant. Rule `R1` reads
-eight test names and proposes **eight**. And **tenant isolation was missed
-entirely**: it is stated in ADR prose, and `R1` reads test names.
+## The measurement is only possible because of the split
 
-> **Deterministic extraction is better than a human at coverage and worse at
-> abstraction.**
+```sh
+python3 discovery/run.py /Users/willy/Localsources/ai-desk external/ai-desk-onboarding \
+    --strategy=suite-level
+```
 
-That is the **deterministic ceiling, measured rather than assumed** — and the
-argument for a probabilistic interpreter is now evidential (`ADR-0103` permits
-one; none is built).
+| Stage | Reads | Produces |
+|---|---|---|
+| **Mechanical** | source files | Mechanical Engineering Model, digest `dd47744e6bc66150` |
+| **Interpretive** | **only the Mechanical Model** | proposed engineering knowledge |
+
+**Interpreters never open a file.** That constraint is what makes two
+interpreters comparable and what separates a missing fact from a bad abstraction.
+
+| Interpreter, same input | entities | invariants |
+|---|---|---|
+| case-level `R1` | 271 | 99 |
+| **suite-level `R3`** | **203** | **31** |
 
 ## What exists
 
 | Area | State |
 |---|---|
-| **`discovery/workers/extractors.py`** | 8 deterministic extractors — structure, stack, modules, APIs, persistence, tests, config, integrations, decisions |
-| **`discovery/workers/interpreters.py`** | 2 bounded rules + gap identification. **Every inference names its rule** |
-| **`discovery/candidate.py`** | Candidate Engineering Model with a content digest |
-| **`compiler/apply/`** | Authorization + application. **An accepted proposal becomes an authoring source, never a model write** |
-| **`tools/review.py`** | Summary, ambiguities, gaps, conflicts, authorize-and-apply |
-| **`model/support-classification.md`** | 8 kinds — 3 batch-reviewable, 3 individual, 1 gap-only |
-| **`compiler/emitters/shacl/`** | Shapes **generated from the same registries the compiler reads** |
-| **`compiler/emitters/indexes/`** | Search, impact, traceability — **derived by the declared query engine** |
-| `external/ai-desk-onboarding/` | Candidate model · 25 authorized sources · CKM · 6 generated products |
-| `tests/` | 17 fixtures, 9 negative, golden outputs for **6 emitters** |
-| Registries | 15 |
-| `model/metamodel/` | 23 of 27 entities — **unchanged for eight milestones** |
+| **`discovery/mechanical.py`** | Facts only: 4 packages · 61 deps · 28 modules · 161 routes · 34 tables · 70 suites with `describe` blocks · 27 env refs · 62 documents |
+| **`discovery/interpretive.py`** | 6 named rules, **two comparable invariant strategies**. Reads no file |
+| `discovery/candidate.py` | Candidate model with content digest and origin statistics |
+| `compiler/apply/` · `tools/review.py` | Authorization and application as authoring sources |
+| **`model/assertion-origins.md`** | 4 origin kinds. **394 of 394 assertions reproducible** |
+| `model/support-classification.md` | 8 kinds — 3 batch, 3 individual, 1 gap-only |
+| `compiler/emitters/` | json · owl · mermaid · explorer · **shacl** · **indexes** |
+| `external/ai-desk-onboarding/` | Mechanical model · candidate model · 16 authored sources · CKM · 6 products |
+| `tests/` | 17 fixtures, 9 negative, golden for 6 emitters |
+| Registries | **16** |
+| `model/metamodel/` | 23 of 27 entities — **unchanged for nine milestones** |
 
-## Findings about ai-desk that no one asked for
+## The plan improved, and in the right way
 
-- **All five ADRs are `Proposed`** while the codebase implements them — recorded
-  as five ambiguities, not silently resolved.
-- **`refresh_tokens` carries no tenant column**, in a system whose foundational
-  decision is tenant isolation via RLS. Recorded as a gap: *whether that is
-  correct is unrecorded.*
-- **Two modules have no test suite** in the modelled scope.
-- 30 of 34 tables are tenant-scoped; the 4 that are not are each recorded.
+```text
+Invariant.AccountLockoutBruteForceProtection
+Invariant.JwtSecurity
+Invariant.PasswordPolicyRegisterdto
+Invariant.RefreshTokenRotation
+```
 
-## Two defects the pipeline found
+**Concepts, not transcriptions** — and derived rather than authored.
 
-**The applier's YAML emission was wrong** — hand-rolled quoting broke on a label
-containing `:` and a value beginning with `@`. **A generated source is compiler
-input**, which `ADR-0106` predicted would make the parser schema load-bearing.
+## What is unreached, not unreachable
 
-**`implements` was used directly and unregistered** — the fourth instance of a
-core relationship type used directly rather than specialized.
+| Gap | Why |
+|---|---|
+| **prose invariants** | No rule reads document prose. A guarantee stated only in an ADR and asserted by no test is invisible |
+| both levels at once | `R3` reaches the concept, `R1` the specific guarantee. **Neither dominates**, and a rule proposing both is the obvious next deterministic step |
+| workflows · runtime behaviour | No rule and no observation |
 
-## What does not exist
+## The argument for a probabilistic interpreter is now weaker
 
-**No probabilistic interpreter.** The ceiling is measured and nothing crosses it.
+`SESSION-0039` called it evidential. **It was not** — the evidence supported *a
+better rule*, and a better rule delivered it.
 
-**No prose rule.** Tenant isolation is missed because no bounded rule reads ADR
-prose.
-
-**Nothing applies an execution observation** — though the applier that would do
-it now exists, which is `ADR-0106`'s point.
-
-**No workflow discovery. No runtime observation.** Both recorded as gaps.
+The case must be made **against `R3`, over the same Mechanical Model**. That is a
+harder bar than the one this project set for itself, and `ADR-0108` exists to
+enforce it.
 
 ## Blocking
 
@@ -110,23 +112,22 @@ it now exists, which is `ADR-0106`'s point.
 
 | Issue | Why it is open |
 |---|---|
-| `ISSUE-0037` | Hand-maintained projections. Fifteen registries, zero generated |
+| `ISSUE-0037` | Hand-maintained projections. Sixteen registries, zero generated |
 
 ## Debt discovered while building
 
 | Question | Where |
 |---|---|
-| **94 invariants inferred, each a transcription rather than a concept** | `ai-desk-onboarding/FINDINGS.md` |
-| A bounded rule cannot find what is not where it looks | `ADR-0107` |
-| Extractors are stack-specific and need writing again for the next stack | `ADR-0107` |
-| Review is individual for `S-inferred`, so 218 of 315 proposals need one-by-one judgement | `support-classification.md` |
-| `S-implemented` and `S-tested` overlap; the extractor decides by file path | `support-classification.md` |
+| **The Mechanical Model's vocabulary is itself a ceiling** — a fact nobody extracted is invisible to every interpreter | `ADR-0108` |
+| Origin is self-reported; nothing verifies it. **Re-running is the check and nothing runs it** | `assertion-origins.md` |
+| Four origin kinds will prove insufficient; hybrids have no entry | `ADR-0109` |
+| `R3` loses detail `R1` keeps; the combination is unbuilt | `ai-desk-onboarding/FINDINGS.md` |
 
 ## Next action
 
-**A rule that reads prose, or the first probabilistic interpreter.** The
-measurement above is its justification, and `ADR-0103` requires the justification
-to be genuine rather than convenient.
+**A rule that proposes both levels** — the concept, with its cases as
+constituent assertions. Then a rule that reads prose. **Then, if still justified,
+a probabilistic interpreter** — measured against `R3`.
 
 ## Repository state
 

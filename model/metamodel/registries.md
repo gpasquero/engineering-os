@@ -205,6 +205,18 @@ registries:
       An adopting repository may add classifications. These are kinds, not a
       scale: they are unordered and do not combine (ADR-0090).
 
+  - id: REG-assertion-origins
+    registers: what kind of process produced a proposed assertion
+    source: ../assertion-origins.md
+    extraction: yaml-block
+    collection: assertion-origins
+    membership: >
+      An origin is registered by appearing with an id, what it means, its
+      discovery stage, whether it is reproducible, and how it is reviewed.
+    extension: >
+      An adopting repository may add origins. Origin is reported as counts by
+      kind and never combined into a score (ADR-0090, ADR-0109).
+
   - id: REG-validation-rules
     registers: the rules the compiler executes
     source: validation-rules.md

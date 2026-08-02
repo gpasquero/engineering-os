@@ -1,18 +1,23 @@
 ---
 id: Artifact.AccountLockoutSpec
 type: Artifact
-label: account-lockout.spec.ts
+label: account-lockout.spec.spec.ts
 attributes:
   cases: '8'
-  locator: 8 it() cases
-  proposed-by: W-structure-extractor
-  proposed-in: T01-extract
+  describes: account lockout & brute-force protection
+  locator: 8 cases
+  origin: O-deterministic-rule
+  proposed-by: W-domain-interpreter
+  proposed-in: T02-interpret
+  rule: S4-spec-validates-module
   source: packages/backend/src/modules/auth/__tests__/account-lockout.spec.ts
   support: S-tested
 relationships:
 - validates: Capability.Auth
 ---
 
-Proposed by `W-structure-extractor` in task `T01-extract` and accepted through review. Support: `S-tested`.
+Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through review. Support: `S-tested`.
+
+Inferred by rule `S4-spec-validates-module`.
 
 **Authored from a discovery proposal** (`ADR-0106`). This is an authoring source, not a model write: the compiler reads it exactly as it reads a hand-written one.

@@ -98,16 +98,24 @@ class Candidate:
         return body
 
     def statistics(self):
-        by_support, by_type, by_worker = {}, {}, {}
+        by_support, by_type, by_worker, by_origin, by_rule = {}, {}, {}, {}, {}
         for e in self.entities:
             by_support[e["support"]] = by_support.get(e["support"], 0) + 1
             by_type[e["type"]] = by_type.get(e["type"], 0) + 1
             w = e["origin"]["worker"]
             by_worker[w] = by_worker.get(w, 0) + 1
+            # Origin kind (ADR-0109) — what KIND of process produced it.
+            o = (e.get("attributes") or {}).get("origin", "O-mechanical-extraction")
+            by_origin[o] = by_origin.get(o, 0) + 1
+            r_ = (e.get("attributes") or {}).get("rule")
+            if r_:
+                by_rule[r_] = by_rule.get(r_, 0) + 1
         for r in self.relationships:
             by_support[r["support"]] = by_support.get(r["support"], 0) + 1
             w = r["origin"]["worker"]
             by_worker[w] = by_worker.get(w, 0) + 1
+            o = "O-deterministic-rule" if r["origin"].get("rule") else "O-mechanical-extraction"
+            by_origin[o] = by_origin.get(o, 0) + 1
         return {
             "entities": len(self.entities),
             "relationships": len(self.relationships),
@@ -118,4 +126,6 @@ class Candidate:
             "bySupport": dict(sorted(by_support.items())),
             "byType": dict(sorted(by_type.items())),
             "byWorker": dict(sorted(by_worker.items())),
+            "byOrigin": dict(sorted(by_origin.items())),
+            "byRule": dict(sorted(by_rule.items())),
         }
