@@ -4376,9 +4376,7 @@
     "envRefs": 27,
     "documents": 62
   },
-  "repository": "/Users/willy/Localsources/ai-desk",
-  "vocabularyVersion": "1.0.0",
   "origin": "O-mechanical-extraction",
   "note": "Mechanical Engineering Model. Facts about what the repository contains. Nothing here is named as engineering knowledge \u2014 that is Interpretive Discovery (ADR-0108).",
-  "digest": "273e846a1787aa11"
+  "digest": "dd47744e6bc66150"
 }

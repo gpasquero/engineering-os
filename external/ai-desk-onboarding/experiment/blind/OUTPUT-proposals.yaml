@@ -1,0 +1,476 @@
+worker: blind-discovery-run
+mechanical-model-digest: dd47744e6bc66150
+skills-executed: [DS-architecture-discovery, DS-invariant-discovery]
+proposals:
+
+  # ─────────────────────────────────────────────────────────────
+  # DS-architecture-discovery
+  # ─────────────────────────────────────────────────────────────
+
+  - id: BoundedContext.TenantScopedWorkspace
+    type: BoundedContext
+    label: The whole backend is a single multi-tenant workspace in which tenant identity is a structural column on almost every table rather than a deployment boundary.
+    skill: DS-architecture-discovery
+    uncertainty: low
+    input-evidence:
+      - 30 of 34 tables carry a `tenantId` column (packages/backend/src/common/database/schema/*.ts).
+      - The 4 exceptions are `tenants` itself (the root aggregate, source schema/tenants.ts), and three tables that are join or credential rows keyed through a parent - `agent_groups` (agentId, groupId, createdAt), `ticket_tags` (ticketId, tagId, createdAt), `refresh_tokens` (agentId, tokenHash, expiresAt, revokedAt).
+      - schema.spec.ts contains a describe block literally named "tenant_id presence on tenant-scoped tables" and a case "has tenant_id as not null".
+      - tenant-isolation.integration.spec.ts (9 cases) exercises a Postgres role named `aidesk_app` and a per-transaction session variable; env refs distinguish DB_USER/DB_PASSWORD from DB_SYSTEM_USER/DB_SYSTEM_PASSWORD.
+      - docs/adr/ADR-0001-multi-tenancy-strategy.md decision field - "Shared Schema + PostgreSQL Row-Level Security".
+    reasoning: >
+      The tenant column is not an occasional foreign key; it is present on essentially every
+      table that holds its own identity, and the three tables that omit it are exactly the ones
+      that cannot be orphaned from a tenant-scoped parent. Combined with a dedicated integration
+      suite and a separate low-privilege database role, tenancy is a boundary enforced beneath
+      the application rather than by application convention. This is the outermost bounded
+      context: every other context named below lives inside it.
+    population-compared: >
+      All 34 tables in the mechanical model; 30 carry tenantId, 4 do not, and each of the 4
+      omissions has a structural explanation.
+
+  - id: BoundedContext.TicketCoreAndItsSatellites
+    type: BoundedContext
+    label: The ticket is the system's aggregate root, but its HTTP namespace is owned by convention across ten modules rather than enforced by one.
+    skill: DS-architecture-discovery
+    uncertainty: medium
+    input-evidence:
+      - "`tickets/*` is the largest route family - 39 of 161 routes (24%), against a next-largest family of 10 (`canned-responses`) across 26 distinct top-level route families."
+      - Those 39 routes are served by 10 different module directories - ticket (14), watcher (5), tag (4), time-log (4), conversation (3), ticket-link (3), ticket-todo (3), audit-log (1), csat (1), scenario (1).
+      - "Two different controllers publish the same URL shape - `GET tickets/:ticketId/audit-log` in packages/backend/src/modules/audit-log/audit-log.controller.ts and `GET tickets/:id/audit-log` in packages/backend/src/modules/ticket/ticket.controller.ts."
+      - The `tickets` table is by far the widest - 35 columns, next widest is `conversations` at 22 and `agents` at 18.
+      - "Module placement for all 28 module directories: Ticket Core = ticket, conversation, attachment, audit-log, tag, ticket-link, ticket-todo, time-log, watcher, saved-view, ticket-form, custom-field; Identity and Access = auth, agent, role, api-key, tenant; Customer Directory = contact, company; Channel Ingress/Egress = channel; Realtime = realtime, notification; Service Level = sla; Workflow Automation = automation, scenario, canned-response; Routing = group; Feedback = csat. One directory, realtime, publishes no HTTP route at all."
+      - "Characterisation of all 26 top-level route families, by shape. Plain tenant-scoped CRUD (create/list/read/update/delete, one owning module each) - companies (5), contacts (6, plus :id/tickets), custom-fields (5), roles (5), automation-rules (5), scenarios (6), sla-policies (5), business-hours (5), ticket-forms (6), canned-responses (10, CRUD plus a folders sub-resource and :id/substitute), saved-views (6, CRUD plus :id/favorite), api-keys (3, create/list/revoke only - no update, consistent with a write-once secret), tags (2 collection-level). Ticket-scoped sub-resources mounted under tickets/* by other modules - ticket-todos (2 detail routes plus 3 under tickets/), time-logs (2 detail routes plus 4 under tickets/ including timer/start and timer/stop), plus watcher, tag, ticket-link, conversation, audit-log, csat, scenario contributions. Command-style (verb-in-path, not CRUD) - tickets/:id/{restore,assign,reopen,spam,unspam,merge,split}, agents/:id/{deactivate,reactivate}, channels/:id/{enable,disable}, notifications/mark-all-read, tickets/:ticketId/execute-scenario/:scenarioId. Singleton/section config - settings (6 - a GET all, a GET :section, and four section-specific PATCHes for general/storage/email/notifications). Identity - auth (4 - login, refresh, logout, and register which is mounted from the tenant module, not the auth module). Self-service - agents/me (GET, PATCH). Binary transfer - attachments (4 - upload, :id/download, ticket/:ticketId, delete). External ingress - channels/:tenantSlug/:channelType/webhook (1). Customer-facing feedback - csat (7 admin survey routes plus csat/respond/:surveyId/:ticketId). Operational - health (1). Environment-scoped - dev/mail (3)."
+    reasoning: >
+      A quarter of the HTTP surface hangs off one noun, and ten modules mount routes into that
+      noun's namespace. Nothing in the mechanical facts shows a gateway or facade that owns
+      `tickets/*`; each module registers its own controller under the shared prefix. That makes
+      the ticket boundary conventional, not enforced - the duplicated `tickets/:id/audit-log`
+      route from two modules is the visible cost. I initially expected `ticket` to own its whole
+      namespace; the route sources contradict that, so the claim is about a shared namespace,
+      not a single owner.
+    population-compared: >
+      All 161 routes grouped into 26 top-level families and 28 module directories; tickets/* is
+      39 routes across 10 modules, every other family is served by exactly one module.
+
+  - id: BoundedContext.ChannelIngressIsTheUntrustedEdge
+    type: BoundedContext
+    label: Inbound external traffic enters through the channel module, which is the only place where tenant identity is resolved from the URL instead of from a verified token.
+    skill: DS-architecture-discovery
+    uncertainty: low
+    input-evidence:
+      - "`POST channels/:tenantSlug/:channelType/webhook` (packages/backend/src/modules/channel/channel-webhook.controller.ts) is the only route in the model that carries a tenant identifier as a path parameter."
+      - channel is the second-largest module directory at 23 files (ticket is 27; median across 28 module dirs is 6).
+      - It owns 7 of the 70 test suites - webhook-idempotency.spec.ts, webhook-replay.spec.ts, email-ingest-flow.spec.ts, channel-registry.spec.ts, adapters/email/email-channel.adapter.spec.ts, adapters/email/providers/in-memory-email.provider.spec.ts, adapters/web-chat.adapter.spec.ts, plus correlation/ticket-correlation.service.spec.ts and email/subject-token.service.spec.ts.
+      - "Dedicated table `inbound_webhook_events` (id, tenantId, provider, providerEventId, receivedAt, processedAt) exists for no other module."
+      - "webhook-idempotency.spec.ts case - \"accepts null tenantId for pre-tenant-resolution claims\" - i.e. an event is recorded before the tenant is known."
+      - docs/adr/ADR-0002-channel-abstraction-architecture.md decision - "Adapter Registry Pattern with Normalized Message Model"; channel-registry.spec.ts asserts duplicate-adapter registration throws.
+    reasoning: >
+      Everywhere else the tenant arrives inside a JWT (jwt-security.spec.ts extracts `tid` from
+      the payload). The webhook route takes it from a URL slug, and the idempotency service
+      explicitly tolerates a null tenant "pre-tenant-resolution". That is a distinct trust
+      boundary with its own persistence, its own registry indirection, and its own correlation
+      logic, which is why the module is nearly four times the median size.
+    population-compared: >
+      All 161 routes (one carries a tenant slug in the path) and all 28 module directories
+      (file counts range 3-27, median 6; channel is 23).
+
+  - id: Concept.WidgetIsASeparateTrustZoneFromTheAgentWorkspace
+    type: Concept
+    label: The embeddable widget and the agent workspace are two client classes with deliberately different limits, and only the widget is excluded from the shared type contract.
+    skill: DS-architecture-discovery
+    uncertainty: medium
+    input-evidence:
+      - "Of 4 packages, `packages/widget` declares exactly one dependency - socket.io-client. backend and frontend both depend on `@ai-desk/shared`; widget does not."
+      - "throttle.spec.ts asserts two separate trackers - \"AgentThrottle sets limit=100 / ttl=60000 on the agent tracker\", \"WidgetThrottle sets a stricter limit=30 / ttl=60000 on the widget tracker\", and \"widget limit is strictly less than the agent limit (stricter by design)\"."
+      - "attachment.service.spec.ts distinguishes the two contexts by quota - \"rejects oversized files for agent context\" and \"rejects oversized files for widget context\" as separate cases."
+      - "realtime module (7 files) publishes 0 of the 161 HTTP routes but owns 3 test suites - chat.gateway.spec.ts (widget sessions), agent.gateway.spec.ts (workspace), realtime.e2e.spec.ts."
+      - 'docs/plans/tasks/work-plan-widget-task-19.md - "Task C.5: Widget application (Vite + vanilla TypeScript)"; work-plan-backend-task-16.md - "Task C.2: Chat gateway for widget connections".'
+    reasoning: >
+      The widget reaches the system only over a socket, gets a rate limit under a third of the
+      agent limit, has its own attachment size ceiling, and is the one package that does not
+      compile against the shared types. Those four independent facts point at the same line -
+      the widget is treated as an anonymous end-customer surface, the frontend as an
+      authenticated staff surface. No single fact says this.
+    population-compared: >
+      All 4 packages (backend, frontend, shared, widget); widget is the only one that omits
+      @ai-desk/shared and the only one with a single dependency.
+
+  - id: Concept.DevelopmentMailSurfaceShipsInsideTheProductionModuleTree
+    type: Concept
+    label: A development-only mail inbox and outbox is exposed as real HTTP routes from inside the channel module, with no fact in the model showing it is gated.
+    skill: DS-architecture-discovery
+    uncertainty: high
+    input-evidence:
+      - "`POST dev/mail/inbound`, `GET dev/mail/outbox`, `DELETE dev/mail/outbox` in packages/backend/src/modules/channel/dev-mail.controller.ts."
+      - "`dev` is one of 26 top-level route families; it is the only family whose name denotes an environment rather than a resource."
+      - packages/backend/src/modules/channel/adapters/email/providers/in-memory-email.provider.spec.ts (13 cases - outbox FIFO, drainOutbox, simulateInbound, enableAutoDelivery) is the in-process email provider these routes front.
+      - NODE_ENV appears as an env ref only in packages/backend/src/modules/auth/auth.module.ts - not in any channel file.
+      - "subject-token.service.spec.ts does show an environment-conditional guard elsewhere - \"throws in production when the secret is unset\"."
+    reasoning: >
+      The route family exists and lives in the same controller directory as the production
+      webhook controller. The model gives no fact that shows the routes being excluded outside
+      development - the only NODE_ENV reference is in the auth module. I mark this high
+      uncertainty deliberately - a NestJS conditional module registration would not appear as
+      an env ref or a route attribute in this model, so absence of evidence here is weak
+      evidence of absence. It is worth a human check precisely because the model cannot settle it.
+    population-compared: >
+      All 26 top-level route families derived from the 161 routes; `dev` is the only
+      environment-named family.
+
+  - id: Concept.VerificationEffortIsConcentratedEntirelyInTheBackend
+    type: Concept
+    label: All automated verification lives in one of four packages, so the frontend and widget boundaries are asserted by nothing.
+    skill: DS-architecture-discovery
+    uncertainty: low
+    input-evidence:
+      - "All 70 test suites and all 728 test cases have file paths under packages/backend/. Zero suites under packages/frontend, packages/widget or packages/shared."
+      - packages/frontend contains the bulk of the .tsx surface (155 .tsx files of 2442 total files) and pulls 34 runtime dependencies including next, react, @tanstack/react-table, tiptap and 13 @radix-ui packages.
+      - "Of the 28 backend module directories, 26 have at least one suite; the 2 without any are `csat` (3 files, 8 routes) and `notification` (3 files, 3 routes)."
+      - "docs/plans/tasks/ contains 11 frontend task documents (work-plan-frontend-task-21 … -41, including \"Task F.5: Accessibility audit and fixes\") - the frontend was planned in detail, just not tested."
+    reasoning: >
+      This is a distribution fact that no single file reveals - it only appears when the 70
+      suites are grouped by package. It also identifies the two backend modules that escaped the
+      otherwise near-total module-level test convention, and both of them expose HTTP routes,
+      including the customer-facing `POST csat/respond/:surveyId/:ticketId`.
+    population-compared: >
+      All 4 packages (70/70 suites in backend, 0 in the other 3) and all 28 backend module
+      directories (26 with suites, 2 without).
+
+  - id: Concept.TheAuditTrailIsImplementedTwice
+    type: Concept
+    label: Two independent audit mechanisms coexist - a generic entity audit and a ticket-specific event log - with overlapping storage, services and URLs.
+    skill: DS-architecture-discovery
+    uncertainty: medium
+    input-evidence:
+      - "Table `audit_logs` (id, tenantId, agentId, entityType, entityId, action, changes, createdAt) in schema/audit-logs.ts."
+      - "Table `ticket_audit_log` (id, tenantId, ticketId, actorId, actorType, eventType, fromValue, toValue, metadata, createdAt) in schema/ticket-audit-log.ts."
+      - "Two services with their own suites - audit-log.service.spec.ts (describes - log, listForEntity, computeDiff) and ticket-audit.service.spec.ts (describes - TicketAuditService, cases about JSON-serializing from/to values)."
+      - "Two routes at the same address - `GET tickets/:ticketId/audit-log` from audit-log.controller.ts and `GET tickets/:id/audit-log` from ticket.controller.ts."
+      - Other modules write to it too - auto-close-extra.spec.ts "records an audit entry", ticket-merge-extra.spec.ts "records a merged audit entry when an audit service is wired", update-assignment-tags.spec.ts has three "records an/a ..." cases.
+    reasoning: >
+      The generic table stores a `changes` diff keyed by entityType/entityId; the ticket table
+      stores a typed from/to transition with an actorType. These are different models of the
+      same concern, and both are reachable at the same URL. The phrase "when an audit service is
+      wired" in ticket-merge-extra.spec.ts suggests the wiring is optional in at least one path,
+      which is what one would expect from an incomplete migration between the two designs.
+    population-compared: >
+      All 34 tables - audit_logs and ticket_audit_log are the only pair covering the same
+      concern; all 161 routes - `tickets/:id/audit-log` is the only path published by two
+      different controllers.
+
+  # ─────────────────────────────────────────────────────────────
+  # DS-invariant-discovery
+  # ─────────────────────────────────────────────────────────────
+
+  - id: Invariant.NoDataCrossesATenantBoundary
+    type: Invariant
+    label: A request executing in one tenant's context can never read, insert, update or delete another tenant's rows.
+    skill: DS-invariant-discovery
+    uncertainty: low
+    input-evidence:
+      - "packages/backend/src/common/database/__tests__/tenant-isolation.integration.spec.ts, describe \"RLS tenant isolation (integration)\", 9 cases including - \"tenant A context sees only tenant A tickets\"; \"aidesk_app without any tenant context cannot read tickets\"; \"attempting INSERT with tenant_id=A while in tenant B context is rejected by WITH CHECK\"; \"attempting UPDATE of tenant A ticket while in tenant B context affects zero rows\"; \"attempting DELETE of tenant A ticket while in tenant B context affects zero rows\"; \"session variable is scoped to the transaction — next query has no context\"; \"cross-tenant ticket lookup by id returns empty (not 404 with a leak)\"."
+      - "Application-layer restatement in tag-by-name.spec.ts - \"scopes the tag lookup by tenantId (tenant isolation)\"."
+      - "Enumeration corollary in account-lockout.spec.ts - \"wrong tenant and wrong credentials return the same error (no tenant enumeration)\"."
+      - Env refs separate an application role (DB_USER/DB_PASSWORD) from a privileged role (DB_SYSTEM_USER/DB_SYSTEM_PASSWORD), both only in that integration spec.
+    reasoning: >
+      This is the only invariant in the model asserted at the database layer rather than the
+      service layer, and the suite tests all four DML verbs plus the default-deny case plus
+      context leakage between transactions. The "not 404 with a leak" case shows the guarantee
+      extends to timing/response-shape side channels, not just row visibility.
+
+  - id: Invariant.TicketStatusFollowsAClosedTransitionMatrix
+    type: Invariant
+    label: A ticket's status may only change along an explicitly enumerated set of transitions, and `closed` is terminal.
+    skill: DS-invariant-discovery
+    uncertainty: low
+    input-evidence:
+      - "ticket.service.spec.ts describe \"isValidTransition (PR-1 matrix)\" - \"allows new -> open, spam, closed\"; \"rejects new -> pending/on_hold/resolved\"; \"allows open -> pending/on_hold/resolved/spam\"; \"rejects open -> closed (must go via resolved)\"; \"allows pending -> open/on_hold/resolved\"; \"rejects pending -> closed\"; \"allows on_hold -> open/resolved only\"; \"allows resolved -> open (reopen) and resolved -> closed\"; \"closed is terminal (no transitions allowed)\"; \"allows spam -> open only\"."
+      - "status-transitions.spec.ts, describe \"ticket status transition matrix (exhaustive)\" - \"closed is terminal — every outgoing transition is rejected\"; \"a ticket cannot transition to itself (no-op) via isValidTransition\"."
+      - "Enforcement at the write path - ticket.service.spec.ts \"rejects closed -> open via update (closed is terminal)\" and \"rejects invalid status transition with helpful error mentioning states\"."
+      - "Enforcement at the DTO boundary - dto-validation.spec.ts \"rejects status outside the allowed enum\"."
+      - "Related guards - \"rejects reopen when ticket is not resolved\"; \"refuses markSpam from invalid state (resolved)\"; \"refuses unmarkSpam when not in spam state\"; ticket-merge-extra.spec.ts \"rejects merging FROM a closed secondary ticket\" and \"allows merging FROM a resolved secondary ticket (not closed)\"."
+      - "`tickets.status` column exists in schema/tickets.ts; `reopenCount` and `autoCloseAt` columns track the resolved→closed path."
+    reasoning: >
+      Two suites assert the same matrix independently and one calls itself exhaustive, which is
+      the strongest signal in the model that this is a deliberate rule rather than incidental
+      behaviour. The rule is re-asserted at three layers - DTO enum, service transition check,
+      and every operation that implies a status change (reopen, spam, merge).
+
+  - id: Invariant.ClosedTicketsAreImmutableToBackgroundJobsToo
+    type: Invariant
+    label: The auto-close job must be a no-op whenever the ticket it was scheduled for has moved on, so a delayed job can never resurrect or overwrite a decided ticket.
+    skill: DS-invariant-discovery
+    uncertainty: low
+    specializes: Invariant.TicketStatusFollowsAClosedTransitionMatrix
+    input-evidence:
+      - "auto-close-extra.spec.ts, describe \"AutoCloseProcessor — survivability\" - \"autoCloseJobId is stable (used for deduplication)\"; \"no-op when ticket was manually closed before the job fires\"; \"no-op when ticket was reopened (open) before the job fires\"; \"no-op when autoCloseAt has been pushed into the future (rescheduled)\"; \"no-op when ticket was soft-deleted while job was in flight (WHERE filter excludes it)\"; \"handles concurrent fire: second run sees cleared autoCloseAt and skips\"."
+      - "auto-close.processor.spec.ts - \"closes a resolved ticket whose grace window has elapsed\"; \"skips when ticket is no longer resolved\"; \"skips stale job when autoCloseAt is in the future\"; \"skips when autoCloseAt is null\"."
+      - "`tickets.autoCloseAt` column; ticket-merge-extra.spec.ts \"cancels the auto-close job for the secondary when merging\"; ticket.service.spec.ts \"open -> resolved stamps slaResolutionAt and schedules autoCloseAt\" and \"reopens a resolved ticket, increments reopenCount, clears autoCloseAt\"."
+      - Backend dependency `bullmq` (packages/backend/package.json); ADR-0005 decision "BullMQ Delayed Jobs with Database-Computed Business Hours".
+    reasoning: >
+      Twelve cases across two suites all assert the same shape - the job re-reads state and
+      declines. This is the concurrency specialisation of the transition matrix - the matrix says
+      what a caller may do, this says a job scheduled minutes or days earlier is treated as a
+      caller with stale knowledge and loses every race.
+
+  - id: Invariant.SecretsAreNeverRecoverableFromStorage
+    type: Invariant
+    label: No credential the system accepts is stored in a form from which it can be read back - passwords, refresh tokens and API keys are all persisted as hashes only.
+    skill: DS-invariant-discovery
+    uncertainty: low
+    input-evidence:
+      - "Columns - `agents.passwordHash`, `refresh_tokens.tokenHash`, `api_keys.keyHash` plus `keyPrefix` and `keyLastFour`. No table in the model has a plaintext secret column."
+      - "password-security.spec.ts, describe \"bcrypt hashing guarantees\" - \"produces hashes with the $2b$12$ cost prefix (>= 12 rounds)\"; \"different calls produce different hashes for the same password (unique salt)\"; \"cost factor below 12 would produce a different prefix — lock 12 as the floor\". tenant.service.spec.ts - \"should hash password with 12 salt rounds\"."
+      - "refresh-token-rotation.spec.ts - \"issueTokens stores the sha256 hash of the refresh token, never the raw value\"; jwt-security.spec.ts - \"refresh token hash at rest is sha256, not the raw value\"."
+      - "api-key-security.spec.ts - \"returns a raw key exactly once at create time with aidk_ prefix\"; \"list() returns only masked keys — never the full raw secret\"; \"uses crypto.timingSafeEqual (constant-time) not == for hash compare\". api-key.service.spec.ts - \"should store SHA-256 hash, not the full key\"; \"should store last 4 characters\"."
+      - "agent.service.spec.ts asserts the read path too - \"should return a list of agents without passwordHash\" and \"should return agent without passwordHash\"."
+      - Backend dependency `bcrypt`.
+    reasoning: >
+      Three unrelated credential types, three different modules, and the same rule asserted in
+      each - hash at rest, never echo, and where a value must be shown to a human, show a
+      derived fragment (keyPrefix/keyLastFour) instead. The agent service cases show the rule is
+      also enforced on serialisation, not only on storage, which makes it a system-wide
+      invariant rather than an auth-module detail.
+    population-compared: >
+      All 34 tables were scanned for a column holding a credential - 3 hold one, all 3 hold a
+      hash; 0 hold a recoverable secret.
+
+  - id: Invariant.RefreshTokensAreSingleUseAndRotate
+    type: Invariant
+    label: Presenting a refresh token consumes it - the old token is revoked in the same operation that issues the new pair, so a replayed token always fails.
+    skill: DS-invariant-discovery
+    uncertainty: low
+    specializes: Invariant.SecretsAreNeverRecoverableFromStorage
+    input-evidence:
+      - "refresh-token-rotation.spec.ts, describe \"Refresh token rotation\" - \"refresh returns a new access+refresh pair AND revokes the old token (rotation)\"; \"replaying a revoked token fails (lookup filter excludes revoked rows)\"; \"expired refresh token is rejected and auto-revoked on the way out\"; \"refresh for a deactivated agent is rejected\"; \"refresh for a soft-deleted agent is rejected\"; \"logout revokes the token (subsequent refresh must fail)\"."
+      - "jwt-security.spec.ts, describe \"refresh token replay prevention\" - \"first refresh succeeds and rotates; second use of the same raw refresh token fails\"."
+      - "`refresh_tokens` columns - id, agentId, tokenHash, expiresAt, revokedAt, createdAt. schema.spec.ts asserts it \"does not have updated_at or deleted_at\" - rows are issued and revoked, never edited."
+      - "Only the three `auth` routes exist for this - POST auth/login, POST auth/refresh, POST auth/logout (packages/backend/src/modules/auth/auth.controller.ts)."
+    reasoning: >
+      Two independent suites assert replay failure, and the revocation is described as happening
+      inside the refresh call rather than as a separate cleanup. The two extra cases - deactivated
+      and soft-deleted agent - show the token is re-authorised against live account state on
+      every use, not merely checked for freshness.
+
+  - id: Invariant.RepeatedFailedLoginsLockTheAccountWithoutRevealingWhy
+    type: Invariant
+    label: Five wrong passwords lock an account for fifteen minutes, and every failure mode returns an indistinguishable response so no account, email or tenant can be enumerated.
+    skill: DS-invariant-discovery
+    uncertainty: low
+    input-evidence:
+      - "account-lockout.spec.ts, describe \"account lockout & brute-force protection\" (8 cases) - \"increments the failed counter on wrong password\"; \"locks the account on the 5th wrong password for exactly 15 minutes\"; \"rejects the CORRECT password while the lockout window is active\"; \"allows login once the lockout window has expired, even with 5 prior failures\"; \"per-agent isolation: locking agent A does not affect agent B\"; \"wrong password and wrong email return the same\"; \"wrong tenant and wrong credentials return the same error (no tenant enumeration)\"; \"deactivated account returns ForbiddenException (distinct from invalid creds)\"."
+      - "auth.service.spec.ts corroborates - \"should throw UnauthorizedException on wrong password and increment failed attempts\"; \"should lock account after 5 failed attempts\"; \"should throw ForbiddenException when account is locked\"."
+      - "`agents.failedLoginAttempts` and `agents.lockedUntil` columns in schema/agents.ts carry the state."
+      - "Complementary transport-level limit - throttle.spec.ts \"AgentThrottle sets limit=100 / ttl=60000\"; backend dependency @nestjs/throttler."
+    reasoning: >
+      The three uniform-response cases are the interesting part - the suite deliberately tests
+      that two different wrong inputs produce the same output, which is an assertion about what
+      the system must NOT reveal. The one intentional exception (deactivated → Forbidden) is
+      itself pinned by a test, so the exception is part of the contract rather than a leak.
+
+  - id: Invariant.AnInboundProviderEventIsProcessedAtMostOnce
+    type: Invariant
+    label: Every inbound webhook event is claimed by its provider event id before processing, so redelivery by an external provider cannot duplicate a ticket or a message.
+    skill: DS-invariant-discovery
+    uncertainty: medium
+    input-evidence:
+      - "`inbound_webhook_events` table (id, tenantId, provider, providerEventId, receivedAt, processedAt) - the only table in the model whose sole purpose is deduplication."
+      - "webhook-idempotency.spec.ts, describes claim / markProcessed / hasProcessed - \"returns true when the event is new (row inserted)\"; \"returns false when the event already exists (conflict do nothing)\"; \"accepts null tenantId for pre-tenant-resolution claims\"; \"updates processed_at for the given event\"."
+      - "webhook-replay.spec.ts, describe \"Webhook replay / idempotency\", single case - \"has a deterministic provider event identifier contract (expected shape)\"."
+      - "Entry point - POST channels/:tenantSlug/:channelType/webhook (channel-webhook.controller.ts)."
+      - "Sibling idempotency at the application layer - tag-by-name.spec.ts \"uses onConflictDoNothing on the ticket_tags association insert\" and \"is idempotent when the ticket is already tagged with the same name\"."
+    reasoning: >
+      Claim-then-process with an insert-conflict as the claim primitive is a deliberate
+      at-most-once design, and the separate replay suite pins the identifier contract that makes
+      it work. Medium uncertainty because webhook-replay.spec.ts contributes only one case and
+      its wording ("expected shape") reads like a placeholder - the guarantee may be weaker in
+      practice than the table design implies.
+
+  - id: Invariant.AnEmailReplyJoinsAnExistingTicketOnlyWhenTheSenderIsEntitledToIt
+    type: Invariant
+    label: Inbound email is correlated to a ticket through an ordered strategy chain, and a subject-token match is rejected outright when the sender is not the ticket's contact.
+    skill: DS-invariant-discovery
+    uncertainty: medium
+    input-evidence:
+      - "ticket-correlation.service.spec.ts describes an ordered chain - subject_token, external_in_reply_to, external_references, open_ticket_for_contact, recent_closed_for_contact, none. Cases - \"returns high confidence when token matches and sender is valid\"; \"rejects with sender_mismatch when sender differs from contact\"; \"falls through on token_invalid (no ticket found)\"; \"walks references newest-first and returns the first match\"; \"returns the most recent non-terminal ticket on this channel\"; \"matches a resolved ticket inside the reopen window\"; \"returns none when there is no signal at all\"."
+      - "subject-token.service.spec.ts (20 cases) - \"is deterministic for the same ticket id\"; \"produces an 8-char base62 token\"; \"differs across distinct ticket ids with no collisions over 1000 samples\"; \"changes when the secret changes\"; \"throws in production when the secret is unset\"."
+      - "email-ingest-flow.spec.ts - \"creates a new ticket, contact, and conversation for a fresh inbound email\"; \"appends to an existing ticket when correlation returns a hit\"; \"passes subject token through correlation input so sender-mismatch can be rejected\"."
+      - "Supporting columns - `tickets.subjectTokenHash`, `conversations.externalMessageId`, `externalInReplyTo`, `externalReferences`, `providerMessageId`; env ref EMAIL_SUBJECT_TOKEN_SECRET."
+    reasoning: >
+      The subject token is a keyed, deterministic 8-character value carried in a mail subject -
+      a value a third party could copy. The sender-mismatch rejection is therefore the actual
+      security boundary, and it is asserted in two separate suites. Medium uncertainty on the
+      chain's ordering being a hard contract rather than a current implementation detail - the
+      test names describe strategies, not a required precedence.
+
+  - id: Invariant.SoftDeletedRecordsAreInvisibleToEveryReadPath
+    type: Invariant
+    label: Deletion is a timestamp, not a removal, and every list, lookup, authorisation and background path must exclude soft-deleted rows.
+    skill: DS-invariant-discovery
+    uncertainty: low
+    input-evidence:
+      - "12 of 34 tables carry `deletedAt` - agents, business_hours, canned_responses, channels, companies, contacts, conversations, custom_field_definitions, groups, sla_policies, tenants, tickets."
+      - "soft-delete-restore.spec.ts describes softDelete / restore / \"list - soft-deleted records excluded\" / \"findById - soft-deleted records excluded\" - \"should throw NotFoundException for already-deleted ticket\"; \"should set deletedAt to null when restoring\"; \"should throw BadRequestException if ticket is not deleted\"; \"should only return non-deleted tickets\"."
+      - "The rule reaches paths outside the owning module - refresh-token-rotation.spec.ts \"refresh for a soft-deleted agent is rejected\"; ticket-merge-extra.spec.ts \"rejects merge into a soft-deleted primary (NotFound because of isNull(deletedAt) filter)\"; auto-close-extra.spec.ts \"no-op when ticket was soft-deleted while job was in flight (WHERE filter excludes it)\"."
+      - "Same pattern re-asserted per module - company.service.spec.ts \"should soft delete a company\"; contact.service.spec.ts \"should soft delete a contact\"; group.service.spec.ts \"should soft delete a non-default group\"; custom-field.service.spec.ts \"should soft delete a field definition\"; sla.service.spec.ts \"should soft delete a policy\" and \"should soft delete business hours\"."
+      - "The complement is asserted too - schema.spec.ts requires that audit_logs \"is immutable (no updated_at or deleted_at)\", refresh_tokens \"does not have updated_at or deleted_at\", and agent_groups \"does not have updated_at (immutable)\"."
+    reasoning: >
+      Twelve tables opt in and the model shows the exclusion being re-checked in auth refresh, in
+      merge, and in a delayed job - three places that have no reason to know about the ticket
+      module. That breadth makes it a system invariant. The schema suite's negative assertions
+      show the opposite decision was made deliberately for append-only tables, which strengthens
+      rather than weakens the rule.
+    population-compared: >
+      All 34 tables - 12 carry deletedAt, 12 carry neither updatedAt nor (in three explicitly
+      tested cases) deletedAt, and the remainder are mutable but not soft-deletable.
+
+  - id: Invariant.SystemAndDefaultRecordsCannotBeEditedOrDeleted
+    type: Invariant
+    label: Records flagged as system-owned or as a tenant's default cannot be mutated or removed by any caller, across every module that has such a record.
+    skill: DS-invariant-discovery
+    uncertainty: low
+    input-evidence:
+      - "6 of 34 tables carry a protection flag - roles.isSystem, groups.isDefault, sla_policies.isDefault, business_hours.isDefault, ticket_forms.isDefault, saved_views.isDefaultSystem."
+      - "role.service.spec.ts - \"refuses to edit a system role\"; \"refuses to delete a system role\"."
+      - "group.service.spec.ts - \"should throw BadRequestException when deleting default group\"."
+      - "sla.service.spec.ts - \"should throw BadRequestException when deleting default policy\"; \"should throw BadRequestException when deleting default\" (business hours)."
+      - "saved-view.service.spec.ts - \"should forbid deleting system default view\"."
+      - "tenant.service.spec.ts - \"should create tenant with all default resources and return tokens\" - the protected records are created at tenant registration."
+    reasoning: >
+      Five modules that share no code path assert the same refusal, and the flag is a column on
+      every table that has one. The tenant-registration case explains why the rule exists - these
+      rows are seeded as part of tenant bootstrap, so deleting one would leave a tenant in a
+      state the bootstrap can never reproduce. ticket_forms.isDefault is the one flagged table
+      whose protection I could NOT find asserted in any test case, which is a coverage gap rather
+      than a counterexample.
+    population-compared: >
+      All 34 tables (6 carry a system/default flag) and all 70 test suites (5 modules assert the
+      refusal; ticket_forms does not).
+
+  - id: Invariant.UserSuppliedHtmlIsNeverRenderedExecutable
+    type: Invariant
+    label: Any HTML that reaches the system from a customer or an agent is sanitised to an allowlist before it is stored or displayed.
+    skill: DS-invariant-discovery
+    uncertainty: medium
+    input-evidence:
+      - "sanitize-html.spec.ts is the largest non-ticket suite at 26 cases, describes \"sanitizeHtml — XSS prevention\", \"block dangerous tags\", \"strip event handler attributes\", \"URL protocol filtering\", \"obfuscated / encoded payloads\", \"preserves safe formatting\", \"edge cases\"."
+      - "Attack-shape cases - \"nested <scr<script>ipt> attack cannot reform into a script tag\"; \"HTML entity encoded script is rendered as inert text, not executed\"; \"strips base64-encoded data: URI payloads\"; \"strips javascript: URLs regardless of case\"; \"strips tags whose name contains a NULL byte and leaves only inert text\"; \"strips unknown/vbscript: protocols\"."
+      - "Allowlist cases - \"keeps bold, italic, underline, emphasis, strong\"; \"keeps lists, paragraphs, headings, blockquotes\"; \"keeps table structure and colspan/rowspan\"; \"keeps safe links with title and rel\"; \"allows http(s) and mailto URLs\"."
+      - "Where the HTML comes from and goes - `conversations.bodyHtml` column; frontend dependency isomorphic-dompurify; frontend tiptap rich-text editor (@tiptap/react, starter-kit, extension-link, extension-underline)."
+    reasoning: >
+      The suite tests obfuscation and re-forming attacks, not just the obvious tag list, which
+      indicates the sanitiser is treated as a security control rather than a formatter. Medium
+      uncertainty on scope - the model shows the utility and its tests, and shows a separate
+      sanitiser dependency on the frontend, but contains no fact proving every write path to
+      `conversations.bodyHtml` actually calls it. That call-site coverage is exactly what the
+      mechanical model cannot see.
+
+  - id: Invariant.ListEndpointsAreBoundedAndFilterInputIsValidatedNotInterpolated
+    type: Invariant
+    label: Collection reads have a hard page ceiling and every filter, sort and cursor value is parsed and rejected on failure rather than passed through.
+    skill: DS-invariant-discovery
+    uncertainty: low
+    input-evidence:
+      - "list-filters.spec.ts - \"limit is capped at 100 even when 500 is requested\"; \"default limit is 25 (26 requested under the hood)\"; \"returns hasMore=false and empty data for an empty result set\"."
+      - "list-controller.spec.ts - \"throws BadRequestException for invalid created_after\"; \"throws BadRequestException for invalid updated_before\"; \"throws BadRequestException for an unknown quick_filter value\"; \"treats an empty CSV as undefined (no filter)\"; \"maps sort=sla_due to sla_resolution_due_at\"."
+      - "pr-a-quick-wins.spec.ts - \"rejects an unknown quick_filter after new-and-mine was added\" - the allowlist is re-verified when extended."
+      - "cursor-pagination.spec.ts - \"should return null for invalid base64\"; \"should return null for valid base64 but invalid JSON\"; \"should return null for valid JSON missing required fields\"; \"should roundtrip correctly\"."
+      - "dto-validation.spec.ts - \"rejects SQL-injection-like contact_id (\"; \"rejects contact_id that is not a UUID\"; \"rejects subject longer than 500 characters (matches DB varchar limit)\"; \"rejects more than 20 tags (ArrayMaxSize guard)\". update-dto-allowlist.spec.ts - \"still rejects unknown fields (guards against silent misuses)\"."
+      - "create-conversation-dto.spec.ts - \"rejects cc_emails longer than 20 entries (ArrayMaxSize guard)\"; \"accepts exactly 20 cc_emails (upper bound inclusive)\"."
+      - 'Backend dependencies class-validator and class-transformer; docs/plans/tasks/work-plan-backend-task-14.md "Task B.7: Cursor-based pagination for ticket listing".'
+    reasoning: >
+      Four suites in three layers (DTO, controller query parsing, service query building) assert
+      the same posture - unrecognised input is refused, not forwarded. The cursor decoder
+      returning null rather than throwing on malformed input, combined with the explicit
+      500→100 clamp, shows the ceiling is enforced server-side and cannot be raised by a client.
+
+  - id: Invariant.SlaOutcomesAreStampedOnceAndElapsedTimeOnlyGrows
+    type: Invariant
+    label: An SLA outcome, once stamped, is never overwritten, and accumulated business minutes only ever increase - so no pause, resume, reschedule or late reply can improve a ticket's recorded service level.
+    skill: DS-invariant-discovery
+    uncertainty: low
+    input-evidence:
+      - "9 of the 35 `tickets` columns are SLA state - slaPolicyId, slaFirstResponseAt, slaFirstResponseDueAt, slaFirstResponseMet, slaResolutionAt, slaResolutionDueAt, slaResolutionMet, slaPausedAt, slaElapsedBusinessMinutes, plus slaBreached."
+      - "`sla_policies` (targets jsonb, isDefault, deletedAt) and `business_hours` (schedule, holidays, timezone, isDefault) tables; 10 routes across sla-policies/* and business-hours/*."
+      - "Two independent business-hours calculators with their own suites - common/utils/__tests__/business-hours-calc.spec.ts (11 cases, calculateBusinessMinutes / addBusinessMinutes) and modules/sla/__tests__/business-hours.util.spec.ts (20 cases, computeBusinessDeadline / computeElapsedBusinessMinutes, including a describe literally named \"ADR-0005 example\")."
+      - "sla-timer.service.spec.ts - \"pause immediately after create records ~0 elapsed business minutes\"; \"multiple pause/resume cycles accumulate elapsed minutes monotonically\"; \"resumed ticket does not overwrite slaFirstResponseDueAt if first response already met\"; \"onFirstResponse is a no-op if already met\"."
+      - "ticket.service.spec.ts - \"open -> pending sets slaPausedAt and open -> pending -> open clears it\". conversation.service.spec.ts - \"should set sla_first_response_at on first agent reply\" and \"should NOT set sla_first_response_at if already set\"."
+      - "Runtime - REDIS_HOST/REDIS_PORT/REDIS_PASSWORD referenced in packages/backend/src/modules/sla/sla-timer.service.ts; bullmq dependency; ADR-0005 \"BullMQ Delayed Jobs with Database-Computed Business Hours\"."
+    reasoning: >
+      Three mechanisms that do not call each other agree on one monotonicity rule - the timer
+      no-ops when already met, the resume path declines to overwrite slaFirstResponseDueAt, and
+      the conversation service checks before stamping sla_first_response_at. Elapsed minutes are
+      separately asserted to "accumulate monotonically" across repeated pause/resume cycles. That
+      convergence is what makes this an invariant rather than a feature description - the measured
+      value is append-only even though the ticket around it is mutable. I first framed this as a
+      capability; the evidence is really about what cannot change, so it is stated as an invariant.
+      A secondary observation the evidence forced - there are two independent business-hours
+      implementations (common/utils and modules/sla), so the arithmetic backing this invariant is
+      duplicated; the modules/sla one is richer (holidays, timezone, deadline computation) and is
+      the one tied to ADR-0005.
+    population-compared: >
+      All 35 columns of the `tickets` table - 10 encode SLA state, more than any other single
+      concern on that table; and all 70 test suites - 2 implement business-hours arithmetic.
+
+gaps:
+  - what: >
+      The schema suite asserts "exports exactly 20 tables" while the mechanical model lists 34
+      table definitions under packages/backend/src/common/database/schema/.
+    why: >
+      Either the barrel export is out of date with the schema directory (14 tables reachable by
+      import path but not by barrel), or the count assertion is stale and is no longer a real
+      guard. Both are drift between an asserted invariant and the code it claims to protect, and
+      the model cannot tell which.
+  - what: >
+      `csat_surveys` and `csat_responses` are listed with byte-identical column sets (comment,
+      contactId, id, isActive, labels, name, question, rating, scaleType, sendOnResolved,
+      surveyId, tenantId, ticketId, ...), both sourced from schema/csat-surveys.ts.
+    why: >
+      This is almost certainly a mechanical extraction artefact - two table declarations in one
+      file, with the extractor attributing every column in the file to both. Every column-level
+      conclusion about csat is therefore unreliable, and csat is also one of the two modules with
+      no test suite at all.
+  - what: >
+      No authorisation metadata is present anywhere in the model - no route carries a guard,
+      role requirement or public/private marker.
+    why: >
+      roles.guard.spec.ts proves a role hierarchy exists (account_admin > admin > supervisor >
+      agent > viewer) and permissions are stored on roles.permissions, but nothing states which
+      of the 161 routes require which role. The customer-facing routes in particular
+      (POST csat/respond/:surveyId/:ticketId, POST channels/:tenantSlug/:channelType/webhook,
+      POST dev/mail/inbound) cannot be confirmed as intentionally unauthenticated.
+  - what: >
+      Environment variables appear to be under-extracted - JWT_ACCESS_SECRET is referenced only
+      from packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts, EMAIL_SUBJECT_TOKEN_SECRET
+      only from a spec, and all DB_* variables only from tenant-isolation.integration.spec.ts.
+    why: >
+      Production code almost certainly reads these through a config layer the extractor did not
+      follow. Any conclusion about configuration surface, required secrets, or deployment
+      prerequisites drawn from the 27 envRefs will be incomplete.
+  - what: >
+      The frontend (155 .tsx files, 34 dependencies) and widget packages contribute zero test
+      suites, zero routes and zero tables to the model.
+    why: >
+      Roughly a third of the file count of the repository is invisible to every invariant
+      proposed here. Client-side rules - what the widget may send, what the workspace renders,
+      how the collision indicator behaves - are unrepresented, and the sanitisation invariant in
+      particular has an unverified client half (isomorphic-dompurify).
+  - what: >
+      No fact in the model distinguishes an intended contract from an accident of implementation
+      for the correlation strategy order, the SLA target shape (a jsonb `targets` blob), or the
+      automation rule condition operators (is_not / contains / starts_with from
+      automation.service.spec.ts).
+    why: >
+      These are all extension points where a future change could silently break an external
+      integration, and none of them has a document heading in the 62 extracted documents that
+      pins the contract. ADR-0002 and ADR-0005 name decisions but the model exposes only their
+      one-line decision fields, not their consequences.
+  - what: >
+      All five ADRs (ADR-0001 … ADR-0005) carry status "Proposed", dated 2026-04-09, and
+      docs/prd.md and docs/ui-spec.md carry status "Draft".
+    why: >
+      Every architectural decision the code visibly implements - RLS multi-tenancy, the channel
+      adapter registry, Socket.io with Redis, JSONB custom fields, the BullMQ SLA engine - is
+      recorded as merely proposed. The documents do not currently ratify the system that exists,
+      so the invariants above are asserted by tests and by nothing else.

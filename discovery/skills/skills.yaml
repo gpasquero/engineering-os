@@ -1,0 +1,188 @@
+# Discovery Skills — engine-independent investigation contracts (ADR-0113).
+#
+# The Skill belongs to Engineering OS. The model is only a worker implementation,
+# and NO MODEL OR VENDOR IS NAMED HERE.
+#
+# Evidence names parts of the MECHANICAL MODEL, never files (ADR-0108).
+# Every skill is independently runnable; none may be merged into an onboarding
+# prompt.
+#
+# Six contract defects were reported by a blind worker executing these contracts
+# (BENCHMARK-BLIND.md). Four are fixed here: the specializes field, the proposal
+# count bound, the stopping-condition tests, and the unanswerable enforcement
+# question. Two remain open: type enforcement is now checked by tools, and the
+# tension between exhaustive stopping conditions and bounded counts is real.
+
+skills:
+  - id: DS-repository-survey
+    objective: Establish what kind of system this is and how it is organised.
+    required-inputs: [mechanical-model]
+    evidence: [packages, fileCounts, dependencies, moduleDirs]
+    questions:
+      - What kind of system is this, and what is its deployment shape?
+      - Which packages exist and what does each appear to be for?
+      - Which frameworks constrain how the rest must be built?
+    permitted-tools: [read-mechanical-model]
+    proposal-types: [BoundedContext, Concept]
+    provenance: Every proposal cites the mechanical fact groups it rests on.
+    uncertainty: high | medium | low, per proposal.
+    stopping: When every package has been characterised or recorded as unclear.
+    output-schema: candidate-proposals-v1
+    review: Batch-reviewable per package.
+
+  - id: DS-architecture-discovery
+    objective: >
+      Identify architectural boundaries, and asymmetries between them that no
+      single fact reveals.
+    required-inputs: [mechanical-model]
+    evidence: [moduleDirs, routes, tables, dependencies]
+    questions:
+      - Where are the architectural boundaries, and what crosses them?
+      - Which facts are outliers in their own population?
+      - >
+        Which boundaries are enforced and which are conventional? The Mechanical
+        Model carries no guard, decorator or authorisation metadata, so this is
+        answerable only where a test asserts enforcement. Report the rest as a
+        gap rather than inferring it.
+    permitted-tools: [read-mechanical-model]
+    proposal-types: [BoundedContext, Capability, Invariant, Concept]
+    provenance: >
+      A distribution-level observation must state the population it compared
+      against and the size of that population.
+    uncertainty: high | medium | low, per proposal.
+    stopping: >
+      When every module directory is assigned to a named context AND every route
+      family has a stated shape. "Placed" and "characterised" were reported as
+      undefined by a blind worker and are now given tests.
+    proposal-count: 5-10
+    output-schema: candidate-proposals-v1
+    review: Individual. Distribution claims are interpretation, not extraction.
+
+  - id: DS-domain-concept-discovery
+    objective: Propose the domain vocabulary the system is written in.
+    required-inputs: [mechanical-model]
+    evidence: [tables, routes, moduleDirs]
+    questions:
+      - What are the nouns of this domain?
+      - Which are core and which are supporting?
+      - Which names appear in more than one place, and do they mean the same thing?
+    permitted-tools: [read-mechanical-model]
+    proposal-types: [Concept, BoundedContext]
+    provenance: Every concept cites the tables or routes that name it.
+    uncertainty: high | medium | low, per proposal.
+    stopping: When every table is accounted for as a concept or explicitly not one.
+    output-schema: candidate-proposals-v1
+    review: Individual.
+
+  - id: DS-capability-discovery
+    objective: Propose what the system can do, as externally visible capabilities.
+    required-inputs: [mechanical-model]
+    evidence: [routes, moduleDirs, testSuites]
+    questions:
+      - What can an external actor cause this system to do?
+      - Which capabilities have no route, and which routes serve no named capability?
+    permitted-tools: [read-mechanical-model]
+    proposal-types: [Capability, Actor]
+    provenance: Every capability cites the routes or module that realise it.
+    uncertainty: high | medium | low, per proposal.
+    stopping: When every route family maps to a capability or is recorded as unmapped.
+    output-schema: candidate-proposals-v1
+    review: Individual.
+
+  - id: DS-invariant-discovery
+    objective: >
+      Propose conditions that must hold, at both the concept and the specific
+      guarantee level (ADR-0111).
+    required-inputs: [mechanical-model]
+    evidence: [testSuites, tables, routes]
+    questions:
+      - What must remain true of this system?
+      - Which invariants are enforced, and where?
+      - Which are asserted by tests and stated in no document?
+    permitted-tools: [read-mechanical-model]
+    proposal-types: [Invariant]
+    provenance: >
+      Every invariant cites its evidence. A specific guarantee declares the
+      concept it `specializes`.
+    uncertainty: high | medium | low, per proposal.
+    stopping: When every test suite has been read for rule-stating content.
+    proposal-count: 8-15
+    review: >
+      Individual. Overlaps deterministic rules R1/R3/R4, so duplication with them
+      is expected and is a measurement rather than a defect. This sanctions
+      overlap and does NOT license unbounded volume — see proposal-count.
+    output-schema: candidate-proposals-v1-with-specializes
+
+  - id: DS-decision-discovery
+    objective: Propose decisions and the rationale behind what exists.
+    required-inputs: [mechanical-model]
+    evidence: [documents, dependencies, tables]
+    questions:
+      - Which decisions are recorded, and what is their stated status?
+      - Which structural choices imply a decision nobody recorded?
+      - Where does a recorded decision disagree with what exists?
+    permitted-tools: [read-mechanical-model]
+    proposal-types: [ADR, Invariant]
+    provenance: Every proposed decision cites the document or structure implying it.
+    uncertainty: high | medium | low, per proposal.
+    stopping: When every document classified as a decision has been read.
+    output-schema: candidate-proposals-v1
+    review: >
+      Individual. An unrecorded decision inferred from structure is the weakest
+      claim this skill can make and must say so.
+
+  - id: DS-workflow-discovery
+    objective: Propose engineering or runtime processes the system embodies.
+    required-inputs: [mechanical-model]
+    evidence: [documents, routes, moduleDirs]
+    questions:
+      - What ordered processes does the evidence describe?
+      - Which documents are individually meaningless and collectively a process?
+    permitted-tools: [read-mechanical-model]
+    proposal-types: [Workflow, WorkflowStep]
+    provenance: >
+      A workflow synthesized from many weak documents cites all of them, not a
+      representative sample.
+    uncertainty: high | medium | low, per proposal.
+    stopping: When no unexamined document group remains.
+    output-schema: candidate-proposals-v1
+    review: Individual.
+
+  - id: DS-gap-discovery
+    objective: >
+      Report what is absent, ambiguous or contradictory. Propose no knowledge.
+    required-inputs: [mechanical-model, candidate-proposals]
+    evidence: [all]
+    questions:
+      - What would this model need that the evidence does not provide?
+      - Where do two sources permit incompatible readings?
+      - Which proposals rest on evidence too thin to support them?
+    permitted-tools: [read-mechanical-model, read-candidate-proposals]
+    proposal-types: []
+    provenance: Every gap names what would resolve it.
+    uncertainty: not applicable — a gap is an absence, not a claim.
+    stopping: When every proposal has been checked for support.
+    output-schema: gaps-v1
+    review: >
+      Not accepted into the model. Recorded as knowledge gaps (S-unknown).
+
+  - id: DS-candidate-synthesis
+    objective: >
+      Merge the outputs of the other skills into one Candidate Engineering Model,
+      resolving duplicates and surfacing contradictions.
+    required-inputs: [candidate-proposals from every other skill]
+    evidence: [all proposals]
+    questions:
+      - Which proposals are the same assertion from different skills?
+      - Which contradict each other?
+      - Which relationships are implied by proposals from different skills?
+    permitted-tools: [read-candidate-proposals]
+    proposal-types: [relationship]
+    provenance: >
+      A merged proposal preserves EVERY origin that produced it, not the first.
+    uncertainty: inherited; a merge never lowers uncertainty.
+    stopping: When every proposal is placed, merged or recorded as conflicting.
+    output-schema: candidate-engineering-model-v1
+    review: >
+      Individual for merges and conflicts. A merge that discards an origin is a
+      defect.

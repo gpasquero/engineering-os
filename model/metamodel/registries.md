@@ -242,6 +242,20 @@ registries:
       An adopting repository may add categories. Every drift item is a proposal
       requiring review; reacquisition never overwrites (ADR-0112).
 
+  - id: REG-discovery-skills
+    registers: engine-independent investigation contracts
+    source: ../../discovery/skills/skills.yaml
+    extraction: yaml-file
+    collection: skills
+    membership: >
+      A skill is registered by appearing with an id, objective, required inputs,
+      evidence, questions, permitted tools, proposal types, provenance,
+      uncertainty reporting, stopping conditions, output schema and review
+      expectations.
+    extension: >
+      An adopting repository declares its own skills. No model or vendor is named
+      in a skill; the model is only a worker implementation (ADR-0113).
+
   - id: REG-validation-rules
     registers: the rules the compiler executes
     source: validation-rules.md

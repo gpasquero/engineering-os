@@ -75,6 +75,13 @@ def _markdown_table(spec, base):
     return out
 
 
+@extractor("yaml-file")
+def _yaml_file(spec, base):
+    """Entries from a whole YAML file, keyed by `id`."""
+    data = yaml.safe_load((base / spec["source"]).read_text())
+    return {item["id"]: item for item in data[spec["collection"]]}
+
+
 @extractor("yaml-block")
 def _yaml_block(spec, base):
     """Entries from a fenced YAML block, keyed by `id`."""

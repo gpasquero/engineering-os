@@ -155,11 +155,12 @@ def main(argv):
             failures += 1
 
     print()
-    schema = subprocess.run([sys.executable, str(ROOT / "tools/check-query-schema.py")],
-                            capture_output=True, text=True)
-    print("  " + schema.stdout.strip().splitlines()[-1])
-    if schema.returncode:
-        failures += 1
+    for checker in ("tools/check-query-schema.py", "tools/check-skills.py"):
+        proc = subprocess.run([sys.executable, str(ROOT / checker)],
+                              capture_output=True, text=True)
+        print("  " + proc.stdout.strip().splitlines()[-1])
+        if proc.returncode:
+            failures += 1
 
     print()
     engines = subprocess.run([sys.executable, str(ROOT / "tools/check-engines.py")],

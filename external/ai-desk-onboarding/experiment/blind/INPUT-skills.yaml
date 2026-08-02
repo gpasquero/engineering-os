@@ -1,0 +1,64 @@
+skills:
+- id: DS-architecture-discovery
+  objective: 'Identify architectural boundaries, and asymmetries between them that
+    no single fact reveals.
+
+    '
+  required-inputs:
+  - mechanical-model
+  evidence:
+  - moduleDirs
+  - routes
+  - tables
+  - dependencies
+  questions:
+  - Where are the architectural boundaries, and what crosses them?
+  - Which facts are outliers in their own population?
+  - Which boundaries are enforced and which are conventional?
+  permitted-tools:
+  - read-mechanical-model
+  proposal-types:
+  - BoundedContext
+  - Capability
+  - Invariant
+  - Concept
+  provenance: 'A distribution-level observation must state the population it compared
+    against and the size of that population.
+
+    '
+  uncertainty: high | medium | low, per proposal.
+  stopping: 'When every module directory is placed and every route family characterised.
+
+    '
+  output-schema: candidate-proposals-v1
+  review: Individual. Distribution claims are interpretation, not extraction.
+- id: DS-invariant-discovery
+  objective: 'Propose conditions that must hold, at both the concept and the specific
+    guarantee level (ADR-0111).
+
+    '
+  required-inputs:
+  - mechanical-model
+  evidence:
+  - testSuites
+  - tables
+  - routes
+  questions:
+  - What must remain true of this system?
+  - Which invariants are enforced, and where?
+  - Which are asserted by tests and stated in no document?
+  permitted-tools:
+  - read-mechanical-model
+  proposal-types:
+  - Invariant
+  provenance: 'Every invariant cites its evidence. A specific guarantee declares the
+    concept it `specializes`.
+
+    '
+  uncertainty: high | medium | low, per proposal.
+  stopping: When every test suite has been read for rule-stating content.
+  review: 'Individual. Overlaps deterministic rules R1/R3/R4, so duplication with
+    them is expected and is a measurement rather than a defect.
+
+    '
+  output-schema: candidate-proposals-v1

@@ -4,7 +4,7 @@ title: Build State
 status: current
 created: 2026-08-02
 updated: 2026-08-02
-milestone: acquisition
+milestone: discovery-skills
 ---
 
 # Build State
@@ -17,99 +17,90 @@ milestone: acquisition
 
 ## Current work
 
-**Brownfield acquisition** in three stages (`ADR-0110`), across three modes
-(`ADR-0112`).
+**Discovery Skills** (`ADR-0113`) — engine-independent investigation contracts.
+**The Skill belongs to Engineering OS; the model is only a worker
+implementation.**
 
-## The trust boundary
+## The blind benchmark — the final interpreter comparison
 
-> **Review and acceptance, not determinism** (`ADR-0110`).
+A separate agent with **no access to this conversation**, given the frozen
+Mechanical Model and two Skill contracts, forbidden every prior interpreter
+output.
 
-| | Valuable because |
+| interpreter | props | invar | distrib | gaps | reproducible |
+|---|---|---|---|---|---|
+| case-level `R1` | 271 | 99 | 0 | 9 | exactly |
+| suite-level `R3` | 203 | 31 | 0 | 9 | exactly |
+| **both-levels `R4`** | **302** | **130** | 0 | 9 | **exactly** |
+| claude (contaminated) | 4 | 2 | 2 | 0 | no |
+| **claude (blind)** | **20** | 13 | **11** | **7** | no |
+
+**Contamination suppressed the earlier result rather than inflating it.** The
+contaminated worker avoided ground the rules had covered; the blind one, given a
+contract and no such knowledge, investigated the whole model.
+
+**13 of 13 blind invariants have no deterministic counterpart** — nearest word
+overlap never exceeds 0.31. They are different kinds of statement:
+`RejectsA7CharPasswordBelowMinimum` against
+`SecretsAreNeverRecoverableFromStorage`.
+
+## The blind worker audited its own input
+
+Four of its seven gaps concern the **Mechanical Model**, not the repository —
+`F-fact-absent` reported unprompted by the interpreter.
+
+**It found a real bug in the extractor**, reading only a 137 KB JSON file:
+*"the extractor appears to attribute every column in a file to every table
+declared in it."* Correct — `csat_surveys` and `csat_responses` both carried the
+same 15 columns. **Fixed**; they now carry 10 and 8. Vocabulary version `1.1.0`.
+
+It also found an unresolved contradiction: *the schema suite asserts "exports
+exactly 20 tables" while the model lists 34.* **Neither the repository nor any
+deterministic rule states this.**
+
+## Six contract defects, found by the worker executing the contract
+
+| Defect | State |
 |---|---|
-| Deterministic discovery | reproducible, cheap, auditable |
-| Probabilistic discovery | synthesizes meaning across weakly structured evidence |
+| The output schema has no `specializes` field, yet the contract mandates it | ✅ fixed |
+| `proposal-types` is silently violable | ✅ declared types now validated; **enforcing worker output remains open** |
+| Stopping conditions and count guidance are in tension | ✅ bounds added; **the tension is real and now visible rather than resolved** |
+| "Placed" and "characterised" are undefined — not comparable across runs | ✅ both given tests |
+| A question is asked that no permitted evidence can answer | ✅ now instructs reporting a gap |
+| The `csat` extraction artefact | ✅ extractor fixed |
 
-**Both are used. Neither is authoritative.** `ADR-0103` still protects the
-Director — a language model may enter acquisition and never planning — and the
-boundary between them is curation.
-
-## The first comparative benchmark
-
-One frozen Mechanical Model, digest `dd47744e6bc66150`. Four interpreters.
-
-| | R1 | R3 | **R4** | Claude |
-|---|---|---|---|---|
-| assertions | 271 | 203 | **302** | 4 |
-| concepts · guarantees | 0 · 99 | 31 · 0 | **31 · 99** | 3 · 0 |
-| `specializes` edges | 0 | 0 | **99** | 0 |
-| **cross-source syntheses** | 0 | 0 | 0 | **4** |
-| reproducible | exactly | exactly | exactly | no |
-
-**Volume and abstraction are different axes.** `R4` proposes 302 assertions and
-zero syntheses; the probabilistic worker proposes 4 and 4.
-
-**Three of four probabilistic findings are `F-rule-insufficient`** — the only
-failure class that is evidence for probabilistic interpretation. `SESSION-0040`'s
-was `F-fact-ignored`, which is not.
-
-**The comparison is contaminated and says so**: the worker had seen `R1`/`R3`/`R4`
-output. No proposal is drawn from test text; all rest on route, table, dependency
-or document facts. A blind comparison needs a worker that has not seen this
-repository.
-
-## The strongest probabilistic finding
-
-**Exactly one route of 161 carries the tenant in its URL path** —
-`POST /channels/:tenantSlug/:channelType/webhook`. Every other route derives it
-from the token.
-
-**The tenant isolation invariant therefore has two enforcement paths**, and
-nothing in the repository records that one is different. Reaching it requires
-comparing a route against the distribution of all other routes; **no declared
-rule compares a fact to its own population.**
-
-## Granularity is preserved
-
-`ADR-0111`. Both levels, related by `specializes`, using existing constructs:
-
-```text
-Invariant.AccountLockoutBruteForceProtection      ← concept
-    ▲ specializes
-Invariant.LocksTheAccountOnThe5ThWrongPassword    ← guarantee
-```
-
-**No `Guarantee` entity.** A specific guarantee is a narrower `Invariant`, and
-`specializes` is a registered core type. **The metamodel is unchanged for a tenth
-milestone.**
+**The worker found more contract defects than the author had.**
 
 ## What exists
 
 | Area | State |
 |---|---|
-| `discovery/mechanical.py` | Facts only, reproducible, versioned vocabulary |
-| **`discovery/interpretive.py`** | 6 named rules, **three comparable strategies** including `R4` |
-| **`external/…/experiment/`** | The benchmark and the probabilistic worker's proposals with full `ADR-0109` provenance |
-| **`model/interpretive-failures.md`** | 5 classes. *Do not call it an interpretation failure until the required fact is known available* |
-| **`model/drift-categories.md`** | 11 categories, all proposals, one recordable |
-| `model/assertion-origins.md` | **5 origins**, plus 6 provenance fields required of probabilistic proposals |
-| `compiler/apply/` · `tools/review.py` | Authorization and application |
-| `external/ai-desk-onboarding/` | Mechanical model · 302 proposals · **30 authored sources** · CKM 32 nodes · 6 products |
-| Registries | **18** |
-| `model/metamodel/` | 23 of 27 entities — **unchanged for ten milestones** |
+| **`discovery/skills/skills.yaml`** | **9 skills**, 11 required fields, **no model or vendor named** |
+| **`tools/check-skills.py`** | Validates completeness, vendor-neutrality, independent runnability, declared types |
+| **`tools/compare-interpreters.py`** | **Refuses to compare interpreters that saw different Mechanical Models** — and refused on its first run |
+| `discovery/mechanical.py` | Facts only, vocabulary `1.1.0`, reproducible |
+| `discovery/interpretive.py` | 6 named rules, 3 comparable strategies |
+| `external/…/experiment/blind/` | Frozen input, blind output, `BENCHMARK-BLIND.md` |
+| Registries | **19** |
+| `model/metamodel/` | 23 of 27 entities — **unchanged for eleven milestones** |
+
+## Interpreter experimentation stops here
+
+The question — *do different worker classes contribute different forms of
+knowledge?* — is answered: **13 of 13, zero overlap.** Further comparison would
+refine a number nobody is waiting on.
 
 ## What does not exist
 
-**Continuous Acquisition and Periodic Reacquisition.** Two of three modes are
-declared and unbuilt, and **the drift report cannot be meaningful until at least
-one incremental update has happened.**
+**Continuous Acquisition and Periodic Reacquisition.** Two of three modes
+declared and unbuilt; **the Knowledge Drift Report cannot be meaningful until at
+least one incremental update has happened.**
 
-**A blind comparison.** The one run is contaminated by construction.
+**Worker-output validation.** A skill declares `proposal-types` and nothing
+checks that a worker honoured it — the worker caught its own violation on
+self-check.
 
-**Curation measurement** — assertions accepted and rejected under review is the
-metric that matters most and was not measured.
-
-**The navigable knowledge product** from a broad authorized model. 30 of 302
-proposals are applied.
+**The navigable knowledge product** from a broad authorized model.
 
 ## Blocking
 
@@ -117,30 +108,24 @@ proposals are applied.
 
 | Issue | Why it is open |
 |---|---|
-| `ISSUE-0037` | Hand-maintained projections. Eighteen registries, zero generated |
-
-## Governance note
-
-**`ACCEPT-0033` and `ACCEPT-0035` are not allocated.** Each was skipped when the
-next identifier was requested. Both gaps are documented in the index and in the
-records that follow them; validation reports an undocumented gap and accepts a
-documented one.
+| `ISSUE-0037` | Hand-maintained projections. Nineteen registries, zero generated |
 
 ## Debt discovered while building
 
 | Question | Where |
 |---|---|
-| **Invariant counts stopped being comparable** — `R4` proposes both levels, so *number of invariants* conflates concepts and guarantees | `ADR-0111` |
-| A specific invariant with no general one is anomalous and nothing detects it | `ADR-0111` |
-| Failure classification is manual; nothing checks whether a fact is in the Mechanical Model | `interpretive-failures.md` |
-| `F-fact-ignored` is only detectable in hindsight, when a better rule uses the fact | `interpretive-failures.md` |
-| Curation load rises with probabilistic proposals, and review already does not scale | `ADR-0110` |
-| The `ADR-0103` boundary now depends on a distinction a reader must hold: models in acquisition, never in direction | `ADR-0110` |
+| **Nothing verifies a worker honoured its contract**; only the output shape is checkable | `ADR-0113` |
+| Exhaustive stopping conditions and bounded proposal counts genuinely conflict | `BENCHMARK-BLIND.md` |
+| Engine independence is asserted and untested until a second engine runs a Skill | `ADR-0113` |
+| The frontend and widget contribute nothing to the Mechanical Model — a third of the repository is invisible | blind gap report |
+| `schema.spec.ts` claims 20 tables, the model lists 34, and the model cannot distinguish drift from a stale assertion | blind gap report |
 
 ## Next action
 
-**A genuinely blind comparison**, then **Continuous Acquisition** — the mode
-whose absence makes the drift report meaningless.
+**The acquisition lifecycle**, not another interpreter. Initial → authorize a
+substantial model → compile and generate the navigable product → run the Director
+→ one bounded change → Continuous Acquisition → Periodic Reacquisition → the
+first Knowledge Drift Report.
 
 ## Repository state
 

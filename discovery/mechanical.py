@@ -83,11 +83,18 @@ def extract(root):
             if f.name == "index.ts":
                 continue
             text = f.read_text(errors="ignore")
-            for name in PGTABLE.findall(text):
-                m["tables"].append({"name": name, "source": _rel(root, f),
-                                    "columns": sorted(set(
-                                        re.findall(r"^\s*([a-zA-Z][A-Za-z0-9]*)\s*:",
-                                                   text, re.M)))[:40]})
+            # Columns belong to the table whose declaration they follow. Attributing
+            # every column in a FILE to every table declared in it produced two
+            # tables with byte-identical column sets — a defect found by a blind
+            # discovery worker reading only this extractor's output.
+            decls = [(m_.start(), m_.group(1)) for m_ in PGTABLE.finditer(text)]
+            for i, (start, name) in enumerate(decls):
+                end = decls[i + 1][0] if i + 1 < len(decls) else len(text)
+                body = text[start:end]
+                m["tables"].append({
+                    "name": name, "source": _rel(root, f),
+                    "columns": sorted(set(
+                        re.findall(r"^\s*([a-zA-Z][A-Za-z0-9]*)\s*:", body, re.M)))[:40]})
 
     for f in sorted(root.glob("packages/backend/src/**/*.spec.ts")):
         text = f.read_text(errors="ignore")
@@ -123,6 +130,8 @@ def extract(root):
         })
 
     m["statistics"] = {k: len(v) for k, v in m.items() if isinstance(v, list)}
+    m["repository"] = str(root)
+    m["vocabularyVersion"] = "1.1.0"   # a versioned contract (ADR-0110)
     m["origin"] = ORIGIN
     m["note"] = ("Mechanical Engineering Model. Facts about what the repository "
                  "contains. Nothing here is named as engineering knowledge — that "

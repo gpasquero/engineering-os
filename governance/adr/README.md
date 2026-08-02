@@ -16,7 +16,7 @@ same session the decision is made.
 > a rule exists; the rule that must be followed lives in a Policy under
 > `shared/policies/`. Agents consume policies; humans read ADRs for rationale.
 
-**Highest allocated ID: `ADR-0112`.** IDs are sequential and never reused.
+**Highest allocated ID: `ADR-0113`.** IDs are sequential and never reused.
 
 > This index table is a hand-maintained projection of ADR front matter. It is
 > listed in the transitional-debt register, `ISSUE-0037`.
@@ -207,6 +207,7 @@ Read these before designing anything that produces an artifact:
 | [ADR-0110](ADR-0110-three-acquisition-stages.md) | **Brownfield acquisition has three stages; the trust boundary is review rather than determinism** | accepted | — |
 | [ADR-0111](ADR-0111-granularity-preservation.md) | **Abstraction and specificity coexist; the relation is `specializes` and no entity is added** | accepted | — |
 | [ADR-0112](ADR-0112-acquisition-modes-and-drift.md) | **Acquisition has three modes; reacquisition produces a Knowledge Drift Report and never overwrites** | accepted | — |
+| [ADR-0113](ADR-0113-discovery-skills.md) | **Discovery Skills are engine-independent investigation contracts owned by Engineering OS** | accepted | — |
 
 ## Supersessions
 

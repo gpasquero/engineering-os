@@ -15,7 +15,7 @@ committed.
 
 **Acceptance is an engineering decision, not a Git operation** (`ADR-0020`).
 
-**Highest allocated ID: `ACCEPT-0036`.** IDs are never reused.
+**Highest allocated ID: `ACCEPT-0037`.** IDs are never reused.
 
 > **`ACCEPT-0033` and `ACCEPT-0035` are not allocated.** Each was skipped when
 > the reviewer requested the next identifier: `ACCEPT-0034` while the highest was
@@ -60,6 +60,7 @@ committed.
 | [ACCEPT-0032](ACCEPT-0032-session-0036-decisions.md) | `SESSION-0036` — the Engineering Director runtime at `fe7a263` | Project Owner (`gpasquero`) | accepted | 2026-08-02 |
 | [ACCEPT-0034](ACCEPT-0034-session-0037-decisions.md) | `SESSION-0037` — autonomy and the first real-repository run at `1003d57` | Project Owner (`gpasquero`) | accepted | 2026-08-02 |
 | [ACCEPT-0036](ACCEPT-0036-session-0040-decisions.md) | `SESSION-0040` — two-stage Discovery and a refuted conclusion at `2a13b4c` | Project Owner (`gpasquero`) | accepted | 2026-08-02 |
+| [ACCEPT-0037](ACCEPT-0037-session-0041-decisions.md) | `SESSION-0041` — acquisition stages and the first benchmark at `288a351` | Project Owner (`gpasquero`) | accepted | 2026-08-02 |
 
 ## The three conditions
 
