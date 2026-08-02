@@ -1,0 +1,40 @@
+@prefix ex:   <https://example.org/engineering-os/example#> .
+@prefix eos:  <https://example.org/engineering-os/metamodel#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+# A PROJECTION of the Canonical Knowledge Model (ADR-0072). Generated; do not edit.
+
+<https://example.org/engineering-os/example> a owl:Ontology ;
+    rdfs:comment "Layer B model expressed in the Layer A metamodel." ;
+    owl:imports <https://example.org/engineering-os/metamodel> .
+
+ex:Artifact_Report a eos:Artifact ;
+    rdfs:label "Validation report" ;
+    rdfs:comment "Output." .
+
+ex:Skill_Validate a eos:Skill ;
+    rdfs:label "Validate" ;
+    rdfs:comment "Carries no position of its own." .
+
+ex:Workflow_Pipeline a eos:Workflow ;
+    rdfs:label "Pipeline" ;
+    rdfs:comment "Sequences steps. Holds no methodology." .
+
+ex:WorkflowStep_P_1 a eos:WorkflowStep ;
+    rdfs:label "Validate (first pass)" ;
+    eos:hasPosition 1 ;
+    rdfs:comment "Position 1." .
+
+ex:WorkflowStep_P_3 a eos:WorkflowStep ;
+    rdfs:label "Validate (second pass)" ;
+    eos:hasPosition 3 ;
+    rdfs:comment "Position 3, same Skill. The position is a fact about the association." .
+
+ex:Skill_Validate eos:produces ex:Artifact_Report .
+ex:Workflow_Pipeline eos:hasStep ex:WorkflowStep_P_1 .
+ex:Workflow_Pipeline eos:hasStep ex:WorkflowStep_P_3 .
+ex:WorkflowStep_P_1 eos:executes ex:Skill_Validate .
+ex:WorkflowStep_P_1 eos:stepOf ex:Workflow_Pipeline .
+ex:WorkflowStep_P_3 eos:executes ex:Skill_Validate .

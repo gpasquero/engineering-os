@@ -1,0 +1,37 @@
+@prefix ex:   <https://example.org/engineering-os/example#> .
+@prefix eos:  <https://example.org/engineering-os/metamodel#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+# A PROJECTION of the Canonical Knowledge Model (ADR-0072). Generated; do not edit.
+
+<https://example.org/engineering-os/example> a owl:Ontology ;
+    rdfs:comment "Layer B model expressed in the Layer A metamodel." ;
+    owl:imports <https://example.org/engineering-os/metamodel> .
+
+ex:AcceptanceRecord_1 a eos:AcceptanceRecord ;
+    rdfs:label "Acceptance of r1" ;
+    rdfs:comment "Acceptance confers Active status. Commits do not." .
+
+ex:Actor_Reviewer a eos:Actor ;
+    rdfs:label "Reviewer" ;
+    rdfs:comment "A role, not a party." .
+
+ex:Artifact_Spec a eos:Artifact ;
+    rdfs:label "A specification" ;
+    rdfs:comment "No lifecycle of its own." .
+
+ex:ArtifactRevision_Spec_r1 a eos:ArtifactRevision ;
+    rdfs:label "Specification r1" ;
+    rdfs:comment "Carries the lifecycle state and is the unit accepted." .
+
+ex:Evidence_Check a eos:Evidence ;
+    rdfs:label "Validation run" ;
+    rdfs:comment "Cited in support. Makes the acceptance falsifiable rather than true." .
+
+ex:AcceptanceRecord_1 eos:accepts ex:ArtifactRevision_Spec_r1 .
+ex:AcceptanceRecord_1 eos:cites ex:Evidence_Check .
+ex:AcceptanceRecord_1 eos:reviewedBy ex:Actor_Reviewer .
+ex:Artifact_Spec eos:hasActiveRevision ex:ArtifactRevision_Spec_r1 .
+ex:ArtifactRevision_Spec_r1 eos:revisionOf ex:Artifact_Spec .

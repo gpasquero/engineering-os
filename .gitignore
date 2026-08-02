@@ -20,3 +20,7 @@ Thumbs.db
 #
 # Whether a given DERIVED artifact is committed is decided per artifact, trading
 # reviewability against churn. That policy is owed to M2.
+
+# Python bytecode
+__pycache__/
+*.py[cod]

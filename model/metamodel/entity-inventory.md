@@ -43,9 +43,10 @@ remaining entity derives from it.
 | 10 | **Dimension** | An independent axis of classification, holding the ten fields `ADR-0048` requires | `ADR-0041`, `ADR-0070` | [✓](entities/dimension.md) |
 | 11 | **DimensionAssignment** | The relationship classifying an artifact along a dimension | `ADR-0042` | [✓](entities/dimension-assignment.md) |
 | 12 | **StateMachineSpecification** | Defines a state machine: states, transitions, what it governs | `ADR-0027`, `ADR-0070` | [✓](entities/state-machine-specification.md) |
-| 13 | **Vocabulary** | A closed enumeration with exactly one definition | `ADR-0008` | — |
-| 14 | **Principle** | A semantic relationship emerging from accepted knowledge. **Not an artifact** | `ADR-0058` | **deferred** |
-| 15 | **KnowledgePackage** | A published interface between repositories | `ADR-0019` | **deferred** |
+| 13 | **CanonicalKnowledgeModel** | The semantic content a set of sources asserts. **The product** | `ADR-0072`, `ADR-0076` | [✓](entities/canonical-knowledge-model.md) |
+| 14 | **Vocabulary** | A closed enumeration with exactly one definition | `ADR-0008` | — |
+| 15 | **Principle** | A semantic relationship emerging from accepted knowledge. **Not an artifact** | `ADR-0058` | **deferred** |
+| 16 | **KnowledgePackage** | A published interface between repositories | `ADR-0019` | **deferred** |
 
 ### Operational
 
@@ -54,27 +55,33 @@ real. It held — see `ontology/FINDINGS.md`.
 
 | # | Entity | Purpose | Established by | Spec |
 |---|---|---|---|---|
-| 16 | **Policy** | A normative rule motivated by Principles — `GovernancePolicy`, `ModelingPolicy`, `ProcessPolicy` | `ADR-0029`, `ADR-0030` | [✓](entities/policy.md) |
-| 17 | **Workflow** | Executable orchestration; sequences skills, holds no methodology | `ADR-0033` | [✓](entities/workflow.md) |
-| 18 | **Skill** | A composable unit of methodology with an explicit contract | `ADR-0033` | [✓](entities/skill.md) |
-| 19 | **EngineeringGate** | An Engineering Process reviewing the introduction or modification of a concept | `ADR-0054` | [✓](entities/engineering-gate.md) |
-| 20 | **AcceptanceRecord** | The act conferring `Active` status on a revision | `ADR-0021` | [✓](entities/acceptance-record.md) |
-| 21 | **ADR** | A recorded architectural decision | `ADR-0002` | [✓](entities/adr.md) |
-| 22 | **Issue** | A recorded unknown | `ADR-0003` | [✓](entities/issue.md) |
-| 23 | **WorkflowStep** | The reified association between a Workflow and a Skill, carrying its position | `ADR-0068` | [✓](entities/workflow-step.md) |
+| 17 | **Policy** | A normative rule motivated by Principles — `GovernancePolicy`, `ModelingPolicy`, `ProcessPolicy` | `ADR-0029`, `ADR-0030` | [✓](entities/policy.md) |
+| 18 | **Workflow** | Executable orchestration; sequences skills, holds no methodology | `ADR-0033` | [✓](entities/workflow.md) |
+| 19 | **Skill** | A composable unit of methodology with an explicit contract | `ADR-0033` | [✓](entities/skill.md) |
+| 20 | **EngineeringGate** | An Engineering Process reviewing the introduction or modification of a concept | `ADR-0054` | [✓](entities/engineering-gate.md) |
+| 21 | **AcceptanceRecord** | The act conferring `Active` status on a revision | `ADR-0021` | [✓](entities/acceptance-record.md) |
+| 22 | **ADR** | A recorded architectural decision | `ADR-0002` | [✓](entities/adr.md) |
+| 23 | **Issue** | A recorded unknown | `ADR-0003` | [✓](entities/issue.md) |
+| 24 | **WorkflowStep** | The reified association between a Workflow and a Skill, carrying its position | `ADR-0068` | [✓](entities/workflow-step.md) |
+| 25 | **ValidationRule** | A constraint a model must satisfy, stated so a compiler can execute it | `ADR-0048`, `ADR-0077` | [✓](entities/validation-rule.md) |
 
 ### Family unassigned
 
 Recorded by `ADR-0065` as not classifying cleanly. Each describes structure
-*about* engineering rather than about a domain. **Assigned when specified.**
+*about* engineering rather than about a domain. **Assigned when specified** —
+`ValidationRule` was, and turned out to be operational.
 
 | # | Entity | Purpose | Established by | Spec |
 |---|---|---|---|---|
-| 24 | **Registry** | Identity, membership rules, extension rules. **Not `RegistrySpecification`** — a registry has no independent existence (`ADR-0070`) | `ADR-0032`, `ADR-0070` | — |
-| 25 | **Manifest** | A root declaration of composition, status or semantics | `ADR-0013` | — |
-| 26 | **ValidationRule** | A constraint a semantic model must satisfy | `ADR-0048` | — |
+| 26 | **Registry** | Identity, membership rules, extension rules. **Not `RegistrySpecification`** — a registry has no independent existence (`ADR-0070`) | `ADR-0032`, `ADR-0070` | — |
+| 27 | **Manifest** | A root declaration of composition, status or semantics | `ADR-0013` | — |
 
-**20 of 26 specified. Four remain in scope; two are deferred** (`ADR-0075`).
+**22 of 27 specified. One remains in scope; two are deferred** (`ADR-0075`).
+
+Both entities added this session were **demanded by the implementation**:
+`CanonicalKnowledgeModel` because the product had no specification, and
+`ValidationRule` because seven checks existed as Python that the model should
+own.
 
 A remaining entity is justified by a **compiler requirement**, not by
 architectural completeness. *If the compiler never needs an entity, question
@@ -82,10 +89,10 @@ whether the metamodel needs it either.*
 
 | Entity | What the compiler would do differently | Status |
 |---|---|---|
-| `ValidationRule` | Own the checks hard-coded in `resolve()` | **needed now** |
+| `ValidationRule` | Own the checks hard-coded in `resolve()` | **specified** ✓ |
 | `Registry` | Hold the vocabulary the compiler reads by regex today | **needed now** |
-| `Vocabulary` | Type the closed enumerations scattered as bare strings | needed soon |
 | `Manifest` | Declare what a project is, replacing the `model/*.md` assumption | needed soon |
+| `Vocabulary` | Type the closed enumerations scattered as bare strings | needed soon |
 | `Principle` | Nothing — the compiler compiles no ADRs | **deferred** |
 | `KnowledgePackage` | Nothing — there is one repository | **deferred** |
 

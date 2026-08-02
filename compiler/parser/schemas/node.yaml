@@ -1,0 +1,23 @@
+# Schema for an authoring source declaring one Canonical Knowledge Model node.
+# An authoritative artifact (ADR-0078). Validated before semantic resolution.
+name: node
+description: One node of a Layer B knowledge model.
+required: [id, type]
+properties:
+  id:
+    type: string
+    pattern: "^[A-Za-z][A-Za-z0-9]*(\\.[A-Za-z0-9_-]+)*$"
+    description: Stable identifier, unique within the project.
+  type:
+    type: string
+    description: A metamodel entity name. Existence is checked at Resolution.
+  label:
+    type: string
+    description: Human-readable name. Defaults to the id.
+  position:
+    type: integer
+    description: Extrinsic ordinal (ADR-0068). Only meaningful on reified associations.
+  relationships:
+    type: list
+    items: mapping
+    description: A list of single-key mappings, predicate to target id.

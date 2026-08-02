@@ -21,8 +21,9 @@ using this metamodel**. Adopters never modify it — they instantiate it
 
 ## Status
 
-**20 of 26 entities specified.** The simplification review is complete
-(`ADR-0070`). `entity-inventory.md` records the current state.
+**22 of 27 entities specified.** One remains in scope; two are deferred
+(`ADR-0075`). Both entities added most recently were **demanded by the
+implementation**, not by the inventory. `entity-inventory.md` records the current state.
 
 This is being built under `ADR-0062`: where an existing decision permits
 building, we build, and open questions that do not block the next deliverable
@@ -51,6 +52,7 @@ model/metamodel/
 ├── README.md              this file
 ├── entity-inventory.md    all entities, with specification status
 ├── relationship-vocabulary.md   the registered core relationship types
+├── validation-rules.md          the rules the compiler executes (ADR-0077)
 ├── entities/              one specification per entity
 ├── ontology/              the OWL skeleton, and what writing it exposed
 └── views/                 generated graph views, and what inspecting them showed
@@ -76,8 +78,13 @@ mechanically produced projection in the repository (`ISSUE-0037`).
   cardinalities, inference and identity.
 - **The metamodel defines `RelationshipType`, not `Relationship`** (`ADR-0066`).
   It declares the vocabulary of edges; it does not model every edge as an entity.
-- **The Canonical Knowledge Model is the product** (`ADR-0072`). This metamodel,
-  the OWL and every register are projections or inputs — none is the deliverable.
+- **The Canonical Knowledge Model is the product** (`ADR-0072`), and is itself a
+  Layer A entity (`ADR-0076`). This metamodel, the OWL and every register are
+  projections or inputs — none is the deliverable.
+- **A concept is a compiler concept only if it is meaningless without a
+  compiler** (`ADR-0076`). That test decides what belongs in Layer A.
+- **The compiler executes ValidationRules; it does not contain them**
+  (`ADR-0077`). Rule kinds are mechanisms and live in code; rules are data.
 - **`RelationshipType` is the type system of the knowledge graph** (`ADR-0074`).
   Seven fields per predicate; the gap is recorded in `relationship-vocabulary.md`.
 - **A remaining entity is justified by compiler need** (`ADR-0075`), not by

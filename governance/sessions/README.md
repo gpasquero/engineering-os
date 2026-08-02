@@ -50,6 +50,7 @@ ADRs answer "why".
 | [SESSION-0025](SESSION-0025-2026-08-02.md) | 2026-08-02 | B1 | `ACCEPT-0020`; **ordering is intrinsic or extrinsic** (`ADR-0068`); state machines specified; **the Specification/Instance pattern failed its second domain**; three generated graph views; 22 of 28 |
 | [SESSION-0026](SESSION-0026-2026-08-02.md) | 2026-08-02 | B1 | `ACCEPT-0021`; **normalization not entity reduction** (`ADR-0069`); **the Specification criterion** (`ADR-0070`) resolving `ISSUE-0074`; **relationship vocabulary** (`ADR-0071`); **first end-to-end compilation** — CKM, OWL, graph, explorer |
 | [SESSION-0027](SESSION-0027-2026-08-02.md) | 2026-08-02 | B1 | `ACCEPT-0022`; **the semantic model is the product** (`ADR-0072`); compiler phases first-class (`ADR-0073`); `RelationshipType` as a type system (`ADR-0074`); entities justified by compiler need (`ADR-0075`); **10 compiler test projects, 4 of them negative** |
+| [SESSION-0028](SESSION-0028-2026-08-02.md) | 2026-08-02 | B1 | `ACCEPT-0023`; **compiler refactored into modules**; `CanonicalKnowledgeModel` is Layer A (`ADR-0076`); **declarative validation** (`ADR-0077`); schema-validated parsing (`ADR-0078`); Explorer as primary interface (`ADR-0079`); **13 fixtures with golden outputs** |
 
 ## Reading
 

@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Knowledge Explorer</title>
+<style>
+:root{--bg:#fff;--fg:#1f1f1f;--mut:#5f6368;--line:#dadce0;--acc:#1a73e8;--d:#4285f4;--o:#ea4335}
+@media(prefers-color-scheme:dark){:root{--bg:#17181a;--fg:#e8eaed;--mut:#9aa0a6;--line:#3c4043;--acc:#8ab4f8}}
+:root[data-theme="dark"]{--bg:#17181a;--fg:#e8eaed;--mut:#9aa0a6;--line:#3c4043;--acc:#8ab4f8}
+:root[data-theme="light"]{--bg:#fff;--fg:#1f1f1f;--mut:#5f6368;--line:#dadce0;--acc:#1a73e8}
+*{box-sizing:border-box}
+body{margin:0;font:15px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+background:var(--bg);color:var(--fg)}
+header{padding:1.1rem 1.5rem;border-bottom:1px solid var(--line)}
+h1{margin:0;font-size:1.05rem}
+h2{font-size:1.3rem;margin:0 0 .4rem}
+h3{font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);
+margin:1.6rem 0 .4rem;font-weight:600}
+.sub{color:var(--mut);font-size:.84rem;margin-top:.25rem}
+.wrap{display:grid;grid-template-columns:minmax(220px,290px) 1fr;min-height:calc(100vh - 88px)}
+@media(max-width:760px){.wrap{grid-template-columns:1fr}nav{max-height:40vh}}
+nav{border-right:1px solid var(--line);padding:1rem;overflow-y:auto}
+main{padding:1.4rem 1.6rem;overflow-x:auto;min-width:0}
+.grp{font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;color:var(--mut);margin:1rem 0 .3rem}
+button.node{display:block;width:100%;text-align:left;background:none;border:0;color:inherit;
+font:inherit;padding:.28rem .5rem;border-radius:6px;cursor:pointer;border-left:3px solid transparent}
+button.node:hover{background:color-mix(in srgb,var(--fg) 8%,transparent)}
+button.node.sel{background:color-mix(in srgb,var(--acc) 18%,transparent);font-weight:600}
+button.node.descriptive{border-left-color:var(--d)}
+button.node.operational{border-left-color:var(--o)}
+table{border-collapse:collapse;margin:.3rem 0 .6rem;font-size:.9rem;min-width:100%}
+th,td{border-bottom:1px solid var(--line);padding:.42rem .7rem;text-align:left;vertical-align:top}
+th{color:var(--mut);font-weight:500;font-size:.74rem;text-transform:uppercase;letter-spacing:.05em}
+code{background:color-mix(in srgb,var(--fg) 9%,transparent);padding:.08rem .35rem;
+border-radius:4px;font-size:.85em}
+a.link{color:var(--acc);text-decoration:none;cursor:pointer;border-bottom:1px solid transparent}
+a.link:hover{border-bottom-color:currentColor}
+.pill{display:inline-block;font-size:.68rem;padding:.08rem .5rem;border-radius:999px;
+border:1px solid var(--line);color:var(--mut)}
+.pill.structural{border-color:#4285f4;color:#4285f4}
+.pill.behavioral{border-color:#ea4335;color:#ea4335}
+.pill.semantic{border-color:#a142f4;color:#a142f4}
+.pill.traceability{border-color:#0f9d58;color:#0f9d58}
+.empty{color:var(--mut);font-style:italic}
+.tbl-wrap{overflow-x:auto}
+.why{color:var(--mut);font-size:.85rem;margin:.1rem 0 .9rem;padding-left:.8rem;
+border-left:2px solid var(--line)}
+.hop{color:var(--mut);font-size:.78rem}
+.qbar{display:flex;flex-wrap:wrap;gap:.4rem;margin:.6rem 0 0}
+.qbar button{font:inherit;font-size:.82rem;padding:.25rem .7rem;border-radius:999px;
+border:1px solid var(--line);background:none;color:inherit;cursor:pointer}
+.qbar button:hover{border-color:var(--acc);color:var(--acc)}
+.qbar button.on{background:var(--acc);border-color:var(--acc);color:var(--bg)}
+</style></head><body>
+<header><h1>Knowledge Explorer</h1>
+<div class="sub">The primary interface to the Canonical Knowledge Model, which is the product
+(<code>ADR-0072</code>, <code>ADR-0079</code>). A projection &mdash; never a source of truth.</div>
+</header>
+<div class="wrap"><nav id="nav"></nav><main id="main"></main></div>
+<script>
+const CKM = __DATA__;
+const byId = Object.fromEntries(CKM.nodes.map(n => [n.id, n]));
+const VOC = CKM.vocabulary || {};
+const out = id => CKM.edges.filter(e => e.from === id);
+const inc = id => CKM.edges.filter(e => e.to === id);
+const nav = document.getElementById('nav'), main = document.getElementById('main');
+let current = null, query = 'relationships';
+
+const DERIVES = new Set(['derives-from', 'derived-into', 'implements', 'implemented-by']);
+
+function esc(s){const d=document.createElement('div');d.textContent=s==null?'':s;return d.innerHTML}
+function link(id){const o=byId[id];return `<a class="link" onclick="show('${id}')">${esc(o?o.label:id)}</a>`}
+function pill(c){return `<span class="pill ${esc(c)}">${esc(c)}</span>`}
+
+/* ---- semantic navigation (ADR-0079) ---------------------------------- */
+
+// Transitive closure. Returns [{id, hops, via}] excluding the start node.
+function closure(startId, step){
+  const seen = new Map(), queue = [[startId, 0, null]];
+  while (queue.length) {
+    const [id, hops, via] = queue.shift();
+    for (const e of step(id)) {
+      const next = e.from === id ? e.to : e.from;
+      if (next === startId || seen.has(next)) continue;
+      seen.set(next, {id: next, hops: hops + 1, via: via || e.predicate});
+      queue.push([next, hops + 1, via || e.predicate]);
+    }
+  }
+  return [...seen.values()].sort((a,b) => a.hops - b.hops || a.id.localeCompare(b.id));
+}
+
+const QUERIES = {
+  relationships: {
+    label: 'Relationships',
+    why: 'Every edge, with the core type and category that explain why it exists.',
+    render(id){
+      const rows = dir => {
+        const list = dir === 'out' ? out(id) : inc(id);
+        if (!list.length) return '<p class="empty">None.</p>';
+        return `<div class="tbl-wrap"><table><tr><th>Predicate</th><th>Why it exists</th>
+          <th>${dir === 'out' ? 'Target' : 'Source'}</th></tr>` + list.map(e => {
+            const other = dir === 'out' ? e.to : e.from;
+            const v = VOC[e.core] || {};
+            return `<tr><td><code>${esc(e.predicate)}</code></td>
+              <td>${pill(e.category)} specializes <code>${esc(e.core)}</code>
+              <div class="hop">${esc(v.means || '')}</div></td>
+              <td>${link(other)} <span class="hop">${esc((byId[other]||{}).type)}</span></td></tr>`;
+          }).join('') + '</table></div>';
+      };
+      return `<h3>Outgoing</h3>${rows('out')}<h3>Incoming</h3>${rows('in')}`;
+    }
+  },
+  provenance: {
+    label: 'Provenance',
+    why: 'Which authoring source asserted this node. Provenance is carried by the model, not remembered.',
+    render(id){
+      const n = byId[id];
+      return `<div class="tbl-wrap"><table>
+        <tr><th>Source</th><td><code>${esc(n.provenance && n.provenance.source)}</code></td></tr>
+        <tr><th>Project</th><td>${esc(CKM.project)}</td></tr>
+        <tr><th>Metamodel</th><td><code>${esc(CKM.metamodelVersion)}</code></td></tr>
+        <tr><th>Format</th><td><code>${esc(CKM.formatVersion)}</code></td></tr>
+        </table></div>
+        <p class="hop">Source revision is <b>not</b> recorded. <code>ADR-0064</code> defines
+        identity as (artifact-id, revision-id) and the compiler carries only the path &mdash;
+        a gap this query exists to expose.</p>`;
+    }
+  },
+  derived: {
+    label: 'Derived from this',
+    why: 'Everything obtained from this node, transitively, following derivation and realisation edges.',
+    render(id){
+      const found = closure(id, nid => inc(nid).filter(e => DERIVES.has(e.core)));
+      if (!found.length) return '<p class="empty">Nothing derives from this node.</p>';
+      return `<div class="tbl-wrap"><table><tr><th>Node</th><th>Type</th><th>Hops</th><th>Via</th></tr>`
+        + found.map(f => `<tr><td>${link(f.id)}</td><td>${esc(byId[f.id].type)}</td>
+          <td>${f.hops}</td><td><code>${esc(f.via)}</code></td></tr>`).join('') + '</table></div>';
+    }
+  },
+  impact: {
+    label: 'Impact if changed',
+    why: 'Everything that references this node, transitively. Anything reachable by an incoming edge may be affected.',
+    render(id){
+      const found = closure(id, inc);
+      if (!found.length) return '<p class="empty">Nothing references this node. Changing it affects nothing else in the model.</p>';
+      const direct = found.filter(f => f.hops === 1).length;
+      return `<p class="hop"><b>${found.length}</b> node(s) affected &mdash; ${direct} directly,
+        ${found.length - direct} transitively.</p>
+        <div class="tbl-wrap"><table><tr><th>Node</th><th>Type</th><th>Hops</th><th>First edge</th></tr>`
+        + found.map(f => `<tr><td>${link(f.id)}</td><td>${esc(byId[f.id].type)}</td>
+          <td>${f.hops}</td><td><code>${esc(f.via)}</code></td></tr>`).join('') + '</table></div>';
+    }
+  },
+  acceptance: {
+    label: 'Acceptance history',
+    why: 'The acceptance chain reaching this node. Acceptance confers Active status; commits do not (ADR-0018).',
+    render(id){
+      const reach = new Set([id, ...closure(id, nid => inc(nid).concat(out(nid))).map(f => f.id)]);
+      const records = CKM.nodes.filter(n => n.type === 'AcceptanceRecord'
+        && out(n.id).some(e => e.predicate === 'accepts' && reach.has(e.to)));
+      if (!records.length) return `<p class="empty">No acceptance record reaches this node.
+        Under <code>ADR-0020</code> its revisions are not Active.</p>`;
+      return `<div class="tbl-wrap"><table><tr><th>Record</th><th>Accepts</th><th>Reviewer</th></tr>`
+        + records.map(r => {
+            const acc = out(r.id).filter(e => e.predicate === 'accepts').map(e => link(e.to)).join(', ');
+            const rev = out(r.id).filter(e => e.predicate === 'reviewed-by').map(e => link(e.to)).join(', ');
+            return `<tr><td>${link(r.id)}</td><td>${acc || '—'}</td><td>${rev || '<span class="empty">none</span>'}</td></tr>`;
+          }).join('') + '</table></div>';
+    }
+  }
+};
+
+/* ---- rendering ------------------------------------------------------- */
+
+const groups = {};
+CKM.nodes.forEach(n => (groups[n.type] ||= []).push(n));
+Object.keys(groups).sort().forEach(type => {
+  const h = document.createElement('div'); h.className='grp'; h.textContent=type; nav.appendChild(h);
+  groups[type].forEach(n => {
+    const b = document.createElement('button');
+    b.className = 'node ' + n.family; b.textContent = n.label; b.dataset.id = n.id;
+    b.onclick = () => show(n.id); nav.appendChild(b);
+  });
+});
+
+function show(id, q){
+  const n = byId[id]; if (!n) return;
+  current = id; query = q || query;
+  document.querySelectorAll('button.node').forEach(b => b.classList.toggle('sel', b.dataset.id === id));
+  const bar = Object.entries(QUERIES).map(([k, v]) =>
+    `<button class="${k === query ? 'on' : ''}" onclick="show('${id}','${k}')">${v.label}</button>`).join('');
+  main.innerHTML = `<h2>${esc(n.label)}</h2>
+    <p><code>${esc(n.id)}</code> &middot; <span class="pill">${esc(n.type)}</span>
+       <span class="pill">${esc(n.family)}</span>
+       ${n.position != null ? `<span class="pill">position ${n.position}</span>` : ''}</p>
+    <p>${esc(n.description)}</p>
+    <div class="qbar">${bar}</div>
+    <div class="why">${esc(QUERIES[query].why)}</div>
+    ${QUERIES[query].render(id)}`;
+  main.scrollTop = 0;
+}
+
+function tbl(o){return '<div class="tbl-wrap"><table>' + Object.entries(o).map(([k,v]) =>
+  `<tr><td><code>${esc(k)}</code></td><td>${v}</td></tr>`).join('') + '</table></div>'}
+
+main.innerHTML = `<h2>Canonical Knowledge Model</h2>
+  <p>${CKM.statistics.nodes} nodes, ${CKM.statistics.edges} edges in <b>${esc(CKM.project)}</b>.
+  Every edge was asserted in the sources; none was inferred.</p>
+  <h3>Nodes by metamodel type</h3>${tbl(CKM.statistics.byType)}
+  <h3>Nodes by family</h3>${tbl(CKM.statistics.byFamily)}
+  <h3>Edges by relationship category</h3>${tbl(CKM.statistics.byCategory)}
+  <h3>Edges by core relationship type</h3>${tbl(CKM.statistics.byCoreType)}
+  <p class="empty">Select a node to explore. Each node answers five questions.</p>`;
+</script></body></html>

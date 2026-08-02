@@ -20,61 +20,64 @@ milestone: B1
 **B1 — Engineering OS Metamodel. In progress.**
 
 **Compiler evolution takes precedence over metamodel expansion** (`ADR-0075`).
-Remaining entities are justified by compiler requirement, not by architectural
-completeness.
 
 ## The product
 
-**The Canonical Knowledge Model** (`ADR-0072`). OWL, the explorer, the graphs and
-every register are projections of it. Nothing else is the deliverable.
+**The Canonical Knowledge Model** (`ADR-0072`), now a Layer A entity in its own
+right (`ADR-0076`). Everything else is a projection.
 
 ```sh
-python3 tools/compile.py --phases      # the phase contract
-python3 tools/compile.py examples/tiny # compile a project
-python3 tools/test.py                  # rebuild every test project
+python3 tools/compile.py --phases       # the phase contract
+python3 tools/compile.py examples/tiny  # compile a project
+python3 tools/test.py                   # rebuild every fixture, check goldens
 ```
 
 ```text
-all 10 project(s) behaved as declared
+all 13 project(s) behaved as declared
 ```
 
 ## What exists
 
 | Area | State |
 |---|---|
-| **`tools/compile.py`** | Six declared phases (`ADR-0073`); **7 features, each declaring input, output, invariants and determinism** |
-| **`tests/projects/`** | **10 compiler test projects — 6 pass, 4 must fail.** Determinism checked by compiling twice and comparing |
-| **`tools/test.py`** | The regression suite. Every compiler change rebuilds every project |
-| **`tools/generate-metamodel-views.py`** | Three generated graph views |
-| `examples/tiny/` | The reference end-to-end example, 13 nodes |
-| **`model/metamodel/`** | **20 of 26 entities specified.** 4 remain in scope, 2 deferred |
-| `model/metamodel/relationship-vocabulary.md` | 18 core types; **63 predicates, all parented**; 2 of 5 required fields machine-readable |
+| **`compiler/`** | **Modular**: `discovery` · `parser` · `resolver` · `validator` · `ckm` · `emitters/{json,owl,mermaid,explorer}` · `runtime`. **9 features**, each declaring input phase, output phase, invariants and determinism |
+| **`compiler/parser/`** | **Real YAML parsing, schema-validated before resolution** (`ADR-0078`). Structural errors surface at Parsing, never at Resolution |
+| **`compiler/validator/`** | **6 rule kinds executing 7 declared rules.** No check is authored in Python |
+| **`compiler/emitters/explorer/`** | **Five semantic queries**: relationships with explanations, provenance, derived-from closure, impact, acceptance history |
+| **`model/metamodel/validation-rules.md`** | `VR-0001`–`VR-0007`, each with a rationale |
+| **`tests/`** | **13 fixtures — 6 pass, 7 must fail.** Golden outputs for all four emitters; deterministic rebuild checked |
+| `tools/compile.py` | **Orchestration only.** 42 lines, no compiler logic |
+| **`model/metamodel/`** | **22 of 27 entities specified** |
 | `model/metamodel/ontology/` | OWL 0.4.0 — 660 triples, 31 classes, 73 object properties |
-| ADRs | 75 — 67 accepted, 8 superseded |
+| ADRs | 79 — 71 accepted, 8 superseded |
 | Issues | 74 — **1 open, 51 resolved, 22 deferred as debt** |
-| Acceptance Records | 22 |
-| Session journal | 27 entries |
+| Acceptance Records | 23 |
+| Session journal | 28 entries |
 
 ### Metamodel progress
 
 | Family | Specified | Remaining |
 |---|---|---|
-| **Descriptive** | BoundedContext · Artifact · ArtifactRevision · Concept · Capability · RelationshipType · Invariant · Evidence · Actor · Dimension · DimensionAssignment · StateMachineSpecification | `Vocabulary` (soon) · ~~Principle~~ · ~~KnowledgePackage~~ |
-| **Operational** | Policy · Workflow · WorkflowStep · Skill · EngineeringGate · AcceptanceRecord · ADR · Issue | — |
-| **Unassigned** | none | `ValidationRule` (now) · `Registry` (now) · `Manifest` (soon) |
+| **Descriptive** | BoundedContext · Artifact · ArtifactRevision · Concept · Capability · RelationshipType · Invariant · Evidence · Actor · Dimension · DimensionAssignment · StateMachineSpecification · **CanonicalKnowledgeModel** | `Vocabulary` · ~~Principle~~ · ~~KnowledgePackage~~ |
+| **Operational** | Policy · Workflow · WorkflowStep · Skill · EngineeringGate · AcceptanceRecord · ADR · Issue · **ValidationRule** | — |
+| **Unassigned** | none | `Registry` · `Manifest` |
 
-`Principle` and `KnowledgePackage` are **deferred** (`ADR-0075`): the compiler
-compiles no ADRs, and there is one repository.
+**Both entities added this session were demanded by the implementation**, which
+is `ADR-0075` working: the product had no specification, and seven checks existed
+as Python the model should own.
 
 ## What does not exist
 
-No `ValidationRule` entity — the checks live in `resolve()` as Python. No
-`Registry` entity — the compiler reads the vocabulary from Markdown by regex. No
-manifest, so a project is *whatever is in `model/*.md`*. No lifecycle
-enforcement, no acceptance checking, no dimension assignment in the compiler.
+No `Registry` entity — the compiler still reads the relationship vocabulary out
+of Markdown with a regex. No `Manifest` — a project is still *whatever is in
+`model/*.md`*. No `Vocabulary` — closed enumerations are bare strings.
 
-**The governance corpus is not compiled.** 192 records, and the Canonical
-Knowledge Model covers 13 example nodes plus 10 test projects.
+No lifecycle enforcement, no acceptance checking, no dimension assignment in the
+compiler. **Provenance records a path, not a revision** (`ADR-0064` wants
+`(artifact-id, revision-id)`), and the Explorer's provenance query says so.
+
+**The governance corpus is still not compiled.** 202 records; the Canonical
+Knowledge Model covers 13 example nodes and 13 test projects.
 
 ## Blocking
 
@@ -82,48 +85,48 @@ Knowledge Model covers 13 example nodes plus 10 test projects.
 
 | Issue | Why it is open |
 |---|---|
-| `ISSUE-0037` | Hand-maintained projections. **Now an architectural violation, not an inconvenience** (`ADR-0072`): a hand-maintained projection is a projection with no model behind it. Four governance indexes, the corrections table and the metamodel ontology are still hand-maintained |
+| `ISSUE-0037` | Hand-maintained projections — an architectural violation under `ADR-0072`. Four governance indexes, the corrections table, the metamodel ontology, **and now the parser schemas**, which nothing checks against the specifications they encode |
 
 ## Architectural debt
 
-**22 deferred issues.**
-
-- **`ISSUE-0073`** — Operational Knowledge. `ADR-0070` draws the boundary: a
-  Specification whose instances live outside the repository is where Engineering
-  OS stops.
-- **`ISSUE-0048`** — `ADR.corrects` specified; six corrections still in a
-  hand-maintained table.
-- **`ISSUE-0063`** — minimum serialized classification set. The compiler assigns
-  no dimensions.
+**22 deferred issues.** Nearest to the surface: `ISSUE-0073` (Operational
+Knowledge), `ISSUE-0048` (`ADR.corrects` has no mechanism), `ISSUE-0063`
+(minimum serialized classification set).
 
 ## Debt discovered while building
 
 | Question | Where |
 |---|---|
-| **441 field declarations required, fewer than a third exist.** Domain, range and cardinality are prose the compiler cannot read | `relationship-vocabulary.md` |
-| Only one `ValidationRule` exists and it is hard-coded in `resolve()` | `ADR-0075` |
-| Four vocabulary mappings are strained — `produces`, `guarded-by`, `has-position`, `requires` | `relationship-vocabulary.md` |
-| No test project exercises the six unspecified entities. **The gap is the map** | `tests/README.md` |
-| Transitions and conditions point at things that are not entities; both extrinsic by `ADR-0068`'s test | `FINDINGS.md` |
-| Nothing enforces that an acceptance reviewer differs from the author | `acceptance-record.md`, `tests/projects/acceptance` |
-| Deferral has no automatic trigger, and two entities were just deferred | `ADR-0075`, `issue.md` |
+| Provenance carries a source path, not a revision | `canonical-knowledge-model.md` |
+| **Scope is undefined** — identity is *(scope, assertion set)* and nothing defines a scope. `Manifest` would | `canonical-knowledge-model.md` |
+| The compatibility policy is written and unexercised; nothing diffs two models | `canonical-knowledge-model.md` |
+| `VR-0007` has no fixture of its own; it fired where a project happened to violate it | `tests/README.md` |
+| Severity is declared and unused; `warning` has no behaviour | `validation-rules.md` |
+| A rule naming an unimplemented kind aborts compilation — the strictest choice, unexamined | `validation-rule.md` |
+| Rules are not individually versioned | `validation-rules.md` |
+| **441 field declarations required by `ADR-0074`; fewer than a third exist.** Domain, range and cardinality are prose | `relationship-vocabulary.md` |
+| Schemas are a new hand-maintained projection | `ADR-0078` |
 
 ## Acceptance status
 
-`ACCEPT-0001` (trust root) through `ACCEPT-0022`, covering `SESSION-0006`
-through `SESSION-0026`.
+`ACCEPT-0001` (trust root) through `ACCEPT-0023`, covering `SESSION-0006`
+through `SESSION-0027`.
 
-**`ADR-0072`–`ADR-0075`, the phase-declaring compiler, `tools/test.py` and the
-ten test projects are `Under Review`.**
+**`ADR-0074` and `ADR-0076`–`ADR-0079`, the modular compiler, declarative
+validation, schema-validated parsing, the semantic Explorer, the golden-output
+suite and the two new entity specifications are `Under Review`.**
+
+`ADR-0074` was written in `SESSION-0027` and was **not named in `ACCEPT-0023`'s
+scope**, so it is carried forward rather than assumed accepted.
 
 ## Next action
 
-**`ValidationRule` and `Registry`** — the two entities the compiler already
-needs, both currently implemented as Python that the model should own.
+**`Registry`**, the last entity the compiler already needs. It would replace the
+regex that reads `relationship-vocabulary.md`, and would give the vocabulary,
+the rules and the dimension registry one mechanism instead of three ad-hoc
+readers.
 
-`ValidationRule` has a concrete first instance ready: *every predicate declares a
-registered parent*. Moving it from `resolve()` into the model is the smallest
-change that makes the metamodel own its own enforcement.
+Then `Manifest` and `Vocabulary`, and B1's entity work is done.
 
 ## Repository state
 

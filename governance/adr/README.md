@@ -16,7 +16,7 @@ same session the decision is made.
 > a rule exists; the rule that must be followed lives in a Policy under
 > `shared/policies/`. Agents consume policies; humans read ADRs for rationale.
 
-**Highest allocated ID: `ADR-0075`.** IDs are sequential and never reused.
+**Highest allocated ID: `ADR-0079`.** IDs are sequential and never reused.
 
 > This index table is a hand-maintained projection of ADR front matter. It is
 > listed in the transitional-debt register, `ISSUE-0037`.
@@ -170,6 +170,10 @@ Read these before designing anything that produces an artifact:
 | [ADR-0073](ADR-0073-compiler-phases-are-first-class.md) | Compiler phases are first-class and every feature declares its contract | accepted | — |
 | [ADR-0074](ADR-0074-relationshiptype-is-a-type-system.md) | RelationshipType is the type system of the knowledge graph | accepted | — |
 | [ADR-0075](ADR-0075-entities-are-justified-by-compiler-need.md) | Remaining entities are justified by compiler need, not architectural completeness | accepted | — |
+| [ADR-0076](ADR-0076-canonical-knowledge-model-is-layer-a.md) | **The Canonical Knowledge Model is a Layer A entity**; a concept is a compiler concept only if it is meaningless without a compiler | accepted | — |
+| [ADR-0077](ADR-0077-declarative-validation.md) | **The compiler executes ValidationRules; it does not contain them** | accepted | — |
+| [ADR-0078](ADR-0078-schema-validated-parsing.md) | Authoring sources are parsed with a real parser and schema-validated before semantic resolution | accepted | — |
+| [ADR-0079](ADR-0079-explorer-is-the-primary-interface.md) | The Knowledge Explorer is the primary interface to the Canonical Knowledge Model | accepted | — |
 
 ## Supersessions
 

@@ -1,6 +1,8 @@
 {
+  "formatVersion": "1.0.0",
   "metamodelVersion": "0.4.0-skeleton",
-  "note": "Canonical Knowledge Model. Every edge was asserted; none inferred (ADR-0061).",
+  "project": "tiny",
+  "note": "Canonical Knowledge Model. Every edge was asserted; none inferred (ADR-0044, ADR-0061). Serializations are projections of this model, not the model (ADR-0076).",
   "nodes": [
     {
       "id": "ADR.0001",
@@ -8,7 +10,10 @@
       "label": "Verify payment synchronously at checkout",
       "family": "operational",
       "position": null,
-      "description": "Decision with alternatives considered. Never edited once accepted; superseded."
+      "description": "Decision with alternatives considered. Never edited once accepted; superseded.",
+      "provenance": {
+        "source": "adr-0001.md"
+      }
     },
     {
       "id": "AcceptanceRecord.0001",
@@ -16,7 +21,10 @@
       "label": "Acceptance of checkout service r2",
       "family": "operational",
       "position": null,
-      "description": "The act that confers Active status. Commits do not."
+      "description": "The act that confers Active status. Commits do not.",
+      "provenance": {
+        "source": "accept-0001.md"
+      }
     },
     {
       "id": "Actor.Customer",
@@ -24,7 +32,10 @@
       "label": "Customer",
       "family": "descriptive",
       "position": null,
-      "description": "The role that submits orders. A role, not a person."
+      "description": "The role that submits orders. A role, not a person.",
+      "provenance": {
+        "source": "actor-customer.md"
+      }
     },
     {
       "id": "Artifact.CheckoutService",
@@ -32,7 +43,10 @@
       "label": "Checkout service",
       "family": "descriptive",
       "position": null,
-      "description": "A stable logical identity. It has no lifecycle of its own."
+      "description": "A stable logical identity. It has no lifecycle of its own.",
+      "provenance": {
+        "source": "artifact-checkout-service.md"
+      }
     },
     {
       "id": "ArtifactRevision.CheckoutService.r2",
@@ -40,7 +54,10 @@
       "label": "Checkout service r2",
       "family": "descriptive",
       "position": null,
-      "description": "The unit that carries lifecycle state and the unit that is accepted."
+      "description": "The unit that carries lifecycle state and the unit that is accepted.",
+      "provenance": {
+        "source": "artifact-revision-checkout-r2.md"
+      }
     },
     {
       "id": "BoundedContext.Sales",
@@ -48,7 +65,10 @@
       "label": "Sales",
       "family": "descriptive",
       "position": null,
-      "description": "The boundary within which \"Order\" means a customer's purchase request."
+      "description": "The boundary within which \"Order\" means a customer's purchase request.",
+      "provenance": {
+        "source": "bounded-context-sales.md"
+      }
     },
     {
       "id": "Capability.PlaceOrder",
@@ -56,7 +76,10 @@
       "label": "Place an order",
       "family": "descriptive",
       "position": null,
-      "description": "The system accepts an order from a Customer and acknowledges it."
+      "description": "The system accepts an order from a Customer and acknowledges it.",
+      "provenance": {
+        "source": "capability-place-order.md"
+      }
     },
     {
       "id": "Concept.Order",
@@ -64,7 +87,10 @@
       "label": "Order",
       "family": "descriptive",
       "position": null,
-      "description": "A customer's request to purchase goods, from submission until fulfilment."
+      "description": "A customer's request to purchase goods, from submission until fulfilment.",
+      "provenance": {
+        "source": "concept-order.md"
+      }
     },
     {
       "id": "Invariant.PaymentBeforeShipping",
@@ -72,7 +98,10 @@
       "label": "An order cannot ship before payment clears",
       "family": "descriptive",
       "position": null,
-      "description": "Stated independently of whatever enforces it. Note that `enforced-at` is absent:\nthis invariant has no recorded enforcement point, which is a finding rather than\nan omission."
+      "description": "Stated independently of whatever enforces it. Note that `enforced-at` is absent:\nthis invariant has no recorded enforcement point, which is a finding rather than\nan omission.",
+      "provenance": {
+        "source": "invariant-payment-before-shipping.md"
+      }
     },
     {
       "id": "Issue.0001",
@@ -80,7 +109,10 @@
       "label": "Should payment be verified synchronously?",
       "family": "operational",
       "position": null,
-      "description": "A recorded unknown."
+      "description": "A recorded unknown.",
+      "provenance": {
+        "source": "issue-0001.md"
+      }
     },
     {
       "id": "Skill.ValidateOrder",
@@ -88,7 +120,10 @@
       "label": "Validate an order",
       "family": "operational",
       "position": null,
-      "description": "Check that an order references known goods and a reachable customer."
+      "description": "Check that an order references known goods and a reachable customer.",
+      "provenance": {
+        "source": "skill-validate-order.md"
+      }
     },
     {
       "id": "Workflow.Checkout",
@@ -96,15 +131,21 @@
       "label": "Checkout",
       "family": "operational",
       "position": null,
-      "description": "Orchestration only. Holds no methodology of its own."
+      "description": "Orchestration only. Holds no methodology of its own.",
+      "provenance": {
+        "source": "workflow-checkout.md"
+      }
     },
     {
       "id": "WorkflowStep.Checkout.1",
       "type": "WorkflowStep",
       "label": "Checkout step 1",
       "family": "operational",
-      "position": "1",
-      "description": "The reified association. The position lives here, not on the Skill."
+      "position": 1,
+      "description": "The reified association. The position lives here, not on the Skill.",
+      "provenance": {
+        "source": "workflow-step-checkout-1.md"
+      }
     }
   ],
   "edges": [
@@ -221,6 +262,63 @@
       "category": "structural"
     }
   ],
+  "vocabulary": {
+    "accepted-by": {
+      "category": "traceability",
+      "means": "A was granted status by act B",
+      "inverse": "accepts"
+    },
+    "accepts": {
+      "category": "traceability",
+      "means": "inverse of accepted-by",
+      "inverse": "accepted-by"
+    },
+    "contained-by": {
+      "category": "structural",
+      "means": "inverse of contains",
+      "inverse": "contains"
+    },
+    "contains": {
+      "category": "structural",
+      "means": "A is a container for B",
+      "inverse": "contained-by"
+    },
+    "derived-into": {
+      "category": "semantic",
+      "means": "inverse of derives-from",
+      "inverse": "derives-from"
+    },
+    "derives-from": {
+      "category": "semantic",
+      "means": "A is obtained from B",
+      "inverse": "derived-into"
+    },
+    "executes": {
+      "category": "behavioral",
+      "means": "A carries out B",
+      "inverse": "executed-by"
+    },
+    "governs": {
+      "category": "behavioral",
+      "means": "A constrains B normatively",
+      "inverse": "governed-by"
+    },
+    "implemented-by": {
+      "category": "structural",
+      "means": "inverse of implements",
+      "inverse": "implements"
+    },
+    "implements": {
+      "category": "structural",
+      "means": "A realises what B describes",
+      "inverse": "implemented-by"
+    },
+    "resolves": {
+      "category": "traceability",
+      "means": "A answers open question B",
+      "inverse": "resolved-by"
+    }
+  },
   "statistics": {
     "nodes": 13,
     "edges": 16,

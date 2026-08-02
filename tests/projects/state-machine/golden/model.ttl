@@ -1,0 +1,31 @@
+@prefix ex:   <https://example.org/engineering-os/example#> .
+@prefix eos:  <https://example.org/engineering-os/metamodel#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+# A PROJECTION of the Canonical Knowledge Model (ADR-0072). Generated; do not edit.
+
+<https://example.org/engineering-os/example> a owl:Ontology ;
+    rdfs:comment "Layer B model expressed in the Layer A metamodel." ;
+    owl:imports <https://example.org/engineering-os/metamodel> .
+
+ex:Artifact_Doc a eos:Artifact ;
+    rdfs:label "Doc" ;
+    rdfs:comment "Has no state." .
+
+ex:ArtifactRevision_Doc_r1 a eos:ArtifactRevision ;
+    rdfs:label "Doc r1" ;
+    rdfs:comment "Governed by the machine." .
+
+ex:SMS_RevisionLifecycle a eos:StateMachineSpecification ;
+    rdfs:label "Artifact revision lifecycle" ;
+    rdfs:comment "Draft, Under Review, Accepted, Active, Superseded, Archived. Every state belongs" .
+
+ex:Workflow_Review a eos:Workflow ;
+    rdfs:label "Review workflow" ;
+    rdfs:comment "Drives the machine." .
+
+ex:ArtifactRevision_Doc_r1 eos:revisionOf ex:Artifact_Doc .
+ex:SMS_RevisionLifecycle eos:controlsLifecycleOf ex:ArtifactRevision_Doc_r1 .
+ex:SMS_RevisionLifecycle eos:drivenBy ex:Workflow_Review .

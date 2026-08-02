@@ -94,6 +94,7 @@ specializes.
 | `constrained-by` | `governed-by` | behavioral |
 | `enforced-at` | `validated-by` | behavioral |
 | `enforced-by` | `validated-by` | behavioral |
+| `validates` | `validates` | behavioral |
 | `reviews` | `validates` | behavioral |
 | `passes-through` | `validated-by` | behavioral |
 | `driven-by` | `triggered-by` | behavioral |
@@ -103,6 +104,7 @@ specializes.
 | `executed-by` | `executed-by` | behavioral |
 | `uses` | `executes` | behavioral |
 | `requires` | `depends-on` | traceability |
+| `represents` | `represents` | semantic |
 | `expressed-in` | `represents` | semantic |
 | `preserves` | `represents` | semantic |
 | `defines` | `defines` | semantic |
@@ -117,6 +119,7 @@ specializes.
 | `has-value` | `defines` | semantic |
 | `has-position` | `defines` | semantic |
 | `instantiates` | `instantiates` | semantic |
+| `derives-from` | `derives-from` | semantic |
 | `revises` | `derives-from` | semantic |
 | `revision-of` | `derives-from` | semantic |
 | `has-revision` | `derived-into` | semantic |
@@ -136,6 +139,16 @@ specializes.
 | `defers-to` | `depends-on` | traceability |
 | `supports` | `supports` | traceability |
 | `evidenced-by` | `evidenced-by` | traceability |
+
+## Core types used directly
+
+`ADR-0071` says a new entity **reuses a core type directly wherever it can**, and
+specializes only where it must. The mapping table did not record that, so the
+three core types first used directly — `represents`, `derives-from`, `validates`
+— were reported as unregistered predicates by the repository validator.
+
+**A core type is a predicate that is its own parent.** Those rows are now
+present; the remaining core types will be added as entities reach for them.
 
 ## Strained mappings
 
