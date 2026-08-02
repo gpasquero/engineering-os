@@ -12,6 +12,7 @@ attributes:
   source: packages/backend/src/modules/ticket-form/__tests__/ticket-form.service.spec.ts
   support: S-inferred
 relationships:
+- constrains: Capability.TicketForm
 - enforced-at: Artifact.TicketFormServiceSpec
 ---
 

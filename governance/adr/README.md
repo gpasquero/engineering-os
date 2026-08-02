@@ -16,7 +16,7 @@ same session the decision is made.
 > a rule exists; the rule that must be followed lives in a Policy under
 > `shared/policies/`. Agents consume policies; humans read ADRs for rationale.
 
-**Highest allocated ID: `ADR-0131`.** IDs are sequential and never reused.
+**Highest allocated ID: `ADR-0136`.** IDs are sequential and never reused.
 
 > This index table is a hand-maintained projection of ADR front matter. It is
 > listed in the transitional-debt register, `ISSUE-0037`.
@@ -225,7 +225,12 @@ Read these before designing anything that produces an artifact:
 | [ADR-0128](ADR-0128-understanding-retention.md) | **Understanding Retention is a first-class product metric alongside coverage** | accepted | — |
 | [ADR-0129](ADR-0129-longitudinal-suite-is-permanent.md) | **The ten-commit longitudinal experiment is a permanent benchmark suite** | accepted | — |
 | [ADR-0130](ADR-0130-preserve-understanding.md) | **Continuous Acquisition preserves understanding; inference is a mechanism, not the objective** | accepted | — |
-| [ADR-0131](ADR-0131-north-star.md) | **The North Star is whether Engineering OS preserves engineering understanding as software evolves** | accepted | — |
+| [ADR-0131](ADR-0131-north-star.md) | The North Star is whether Engineering OS preserves engineering understanding as software evolves | superseded | `ADR-0136` |
+| [ADR-0132](ADR-0132-metric-admission-test.md) | **A metric may not become primary if it can rise while understanding deteriorates** | accepted | — |
+| [ADR-0133](ADR-0133-three-preservation-properties.md) | **Knowledge, Understanding and Guidance Preservation are three different product properties** | accepted | — |
+| [ADR-0134](ADR-0134-questions-are-the-product-contract.md) | **Engineering Questions are the product contract; predicates are implementation detail** | accepted | — |
+| [ADR-0135](ADR-0135-acquisition-and-guidance-are-two-products.md) | **Engineering Acquisition and Engineering Guidance are two products sharing an implementation** | accepted | — |
+| [ADR-0136](ADR-0136-north-star-correct-decisions.md) | **The North Star is preserving an engineering team's ability to make correct decisions as software evolves** | accepted | — |
 
 ## Supersessions
 

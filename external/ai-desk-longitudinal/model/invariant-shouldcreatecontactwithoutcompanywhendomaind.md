@@ -12,6 +12,7 @@ attributes:
   source: packages/backend/src/modules/contact/__tests__/contact.service.spec.ts
   support: S-inferred
 relationships:
+- enforced-at: Artifact.ContactServiceSpec
 - specializes: Invariant.Contactservice
 ---
 

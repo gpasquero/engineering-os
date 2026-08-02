@@ -1,7 +1,24 @@
 # Longitudinal validation — does engineering understanding survive time?
 
 **Repository:** `ai-desk` · **Ten real commits** from its own history, in order
-**Run:** `SESSION-0047` · `python3 tools/longitudinal.py`
+**Run:** `SESSION-0049` (baseline recorded `SESSION-0047`) · `python3 tools/longitudinal.py`
+
+> **Result of the semantic-preservation change** (`ADR-0130`, `ADR-0134`):
+>
+> ```text
+>                           before        after
+> coverage           1/9 → 1/9      1/9 → 2/9
+> retention               0 %          100 %
+> EQ-06                degraded      retained
+> edges/node               0.38          0.68
+> predicates in use         2 of 6       5 of 6
+> isolated capabilities    9 of 10       0 of 10
+> maintenance               278            314
+> ```
+>
+> The acceptance criterion — *`EQ-06` answered at `t9`, retention 100 %* — was
+> written before the work started and met exactly. **Everything below is the
+> baseline it was measured against**, preserved as `ADR-0129` requires.
 
 > **This validates the central promise of Engineering OS: that engineering
 > understanding survives the passage of time. No benchmark can replace that

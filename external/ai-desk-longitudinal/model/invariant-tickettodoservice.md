@@ -12,6 +12,7 @@ attributes:
   source: packages/backend/src/modules/ticket-todo/__tests__/ticket-todo.service.spec.ts
   support: S-inferred
 relationships:
+- constrains: Capability.TicketTodo
 - enforced-at: Artifact.TicketTodoServiceSpec
 ---
 

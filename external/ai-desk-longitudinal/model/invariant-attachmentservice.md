@@ -12,6 +12,7 @@ attributes:
   source: packages/backend/src/modules/attachment/__tests__/attachment.service.spec.ts
   support: S-inferred
 relationships:
+- constrains: Capability.Attachment
 - enforced-at: Artifact.AttachmentServiceSpec
 ---
 

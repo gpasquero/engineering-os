@@ -1,15 +1,19 @@
 ---
 id: ADR-0131
 title: The North Star is whether Engineering OS preserves engineering understanding as software evolves
-status: accepted
+status: superseded
 date: 2026-08-02
 supersedes: null
-superseded-by: null
+superseded-by: ADR-0136
 resolves: []
 related: [ADR-0116, ADR-0119, ADR-0120, ADR-0123, ADR-0127, ADR-0128, ADR-0129, ADR-0130]
 ---
 
 # ADR-0131 — The North Star
+
+> **Superseded by `ADR-0136`.** The subject moves from the model to the team:
+> preserving understanding is necessary and is not the promise. The instrument,
+> the severity and the ordering below all survive unchanged.
 
 ## Context
 

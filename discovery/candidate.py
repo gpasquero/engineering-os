@@ -41,12 +41,19 @@ class Candidate:
         return node_id
 
     def relation(self, subject, predicate, obj, *, support, source, worker, task,
-                 rule=None, locator=None):
+                 rule=None, locator=None, preserves=None):
+        """`preserves` names the Initial Acquisition rule whose meaning this
+        relationship carries forward (`ADR-0130`). A maintained model that
+        cannot say which onboarding rule a relationship stands for cannot be
+        checked for semantic parity."""
+        origin = {"worker": worker, "task": task, "rule": rule}
+        if preserves:
+            origin["preserves"] = preserves
         self.relationships.append({
             "from": subject, "predicate": predicate, "to": obj,
             "support": support,
             "provenance": {"source": source, "locator": locator},
-            "origin": {"worker": worker, "task": task, "rule": rule},
+            "origin": origin,
         })
 
     def classification(self, node_id, dimension, value, *, support, source,

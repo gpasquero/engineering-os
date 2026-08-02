@@ -61,6 +61,19 @@ def acquire(before, after, authoritative_ids, accepted=None):
     task = "T-continuous"
     W = "W-constraint-interpreter"
 
+    # ── Semantic preservation (ADR-0130) ─────────────────────────────────
+    #
+    # Continuous Acquisition preserves the engineering meaning that Initial
+    # Acquisition established. Each relationship below cites the initial rule
+    # whose meaning it carries forward, and none of them is INFERRED — every one
+    # is read from evidence the mechanical delta already carries.
+    #
+    # Before SESSION-0049 this function preserved `enforced-at` and
+    # `specializes` and dropped `constrains`, `implements`, `validates` and
+    # `scoped-to`. All four attach something to a Capability, so a model
+    # maintained rather than rebuilt grew nodes and lost the ability to answer
+    # `EQ-06` — measured at 0% Understanding Retention across ten commits.
+
     # New test suites propose invariants at both levels (ADR-0111), exactly as
     # Initial Acquisition does. The rule is the same rule; only the input is
     # narrower.
@@ -72,6 +85,28 @@ def acquire(before, after, authoritative_ids, accepted=None):
                     worker="W-domain-interpreter", task=task,
                     attributes={"origin": ORIGIN, "rule": "C1-new-suite",
                                 "cases": str(len(suite["cases"]))})
+        # preserves S4-spec-validates-module
+        cand.relation(sid, "validates", f"Capability.{_slug(suite['moduleDir'])}",
+                      support="S-inferred", source=path,
+                      worker="W-domain-interpreter", task=task,
+                      rule="C1-new-suite", preserves="S4-spec-validates-module")
+
+        # A suite that declares no subject has no general invariant, and its
+        # cases are still guarantees — the same degradation R4 makes (ADR-0130).
+        if not suite["describes"]:
+            for case in [c for c in suite["cases"] if _states_a_rule(c)]:
+                iid = f"Invariant.{_slug(case, 44)}"
+                if cand.entity(iid, "Invariant", case, support="S-inferred",
+                               source=path, locator=f"case('{case[:70]}')",
+                               worker=W, task=task,
+                               attributes={"origin": ORIGIN, "rule": "C1-new-suite",
+                                           "granularity": "guarantee",
+                                           "grouping": "none-declared"}) is None:
+                    continue
+                cand.relation(iid, "enforced-at", sid, support="S-tested",
+                              source=path, worker=W, task=task, rule="C1-new-suite",
+                              preserves="R4-both-levels")
+
         for describe in suite["describes"]:
             rule_cases = [c for c in suite["cases"] if _states_a_rule(c)]
             if not rule_cases:
@@ -83,7 +118,14 @@ def acquire(before, after, authoritative_ids, accepted=None):
                            attributes={"origin": ORIGIN, "rule": "C1-new-suite",
                                        "granularity": "concept"}) is not None:
                 cand.relation(gid, "enforced-at", sid, support="S-tested",
-                              source=path, worker=W, task=task, rule="C1-new-suite")
+                              source=path, worker=W, task=task, rule="C1-new-suite",
+                              preserves="R4-both-levels")
+                # preserves R4-both-levels: an invariant guards a capability
+                cand.relation(gid, "constrains",
+                              f"Capability.{_slug(suite['moduleDir'])}",
+                              support="S-inferred", source=path, worker=W,
+                              task=task, rule="C1-new-suite",
+                              preserves="R4-both-levels")
             for case in rule_cases:
                 iid = f"Invariant.{_slug(case, 44)}"
                 if cand.entity(iid, "Invariant", case, support="S-inferred",
@@ -93,7 +135,11 @@ def acquire(before, after, authoritative_ids, accepted=None):
                                            "granularity": "guarantee"}) is None:
                     continue
                 cand.relation(iid, "specializes", gid, support="S-inferred",
-                              source=path, worker=W, task=task, rule="C1-new-suite")
+                              source=path, worker=W, task=task, rule="C1-new-suite",
+                              preserves="R4-both-levels")
+                cand.relation(iid, "enforced-at", sid, support="S-tested",
+                              source=path, worker=W, task=task, rule="C1-new-suite",
+                              preserves="R4-both-levels")
 
     for name in d["tables"]["added"]:
         t = a["tables"][name]
@@ -104,10 +150,36 @@ def acquire(before, after, authoritative_ids, accepted=None):
 
     for name in d["modules"]["added"]:
         m = a["modules"][name]
-        cand.entity(f"Capability.{_slug(name)}", "Capability", f"{name} module",
+        mid = f"Capability.{_slug(name)}"
+        cand.entity(mid, "Capability", f"{name} module",
                     support="S-implemented", source=m["path"],
                     locator="module directory", worker="W-domain-interpreter",
                     task=task, attributes={"origin": ORIGIN, "rule": "C3-new-module"})
+        # preserves S1-module-is-a-capability
+        cand.relation(mid, "scoped-to", "BoundedContext.Backend",
+                      support="S-inferred", source=m["path"],
+                      worker="W-domain-interpreter", task=task,
+                      rule="C3-new-module", preserves="S1-module-is-a-capability")
+
+    # C4 — a controller that gained routes realises its capability. There was no
+    # route rule at all: a controller added after onboarding never entered the
+    # model, so its capability had nothing implementing it.
+    by_source = {}
+    for key in d["routes"]["added"]:
+        r = a["routes"][key]
+        by_source.setdefault((r["source"], r["moduleDir"]), []).append(r)
+    for (source, module), rs in sorted(by_source.items()):
+        aid = f"Artifact.{_slug(source.split('/')[-1].rsplit('.', 1)[0])}"
+        cand.entity(aid, "Artifact", source.split("/")[-1], support="S-implemented",
+                    source=source, locator=f"{len(rs)} routes",
+                    worker="W-domain-interpreter", task=task,
+                    attributes={"origin": ORIGIN, "rule": "C4-new-routes",
+                                "routes": str(len(rs))})
+        # preserves S2-controller-implements-module
+        cand.relation(aid, "implements", f"Capability.{_slug(module)}",
+                      support="S-inferred", source=source,
+                      worker="W-domain-interpreter", task=task,
+                      rule="C4-new-routes", preserves="S2-controller-implements-module")
 
     # Removals are never applied mechanically. An assertion whose evidence
     # disappeared is a GOVERNED proposal (ADR-0101): the evidence may have moved.

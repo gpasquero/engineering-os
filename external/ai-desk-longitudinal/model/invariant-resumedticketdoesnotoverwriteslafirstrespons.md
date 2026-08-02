@@ -13,6 +13,7 @@ attributes:
   source: packages/backend/src/modules/sla/__tests__/sla-timer.service.spec.ts
   support: S-inferred
 relationships:
+- enforced-at: Artifact.SlaTimerServiceSpec
 - specializes: Invariant.SlatimerservicePauseResumeEdgeCases
 ---
 

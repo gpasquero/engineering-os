@@ -13,6 +13,7 @@ attributes:
   source: packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts
   support: S-inferred
 relationships:
+- enforced-at: Artifact.JwtSecuritySpec
 - specializes: Invariant.JwtSecurity
 ---
 

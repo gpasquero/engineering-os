@@ -12,6 +12,7 @@ attributes:
   source: packages/backend/src/modules/auth/__tests__/password-security.spec.ts
   support: S-inferred
 relationships:
+- enforced-at: Artifact.PasswordSecuritySpec
 - specializes: Invariant.PasswordPolicyRegisterdto
 ---
 

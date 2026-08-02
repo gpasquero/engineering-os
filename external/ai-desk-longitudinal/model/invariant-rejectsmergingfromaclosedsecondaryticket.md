@@ -12,6 +12,7 @@ attributes:
   source: packages/backend/src/modules/ticket/__tests__/ticket-merge-extra.spec.ts
   support: S-inferred
 relationships:
+- enforced-at: Artifact.TicketMergeExtraSpec
 - specializes: Invariant.TicketserviceMergeAdditionalScenarios
 ---
 
