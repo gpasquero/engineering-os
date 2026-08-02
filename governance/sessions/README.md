@@ -46,6 +46,7 @@ ADRs answer "why".
 | [SESSION-0021](SESSION-0021-2026-08-02.md) | 2026-08-02 | B1 | `ACCEPT-0016`; Mechanical vs Interpretive Discovery; four knowledge categories; **`ADR-0062` — architecture through implementation**; 22 issues re-triaged as debt; **`model/metamodel/` created** |
 | [SESSION-0022](SESSION-0022-2026-08-02.md) | 2026-08-02 | B1 | `ACCEPT-0017`; **Apache-2.0**; artifact identity model; inventory reclassified into five categories; **7 metamodel entities specified**; `ADR-0063`, `ADR-0064` |
 | [SESSION-0023](SESSION-0023-2026-08-02.md) | 2026-08-02 | B1 | `ACCEPT-0018`; **descriptive vs operational entities** (`ADR-0065`); semantic backbone completed — 12 of 27 specified; **first OWL skeleton**, and six findings from writing it |
+| [SESSION-0024](SESSION-0024-2026-08-02.md) | 2026-08-02 | B1 | `ACCEPT-0019`; **`RelationshipType` replaces `Relationship`** (`ADR-0066`); **the relationship is the design unit** (`ADR-0067`); operational family complete — 19 of 27; second OWL checkpoint; `ISSUE-0074` |
 
 ## Reading
 

@@ -30,7 +30,7 @@ remaining entity derives from it.
 | 2 | **Artifact** | A stable logical identity that owns many revisions | `ADR-0026`, `ADR-0064` | [✓](entities/artifact.md) |
 | 3 | **Concept** | A named unit of meaning within a bounded context | `ADR-0035` | [✓](entities/concept.md) |
 | 4 | **Capability** | Something a system can do, externally visible | `ADR-0035` | [✓](entities/capability.md) |
-| 5 | **Relationship** | A named, typed, directed association between two semantic entities | `ADR-0042` | [✓](entities/relationship.md) |
+| 5 | **RelationshipType** | Declares that a kind of association may exist: domain, range, cardinality, constraints, semantics | `ADR-0042`, `ADR-0066` | [✓](entities/relationship-type.md) |
 | 6 | **Invariant** | A condition that must hold, stated independently of what enforces it | `ADR-0035` | [✓](entities/invariant.md) |
 | 7 | **Evidence** | A reference to an observable fact, cited in support of an assertion | `ADR-0060`, `ADR-0061` | [✓](entities/evidence.md) |
 | 8 | **Actor** | A role that interacts with a system's Capabilities | `ADR-0035` | [✓](entities/actor.md) |
@@ -51,17 +51,18 @@ remaining entity derives from it.
 
 ### Operational
 
-**None specified.** The entire family is unbuilt.
+**Complete.** All seven specified, as the test of whether `ADR-0065`'s split is
+real. It held — see `ontology/FINDINGS.md`.
 
 | # | Entity | Purpose | Established by | Spec |
 |---|---|---|---|---|
-| 18 | **Policy** | A normative rule motivated by Principles — `GovernancePolicy`, `ModelingPolicy`, `ProcessPolicy` | `ADR-0029`, `ADR-0030` | — |
-| 19 | **Workflow** | Executable orchestration; sequences skills, holds no methodology | `ADR-0033` | — |
-| 20 | **Skill** | A composable unit of methodology with an explicit contract | `governance/glossary.md` | — |
-| 21 | **EngineeringGate** | An Engineering Process reviewing the introduction or modification of a concept | `ADR-0054` | — |
-| 22 | **AcceptanceRecord** | The act conferring `Active` status on a revision | `ADR-0021` | — |
-| 23 | **ADR** | A recorded architectural decision | `ADR-0002` | — |
-| 24 | **Issue** | A recorded unknown | `ADR-0003` | — |
+| 18 | **Policy** | A normative rule motivated by Principles — `GovernancePolicy`, `ModelingPolicy`, `ProcessPolicy` | `ADR-0029`, `ADR-0030` | [✓](entities/policy.md) |
+| 19 | **Workflow** | Executable orchestration; sequences skills, holds no methodology | `ADR-0033` | [✓](entities/workflow.md) |
+| 20 | **Skill** | A composable unit of methodology with an explicit contract | `ADR-0033` | [✓](entities/skill.md) |
+| 21 | **EngineeringGate** | An Engineering Process reviewing the introduction or modification of a concept | `ADR-0054` | [✓](entities/engineering-gate.md) |
+| 22 | **AcceptanceRecord** | The act conferring `Active` status on a revision | `ADR-0021` | [✓](entities/acceptance-record.md) |
+| 23 | **ADR** | A recorded architectural decision | `ADR-0002` | [✓](entities/adr.md) |
+| 24 | **Issue** | A recorded unknown | `ADR-0003` | [✓](entities/issue.md) |
 
 ### Family unassigned
 
@@ -74,7 +75,13 @@ Recorded by `ADR-0065` as not classifying cleanly. Each describes structure
 | 26 | **Manifest** | A root declaration of composition, status or semantics | `ADR-0013` | — |
 | 27 | **ValidationRule** | A constraint a semantic model must satisfy | `ADR-0048` | — |
 
-**12 of 27 specified — and all twelve are descriptive.**
+**19 of 27 specified.** The remaining eight are five descriptive and three
+unassigned.
+
+**Approaching the simplification review threshold** (`ISSUE-0074`): at
+approximately 20 of 27, entity pairs that can merge without losing expressive
+power are identified as one considered pass. `Dimension` / `DimensionSpecification`
+is the first candidate.
 
 ## Compiler-architecture concepts
 
@@ -128,14 +135,23 @@ written before `ADR-0053` drew the semantic/compiler boundary.
 
 **Five entities were added by writing specifications, not by analysis.**
 `BoundedContext`, `Invariant`, `Evidence` and `Actor` were referenced by
-specifications before they existed in any list. `Relationship` was absent from
-every list this project produced in twenty-two sessions and is arguably the most
-fundamental entity in the metamodel — the graph is the model, and nothing named
-the edge.
+specifications before they existed in any list. `RelationshipType` was absent from
+every list this project produced in twenty-two sessions, and the meaning of the
+metamodel is now converging on it — the graph is the model, and nothing named the
+vocabulary of its edges.
 
-**All twelve specified entities are descriptive.** The operational family is
-entirely unbuilt, which is not an accident: the descriptive entities are what
-`ADR-0065` calls the language, and the operational ones describe activity
-performed *on* things described in that language. The build order followed the
-dependency without anyone stating it, and `ADR-0065` is that statement arriving
-after the fact.
+**The build order followed the family boundary before anyone had named it.** The
+first twelve entities specified were all descriptive; `ADR-0065` arrived after
+the fact, which is a better outcome than inventing the distinction — the evidence
+preceded the decision.
+
+**Writing the operational family tested it, and it held.** All seven are owned by
+the engineering process rather than by a BoundedContext, all seven carry
+provenance about who acted, and two have lifecycles that are not
+`ArtifactRevisionLifecycle` — `AcceptanceRecord` has none at all.
+
+**`Relationship` existed for exactly one session.** Specified in `SESSION-0023`,
+replaced by `RelationshipType` in `SESSION-0024` because the OWL checkpoint showed
+it competing with the mechanism it would compile to. It was the shortest-lived
+artifact in the project, and the first withdrawn because building revealed the
+error rather than because analysis predicted it.

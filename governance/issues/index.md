@@ -9,8 +9,8 @@ related: [ISSUE-0037]
 
 # Issue Index
 
-**73 recorded · 1 open · 50 resolved · 22 deferred.** Highest allocated ID:
-`ISSUE-0073`.
+**74 recorded · 1 open · 50 resolved · 23 deferred.** Highest allocated ID:
+`ISSUE-0074`.
 
 > **Hand-maintained projection.** Under `ADR-0016` this is a projection of issue
 > front matter, which is authoritative. No generator exists yet (`ISSUE-0036`),
@@ -35,7 +35,8 @@ not on a schedule.
 
 | ID | Title | Reopen at |
 |---|---|---|
-| [0073](ISSUE-0073-operational-knowledge-versus-evidence-hierarchy.md) | "runtime" names two things; Operational Knowledge versus the evidence hierarchy | **B1** — most likely to be met early |
+| [0073](ISSUE-0073-operational-knowledge-versus-evidence-hierarchy.md) | "runtime" names two things; Operational Knowledge versus the evidence hierarchy | **B1** — surfaced in `Evidence` and `Workflow`; stepped over, not resolved |
+| [0074](ISSUE-0074-metamodel-simplification-review.md) | Metamodel simplification review — identify entity pairs that can merge | **B1** — triggers at ~20 of 27 entities |
 | — | *`ISSUE-0007` was deferred here and resolved one session later by `ADR-0064`, because building `ArtifactRevision` turned it into a blank field* | — |
 | [0072](ISSUE-0072-how-artifacts-declare-principles.md) | How an artifact declares the Principles it establishes | B1–B3 |
 | [0063](ISSUE-0063-minimum-serialized-classifications.md) | Minimum serialized classification set | B3 |

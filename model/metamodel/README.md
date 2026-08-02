@@ -21,8 +21,9 @@ using this metamodel**. Adopters never modify it — they instantiate it
 
 ## Status
 
-**12 of 27 entities specified**, all of them descriptive. The operational family
-(`ADR-0065`) is entirely unbuilt. `entity-inventory.md` records the current state.
+**19 of 27 entities specified.** Both families (`ADR-0065`) are now present and
+the operational family is complete. `entity-inventory.md` records the current
+state.
 
 This is being built under `ADR-0062`: where an existing decision permits
 building, we build, and open questions that do not block the next deliverable
@@ -30,10 +31,11 @@ are recorded as architectural debt rather than as blockers.
 
 ## What an entity specification contains
 
-Every metamodel entity declares eight properties (`ADR-0035`):
+Every metamodel entity declares nine properties (`ADR-0035`, `ADR-0067`):
 
 | Property | States |
 |---|---|
+| **what new semantics does this introduce?** | **the relationship this entity adds that cannot already be expressed. If the answer is "none", the entity is probably redundant** (`ADR-0067`) |
 | identity | how an instance is identified |
 | purpose | what the entity is for |
 | ownership | who owns instances |
@@ -65,14 +67,22 @@ model/metamodel/
   not carry dimension values; Dimension Assignments relate them.
 - **Every entity declares its family** — descriptive or operational (`ADR-0065`).
   The two are not peers and no specification treats them as interchangeable.
+- **The relationship is the design unit, not the entity** (`ADR-0067`). Entities
+  are lightweight; the semantics live in relationships, constraints,
+  cardinalities, inference and identity.
+- **The metamodel defines `RelationshipType`, not `Relationship`** (`ADR-0066`).
+  It declares the vocabulary of edges; it does not model every edge as an entity.
 
 ## The OWL skeleton
 
 `ontology/engineering-os-metamodel.ttl` expresses the specified entities as OWL,
-and was written deliberately **before** the metamodel was complete. Reading the
-specifications as class definitions exposed a missing superclass, an entity that
-may be redundant, and two relationships pointing at nothing defined — see
-`ontology/FINDINGS.md`.
+and is regenerated at checkpoints **before** the metamodel is complete rather
+than after.
+
+Two checkpoints have run, at 12 and 19 entities, producing eight findings. One
+withdrew an entity one session after it was accepted (`ADR-0066`); one changed
+how every future entity is admitted (`ADR-0067`); one is scheduled for a
+simplification review (`ISSUE-0074`). See `ontology/FINDINGS.md`.
 
 Markdown remains the authoring form, which keeps `ADR-0017`'s guarantee intact:
 authoritative artifacts stay usable without executing the compiler. **Which of

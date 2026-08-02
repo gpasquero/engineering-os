@@ -1,19 +1,25 @@
 ---
 id: METAMODEL-OWL-FINDINGS
-title: What the first OWL skeleton exposed
+title: What the OWL skeleton exposed
 status: draft
 created: 2026-08-02
 updated: 2026-08-02
 semantic-layer: A
 artifact-kind: authoritative
-established-by: [ADR-0062, ADR-0065]
+established-by: [ADR-0062, ADR-0065, ADR-0066, ADR-0067]
 ---
 
-# What the first OWL skeleton exposed
+# What the OWL skeleton exposed
 
-The skeleton was generated at 12 of 27 entities rather than at completion,
-specifically to find problems while they are cheap. It found six, and confirmed
-three decisions.
+The skeleton is generated at intervals rather than at completion, specifically to
+find problems while they are cheap.
+
+**First checkpoint — 12 of 27 entities.** Six findings, three confirmations. Two
+findings were answered by the reviewer within one session (`ADR-0066`,
+`ADR-0067`); one was deferred to a scheduled review (`ISSUE-0074`).
+
+**Second checkpoint — 19 of 27 entities**, adding the operational family. Two new
+findings, recorded as #7 and #8 below.
 
 **None of these blocks B1.** They are recorded here and, where they need to
 survive beyond this document, in the affected specification's `Debt` section.
@@ -21,6 +27,12 @@ survive beyond this document, in the affected specification's `Debt` section.
 ## The findings
 
 ### 1. `Relationship` competes with OWL's own mechanism for edges
+
+> **ANSWERED — `ADR-0066`.** The metamodel defines `RelationshipType`, not
+> `Relationship`. It declares the *vocabulary* of relationships — domain, range,
+> cardinality, constraints, semantics — and does not represent every edge as an
+> entity. Instances are graph structure, compiled to `owl:ObjectProperty`.
+> **Finding #5 closed as a consequence.**
 
 Every association in the skeleton is expressed as an `owl:ObjectProperty`. The
 metamodel also declares an entity, `Relationship`, whose stated purpose is to
@@ -41,6 +53,12 @@ more expensive to discover after the operational entities were written, since
 every one of them relates to something.
 
 ### 2. `Dimension` carries no data its specification does not already carry
+
+> **DEFERRED BY DECISION — `ISSUE-0074`.** The 1:1 correspondence is confirmed as
+> a strong signal, and the pair is the first candidate for a **metamodel
+> simplification review at approximately 75% completion**. Not resolved
+> opportunistically: *do not optimise prematurely, but do not preserve accidental
+> complexity either.*
 
 In OWL, `eos:Dimension` is a class whose every instance stands in a one-to-one
 functional relation to a `DimensionSpecification`, has no authoritative
@@ -85,9 +103,9 @@ prose, `Assertion` is the entity that expresses it.** Left undeclared for now.
 
 ### 5. `Relationship.typedBy` points at nothing defined
 
-Already recorded as debt when `Relationship` was written; OWL forced a
-provisional choice rather than allowing the question to stay open. The skeleton
-guesses `Concept`, marked `PROVISIONAL`.
+> **CLOSED by `ADR-0066`.** The property no longer exists. Under `RelationshipType`
+> there is nothing for an edge to be typed *by* — the type is the modelled thing,
+> and the edge is structure.
 
 ### 6. `DimensionAssignment.hasValue` is not expressible in plain OWL
 
@@ -98,6 +116,57 @@ one"* without either a value partition per dimension or leaving it unconstrained
 The skeleton leaves it unconstrained. This is a genuine expressiveness limit,
 not a modelling error, and it is the first concrete evidence for what the
 Knowledge Compiler must check that an ontology cannot (`ISSUE-0063`).
+
+## Second checkpoint — the operational family
+
+### 7. `RelationshipType` cannot express order
+
+`Workflow.sequences` is **ordered**. Every other relationship in the metamodel is
+a set.
+
+`RelationshipType` declares five things — domain, range, cardinality, constraints,
+semantics — and **none of them is sequence**. The relationship vocabulary,
+introduced one session ago to be the place where relationship semantics live,
+cannot type the first relationship that needed it.
+
+It does not block: the ordering can be carried in the Workflow's own declaration.
+It does mean `RelationshipType` needs either an ordering field or an explicit
+statement that ordered relationships are modelled differently.
+
+**Found by writing the entity that needed it**, one session after the entity that
+should have provided it.
+
+### 8. Two more relationships point at things that are not entities
+
+`EngineeringGate.holds` points at *question*. `EngineeringGate.produces` points at
+*outcome*. Neither exists in the inventory.
+
+This is the third instance of the same shape, after `Evidence.supports` (#4) and
+`Relationship.typedBy` (#5). **The pattern is now worth naming: a relationship
+whose target is undefined is the reliable signal of a missing entity — or of an
+entity that should not exist.**
+
+Under `ADR-0067` both should be tested before being created. `question` probably
+introduces no relationship a `Concept` cannot express. Recorded for `ISSUE-0074`.
+
+### What the operational family confirmed about `ADR-0065`
+
+The seven operational entities were written as the test of whether the
+descriptive/operational split is real. **It held.** All seven differ structurally
+from every descriptive entity in the same three ways:
+
+- they are owned by the engineering process, not by a BoundedContext;
+- they carry provenance about **who acted**, which no descriptive entity does;
+- two of them have lifecycles that are **not** `ArtifactRevisionLifecycle` —
+  `AcceptanceRecord` has none at all, and `Issue` has its own.
+
+That third point is the strongest evidence. A family boundary that predicts
+lifecycle divergence is describing something structural.
+
+**The entity that came closest to failing is `Issue`**, which passes on `blocks`
+and `defers-to` alone — `resolved-by` is merely the inverse of `ADR.resolves` and
+introduces nothing. It is recorded in its own specification as the thinnest
+passing entity in the metamodel.
 
 ## What the skeleton confirmed
 

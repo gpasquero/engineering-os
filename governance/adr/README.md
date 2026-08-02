@@ -16,7 +16,7 @@ same session the decision is made.
 > a rule exists; the rule that must be followed lives in a Policy under
 > `shared/policies/`. Agents consume policies; humans read ADRs for rationale.
 
-**Highest allocated ID: `ADR-0065`.** IDs are sequential and never reused.
+**Highest allocated ID: `ADR-0067`.** IDs are sequential and never reused.
 
 > This index table is a hand-maintained projection of ADR front matter. It is
 > listed in the transitional-debt register, `ISSUE-0037`.
@@ -160,6 +160,8 @@ Read these before designing anything that produces an artifact:
 | [ADR-0063](ADR-0063-apache-2-0-license.md) | Engineering OS is licensed under Apache-2.0 | accepted | ISSUE-0011 |
 | [ADR-0064](ADR-0064-artifact-and-revision-identity.md) | Artifact and ArtifactRevision identity | accepted | ISSUE-0007 |
 | [ADR-0065](ADR-0065-descriptive-and-operational-entities.md) | **Metamodel entities are either Descriptive or Operational** | accepted | — |
+| [ADR-0066](ADR-0066-relationship-type-not-edge.md) | The metamodel defines RelationshipType, not Relationship | accepted | — |
+| [ADR-0067](ADR-0067-the-relationship-is-the-design-unit.md) | **The relationship is the design unit, not the entity** | accepted | — |
 
 ## Supersessions
 
