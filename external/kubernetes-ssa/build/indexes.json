@@ -1,0 +1,1893 @@
+{
+  "note": "Projections of the Canonical Knowledge Model, derived by the declared query engine (ADR-0086).",
+  "search": [
+    {
+      "id": "Artifact.ApplyIntegrationTest",
+      "type": "Artifact",
+      "label": "test/integration/apiserver/apply/apply_test.go",
+      "family": "descriptive",
+      "text": "test/integration/apiserver/apply/apply_test.go artifact integration tests including `testapplyupdateapplyconflictforced`,\n`testapplymanagedfields`, `testapplyrequiresfieldmanager`,\n`testclearmanagedfieldswith{update,mergepatch,strategicmergepatch,jsonpatch",
+      "attributes": {
+        "locator": "30 Test functions",
+        "source": "https://github.com/kubernetes/kubernetes/blob/master/test/integration/apiserver/apply/apply_test.go",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Artifact.ConflictGo",
+      "type": "Artifact",
+      "label": "managedfields/internal/conflict.go",
+      "family": "descriptive",
+      "text": "managedfields/internal/conflict.go artifact formats `\"apply failed with 1 conflict: conflict with %v: %v\"`. `printmanager`\nrenders manager name, apiversion, operation, **time** and subresource.",
+      "attributes": {
+        "locator": "NewConflictError, getConflictMessage, printManager",
+        "source": "https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/apimachinery/pkg/util/managedfields/internal/conflict.go",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Artifact.FieldManagerGo",
+      "type": "Artifact",
+      "label": "managedfields/internal/fieldmanager.go",
+      "family": "descriptive",
+      "text": "managedfields/internal/fieldmanager.go artifact `fieldmanager.apply` takes `force bool`; `update` handles non-apply operations;\n`updatenoerrors` preserves the live object's managedfields on error.",
+      "attributes": {
+        "locator": "FieldManager.Apply(liveObj, appliedObj runtime.Object, manager string, force bool)",
+        "source": "https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/apimachinery/pkg/util/managedfields/internal/fieldmanager.go",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Artifact.MetaV1Types",
+      "type": "Artifact",
+      "label": "apimachinery meta/v1/types.go",
+      "family": "descriptive",
+      "text": "apimachinery meta/v1/types.go artifact the api type. its `time` doc comment is where the takeover-timestamp rule lives.",
+      "attributes": {
+        "locator": "type ManagedFieldsEntry struct",
+        "source": "https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/apimachinery/pkg/apis/meta/v1/types.go",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Artifact.SsaDocs",
+      "type": "Artifact",
+      "label": "kubernetes.io Server-Side Apply reference",
+      "family": "descriptive",
+      "text": "kubernetes.io server-side apply reference artifact user-facing reference. describes conflict resolution's three paths and the\nfield-removal rule.",
+      "attributes": {
+        "source": "https://kubernetes.io/docs/reference/using-api/server-side-apply/",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "BC.ApiMachinery",
+      "type": "BoundedContext",
+      "label": "Kubernetes API Machinery",
+      "family": "descriptive",
+      "text": "kubernetes api machinery boundedcontext the boundary within which \"apply\", \"manager\" and \"field\" have their\nserver-side apply meanings.",
+      "attributes": {}
+    },
+    {
+      "id": "Capability.ConflictDetection",
+      "type": "Capability",
+      "label": "Detect and report field conflicts",
+      "family": "descriptive",
+      "text": "detect and report field conflicts capability reject an apply that changes a field owned by another manager, naming the\nmanager and the field path.",
+      "attributes": {
+        "locator": "NewConflictError, getConflictMessage",
+        "source": "https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/apimachinery/pkg/util/managedfields/internal/conflict.go",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Capability.ServerSideApply",
+      "type": "Capability",
+      "label": "Apply an object server-side",
+      "family": "descriptive",
+      "text": "apply an object server-side capability merge an applied configuration into the live object and update managed fields.",
+      "attributes": {
+        "locator": "func (f *FieldManager) Apply",
+        "source": "https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/apimachinery/pkg/util/managedfields/internal/fieldmanager.go",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Concept.Conflict",
+      "type": "Concept",
+      "label": "Conflict",
+      "family": "descriptive",
+      "text": "conflict concept \"a conflict occurs when an apply operation tries to change a field that another\nmanager also claims to manage.\"",
+      "attributes": {
+        "source": "https://kubernetes.io/docs/reference/using-api/server-side-apply/",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Concept.FieldManagement",
+      "type": "Concept",
+      "label": "Field management",
+      "family": "descriptive",
+      "text": "field management concept \"the user relies on and expects the value of the field not to change. the user\nwho last made an assertion about the value of a field will be recorded as the\ncurrent field manager.\"",
+      "attributes": {
+        "source": "https://kubernetes.io/docs/reference/using-api/server-side-apply/",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Concept.Force",
+      "type": "Concept",
+      "label": "Force",
+      "family": "descriptive",
+      "text": "force concept setting `force=true` \"forces the operation to succeed, changes the value of the\nfield, and **removes the field from all other managers' entries in\nmanagedfields**.\"",
+      "attributes": {
+        "source": "https://kubernetes.io/docs/reference/using-api/server-side-apply/",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Concept.LastAppliedAnnotation",
+      "type": "Concept",
+      "label": "last-applied-configuration annotation",
+      "family": "descriptive",
+      "text": "last-applied-configuration annotation concept the legacy client-side mechanism ssa replaces. tracks a user's last applied\nstate rather than their field management.",
+      "attributes": {
+        "source": "https://kubernetes.io/docs/reference/using-api/server-side-apply/",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Concept.ManagedFields",
+      "type": "Concept",
+      "label": "managedFields",
+      "family": "descriptive",
+      "text": "managedfields concept an entry in `metadata.managedfields` recording `manager`, `operation`\n(`apply` or `update`), `apiversion`, `time`, `fieldstype` (`fieldsv1`) and\n`fieldsv1`.",
+      "attributes": {
+        "locator": "type ManagedFieldsEntry",
+        "source": "https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/apimachinery/pkg/apis/meta/v1/types.go",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Concept.OwnershipTransfer",
+      "type": "Concept",
+      "label": "Ownership transfer",
+      "family": "descriptive",
+      "text": "ownership transfer concept \"whenever a field's value does change, ownership moves from its current manager\nto the manager making the change.\"",
+      "attributes": {
+        "source": "https://kubernetes.io/docs/reference/using-api/server-side-apply/",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Evidence.ConflictSymbols",
+      "type": "Evidence",
+      "label": "conflict.go exported symbols",
+      "family": "descriptive",
+      "text": "conflict.go exported symbols evidence http 200. printmanager renders manager, apiversion, operation, time and\nsubresource.",
+      "attributes": {
+        "fetched": "2026-08-02",
+        "kind": "source-reference",
+        "locator": "NewConflictError, getConflictMessage, printManager",
+        "source": "https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/apimachinery/pkg/util/managedfields/internal/conflict.go",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Evidence.DocsConflict",
+      "type": "Evidence",
+      "label": "Docs \u2014 conflict definition",
+      "family": "descriptive",
+      "text": "docs \u2014 conflict definition evidence defines a conflict and lists the three resolution paths.",
+      "attributes": {
+        "fetched": "2026-08-02",
+        "kind": "artifact-reference",
+        "locator": "Conflicts",
+        "source": "https://kubernetes.io/docs/reference/using-api/server-side-apply/",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Evidence.DocsFieldManagement",
+      "type": "Evidence",
+      "label": "Docs \u2014 field management definition",
+      "family": "descriptive",
+      "text": "docs \u2014 field management definition evidence quotes the definition of field management and the current-field-manager rule.",
+      "attributes": {
+        "fetched": "2026-08-02",
+        "kind": "artifact-reference",
+        "locator": "What is field management",
+        "source": "https://kubernetes.io/docs/reference/using-api/server-side-apply/",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Evidence.DocsForce",
+      "type": "Evidence",
+      "label": "Docs \u2014 force semantics",
+      "family": "descriptive",
+      "text": "docs \u2014 force semantics evidence states that force removes the field from all other managers' entries.",
+      "attributes": {
+        "fetched": "2026-08-02",
+        "kind": "artifact-reference",
+        "locator": "Overwrite value, become sole manager",
+        "source": "https://kubernetes.io/docs/reference/using-api/server-side-apply/",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Evidence.DocsLastApplied",
+      "type": "Evidence",
+      "label": "Docs \u2014 comparison with last-applied-configuration",
+      "family": "descriptive",
+      "text": "docs \u2014 comparison with last-applied-configuration evidence states ssa tracks field management rather than last applied state.",
+      "attributes": {
+        "fetched": "2026-08-02",
+        "kind": "artifact-reference",
+        "locator": "Comparison with client-side apply",
+        "source": "https://kubernetes.io/docs/reference/using-api/server-side-apply/",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Evidence.DocsManagedFieldsShape",
+      "type": "Evidence",
+      "label": "Docs \u2014 managedFields entry example",
+      "family": "descriptive",
+      "text": "docs \u2014 managedfields entry example evidence shows manager, operation, apiversion, time, fieldstype, fieldsv1.",
+      "attributes": {
+        "fetched": "2026-08-02",
+        "kind": "artifact-reference",
+        "locator": "managedFields YAML example",
+        "source": "https://kubernetes.io/docs/reference/using-api/server-side-apply/",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Evidence.DocsOwnershipTransfer",
+      "type": "Evidence",
+      "label": "Docs \u2014 ownership transfer",
+      "family": "descriptive",
+      "text": "docs \u2014 ownership transfer evidence 'whenever a field's value does change, ownership moves from its current manager\nto the manager making the change.'",
+      "attributes": {
+        "fetched": "2026-08-02",
+        "kind": "artifact-reference",
+        "locator": "Transferring ownership",
+        "source": "https://kubernetes.io/docs/reference/using-api/server-side-apply/",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Evidence.FieldManagerSymbols",
+      "type": "Evidence",
+      "label": "fieldmanager.go exported symbols",
+      "family": "descriptive",
+      "text": "fieldmanager.go exported symbols evidence http 200. apply carries force bool. updatenoerrors preserves live managedfields\non error 'to prevent clients who don't understand managedfields from deleting it\naccidentally.'",
+      "attributes": {
+        "fetched": "2026-08-02",
+        "kind": "source-reference",
+        "locator": "FieldManager, Apply, Update, UpdateNoErrors",
+        "source": "https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/apimachinery/pkg/util/managedfields/internal/fieldmanager.go",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Evidence.Kep555Readme",
+      "type": "Evidence",
+      "label": "KEP-555 README",
+      "family": "descriptive",
+      "text": "kep-555 readme evidence fetched. yields stage (alpha v1.14, beta v1.19, ga v1.22), the managedfields\nreplacement of last-applied-configuration, and the backward-compatibility and\nrollback commitments.",
+      "attributes": {
+        "fetched": "2026-08-02",
+        "kind": "artifact-reference",
+        "locator": "Motivation, Proposal",
+        "source": "https://github.com/kubernetes/enhancements/blob/master/keps/sig-api-machinery/555-server-side-apply/README.md",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Evidence.Kep555ResetFields",
+      "type": "Evidence",
+      "label": "KEP-555 \u2014 ResetFieldsProvider",
+      "family": "descriptive",
+      "text": "kep-555 \u2014 resetfieldsprovider evidence names the interface protecting status fields from ownership claims.",
+      "attributes": {
+        "fetched": "2026-08-02",
+        "kind": "artifact-reference",
+        "locator": "ResetFieldsProvider interface, PR #86083",
+        "source": "https://github.com/kubernetes/enhancements/blob/master/keps/sig-api-machinery/555-server-side-apply/README.md",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Evidence.KepDirectoryListing",
+      "type": "Evidence",
+      "label": "keps/sig-api-machinery directory listing",
+      "family": "descriptive",
+      "text": "keps/sig-api-machinery directory listing evidence fetched. confirms the kep numbers exist. **does not confirm their contents** \u2014\nonly 555 and the docs page were read in full.",
+      "attributes": {
+        "fetched": "2026-08-02",
+        "kind": "artifact-reference",
+        "locator": "555, 2155, 2885, 5958",
+        "source": "https://api.github.com/repos/kubernetes/enhancements/contents/keps/sig-api-machinery",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Evidence.ManagedFieldsEntryType",
+      "type": "Evidence",
+      "label": "ManagedFieldsEntry struct",
+      "family": "descriptive",
+      "text": "managedfieldsentry struct evidence http 200, definition extracted. operation is documented as 'apply' or 'update'\nonly.",
+      "attributes": {
+        "fetched": "2026-08-02",
+        "kind": "source-reference",
+        "locator": "line 1407",
+        "source": "https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/apimachinery/pkg/apis/meta/v1/types.go",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Evidence.TestClearManagedFields",
+      "type": "Evidence",
+      "label": "TestClearManagedFieldsWith{Update,MergePatch,StrategicMergePatch,JSONPatch}",
+      "family": "descriptive",
+      "text": "testclearmanagedfieldswith{update,mergepatch,strategicmergepatch,jsonpatch} evidence four tests clearing managedfields by four request paths.",
+      "attributes": {
+        "fetched": "2026-08-02",
+        "kind": "source-reference",
+        "locator": "lines 1686-1924",
+        "source": "https://github.com/kubernetes/kubernetes/blob/master/test/integration/apiserver/apply/apply_test.go",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Evidence.TestConflictForced",
+      "type": "Evidence",
+      "label": "TestApplyUpdateApplyConflictForced",
+      "family": "descriptive",
+      "text": "testapplyupdateapplyconflictforced evidence exercises apply, update, apply, then forced resolution.",
+      "attributes": {
+        "fetched": "2026-08-02",
+        "kind": "source-reference",
+        "locator": "line 747",
+        "source": "https://github.com/kubernetes/kubernetes/blob/master/test/integration/apiserver/apply/apply_test.go",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Evidence.TestFunctionList",
+      "type": "Evidence",
+      "label": "apply_test.go function list",
+      "family": "descriptive",
+      "text": "apply_test.go function list evidence http 200; names extracted by grep.",
+      "attributes": {
+        "fetched": "2026-08-02",
+        "kind": "source-reference",
+        "locator": "30 func Test... declarations",
+        "source": "https://github.com/kubernetes/kubernetes/blob/master/test/integration/apiserver/apply/apply_test.go",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Evidence.TestRequiresFieldManager",
+      "type": "Evidence",
+      "label": "TestApplyRequiresFieldManager",
+      "family": "descriptive",
+      "text": "testapplyrequiresfieldmanager evidence asserts a requirement no fetched document states.",
+      "attributes": {
+        "fetched": "2026-08-02",
+        "kind": "source-reference",
+        "locator": "line 1310",
+        "source": "https://github.com/kubernetes/kubernetes/blob/master/test/integration/apiserver/apply/apply_test.go",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Evidence.TestSubresources",
+      "type": "Evidence",
+      "label": "TestApplyDoesNotChangeManagedFieldsViaSubresources",
+      "family": "descriptive",
+      "text": "testapplydoesnotchangemanagedfieldsviasubresources evidence protects the subresource path.",
+      "attributes": {
+        "fetched": "2026-08-02",
+        "kind": "source-reference",
+        "locator": "line 2072",
+        "source": "https://github.com/kubernetes/kubernetes/blob/master/test/integration/apiserver/apply/apply_test.go",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Evidence.TimeFieldComment",
+      "type": "Evidence",
+      "label": "ManagedFieldsEntry.Time doc comment",
+      "family": "descriptive",
+      "text": "managedfieldsentry.time doc comment evidence 'the timestamp will also be updated if a field is added, the manager changes any\nof the owned fields value or removes a field. **the timestamp does not update\nwhen a field is removed from the entry be",
+      "attributes": {
+        "fetched": "2026-08-02",
+        "kind": "source-reference",
+        "locator": "lines 1419-1424",
+        "source": "https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/apimachinery/pkg/apis/meta/v1/types.go",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Invariant.ApplyRequiresFieldManager",
+      "type": "Invariant",
+      "label": "An apply request must name a field manager",
+      "family": "descriptive",
+      "text": "an apply request must name a field manager invariant **asserted by a test, stated by no fetched document.** the docs describe what a\nmanager is; the requirement that a request carry one is visible in the test\nname.",
+      "attributes": {
+        "locator": "TestApplyRequiresFieldManager",
+        "source": "https://github.com/kubernetes/kubernetes/blob/master/test/integration/apiserver/apply/apply_test.go",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Invariant.BackwardCompatible",
+      "type": "Invariant",
+      "label": "Changes must be strictly backward compatible",
+      "family": "descriptive",
+      "text": "changes must be strictly backward compatible invariant \"all the changes should be strictly backward compatible, and shouldn't break\nexisting automation or users.\"",
+      "attributes": {
+        "source": "https://github.com/kubernetes/enhancements/blob/master/keps/sig-api-machinery/555-server-side-apply/README.md",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Invariant.RollbackClearsManagedFields",
+      "type": "Invariant",
+      "label": "Disabling the feature clears managedFields without affecting workloads",
+      "family": "descriptive",
+      "text": "disabling the feature clears managedfields without affecting workloads invariant rollback safety. four integration tests clear `managedfields` by four different\nrequest paths.",
+      "attributes": {
+        "source": "https://github.com/kubernetes/enhancements/blob/master/keps/sig-api-machinery/555-server-side-apply/README.md",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Invariant.StatusFieldsProtected",
+      "type": "Invariant",
+      "label": "Status fields are protected from ownership claims",
+      "family": "descriptive",
+      "text": "status fields are protected from ownership claims invariant protected through a `resetfieldsprovider` interface that resource strategies\nimplement.",
+      "attributes": {
+        "locator": "ResetFieldsProvider",
+        "source": "https://github.com/kubernetes/enhancements/blob/master/keps/sig-api-machinery/555-server-side-apply/README.md",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Invariant.TimestampNotUpdatedOnTakeover",
+      "type": "Invariant",
+      "label": "An entry's timestamp does not update when another manager takes a field over",
+      "family": "descriptive",
+      "text": "an entry's timestamp does not update when another manager takes a field over invariant \"the timestamp does not update when a field is removed from the entry because\nanother manager took it over.\"\n\n**this invariant is the cross-source finding.** see `../ground-truth.md` q7.",
+      "attributes": {
+        "locator": "ManagedFieldsEntry.Time doc comment",
+        "source": "https://github.com/kubernetes/kubernetes/blob/master/staging/src/k8s.io/apimachinery/pkg/apis/meta/v1/types.go",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "KEP.2155",
+      "type": "ADR",
+      "label": "KEP-2155 \u2014 client-go apply configurations",
+      "family": "operational",
+      "text": "kep-2155 \u2014 client-go apply configurations adr typed apply configurations for client-go. **refines** kep-555 by giving go\nclients a way to construct apply requests; does not supersede it.",
+      "attributes": {
+        "source": "https://github.com/kubernetes/enhancements/tree/master/keps/sig-api-machinery/2155-clientgo-apply",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "KEP.2885",
+      "type": "ADR",
+      "label": "KEP-2885 \u2014 server-side unknown field validation",
+      "family": "operational",
+      "text": "kep-2885 \u2014 server-side unknown field validation adr moves unknown-field validation to the server. **refines** the apply request\npath.",
+      "attributes": {
+        "source": "https://github.com/kubernetes/enhancements/blob/master/keps/sig-api-machinery/2885-server-side-unknown-field-validation/README.md",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "KEP.555",
+      "type": "ADR",
+      "label": "KEP-555 \u2014 Server-Side Apply",
+      "family": "operational",
+      "text": "kep-555 \u2014 server-side apply adr moves apply logic from the client to the server. replaces the single\n`kubectl.kubernetes.io/last-applied-configuration` annotation with per-field\nownership tracking.",
+      "attributes": {
+        "sig": "sig-api-machinery",
+        "source": "https://github.com/kubernetes/enhancements/blob/master/keps/sig-api-machinery/555-server-side-apply/README.md",
+        "stage": "GA in v1.22 (Alpha v1.14, Beta v1.19)",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "KEP.5958",
+      "type": "ADR",
+      "label": "KEP-5958 \u2014 client opt-out of managedFields",
+      "family": "operational",
+      "text": "kep-5958 \u2014 client opt-out of managedfields adr lets clients opt out of receiving `managedfields`. **support status:\nincomplete** \u2014 the directory exists and was listed, but its readme was not\nfetched, so its stage and exact scope are unverified.",
+      "attributes": {
+        "source": "https://github.com/kubernetes/enhancements/tree/master/keps/sig-api-machinery/5958-client-opt-out-managedfields",
+        "support": "incomplete"
+      }
+    }
+  ],
+  "impact": {
+    "Artifact.ApplyIntegrationTest": [
+      {
+        "id": "Invariant.ApplyRequiresFieldManager",
+        "hops": 1,
+        "via": "enforced-at"
+      },
+      {
+        "id": "Invariant.RollbackClearsManagedFields",
+        "hops": 1,
+        "via": "enforced-at"
+      },
+      {
+        "id": "Invariant.StatusFieldsProtected",
+        "hops": 1,
+        "via": "enforced-at"
+      },
+      {
+        "id": "KEP.555",
+        "hops": 2,
+        "via": "enforced-at"
+      },
+      {
+        "id": "KEP.2155",
+        "hops": 3,
+        "via": "enforced-at"
+      },
+      {
+        "id": "KEP.2885",
+        "hops": 3,
+        "via": "enforced-at"
+      }
+    ],
+    "Artifact.ConflictGo": [
+      {
+        "id": "Artifact.ApplyIntegrationTest",
+        "hops": 1,
+        "via": "validates"
+      },
+      {
+        "id": "Capability.ConflictDetection",
+        "hops": 1,
+        "via": "realised-by"
+      },
+      {
+        "id": "Invariant.ApplyRequiresFieldManager",
+        "hops": 2,
+        "via": "validates"
+      },
+      {
+        "id": "Invariant.RollbackClearsManagedFields",
+        "hops": 2,
+        "via": "validates"
+      },
+      {
+        "id": "Invariant.StatusFieldsProtected",
+        "hops": 2,
+        "via": "validates"
+      },
+      {
+        "id": "KEP.555",
+        "hops": 3,
+        "via": "validates"
+      },
+      {
+        "id": "KEP.2155",
+        "hops": 4,
+        "via": "validates"
+      },
+      {
+        "id": "KEP.2885",
+        "hops": 4,
+        "via": "validates"
+      }
+    ],
+    "Artifact.FieldManagerGo": [
+      {
+        "id": "Artifact.ApplyIntegrationTest",
+        "hops": 1,
+        "via": "validates"
+      },
+      {
+        "id": "Capability.ServerSideApply",
+        "hops": 1,
+        "via": "realised-by"
+      },
+      {
+        "id": "Invariant.ApplyRequiresFieldManager",
+        "hops": 2,
+        "via": "realised-by"
+      },
+      {
+        "id": "Invariant.BackwardCompatible",
+        "hops": 2,
+        "via": "realised-by"
+      },
+      {
+        "id": "Invariant.RollbackClearsManagedFields",
+        "hops": 2,
+        "via": "validates"
+      },
+      {
+        "id": "Invariant.StatusFieldsProtected",
+        "hops": 2,
+        "via": "realised-by"
+      },
+      {
+        "id": "KEP.555",
+        "hops": 3,
+        "via": "realised-by"
+      },
+      {
+        "id": "KEP.2155",
+        "hops": 4,
+        "via": "realised-by"
+      },
+      {
+        "id": "KEP.2885",
+        "hops": 4,
+        "via": "realised-by"
+      }
+    ],
+    "BC.ApiMachinery": [
+      {
+        "id": "Capability.ConflictDetection",
+        "hops": 1,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Capability.ServerSideApply",
+        "hops": 1,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Concept.Conflict",
+        "hops": 1,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Concept.FieldManagement",
+        "hops": 1,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Concept.Force",
+        "hops": 1,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Concept.LastAppliedAnnotation",
+        "hops": 1,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Concept.ManagedFields",
+        "hops": 1,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Concept.OwnershipTransfer",
+        "hops": 1,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Invariant.ApplyRequiresFieldManager",
+        "hops": 1,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Invariant.BackwardCompatible",
+        "hops": 1,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Invariant.RollbackClearsManagedFields",
+        "hops": 1,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Invariant.StatusFieldsProtected",
+        "hops": 1,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Invariant.TimestampNotUpdatedOnTakeover",
+        "hops": 1,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Artifact.ApplyIntegrationTest",
+        "hops": 2,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Artifact.ConflictGo",
+        "hops": 2,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Artifact.FieldManagerGo",
+        "hops": 2,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Artifact.MetaV1Types",
+        "hops": 2,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Artifact.SsaDocs",
+        "hops": 2,
+        "via": "scoped-to"
+      },
+      {
+        "id": "KEP.555",
+        "hops": 2,
+        "via": "scoped-to"
+      },
+      {
+        "id": "KEP.5958",
+        "hops": 2,
+        "via": "scoped-to"
+      },
+      {
+        "id": "KEP.2155",
+        "hops": 3,
+        "via": "scoped-to"
+      },
+      {
+        "id": "KEP.2885",
+        "hops": 3,
+        "via": "scoped-to"
+      }
+    ],
+    "Capability.ServerSideApply": [
+      {
+        "id": "Invariant.ApplyRequiresFieldManager",
+        "hops": 1,
+        "via": "constrains"
+      },
+      {
+        "id": "Invariant.BackwardCompatible",
+        "hops": 1,
+        "via": "constrains"
+      },
+      {
+        "id": "Invariant.StatusFieldsProtected",
+        "hops": 1,
+        "via": "constrains"
+      },
+      {
+        "id": "KEP.555",
+        "hops": 2,
+        "via": "constrains"
+      },
+      {
+        "id": "KEP.2155",
+        "hops": 3,
+        "via": "constrains"
+      },
+      {
+        "id": "KEP.2885",
+        "hops": 3,
+        "via": "constrains"
+      }
+    ],
+    "Concept.Conflict": [
+      {
+        "id": "Artifact.ConflictGo",
+        "hops": 1,
+        "via": "represents"
+      },
+      {
+        "id": "Artifact.SsaDocs",
+        "hops": 1,
+        "via": "references"
+      },
+      {
+        "id": "Capability.ConflictDetection",
+        "hops": 1,
+        "via": "references"
+      },
+      {
+        "id": "Concept.Force",
+        "hops": 1,
+        "via": "references"
+      },
+      {
+        "id": "KEP.555",
+        "hops": 1,
+        "via": "establishes"
+      },
+      {
+        "id": "Artifact.ApplyIntegrationTest",
+        "hops": 2,
+        "via": "references"
+      },
+      {
+        "id": "Invariant.TimestampNotUpdatedOnTakeover",
+        "hops": 2,
+        "via": "references"
+      },
+      {
+        "id": "KEP.2155",
+        "hops": 2,
+        "via": "establishes"
+      },
+      {
+        "id": "KEP.2885",
+        "hops": 2,
+        "via": "establishes"
+      },
+      {
+        "id": "Invariant.ApplyRequiresFieldManager",
+        "hops": 3,
+        "via": "references"
+      },
+      {
+        "id": "Invariant.RollbackClearsManagedFields",
+        "hops": 3,
+        "via": "references"
+      },
+      {
+        "id": "Invariant.StatusFieldsProtected",
+        "hops": 3,
+        "via": "references"
+      }
+    ],
+    "Concept.FieldManagement": [
+      {
+        "id": "Artifact.FieldManagerGo",
+        "hops": 1,
+        "via": "represents"
+      },
+      {
+        "id": "Artifact.SsaDocs",
+        "hops": 1,
+        "via": "represents"
+      },
+      {
+        "id": "Capability.ServerSideApply",
+        "hops": 1,
+        "via": "references"
+      },
+      {
+        "id": "Concept.Conflict",
+        "hops": 1,
+        "via": "references"
+      },
+      {
+        "id": "Concept.ManagedFields",
+        "hops": 1,
+        "via": "references"
+      },
+      {
+        "id": "Concept.OwnershipTransfer",
+        "hops": 1,
+        "via": "references"
+      },
+      {
+        "id": "KEP.555",
+        "hops": 1,
+        "via": "establishes"
+      },
+      {
+        "id": "Artifact.ApplyIntegrationTest",
+        "hops": 2,
+        "via": "references"
+      },
+      {
+        "id": "Artifact.ConflictGo",
+        "hops": 2,
+        "via": "references"
+      },
+      {
+        "id": "Artifact.MetaV1Types",
+        "hops": 2,
+        "via": "references"
+      },
+      {
+        "id": "Capability.ConflictDetection",
+        "hops": 2,
+        "via": "references"
+      },
+      {
+        "id": "Concept.Force",
+        "hops": 2,
+        "via": "references"
+      },
+      {
+        "id": "Invariant.ApplyRequiresFieldManager",
+        "hops": 2,
+        "via": "references"
+      },
+      {
+        "id": "Invariant.BackwardCompatible",
+        "hops": 2,
+        "via": "references"
+      },
+      {
+        "id": "Invariant.RollbackClearsManagedFields",
+        "hops": 2,
+        "via": "references"
+      },
+      {
+        "id": "Invariant.StatusFieldsProtected",
+        "hops": 2,
+        "via": "references"
+      },
+      {
+        "id": "Invariant.TimestampNotUpdatedOnTakeover",
+        "hops": 2,
+        "via": "references"
+      },
+      {
+        "id": "KEP.2155",
+        "hops": 2,
+        "via": "establishes"
+      },
+      {
+        "id": "KEP.2885",
+        "hops": 2,
+        "via": "establishes"
+      },
+      {
+        "id": "KEP.5958",
+        "hops": 2,
+        "via": "references"
+      }
+    ],
+    "Concept.Force": [
+      {
+        "id": "Artifact.ApplyIntegrationTest",
+        "hops": 1,
+        "via": "references"
+      },
+      {
+        "id": "Artifact.SsaDocs",
+        "hops": 1,
+        "via": "references"
+      },
+      {
+        "id": "Invariant.TimestampNotUpdatedOnTakeover",
+        "hops": 1,
+        "via": "references"
+      },
+      {
+        "id": "Invariant.ApplyRequiresFieldManager",
+        "hops": 2,
+        "via": "references"
+      },
+      {
+        "id": "Invariant.RollbackClearsManagedFields",
+        "hops": 2,
+        "via": "references"
+      },
+      {
+        "id": "Invariant.StatusFieldsProtected",
+        "hops": 2,
+        "via": "references"
+      },
+      {
+        "id": "KEP.555",
+        "hops": 3,
+        "via": "references"
+      },
+      {
+        "id": "KEP.2155",
+        "hops": 4,
+        "via": "references"
+      },
+      {
+        "id": "KEP.2885",
+        "hops": 4,
+        "via": "references"
+      }
+    ],
+    "Concept.LastAppliedAnnotation": [
+      {
+        "id": "Artifact.SsaDocs",
+        "hops": 1,
+        "via": "references"
+      }
+    ],
+    "Concept.ManagedFields": [
+      {
+        "id": "Artifact.ApplyIntegrationTest",
+        "hops": 1,
+        "via": "references"
+      },
+      {
+        "id": "Artifact.MetaV1Types",
+        "hops": 1,
+        "via": "represents"
+      },
+      {
+        "id": "Invariant.RollbackClearsManagedFields",
+        "hops": 1,
+        "via": "constrains"
+      },
+      {
+        "id": "Invariant.TimestampNotUpdatedOnTakeover",
+        "hops": 1,
+        "via": "constrains"
+      },
+      {
+        "id": "KEP.555",
+        "hops": 1,
+        "via": "establishes"
+      },
+      {
+        "id": "KEP.5958",
+        "hops": 1,
+        "via": "references"
+      },
+      {
+        "id": "Invariant.ApplyRequiresFieldManager",
+        "hops": 2,
+        "via": "references"
+      },
+      {
+        "id": "Invariant.StatusFieldsProtected",
+        "hops": 2,
+        "via": "references"
+      },
+      {
+        "id": "KEP.2155",
+        "hops": 2,
+        "via": "establishes"
+      },
+      {
+        "id": "KEP.2885",
+        "hops": 2,
+        "via": "establishes"
+      }
+    ],
+    "Concept.OwnershipTransfer": [
+      {
+        "id": "Invariant.TimestampNotUpdatedOnTakeover",
+        "hops": 1,
+        "via": "references"
+      }
+    ],
+    "Evidence.ConflictSymbols": [
+      {
+        "id": "Artifact.ConflictGo",
+        "hops": 1,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.ApplyIntegrationTest",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Capability.ConflictDetection",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.ApplyRequiresFieldManager",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.RollbackClearsManagedFields",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.StatusFieldsProtected",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "KEP.555",
+        "hops": 4,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "KEP.2155",
+        "hops": 5,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "KEP.2885",
+        "hops": 5,
+        "via": "evidenced-by"
+      }
+    ],
+    "Evidence.DocsConflict": [
+      {
+        "id": "Concept.Conflict",
+        "hops": 1,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.ConflictGo",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.SsaDocs",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Capability.ConflictDetection",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Concept.Force",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "KEP.555",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.ApplyIntegrationTest",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.TimestampNotUpdatedOnTakeover",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "KEP.2155",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "KEP.2885",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.ApplyRequiresFieldManager",
+        "hops": 4,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.RollbackClearsManagedFields",
+        "hops": 4,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.StatusFieldsProtected",
+        "hops": 4,
+        "via": "evidenced-by"
+      }
+    ],
+    "Evidence.DocsFieldManagement": [
+      {
+        "id": "Artifact.SsaDocs",
+        "hops": 1,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Concept.FieldManagement",
+        "hops": 1,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.FieldManagerGo",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Capability.ServerSideApply",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Concept.Conflict",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Concept.ManagedFields",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Concept.OwnershipTransfer",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "KEP.555",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.ApplyIntegrationTest",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.ConflictGo",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.MetaV1Types",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Capability.ConflictDetection",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Concept.Force",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.ApplyRequiresFieldManager",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.BackwardCompatible",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.RollbackClearsManagedFields",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.StatusFieldsProtected",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.TimestampNotUpdatedOnTakeover",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "KEP.2155",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "KEP.2885",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "KEP.5958",
+        "hops": 3,
+        "via": "evidenced-by"
+      }
+    ],
+    "Evidence.DocsForce": [
+      {
+        "id": "Concept.Force",
+        "hops": 1,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.TimestampNotUpdatedOnTakeover",
+        "hops": 1,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.ApplyIntegrationTest",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.SsaDocs",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.ApplyRequiresFieldManager",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.RollbackClearsManagedFields",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.StatusFieldsProtected",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "KEP.555",
+        "hops": 4,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "KEP.2155",
+        "hops": 5,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "KEP.2885",
+        "hops": 5,
+        "via": "evidenced-by"
+      }
+    ],
+    "Evidence.DocsLastApplied": [
+      {
+        "id": "Concept.LastAppliedAnnotation",
+        "hops": 1,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.SsaDocs",
+        "hops": 2,
+        "via": "evidenced-by"
+      }
+    ],
+    "Evidence.DocsManagedFieldsShape": [
+      {
+        "id": "Concept.ManagedFields",
+        "hops": 1,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.ApplyIntegrationTest",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.MetaV1Types",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.RollbackClearsManagedFields",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.TimestampNotUpdatedOnTakeover",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "KEP.555",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "KEP.5958",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.ApplyRequiresFieldManager",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.StatusFieldsProtected",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "KEP.2155",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "KEP.2885",
+        "hops": 3,
+        "via": "evidenced-by"
+      }
+    ],
+    "Evidence.DocsOwnershipTransfer": [
+      {
+        "id": "Concept.OwnershipTransfer",
+        "hops": 1,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.TimestampNotUpdatedOnTakeover",
+        "hops": 2,
+        "via": "evidenced-by"
+      }
+    ],
+    "Evidence.FieldManagerSymbols": [
+      {
+        "id": "Artifact.FieldManagerGo",
+        "hops": 1,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.ApplyIntegrationTest",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Capability.ServerSideApply",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.ApplyRequiresFieldManager",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.BackwardCompatible",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.RollbackClearsManagedFields",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.StatusFieldsProtected",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "KEP.555",
+        "hops": 4,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "KEP.2155",
+        "hops": 5,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "KEP.2885",
+        "hops": 5,
+        "via": "evidenced-by"
+      }
+    ],
+    "Evidence.Kep555Readme": [
+      {
+        "id": "Invariant.BackwardCompatible",
+        "hops": 1,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.RollbackClearsManagedFields",
+        "hops": 1,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "KEP.555",
+        "hops": 1,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "KEP.2155",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "KEP.2885",
+        "hops": 2,
+        "via": "evidenced-by"
+      }
+    ],
+    "Evidence.Kep555ResetFields": [
+      {
+        "id": "Invariant.StatusFieldsProtected",
+        "hops": 1,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "KEP.555",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "KEP.2155",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "KEP.2885",
+        "hops": 3,
+        "via": "evidenced-by"
+      }
+    ],
+    "Evidence.KepDirectoryListing": [
+      {
+        "id": "KEP.2155",
+        "hops": 1,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "KEP.2885",
+        "hops": 1,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "KEP.5958",
+        "hops": 1,
+        "via": "evidenced-by"
+      }
+    ],
+    "Evidence.ManagedFieldsEntryType": [
+      {
+        "id": "Artifact.MetaV1Types",
+        "hops": 1,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Concept.ManagedFields",
+        "hops": 1,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.ApplyIntegrationTest",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.RollbackClearsManagedFields",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.TimestampNotUpdatedOnTakeover",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "KEP.555",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "KEP.5958",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.ApplyRequiresFieldManager",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.StatusFieldsProtected",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "KEP.2155",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "KEP.2885",
+        "hops": 3,
+        "via": "evidenced-by"
+      }
+    ],
+    "Evidence.TestClearManagedFields": [
+      {
+        "id": "Invariant.RollbackClearsManagedFields",
+        "hops": 1,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "KEP.555",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "KEP.2155",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "KEP.2885",
+        "hops": 3,
+        "via": "evidenced-by"
+      }
+    ],
+    "Evidence.TestFunctionList": [
+      {
+        "id": "Artifact.ApplyIntegrationTest",
+        "hops": 1,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.ApplyRequiresFieldManager",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.RollbackClearsManagedFields",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.StatusFieldsProtected",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "KEP.555",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "KEP.2155",
+        "hops": 4,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "KEP.2885",
+        "hops": 4,
+        "via": "evidenced-by"
+      }
+    ],
+    "Evidence.TestRequiresFieldManager": [
+      {
+        "id": "Invariant.ApplyRequiresFieldManager",
+        "hops": 1,
+        "via": "evidenced-by"
+      }
+    ],
+    "Evidence.TestSubresources": [
+      {
+        "id": "Invariant.StatusFieldsProtected",
+        "hops": 1,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "KEP.555",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "KEP.2155",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "KEP.2885",
+        "hops": 3,
+        "via": "evidenced-by"
+      }
+    ],
+    "Evidence.TimeFieldComment": [
+      {
+        "id": "Invariant.TimestampNotUpdatedOnTakeover",
+        "hops": 1,
+        "via": "evidenced-by"
+      }
+    ],
+    "Invariant.BackwardCompatible": [
+      {
+        "id": "KEP.555",
+        "hops": 1,
+        "via": "establishes"
+      },
+      {
+        "id": "KEP.2155",
+        "hops": 2,
+        "via": "establishes"
+      },
+      {
+        "id": "KEP.2885",
+        "hops": 2,
+        "via": "establishes"
+      }
+    ],
+    "Invariant.RollbackClearsManagedFields": [
+      {
+        "id": "KEP.555",
+        "hops": 1,
+        "via": "establishes"
+      },
+      {
+        "id": "KEP.2155",
+        "hops": 2,
+        "via": "establishes"
+      },
+      {
+        "id": "KEP.2885",
+        "hops": 2,
+        "via": "establishes"
+      }
+    ],
+    "Invariant.StatusFieldsProtected": [
+      {
+        "id": "KEP.555",
+        "hops": 1,
+        "via": "establishes"
+      },
+      {
+        "id": "KEP.2155",
+        "hops": 2,
+        "via": "establishes"
+      },
+      {
+        "id": "KEP.2885",
+        "hops": 2,
+        "via": "establishes"
+      }
+    ],
+    "KEP.555": [
+      {
+        "id": "KEP.2155",
+        "hops": 1,
+        "via": "references"
+      },
+      {
+        "id": "KEP.2885",
+        "hops": 1,
+        "via": "references"
+      }
+    ]
+  },
+  "traceability": {
+    "Artifact.ApplyIntegrationTest": {
+      "evidence": [
+        "Evidence.TestFunctionList"
+      ],
+      "rationale": []
+    },
+    "Artifact.ConflictGo": {
+      "evidence": [
+        "Evidence.ConflictSymbols"
+      ],
+      "rationale": []
+    },
+    "Artifact.FieldManagerGo": {
+      "evidence": [
+        "Evidence.FieldManagerSymbols"
+      ],
+      "rationale": []
+    },
+    "Artifact.MetaV1Types": {
+      "evidence": [
+        "Evidence.ManagedFieldsEntryType"
+      ],
+      "rationale": []
+    },
+    "Artifact.SsaDocs": {
+      "evidence": [
+        "Evidence.DocsFieldManagement"
+      ],
+      "rationale": []
+    },
+    "Concept.Conflict": {
+      "evidence": [
+        "Evidence.DocsConflict"
+      ],
+      "rationale": [
+        "KEP.555"
+      ]
+    },
+    "Concept.FieldManagement": {
+      "evidence": [
+        "Evidence.DocsFieldManagement"
+      ],
+      "rationale": [
+        "KEP.555"
+      ]
+    },
+    "Concept.Force": {
+      "evidence": [
+        "Evidence.DocsForce"
+      ],
+      "rationale": []
+    },
+    "Concept.LastAppliedAnnotation": {
+      "evidence": [
+        "Evidence.DocsLastApplied"
+      ],
+      "rationale": []
+    },
+    "Concept.ManagedFields": {
+      "evidence": [
+        "Evidence.DocsManagedFieldsShape",
+        "Evidence.ManagedFieldsEntryType"
+      ],
+      "rationale": [
+        "KEP.555"
+      ]
+    },
+    "Concept.OwnershipTransfer": {
+      "evidence": [
+        "Evidence.DocsOwnershipTransfer"
+      ],
+      "rationale": []
+    },
+    "Invariant.ApplyRequiresFieldManager": {
+      "evidence": [
+        "Evidence.TestRequiresFieldManager"
+      ],
+      "rationale": []
+    },
+    "Invariant.BackwardCompatible": {
+      "evidence": [
+        "Evidence.Kep555Readme"
+      ],
+      "rationale": [
+        "KEP.555"
+      ]
+    },
+    "Invariant.RollbackClearsManagedFields": {
+      "evidence": [
+        "Evidence.Kep555Readme",
+        "Evidence.TestClearManagedFields"
+      ],
+      "rationale": [
+        "KEP.555"
+      ]
+    },
+    "Invariant.StatusFieldsProtected": {
+      "evidence": [
+        "Evidence.Kep555ResetFields",
+        "Evidence.TestSubresources"
+      ],
+      "rationale": [
+        "KEP.555"
+      ]
+    },
+    "Invariant.TimestampNotUpdatedOnTakeover": {
+      "evidence": [
+        "Evidence.DocsForce",
+        "Evidence.TimeFieldComment"
+      ],
+      "rationale": []
+    },
+    "KEP.2155": {
+      "evidence": [
+        "Evidence.KepDirectoryListing"
+      ],
+      "rationale": []
+    },
+    "KEP.2885": {
+      "evidence": [
+        "Evidence.KepDirectoryListing"
+      ],
+      "rationale": []
+    },
+    "KEP.555": {
+      "evidence": [
+        "Evidence.Kep555Readme"
+      ],
+      "rationale": []
+    },
+    "KEP.5958": {
+      "evidence": [
+        "Evidence.KepDirectoryListing"
+      ],
+      "rationale": []
+    }
+  },
+  "statistics": {
+    "searchable": 41,
+    "withImpact": 32,
+    "withTraceability": 20
+  }
+}

@@ -1,0 +1,1328 @@
+{
+  "note": "Projections of the Canonical Knowledge Model, derived by the declared query engine (ADR-0086).",
+  "search": [
+    {
+      "id": "ADR.004",
+      "type": "ADR",
+      "label": "Orders are single-currency",
+      "family": "operational",
+      "text": "orders are single-currency adr superseded, and still readable. a superseded adr is a correct record of what was\ndecided then.",
+      "attributes": {}
+    },
+    {
+      "id": "ADR.011",
+      "type": "ADR",
+      "label": "Payment is settled synchronously at checkout",
+      "family": "operational",
+      "text": "payment is settled synchronously at checkout adr **the decision that established the invariant.** this edge is what makes\n*which adr established this invariant?* answerable.",
+      "attributes": {}
+    },
+    {
+      "id": "AcceptanceRecord.014",
+      "type": "AcceptanceRecord",
+      "label": "Acceptance of checkout r7",
+      "family": "operational",
+      "text": "acceptance of checkout r7 acceptancerecord confers active status. commits do not.",
+      "attributes": {}
+    },
+    {
+      "id": "Actor.Customer",
+      "type": "Actor",
+      "label": "Customer",
+      "family": "descriptive",
+      "text": "customer actor submits orders.",
+      "attributes": {}
+    },
+    {
+      "id": "Actor.Reviewer",
+      "type": "Actor",
+      "label": "Reviewer",
+      "family": "descriptive",
+      "text": "reviewer actor decides at the gate and reviews acceptances.",
+      "attributes": {}
+    },
+    {
+      "id": "Artifact.CheckoutService",
+      "type": "Artifact",
+      "label": "Checkout service",
+      "family": "descriptive",
+      "text": "checkout service artifact a stable logical identity with no lifecycle of its own.",
+      "attributes": {}
+    },
+    {
+      "id": "Artifact.CheckoutTests",
+      "type": "Artifact",
+      "label": "Checkout test suite",
+      "family": "descriptive",
+      "text": "checkout test suite artifact tests. modelled as an artifact that validates another and references the\nconcepts it exercises \u2014 which is what makes *which tests must change* answerable.",
+      "attributes": {}
+    },
+    {
+      "id": "Artifact.CurrencyCheck",
+      "type": "Artifact",
+      "label": "Legacy currency checker",
+      "family": "descriptive",
+      "text": "legacy currency checker artifact **implements a rationale that no longer stands.** `invariant.singlecurrency` was\nestablished by `adr.004`, which `adr.011` superseded. the code is still here and\nnothing in the repository connects it ",
+      "attributes": {}
+    },
+    {
+      "id": "Artifact.OrderingSpec",
+      "type": "Artifact",
+      "label": "Ordering specification",
+      "family": "descriptive",
+      "text": "ordering specification artifact a specification document. becomes inconsistent when what it represents changes.",
+      "attributes": {}
+    },
+    {
+      "id": "Artifact.PaymentService",
+      "type": "Artifact",
+      "label": "Payment service",
+      "family": "descriptive",
+      "text": "payment service artifact realises the refund capability.",
+      "attributes": {}
+    },
+    {
+      "id": "ArtifactRevision.Checkout.r7",
+      "type": "ArtifactRevision",
+      "label": "Checkout service r7",
+      "family": "descriptive",
+      "text": "checkout service r7 artifactrevision the unit that carries lifecycle state.",
+      "attributes": {}
+    },
+    {
+      "id": "ArtifactRevision.Payment.r3",
+      "type": "ArtifactRevision",
+      "label": "Payment service r3",
+      "family": "descriptive",
+      "text": "payment service r3 artifactrevision **not accepted.** no acceptancerecord reaches it, so it is not `active`.",
+      "attributes": {}
+    },
+    {
+      "id": "BC.Ordering",
+      "type": "BoundedContext",
+      "label": "Ordering",
+      "family": "descriptive",
+      "text": "ordering boundedcontext the boundary within which \"order\" means a customer purchase request.",
+      "attributes": {}
+    },
+    {
+      "id": "Capability.PlaceOrder",
+      "type": "Capability",
+      "label": "Place an order",
+      "family": "descriptive",
+      "text": "place an order capability the system accepts an order and acknowledges it.",
+      "attributes": {}
+    },
+    {
+      "id": "Capability.Refund",
+      "type": "Capability",
+      "label": "Refund an order",
+      "family": "descriptive",
+      "text": "refund an order capability reverses a settled payment. **depends on the checkout workflow** through the\nskill it shares.",
+      "attributes": {}
+    },
+    {
+      "id": "Concept.Order",
+      "type": "Concept",
+      "label": "Order",
+      "family": "descriptive",
+      "text": "order concept a customer's request to purchase goods, from submission until fulfilment.",
+      "attributes": {}
+    },
+    {
+      "id": "Concept.Payment",
+      "type": "Concept",
+      "label": "Payment",
+      "family": "descriptive",
+      "text": "payment concept an authorised transfer settling an order.",
+      "attributes": {}
+    },
+    {
+      "id": "Evidence.OrderSchema",
+      "type": "Evidence",
+      "label": "order.sql lines 1-40",
+      "family": "descriptive",
+      "text": "order.sql lines 1-40 evidence source reference. directness rank 2.",
+      "attributes": {}
+    },
+    {
+      "id": "Evidence.PaymentTrace",
+      "type": "Evidence",
+      "label": "Production trace, checkout span",
+      "family": "descriptive",
+      "text": "production trace, checkout span evidence runtime observation. directness rank 1 \u2014 the most direct kind.",
+      "attributes": {}
+    },
+    {
+      "id": "Gate.PaymentReview",
+      "type": "EngineeringGate",
+      "label": "Payment review gate",
+      "family": "operational",
+      "text": "payment review gate engineeringgate holds the questions asked of every payment change.",
+      "attributes": {}
+    },
+    {
+      "id": "Invariant.PaymentBeforeShipping",
+      "type": "Invariant",
+      "label": "An order cannot ship before payment clears",
+      "family": "descriptive",
+      "text": "an order cannot ship before payment clears invariant stated independently of what enforces it.",
+      "attributes": {}
+    },
+    {
+      "id": "Invariant.SingleCurrency",
+      "type": "Invariant",
+      "label": "An order has exactly one currency",
+      "family": "descriptive",
+      "text": "an order has exactly one currency invariant **no `enforced-at`.** nothing records where this is checked, which is a finding\nrather than an omission.",
+      "attributes": {}
+    },
+    {
+      "id": "Issue.023",
+      "type": "Issue",
+      "label": "Where is single-currency enforced?",
+      "family": "operational",
+      "text": "where is single-currency enforced? issue a recorded unknown, blocking a capability.",
+      "attributes": {}
+    },
+    {
+      "id": "Policy.PaymentChangesReviewed",
+      "type": "Policy",
+      "label": "Payment changes require review",
+      "family": "operational",
+      "text": "payment changes require review policy a governancepolicy, motivated by a recorded decision.",
+      "attributes": {}
+    },
+    {
+      "id": "Skill.SettlePayment",
+      "type": "Skill",
+      "label": "Settle payment",
+      "family": "operational",
+      "text": "settle payment skill shared by checkout and refund.",
+      "attributes": {}
+    },
+    {
+      "id": "Skill.ValidateOrder",
+      "type": "Skill",
+      "label": "Validate an order",
+      "family": "operational",
+      "text": "validate an order skill methodology with an explicit contract.",
+      "attributes": {}
+    },
+    {
+      "id": "Workflow.Checkout",
+      "type": "Workflow",
+      "label": "Checkout",
+      "family": "operational",
+      "text": "checkout workflow orchestration only.",
+      "attributes": {}
+    },
+    {
+      "id": "WorkflowStep.Checkout.1",
+      "type": "WorkflowStep",
+      "label": "Validate order",
+      "family": "operational",
+      "text": "validate order workflowstep position 1.",
+      "attributes": {}
+    },
+    {
+      "id": "WorkflowStep.Checkout.2",
+      "type": "WorkflowStep",
+      "label": "Settle payment",
+      "family": "operational",
+      "text": "settle payment workflowstep position 2.",
+      "attributes": {}
+    }
+  ],
+  "impact": {
+    "ADR.011": [
+      {
+        "id": "ADR.004",
+        "hops": 1,
+        "via": "superseded-by"
+      },
+      {
+        "id": "Policy.PaymentChangesReviewed",
+        "hops": 1,
+        "via": "established-by"
+      }
+    ],
+    "AcceptanceRecord.014": [
+      {
+        "id": "ArtifactRevision.Checkout.r7",
+        "hops": 1,
+        "via": "accepted-by"
+      },
+      {
+        "id": "Artifact.CheckoutService",
+        "hops": 2,
+        "via": "accepted-by"
+      },
+      {
+        "id": "Artifact.CheckoutTests",
+        "hops": 3,
+        "via": "accepted-by"
+      },
+      {
+        "id": "Artifact.CurrencyCheck",
+        "hops": 3,
+        "via": "accepted-by"
+      },
+      {
+        "id": "Capability.PlaceOrder",
+        "hops": 3,
+        "via": "accepted-by"
+      },
+      {
+        "id": "Invariant.PaymentBeforeShipping",
+        "hops": 3,
+        "via": "accepted-by"
+      },
+      {
+        "id": "Skill.ValidateOrder",
+        "hops": 3,
+        "via": "accepted-by"
+      },
+      {
+        "id": "ADR.011",
+        "hops": 4,
+        "via": "accepted-by"
+      },
+      {
+        "id": "Actor.Customer",
+        "hops": 4,
+        "via": "accepted-by"
+      },
+      {
+        "id": "WorkflowStep.Checkout.1",
+        "hops": 4,
+        "via": "accepted-by"
+      },
+      {
+        "id": "ADR.004",
+        "hops": 5,
+        "via": "accepted-by"
+      },
+      {
+        "id": "Policy.PaymentChangesReviewed",
+        "hops": 5,
+        "via": "accepted-by"
+      },
+      {
+        "id": "Workflow.Checkout",
+        "hops": 5,
+        "via": "accepted-by"
+      },
+      {
+        "id": "WorkflowStep.Checkout.2",
+        "hops": 6,
+        "via": "accepted-by"
+      }
+    ],
+    "Actor.Reviewer": [
+      {
+        "id": "AcceptanceRecord.014",
+        "hops": 1,
+        "via": "reviewed-by"
+      },
+      {
+        "id": "Gate.PaymentReview",
+        "hops": 1,
+        "via": "decided-by"
+      },
+      {
+        "id": "ArtifactRevision.Checkout.r7",
+        "hops": 2,
+        "via": "reviewed-by"
+      },
+      {
+        "id": "Workflow.Checkout",
+        "hops": 2,
+        "via": "decided-by"
+      },
+      {
+        "id": "Artifact.CheckoutService",
+        "hops": 3,
+        "via": "reviewed-by"
+      },
+      {
+        "id": "Policy.PaymentChangesReviewed",
+        "hops": 3,
+        "via": "decided-by"
+      },
+      {
+        "id": "WorkflowStep.Checkout.1",
+        "hops": 3,
+        "via": "decided-by"
+      },
+      {
+        "id": "WorkflowStep.Checkout.2",
+        "hops": 3,
+        "via": "decided-by"
+      },
+      {
+        "id": "Artifact.CheckoutTests",
+        "hops": 4,
+        "via": "reviewed-by"
+      },
+      {
+        "id": "Artifact.CurrencyCheck",
+        "hops": 4,
+        "via": "reviewed-by"
+      },
+      {
+        "id": "Capability.PlaceOrder",
+        "hops": 4,
+        "via": "reviewed-by"
+      },
+      {
+        "id": "Invariant.PaymentBeforeShipping",
+        "hops": 4,
+        "via": "reviewed-by"
+      },
+      {
+        "id": "Skill.ValidateOrder",
+        "hops": 4,
+        "via": "reviewed-by"
+      },
+      {
+        "id": "ADR.011",
+        "hops": 5,
+        "via": "reviewed-by"
+      },
+      {
+        "id": "Actor.Customer",
+        "hops": 5,
+        "via": "reviewed-by"
+      },
+      {
+        "id": "ADR.004",
+        "hops": 6,
+        "via": "reviewed-by"
+      }
+    ],
+    "Artifact.CheckoutService": [
+      {
+        "id": "Artifact.CheckoutTests",
+        "hops": 1,
+        "via": "validates"
+      },
+      {
+        "id": "Artifact.CurrencyCheck",
+        "hops": 1,
+        "via": "validates"
+      },
+      {
+        "id": "ArtifactRevision.Checkout.r7",
+        "hops": 1,
+        "via": "revision-of"
+      },
+      {
+        "id": "Capability.PlaceOrder",
+        "hops": 1,
+        "via": "realised-by"
+      },
+      {
+        "id": "Invariant.PaymentBeforeShipping",
+        "hops": 1,
+        "via": "enforced-at"
+      },
+      {
+        "id": "Skill.ValidateOrder",
+        "hops": 1,
+        "via": "produces"
+      },
+      {
+        "id": "ADR.011",
+        "hops": 2,
+        "via": "enforced-at"
+      },
+      {
+        "id": "AcceptanceRecord.014",
+        "hops": 2,
+        "via": "revision-of"
+      },
+      {
+        "id": "Actor.Customer",
+        "hops": 2,
+        "via": "realised-by"
+      },
+      {
+        "id": "WorkflowStep.Checkout.1",
+        "hops": 2,
+        "via": "produces"
+      },
+      {
+        "id": "ADR.004",
+        "hops": 3,
+        "via": "enforced-at"
+      },
+      {
+        "id": "Policy.PaymentChangesReviewed",
+        "hops": 3,
+        "via": "enforced-at"
+      },
+      {
+        "id": "Workflow.Checkout",
+        "hops": 3,
+        "via": "produces"
+      },
+      {
+        "id": "WorkflowStep.Checkout.2",
+        "hops": 4,
+        "via": "produces"
+      }
+    ],
+    "Artifact.PaymentService": [
+      {
+        "id": "ArtifactRevision.Payment.r3",
+        "hops": 1,
+        "via": "revision-of"
+      },
+      {
+        "id": "Capability.Refund",
+        "hops": 1,
+        "via": "realised-by"
+      },
+      {
+        "id": "Gate.PaymentReview",
+        "hops": 1,
+        "via": "reviews"
+      },
+      {
+        "id": "Skill.SettlePayment",
+        "hops": 1,
+        "via": "produces"
+      },
+      {
+        "id": "Issue.023",
+        "hops": 2,
+        "via": "realised-by"
+      },
+      {
+        "id": "Workflow.Checkout",
+        "hops": 2,
+        "via": "reviews"
+      },
+      {
+        "id": "WorkflowStep.Checkout.2",
+        "hops": 2,
+        "via": "produces"
+      },
+      {
+        "id": "ADR.011",
+        "hops": 3,
+        "via": "realised-by"
+      },
+      {
+        "id": "Policy.PaymentChangesReviewed",
+        "hops": 3,
+        "via": "reviews"
+      },
+      {
+        "id": "WorkflowStep.Checkout.1",
+        "hops": 3,
+        "via": "reviews"
+      },
+      {
+        "id": "ADR.004",
+        "hops": 4,
+        "via": "realised-by"
+      }
+    ],
+    "ArtifactRevision.Checkout.r7": [
+      {
+        "id": "AcceptanceRecord.014",
+        "hops": 1,
+        "via": "accepts"
+      },
+      {
+        "id": "Artifact.CheckoutService",
+        "hops": 1,
+        "via": "has-active-revision"
+      },
+      {
+        "id": "Artifact.CheckoutTests",
+        "hops": 2,
+        "via": "has-active-revision"
+      },
+      {
+        "id": "Artifact.CurrencyCheck",
+        "hops": 2,
+        "via": "has-active-revision"
+      },
+      {
+        "id": "Capability.PlaceOrder",
+        "hops": 2,
+        "via": "has-active-revision"
+      },
+      {
+        "id": "Invariant.PaymentBeforeShipping",
+        "hops": 2,
+        "via": "has-active-revision"
+      },
+      {
+        "id": "Skill.ValidateOrder",
+        "hops": 2,
+        "via": "has-active-revision"
+      },
+      {
+        "id": "ADR.011",
+        "hops": 3,
+        "via": "has-active-revision"
+      },
+      {
+        "id": "Actor.Customer",
+        "hops": 3,
+        "via": "has-active-revision"
+      },
+      {
+        "id": "WorkflowStep.Checkout.1",
+        "hops": 3,
+        "via": "has-active-revision"
+      },
+      {
+        "id": "ADR.004",
+        "hops": 4,
+        "via": "has-active-revision"
+      },
+      {
+        "id": "Policy.PaymentChangesReviewed",
+        "hops": 4,
+        "via": "has-active-revision"
+      },
+      {
+        "id": "Workflow.Checkout",
+        "hops": 4,
+        "via": "has-active-revision"
+      },
+      {
+        "id": "WorkflowStep.Checkout.2",
+        "hops": 5,
+        "via": "has-active-revision"
+      }
+    ],
+    "ArtifactRevision.Payment.r3": [
+      {
+        "id": "Artifact.PaymentService",
+        "hops": 1,
+        "via": "has-active-revision"
+      },
+      {
+        "id": "Capability.Refund",
+        "hops": 2,
+        "via": "has-active-revision"
+      },
+      {
+        "id": "Gate.PaymentReview",
+        "hops": 2,
+        "via": "has-active-revision"
+      },
+      {
+        "id": "Skill.SettlePayment",
+        "hops": 2,
+        "via": "has-active-revision"
+      },
+      {
+        "id": "Issue.023",
+        "hops": 3,
+        "via": "has-active-revision"
+      },
+      {
+        "id": "Workflow.Checkout",
+        "hops": 3,
+        "via": "has-active-revision"
+      },
+      {
+        "id": "WorkflowStep.Checkout.2",
+        "hops": 3,
+        "via": "has-active-revision"
+      },
+      {
+        "id": "ADR.011",
+        "hops": 4,
+        "via": "has-active-revision"
+      },
+      {
+        "id": "Policy.PaymentChangesReviewed",
+        "hops": 4,
+        "via": "has-active-revision"
+      },
+      {
+        "id": "WorkflowStep.Checkout.1",
+        "hops": 4,
+        "via": "has-active-revision"
+      },
+      {
+        "id": "ADR.004",
+        "hops": 5,
+        "via": "has-active-revision"
+      }
+    ],
+    "BC.Ordering": [
+      {
+        "id": "Actor.Customer",
+        "hops": 1,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Actor.Reviewer",
+        "hops": 1,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Capability.PlaceOrder",
+        "hops": 1,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Capability.Refund",
+        "hops": 1,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Concept.Order",
+        "hops": 1,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Concept.Payment",
+        "hops": 1,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Invariant.PaymentBeforeShipping",
+        "hops": 1,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Invariant.SingleCurrency",
+        "hops": 1,
+        "via": "scoped-to"
+      },
+      {
+        "id": "ADR.004",
+        "hops": 2,
+        "via": "scoped-to"
+      },
+      {
+        "id": "ADR.011",
+        "hops": 2,
+        "via": "scoped-to"
+      },
+      {
+        "id": "AcceptanceRecord.014",
+        "hops": 2,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Artifact.CheckoutTests",
+        "hops": 2,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Artifact.CurrencyCheck",
+        "hops": 2,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Artifact.OrderingSpec",
+        "hops": 2,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Gate.PaymentReview",
+        "hops": 2,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Issue.023",
+        "hops": 2,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Skill.SettlePayment",
+        "hops": 2,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Skill.ValidateOrder",
+        "hops": 2,
+        "via": "scoped-to"
+      },
+      {
+        "id": "ArtifactRevision.Checkout.r7",
+        "hops": 3,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Policy.PaymentChangesReviewed",
+        "hops": 3,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Workflow.Checkout",
+        "hops": 3,
+        "via": "scoped-to"
+      },
+      {
+        "id": "WorkflowStep.Checkout.1",
+        "hops": 3,
+        "via": "scoped-to"
+      },
+      {
+        "id": "WorkflowStep.Checkout.2",
+        "hops": 3,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Artifact.CheckoutService",
+        "hops": 4,
+        "via": "scoped-to"
+      }
+    ],
+    "Capability.PlaceOrder": [
+      {
+        "id": "Actor.Customer",
+        "hops": 1,
+        "via": "uses"
+      }
+    ],
+    "Capability.Refund": [
+      {
+        "id": "Issue.023",
+        "hops": 1,
+        "via": "blocks"
+      },
+      {
+        "id": "ADR.011",
+        "hops": 2,
+        "via": "blocks"
+      },
+      {
+        "id": "ADR.004",
+        "hops": 3,
+        "via": "blocks"
+      },
+      {
+        "id": "Policy.PaymentChangesReviewed",
+        "hops": 3,
+        "via": "blocks"
+      }
+    ],
+    "Concept.Order": [
+      {
+        "id": "Artifact.CheckoutTests",
+        "hops": 1,
+        "via": "references"
+      },
+      {
+        "id": "Artifact.OrderingSpec",
+        "hops": 1,
+        "via": "represents"
+      },
+      {
+        "id": "Capability.PlaceOrder",
+        "hops": 1,
+        "via": "references"
+      },
+      {
+        "id": "Concept.Payment",
+        "hops": 1,
+        "via": "references"
+      },
+      {
+        "id": "Invariant.PaymentBeforeShipping",
+        "hops": 1,
+        "via": "constrains"
+      },
+      {
+        "id": "Invariant.SingleCurrency",
+        "hops": 1,
+        "via": "constrains"
+      },
+      {
+        "id": "Skill.ValidateOrder",
+        "hops": 1,
+        "via": "requires"
+      },
+      {
+        "id": "ADR.004",
+        "hops": 2,
+        "via": "constrains"
+      },
+      {
+        "id": "ADR.011",
+        "hops": 2,
+        "via": "constrains"
+      },
+      {
+        "id": "Actor.Customer",
+        "hops": 2,
+        "via": "references"
+      },
+      {
+        "id": "Artifact.CurrencyCheck",
+        "hops": 2,
+        "via": "constrains"
+      },
+      {
+        "id": "Capability.Refund",
+        "hops": 2,
+        "via": "references"
+      },
+      {
+        "id": "Skill.SettlePayment",
+        "hops": 2,
+        "via": "references"
+      },
+      {
+        "id": "WorkflowStep.Checkout.1",
+        "hops": 2,
+        "via": "requires"
+      },
+      {
+        "id": "Issue.023",
+        "hops": 3,
+        "via": "references"
+      },
+      {
+        "id": "Policy.PaymentChangesReviewed",
+        "hops": 3,
+        "via": "constrains"
+      },
+      {
+        "id": "Workflow.Checkout",
+        "hops": 3,
+        "via": "requires"
+      },
+      {
+        "id": "WorkflowStep.Checkout.2",
+        "hops": 3,
+        "via": "references"
+      }
+    ],
+    "Concept.Payment": [
+      {
+        "id": "Artifact.OrderingSpec",
+        "hops": 1,
+        "via": "references"
+      },
+      {
+        "id": "Capability.Refund",
+        "hops": 1,
+        "via": "references"
+      },
+      {
+        "id": "Skill.SettlePayment",
+        "hops": 1,
+        "via": "requires"
+      },
+      {
+        "id": "Issue.023",
+        "hops": 2,
+        "via": "references"
+      },
+      {
+        "id": "WorkflowStep.Checkout.2",
+        "hops": 2,
+        "via": "requires"
+      },
+      {
+        "id": "ADR.011",
+        "hops": 3,
+        "via": "references"
+      },
+      {
+        "id": "Workflow.Checkout",
+        "hops": 3,
+        "via": "requires"
+      },
+      {
+        "id": "ADR.004",
+        "hops": 4,
+        "via": "references"
+      },
+      {
+        "id": "Policy.PaymentChangesReviewed",
+        "hops": 4,
+        "via": "references"
+      },
+      {
+        "id": "WorkflowStep.Checkout.1",
+        "hops": 4,
+        "via": "requires"
+      }
+    ],
+    "Evidence.OrderSchema": [
+      {
+        "id": "Concept.Order",
+        "hops": 1,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Issue.023",
+        "hops": 1,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "ADR.011",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.CheckoutTests",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.OrderingSpec",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Capability.PlaceOrder",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Concept.Payment",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.PaymentBeforeShipping",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.SingleCurrency",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Skill.ValidateOrder",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "ADR.004",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Actor.Customer",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.CurrencyCheck",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Capability.Refund",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Policy.PaymentChangesReviewed",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Skill.SettlePayment",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "WorkflowStep.Checkout.1",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Workflow.Checkout",
+        "hops": 4,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "WorkflowStep.Checkout.2",
+        "hops": 4,
+        "via": "evidenced-by"
+      }
+    ],
+    "Evidence.PaymentTrace": [
+      {
+        "id": "AcceptanceRecord.014",
+        "hops": 1,
+        "via": "cites"
+      },
+      {
+        "id": "Invariant.PaymentBeforeShipping",
+        "hops": 1,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "ADR.011",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "ArtifactRevision.Checkout.r7",
+        "hops": 2,
+        "via": "cites"
+      },
+      {
+        "id": "ADR.004",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.CheckoutService",
+        "hops": 3,
+        "via": "cites"
+      },
+      {
+        "id": "Policy.PaymentChangesReviewed",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.CheckoutTests",
+        "hops": 4,
+        "via": "cites"
+      },
+      {
+        "id": "Artifact.CurrencyCheck",
+        "hops": 4,
+        "via": "cites"
+      },
+      {
+        "id": "Capability.PlaceOrder",
+        "hops": 4,
+        "via": "cites"
+      },
+      {
+        "id": "Skill.ValidateOrder",
+        "hops": 4,
+        "via": "cites"
+      },
+      {
+        "id": "Actor.Customer",
+        "hops": 5,
+        "via": "cites"
+      },
+      {
+        "id": "WorkflowStep.Checkout.1",
+        "hops": 5,
+        "via": "cites"
+      },
+      {
+        "id": "Workflow.Checkout",
+        "hops": 6,
+        "via": "cites"
+      },
+      {
+        "id": "WorkflowStep.Checkout.2",
+        "hops": 7,
+        "via": "cites"
+      }
+    ],
+    "Gate.PaymentReview": [
+      {
+        "id": "Workflow.Checkout",
+        "hops": 1,
+        "via": "passes-through"
+      },
+      {
+        "id": "Policy.PaymentChangesReviewed",
+        "hops": 2,
+        "via": "passes-through"
+      },
+      {
+        "id": "WorkflowStep.Checkout.1",
+        "hops": 2,
+        "via": "passes-through"
+      },
+      {
+        "id": "WorkflowStep.Checkout.2",
+        "hops": 2,
+        "via": "passes-through"
+      }
+    ],
+    "Invariant.PaymentBeforeShipping": [
+      {
+        "id": "ADR.011",
+        "hops": 1,
+        "via": "establishes"
+      },
+      {
+        "id": "ADR.004",
+        "hops": 2,
+        "via": "establishes"
+      },
+      {
+        "id": "Policy.PaymentChangesReviewed",
+        "hops": 2,
+        "via": "establishes"
+      }
+    ],
+    "Invariant.SingleCurrency": [
+      {
+        "id": "ADR.004",
+        "hops": 1,
+        "via": "establishes"
+      },
+      {
+        "id": "Artifact.CurrencyCheck",
+        "hops": 1,
+        "via": "represents"
+      }
+    ],
+    "Issue.023": [
+      {
+        "id": "ADR.011",
+        "hops": 1,
+        "via": "resolves"
+      },
+      {
+        "id": "ADR.004",
+        "hops": 2,
+        "via": "resolves"
+      },
+      {
+        "id": "Policy.PaymentChangesReviewed",
+        "hops": 2,
+        "via": "resolves"
+      }
+    ],
+    "Skill.SettlePayment": [
+      {
+        "id": "WorkflowStep.Checkout.2",
+        "hops": 1,
+        "via": "executes"
+      },
+      {
+        "id": "Workflow.Checkout",
+        "hops": 2,
+        "via": "executes"
+      },
+      {
+        "id": "Policy.PaymentChangesReviewed",
+        "hops": 3,
+        "via": "executes"
+      },
+      {
+        "id": "WorkflowStep.Checkout.1",
+        "hops": 3,
+        "via": "executes"
+      }
+    ],
+    "Skill.ValidateOrder": [
+      {
+        "id": "WorkflowStep.Checkout.1",
+        "hops": 1,
+        "via": "executes"
+      },
+      {
+        "id": "Workflow.Checkout",
+        "hops": 2,
+        "via": "executes"
+      },
+      {
+        "id": "Policy.PaymentChangesReviewed",
+        "hops": 3,
+        "via": "executes"
+      },
+      {
+        "id": "WorkflowStep.Checkout.2",
+        "hops": 3,
+        "via": "executes"
+      }
+    ],
+    "Workflow.Checkout": [
+      {
+        "id": "Policy.PaymentChangesReviewed",
+        "hops": 1,
+        "via": "governs"
+      },
+      {
+        "id": "WorkflowStep.Checkout.1",
+        "hops": 1,
+        "via": "step-of"
+      },
+      {
+        "id": "WorkflowStep.Checkout.2",
+        "hops": 1,
+        "via": "step-of"
+      }
+    ],
+    "WorkflowStep.Checkout.1": [
+      {
+        "id": "Workflow.Checkout",
+        "hops": 1,
+        "via": "has-step"
+      },
+      {
+        "id": "Policy.PaymentChangesReviewed",
+        "hops": 2,
+        "via": "has-step"
+      },
+      {
+        "id": "WorkflowStep.Checkout.2",
+        "hops": 2,
+        "via": "has-step"
+      }
+    ],
+    "WorkflowStep.Checkout.2": [
+      {
+        "id": "Workflow.Checkout",
+        "hops": 1,
+        "via": "has-step"
+      },
+      {
+        "id": "Policy.PaymentChangesReviewed",
+        "hops": 2,
+        "via": "has-step"
+      },
+      {
+        "id": "WorkflowStep.Checkout.1",
+        "hops": 2,
+        "via": "has-step"
+      }
+    ]
+  },
+  "traceability": {
+    "Concept.Order": {
+      "evidence": [
+        "Evidence.OrderSchema"
+      ],
+      "rationale": []
+    },
+    "Invariant.PaymentBeforeShipping": {
+      "evidence": [
+        "Evidence.PaymentTrace"
+      ],
+      "rationale": [
+        "ADR.011"
+      ]
+    },
+    "Invariant.SingleCurrency": {
+      "evidence": [],
+      "rationale": [
+        "ADR.004"
+      ]
+    },
+    "Issue.023": {
+      "evidence": [
+        "Evidence.OrderSchema"
+      ],
+      "rationale": []
+    }
+  },
+  "statistics": {
+    "searchable": 29,
+    "withImpact": 23,
+    "withTraceability": 4
+  }
+}

@@ -1,0 +1,1618 @@
+{
+  "note": "Projections of the Canonical Knowledge Model, derived by the declared query engine (ADR-0086).",
+  "search": [
+    {
+      "id": "ADR.0001",
+      "type": "ADR",
+      "label": "ADR-0001 \u2014 Multi-tenancy: shared schema + PostgreSQL RLS",
+      "family": "operational",
+      "text": "adr-0001 \u2014 multi-tenancy: shared schema + postgresql rls adr \"all tenants share the same tables\u2026 postgresql rls policies enforce isolation at\nthe database engine level.\"\n\n**status is `proposed`, not accepted** \u2014 a decision the codebase already\nimplements.",
+      "attributes": {
+        "date": "2026-04-09",
+        "source": "docs/adr/ADR-0001-multi-tenancy-strategy.md",
+        "status": "Proposed",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Artifact.AccountLockoutTests",
+      "type": "Artifact",
+      "label": "account-lockout.spec.ts",
+      "family": "descriptive",
+      "text": "account-lockout.spec.ts artifact 8 test cases. one node per suite, with its case count \u2014 the granularity the\nkubernetes findings recommended.",
+      "attributes": {
+        "cases": "8",
+        "source": "packages/backend/src/modules/auth/__tests__/account-lockout.spec.ts",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Artifact.AuthService",
+      "type": "Artifact",
+      "label": "auth.service.ts",
+      "family": "descriptive",
+      "text": "auth.service.ts artifact four public methods. every authentication path in the backend passes through it.",
+      "attributes": {
+        "locator": "login, issueTokens, refresh, logout",
+        "source": "packages/backend/src/modules/auth/auth.service.ts",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Artifact.AuthServiceTests",
+      "type": "Artifact",
+      "label": "auth.service.spec.ts",
+      "family": "descriptive",
+      "text": "auth.service.spec.ts artifact 12 cases. **no invariant in this model is traced to it** \u2014 the suite exists and\nnothing records what it guarantees.",
+      "attributes": {
+        "cases": "12",
+        "source": "packages/backend/src/modules/auth/__tests__/auth.service.spec.ts",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Artifact.JwtGuard",
+      "type": "Artifact",
+      "label": "jwt-auth.guard.ts",
+      "family": "descriptive",
+      "text": "jwt-auth.guard.ts artifact a one-line subclass. **all verification behaviour is inherited**, so nothing\nlocal expresses what it enforces.",
+      "attributes": {
+        "locator": "export class JwtAuthGuard extends AuthGuard('jwt')",
+        "source": "packages/backend/src/common/guards/jwt-auth.guard.ts",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Artifact.JwtSecurityTests",
+      "type": "Artifact",
+      "label": "jwt-security.spec.ts",
+      "family": "descriptive",
+      "text": "jwt-security.spec.ts artifact 12 test cases. one node per suite, with its case count \u2014 the granularity the\nkubernetes findings recommended.",
+      "attributes": {
+        "cases": "12",
+        "source": "packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Artifact.PasswordSecurityTests",
+      "type": "Artifact",
+      "label": "password-security.spec.ts",
+      "family": "descriptive",
+      "text": "password-security.spec.ts artifact 11 cases. same gap: no invariant is traced to it.",
+      "attributes": {
+        "cases": "11",
+        "source": "packages/backend/src/modules/auth/__tests__/password-security.spec.ts",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Artifact.RefreshRotationTests",
+      "type": "Artifact",
+      "label": "refresh-token-rotation.spec.ts",
+      "family": "descriptive",
+      "text": "refresh-token-rotation.spec.ts artifact 7 test cases. one node per suite, with its case count \u2014 the granularity the\nkubernetes findings recommended.",
+      "attributes": {
+        "cases": "7",
+        "source": "packages/backend/src/modules/auth/__tests__/refresh-token-rotation.spec.ts",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Artifact.RefreshTokenSchema",
+      "type": "Artifact",
+      "label": "refresh-tokens.ts",
+      "family": "descriptive",
+      "text": "refresh-tokens.ts artifact revocation is a lookup-time exclusion, not a delete.",
+      "attributes": {
+        "locator": "partial index WHERE revoked_at IS NULL",
+        "source": "packages/backend/src/common/database/schema/refresh-tokens.ts",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "BC.Auth",
+      "type": "BoundedContext",
+      "label": "ai-desk authentication",
+      "family": "descriptive",
+      "text": "ai-desk authentication boundedcontext the boundary within which \"agent\", \"tenant\", \"token\" and \"session\" have their\nai-desk authentication meanings.",
+      "attributes": {}
+    },
+    {
+      "id": "Capability.Login",
+      "type": "Capability",
+      "label": "Authenticate an agent into a workspace",
+      "family": "descriptive",
+      "text": "authenticate an agent into a workspace capability resolve the tenant by slug, verify the password, issue tokens.",
+      "attributes": {
+        "locator": "async login",
+        "source": "packages/backend/src/modules/auth/auth.service.ts",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Capability.RefreshSession",
+      "type": "Capability",
+      "label": "Exchange a refresh token for a new pair",
+      "family": "descriptive",
+      "text": "exchange a refresh token for a new pair capability rotates: issues a new pair and revokes the presented token.",
+      "attributes": {
+        "locator": "async refresh",
+        "source": "packages/backend/src/modules/auth/auth.service.ts",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Concept.AccessToken",
+      "type": "Concept",
+      "label": "Access token",
+      "family": "descriptive",
+      "text": "access token concept a jwt carrying agent, tenant, role, name and ticket scope.",
+      "attributes": {
+        "locator": "issueTokens(agentId, tenantId, role, name, ticketScope)",
+        "source": "packages/backend/src/modules/auth/auth.service.ts",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Concept.Agent",
+      "type": "Concept",
+      "label": "Agent",
+      "family": "descriptive",
+      "text": "agent concept a human user authenticating into a workspace. identified by email within a\ntenant, never globally.",
+      "attributes": {
+        "locator": "login(email, password, workspaceSlug)",
+        "source": "packages/backend/src/modules/auth/auth.service.ts",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Concept.RefreshToken",
+      "type": "Concept",
+      "label": "Refresh token",
+      "family": "descriptive",
+      "text": "refresh token concept a persisted, revocable credential. the partial index filters on\n`revoked_at is null`, so revocation is a lookup-time exclusion.",
+      "attributes": {
+        "locator": "pgTable refreshTokens: expiresAt, revokedAt",
+        "source": "packages/backend/src/common/database/schema/refresh-tokens.ts",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Concept.Tenant",
+      "type": "Concept",
+      "label": "Tenant",
+      "family": "descriptive",
+      "text": "tenant concept a workspace. resolved by slug at login and carried in every token as `tid`.",
+      "attributes": {
+        "source": "docs/adr/ADR-0001-multi-tenancy-strategy.md",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Evidence.Adr0001",
+      "type": "Evidence",
+      "label": "ADR-0001 multi-tenancy",
+      "family": "descriptive",
+      "text": "adr-0001 multi-tenancy evidence read from the working tree. yields the rls decision, the isolation guarantee and\nthe set app.current_tenant_id discipline requirement.",
+      "attributes": {
+        "extracted": "2026-08-02",
+        "kind": "artifact-reference",
+        "locator": "Decision, Rationale",
+        "source": "docs/adr/ADR-0001-multi-tenancy-strategy.md",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Evidence.GuardSymbols",
+      "type": "Evidence",
+      "label": "jwt-auth.guard.ts",
+      "family": "descriptive",
+      "text": "jwt-auth.guard.ts evidence one line: export class jwtauthguard extends authguard('jwt') {}. no local behaviour.",
+      "attributes": {
+        "extracted": "2026-08-02",
+        "kind": "source-reference",
+        "locator": "line 5",
+        "source": "packages/backend/src/common/guards/jwt-auth.guard.ts",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Evidence.IssueTokensSignature",
+      "type": "Evidence",
+      "label": "auth.service.ts issueTokens",
+      "family": "descriptive",
+      "text": "auth.service.ts issuetokens evidence issuetokens(agentid, tenantid, role, name, ticketscope='global'). five claims.",
+      "attributes": {
+        "extracted": "2026-08-02",
+        "kind": "source-reference",
+        "locator": "line 111",
+        "source": "packages/backend/src/modules/auth/auth.service.ts",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Evidence.JwtTests",
+      "type": "Evidence",
+      "label": "jwt-security.spec.ts case names",
+      "family": "descriptive",
+      "text": "jwt-security.spec.ts case names evidence wrong secret, tampered tid, alg=none, malformed, expired.",
+      "attributes": {
+        "extracted": "2026-08-02",
+        "kind": "source-reference",
+        "locator": "12 it() cases",
+        "source": "packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Evidence.LockoutTests",
+      "type": "Evidence",
+      "label": "account-lockout.spec.ts case names",
+      "family": "descriptive",
+      "text": "account-lockout.spec.ts case names evidence extracted by grep. includes the exact 15-minute window, per-agent isolation and\nthe no-enumeration guarantee.",
+      "attributes": {
+        "extracted": "2026-08-02",
+        "kind": "source-reference",
+        "locator": "8 it() cases",
+        "source": "packages/backend/src/modules/auth/__tests__/account-lockout.spec.ts",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Evidence.LoginSignature",
+      "type": "Evidence",
+      "label": "auth.service.ts login signature",
+      "family": "descriptive",
+      "text": "auth.service.ts login signature evidence grep -ne 'async login'. signature (email, password, workspaceslug) shows the\ntenant is resolved by slug, not carried.",
+      "attributes": {
+        "extracted": "2026-08-02",
+        "kind": "source-reference",
+        "locator": "line 31",
+        "source": "packages/backend/src/modules/auth/auth.service.ts",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Evidence.RefreshTokenSchema",
+      "type": "Evidence",
+      "label": "refresh-tokens.ts",
+      "family": "descriptive",
+      "text": "refresh-tokens.ts evidence pgtable with expiresat, revokedat, and a partial index where revoked_at is null.",
+      "attributes": {
+        "extracted": "2026-08-02",
+        "kind": "source-reference",
+        "locator": "lines 11-27",
+        "source": "packages/backend/src/common/database/schema/refresh-tokens.ts",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Evidence.RotationTests",
+      "type": "Evidence",
+      "label": "refresh-token-rotation.spec.ts case names",
+      "family": "descriptive",
+      "text": "refresh-token-rotation.spec.ts case names evidence rotation, replay rejection, expiry auto-revoke, deactivated and soft-deleted agents.",
+      "attributes": {
+        "extracted": "2026-08-02",
+        "kind": "source-reference",
+        "locator": "7 it() cases",
+        "source": "packages/backend/src/modules/auth/__tests__/refresh-token-rotation.spec.ts",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Evidence.TestInventory",
+      "type": "Evidence",
+      "label": "auth test suite inventory",
+      "family": "descriptive",
+      "text": "auth test suite inventory evidence grep -c 'it(' across the directory: 8 + 12 + 12 + 11 + 7 = 50 cases in 5 suites.",
+      "attributes": {
+        "extracted": "2026-08-02",
+        "kind": "source-reference",
+        "locator": "5 suites, 50 cases",
+        "source": "packages/backend/src/modules/auth/__tests__/",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Invariant.AccountLockout",
+      "type": "Invariant",
+      "label": "Five wrong passwords lock the account for exactly 15 minutes",
+      "family": "descriptive",
+      "text": "five wrong passwords lock the account for exactly 15 minutes invariant **asserted by a test and by no fetched document.** the correct password is\nrejected while the window is active, and lockout is per-agent.",
+      "attributes": {
+        "locator": "locks the account on the 5th wrong password for exactly 15 minutes",
+        "source": "packages/backend/src/modules/auth/__tests__/account-lockout.spec.ts",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Invariant.NoUserEnumeration",
+      "type": "Invariant",
+      "label": "Wrong password and wrong email return the same error",
+      "family": "descriptive",
+      "text": "wrong password and wrong email return the same error invariant a security guarantee stated only as a test case.",
+      "attributes": {
+        "locator": "wrong password and wrong email return the same \"Invalid credentials\" error",
+        "source": "packages/backend/src/modules/auth/__tests__/account-lockout.spec.ts",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Invariant.RefreshRotation",
+      "type": "Invariant",
+      "label": "Refresh rotates and revokes; a replayed token fails",
+      "family": "descriptive",
+      "text": "refresh rotates and revokes; a replayed token fails invariant also: expired tokens auto-revoke, and refresh is rejected for deactivated or\nsoft-deleted agents.",
+      "attributes": {
+        "locator": "refresh returns a new access+refresh pair AND revokes the old token",
+        "source": "packages/backend/src/modules/auth/__tests__/refresh-token-rotation.spec.ts",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Invariant.TenantIdOnEveryConnection",
+      "type": "Invariant",
+      "label": "tenant_id must be set on every connection",
+      "family": "descriptive",
+      "text": "tenant_id must be set on every connection invariant **no `enforced-at`.** the adr calls it \"discipline\"; no artifact in the modelled\nscope is recorded as enforcing it. **the gap is the finding.**",
+      "attributes": {
+        "locator": "Requires discipline: SET app.current_tenant_id",
+        "source": "docs/adr/ADR-0001-multi-tenancy-strategy.md",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Invariant.TenantIsolation",
+      "type": "Invariant",
+      "label": "No tenant can read or modify another tenant's data",
+      "family": "descriptive",
+      "text": "no tenant can read or modify another tenant's data invariant \"rls policies are enforced by postgresql itself, making cross-tenant data leakage\nimpossible even if application code has bugs.\"",
+      "attributes": {
+        "source": "docs/adr/ADR-0001-multi-tenancy-strategy.md",
+        "support": "confirmed"
+      }
+    },
+    {
+      "id": "Invariant.TokenIntegrity",
+      "type": "Invariant",
+      "label": "Tokens with a wrong secret, tampered payload or alg=none are rejected",
+      "family": "descriptive",
+      "text": "tokens with a wrong secret, tampered payload or alg=none are rejected invariant **\"modified `tid`\" is tenant isolation enforced at the token layer** \u2014 the test\nsuite protects the multi-tenancy invariant without naming it.",
+      "attributes": {
+        "locator": "rejects a token with a tampered payload (modified tid)",
+        "source": "packages/backend/src/modules/auth/__tests__/jwt-security.spec.ts",
+        "support": "confirmed"
+      }
+    }
+  ],
+  "impact": {
+    "Artifact.AccountLockoutTests": [
+      {
+        "id": "Invariant.AccountLockout",
+        "hops": 1,
+        "via": "enforced-at"
+      },
+      {
+        "id": "Invariant.NoUserEnumeration",
+        "hops": 1,
+        "via": "enforced-at"
+      }
+    ],
+    "Artifact.AuthService": [
+      {
+        "id": "Artifact.AccountLockoutTests",
+        "hops": 1,
+        "via": "validates"
+      },
+      {
+        "id": "Artifact.AuthServiceTests",
+        "hops": 1,
+        "via": "validates"
+      },
+      {
+        "id": "Artifact.JwtSecurityTests",
+        "hops": 1,
+        "via": "validates"
+      },
+      {
+        "id": "Artifact.PasswordSecurityTests",
+        "hops": 1,
+        "via": "validates"
+      },
+      {
+        "id": "Artifact.RefreshRotationTests",
+        "hops": 1,
+        "via": "validates"
+      },
+      {
+        "id": "Capability.Login",
+        "hops": 1,
+        "via": "realised-by"
+      },
+      {
+        "id": "Capability.RefreshSession",
+        "hops": 1,
+        "via": "realised-by"
+      },
+      {
+        "id": "Invariant.TenantIsolation",
+        "hops": 1,
+        "via": "enforced-at"
+      },
+      {
+        "id": "ADR.0001",
+        "hops": 2,
+        "via": "enforced-at"
+      },
+      {
+        "id": "Invariant.AccountLockout",
+        "hops": 2,
+        "via": "realised-by"
+      },
+      {
+        "id": "Invariant.NoUserEnumeration",
+        "hops": 2,
+        "via": "realised-by"
+      },
+      {
+        "id": "Invariant.RefreshRotation",
+        "hops": 2,
+        "via": "realised-by"
+      },
+      {
+        "id": "Invariant.TokenIntegrity",
+        "hops": 2,
+        "via": "validates"
+      }
+    ],
+    "Artifact.JwtSecurityTests": [
+      {
+        "id": "Invariant.TokenIntegrity",
+        "hops": 1,
+        "via": "enforced-at"
+      }
+    ],
+    "Artifact.RefreshRotationTests": [
+      {
+        "id": "Invariant.RefreshRotation",
+        "hops": 1,
+        "via": "enforced-at"
+      }
+    ],
+    "BC.Auth": [
+      {
+        "id": "Capability.Login",
+        "hops": 1,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Capability.RefreshSession",
+        "hops": 1,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Concept.AccessToken",
+        "hops": 1,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Concept.Agent",
+        "hops": 1,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Concept.RefreshToken",
+        "hops": 1,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Concept.Tenant",
+        "hops": 1,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Invariant.AccountLockout",
+        "hops": 1,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Invariant.NoUserEnumeration",
+        "hops": 1,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Invariant.RefreshRotation",
+        "hops": 1,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Invariant.TenantIdOnEveryConnection",
+        "hops": 1,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Invariant.TenantIsolation",
+        "hops": 1,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Invariant.TokenIntegrity",
+        "hops": 1,
+        "via": "scoped-to"
+      },
+      {
+        "id": "ADR.0001",
+        "hops": 2,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Artifact.AccountLockoutTests",
+        "hops": 2,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Artifact.AuthService",
+        "hops": 2,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Artifact.JwtGuard",
+        "hops": 2,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Artifact.JwtSecurityTests",
+        "hops": 2,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Artifact.RefreshRotationTests",
+        "hops": 2,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Artifact.RefreshTokenSchema",
+        "hops": 2,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Artifact.AuthServiceTests",
+        "hops": 3,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Artifact.PasswordSecurityTests",
+        "hops": 3,
+        "via": "scoped-to"
+      }
+    ],
+    "Capability.Login": [
+      {
+        "id": "Artifact.AuthService",
+        "hops": 1,
+        "via": "represents"
+      },
+      {
+        "id": "Invariant.AccountLockout",
+        "hops": 1,
+        "via": "constrains"
+      },
+      {
+        "id": "Invariant.NoUserEnumeration",
+        "hops": 1,
+        "via": "constrains"
+      },
+      {
+        "id": "Invariant.TenantIsolation",
+        "hops": 1,
+        "via": "constrains"
+      },
+      {
+        "id": "ADR.0001",
+        "hops": 2,
+        "via": "constrains"
+      },
+      {
+        "id": "Artifact.AccountLockoutTests",
+        "hops": 2,
+        "via": "constrains"
+      },
+      {
+        "id": "Artifact.AuthServiceTests",
+        "hops": 2,
+        "via": "represents"
+      },
+      {
+        "id": "Artifact.JwtSecurityTests",
+        "hops": 2,
+        "via": "represents"
+      },
+      {
+        "id": "Artifact.PasswordSecurityTests",
+        "hops": 2,
+        "via": "represents"
+      },
+      {
+        "id": "Artifact.RefreshRotationTests",
+        "hops": 2,
+        "via": "represents"
+      },
+      {
+        "id": "Capability.RefreshSession",
+        "hops": 2,
+        "via": "represents"
+      },
+      {
+        "id": "Invariant.RefreshRotation",
+        "hops": 3,
+        "via": "represents"
+      },
+      {
+        "id": "Invariant.TokenIntegrity",
+        "hops": 3,
+        "via": "represents"
+      }
+    ],
+    "Capability.RefreshSession": [
+      {
+        "id": "Invariant.RefreshRotation",
+        "hops": 1,
+        "via": "constrains"
+      },
+      {
+        "id": "Artifact.RefreshRotationTests",
+        "hops": 2,
+        "via": "constrains"
+      }
+    ],
+    "Concept.AccessToken": [
+      {
+        "id": "Artifact.JwtGuard",
+        "hops": 1,
+        "via": "represents"
+      },
+      {
+        "id": "Concept.RefreshToken",
+        "hops": 1,
+        "via": "references"
+      },
+      {
+        "id": "Invariant.TokenIntegrity",
+        "hops": 1,
+        "via": "constrains"
+      },
+      {
+        "id": "Artifact.AuthService",
+        "hops": 2,
+        "via": "references"
+      },
+      {
+        "id": "Artifact.JwtSecurityTests",
+        "hops": 2,
+        "via": "constrains"
+      },
+      {
+        "id": "Artifact.RefreshTokenSchema",
+        "hops": 2,
+        "via": "references"
+      },
+      {
+        "id": "Capability.RefreshSession",
+        "hops": 2,
+        "via": "references"
+      },
+      {
+        "id": "Artifact.AccountLockoutTests",
+        "hops": 3,
+        "via": "references"
+      },
+      {
+        "id": "Artifact.AuthServiceTests",
+        "hops": 3,
+        "via": "references"
+      },
+      {
+        "id": "Artifact.PasswordSecurityTests",
+        "hops": 3,
+        "via": "references"
+      },
+      {
+        "id": "Artifact.RefreshRotationTests",
+        "hops": 3,
+        "via": "references"
+      },
+      {
+        "id": "Capability.Login",
+        "hops": 3,
+        "via": "references"
+      },
+      {
+        "id": "Invariant.RefreshRotation",
+        "hops": 3,
+        "via": "references"
+      },
+      {
+        "id": "Invariant.TenantIsolation",
+        "hops": 3,
+        "via": "references"
+      },
+      {
+        "id": "ADR.0001",
+        "hops": 4,
+        "via": "references"
+      },
+      {
+        "id": "Invariant.AccountLockout",
+        "hops": 4,
+        "via": "references"
+      },
+      {
+        "id": "Invariant.NoUserEnumeration",
+        "hops": 4,
+        "via": "references"
+      }
+    ],
+    "Concept.Agent": [
+      {
+        "id": "Capability.Login",
+        "hops": 1,
+        "via": "references"
+      },
+      {
+        "id": "Artifact.AuthService",
+        "hops": 2,
+        "via": "references"
+      },
+      {
+        "id": "Invariant.AccountLockout",
+        "hops": 2,
+        "via": "references"
+      },
+      {
+        "id": "Invariant.NoUserEnumeration",
+        "hops": 2,
+        "via": "references"
+      },
+      {
+        "id": "Invariant.TenantIsolation",
+        "hops": 2,
+        "via": "references"
+      },
+      {
+        "id": "ADR.0001",
+        "hops": 3,
+        "via": "references"
+      },
+      {
+        "id": "Artifact.AccountLockoutTests",
+        "hops": 3,
+        "via": "references"
+      },
+      {
+        "id": "Artifact.AuthServiceTests",
+        "hops": 3,
+        "via": "references"
+      },
+      {
+        "id": "Artifact.JwtSecurityTests",
+        "hops": 3,
+        "via": "references"
+      },
+      {
+        "id": "Artifact.PasswordSecurityTests",
+        "hops": 3,
+        "via": "references"
+      },
+      {
+        "id": "Artifact.RefreshRotationTests",
+        "hops": 3,
+        "via": "references"
+      },
+      {
+        "id": "Capability.RefreshSession",
+        "hops": 3,
+        "via": "references"
+      },
+      {
+        "id": "Invariant.RefreshRotation",
+        "hops": 4,
+        "via": "references"
+      },
+      {
+        "id": "Invariant.TokenIntegrity",
+        "hops": 4,
+        "via": "references"
+      }
+    ],
+    "Concept.RefreshToken": [
+      {
+        "id": "Artifact.AuthService",
+        "hops": 1,
+        "via": "references"
+      },
+      {
+        "id": "Artifact.RefreshTokenSchema",
+        "hops": 1,
+        "via": "represents"
+      },
+      {
+        "id": "Capability.RefreshSession",
+        "hops": 1,
+        "via": "references"
+      },
+      {
+        "id": "Artifact.AccountLockoutTests",
+        "hops": 2,
+        "via": "references"
+      },
+      {
+        "id": "Artifact.AuthServiceTests",
+        "hops": 2,
+        "via": "references"
+      },
+      {
+        "id": "Artifact.JwtSecurityTests",
+        "hops": 2,
+        "via": "references"
+      },
+      {
+        "id": "Artifact.PasswordSecurityTests",
+        "hops": 2,
+        "via": "references"
+      },
+      {
+        "id": "Artifact.RefreshRotationTests",
+        "hops": 2,
+        "via": "references"
+      },
+      {
+        "id": "Capability.Login",
+        "hops": 2,
+        "via": "references"
+      },
+      {
+        "id": "Invariant.RefreshRotation",
+        "hops": 2,
+        "via": "references"
+      },
+      {
+        "id": "Invariant.TenantIsolation",
+        "hops": 2,
+        "via": "references"
+      },
+      {
+        "id": "ADR.0001",
+        "hops": 3,
+        "via": "references"
+      },
+      {
+        "id": "Invariant.AccountLockout",
+        "hops": 3,
+        "via": "references"
+      },
+      {
+        "id": "Invariant.NoUserEnumeration",
+        "hops": 3,
+        "via": "references"
+      },
+      {
+        "id": "Invariant.TokenIntegrity",
+        "hops": 3,
+        "via": "references"
+      }
+    ],
+    "Concept.Tenant": [
+      {
+        "id": "Concept.AccessToken",
+        "hops": 1,
+        "via": "references"
+      },
+      {
+        "id": "Invariant.TenantIdOnEveryConnection",
+        "hops": 1,
+        "via": "constrains"
+      },
+      {
+        "id": "ADR.0001",
+        "hops": 2,
+        "via": "constrains"
+      },
+      {
+        "id": "Artifact.JwtGuard",
+        "hops": 2,
+        "via": "references"
+      },
+      {
+        "id": "Concept.RefreshToken",
+        "hops": 2,
+        "via": "references"
+      },
+      {
+        "id": "Invariant.TokenIntegrity",
+        "hops": 2,
+        "via": "references"
+      },
+      {
+        "id": "Artifact.AuthService",
+        "hops": 3,
+        "via": "references"
+      },
+      {
+        "id": "Artifact.JwtSecurityTests",
+        "hops": 3,
+        "via": "references"
+      },
+      {
+        "id": "Artifact.RefreshTokenSchema",
+        "hops": 3,
+        "via": "references"
+      },
+      {
+        "id": "Capability.RefreshSession",
+        "hops": 3,
+        "via": "references"
+      },
+      {
+        "id": "Artifact.AccountLockoutTests",
+        "hops": 4,
+        "via": "references"
+      },
+      {
+        "id": "Artifact.AuthServiceTests",
+        "hops": 4,
+        "via": "references"
+      },
+      {
+        "id": "Artifact.PasswordSecurityTests",
+        "hops": 4,
+        "via": "references"
+      },
+      {
+        "id": "Artifact.RefreshRotationTests",
+        "hops": 4,
+        "via": "references"
+      },
+      {
+        "id": "Capability.Login",
+        "hops": 4,
+        "via": "references"
+      },
+      {
+        "id": "Invariant.RefreshRotation",
+        "hops": 4,
+        "via": "references"
+      },
+      {
+        "id": "Invariant.TenantIsolation",
+        "hops": 4,
+        "via": "references"
+      },
+      {
+        "id": "Invariant.AccountLockout",
+        "hops": 5,
+        "via": "references"
+      },
+      {
+        "id": "Invariant.NoUserEnumeration",
+        "hops": 5,
+        "via": "references"
+      }
+    ],
+    "Evidence.Adr0001": [
+      {
+        "id": "ADR.0001",
+        "hops": 1,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Concept.Tenant",
+        "hops": 1,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.TenantIdOnEveryConnection",
+        "hops": 1,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.TenantIsolation",
+        "hops": 1,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Concept.AccessToken",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.JwtGuard",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Concept.RefreshToken",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.TokenIntegrity",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.AuthService",
+        "hops": 4,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.JwtSecurityTests",
+        "hops": 4,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.RefreshTokenSchema",
+        "hops": 4,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Capability.RefreshSession",
+        "hops": 4,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.AccountLockoutTests",
+        "hops": 5,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.AuthServiceTests",
+        "hops": 5,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.PasswordSecurityTests",
+        "hops": 5,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.RefreshRotationTests",
+        "hops": 5,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Capability.Login",
+        "hops": 5,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.RefreshRotation",
+        "hops": 5,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.AccountLockout",
+        "hops": 6,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.NoUserEnumeration",
+        "hops": 6,
+        "via": "evidenced-by"
+      }
+    ],
+    "Evidence.GuardSymbols": [
+      {
+        "id": "Artifact.JwtGuard",
+        "hops": 1,
+        "via": "evidenced-by"
+      }
+    ],
+    "Evidence.IssueTokensSignature": [
+      {
+        "id": "Artifact.AuthService",
+        "hops": 1,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Concept.AccessToken",
+        "hops": 1,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.AccountLockoutTests",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.AuthServiceTests",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.JwtGuard",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.JwtSecurityTests",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.PasswordSecurityTests",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.RefreshRotationTests",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Capability.Login",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Capability.RefreshSession",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Concept.RefreshToken",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.TenantIsolation",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.TokenIntegrity",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "ADR.0001",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.RefreshTokenSchema",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.AccountLockout",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.NoUserEnumeration",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.RefreshRotation",
+        "hops": 3,
+        "via": "evidenced-by"
+      }
+    ],
+    "Evidence.JwtTests": [
+      {
+        "id": "Invariant.TokenIntegrity",
+        "hops": 1,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.JwtSecurityTests",
+        "hops": 2,
+        "via": "evidenced-by"
+      }
+    ],
+    "Evidence.LockoutTests": [
+      {
+        "id": "Invariant.AccountLockout",
+        "hops": 1,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.NoUserEnumeration",
+        "hops": 1,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.AccountLockoutTests",
+        "hops": 2,
+        "via": "evidenced-by"
+      }
+    ],
+    "Evidence.LoginSignature": [
+      {
+        "id": "Artifact.AuthService",
+        "hops": 1,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Concept.Agent",
+        "hops": 1,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.AccountLockoutTests",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.AuthServiceTests",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.JwtSecurityTests",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.PasswordSecurityTests",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.RefreshRotationTests",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Capability.Login",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Capability.RefreshSession",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.TenantIsolation",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "ADR.0001",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.AccountLockout",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.NoUserEnumeration",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.RefreshRotation",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.TokenIntegrity",
+        "hops": 3,
+        "via": "evidenced-by"
+      }
+    ],
+    "Evidence.RefreshTokenSchema": [
+      {
+        "id": "Artifact.RefreshTokenSchema",
+        "hops": 1,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Concept.RefreshToken",
+        "hops": 1,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.AuthService",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Capability.RefreshSession",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.AccountLockoutTests",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.AuthServiceTests",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.JwtSecurityTests",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.PasswordSecurityTests",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.RefreshRotationTests",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Capability.Login",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.RefreshRotation",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.TenantIsolation",
+        "hops": 3,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "ADR.0001",
+        "hops": 4,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.AccountLockout",
+        "hops": 4,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.NoUserEnumeration",
+        "hops": 4,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.TokenIntegrity",
+        "hops": 4,
+        "via": "evidenced-by"
+      }
+    ],
+    "Evidence.RotationTests": [
+      {
+        "id": "Invariant.RefreshRotation",
+        "hops": 1,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.RefreshRotationTests",
+        "hops": 2,
+        "via": "evidenced-by"
+      }
+    ],
+    "Evidence.TestInventory": [
+      {
+        "id": "Artifact.AccountLockoutTests",
+        "hops": 1,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.AuthServiceTests",
+        "hops": 1,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.JwtSecurityTests",
+        "hops": 1,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.PasswordSecurityTests",
+        "hops": 1,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Artifact.RefreshRotationTests",
+        "hops": 1,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.AccountLockout",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.NoUserEnumeration",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.RefreshRotation",
+        "hops": 2,
+        "via": "evidenced-by"
+      },
+      {
+        "id": "Invariant.TokenIntegrity",
+        "hops": 2,
+        "via": "evidenced-by"
+      }
+    ],
+    "Invariant.AccountLockout": [
+      {
+        "id": "Artifact.AccountLockoutTests",
+        "hops": 1,
+        "via": "references"
+      },
+      {
+        "id": "Invariant.NoUserEnumeration",
+        "hops": 2,
+        "via": "references"
+      }
+    ],
+    "Invariant.RefreshRotation": [
+      {
+        "id": "Artifact.RefreshRotationTests",
+        "hops": 1,
+        "via": "references"
+      }
+    ],
+    "Invariant.TenantIdOnEveryConnection": [
+      {
+        "id": "ADR.0001",
+        "hops": 1,
+        "via": "establishes"
+      }
+    ],
+    "Invariant.TenantIsolation": [
+      {
+        "id": "ADR.0001",
+        "hops": 1,
+        "via": "establishes"
+      }
+    ],
+    "Invariant.TokenIntegrity": [
+      {
+        "id": "Artifact.JwtSecurityTests",
+        "hops": 1,
+        "via": "references"
+      }
+    ]
+  },
+  "traceability": {
+    "ADR.0001": {
+      "evidence": [
+        "Evidence.Adr0001"
+      ],
+      "rationale": []
+    },
+    "Artifact.AccountLockoutTests": {
+      "evidence": [
+        "Evidence.TestInventory"
+      ],
+      "rationale": []
+    },
+    "Artifact.AuthService": {
+      "evidence": [
+        "Evidence.IssueTokensSignature",
+        "Evidence.LoginSignature"
+      ],
+      "rationale": []
+    },
+    "Artifact.AuthServiceTests": {
+      "evidence": [
+        "Evidence.TestInventory"
+      ],
+      "rationale": []
+    },
+    "Artifact.JwtGuard": {
+      "evidence": [
+        "Evidence.GuardSymbols"
+      ],
+      "rationale": []
+    },
+    "Artifact.JwtSecurityTests": {
+      "evidence": [
+        "Evidence.TestInventory"
+      ],
+      "rationale": []
+    },
+    "Artifact.PasswordSecurityTests": {
+      "evidence": [
+        "Evidence.TestInventory"
+      ],
+      "rationale": []
+    },
+    "Artifact.RefreshRotationTests": {
+      "evidence": [
+        "Evidence.TestInventory"
+      ],
+      "rationale": []
+    },
+    "Artifact.RefreshTokenSchema": {
+      "evidence": [
+        "Evidence.RefreshTokenSchema"
+      ],
+      "rationale": []
+    },
+    "Concept.AccessToken": {
+      "evidence": [
+        "Evidence.IssueTokensSignature"
+      ],
+      "rationale": []
+    },
+    "Concept.Agent": {
+      "evidence": [
+        "Evidence.LoginSignature"
+      ],
+      "rationale": []
+    },
+    "Concept.RefreshToken": {
+      "evidence": [
+        "Evidence.RefreshTokenSchema"
+      ],
+      "rationale": []
+    },
+    "Concept.Tenant": {
+      "evidence": [
+        "Evidence.Adr0001"
+      ],
+      "rationale": []
+    },
+    "Invariant.AccountLockout": {
+      "evidence": [
+        "Evidence.LockoutTests"
+      ],
+      "rationale": []
+    },
+    "Invariant.NoUserEnumeration": {
+      "evidence": [
+        "Evidence.LockoutTests"
+      ],
+      "rationale": []
+    },
+    "Invariant.RefreshRotation": {
+      "evidence": [
+        "Evidence.RotationTests"
+      ],
+      "rationale": []
+    },
+    "Invariant.TenantIdOnEveryConnection": {
+      "evidence": [
+        "Evidence.Adr0001"
+      ],
+      "rationale": [
+        "ADR.0001"
+      ]
+    },
+    "Invariant.TenantIsolation": {
+      "evidence": [
+        "Evidence.Adr0001"
+      ],
+      "rationale": [
+        "ADR.0001"
+      ]
+    },
+    "Invariant.TokenIntegrity": {
+      "evidence": [
+        "Evidence.JwtTests"
+      ],
+      "rationale": []
+    }
+  },
+  "statistics": {
+    "searchable": 31,
+    "withImpact": 25,
+    "withTraceability": 19
+  }
+}

@@ -1,0 +1,277 @@
+{
+  "note": "Projections of the Canonical Knowledge Model, derived by the declared query engine (ADR-0086).",
+  "search": [
+    {
+      "id": "ADR.0001",
+      "type": "ADR",
+      "label": "Verify payment synchronously at checkout",
+      "family": "operational",
+      "text": "verify payment synchronously at checkout adr decision with alternatives considered. never edited once accepted; superseded.",
+      "attributes": {}
+    },
+    {
+      "id": "AcceptanceRecord.0001",
+      "type": "AcceptanceRecord",
+      "label": "Acceptance of checkout service r2",
+      "family": "operational",
+      "text": "acceptance of checkout service r2 acceptancerecord the act that confers active status. commits do not.",
+      "attributes": {}
+    },
+    {
+      "id": "Actor.Customer",
+      "type": "Actor",
+      "label": "Customer",
+      "family": "descriptive",
+      "text": "customer actor the role that submits orders. a role, not a person.",
+      "attributes": {}
+    },
+    {
+      "id": "Artifact.CheckoutService",
+      "type": "Artifact",
+      "label": "Checkout service",
+      "family": "descriptive",
+      "text": "checkout service artifact a stable logical identity. it has no lifecycle of its own.",
+      "attributes": {}
+    },
+    {
+      "id": "ArtifactRevision.CheckoutService.r2",
+      "type": "ArtifactRevision",
+      "label": "Checkout service r2",
+      "family": "descriptive",
+      "text": "checkout service r2 artifactrevision the unit that carries lifecycle state and the unit that is accepted.",
+      "attributes": {}
+    },
+    {
+      "id": "BoundedContext.Sales",
+      "type": "BoundedContext",
+      "label": "Sales",
+      "family": "descriptive",
+      "text": "sales boundedcontext the boundary within which \"order\" means a customer's purchase request.",
+      "attributes": {}
+    },
+    {
+      "id": "Capability.PlaceOrder",
+      "type": "Capability",
+      "label": "Place an order",
+      "family": "descriptive",
+      "text": "place an order capability the system accepts an order from a customer and acknowledges it.",
+      "attributes": {}
+    },
+    {
+      "id": "Concept.Order",
+      "type": "Concept",
+      "label": "Order",
+      "family": "descriptive",
+      "text": "order concept a customer's request to purchase goods, from submission until fulfilment.",
+      "attributes": {}
+    },
+    {
+      "id": "Invariant.PaymentBeforeShipping",
+      "type": "Invariant",
+      "label": "An order cannot ship before payment clears",
+      "family": "descriptive",
+      "text": "an order cannot ship before payment clears invariant stated independently of whatever enforces it. note that `enforced-at` is absent:\nthis invariant has no recorded enforcement point, which is a finding rather than\nan omission.",
+      "attributes": {}
+    },
+    {
+      "id": "Issue.0001",
+      "type": "Issue",
+      "label": "Should payment be verified synchronously?",
+      "family": "operational",
+      "text": "should payment be verified synchronously? issue a recorded unknown.",
+      "attributes": {}
+    },
+    {
+      "id": "Skill.ValidateOrder",
+      "type": "Skill",
+      "label": "Validate an order",
+      "family": "operational",
+      "text": "validate an order skill check that an order references known goods and a reachable customer.",
+      "attributes": {}
+    },
+    {
+      "id": "Workflow.Checkout",
+      "type": "Workflow",
+      "label": "Checkout",
+      "family": "operational",
+      "text": "checkout workflow orchestration only. holds no methodology of its own.",
+      "attributes": {}
+    },
+    {
+      "id": "WorkflowStep.Checkout.1",
+      "type": "WorkflowStep",
+      "label": "Checkout step 1",
+      "family": "operational",
+      "text": "checkout step 1 workflowstep the reified association. the position lives here, not on the skill.",
+      "attributes": {}
+    }
+  ],
+  "impact": {
+    "Actor.Customer": [
+      {
+        "id": "AcceptanceRecord.0001",
+        "hops": 1,
+        "via": "reviewed-by"
+      }
+    ],
+    "Artifact.CheckoutService": [
+      {
+        "id": "ArtifactRevision.CheckoutService.r2",
+        "hops": 1,
+        "via": "revision-of"
+      },
+      {
+        "id": "Capability.PlaceOrder",
+        "hops": 1,
+        "via": "realised-by"
+      },
+      {
+        "id": "Skill.ValidateOrder",
+        "hops": 1,
+        "via": "produces"
+      },
+      {
+        "id": "AcceptanceRecord.0001",
+        "hops": 2,
+        "via": "revision-of"
+      },
+      {
+        "id": "Actor.Customer",
+        "hops": 2,
+        "via": "realised-by"
+      },
+      {
+        "id": "WorkflowStep.Checkout.1",
+        "hops": 2,
+        "via": "produces"
+      },
+      {
+        "id": "Workflow.Checkout",
+        "hops": 3,
+        "via": "produces"
+      }
+    ],
+    "ArtifactRevision.CheckoutService.r2": [
+      {
+        "id": "AcceptanceRecord.0001",
+        "hops": 1,
+        "via": "accepts"
+      },
+      {
+        "id": "Artifact.CheckoutService",
+        "hops": 1,
+        "via": "has-active-revision"
+      },
+      {
+        "id": "Capability.PlaceOrder",
+        "hops": 2,
+        "via": "has-active-revision"
+      },
+      {
+        "id": "Skill.ValidateOrder",
+        "hops": 2,
+        "via": "has-active-revision"
+      },
+      {
+        "id": "Actor.Customer",
+        "hops": 3,
+        "via": "has-active-revision"
+      },
+      {
+        "id": "WorkflowStep.Checkout.1",
+        "hops": 3,
+        "via": "has-active-revision"
+      },
+      {
+        "id": "Workflow.Checkout",
+        "hops": 4,
+        "via": "has-active-revision"
+      }
+    ],
+    "BoundedContext.Sales": [
+      {
+        "id": "Actor.Customer",
+        "hops": 1,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Capability.PlaceOrder",
+        "hops": 1,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Concept.Order",
+        "hops": 1,
+        "via": "scoped-to"
+      },
+      {
+        "id": "Invariant.PaymentBeforeShipping",
+        "hops": 1,
+        "via": "scoped-to"
+      },
+      {
+        "id": "AcceptanceRecord.0001",
+        "hops": 2,
+        "via": "scoped-to"
+      }
+    ],
+    "Capability.PlaceOrder": [
+      {
+        "id": "Actor.Customer",
+        "hops": 1,
+        "via": "uses"
+      },
+      {
+        "id": "AcceptanceRecord.0001",
+        "hops": 2,
+        "via": "uses"
+      }
+    ],
+    "Concept.Order": [
+      {
+        "id": "Invariant.PaymentBeforeShipping",
+        "hops": 1,
+        "via": "constrains"
+      }
+    ],
+    "Issue.0001": [
+      {
+        "id": "ADR.0001",
+        "hops": 1,
+        "via": "resolves"
+      }
+    ],
+    "Skill.ValidateOrder": [
+      {
+        "id": "WorkflowStep.Checkout.1",
+        "hops": 1,
+        "via": "executes"
+      },
+      {
+        "id": "Workflow.Checkout",
+        "hops": 2,
+        "via": "executes"
+      }
+    ],
+    "Workflow.Checkout": [
+      {
+        "id": "WorkflowStep.Checkout.1",
+        "hops": 1,
+        "via": "step-of"
+      }
+    ],
+    "WorkflowStep.Checkout.1": [
+      {
+        "id": "Workflow.Checkout",
+        "hops": 1,
+        "via": "has-step"
+      }
+    ]
+  },
+  "traceability": {},
+  "statistics": {
+    "searchable": 13,
+    "withImpact": 10,
+    "withTraceability": 0
+  }
+}
