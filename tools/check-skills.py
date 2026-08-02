@@ -24,7 +24,7 @@ from compiler.registry import load_all  # noqa: E402
 VALID_TYPES = {"Concept", "Capability", "BoundedContext", "Invariant", "Actor",
                "ADR", "Workflow", "WorkflowStep", "Artifact", "Evidence",
                "relationship"}
-REQUIRED = ["kind", "objective", "required-inputs", "evidence", "questions",
+REQUIRED = ["kind", "level", "objective", "required-inputs", "evidence", "questions",
             "permitted-tools", "proposal-types", "provenance", "uncertainty",
             "stopping", "output-schema", "review"]
 VENDORS = ("claude", "codex", "gpt", "gemini", "anthropic", "openai", "llama",
@@ -53,6 +53,11 @@ def main():
                       for i in (skill.get("required-inputs") or []))
         if depends and sid not in MAY_DEPEND:
             problems.append("requires another skill's output; not independently runnable")
+        level = skill.get("level")
+        if level not in (1, 2, 3):
+            problems.append(f"level must be 1, 2 or 3, got {level!r}")
+        if level == 3 and skill.get("kind") != "domain":
+            problems.append("level 3 is reserved for domain skills")
         kind = skill.get("kind")
         if kind not in ("general", "technology", "domain"):
             problems.append(f"kind must be general, technology or domain, "

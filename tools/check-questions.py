@@ -35,6 +35,10 @@ def main():
     bad = []
 
     for qid, q in sorted(questions.items()):
+        if q.get("level") != "repository":
+            problems_level = q.get("level")
+            bad.append(f"{qid}: level must be 'repository' until two maintained "
+                       f"models coexist (ADR-0126), got {problems_level!r}")
         for field in ("question", "author", "matters-because", "subject-types"):
             if not q.get(field):
                 bad.append(f"{qid}: missing {field!r}")

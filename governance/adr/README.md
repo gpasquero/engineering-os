@@ -16,7 +16,7 @@ same session the decision is made.
 > a rule exists; the rule that must be followed lives in a Policy under
 > `shared/policies/`. Agents consume policies; humans read ADRs for rationale.
 
-**Highest allocated ID: `ADR-0122`.** IDs are sequential and never reused.
+**Highest allocated ID: `ADR-0126`.** IDs are sequential and never reused.
 
 > This index table is a hand-maintained projection of ADR front matter. It is
 > listed in the transitional-debt register, `ISSUE-0037`.
@@ -216,7 +216,11 @@ Read these before designing anything that produces an artifact:
 | [ADR-0119](ADR-0119-a-repository-is-a-benchmark.md) | **A repository is a benchmark, not a backlog; evolve only on repeated evidence** | accepted | — |
 | [ADR-0120](ADR-0120-engineering-understanding-is-the-metric.md) | **Engineering understanding is the product metric; entity counts are implementation metrics** | accepted | — |
 | [ADR-0121](ADR-0121-three-kinds-of-discovery-skill.md) | **Discovery Skills are general, technology or domain, and all three produce the same entities** | accepted | — |
-| [ADR-0122](ADR-0122-engineering-memory.md) | **Engineering OS is a continuously improving engineering memory** | accepted | — |
+| [ADR-0122](ADR-0122-engineering-memory.md) | Engineering OS is a continuously improving engineering memory | superseded | `ADR-0123` |
+| [ADR-0123](ADR-0123-engineering-understanding-system.md) | **Engineering OS is a continuously improving Engineering Understanding System** | accepted | — |
+| [ADR-0124](ADR-0124-discovery-skill-maturity.md) | **Discovery Skills have three maturity levels and only two are catalog assets** | accepted | — |
+| [ADR-0125](ADR-0125-repositories-are-one-evidence-source.md) | **The Engineering Model is the stable representation; a repository is one evidence source** | accepted | — |
+| [ADR-0126](ADR-0126-question-levels.md) | **Engineering Questions exist at repository and organization level; only the first is built** | accepted | — |
 
 ## Supersessions
 

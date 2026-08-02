@@ -81,6 +81,15 @@ def score(ckm, question, queries):
     return ("answered" if ratio >= threshold else "partial"), answered, len(subjects)
 
 
+def score_all(ckm, questions, queries):
+    """Reusable scoring, so the longitudinal experiment measures the same way."""
+    rows = [(qid, q) + score(ckm, q, queries) for qid, q in questions.items()]
+    states = {qid: state for qid, _, state, _, _ in rows}
+    answered = sum(1 for s in states.values() if s == "answered")
+    return {"answered": answered, "total": len(rows), "states": states,
+            "rows": rows}
+
+
 def measure(project, questions, queries):
     ckm, problems = compile_project(project)
     if problems:

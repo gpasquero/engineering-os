@@ -4,7 +4,7 @@ title: Build State
 status: current
 created: 2026-08-02
 updated: 2026-08-02
-milestone: engineering-memory
+milestone: understanding-system
 ---
 
 # Build State
@@ -17,9 +17,56 @@ milestone: engineering-memory
 
 ## Current work
 
-**Engineering memory.** Discovery exists so that six months later an engineer can
-ask a difficult question and receive an answer nobody had to rediscover
-(`ADR-0122`).
+**A continuously improving Engineering Understanding System** (`ADR-0123`).
+**Memory stores. Understanding explains. Guidance recommends. Acquisition
+learns. Drift challenges.**
+
+| Verb | State |
+|---|---|
+| Acquisition | **strong** — three modes, two stacks, declarative extraction |
+| Memory | **strong** — provenance on every assertion, curation governed |
+| Drift | **works** — has caught the model asserting what a rerun would not |
+| **Understanding** | **weak — 22 % and 33 %** |
+| **Guidance** | **never run against a model it did not build for itself** |
+
+## The longitudinal experiment — understanding did not improve
+
+Ten real `ai-desk` commits, `4b85ca2` → `97ca033`, acquired once and maintained.
+
+```text
+t0    initial         39      —       —   1/9 answered
+t1    continuous      47     91   51.6%   1/9
+t3    continuous     128    216   59.3%   1/9
+t9    continuous       4    302    1.3%   1/9
+```
+
+**Acquired at 39 proposals; maintained across nine changes for 278 more — 13 %
+of re-running every time.**
+
+**The model grew 2.4× and answered one question worse.** `EQ-06` — *which
+capabilities would be affected?* — was `answered` at `t0` and `partial` at every
+step since.
+
+```text
+94 nodes · 36 edges · 0.38 edges per node
+capabilities: 10        with no edge at all: 9
+```
+
+**`C3-new-module` proposes a Capability and no relationship**, while the
+equivalent initial rule emits `scoped-to`. The two acquisition modes disagree
+about the same evidence — the second defect found by comparing modes rather than
+checking either. **Not fixed: the remedy is a decision about what Continuous
+Acquisition may infer.**
+
+## A published number was measured at the flattest point
+
+`SESSION-0043` reported Continuous Acquisition at **1.3 % of a rerun**. It
+reproduces exactly — **at `t9`**, where almost nothing changes.
+
+Across the whole history it is **13 %**, ranging **0 % to 59 %**.
+
+> A single-step measurement of an incremental process reports the step it was
+> taken at, not the process.
 
 ## The product metric
 
@@ -178,7 +225,8 @@ a proposal like any other.
 | `external/wa-b2b-onboarding/` | **The first benchmark of an unseen system** — 453 sources, `BENCHMARK.md` |
 | `external/…/experiment/blind/` | The blind benchmark |
 | `tools/check-governance.py` | The corpus check, **committed at last** — 271 records |
-| `model/engineering-questions.md` | **The product metric** — 9 questions, reviewer-authored |
+| `model/engineering-questions.md` | **The product metric** — 9 questions, reviewer-authored, `level: repository` |
+| `tools/longitudinal.py` · `external/ai-desk-longitudinal/` | **Ten commits, measured at each** |
 | Registries | **20** |
 | `model/metamodel/` | 23 of 27 entities — **unchanged for twelve milestones** |
 
@@ -208,10 +256,13 @@ unspent.**
 
 **Runtime evidence.** No mode consumes it.
 
-**Any measurement of the claim `ADR-0122` makes.** The architecture claims
-*cumulative* improvement. Continuous and Periodic Reacquisition have run against
-**one engineering change, in one repository, over one commit.** A longitudinal
-test is missing infrastructure, not a nice-to-have.
+**Cumulative improvement.** It was measured this session and **it does not
+happen**: ten commits, understanding flat, one question lost. What survives time
+today is the model; what does not yet accumulate is the understanding.
+
+**Guidance against a real model.** Every plan run so far used a model built for
+the purpose. It is the weakest of the five verbs and the one a customer buys
+(`ADR-0123`).
 
 **A domain Discovery Skill.** The category is empty again — `DS-multitenant-saas`
 was reclassified as `technology`, because multi-tenancy is an architectural
@@ -245,6 +296,7 @@ catalogue. Six more were deferred by the test written in the same session.
 | **The same five metamodel entities in two unrelated repositories** — repeated evidence, and it points at the interpreter | `BENCHMARK.md` |
 | **369 migrations and 135 documents unread** — the system's decision history is in the repository and not in the model | `BENCHMARK.md` |
 | **A metric is a query too** — three scoring defects, all flattering, two found by hand and the third by a check | `tools/check-questions.py` |
+| **`C3` proposes a Capability with no relationship** — nine of ten capabilities isolated | `LONGITUDINAL.md` |
 | **No strong event-driven repository is available locally** — the only one with a broker has three test classes | `SESSION-0046` |
 | **`apply()` never asks whose model is already in the directory** — pointed at another project's model it merged the two and reported success | `SESSION-0045` |
 | **A check retyped each session is not a check** — three records had unparseable front matter for many sessions | `tools/check-governance.py` |
@@ -255,14 +307,13 @@ catalogue. Six more were deferred by the test written in the same session.
 
 ## Next action
 
-**The event-driven benchmark — and the repository is a decision for the Project
-Owner.** The local inventory contains one repository with a message broker, and
-it has three test classes; it would measure the extractor, not the engineering
-shape.
+**Decide what Continuous Acquisition may infer, then re-run the longitudinal
+experiment against the same ten commits.**
 
-If none is available, the higher-value alternative is **the longitudinal test**:
-the same repository, several real commits apart, asking whether the second answer
-cost anything. It is the one claim `ADR-0122` makes and nothing verifies.
+For the first time the project has a measurement a fix must move: `EQ-06`
+regressed at `t1` and stayed regressed for nine steps, the experiment is
+reproducible, and **the acceptance criterion is a number rather than an
+opinion.**
 
 Still untested, and still where getting it wrong destroys curated knowledge:
 **a change that removes evidence.**

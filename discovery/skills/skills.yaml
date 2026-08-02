@@ -13,6 +13,13 @@
 # question. Two remain open: type enforcement is now checked by tools, and the
 # tension between exhaustive stopping conditions and bounded counts is real.
 
+# Each skill declares its LEVEL (ADR-0124):
+#   1 — repository-specific. Exists to discover what should generalize, and is
+#       never a catalog asset. Deleted without ceremony.
+#   2 — reusable technology skill
+#   3 — reusable domain skill
+# Only levels 2 and 3 are long-lived.
+#
 # Each skill declares its KIND (ADR-0121):
 #   general    — knows about software, in any language and any business
 #   technology — knows what a framework's PRESENCE implies; never where it puts
@@ -29,6 +36,7 @@
 skills:
   - id: DS-repository-survey
     kind: general
+    level: 2
     objective: Establish what kind of system this is and how it is organised.
     required-inputs: [mechanical-model]
     evidence: [packages, fileCounts, dependencies, moduleDirs]
@@ -46,6 +54,7 @@ skills:
 
   - id: DS-architecture-discovery
     kind: general
+    level: 2
     objective: >
       Identify architectural boundaries, and asymmetries between them that no
       single fact reveals.
@@ -75,6 +84,7 @@ skills:
 
   - id: DS-domain-concept-discovery
     kind: general
+    level: 2
     objective: Propose the domain vocabulary the system is written in.
     required-inputs: [mechanical-model]
     evidence: [tables, routes, moduleDirs]
@@ -92,6 +102,7 @@ skills:
 
   - id: DS-capability-discovery
     kind: general
+    level: 2
     objective: Propose what the system can do, as externally visible capabilities.
     required-inputs: [mechanical-model]
     evidence: [routes, moduleDirs, testSuites]
@@ -108,6 +119,7 @@ skills:
 
   - id: DS-invariant-discovery
     kind: general
+    level: 2
     objective: >
       Propose conditions that must hold, at both the concept and the specific
       guarantee level (ADR-0111).
@@ -133,6 +145,7 @@ skills:
 
   - id: DS-decision-discovery
     kind: general
+    level: 2
     objective: Propose decisions and the rationale behind what exists.
     required-inputs: [mechanical-model]
     evidence: [documents, dependencies, tables]
@@ -152,6 +165,7 @@ skills:
 
   - id: DS-workflow-discovery
     kind: general
+    level: 2
     objective: Propose engineering or runtime processes the system embodies.
     required-inputs: [mechanical-model]
     evidence: [documents, routes, moduleDirs]
@@ -170,6 +184,7 @@ skills:
 
   - id: DS-gap-discovery
     kind: general
+    level: 2
     objective: >
       Report what is absent, ambiguous or contradictory. Propose no knowledge.
     required-inputs: [mechanical-model, candidate-proposals]
@@ -189,6 +204,7 @@ skills:
 
   - id: DS-candidate-synthesis
     kind: general
+    level: 2
     objective: >
       Merge the outputs of the other skills into one Candidate Engineering Model,
       resolving duplicates and surfacing contradictions.
@@ -220,6 +236,7 @@ skills:
 
   - id: DS-multitenant-saas
     kind: technology
+    level: 2
     technology: Multi-tenant persistence and request scoping
     objective: >
       Propose the invariants and absences a multi-tenant system is expected to

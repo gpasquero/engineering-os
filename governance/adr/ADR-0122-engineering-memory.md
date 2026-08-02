@@ -1,15 +1,19 @@
 ---
 id: ADR-0122
 title: Engineering OS is a continuously improving engineering memory
-status: accepted
+status: superseded
 date: 2026-08-02
 supersedes: null
-superseded-by: null
+superseded-by: ADR-0123
 resolves: []
 related: [ADR-0080, ADR-0089, ADR-0110, ADR-0112, ADR-0116, ADR-0118, ADR-0120]
 ---
 
 # ADR-0122 — Engineering memory is the product
+
+> **Superseded by `ADR-0123`.** The framing was right about *time* and wrong
+> about *verb*. Memory stores; understanding explains. Everything below still
+> holds — `ADR-0123` widens it rather than reversing it.
 
 ## Context
 

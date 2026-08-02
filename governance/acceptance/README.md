@@ -15,7 +15,7 @@ committed.
 
 **Acceptance is an engineering decision, not a Git operation** (`ADR-0020`).
 
-**Highest allocated ID: `ACCEPT-0041`.** IDs are never reused.
+**Highest allocated ID: `ACCEPT-0042`.** IDs are never reused.
 
 > **`ACCEPT-0033` and `ACCEPT-0035` are not allocated.** Each was skipped when
 > the reviewer requested the next identifier: `ACCEPT-0034` while the highest was
@@ -65,6 +65,7 @@ committed.
 | [ACCEPT-0039](ACCEPT-0039-session-0043-decisions.md) | `SESSION-0043` — the complete acquisition lifecycle at `2924fd5` | Project Owner (`gpasquero`) | accepted | 2026-08-02 |
 | [ACCEPT-0040](ACCEPT-0040-session-0044-decisions.md) | `SESSION-0044` — drift routing, the skill catalog and the product test at `20c7502` | Project Owner (`gpasquero`) | accepted | 2026-08-02 |
 | [ACCEPT-0041](ACCEPT-0041-session-0045-decisions.md) | `SESSION-0045` — Stack Profiles and the first generalization benchmark at `92a0248` | Project Owner (`gpasquero`) | accepted | 2026-08-02 |
+| [ACCEPT-0042](ACCEPT-0042-session-0046-decisions.md) | `SESSION-0046` — the product metric and the skill taxonomy at `d82ec43` | Project Owner (`gpasquero`) | accepted | 2026-08-02 |
 
 ## The three conditions
 

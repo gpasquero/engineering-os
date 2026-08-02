@@ -28,6 +28,16 @@ conflict `ADR-0023` forbids for acceptance.
 **The implementer may not add a question they know passes.** New questions are
 proposed with their expected answer *unknown*, and are added by the reviewer.
 
+## Levels
+
+Every question here is a **Repository Question** — asked about one system.
+`ADR-0126` records a second level, **Organization Questions** (*which systems
+implement customer identity? where is this business rule enforced?*), and
+records that it is **not to be built yet**.
+
+`level: repository` is declared on all nine so that the day a second level
+exists, nothing has to be reinterpreted.
+
 ## How a question is scored
 
 Each question names the declared queries that would answer it, and the subject
@@ -50,6 +60,7 @@ engineering-questions:
 
   - id: EQ-01-why
     question: Why does this system work this way?
+    level: repository
     author: Project Owner
     matters-because: >
       The first question a new engineer asks, and the one existing documentation
@@ -61,6 +72,7 @@ engineering-questions:
 
   - id: EQ-02-enforced-rules
     question: What business rules are actually enforced?
+    level: repository
     author: Project Owner
     matters-because: >
       A rule that is documented and not enforced is a liability; a rule enforced
@@ -71,6 +83,7 @@ engineering-questions:
 
   - id: EQ-03-safe-to-change
     question: What could safely be changed?
+    level: repository
     author: Project Owner
     matters-because: >
       The question every estimate depends on. A node nothing depends on is
@@ -82,6 +95,7 @@ engineering-questions:
 
   - id: EQ-04-unsafe-to-change
     question: What cannot safely be changed?
+    level: repository
     author: Project Owner
     matters-because: >
       The inverse is not the same question. Something may be depended upon
@@ -93,6 +107,7 @@ engineering-questions:
 
   - id: EQ-05-decisions-that-matter
     question: Which architectural decisions still matter?
+    level: repository
     author: Project Owner
     matters-because: >
       A decision record corpus nobody prunes becomes a corpus nobody reads.
@@ -108,6 +123,7 @@ engineering-questions:
 
   - id: EQ-06-affected-capabilities
     question: Which capabilities would be affected by this feature?
+    level: repository
     author: Project Owner
     matters-because: >
       The planning question. It is the one question a Director must answer
@@ -118,6 +134,7 @@ engineering-questions:
 
   - id: EQ-07-protecting-invariants
     question: Which invariants protect this behavior?
+    level: repository
     author: Project Owner
     matters-because: >
       Changing behaviour without knowing which guarantees cover it is how
@@ -128,6 +145,7 @@ engineering-questions:
 
   - id: EQ-08-authorization
     question: Who is allowed to perform this operation?
+    level: repository
     author: Project Owner
     matters-because: >
       In any multi-tenant or regulated system this is a correctness question,
@@ -139,6 +157,7 @@ engineering-questions:
 
   - id: EQ-09-unsupported-assumptions
     question: Which engineering assumptions are currently unsupported?
+    level: repository
     author: Project Owner
     matters-because: >
       An assumption nothing supports is the cheapest defect to find and the most

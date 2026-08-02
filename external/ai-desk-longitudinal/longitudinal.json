@@ -1,0 +1,257 @@
+{
+  "repository": "/Users/willy/Localsources/ai-desk",
+  "timeline": [
+    {
+      "step": "t0",
+      "commit": "4b85ca2",
+      "kind": "initial",
+      "proposed": 39,
+      "accepted": 10,
+      "cost": 39,
+      "answered": 1,
+      "total": 9,
+      "states": {
+        "EQ-01-why": "no-data",
+        "EQ-02-enforced-rules": "no-data",
+        "EQ-03-safe-to-change": "partial",
+        "EQ-04-unsafe-to-change": "partial",
+        "EQ-05-decisions-that-matter": "no-data",
+        "EQ-06-affected-capabilities": "answered",
+        "EQ-07-protecting-invariants": "no-data",
+        "EQ-08-authorization": "no-query",
+        "EQ-09-unsupported-assumptions": "no-data"
+      }
+    },
+    {
+      "step": "t1",
+      "commit": "d833545",
+      "kind": "continuous",
+      "proposed": 47,
+      "accepted": 12,
+      "cost": 47,
+      "fullRerun": 91,
+      "retractions": 0,
+      "answered": 1,
+      "total": 9,
+      "states": {
+        "EQ-01-why": "no-data",
+        "EQ-02-enforced-rules": "no-data",
+        "EQ-03-safe-to-change": "partial",
+        "EQ-04-unsafe-to-change": "partial",
+        "EQ-05-decisions-that-matter": "no-data",
+        "EQ-06-affected-capabilities": "partial",
+        "EQ-07-protecting-invariants": "no-data",
+        "EQ-08-authorization": "no-query",
+        "EQ-09-unsupported-assumptions": "answered"
+      }
+    },
+    {
+      "step": "t2",
+      "commit": "cb03440",
+      "kind": "continuous",
+      "proposed": 13,
+      "accepted": 4,
+      "cost": 13,
+      "fullRerun": 110,
+      "retractions": 0,
+      "answered": 1,
+      "total": 9,
+      "states": {
+        "EQ-01-why": "no-data",
+        "EQ-02-enforced-rules": "no-data",
+        "EQ-03-safe-to-change": "partial",
+        "EQ-04-unsafe-to-change": "partial",
+        "EQ-05-decisions-that-matter": "no-data",
+        "EQ-06-affected-capabilities": "partial",
+        "EQ-07-protecting-invariants": "no-data",
+        "EQ-08-authorization": "no-query",
+        "EQ-09-unsupported-assumptions": "answered"
+      }
+    },
+    {
+      "step": "t3",
+      "commit": "9c4cdd0",
+      "kind": "continuous",
+      "proposed": 128,
+      "accepted": 40,
+      "cost": 128,
+      "fullRerun": 216,
+      "retractions": 0,
+      "answered": 1,
+      "total": 9,
+      "states": {
+        "EQ-01-why": "no-data",
+        "EQ-02-enforced-rules": "no-data",
+        "EQ-03-safe-to-change": "partial",
+        "EQ-04-unsafe-to-change": "partial",
+        "EQ-05-decisions-that-matter": "no-data",
+        "EQ-06-affected-capabilities": "partial",
+        "EQ-07-protecting-invariants": "no-data",
+        "EQ-08-authorization": "no-query",
+        "EQ-09-unsupported-assumptions": "answered"
+      }
+    },
+    {
+      "step": "t4",
+      "commit": "1c52a49",
+      "kind": "continuous",
+      "proposed": 34,
+      "accepted": 12,
+      "cost": 34,
+      "fullRerun": 249,
+      "retractions": 0,
+      "answered": 1,
+      "total": 9,
+      "states": {
+        "EQ-01-why": "no-data",
+        "EQ-02-enforced-rules": "no-data",
+        "EQ-03-safe-to-change": "partial",
+        "EQ-04-unsafe-to-change": "partial",
+        "EQ-05-decisions-that-matter": "no-data",
+        "EQ-06-affected-capabilities": "partial",
+        "EQ-07-protecting-invariants": "no-data",
+        "EQ-08-authorization": "no-query",
+        "EQ-09-unsupported-assumptions": "answered"
+      },
+      "drift": {
+        "D-new-knowledge": 81,
+        "D-unsupported-assertion": 3,
+        "D-implementation-without-knowledge": 93,
+        "D-knowledge-without-implementation": 5,
+        "D-invariant-without-enforcement": 29
+      },
+      "reacquired": 249
+    },
+    {
+      "step": "t5",
+      "commit": "80f4a4f",
+      "kind": "continuous",
+      "proposed": 20,
+      "accepted": 5,
+      "cost": 20,
+      "fullRerun": 267,
+      "retractions": 0,
+      "answered": 1,
+      "total": 9,
+      "states": {
+        "EQ-01-why": "no-data",
+        "EQ-02-enforced-rules": "no-data",
+        "EQ-03-safe-to-change": "partial",
+        "EQ-04-unsafe-to-change": "partial",
+        "EQ-05-decisions-that-matter": "no-data",
+        "EQ-06-affected-capabilities": "partial",
+        "EQ-07-protecting-invariants": "no-data",
+        "EQ-08-authorization": "no-query",
+        "EQ-09-unsupported-assumptions": "answered"
+      }
+    },
+    {
+      "step": "t6",
+      "commit": "9228f6c",
+      "kind": "continuous",
+      "proposed": 19,
+      "accepted": 7,
+      "cost": 19,
+      "fullRerun": 287,
+      "retractions": 0,
+      "answered": 1,
+      "total": 9,
+      "states": {
+        "EQ-01-why": "no-data",
+        "EQ-02-enforced-rules": "no-data",
+        "EQ-03-safe-to-change": "partial",
+        "EQ-04-unsafe-to-change": "partial",
+        "EQ-05-decisions-that-matter": "no-data",
+        "EQ-06-affected-capabilities": "partial",
+        "EQ-07-protecting-invariants": "no-data",
+        "EQ-08-authorization": "no-query",
+        "EQ-09-unsupported-assumptions": "answered"
+      }
+    },
+    {
+      "step": "t7",
+      "commit": "8b15fcc",
+      "kind": "continuous",
+      "proposed": 13,
+      "accepted": 3,
+      "cost": 13,
+      "fullRerun": 298,
+      "retractions": 0,
+      "answered": 1,
+      "total": 9,
+      "states": {
+        "EQ-01-why": "no-data",
+        "EQ-02-enforced-rules": "no-data",
+        "EQ-03-safe-to-change": "partial",
+        "EQ-04-unsafe-to-change": "partial",
+        "EQ-05-decisions-that-matter": "no-data",
+        "EQ-06-affected-capabilities": "partial",
+        "EQ-07-protecting-invariants": "no-data",
+        "EQ-08-authorization": "no-query",
+        "EQ-09-unsupported-assumptions": "answered"
+      }
+    },
+    {
+      "step": "t8",
+      "commit": "f2af6ca",
+      "kind": "continuous",
+      "proposed": 0,
+      "accepted": 0,
+      "cost": 0,
+      "fullRerun": 299,
+      "retractions": 0,
+      "answered": 1,
+      "total": 9,
+      "states": {
+        "EQ-01-why": "no-data",
+        "EQ-02-enforced-rules": "no-data",
+        "EQ-03-safe-to-change": "partial",
+        "EQ-04-unsafe-to-change": "partial",
+        "EQ-05-decisions-that-matter": "no-data",
+        "EQ-06-affected-capabilities": "partial",
+        "EQ-07-protecting-invariants": "no-data",
+        "EQ-08-authorization": "no-query",
+        "EQ-09-unsupported-assumptions": "answered"
+      },
+      "drift": {
+        "D-new-knowledge": 95,
+        "D-unsupported-assertion": 3,
+        "D-implementation-without-knowledge": 114,
+        "D-knowledge-without-implementation": 9,
+        "D-invariant-without-enforcement": 30
+      },
+      "reacquired": 299
+    },
+    {
+      "step": "t9",
+      "commit": "97ca033",
+      "kind": "continuous",
+      "proposed": 4,
+      "accepted": 1,
+      "cost": 4,
+      "fullRerun": 302,
+      "retractions": 0,
+      "answered": 1,
+      "total": 9,
+      "states": {
+        "EQ-01-why": "no-data",
+        "EQ-02-enforced-rules": "no-data",
+        "EQ-03-safe-to-change": "partial",
+        "EQ-04-unsafe-to-change": "partial",
+        "EQ-05-decisions-that-matter": "no-data",
+        "EQ-06-affected-capabilities": "partial",
+        "EQ-07-protecting-invariants": "no-data",
+        "EQ-08-authorization": "no-query",
+        "EQ-09-unsupported-assumptions": "answered"
+      },
+      "drift": {
+        "D-new-knowledge": 97,
+        "D-unsupported-assertion": 3,
+        "D-implementation-without-knowledge": 114,
+        "D-knowledge-without-implementation": 9,
+        "D-invariant-without-enforcement": 30
+      },
+      "reacquired": 302
+    }
+  ]
+}
