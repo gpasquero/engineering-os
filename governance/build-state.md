@@ -71,5 +71,6 @@ schema.
 
 ## Repository state
 
-- Branch: `feat/repository-bootstrap`
-- Remote: `github.com/gpasquero/engineering-os`
+- Branch: `main`, published to `github.com/gpasquero/engineering-os`
+- Visibility: **public, with no licence file** — see `ISSUE-0011`, raised to
+  `high` because default copyright makes public code legally unreusable

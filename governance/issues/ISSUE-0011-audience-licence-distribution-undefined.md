@@ -3,10 +3,10 @@ id: ISSUE-0011
 title: Audience, licence and distribution model are undefined
 type: question
 status: open
-severity: medium
+severity: high
 created: 2026-08-02
 updated: 2026-08-02
-blocks: [M12]
+blocks: [M2, M12]
 evidence:
   - sources/handoff/README.md
   - sources/handoff/BOOTSTRAP.md
@@ -31,7 +31,19 @@ access control over the knowledge model (`ISSUE-0004`).
 
 - `sources/handoff/BOOTSTRAP.md` states the ambition to build "the best AI software engineering
   system ever built", which suggests a public artifact, but does not say so.
-- The repository has no remote configured.
+- **The repository is published at `github.com/gpasquero/engineering-os` with
+  visibility `PUBLIC` and no licence file.** This was confirmed against the
+  GitHub API, not assumed.
+
+## Why the severity was raised
+
+Publishing publicly without a licence does not make the work open. Under default
+copyright, no one may legally copy, modify or reuse it — the opposite of the
+apparent intent, and a worse position than either a deliberate licence or a
+private repository.
+
+The distribution question is therefore no longer a M12 concern only. It has been
+answered de facto by publication, and the licence gap is live now.
 
 ## Options
 

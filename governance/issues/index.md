@@ -37,6 +37,7 @@ and `ADR-0010`.
 | [0014](ISSUE-0014-model-changes-directory-missing.md) | `model/changes/` absent from the canonical tree | inconsistency | high |
 | [0015](ISSUE-0015-path-resolution-ambiguity.md) | Skill-relative and target-relative paths not distinguished | inconsistency | high |
 | [0030](ISSUE-0030-manifest-serves-two-audiences.md) | `MANIFEST.yaml` serves two audiences | question | high |
+| [0011](ISSUE-0011-audience-licence-distribution-undefined.md) | Repository is public with no licence | question | high |
 | [0018](ISSUE-0018-assertion-statuses-duplicated.md) | Assertion status vocabulary defined twice | inconsistency | medium |
 | [0019](ISSUE-0019-evidence-record-defaults-diverge.md) | Two minimum evidence records disagree | inconsistency | low |
 
@@ -88,7 +89,7 @@ and `ADR-0010`.
 | ID | Title | Type | Severity |
 |---|---|---|---|
 | [0001](ISSUE-0001-runtime-target-undefined.md) | The agent runtime target is undefined | question | high |
-| [0011](ISSUE-0011-audience-licence-distribution-undefined.md) | Audience, licence and distribution model | question | medium |
+| [0011](ISSUE-0011-audience-licence-distribution-undefined.md) | Audience, licence and distribution model | question | high |
 
 ### M13 — Knowledge Packages and federation
 
