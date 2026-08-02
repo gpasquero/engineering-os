@@ -2,7 +2,7 @@
 id: ISSUE-0063
 title: The minimum set of classifications that must be serialized is unstated
 type: gap
-status: open
+status: deferred
 severity: high
 created: 2026-08-02
 updated: 2026-08-02
@@ -12,9 +12,14 @@ evidence:
   - governance/adr/ADR-0038-four-questions-for-every-new-artifact-type.md
   - governance/adr/ADR-0001-repository-is-persistent-memory.md
 resolved-by: null
+defers-to: [M2]
+debt: architectural
 ---
 
 # ISSUE-0063 — The minimum serialized classification set is unstated
+
+> **Architectural debt** (`ADR-0062`). Deferred because it is not needed to
+> build the next deliverable. Reopen when implementation requires it.
 
 ## Statement
 

@@ -35,6 +35,8 @@ Read in this order. Do not skip, and do not begin work before finishing.
 6. `governance/documentation-system.md` — how to record what you learn.
 7. `governance/roadmap.md` — the milestone sequence.
 8. `governance/build-state.md` — what exists today and what is next.
+   Then `governance/roadmap.md`'s build sequence: the project builds in a
+   vertical slice, not milestone by milestone (`ADR-0062`).
 9. `governance/issues/index.md` — every open question, especially `blocking`.
 10. `governance/adr/README.md` — the decision index; read any ADR relevant to
     the current milestone.
@@ -49,12 +51,13 @@ requires the original inputs.
   redirects.
 - Before assuming an answer to anything, search `governance/issues/`. If an
   issue is `open`, respect it as open — do not quietly decide it.
+- **Ask first: "do we need to resolve this in order to build the next
+  deliverable?"** (`ADR-0062`). If the answer is no, record it as architectural
+  debt — a `deferred` issue — and keep building. Building stops only for a real
+  contradiction.
 - **Position every new concept in the Metamodel before introducing a new
-  artifact type** (`ADR-0035`), and answer four questions before it is accepted
-  (`ADR-0038`): which layer owns it; is it authoritative or derived; what
-  metamodel entity does it instantiate; which compiler phase consumes or
-  produces it. **An unanswerable question is a rejection, not a gap to fill
-  later.** This inverts how the project worked for its first
+  artifact type** (`ADR-0035`). Evaluation questions belong to the Gate that
+  declares them, not to every artifact (`ADR-0055`). This inverts how the project worked for its first
   eleven sessions, and it is the structural remedy for naming after the fact —
   the defect behind five vocabulary collisions. This rule belongs in a
   `ModelingPolicy` once M3 exists; until then it lives here.

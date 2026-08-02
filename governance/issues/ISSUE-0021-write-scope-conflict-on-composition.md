@@ -2,7 +2,7 @@
 id: ISSUE-0021
 title: Write scope conflicts when reconstruction composes with implementation
 type: risk
-status: open
+status: deferred
 severity: high
 created: 2026-08-02
 updated: 2026-08-02
@@ -12,9 +12,14 @@ evidence:
   - imports/ontology-driven-development-v2/SKILL.md
   - imports/principal-engineering-skill/SKILL.md
 resolved-by: null
+defers-to: [M3]
+debt: architectural
 ---
 
 # ISSUE-0021 — Write scope conflicts on composition
+
+> **Architectural debt** (`ADR-0062`). Deferred because it is not needed to
+> build the next deliverable. Reopen when implementation requires it.
 
 ## Statement
 

@@ -2,7 +2,7 @@
 id: ISSUE-0014
 title: model/changes/ is written to but absent from the canonical model tree
 type: inconsistency
-status: open
+status: deferred
 severity: high
 created: 2026-08-02
 updated: 2026-08-02
@@ -11,9 +11,14 @@ evidence:
   - imports/ontology-driven-development-v2/SKILL.md
   - imports/reconstruct-system-knowledge/references/repository-structure.md
 resolved-by: null
+defers-to: [M2]
+debt: architectural
 ---
 
 # ISSUE-0014 — `model/changes/` is absent from the canonical model tree
+
+> **Architectural debt** (`ADR-0062`). Deferred because it is not needed to
+> build the next deliverable. Reopen when implementation requires it.
 
 ## Statement
 

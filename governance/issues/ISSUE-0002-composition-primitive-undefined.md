@@ -2,7 +2,7 @@
 id: ISSUE-0002
 title: The mechanism by which a workflow invokes a skill is undefined
 type: question
-status: open
+status: deferred
 severity: blocking
 created: 2026-08-02
 updated: 2026-08-02
@@ -12,9 +12,14 @@ evidence:
   - governance/design/workflow-catalog.md
   - imports/principal-engineering-skill/SKILL.md
 resolved-by: null
+defers-to: [M8]
+debt: architectural
 ---
 
 # ISSUE-0002 — The composition primitive is undefined
+
+> **Architectural debt** (`ADR-0062`). Deferred because it is not needed to
+> build the next deliverable. Reopen when implementation requires it.
 
 ## Statement
 

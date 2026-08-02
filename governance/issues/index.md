@@ -9,8 +9,8 @@ related: [ISSUE-0037]
 
 # Issue Index
 
-**71 recorded · 23 open · 47 resolved · 1 deferred.** Highest allocated ID:
-`ISSUE-0071`.
+**73 recorded · 2 open · 48 resolved · 23 deferred.** Highest allocated ID:
+`ISSUE-0073`.
 
 > **Hand-maintained projection.** Under `ADR-0016` this is a projection of issue
 > front matter, which is authoritative. No generator exists yet (`ISSUE-0036`),
@@ -19,85 +19,46 @@ related: [ISSUE-0037]
 > are now computed from the files before each rewrite. The issue files win in
 > any disagreement.
 
-## Blocking — the named milestone cannot start
+## Open
 
-| ID | Title | Blocks |
+Only two issues are open. Both are non-architectural.
+
+| ID | Title | Why open |
 |---|---|---|
-| [0071](ISSUE-0071-how-discovered-knowledge-is-produced.md) | How discovered knowledge is produced; can discovery be deterministic? | **M2**, M9 |
-| [0002](ISSUE-0002-composition-primitive-undefined.md) | How a workflow invokes a skill is undefined | M8 |
-| [0006](ISSUE-0006-scenario-testing-method-undefined.md) | How a prompt-based methodology is tested is undefined | M10 |
+| [0011](ISSUE-0011-audience-licence-distribution-undefined.md) | Repository is public with no licence | Legal exposure, not a design question |
+| [0037](ISSUE-0037-hand-maintained-projections-are-debt.md) | Hand-maintained projections | Operational debt; B5 discharges it |
 
-The metamodel must represent Principles as semantic entities extracted by the
-compiler, and whether extraction can be deterministic is undecided
-(`ISSUE-0071`). `ISSUE-0063` gates the front-matter contracts.
+## Architectural debt
 
-## Open, by milestone
+**23 issues deferred under `ADR-0062`.** Each is a real question that does not
+block the next deliverable. They are reopened when implementation requires them,
+not on a schedule.
 
-### M2 — Foundational contracts, manifests and the compiler interface
-
-| ID | Title | Type | Severity |
-|---|---|---|---|
-| [0049](ISSUE-0049-state-machine-specification-location.md) | Where state machine specifications live | question | high |
-| [0071](ISSUE-0071-how-discovered-knowledge-is-produced.md) | How discovered knowledge is produced | question | blocking |
-| [0063](ISSUE-0063-minimum-serialized-classifications.md) | The minimum serialized classification set | gap | high |
-| [0048](ISSUE-0048-no-mechanism-for-correcting-an-active-adr.md) | No mechanism for correcting part of an `Active` ADR | gap | medium |
-| [0007](ISSUE-0007-versioning-granularity-undefined.md) | Versioning granularity; what identifies a revision | question | high |
-| [0011](ISSUE-0011-audience-licence-distribution-undefined.md) | Repository is public with no licence | question | high |
-| [0013](ISSUE-0013-three-conflicting-impact-analysis-templates.md) | Three conflicting impact-analysis templates | inconsistency | high |
-| [0014](ISSUE-0014-model-changes-directory-missing.md) | `model/changes/` absent from the canonical tree | inconsistency | high |
-| [0015](ISSUE-0015-path-resolution-ambiguity.md) | Skill-relative and target-relative paths not distinguished | inconsistency | high |
-| [0018](ISSUE-0018-assertion-statuses-duplicated.md) | Assertion status vocabulary defined twice | inconsistency | medium |
-| [0019](ISSUE-0019-evidence-record-defaults-diverge.md) | Two minimum evidence records disagree | inconsistency | low |
-
-### M3 — Shared policies
-
-| ID | Title | Type | Severity |
-|---|---|---|---|
-| [0010](ISSUE-0010-definition-of-done-missing.md) | Definition of Done asserted but never stated | gap | high |
-| [0020](ISSUE-0020-three-conflicting-autonomy-policies.md) | Three incompatible autonomy policies | inconsistency | high |
-| [0021](ISSUE-0021-write-scope-conflict-on-composition.md) | Write scope conflicts on composition | risk | high |
-| [0027](ISSUE-0027-inherited-decisions-lack-context.md) | Ten inherited decisions have no rationale | gap | medium |
-
-### M4 — Discovery skills
-
-| ID | Title | Type | Severity |
-|---|---|---|---|
-| [0017](ISSUE-0017-phase-models-do-not-reconcile.md) | Phase models do not reconcile with the skill catalogue | inconsistency | high |
-| [0008](ISSUE-0008-greenfield-scope-undefined.md) | Whether greenfield development is in scope | question | medium |
-| [0025](ISSUE-0025-skill-decomposition-is-a-name-list.md) | Skill decomposition is only a list of names | gap | medium |
-
-### M8 — Workflows
-
-| ID | Title | Type | Severity |
-|---|---|---|---|
-| [0002](ISSUE-0002-composition-primitive-undefined.md) | The composition primitive is undefined | question | blocking |
-| [0016](ISSUE-0016-three-change-type-taxonomies.md) | Three incompatible change-type taxonomies | inconsistency | high |
-
-### M9 — Schemas, validation and the reference implementation
-
-| ID | Title | Type | Severity |
-|---|---|---|---|
-| [0037](ISSUE-0037-hand-maintained-projections-are-debt.md) | Hand-maintained projections are transitional debt | risk | high |
-| [0071](ISSUE-0071-how-discovered-knowledge-is-produced.md) | How discovered knowledge is produced | question | blocking |
-
-### M10 — Scenario tests
-
-| ID | Title | Type | Severity |
-|---|---|---|---|
-| [0006](ISSUE-0006-scenario-testing-method-undefined.md) | How to test a prompt-based methodology | question | blocking |
-
-### M12 — Documentation, adapters and v1
-
-| ID | Title | Type | Severity |
-|---|---|---|---|
-| [0001](ISSUE-0001-runtime-target-undefined.md) | The agent runtime target is undefined | question | high |
-| [0011](ISSUE-0011-audience-licence-distribution-undefined.md) | Audience, licence and distribution model | question | high |
-
-## Deferred
-
-| ID | Title | Defers to |
+| ID | Title | Reopen at |
 |---|---|---|
-| [0036](ISSUE-0036-reference-implementation-language.md) | Reference implementation language | M9 |
+| [0073](ISSUE-0073-operational-knowledge-versus-evidence-hierarchy.md) | "runtime" names two things; Operational Knowledge versus the evidence hierarchy | **B1** — most likely to be met early |
+| [0007](ISSUE-0007-versioning-granularity-undefined.md) | What identifies a revision | **B1** — `ArtifactRevision` already says "undefined" |
+| [0072](ISSUE-0072-how-artifacts-declare-principles.md) | How an artifact declares the Principles it establishes | B1–B3 |
+| [0063](ISSUE-0063-minimum-serialized-classifications.md) | Minimum serialized classification set | B3 |
+| [0049](ISSUE-0049-state-machine-specification-location.md) | Where state machine specifications live | B1 |
+| [0048](ISSUE-0048-no-mechanism-for-correcting-an-active-adr.md) | No correction mechanism for an `Active` ADR | B3 |
+| [0018](ISSUE-0018-assertion-statuses-duplicated.md) | Assertion status vocabulary defined twice | B2 |
+| [0019](ISSUE-0019-evidence-record-defaults-diverge.md) | Two minimum evidence records disagree | B2 |
+| [0013](ISSUE-0013-three-conflicting-impact-analysis-templates.md) | Three conflicting impact-analysis templates | M5 |
+| [0014](ISSUE-0014-model-changes-directory-missing.md) | `model/changes/` absent from the canonical tree | M5 |
+| [0015](ISSUE-0015-path-resolution-ambiguity.md) | Skill-relative versus target-relative paths | M4 |
+| [0027](ISSUE-0027-inherited-decisions-lack-context.md) | Ten inherited decisions have no rationale | B2 (OWL) |
+| [0010](ISSUE-0010-definition-of-done-missing.md) | Definition of Done never stated | M3 |
+| [0020](ISSUE-0020-three-conflicting-autonomy-policies.md) | Three incompatible autonomy policies | M3 |
+| [0021](ISSUE-0021-write-scope-conflict-on-composition.md) | Write scope conflicts on composition | M3 |
+| [0008](ISSUE-0008-greenfield-scope-undefined.md) | Whether greenfield is in scope | M4 |
+| [0017](ISSUE-0017-phase-models-do-not-reconcile.md) | Phase models versus the skill catalogue | M4 |
+| [0025](ISSUE-0025-skill-decomposition-is-a-name-list.md) | Skill decomposition is a name list | M4 |
+| [0002](ISSUE-0002-composition-primitive-undefined.md) | The composition primitive | M8 |
+| [0016](ISSUE-0016-three-change-type-taxonomies.md) | Three change-type taxonomies | M8 |
+| [0006](ISSUE-0006-scenario-testing-method-undefined.md) | How to test a prompt-based methodology | M10 |
+| [0001](ISSUE-0001-runtime-target-undefined.md) | The agent runtime target | M12 |
+| [0036](ISSUE-0036-reference-implementation-language.md) | Reference implementation language | **B5** |
 
 ## Resolved
 
@@ -150,3 +111,4 @@ compiler, and whether extraction can be deterministic is undecided
 | [0068](ISSUE-0068-compiler-phase-question-conflicts-with-separation.md) | Compiler-phase question versus separation | `ADR-0055` |
 | [0069](ISSUE-0069-level-and-process-reused.md) | "Level" and "Process" reused | `ADR-0057` |
 | [0070](ISSUE-0070-are-principles-a-first-class-artifact-type.md) | Are Principles an artifact type? | `ADR-0058` |
+| [0071](ISSUE-0071-how-discovered-knowledge-is-produced.md) | How discovered knowledge is produced | `ADR-0060` |

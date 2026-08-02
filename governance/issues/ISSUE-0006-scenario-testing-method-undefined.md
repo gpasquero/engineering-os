@@ -2,7 +2,7 @@
 id: ISSUE-0006
 title: How a prompt-based methodology is tested is undefined
 type: question
-status: open
+status: deferred
 severity: blocking
 created: 2026-08-02
 updated: 2026-08-02
@@ -10,9 +10,14 @@ blocks: [M10]
 evidence:
   - sources/handoff/ROADMAP.md
 resolved-by: null
+defers-to: [M10]
+debt: architectural
 ---
 
 # ISSUE-0006 — How to test a prompt-based methodology is undefined
+
+> **Architectural debt** (`ADR-0062`). Deferred because it is not needed to
+> build the next deliverable. Reopen when implementation requires it.
 
 ## Statement
 

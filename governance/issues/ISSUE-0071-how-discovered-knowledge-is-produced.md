@@ -2,7 +2,7 @@
 id: ISSUE-0071
 title: How discovered knowledge is produced, and whether discovery can be deterministic
 type: question
-status: open
+status: resolved
 severity: blocking
 created: 2026-08-02
 updated: 2026-08-02
@@ -11,7 +11,7 @@ evidence:
   - governance/adr/ADR-0059-authored-versus-discovered-knowledge.md
   - governance/adr/ADR-0058-principles-are-semantic-entities-not-artifacts.md
   - governance/adr/ADR-0020-artifact-taxonomy-and-revision-lifecycle-are-independent.md
-resolved-by: null
+resolved-by: ADR-0060
 ---
 
 # ISSUE-0071 — How discovered knowledge is produced
@@ -83,8 +83,29 @@ That preserves every existing rule. It also means `ADR-0059`'s more ambitious
 discoveries are not compiler features at all — which may or may not be the
 intent.
 
-## Resolution criteria
+## Resolution
 
-An ADR stating which discoveries are deterministic compilation and which are
-agent-assisted authoring, how discovered assertions are validated, and whether
-confidence is represented in the Canonical Knowledge Model.
+`ADR-0060`, **adopting the reading recorded above.**
+
+> The word "discovery" conflates two fundamentally different activities.
+
+**Mechanical Discovery** — derivable exclusively from authoritative artifacts by
+deterministic algorithm. Traceability, dependency graphs, impact graphs,
+registry projections, transitive relationships, consistency checks, ontology
+expansion, validation reports. **Belongs to the Knowledge Compiler.**
+
+**Interpretive Discovery** — requiring interpretation, analogy, abstraction or
+architectural judgment. Architectural patterns, recurring design principles,
+semantic clusters, candidate abstractions, emergent concepts. **Is Authoring.**
+Its output is a proposal entering the normal workflow: reviewed, accepted or
+rejected, authoritative only after acceptance, in the Canonical Knowledge Model
+only after compilation.
+
+**No principle requires modification.** The compiler stays deterministic,
+authoring stays non-deterministic, acceptance stays the trust boundary, and the
+Canonical Knowledge Model stays mechanically reproducible.
+
+Second time an issue's own suggested reading was adopted, after `ISSUE-0045`.
+
+Newly open: how an artifact **declares** the Principles it establishes
+(`ISSUE-0072`), since extraction is mechanical only where declaration exists.

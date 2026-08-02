@@ -2,7 +2,7 @@
 id: ISSUE-0049
 title: Where state machine specifications live, and their boundary with shared/vocabularies/
 type: question
-status: open
+status: deferred
 severity: high
 created: 2026-08-02
 updated: 2026-08-02
@@ -12,9 +12,14 @@ evidence:
   - governance/adr/ADR-0027-state-machine-registration-model.md
   - governance/adr/ADR-0025-every-state-belongs-to-exactly-one-state-machine.md
 resolved-by: null
+defers-to: [M2]
+debt: architectural
 ---
 
 # ISSUE-0049 — Where state machine specifications live
+
+> **Architectural debt** (`ADR-0062`). Deferred because it is not needed to
+> build the next deliverable. Reopen when implementation requires it.
 
 ## Statement
 

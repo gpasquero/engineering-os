@@ -2,7 +2,7 @@
 id: ISSUE-0008
 title: Whether greenfield development is in scope is undefined
 type: question
-status: open
+status: deferred
 severity: medium
 created: 2026-08-02
 updated: 2026-08-02
@@ -12,9 +12,14 @@ evidence:
   - imports/ontology-driven-development-v2/SKILL.md
   - imports/principal-engineering-skill/SKILL.md
 resolved-by: null
+defers-to: [M4]
+debt: architectural
 ---
 
 # ISSUE-0008 — Whether greenfield development is in scope is undefined
+
+> **Architectural debt** (`ADR-0062`). Deferred because it is not needed to
+> build the next deliverable. Reopen when implementation requires it.
 
 ## Statement
 

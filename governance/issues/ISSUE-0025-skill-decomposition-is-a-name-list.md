@@ -2,7 +2,7 @@
 id: ISSUE-0025
 title: Skill decomposition is recorded as complete but is only a list of names
 type: gap
-status: open
+status: deferred
 severity: medium
 created: 2026-08-02
 updated: 2026-08-02
@@ -12,9 +12,14 @@ evidence:
   - governance/design/skill-catalog.md
   - governance/design/workflow-catalog.md
 resolved-by: null
+defers-to: [M4]
+debt: architectural
 ---
 
 # ISSUE-0025 — Skill decomposition is a name list, not a decomposition
+
+> **Architectural debt** (`ADR-0062`). Deferred because it is not needed to
+> build the next deliverable. Reopen when implementation requires it.
 
 ## Statement
 

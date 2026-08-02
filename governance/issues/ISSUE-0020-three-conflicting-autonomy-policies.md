@@ -2,7 +2,7 @@
 id: ISSUE-0020
 title: The three prototypes state incompatible autonomy policies
 type: inconsistency
-status: open
+status: deferred
 severity: high
 created: 2026-08-02
 updated: 2026-08-02
@@ -12,9 +12,14 @@ evidence:
   - imports/ontology-driven-development-v2/SKILL.md
   - imports/principal-engineering-skill/SKILL.md
 resolved-by: null
+defers-to: [M3]
+debt: architectural
 ---
 
 # ISSUE-0020 — Three incompatible autonomy policies
+
+> **Architectural debt** (`ADR-0062`). Deferred because it is not needed to
+> build the next deliverable. Reopen when implementation requires it.
 
 ## Statement
 

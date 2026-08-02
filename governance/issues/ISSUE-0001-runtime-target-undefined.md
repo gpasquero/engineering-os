@@ -2,7 +2,7 @@
 id: ISSUE-0001
 title: The agent runtime target of the Engineering OS is undefined
 type: question
-status: open
+status: deferred
 severity: high
 created: 2026-08-02
 updated: 2026-08-02
@@ -13,9 +13,14 @@ evidence:
   - imports/reconstruct-system-knowledge/README.md
   - imports/ontology-driven-development-v2/README.md
 resolved-by: null
+defers-to: [M12]
+debt: architectural
 ---
 
 # ISSUE-0001 — The agent runtime target is undefined
+
+> **Architectural debt** (`ADR-0062`). Deferred because it is not needed to
+> build the next deliverable. Reopen when implementation requires it.
 
 ## Statement
 

@@ -2,7 +2,7 @@
 id: ISSUE-0015
 title: Skill-relative and target-relative paths are not distinguished
 type: inconsistency
-status: open
+status: deferred
 severity: high
 created: 2026-08-02
 updated: 2026-08-02
@@ -10,9 +10,14 @@ blocks: [M2]
 evidence:
   - imports/ontology-driven-development-v2/SKILL.md
 resolved-by: null
+defers-to: [M2]
+debt: architectural
 ---
 
 # ISSUE-0015 — Skill-relative and target-relative paths are not distinguished
+
+> **Architectural debt** (`ADR-0062`). Deferred because it is not needed to
+> build the next deliverable. Reopen when implementation requires it.
 
 ## Statement
 

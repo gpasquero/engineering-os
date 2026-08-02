@@ -2,7 +2,7 @@
 id: ISSUE-0017
 title: The three prototype phase models do not reconcile with the skill catalogue
 type: inconsistency
-status: open
+status: deferred
 severity: high
 created: 2026-08-02
 updated: 2026-08-02
@@ -13,9 +13,14 @@ evidence:
   - imports/reconstruct-system-knowledge/SKILL.md
   - governance/design/skill-catalog.md
 resolved-by: null
+defers-to: [M4]
+debt: architectural
 ---
 
 # ISSUE-0017 — Phase models do not reconcile with the skill catalogue
+
+> **Architectural debt** (`ADR-0062`). Deferred because it is not needed to
+> build the next deliverable. Reopen when implementation requires it.
 
 ## Statement
 

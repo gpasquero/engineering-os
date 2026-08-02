@@ -2,7 +2,7 @@
 id: ISSUE-0007
 title: Versioning granularity and compatibility policy are undefined
 type: question
-status: open
+status: deferred
 severity: high
 created: 2026-08-02
 updated: 2026-08-02
@@ -11,9 +11,14 @@ evidence:
   - sources/handoff/BOOTSTRAP.md
   - sources/handoff/DECISIONS.md
 resolved-by: null
+defers-to: [M2]
+debt: architectural
 ---
 
 # ISSUE-0007 — Versioning granularity is undefined
+
+> **Architectural debt** (`ADR-0062`). Deferred because it is not needed to
+> build the next deliverable. Reopen when implementation requires it.
 
 ## Statement
 

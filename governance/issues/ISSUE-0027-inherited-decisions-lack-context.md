@@ -2,7 +2,7 @@
 id: ISSUE-0027
 title: Ten inherited decisions are accepted but have no recorded rationale
 type: gap
-status: open
+status: deferred
 severity: medium
 created: 2026-08-02
 updated: 2026-08-02
@@ -11,9 +11,14 @@ evidence:
   - sources/handoff/DECISIONS.md
   - governance/inherited-decisions.md
 resolved-by: null
+defers-to: [M3]
+debt: architectural
 ---
 
 # ISSUE-0027 — Inherited decisions have no recorded rationale
+
+> **Architectural debt** (`ADR-0062`). Deferred because it is not needed to
+> build the next deliverable. Reopen when implementation requires it.
 
 ## Statement
 

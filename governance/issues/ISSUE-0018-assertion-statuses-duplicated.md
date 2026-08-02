@@ -2,7 +2,7 @@
 id: ISSUE-0018
 title: The assertion status vocabulary is defined in two places
 type: inconsistency
-status: open
+status: deferred
 severity: medium
 created: 2026-08-02
 updated: 2026-08-02
@@ -12,9 +12,14 @@ evidence:
   - imports/reconstruct-system-knowledge/references/evidence-model.md
   - sources/handoff/DECISIONS.md
 resolved-by: null
+defers-to: [M2]
+debt: architectural
 ---
 
 # ISSUE-0018 — The assertion status vocabulary is duplicated
+
+> **Architectural debt** (`ADR-0062`). Deferred because it is not needed to
+> build the next deliverable. Reopen when implementation requires it.
 
 ## Statement
 

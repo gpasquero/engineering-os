@@ -592,7 +592,7 @@ engineering-os/
 ├── workflows/                  M8 — one directory per workflow
 ├── model-spec/                 M2 — specification + scaffold of a Layer B tree
 ├── model/
-│   └── metamodel/              M2 — LAYER A, the Engineering OS Metamodel
+│   └── metamodel/              LAYER A — the Engineering OS Metamodel (exists)
 ├── templates/                  Document templates used by skills
 ├── schemas/                    M9 — JSON Schema for machine validation
 ├── validation/                 M9 — rules and scripts
@@ -658,9 +658,13 @@ These are recorded as issues and must not be silently assumed:
 
 - `ISSUE-0049` — where state machine specifications live, and their boundary
   with `shared/vocabularies/`. Blocks `shared/vocabularies/`.
-- `ISSUE-0071` — how discovered knowledge is produced, and whether discovery can
-  be deterministic. **Blocks the metamodel and M9.**
-- `ISSUE-0063` — the minimum set of classifications that must be serialized.
+**Under `ADR-0062` these are architectural debt, not blockers.** They are
+reopened when implementation requires them. See `governance/issues/index.md`.
+
+- `ISSUE-0073` — "runtime" names both a compiler artifact kind and target-system
+  telemetry. Most likely to be met while building the metamodel.
+- `ISSUE-0007` — what identifies a revision.
+- `ISSUE-0072` — how an artifact declares the Principles it establishes.
 - `ISSUE-0048` — no mechanism for correcting part of an `Active` ADR.
 - `ISSUE-0007` — versioning granularity, now also covering what identifies a
   **revision**.

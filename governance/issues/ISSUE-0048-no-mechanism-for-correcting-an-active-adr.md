@@ -2,7 +2,7 @@
 id: ISSUE-0048
 title: The documentation system has no mechanism for correcting part of an Active ADR
 type: gap
-status: open
+status: deferred
 severity: medium
 created: 2026-08-02
 updated: 2026-08-02
@@ -12,9 +12,14 @@ evidence:
   - governance/adr/ADR-0026-artifact-revision-lifecycle.md
   - governance/adr/ADR-0025-every-state-belongs-to-exactly-one-state-machine.md
 resolved-by: null
+defers-to: [M2]
+debt: architectural
 ---
 
 # ISSUE-0048 — No mechanism for correcting part of an Active ADR
+
+> **Architectural debt** (`ADR-0062`). Deferred because it is not needed to
+> build the next deliverable. Reopen when implementation requires it.
 
 ## Statement
 

@@ -16,7 +16,7 @@ same session the decision is made.
 > a rule exists; the rule that must be followed lives in a Policy under
 > `shared/policies/`. Agents consume policies; humans read ADRs for rationale.
 
-**Highest allocated ID: `ADR-0059`.** IDs are sequential and never reused.
+**Highest allocated ID: `ADR-0062`.** IDs are sequential and never reused.
 
 > This index table is a hand-maintained projection of ADR front matter. It is
 > listed in the transitional-debt register, `ISSUE-0037`.
@@ -81,6 +81,13 @@ Read these before designing anything that produces an artifact:
   by the compiler.
 - **`ADR-0059`** — **authored versus discovered knowledge.** Maximize the
   discovered; it is why the compiler is worth building.
+- **`ADR-0060`** — **Mechanical Discovery is compilation; Interpretive Discovery
+  is authoring.**
+- **`ADR-0061`** — **four categories of knowledge.** The Knowledge Compiler is
+  not an intelligence.
+- **`ADR-0062`** — **architecture through implementation.** Build first; defer
+  what does not block the next deliverable. **Read this before opening an
+  issue.**
 - **`ADR-0017`** — reference architecture, not reference implementation.
 - **`ADR-0019`** — Knowledge Packages are a published interface.
 
@@ -147,6 +154,9 @@ Read these before designing anything that produces an artifact:
 | [ADR-0057](ADR-0057-naming-qualification.md) | **Naming Qualification** | accepted | ISSUE-0069 |
 | [ADR-0058](ADR-0058-principles-are-semantic-entities-not-artifacts.md) | **Principles are semantic entities, not artifacts** | accepted | ISSUE-0070 |
 | [ADR-0059](ADR-0059-authored-versus-discovered-knowledge.md) | **Authored versus discovered knowledge** | accepted | — |
+| [ADR-0060](ADR-0060-mechanical-and-interpretive-discovery.md) | **Mechanical and Interpretive Discovery** | accepted | ISSUE-0071 |
+| [ADR-0061](ADR-0061-four-categories-of-knowledge.md) | **Four categories of knowledge** | accepted | — |
+| [ADR-0062](ADR-0062-architecture-through-implementation.md) | **Architecture through implementation** | accepted | — |
 
 ## Supersessions
 
@@ -179,6 +189,7 @@ wrong. There is no front-matter mechanism for this — `ISSUE-0048`.
 | `ADR-0010` | `ADR-0037` | Layer terminology only. `ADR-0010` used "Layer A" for the methodology; Layer A is now the Metamodel. Its decision — knowledge is repository-local, environments federate — is untouched and remains `Active`. |
 | `ADR-0041` | `ADR-0048` | The field list. Eight fields become ten: `value domain` becomes `value model`, `authoritative specification` is dropped, and assignment semantics, serialization strategy and validation rules are added. The registration decision is untouched and remains `Active`. |
 | `ADR-0037` | `ADR-0039` | The universality claim. "Every artifact belongs to exactly one layer" should read: every *semantic* artifact does; cross-cutting artifacts belong to none. The four layers are untouched and remain `Active`. |
+| `ADR-0058` | `ADR-0060` | "Extracts" means extracting a *declaration*, which is mechanical. **Recognising** a recurring principle is Interpretive Discovery, and therefore authoring rather than compilation. |
 | `ADR-0031` | `ADR-0032` | The opening definition. "A Registry is an authoritative index" should read: a Registry *Specification* is authoritative; a Registry *Projection* is the derived index. The pattern is untouched and remains `Active`. |
 
 ## Rules

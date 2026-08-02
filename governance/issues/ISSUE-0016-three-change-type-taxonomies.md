@@ -2,7 +2,7 @@
 id: ISSUE-0016
 title: Three incompatible taxonomies of change type were inherited
 type: inconsistency
-status: open
+status: deferred
 severity: high
 created: 2026-08-02
 updated: 2026-08-02
@@ -11,9 +11,14 @@ evidence:
   - governance/design/workflow-catalog.md
   - imports/ontology-driven-development-v2/SKILL.md
 resolved-by: null
+defers-to: [M8]
+debt: architectural
 ---
 
 # ISSUE-0016 — Three incompatible change-type taxonomies
+
+> **Architectural debt** (`ADR-0062`). Deferred because it is not needed to
+> build the next deliverable. Reopen when implementation requires it.
 
 ## Statement
 

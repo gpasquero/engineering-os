@@ -2,7 +2,7 @@
 id: ISSUE-0013
 title: Three conflicting impact-analysis templates were inherited
 type: inconsistency
-status: open
+status: deferred
 severity: high
 created: 2026-08-02
 updated: 2026-08-02
@@ -12,9 +12,14 @@ evidence:
   - imports/principal-engineering-skill/templates/impact-analysis.md
   - imports/ontology-driven-development-v2/SKILL.md
 resolved-by: null
+defers-to: [M2]
+debt: architectural
 ---
 
 # ISSUE-0013 — Three conflicting impact-analysis templates
+
+> **Architectural debt** (`ADR-0062`). Deferred because it is not needed to
+> build the next deliverable. Reopen when implementation requires it.
 
 ## Statement
 
