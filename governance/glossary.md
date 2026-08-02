@@ -290,18 +290,31 @@ governance artifacts — inputs to the Engineering OS process, not part of any
 target domain's semantic model. Their Semantic Layer is `None (Not Applicable)`.
 
 **Architectural Dimension** — a **first-class semantic entity** defining one
-independent axis of classification. Not merely a taxonomy (`ADR-0041`). Each
-declares identifier, purpose, governed entity types, value domain, cardinality,
-constraints, relationships to other dimensions, and its authoritative
-specification.
+independent axis of classification. Not merely a taxonomy (`ADR-0041`).
+
+**Dimensions must be specified before they can be instantiated.** A
+**`DimensionSpecification`** is a first-class metamodel entity declaring ten
+fields: identifier, purpose, governed entity types, **value model**,
+**assignment semantics**, cardinality, constraints, relationships,
+**serialization strategy**, **validation rules** (`ADR-0048`). Every Dimension
+Assignment instantiates one.
+
+> **Dimensions are a scarce architectural resource. Creating one requires an
+> ADR** (`ADR-0049`). A concept becomes a Dimension only if all five conditions
+> hold: it classifies many independent artifact types; its values are
+> **orthogonal to other classifications**; it evolves independently; it is
+> useful for querying, navigation or validation; and multiple values exist
+> across repository artifacts. Otherwise it is modelled as metadata, a property,
+> a relationship, or a dedicated metamodel entity.
 
 **Dimensions are added by registration, never by modifying compiler logic** — a
 **Dimension Registry Specification** (authoritative) with a generated
 **Dimension Registry Projection**, following the Registry Pattern.
 
-Examples: Semantic Layer · Artifact Taxonomy · Lifecycle · Governance Status ·
-Ownership · Authority · Visibility · Compilation Phase. Four remain undefined —
-`ISSUE-0062`.
+Candidates: Semantic Layer · Artifact Taxonomy · Lifecycle · Compilation Phase ·
+Abstraction Level · Governance Status · Ownership · Authority · Visibility ·
+Representation. **None has been evaluated against the five conditions** —
+`ISSUE-0065`.
 
 > **Independence is not isolation** (`ADR-0044`). Dimension *values* are never
 > derived from one another, but dimensions **may** declare semantic
@@ -359,6 +372,23 @@ types rather than flattening them into object properties.
 > semantic position in the knowledge architecture. No renaming — only
 > qualification, the same discipline applied to state names (`ADR-0025`) and
 > normative artifact types (`ADR-0030`).
+
+**Modeling hierarchy** — the recurring four-stage pattern across the framework
+(`ADR-0050`):
+
+```text
+Definition → Instance → Assignment → Projection
+```
+
+| Definition | Instance | Assignment | Projection |
+|---|---|---|---|
+| Dimension Specification | Dimension | Dimension Assignment | Registry Projection |
+| State Machine Specification | State Machine | State Assignment | State Registry Projection |
+| Policy Specification | Policy | *Policy Assignment (future)* | Policy Registry Projection |
+
+Future extensible concepts are evaluated against it before new modeling
+structures are introduced. Where the **Registry Specification** sits relative to
+these four stages is unresolved — `ISSUE-0066`.
 
 ## The three representations of knowledge
 

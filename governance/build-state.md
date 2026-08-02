@@ -30,10 +30,10 @@ M1 is complete. **M3 is unblocked.**
 | Documentation system, session protocol | Defined and accepted |
 | Vision, principles, glossary | Written |
 | Roadmap | M1–M13 |
-| ADRs | 47 — 41 accepted, 6 superseded |
-| Issues | 64 recorded — 24 open, 39 resolved, 1 deferred |
-| Acceptance Records | 11 — `ACCEPT-0001` (trust root) through `ACCEPT-0011` |
-| Session journal | 16 entries |
+| ADRs | 50 — 44 accepted, 6 superseded |
+| Issues | 66 recorded — 24 open, 41 resolved, 1 deferred |
+| Acceptance Records | 12 — `ACCEPT-0001` (trust root) through `ACCEPT-0012` |
+| Session journal | 17 entries |
 | Frozen provenance | `imports/` (3 prototypes), `sources/` (requirements, archives, original handoff) |
 
 ## What does not exist
@@ -85,21 +85,28 @@ the same knowledge, not different knowledge.
 
 **Front matter is interchange syntax** (`ADR-0045`), not the semantic model.
 
+**One modeling hierarchy spans the framework** (`ADR-0050`):
+`Definition → Instance → Assignment → Projection`. Dimensions, state machines
+and policies all follow it.
+
+**Dimensions are scarce** (`ADR-0049`) — five conditions, and creating one
+requires an ADR.
+
 ## Acceptance status
 
 | Record | Covers |
 |---|---|
 | `ACCEPT-0001` | Bootstrap corpus at `2b6484f` — trust root, the only retrospective acceptance |
 | `ACCEPT-0002` | `SESSION-0006` at `aed6d89` — first under the normal workflow |
-| `ACCEPT-0003`–`ACCEPT-0011` | `SESSION-0007` through `SESSION-0015` |
+| `ACCEPT-0003`–`ACCEPT-0012` | `SESSION-0007` through `SESSION-0016` |
 
-**`ADR-0044`–`ADR-0047`, `ISSUE-0062`–`ISSUE-0064` and this session's
+**`ADR-0048`–`ADR-0050`, `ISSUE-0065`, `ISSUE-0066` and this session's
 propagation are `Under Review`**, not `Active`.
 
 ## A note for agents reading this repository
 
-**The ADR corpus is history, not specification** (`ADR-0029`). Forty-seven
-decisions, six superseded, four partially corrected.
+**The ADR corpus is history, not specification** (`ADR-0029`). **Fifty
+decisions**, six superseded, **five partially corrected**.
 
 **Two process gates are in force:**
 
@@ -114,8 +121,8 @@ decisions, six superseded, four partially corrected.
 
 | Issue | Blocks |
 |---|---|
-| `ISSUE-0062` | **M2.** Four dimensions remain undefined — deferred through three consecutive issues. The Dimension Registry cannot be written. |
-| `ISSUE-0064` | **M2.** Whether Representation is an independent dimension or a grouping of Semantic Layers. Registering a duplicate axis is the failure `ISSUE-0061` established the discipline to prevent. |
+| `ISSUE-0065` | **M2.** Nine dimension candidates, none evaluated against `ADR-0049`'s five conditions. Five are already in active use. The Dimension Registry cannot be written. |
+| `ISSUE-0066` | **M2.** Where the Registry Specification sits in the four-stage hierarchy. The same Registry Projection now appears in two different pairings. |
 | `ISSUE-0063` | The minimum classifications every artifact must serialize. `ADR-0038` says what must be knowable; `ADR-0045` says what may be visible; nothing connects them. |
 | `ISSUE-0002` | M8 |
 | `ISSUE-0006` | M10 |
@@ -129,16 +136,18 @@ decisions, six superseded, four partially corrected.
 
 - **`ISSUE-0037`** — five hand-maintained Registry Projections; no compiler until
   `ISSUE-0036` is un-deferred.
-- **`ISSUE-0048`** — no machine-readable correction mechanism. **Four
-  corrections** now exist, visible only in the ADR index.
+- **`ISSUE-0048`** — no machine-readable correction mechanism. **Five
+  corrections** now exist, visible only in the ADR index. Open since
+  `SESSION-0008`.
 
 ## Next action
 
 Accept or return this session's work.
 
-Then `ISSUE-0062` and `ISSUE-0064`, which together decide what goes into the
-Dimension Registry. `ISSUE-0062` has now been deferred three times; it is the
-oldest unanswered question in the dimension design.
+Then `ISSUE-0065` — nine dimension candidates, each needing an ADR against
+`ADR-0049`'s five conditions. Some are expected to fail, so this may **remove**
+axes rather than add them. `ISSUE-0066` should be settled alongside it, since
+both determine the Dimension Registry's shape.
 
 ## Repository state
 

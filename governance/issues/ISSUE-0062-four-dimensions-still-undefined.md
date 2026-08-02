@@ -2,7 +2,7 @@
 id: ISSUE-0062
 title: Four dimensions remain undefined, deferred through three consecutive issues
 type: gap
-status: open
+status: resolved
 severity: blocking
 created: 2026-08-02
 updated: 2026-08-02
@@ -13,7 +13,7 @@ evidence:
   - governance/adr/ADR-0044-independence-is-not-isolation.md
   - governance/issues/ISSUE-0057-dimension-set-is-not-fixed.md
   - governance/issues/ISSUE-0059-dimension-independence-and-overlaps.md
-resolved-by: null
+resolved-by: ADR-0048
 ---
 
 # ISSUE-0062 — Four dimensions remain undefined
@@ -67,8 +67,27 @@ prevent, in the artifact meant to prevent it.
 - What is each one's value domain and cardinality — the fields `ADR-0041`
   requires?
 
-## Resolution criteria
+## Resolution
 
-Definitions for all four, or removal of those that turn out to be duplicates —
-with the eight `ADR-0041` fields filled for each survivor. Must precede the
-Dimension Registry Specification.
+`ADR-0048`, **by reframing rather than by defining**.
+
+> Dimensions are part of the Engineering OS Metamodel. They must therefore be
+> **specified before they can be instantiated**.
+
+`DimensionSpecification` becomes a first-class metamodel entity with **ten**
+fields — `ADR-0041`'s eight, corrected: `value domain` becomes `value model`,
+`authoritative specification` is dropped, and **assignment semantics**,
+**serialization strategy** and **validation rules** are added. **A Dimension
+Assignment is always an instance of a Dimension Specification.**
+
+The initial dimensions are created as **instances of that entity**, not embedded
+into compiler documentation.
+
+**The three-session deferral chain ends here** — not because the four are
+defined, but because they stop being undefined *concepts* and become unwritten
+*instances of a defined entity*. Combined with `ADR-0049`'s five conditions,
+the test that was missing now exists.
+
+**What remains** is applying that test. Nine candidates, none evaluated —
+`ISSUE-0065`, which also records the reading that `Governance Status` most
+likely fails condition 2 against `Lifecycle`.

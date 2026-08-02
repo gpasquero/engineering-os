@@ -100,8 +100,16 @@ vocabulary collision came from one classification being asked to do several
 jobs.
 
 **Dimensions are first-class entities, added by registration** (`ADR-0041`) —
-never by modifying compiler logic. A Dimension Registry Specification is
-authoritative; its Projection is generated.
+never by modifying compiler logic. They must be **specified before they can be
+instantiated**: a `DimensionSpecification` is a metamodel entity with ten fields,
+and every assignment instantiates one (`ADR-0048`).
+
+**Dimensions are a scarce architectural resource** (`ADR-0049`). A concept
+becomes a Dimension only if it classifies many independent artifact types, is
+orthogonal to other classifications, evolves independently, is useful for
+querying or validation, and takes multiple values across artifacts. Otherwise it
+is metadata, a property, a relationship, or a metamodel entity. **Creating one
+requires an ADR.**
 
 **Artifacts do not contain dimension values.** They are classified by
 **Dimension Assignments** — explicit semantic relationships (`ADR-0042`):
@@ -127,6 +135,24 @@ without the compiler.
 ```text
 Dimension Assignment → Canonical Serialization → Artifact Front Matter
 ```
+
+## The modeling hierarchy
+
+One recurring four-stage pattern spans the framework (`ADR-0050`):
+
+```text
+Definition → Instance → Assignment → Projection
+```
+
+| Definition | Instance | Assignment | Projection |
+|---|---|---|---|
+| Dimension Specification | Dimension | Dimension Assignment | Registry Projection |
+| State Machine Specification | State Machine | State Assignment | State Registry Projection |
+| Policy Specification | Policy | *Policy Assignment (future)* | Policy Registry Projection |
+
+Future extensible concepts are evaluated against it before new modeling
+structures are introduced. Where the Registry Specification (`ADR-0032`) sits
+relative to these stages is unresolved — `ISSUE-0066`.
 
 ## Three representations of knowledge
 
@@ -558,11 +584,11 @@ These are recorded as issues and must not be silently assumed:
 
 - `ISSUE-0049` — where state machine specifications live, and their boundary
   with `shared/vocabularies/`. Blocks `shared/vocabularies/`.
-- `ISSUE-0062` — four dimensions remain undefined, deferred through three
-  consecutive issues. **Blocks the Dimension Registry.**
+- `ISSUE-0065` — nine dimension candidates, none evaluated against `ADR-0049`'s
+  five conditions. **Blocks the Dimension Registry.**
+- `ISSUE-0066` — where the Registry Specification sits in the four-stage
+  hierarchy.
 - `ISSUE-0063` — the minimum set of classifications that must be serialized.
-- `ISSUE-0064` — whether Representation is an independent dimension or a
-  grouping of Semantic Layers.
 - `ISSUE-0048` — no mechanism for correcting part of an `Active` ADR.
 - `ISSUE-0007` — versioning granularity, now also covering what identifies a
   **revision**.

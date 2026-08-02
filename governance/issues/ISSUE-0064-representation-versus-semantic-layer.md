@@ -2,7 +2,7 @@
 id: ISSUE-0064
 title: Whether Representation is an independent dimension or a grouping of Semantic Layers
 type: question
-status: open
+status: resolved
 severity: high
 created: 2026-08-02
 updated: 2026-08-02
@@ -11,7 +11,7 @@ evidence:
   - governance/adr/ADR-0047-three-representations-of-knowledge.md
   - governance/adr/ADR-0037-four-layer-semantic-architecture.md
   - governance/adr/ADR-0039-layers-classify-artifacts-not-directories.md
-resolved-by: null
+resolved-by: ADR-0049
 ---
 
 # ISSUE-0064 — Representation versus Semantic Layer
@@ -73,8 +73,27 @@ This reading is coherent and is **not stated in `ADR-0047`**.
 The third option is worth serious weight: `ADR-0047` calls them "views of the
 same knowledge", which is not obviously a property of an artifact at all.
 
-## Resolution criteria
+## Resolution
 
-An ADR stating whether Representation is a registered dimension, what entity
-type it governs, and how it relates to Semantic Layer under `ADR-0044`'s
-descriptive-relationship rule.
+`ADR-0049`, **by supplying the test rather than the verdict**.
+
+> Not every conceptual distinction deserves to become a Dimension.
+
+A concept becomes a Dimension only if **all five** conditions hold: it
+classifies many independent artifact types; its values are **orthogonal to other
+classifications**; it evolves independently; it is useful for querying,
+navigation or validation; and multiple values exist across repository artifacts.
+
+Otherwise it is modelled as metadata, a property, a relationship, or a dedicated
+metamodel entity.
+
+> **Dimensions are a scarce architectural resource. Creating a new Dimension
+> requires an ADR.**
+
+Condition 2 is precisely this issue's question, now with a name and a procedure.
+The three options recorded above map onto the possible outcomes of applying it —
+including the third, which would make the comparison a category error and let
+both stand.
+
+**The verdict is not given.** Representation has not been evaluated, and neither
+have the eight other candidates — `ISSUE-0065`.

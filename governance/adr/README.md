@@ -16,7 +16,7 @@ same session the decision is made.
 > a rule exists; the rule that must be followed lives in a Policy under
 > `shared/policies/`. Agents consume policies; humans read ADRs for rationale.
 
-**Highest allocated ID: `ADR-0047`.** IDs are sequential and never reused.
+**Highest allocated ID: `ADR-0050`.** IDs are sequential and never reused.
 
 > This index table is a hand-maintained projection of ADR front matter. It is
 > listed in the transitional-debt register, `ISSUE-0037`.
@@ -64,6 +64,10 @@ Read these before designing anything that produces an artifact:
   model.
 - **`ADR-0047`** — **three representations of knowledge**, with the compiler
   responsible for semantic equivalence across them.
+- **`ADR-0049`** — **dimensions are a scarce architectural resource**. Five
+  conditions; creating one requires an ADR.
+- **`ADR-0050`** — the **`Definition → Instance → Assignment → Projection`**
+  hierarchy. Evaluate every extensible concept against it.
 - **`ADR-0017`** — reference architecture, not reference implementation.
 - **`ADR-0019`** — Knowledge Packages are a published interface.
 
@@ -118,6 +122,9 @@ Read these before designing anything that produces an artifact:
 | [ADR-0045](ADR-0045-human-representation-and-front-matter-as-interchange-syntax.md) | **Front matter is interchange syntax** | accepted | ISSUE-0060 |
 | [ADR-0046](ADR-0046-abstraction-level-and-semantic-layer.md) | Abstraction Level and Semantic Layer | accepted | ISSUE-0061 |
 | [ADR-0047](ADR-0047-three-representations-of-knowledge.md) | **Three representations of knowledge** | accepted | — |
+| [ADR-0048](ADR-0048-dimension-specification-is-a-metamodel-entity.md) | `DimensionSpecification` is a metamodel entity | accepted | ISSUE-0062 |
+| [ADR-0049](ADR-0049-dimensions-are-a-scarce-architectural-resource.md) | **Dimensions are a scarce architectural resource** | accepted | ISSUE-0064 |
+| [ADR-0050](ADR-0050-definition-instance-assignment-projection.md) | **Definition → Instance → Assignment → Projection** | accepted | — |
 
 ## Supersessions
 
@@ -146,6 +153,7 @@ wrong. There is no front-matter mechanism for this — `ISSUE-0048`.
 |---|---|---|
 | `ADR-0025` | `ADR-0026` | Examples only. `ArtifactLifecycle` should read `ArtifactRevisionLifecycle`. The state-machine rule is untouched and remains `Active`. |
 | `ADR-0010` | `ADR-0037` | Layer terminology only. `ADR-0010` used "Layer A" for the methodology; Layer A is now the Metamodel. Its decision — knowledge is repository-local, environments federate — is untouched and remains `Active`. |
+| `ADR-0041` | `ADR-0048` | The field list. Eight fields become ten: `value domain` becomes `value model`, `authoritative specification` is dropped, and assignment semantics, serialization strategy and validation rules are added. The registration decision is untouched and remains `Active`. |
 | `ADR-0037` | `ADR-0039` | The universality claim. "Every artifact belongs to exactly one layer" should read: every *semantic* artifact does; cross-cutting artifacts belong to none. The four layers are untouched and remain `Active`. |
 | `ADR-0031` | `ADR-0032` | The opening definition. "A Registry is an authoritative index" should read: a Registry *Specification* is authoritative; a Registry *Projection* is the derived index. The pattern is untouched and remains `Active`. |
 
