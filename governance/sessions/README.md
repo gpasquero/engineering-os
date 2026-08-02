@@ -58,6 +58,7 @@ ADRs answer "why".
 | [SESSION-0033](SESSION-0033-2026-08-02.md) | 2026-08-02 | exploit | `ACCEPT-0028`; **engineering value is the target** (`ADR-0089`); **finding taxonomy, no confidence scores** (`ADR-0090`); **Engineering Recommendation** (`ADR-0091`); `has-path`; six maintainer questions; `tools/advise.py` |
 | [SESSION-0034](SESSION-0034-2026-08-02.md) | 2026-08-02 | director | `ACCEPT-0029`; **the product is an Engineering Director** (`ADR-0092`); **the judgment measure** (`ADR-0093`); **the Engineering Plan** (`ADR-0094`); `tools/plan.py`; `EngineeringIntent` **proposal, not implemented** |
 | [SESSION-0035](SESSION-0035-2026-08-02.md) | 2026-08-02 | taskgraph | `ACCEPT-0030`; **the engineering loop is the architecture** (`ADR-0095`); **`EngineeringIntent` is a registry** (`ADR-0096`); **the Task Graph** (`ADR-0097`); `tools/taskgraph.py`; capabilities, never workers |
+| [SESSION-0036](SESSION-0036-2026-08-02.md) | 2026-08-02 | orchestration | `ACCEPT-0031`; **orchestration is the objective** (`ADR-0098`); **workers are capabilities** (`ADR-0099`); **governance is not a worker** (`ADR-0100`); **context out, observations back** (`ADR-0101`); **end-to-end simulation found two defects** |
 
 ## Reading
 

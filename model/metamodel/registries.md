@@ -156,6 +156,43 @@ registries:
       An adopting repository declares kinds for its own plan actions. A TaskGraph
       is derived, never declared (ADR-0097).
 
+  - id: REG-workers
+    registers: worker types and the capabilities they provide
+    source: ../workers.md
+    extraction: yaml-block
+    collection: workers
+    membership: >
+      A worker type is registered by appearing with an id, a label, the
+      capabilities it provides, an execution class and a scope.
+    extension: >
+      An adopting repository declares its own worker types. No model or vendor is
+      ever named; runtime implementations are outside the model (ADR-0099).
+
+  - id: REG-governance-gates
+    registers: gates that authorize change
+    source: ../governance-gates.md
+    extraction: yaml-block
+    collection: governance-gates
+    membership: >
+      A gate is registered by appearing with an id, what it authorizes, the
+      decision it enforces and the rule it states.
+    extension: >
+      An adopting repository declares its own gates. A gate is never a worker and
+      has no capabilities (ADR-0100).
+
+  - id: REG-observation-kinds
+    registers: what a worker may report, and whether it may enter the model
+    source: ../observation-kinds.md
+    extraction: yaml-block
+    collection: observation-kinds
+    membership: >
+      An observation kind is registered by appearing with an id, what it asserts,
+      an intake outcome of record, govern or reject, what it produces and a
+      rationale.
+    extension: >
+      An adopting repository declares kinds its execution can report. Workers
+      never write to the model (ADR-0101).
+
   - id: REG-validation-rules
     registers: the rules the compiler executes
     source: validation-rules.md

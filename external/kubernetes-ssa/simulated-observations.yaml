@@ -1,0 +1,55 @@
+# Simulated Execution Observations (ADR-0101).
+#
+# THE IMPLEMENTATION IS MOCKED. THE ORCHESTRATION IS NOT.
+#
+# These are the observations a worker would emit after executing the task graph
+# for `I-modify-behavior` on `Artifact.ConflictGo`. They are plausible and
+# invented; no code was changed and no test was run. Their purpose is to exercise
+# intake, not to assert anything about Kubernetes.
+#
+# Every statement below is therefore UNVERIFIED and must not be read as a claim
+# about Server-Side Apply.
+
+observations:
+  - task: T01-understand-investigate
+    kind: O-evidence-discovered
+    statement: >
+      conflict.go's printManager renders the manager timestamp in the user-facing
+      conflict message, which the model already records as Evidence.ConflictSymbols.
+    node: Artifact.ConflictGo
+
+  - task: T01-understand-investigate
+    kind: O-unexpected-dependency
+    statement: >
+      Conflict message formatting depends on ManagedFieldsEntry.Time, which no
+      edge in the model connects to Artifact.ConflictGo.
+    from: Artifact.ConflictGo
+    to: Concept.ManagedFields
+
+  - task: T02-change-inspect
+    kind: O-assumption-disproved
+    statement: >
+      The plan assumed invariants constrain Concept.Conflict. None do — the
+      assumption was recorded as UNVERIFIED and execution confirmed the gap.
+    node: Concept.Conflict
+
+  - task: T03-verify-verify
+    kind: O-invariant-confirmed
+    statement: >
+      TestApplyUpdateApplyConflictForced exercises the forced-conflict path and
+      passes, corroborating Invariant.StatusFieldsProtected.
+    node: Invariant.StatusFieldsProtected
+
+  - task: T02-change-inspect
+    kind: O-architectural-concern
+    statement: >
+      Rendering a timestamp that a forced apply does not update seems misleading
+      and should perhaps be removed.
+    node: Artifact.ConflictGo
+
+  - task: T02-change-inspect
+    kind: O-performance-regression
+    statement: >
+      An observation kind that does not exist, to check that intake rejects
+      rather than ignores.
+    node: Artifact.ConflictGo

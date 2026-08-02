@@ -16,7 +16,7 @@ same session the decision is made.
 > a rule exists; the rule that must be followed lives in a Policy under
 > `shared/policies/`. Agents consume policies; humans read ADRs for rationale.
 
-**Highest allocated ID: `ADR-0097`.** IDs are sequential and never reused.
+**Highest allocated ID: `ADR-0101`.** IDs are sequential and never reused.
 
 > This index table is a hand-maintained projection of ADR front matter. It is
 > listed in the transitional-debt register, `ISSUE-0037`.
@@ -192,6 +192,10 @@ Read these before designing anything that produces an artifact:
 | [ADR-0095](ADR-0095-the-engineering-loop.md) | **The architecture is the engineering loop; every stage is a deterministic artifact** | accepted | — |
 | [ADR-0096](ADR-0096-engineering-intent-is-a-registry.md) | **EngineeringIntent is a registry, not a Layer A entity** | accepted | — |
 | [ADR-0097](ADR-0097-the-task-graph.md) | **The Task Graph is derived deterministically from the plan and declares required capabilities** | accepted | — |
+| [ADR-0098](ADR-0098-orchestration-is-the-objective.md) | **Orchestration is the objective; the Engineering Director owns the loop** | accepted | — |
+| [ADR-0099](ADR-0099-workers-are-capabilities.md) | **Workers are capabilities, not vendors; assignment is deterministic matching** | accepted | — |
+| [ADR-0100](ADR-0100-governance-is-not-a-worker.md) | **Human review is a governance gate, not a worker** | accepted | — |
+| [ADR-0101](ADR-0101-context-and-observations.md) | **Execution Context out, Execution Observations back; workers never touch the model** | accepted | — |
 
 ## Supersessions
 

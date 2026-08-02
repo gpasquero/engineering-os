@@ -4,7 +4,7 @@ title: Build State
 status: current
 created: 2026-08-02
 updated: 2026-08-02
-milestone: task-graph
+milestone: orchestration
 ---
 
 # Build State
@@ -17,83 +17,90 @@ milestone: task-graph
 
 ## Current work
 
-**The Engineering Director** (`ADR-0092`), built stage by stage around the
-engineering loop (`ADR-0095`).
+**Orchestration** (`ADR-0098`). The Engineering Director owns the loop; workers
+execute only individual tasks.
+
+## The KPI
+
+> **How much engineering judgment happens before the first LLM token is
+> generated?**
+
+```text
+36 engineering decisions made before the first LLM token
+ 5 left to workers
+```
+
+Counts of entities, registries, queries, plans and task graphs are **inventory,
+not progress**.
 
 ## The loop
 
-```text
-Developer Intent → Context Acquisition → Engineering Reasoning
-   → Engineering Plan → Task Graph → Worker Assignment → Execution
-   → Review → Knowledge Update → Continuous Learning ⟲
+```sh
+python3 tools/direct.py external/kubernetes-ssa I-modify-behavior Artifact.ConflictGo \
+    --observations=external/kubernetes-ssa/simulated-observations.yaml
 ```
 
 | Stage | State |
 |---|---|
-| Developer Intent | **registry** — 3 intents (`ADR-0096`) |
-| Context Acquisition | compiler + CKM |
-| Engineering Reasoning | 17 queries, 3 recommendations |
+| Developer Intent | ✅ registry, 3 intents |
+| Engineering Director | ✅ `tools/direct.py` |
 | Engineering Plan | ✅ 2 plans |
-| **Task Graph** | ✅ **this milestone** |
-| Worker Assignment | capabilities declared; **routing not built** |
-| Execution · Review · Knowledge Update · Continuous Learning | **not built** |
+| Task Graph | ✅ levels computed |
+| **Worker Assignment** | ✅ **set containment; no heuristic, no vendor named** |
+| Execution | **mocked; no runtime exists** |
+| **Execution Observations** | ✅ **intake, classification, gate routing** |
+| Knowledge Update | **proposal only — nothing applies it** |
+| Repository Evolution | not built |
 
-**Five of ten stages exist. The loop does not close** — which is the step that
-would make the system improve between one intent and the next.
-
-## The measure
-
-`ADR-0093`. **How much engineering judgment happens before an LLM must think.**
-
-```sh
-python3 tools/taskgraph.py external/kubernetes-ssa P-change-implementation Artifact.ConflictGo
-```
-
-| Graph | Tasks | mechanical | reasoning | human | Parallelism | Deferred |
-|---|---|---|---|---|---|---|
-| `Artifact.ConflictGo` | 5 | 3 | 2 | 1 | 1 | 3 |
-| `Concept.ManagedFields` | 7 | 2 | 4 | 1 | **2** | 3 |
-
-**An executor receives a task with an objective, dependencies, a completion
-condition, the evidence it must produce, and no decisions about ordering.** That
-is the largest single transfer of judgement from executor to system the project
-has made.
+**Seven of nine stages exist. The loop does not close.**
 
 ## What exists
 
 | Area | State |
 |---|---|
-| **`compiler/taskgraph/`** | Derives graphs from plans. **Levels computed, not annotated**; cyclic dependencies rejected |
-| **`tools/taskgraph.py`** | Text, `--json` for executors, `--mermaid`. Verified byte-identical across runs |
-| **`model/task-kinds.md`** | 6 kinds from plan actions + **2 terminal**: review gate and knowledge update |
-| **`model/worker-capabilities.md`** | 6 capabilities, each classed `mechanical`, `reasoning` or `human` |
-| **`model/engineering-intents.md`** | 3 intents. **Not a metamodel entity** (`ADR-0096`) |
-| `model/plans.md` · `compiler/plan/` | 2 plans, 8 declared parts, explicit `defers` |
-| `model/recommendations.md` · `model/queries.md` | 3 recommendations, 17 queries |
-| `external/kubernetes-ssa/` | 41 nodes, four source classes, 6 classified findings |
+| **`compiler/direct/`** | Assignment · execution contexts · observation intake · the loop · the KPI |
+| **`tools/direct.py`** | One command, intent to knowledge-update proposal. `--context=`, `--observations=`, `--json` |
+| **`model/workers.md`** | 7 worker types. **No model or vendor named** (`ADR-0099`) |
+| **`model/governance-gates.md`** | 3 gates. **Workers perform work; governance authorizes change** (`ADR-0100`) |
+| **`model/observation-kinds.md`** | 8 kinds — **2 record, 5 govern, 1 reject** |
+| `model/task-kinds.md` · `worker-capabilities.md` | 8 kinds, 6 capabilities |
+| `model/plans.md` · `recommendations.md` · `queries.md` | 2 · 3 · 17 |
+| `external/kubernetes-ssa/` | 41 nodes, 6 classified findings, **end-to-end simulation** |
 | `tests/` | 17 fixtures, 9 negative, golden outputs |
-| Registries | **11** |
-| `model/metamodel/` | 23 of 27 entities — **unchanged for four milestones** |
+| Registries | **14** |
+| `model/metamodel/` | 23 of 27 entities — **unchanged for five milestones** |
 
-## Capabilities, never workers
+## Two defects found only by running the loop
 
-A task declares **what capability it requires**. Routing is a separate stage
-(`ADR-0097`).
+Both in **declarations**, not the engine, and invisible to every existing check.
 
-**Every graph terminates in `T-review-gate`, which requires `C-approve` — a
-capability no worker of any kind may hold**, because self-certification is
-prohibited (`ADR-0023`). By design, and worth stating: the graph ends in a task
-nothing can execute automatically.
+**Gate identifiers were written without their `O-` prefix.** `G-decision-record`
+matched nothing and every governed observation fell through to the general gate.
+**A registry that names things wrongly is not detectably different from one that
+names nothing** — nothing checks cross-registry references.
+
+**A gate was declared for an observation kind that is rejected.**
+`architectural-concern` never enters the model, so a gate authorizing its entry
+is unreachable by construction.
+
+## What the architecture now enforces
+
+**Workers never write to the model** (`ADR-0101`). Six observations produced
+**2 record · 2 govern · 2 reject**, and both recordable kinds are additive.
+
+**No worker provides `C-approve`** (`ADR-0100`). Every run ends at a human, by
+design.
+
+**Assignment names no vendor.** `T02-change-inspect` matches four worker types
+and the system does not choose — choosing would be a heuristic (`ADR-0099`).
 
 ## What does not exist
 
-**No routing.** Capabilities are declared and nothing matches them to a worker.
+**Nothing applies a knowledge-update proposal.** No authorization artifact, no
+write path. **This is the loop's closure and it is the one thing missing.**
 
-**No execution, no review, no knowledge update.** `T-update-knowledge` appears in
-every graph as a task and has no executor — **the loop's closure is present as a
-node and absent as a capability**, which is more honest than omitting it.
-
-No second external system. No confidence scores, and none will be added.
+No runtime implements any worker type. No second external system. No confidence
+scores.
 
 ## Blocking
 
@@ -101,26 +108,25 @@ No second external system. No confidence scores, and none will be added.
 
 | Issue | Why it is open |
 |---|---|
-| `ISSUE-0037` | Hand-maintained projections. **Eleven registries**, eleven hand-maintained sources, zero generated |
+| `ISSUE-0037` | Hand-maintained projections. **Fourteen registries**, fourteen hand-maintained sources, zero generated — and cross-registry references are unchecked, which is how this session's first defect survived |
 
 ## Debt discovered while building
 
 | Question | Where |
 |---|---|
-| **A plan action with no declared task kind produces no task**, reported as a diagnostic rather than dropped — but nothing prevents the omission | `ADR-0097` |
-| Execution classes are authored judgements — that reading source requires reasoning is plausible and unverified | `worker-capabilities.md` |
-| Completion conditions are inherited from the plan and **remain unchecked**; nothing re-runs them | `plans.md`, `ADR-0097` |
-| `I-investigate` selects no plan — a real intent with no planning support | `engineering-intents.md` |
-| Intent selection is a declared list; adding a plan does not update the intents that should offer it | `engineering-intents.md` |
-| Task objectives substitute only `{targets}`, so a task cannot say *why* those targets were selected | `task-kinds.md` |
+| **Cross-registry references are unchecked** — a gate naming a kind that does not exist matches silently | `simulation.md` |
+| Assignment cannot express *the right worker for this artifact kind*, and preferring would be a heuristic | `workers.md` |
+| Worker scope is prose and unenforced | `workers.md` |
+| Observation kinds are closed; execution will find things that fit none | `observation-kinds.md` |
+| `produces` is prose — proposals are described, not generated | `observation-kinds.md` |
+| Gates have no recorded outcome; passing one should produce an authorization artifact | `governance-gates.md` |
 
 ## Next action
 
-**The first true Engineering Director** — one command from intent to Plan, Task
-Graph, Reviews, Suggested Worker Assignment, Verification Strategy and Expected
-Knowledge Updates, **with no language model invoked.**
+**Close the loop.** A knowledge-update proposal exists and nothing applies it.
 
-Only then should Claude or Codex receive implementation tasks.
+Until an authorization artifact and a write path exist, **the system produces the
+same plan on Tuesday that it produced on Monday, however Monday went.**
 
 ## Repository state
 
