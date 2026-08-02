@@ -1,0 +1,14 @@
+id: evidence-0001
+subject: example:Concept
+assertion: "Natural-language assertion"
+status: unknown
+confidence: low
+scope: ""
+evidence:
+  - type: source
+    path: ""
+    symbol: ""
+    lines: ""
+external_sources: []
+conflicts: []
+notes: ""

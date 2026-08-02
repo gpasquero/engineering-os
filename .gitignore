@@ -1,0 +1,15 @@
+# OS artifacts
+.DS_Store
+Thumbs.db
+
+# Editor
+.idea/
+.vscode/
+*.swp
+*~
+
+# Local agent state
+.claude/settings.local.json
+
+# Nothing else is ignored by design.
+# This repository is the persistent memory: artifacts belong in git.

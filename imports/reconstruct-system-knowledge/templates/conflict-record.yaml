@@ -1,0 +1,15 @@
+id: conflict-0001
+concept: example:Concept
+question: "What is conflicting?"
+interpretations:
+  - statement: "Interpretation A"
+    evidence:
+      - path: ""
+  - statement: "Interpretation B"
+    evidence:
+      - path: ""
+runtime_behavior: unknown
+impact: medium
+safe_to_encode: false
+recommended_resolution: ""
+status: open
