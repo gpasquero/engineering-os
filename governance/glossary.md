@@ -101,6 +101,14 @@ authoritative. Requires explicit reviewer approval, traceability to the
 motivating issue or ADR, and successful validation of applicable deterministic
 checks. Is itself knowledge, and traceable. See `ADR-0018`.
 
+**State machine** — the owner of a state vocabulary. **Every state belongs to
+exactly one state machine, and there is no global concept of "state"**
+(`ADR-0025`). State names may coincide across machines only when explicitly
+namespaced — `ADRLifecycle.Accepted`, `ArtifactLifecycle.Active`,
+`IssueLifecycle.Open`. **The same textual label never implies semantic
+equivalence across machines.** This is a fundamental modeling rule for the whole
+Engineering OS, including how skills model state in target domains.
+
 **Revision** — an identifiable version of an artifact. The unit the lifecycle
 applies to, and the unit that is accepted. What identifies a revision is
 undefined — `ISSUE-0007`.
@@ -125,7 +133,10 @@ superseded by a newer accepted revision.
 
 **Acceptance Record** — the artifact that records an acceptance, under
 `governance/acceptance/` with the prefix `ACCEPT-`. A first-class Authoritative
-Artifact. Whether it requires acceptance itself is unresolved — `ISSUE-0042`.
+Artifact, and **the point at which the acceptance process terminates**: an
+Acceptance Record is never itself subject to an additional Acceptance Record. It
+derives its authority from the decision it records. This is the base case of the
+acceptance model, not an exception (`ADR-0024`).
 
 **Trust root** — `ACCEPT-0001`, the single permitted retrospective acceptance,
 covering the bootstrap corpus at a named revision. Every later acceptance chains

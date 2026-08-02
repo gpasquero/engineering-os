@@ -12,7 +12,7 @@ related: [ISSUE-0037]
 A decision that is not recorded here will be re-litigated. Write the ADR in the
 same session the decision is made.
 
-**Highest allocated ID: `ADR-0023`.** IDs are sequential and never reused.
+**Highest allocated ID: `ADR-0025`.** IDs are sequential and never reused.
 
 > This index table is a hand-maintained projection of ADR front matter. It is
 > listed in the transitional-debt register, `ISSUE-0037`.
@@ -26,6 +26,8 @@ Read these before designing anything that produces an artifact:
 - **`ADR-0020`** — artifact taxonomy and revision lifecycle are independent;
   acceptance confers `Active` status.
 - **`ADR-0023`** — governance is self-hosting but never self-certifying.
+- **`ADR-0025`** — every state belongs to exactly one state machine. A modeling
+  rule for the whole Engineering OS, not only for this repository.
 - **`ADR-0017`** — reference architecture, not reference implementation.
 - **`ADR-0019`** — Knowledge Packages are a published interface.
 
@@ -56,6 +58,8 @@ Read these before designing anything that produces an artifact:
 | [ADR-0021](ADR-0021-acceptance-record-specification.md) | Acceptance Record specification | accepted | ISSUE-0041 |
 | [ADR-0022](ADR-0022-bootstrap-acceptance-establishes-the-trust-root.md) | Bootstrap acceptance establishes the trust root | accepted | ISSUE-0040 |
 | [ADR-0023](ADR-0023-governance-is-self-hosting-never-self-certifying.md) | **Governance is self-hosting but never self-certifying** | accepted | ISSUE-0039 |
+| [ADR-0024](ADR-0024-acceptance-terminates-at-the-acceptance-record.md) | The acceptance process terminates at the Acceptance Record | accepted | ISSUE-0042 |
+| [ADR-0025](ADR-0025-every-state-belongs-to-exactly-one-state-machine.md) | **Every state belongs to exactly one state machine** | accepted | ISSUE-0043 |
 
 ## Supersessions
 

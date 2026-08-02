@@ -9,8 +9,8 @@ related: [ISSUE-0037]
 
 # Issue Index
 
-**43 recorded · 22 open · 20 resolved · 1 deferred.** Highest allocated ID:
-`ISSUE-0043`.
+**45 recorded · 22 open · 22 resolved · 1 deferred.** Highest allocated ID:
+`ISSUE-0045`.
 
 > **Hand-maintained projection.** Under `ADR-0016` this is a projection of issue
 > front matter, which is authoritative. No generator exists yet (`ISSUE-0036`),
@@ -26,9 +26,8 @@ related: [ISSUE-0037]
 | [0002](ISSUE-0002-composition-primitive-undefined.md) | How a workflow invokes a skill is undefined | M8 |
 | [0006](ISSUE-0006-scenario-testing-method-undefined.md) | How a prompt-based methodology is tested is undefined | M10 |
 
-**M2 is unblocked.** Two issues gate specific deliverables within it rather than
-the milestone: `ISSUE-0043` before `shared/vocabularies/`, `ISSUE-0042` before
-the Acceptance Record contract.
+**M2 is unblocked.** Two issues gate `shared/vocabularies/` rather than the
+milestone: `ISSUE-0044` and `ISSUE-0045`.
 
 ## Open, by milestone
 
@@ -36,8 +35,8 @@ the Acceptance Record contract.
 
 | ID | Title | Type | Severity |
 |---|---|---|---|
-| [0042](ISSUE-0042-acceptance-record-regress.md) | Does an Acceptance Record require acceptance? | question | high |
-| [0043](ISSUE-0043-document-status-vocabularies-overlap-lifecycle.md) | Document status vocabularies overlap the revision lifecycle | inconsistency | high |
+| [0044](ISSUE-0044-artifact-versus-revision-lifecycle-naming.md) | `ArtifactLifecycle` conflicts with `ADR-0020`'s revision framing | inconsistency | high |
+| [0045](ISSUE-0045-state-machine-inventory-not-fixed.md) | The state machine inventory is not fixed | gap | high |
 | [0007](ISSUE-0007-versioning-granularity-undefined.md) | Versioning granularity; what identifies a revision | question | high |
 | [0011](ISSUE-0011-audience-licence-distribution-undefined.md) | Repository is public with no licence | question | high |
 | [0013](ISSUE-0013-three-conflicting-impact-analysis-templates.md) | Three conflicting impact-analysis templates | inconsistency | high |
@@ -126,3 +125,5 @@ the Acceptance Record contract.
 | [0039](ISSUE-0039-governance-policy-mechanism-missing.md) | Governance policy mechanism | `ADR-0023` |
 | [0040](ISSUE-0040-existing-corpus-was-self-certified.md) | Existing corpus was self-certified | `ADR-0022` → `ACCEPT-0001` |
 | [0041](ISSUE-0041-acceptance-record-undefined.md) | Acceptance record undefined | `ADR-0021` |
+| [0042](ISSUE-0042-acceptance-record-regress.md) | Acceptance Record regress | `ADR-0024` |
+| [0043](ISSUE-0043-document-status-vocabularies-overlap-lifecycle.md) | Status vocabularies overlap the lifecycle | `ADR-0025` |

@@ -17,7 +17,7 @@ Session logs are the trajectory record: they answer "how did we get here",
 which no other document does. `build-state.md` answers "where are we", and the
 ADRs answer "why".
 
-**Highest allocated ID: `SESSION-0006`.**
+**Highest allocated ID: `SESSION-0007`.**
 
 ## Index
 
@@ -29,6 +29,7 @@ ADRs answer "why".
 | [SESSION-0004](SESSION-0004-2026-08-02.md) | 2026-08-02 | M2 | Three-tier knowledge model, determinism boundary, governance-as-source, reference architecture; `ADR-0014`–`ADR-0017`; `ADR-0011` superseded; M2 unblocked |
 | [SESSION-0005](SESSION-0005-2026-08-02.md) | 2026-08-02 | M2 | Acceptance confers authoritative status; Knowledge Packages as published interface; `ADR-0018`, `ADR-0019`; `ADR-0015` superseded; M2 blocked by `ISSUE-0038`, `ISSUE-0040`, `ISSUE-0041` |
 | [SESSION-0006](SESSION-0006-2026-08-02.md) | 2026-08-02 | M2 | Taxonomy/lifecycle split, Acceptance Record spec, trust root `ACCEPT-0001`, governance self-hosting; `ADR-0020`–`ADR-0023`; `ADR-0018` superseded; M2 unblocked |
+| [SESSION-0007](SESSION-0007-2026-08-02.md) | 2026-08-02 | M2 | `ACCEPT-0002` — first acceptance under the normal workflow; acceptance chain terminates at the record; every state belongs to one state machine; `ADR-0024`, `ADR-0025` |
 
 ## Reading
 

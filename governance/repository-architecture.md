@@ -147,9 +147,39 @@ and **the currently `Active` policy always governs the acceptance of the next
 revision** — so no policy can silently relax the rules under which it is
 accepted.
 
-The chain terminates at **`ACCEPT-0001`**, the trust root: the single permitted
-retrospective acceptance, covering the bootstrap corpus at a named revision
-(`ADR-0022`).
+**The acceptance process terminates at the Acceptance Record** (`ADR-0024`). A
+record is never itself subject to an additional record — it derives its
+authority from the decision it records. This is the base case, not an exception.
+
+The chain of retrospective trust terminates at **`ACCEPT-0001`**, the single
+permitted retrospective acceptance, covering the bootstrap corpus at a named
+revision (`ADR-0022`).
+
+## Every state belongs to exactly one state machine
+
+**There is no global concept of "state"** (`ADR-0025`). There are independent
+state machines, each owning its own vocabulary. State names may coincide only
+when explicitly namespaced:
+
+```text
+ArtifactLifecycle.Active     ADRLifecycle.Accepted
+IssueLifecycle.Open          AcceptanceLifecycle.Recorded
+CompilerExecution.Completed
+```
+
+**The same textual label never implies semantic equivalence across machines.**
+
+`shared/vocabularies/` is therefore organised **by state machine**, not as one
+global list of states.
+
+This is a fundamental modeling rule for the entire Engineering OS: it governs
+how skills model lifecycles and state machines in target domains, not only how
+this repository names its own. It exists because the project caught the same
+class of collision three times — "skill", "authoritative", and the document
+status vocabularies — and the third time identified the shared root cause.
+
+The naming of the artifact/revision machine (`ISSUE-0044`) and the inventory of
+machines this repository owns (`ISSUE-0045`) are open.
 
 ## Reference architecture, not reference implementation
 
@@ -308,9 +338,10 @@ current state and proposed state. See `ADR-0005`.
 
 These are recorded as issues and must not be silently assumed:
 
-- `ISSUE-0042` — whether an Acceptance Record itself requires acceptance.
-- `ISSUE-0043` — the project's document status vocabularies overlap the revision
-  lifecycle. Blocks `shared/vocabularies/`.
+- `ISSUE-0044` — whether the state machine is `ArtifactLifecycle` or
+  `RevisionLifecycle`. Blocks `shared/vocabularies/`.
+- `ISSUE-0045` — the inventory of state machines, and how a new one is
+  introduced in this repository and in an adopting one.
 - `ISSUE-0007` — versioning granularity, now also covering what identifies a
   **revision**.
 - `ISSUE-0031` — the scope of this repository's own `model/`, and its overlap

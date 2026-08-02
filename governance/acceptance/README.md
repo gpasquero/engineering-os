@@ -15,13 +15,14 @@ committed.
 
 **Acceptance is an engineering decision, not a Git operation** (`ADR-0020`).
 
-**Highest allocated ID: `ACCEPT-0001`.** IDs are sequential and never reused.
+**Highest allocated ID: `ACCEPT-0002`.** IDs are sequential and never reused.
 
 ## Index
 
 | ID | Covers | Reviewer | Decision | Date |
 |---|---|---|---|---|
 | [ACCEPT-0001](ACCEPT-0001-bootstrap.md) | Bootstrap corpus at `2b6484f` | Project owner (`gpasquero`) | accepted | 2026-08-02 |
+| [ACCEPT-0002](ACCEPT-0002-session-0006-decisions.md) | `SESSION-0006` decisions at `aed6d89` | Project Owner (`gpasquero`) | accepted | 2026-08-02 |
 
 ## The three conditions
 
@@ -48,8 +49,12 @@ never changes as tooling arrives (`ADR-0021`).
   self-hosting but never self-certifying (`ADR-0023`).
 - Use `_template.md`.
 
-## Known gap
+## The chain terminates here
 
-Whether an Acceptance Record itself requires acceptance is unresolved —
-`ISSUE-0042`. `ACCEPT-0001` is asserted as the base case by `ADR-0022`, but the
-general regress is not settled.
+**An Acceptance Record is never itself subject to an additional Acceptance
+Record** (`ADR-0024`). It derives its authority from the decision it records.
+This is the base case of the acceptance model, not an exception.
+
+One consequence is worth stating plainly: an Acceptance Record is the single
+artifact that nothing else checks. The `reviewer` field must therefore always
+name a real, askable party.

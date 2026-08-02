@@ -31,10 +31,10 @@ M1 is complete.
 | Documentation system, session protocol | Defined and accepted |
 | Vision, principles, glossary | Written |
 | Roadmap | M1–M13 |
-| ADRs | 23 — 18 accepted, 5 superseded |
-| Issues | 43 recorded — 22 open, 20 resolved, 1 deferred |
-| **Acceptance Records** | **1 — `ACCEPT-0001`, the trust root** |
-| Session journal | 6 entries |
+| ADRs | 25 — 20 accepted, 5 superseded |
+| Issues | 45 recorded — 22 open, 22 resolved, 1 deferred |
+| Acceptance Records | 2 — `ACCEPT-0001` (trust root), `ACCEPT-0002` |
+| Session journal | 7 entries |
 | Frozen provenance | `imports/` (3 prototypes), `sources/` (requirements, archives, original handoff) |
 
 ## What does not exist
@@ -48,26 +48,26 @@ first arrives in M3.
 
 ## Acceptance status
 
-`ACCEPT-0001` covers the bootstrap corpus at revision `2b6484f` and **nothing
-after it** (`ADR-0022`).
+| Record | Covers | Status |
+|---|---|---|
+| `ACCEPT-0001` | Bootstrap corpus at `2b6484f` | Trust root; the only retrospective acceptance |
+| `ACCEPT-0002` | `SESSION-0006` decisions at `aed6d89` | First acceptance under the normal workflow |
 
-**Everything created since that revision is `Under Review`, not `Active`** —
-`ADR-0020` through `ADR-0023`, `ACCEPT-0001` itself, `ISSUE-0042`, `ISSUE-0043`,
-and this session's propagation edits. They await acceptance by a reviewer other
-than their author (`ADR-0023`).
-
-This is the normal workflow operating, not a defect. It is also the first time
-the repository has held unaccepted work, which is what the lifecycle exists to
-express.
+**`ADR-0024`, `ADR-0025`, `ISSUE-0044`, `ISSUE-0045` and this session's
+propagation are `Under Review`**, not `Active`. They await acceptance by a
+reviewer other than their author.
 
 ## Blocking
 
-**Nothing blocks M2.** Two issues gate specific deliverables within it:
+**Nothing blocks M2.** Two issues gate `shared/vocabularies/`:
 
 | Issue | Gates |
 |---|---|
-| `ISSUE-0043` | `shared/vocabularies/` — four document status vocabularies overlap the revision lifecycle |
-| `ISSUE-0042` | The Acceptance Record contract — whether a record requires its own acceptance |
+| `ISSUE-0044` | Whether the state machine is `ArtifactLifecycle` or `RevisionLifecycle` |
+| `ISSUE-0045` | Which state machines this repository owns, and how a new one is introduced |
+
+Other M2 work — the compiler interface specification, `model-spec/`, the
+manifests, the remaining contracts — can proceed in parallel.
 
 `ISSUE-0002` (M8) and `ISSUE-0006` (M10) block later milestones.
 
@@ -79,16 +79,15 @@ express.
 ## Known debt
 
 - **`ISSUE-0037`** — five hand-maintained projections, because no generator can
-  exist until `ISSUE-0036` is un-deferred. Counts drifted once already, in
+  exist until `ISSUE-0036` is un-deferred. Counts drifted once, in
   `SESSION-0004`, and are now recomputed from the files before each rewrite.
 
 ## Next action
 
-Accept this session's work, or return it for revision. Until then the corpus
-above `2b6484f` is `Under Review`.
+Accept or return this session's work.
 
-Then M2: the compiler interface specification and `model-spec/` can proceed
-immediately; `shared/vocabularies/` waits on `ISSUE-0043`.
+Then M2: the compiler interface specification and `model-spec/` can start
+immediately. `shared/vocabularies/` waits on `ISSUE-0044` and `ISSUE-0045`.
 
 ## Repository state
 

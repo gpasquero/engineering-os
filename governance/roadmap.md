@@ -30,11 +30,10 @@ recorded as issues. No skills, policies or contracts.
 resolved by `ADR-0020` through `ADR-0023`, and the trust root `ACCEPT-0001`
 exists.
 
-Two issues gate specific deliverables rather than the milestone:
-`ISSUE-0043` must be settled before `shared/vocabularies/`, and `ISSUE-0042`
-before the Acceptance Record contract in `shared/contracts/`. Other M2 work —
-the compiler interface specification, `model-spec/`, the manifests — can proceed
-in parallel.
+Two issues gate `shared/vocabularies/` rather than the milestone: `ISSUE-0044`
+(the artifact/revision machine name) and `ISSUE-0045` (which state machines this
+repository owns). Other M2 work — the compiler interface specification,
+`model-spec/`, the manifests, the remaining contracts — can proceed in parallel.
 
 - **Compiler interface specification** (`ADR-0017`) — language-independent, and
   the substitute for shipping executable tooling in this milestone
@@ -46,9 +45,10 @@ in parallel.
 - Skill contract and workflow contract, including write-scope declaration
 - Evidence record, conflict record, traceability record contracts
 - **Acceptance Record contract** (`ADR-0021`, `ISSUE-0042`)
-- `shared/vocabularies/` — single-source assertion statuses, confidence, risk,
-  gate decisions, change types, **artifact kinds** (`ADR-0012`) and **revision
-  lifecycle states** (`ADR-0020`)
+- `shared/vocabularies/` — **grouped by state machine** (`ADR-0025`), never as
+  one global list. Covers assertion statuses, confidence, risk, gate decisions,
+  change types, **artifact kinds** (`ADR-0012`) and the **revision lifecycle**
+  (`ADR-0020`)
 - One canonical impact-analysis template
 
 **No executable tooling.** `ADR-0017` defers the implementation language, so

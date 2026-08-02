@@ -2,7 +2,7 @@
 id: ISSUE-0043
 title: The project's document status vocabularies overlap the revision lifecycle
 type: inconsistency
-status: open
+status: resolved
 severity: high
 created: 2026-08-02
 updated: 2026-08-02
@@ -10,7 +10,7 @@ blocks: [M2]
 evidence:
   - governance/documentation-system.md
   - governance/adr/ADR-0020-artifact-taxonomy-and-revision-lifecycle-are-independent.md
-resolved-by: null
+resolved-by: ADR-0025
 ---
 
 # ISSUE-0043 — Document status vocabularies overlap the revision lifecycle
@@ -61,7 +61,36 @@ marked `status: accepted`.
 The second option is the most likely correct, but the distinction it rests on —
 that an issue's status is not a revision lifecycle — has not been confirmed.
 
-## Resolution criteria
+## Resolution
 
-An ADR fixing which vocabularies exist, what each governs, and how the
-documentation system is updated. Must precede `shared/vocabularies/`.
+`ADR-0025`, and it addresses the root cause rather than this symptom.
+
+**Every state belongs to exactly one state machine. There is no global concept
+of "state."** State names may coincide only if explicitly namespaced:
+
+```text
+ArtifactLifecycle.Active     IssueLifecycle.Open
+ADRLifecycle.Accepted        AcceptanceLifecycle.Recorded
+```
+
+> The same textual label must never imply semantic equivalence across state
+> machines.
+
+`shared/vocabularies/` therefore defines vocabularies **grouped by state
+machine**, not as one global list.
+
+The three "overlapping" vocabularies identified above are retroactively
+legitimate — they were always separate state machines, merely never named as
+such. The second option listed above was in effect chosen, and generalized: not
+just issue status, but *every* vocabulary is its own machine.
+
+The live contradiction dissolves without renaming anything. Nineteen ADRs marked
+`ADRLifecycle.Accepted` never conflicted with one revision being
+`ArtifactLifecycle.Active`; the two were never the same state.
+
+This is now a **fundamental modeling rule for the entire Engineering OS**,
+governing how skills model state machines in target domains as well.
+
+Opened by this answer: `ISSUE-0044` (`ArtifactLifecycle` conflicts with
+`ADR-0020`'s revision framing) and `ISSUE-0045` (the state machine inventory is
+not fixed).

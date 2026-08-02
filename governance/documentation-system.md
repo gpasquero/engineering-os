@@ -96,6 +96,15 @@ branch: feat/repository-bootstrap
 
 ## Status vocabularies
 
+**Each of these is a distinct state machine** (`ADR-0025`). There is no global
+concept of "state" in this project. `ADRLifecycle.Accepted` and
+`ArtifactLifecycle.Accepted` are different states that happen to share an
+English word; the label implies no equivalence.
+
+In front matter the machine is determined by document type, so the bare value is
+used. Explicit qualification is required wherever context does not fix the
+machine — in prose, vocabularies, contracts and any cross-machine comparison.
+
 These are closed sets. Adding a value requires an ADR.
 
 **ADR status** — `proposed`, `accepted`, `superseded`, `rejected`.
@@ -118,11 +127,13 @@ An accepted ADR is never edited. It is superseded by a new ADR.
 index or status document), `proposal` (a design note, not binding),
 `superseded` (replaced; must name `superseded-by`).
 
-> **These three vocabularies predate the revision lifecycle** defined in
-> `ADR-0020` (`Draft`, `Under Review`, `Accepted`, `Active`, `Superseded`,
-> `Archived`), and overlap it without agreeing. An ADR marked
-> `status: accepted` is, in lifecycle terms, `Active`. Unresolved —
-> `ISSUE-0043`. Must be settled before `shared/vocabularies/` is written.
+These three predate the revision lifecycle defined in `ADR-0020` (`Draft`,
+`Under Review`, `Accepted`, `Active`, `Superseded`, `Archived`) and appeared to
+overlap it. Under `ADR-0025` they do not: each is its own state machine, and
+`ADRLifecycle.Accepted` never meant `ArtifactLifecycle.Active`.
+
+The naming of the artifact/revision machine is still open (`ISSUE-0044`), as is
+the full inventory of machines this repository owns (`ISSUE-0045`).
 
 ## ID allocation
 

@@ -2,7 +2,7 @@
 id: ISSUE-0042
 title: Whether an Acceptance Record itself requires acceptance is unresolved
 type: question
-status: open
+status: resolved
 severity: high
 created: 2026-08-02
 updated: 2026-08-02
@@ -11,7 +11,7 @@ evidence:
   - governance/adr/ADR-0021-acceptance-record-specification.md
   - governance/adr/ADR-0020-artifact-taxonomy-and-revision-lifecycle-are-independent.md
   - governance/acceptance/ACCEPT-0001-bootstrap.md
-resolved-by: null
+resolved-by: ADR-0024
 ---
 
 # ISSUE-0042 — Does an Acceptance Record require acceptance?
@@ -59,8 +59,29 @@ equivalent ordering has been stated for acceptance records themselves.
 contract cannot state the artifact's own lifecycle obligations while this is
 open.
 
-## Resolution criteria
+## Resolution
 
-An ADR stating whether an Acceptance Record requires acceptance, and if not, on
-what principled basis it is exempt — not merely that the regress is
-inconvenient.
+`ADR-0024`. **The acceptance process terminates at the Acceptance Record.**
+
+Acceptance Records are authoritative governance artifacts but are explicitly
+excluded from recursive acceptance. A record derives its authority from **the
+acceptance decision it records**; requiring one to accept itself creates an
+infinite regress with no architectural value.
+
+The invariant:
+
+> Acceptance Records are never themselves subject to an additional Acceptance
+> Record.
+
+**This is the base case of the acceptance model, not an exception** — which is
+the principled basis the resolution criteria demanded. The self-attesting option
+listed above was chosen, and its apparent cost (making Acceptance Records an
+exception to `ADR-0020`) dissolves: nothing is exempted, because the chain was
+never meant to extend past the act of acceptance itself.
+
+The ordering option was rejected on the grounds that it buys nothing here.
+`ADR-0023`'s ordering exists to stop a policy relaxing the rules governing its
+own acceptance; an Acceptance Record has no rules to relax.
+
+`ACCEPT-0001`'s base-case status is now a consequence of a general rule rather
+than an assertion about one file.
