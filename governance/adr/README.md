@@ -16,7 +16,7 @@ same session the decision is made.
 > a rule exists; the rule that must be followed lives in a Policy under
 > `shared/policies/`. Agents consume policies; humans read ADRs for rationale.
 
-**Highest allocated ID: `ADR-0094`.** IDs are sequential and never reused.
+**Highest allocated ID: `ADR-0097`.** IDs are sequential and never reused.
 
 > This index table is a hand-maintained projection of ADR front matter. It is
 > listed in the transitional-debt register, `ISSUE-0037`.
@@ -189,6 +189,9 @@ Read these before designing anything that produces an artifact:
 | [ADR-0092](ADR-0092-the-engineering-director.md) | **The product is an Engineering Director; Engineering OS reasons, LLMs execute** | accepted | — |
 | [ADR-0093](ADR-0093-the-judgment-measure.md) | **Success is measured by how much engineering judgment happens before an LLM must think** | accepted | — |
 | [ADR-0094](ADR-0094-the-engineering-plan.md) | **The Engineering Plan is an authoritative artifact derived deterministically from the model** | accepted | — |
+| [ADR-0095](ADR-0095-the-engineering-loop.md) | **The architecture is the engineering loop; every stage is a deterministic artifact** | accepted | — |
+| [ADR-0096](ADR-0096-engineering-intent-is-a-registry.md) | **EngineeringIntent is a registry, not a Layer A entity** | accepted | — |
+| [ADR-0097](ADR-0097-the-task-graph.md) | **The Task Graph is derived deterministically from the plan and declares required capabilities** | accepted | — |
 
 ## Supersessions
 

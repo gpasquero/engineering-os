@@ -4,7 +4,7 @@ title: Build State
 status: current
 created: 2026-08-02
 updated: 2026-08-02
-milestone: engineering-planning
+milestone: task-graph
 ---
 
 # Build State
@@ -17,89 +17,81 @@ milestone: engineering-planning
 
 ## Current work
 
-**The Engineering Director** (`ADR-0092`). Engineering OS reasons; LLMs execute,
-and the two responsibilities are never merged.
+**The Engineering Director** (`ADR-0092`), built stage by stage around the
+engineering loop (`ADR-0095`).
+
+## The loop
+
+```text
+Developer Intent → Context Acquisition → Engineering Reasoning
+   → Engineering Plan → Task Graph → Worker Assignment → Execution
+   → Review → Knowledge Update → Continuous Learning ⟲
+```
+
+| Stage | State |
+|---|---|
+| Developer Intent | **registry** — 3 intents (`ADR-0096`) |
+| Context Acquisition | compiler + CKM |
+| Engineering Reasoning | 17 queries, 3 recommendations |
+| Engineering Plan | ✅ 2 plans |
+| **Task Graph** | ✅ **this milestone** |
+| Worker Assignment | capabilities declared; **routing not built** |
+| Execution · Review · Knowledge Update · Continuous Learning | **not built** |
+
+**Five of ten stages exist. The loop does not close** — which is the step that
+would make the system improve between one intent and the next.
 
 ## The measure
 
 `ADR-0093`. **How much engineering judgment happens before an LLM must think.**
-Entity, ADR, compiler-feature and query counts are inventory, not progress.
-
-| Plan | Subject | Derived | Deferred |
-|---|---|---|---|
-| `P-change-implementation` | `Artifact.ConflictGo` | **10** | 3 |
-| `P-change-implementation` | `Artifact.MetaV1Types` | 6 | 3 |
-| `P-change-concept` | `Concept.ManagedFields` | 14 | 3 |
-
-**Deferred items are enumerated, never counted.** *This plan cannot tell you
-whether the change is source-compatible for existing callers* is information;
-*3 deferrals* is a metric.
-
-## What valuable engineering capability became possible
-
-**A deterministic Engineering Plan, derived entirely from the model.**
 
 ```sh
-python3 tools/plan.py external/kubernetes-ssa P-change-implementation Artifact.ConflictGo
-python3 tools/plan.py external/kubernetes-ssa P-change-concept Concept.ManagedFields --reasoning
+python3 tools/taskgraph.py external/kubernetes-ssa P-change-implementation Artifact.ConflictGo
 ```
 
-Objective · assumptions · reasoning chain · ordered actions · dependencies ·
-required reviews · expected evidence · completion conditions · **derived and
-deferred judgment**.
+| Graph | Tasks | mechanical | reasoning | human | Parallelism | Deferred |
+|---|---|---|---|---|---|---|
+| `Artifact.ConflictGo` | 5 | 3 | 2 | 1 | 1 | 3 |
+| `Concept.ManagedFields` | 7 | 2 | 4 | 1 | **2** | 3 |
 
-**No language model participates.** Every action names the query and
-recommendation that produced it.
-
-### The plan surfaced the model's own gap as an unmet precondition
-
-Planning a change to `conflict.go` leaves one completion condition unchecked:
-
-```text
-[ ] The constraints on this artifact are known and were reviewed.   [Q-assumptions]
-[x] At least one test validates this artifact.                      [Q-tests]
-```
-
-That is the traceability gap found last session — nothing constrains
-`Concept.Conflict` — **arriving unprompted as a reason the work is not ready to
-start.** The same plan against `Artifact.MetaV1Types` checks that box and leaves
-the other unchecked.
+**An executor receives a task with an objective, dependencies, a completion
+condition, the evidence it must produce, and no decisions about ordering.** That
+is the largest single transfer of judgement from executor to system the project
+has made.
 
 ## What exists
 
 | Area | State |
 |---|---|
-| **`model/plans.md`** | **2 plans**, declared. Phases, dependencies, reviews, evidence, completion, explicit `defers` |
-| **`compiler/plan/`** | Derives plans by executing queries and recommendations. Stable topological phase order; cyclic dependencies rejected |
-| **`tools/plan.py`** | Implements no plan. `--reasoning` prints the full chain; `--json` for executors |
-| `model/recommendations.md` · `compiler/recommend/` | 3 recommendations, 6-action vocabulary |
-| `model/queries.md` · `compiler/query/` | 17 queries, 6 operators |
-| `model/finding-kinds.md` | 8-kind taxonomy. **No confidence scores anywhere** |
+| **`compiler/taskgraph/`** | Derives graphs from plans. **Levels computed, not annotated**; cyclic dependencies rejected |
+| **`tools/taskgraph.py`** | Text, `--json` for executors, `--mermaid`. Verified byte-identical across runs |
+| **`model/task-kinds.md`** | 6 kinds from plan actions + **2 terminal**: review gate and knowledge update |
+| **`model/worker-capabilities.md`** | 6 capabilities, each classed `mechanical`, `reasoning` or `human` |
+| **`model/engineering-intents.md`** | 3 intents. **Not a metamodel entity** (`ADR-0096`) |
+| `model/plans.md` · `compiler/plan/` | 2 plans, 8 declared parts, explicit `defers` |
+| `model/recommendations.md` · `model/queries.md` | 3 recommendations, 17 queries |
 | `external/kubernetes-ssa/` | 41 nodes, four source classes, 6 classified findings |
 | `tests/` | 17 fixtures, 9 negative, golden outputs |
-| Parity | **981 query/subject pairs**, four projects, full fidelity |
-| `model/metamodel/` | 23 of 27 entities — **unchanged for three milestones** |
-| Registries | **8** — entity types, predicates, core types, rules, queries, recommendations, plans, finding kinds |
+| Registries | **11** |
+| `model/metamodel/` | 23 of 27 entities — **unchanged for four milestones** |
 
-## Awaiting decision
+## Capabilities, never workers
 
-**`EngineeringIntent`** — `governance/design/PROPOSAL-engineering-intent.md`.
-**Not implemented**, as directed.
+A task declares **what capability it requires**. Routing is a separate stage
+(`ADR-0097`).
 
-The proposal recommends **neither** offered option. Not a Layer A entity: it
-would be the first whose instances live outside models. Not a Recommendation
-specialization: that inverts the relationship, since an intent should *select*
-recommendations rather than be one. **A registry beside them**, because
-promoting a registry later is cheap and demoting an entity is not.
+**Every graph terminates in `T-review-gate`, which requires `C-approve` — a
+capability no worker of any kind may hold**, because self-certification is
+prohibited (`ADR-0023`). By design, and worth stating: the graph ends in a task
+nothing can execute automatically.
 
 ## What does not exist
 
-Of the nine steps in `ADR-0092`'s loop, **four exist**: Reasoning, Engineering
-Plan, Recommendations, and the model the first three read.
+**No routing.** Capabilities are declared and nothing matches them to a worker.
 
-**No Engineering Goal, no Execution Plan, no Task Graph, no AI workers, no
-Verification, and no Knowledge Update.** The loop does not close, which is the
-step that would make this a system that learns.
+**No execution, no review, no knowledge update.** `T-update-knowledge` appears in
+every graph as a task and has no executor — **the loop's closure is present as a
+node and absent as a capability**, which is more honest than omitting it.
 
 No second external system. No confidence scores, and none will be added.
 
@@ -109,25 +101,26 @@ No second external system. No confidence scores, and none will be added.
 
 | Issue | Why it is open |
 |---|---|
-| `ISSUE-0037` | Hand-maintained projections. **Eight registries**, eight hand-maintained sources, zero generated |
+| `ISSUE-0037` | Hand-maintained projections. **Eleven registries**, eleven hand-maintained sources, zero generated |
 
 ## Debt discovered while building
 
 | Question | Where |
 |---|---|
-| Phase order and `requires` are judgements encoded as data with nothing to check them | `plans.md` |
-| **`defers` is authored, not derived.** Nothing detects a decision neither derived nor deferred | `plans.md` |
-| Completion conditions are checkable in principle and unchecked in practice — nothing re-runs a plan | `plans.md` |
-| A plan inherits every weakness of its queries and presents it with more authority | `ADR-0094` |
-| The judgment measure is gameable by inflating `derived` with trivia | `ADR-0093` |
+| **A plan action with no declared task kind produces no task**, reported as a diagnostic rather than dropped — but nothing prevents the omission | `ADR-0097` |
+| Execution classes are authored judgements — that reading source requires reasoning is plausible and unverified | `worker-capabilities.md` |
+| Completion conditions are inherited from the plan and **remain unchecked**; nothing re-runs them | `plans.md`, `ADR-0097` |
+| `I-investigate` selects no plan — a real intent with no planning support | `engineering-intents.md` |
+| Intent selection is a declared list; adding a plan does not update the intents that should offer it | `engineering-intents.md` |
+| Task objectives substitute only `{targets}`, so a task cannot say *why* those targets were selected | `task-kinds.md` |
 
 ## Next action
 
-**The Project Owner's decision on `EngineeringIntent`**, then the second external
-system — PostgreSQL or LLVM, for architectural diversity rather than scale.
+**The first true Engineering Director** — one command from intent to Plan, Task
+Graph, Reviews, Suggested Worker Assignment, Verification Strategy and Expected
+Knowledge Updates, **with no language model invoked.**
 
-**Aim at ranks 1–3 of the finding taxonomy.** Kubernetes reached rank 5; the
-three strongest kinds have never been used.
+Only then should Claude or Codex receive implementation tasks.
 
 ## Repository state
 

@@ -118,6 +118,44 @@ registries:
       queries. No plan logic is written in code, and no language model
       participates in producing a plan (ADR-0092, ADR-0094).
 
+  - id: REG-engineering-intents
+    registers: why a developer entered the system
+    source: ../engineering-intents.md
+    extraction: yaml-block
+    collection: engineering-intents
+    membership: >
+      An intent is registered by appearing with an id, a label, the question it
+      asks, and the plans and recommendations it selects.
+    extension: >
+      An adopting repository declares its own intents. An intent is never a
+      metamodel entity: its instances belong to a session, not to a model
+      (ADR-0096).
+
+  - id: REG-worker-capabilities
+    registers: what kind of worker a task requires
+    source: ../worker-capabilities.md
+    extraction: yaml-block
+    collection: worker-capabilities
+    membership: >
+      A capability is registered by appearing with an id, a label, an execution
+      class of mechanical, reasoning or human, and a rationale.
+    extension: >
+      An adopting repository declares capabilities its workers have. A task
+      declares capabilities, never workers (ADR-0097).
+
+  - id: REG-task-kinds
+    registers: how a plan action becomes a task
+    source: ../task-kinds.md
+    extraction: yaml-block
+    collection: task-kinds
+    membership: >
+      A task kind is registered by appearing with an id, either a from-action or
+      terminal flag, an objective template, required capabilities, a completion
+      condition and the evidence it produces.
+    extension: >
+      An adopting repository declares kinds for its own plan actions. A TaskGraph
+      is derived, never declared (ADR-0097).
+
   - id: REG-validation-rules
     registers: the rules the compiler executes
     source: validation-rules.md

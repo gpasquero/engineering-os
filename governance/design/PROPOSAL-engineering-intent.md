@@ -1,18 +1,25 @@
 ---
 id: PROPOSAL-ENGINEERING-INTENT
 title: Proposal — where EngineeringIntent belongs
-status: proposed
+status: accepted
 created: 2026-08-02
 updated: 2026-08-02
 semantic-layer: None
 artifact-kind: authoritative
 established-by: [ADR-0065, ADR-0076, ADR-0085, ADR-0091, ADR-0092]
 decision-required-from: Project Owner
+resolved-by: ADR-0096
 ---
 
 # Proposal — where `EngineeringIntent` belongs
 
-**Requested before implementation.** Nothing in this proposal has been built.
+> **ACCEPTED as recommended** — `ADR-0096`. The reviewer confirmed that
+> `EngineeringIntent` should not become a Layer A entity: it is part of an
+> engineering session, not of the software knowledge. **Do not promote it unless
+> reality forces us to.**
+
+**Requested before implementation.** Nothing in this proposal had been built when
+it was written.
 
 The question: is `EngineeringIntent` a **Layer A entity**, or is it better
 represented as a **specialization of Recommendation**?
