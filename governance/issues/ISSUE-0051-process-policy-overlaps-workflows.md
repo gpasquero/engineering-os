@@ -2,7 +2,7 @@
 id: ISSUE-0051
 title: ProcessPolicy overlaps the workflow catalogue
 type: inconsistency
-status: open
+status: resolved
 severity: high
 created: 2026-08-02
 updated: 2026-08-02
@@ -11,7 +11,7 @@ evidence:
   - governance/adr/ADR-0030-normative-artifact-taxonomy.md
   - governance/roadmap.md
   - governance/design/workflow-catalog.md
-resolved-by: null
+resolved-by: ADR-0033
 ---
 
 # ISSUE-0051 — `ProcessPolicy` overlaps the workflow catalogue
@@ -57,7 +57,29 @@ plausibly the missing half — but that reading is not stated.
 
 The first two are both coherent and lead to different M8 deliverables.
 
-## Resolution criteria
+## Resolution
 
-An ADR stating the relationship between `ProcessPolicy` and workflow artifacts,
-and which milestone owns which content. Needed before M3 writes process policies.
+`ADR-0033`. **A `ProcessPolicy` defines normative execution rules; a Workflow
+defines executable orchestration.** Independent artifact types — the first
+option listed above.
+
+- A Workflow **references** one or more ProcessPolicies.
+- A ProcessPolicy **never embeds** workflow execution.
+- A Workflow **never embeds** normative rules.
+
+```text
+ProcessPolicy  governs  Workflow
+Workflow       executes Process
+```
+
+The stated purpose is the sharp part: **this prevents implementation procedures
+from becoming the source of engineering policy.** A rule that lives only inside
+the steps implementing it cannot be reviewed, reused by another workflow, or
+changed without editing an executable artifact.
+
+The Registry Pattern reading was rejected — a workflow is not an index of a
+policy, and forcing the pattern would misuse an abstraction that fits
+identity-and-semantics, not rules-and-orchestration.
+
+`ADR-0008`'s existing rule that workflows "contain no methodology of their own"
+now has a mechanism.

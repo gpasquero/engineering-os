@@ -2,7 +2,7 @@
 id: ISSUE-0053
 title: Whether a Registry is authoritative or derived is contradicted across three ADRs
 type: inconsistency
-status: open
+status: resolved
 severity: blocking
 created: 2026-08-02
 updated: 2026-08-02
@@ -11,7 +11,7 @@ evidence:
   - governance/adr/ADR-0031-registry-pattern.md
   - governance/adr/ADR-0016-governance-is-authoritative-manifests-are-projections.md
   - governance/adr/ADR-0012-executable-framework-and-artifact-taxonomy.md
-resolved-by: null
+resolved-by: ADR-0032
 ---
 
 # ISSUE-0053 — Is a Registry authoritative or derived?
@@ -73,8 +73,36 @@ This is coherent, and it is not what any of the three ADRs actually says.
 
 That last question is the hard one, and the taxonomy currently says no.
 
-## Resolution criteria
+## Resolution
 
-An ADR assigning an artifact kind to each of the three manifests and to
-registries in general, and stating how `ADR-0016`'s projection rule and
-`ADR-0031`'s authoritative-index claim coexist.
+`ADR-0032`. **The contradiction came from using "Registry" for two different
+concepts.**
+
+- **Registry Specification** — *authoritative*. Defines registry identity,
+  semantic purpose, ownership, membership rules, required metadata, constraints,
+  relationships and extension rules.
+- **Registry Projection** — *derived*. The generated index of the entities
+  currently registered.
+
+```text
+State Machine Registry Specification → Knowledge Compiler → Registry Projection
+        (authoritative)                                        (derived)
+```
+
+The projection is what humans browse; the specification is what governs the
+registry.
+
+**All three ADRs are preserved simultaneously.** `ADR-0016` remains true because
+generated indexes are still derived; `ADR-0031` remains true because registries
+are still first-class. The ambiguity disappears because the authoritative
+artifact is the specification, not the generated contents.
+
+The reconciliation sketched above — the "restating" test — was **rejected**: it
+makes the artifact kind depend on a content comparison that shifts as
+specifications evolve, so an artifact could change kind without being edited.
+
+The hard sub-question above is answered by not arising: no artifact is part
+authoritative and part generated, because they are two artifacts.
+
+`ADR-0032` also corrects `ADR-0031`'s opening definition, and names the
+Engineering OS metamodel for the first time — `ISSUE-0054`.

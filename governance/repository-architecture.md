@@ -97,8 +97,11 @@ Derived Artifacts          DERIVED — website, indexes, graph, reports, caches,
 Compiler stages: parsing → normalization → validation → semantic linking.
 
 Derived artifacts are produced *from the canonical model*, never directly from
-the authoritative assets. The documentation website is one projection among many.
-**No consumer is privileged.**
+the authoritative assets. Consumers include the knowledge graph, search index,
+cross-reference index, impact database, validation reports, agent context,
+documentation website and the **Knowledge Explorer** (`ADR-0034`) — a
+per-repository navigable projection that every adopting repository generates over
+its own domain. **No consumer is privileged.**
 
 ## Authoring, acceptance and compilation
 
@@ -232,9 +235,18 @@ how a specification came to be, not a specification.
 
 ## The Registry Pattern
 
-**A Registry is an authoritative index of semantic entities. It never contains
-the complete specification** — it references independently versioned ones
-(`ADR-0031`).
+**A Registry never contains the complete specification** — it references
+independently versioned ones (`ADR-0031`). The word names **two artifacts of
+different kinds** (`ADR-0032`):
+
+| Artifact | Kind | Holds |
+|---|---|---|
+| **Registry Specification** | authoritative | identity, semantic purpose, ownership, membership rules, required metadata, constraints, relationships, extension rules |
+| **Registry Projection** | derived | the generated index of entities currently registered |
+
+The projection is what humans browse; the specification governs the registry.
+This reconciles `ADR-0016` (generated indexes are derived) with `ADR-0031`
+(registries are first-class) without superseding either.
 
 | The Registry answers | The Specification answers |
 |---|---|
@@ -252,8 +264,9 @@ state machines registered rather than enumerated, the registry indexing
 specifications held elsewhere, and policies following the same shape — before
 being named.
 
-Whether a Registry is `authoritative` or `derived` is contested across
-`ADR-0031`, `ADR-0016` and `ADR-0012` — `ISSUE-0053`, which blocks the manifests.
+`governance/issues/index.md` and `governance/adr/README.md` are Registry
+Projections maintained by hand because no compiler exists — the debt registered
+in `ISSUE-0037`. Their Registry Specifications do not exist yet either.
 
 ## Reference architecture, not reference implementation
 
@@ -414,11 +427,8 @@ These are recorded as issues and must not be silently assumed:
 
 - `ISSUE-0049` — where state machine specifications live, and their boundary
   with `shared/vocabularies/`. Blocks `shared/vocabularies/`.
-- `ISSUE-0053` — whether a Registry is authoritative or derived. **Blocks the
-  three manifests.**
-- `ISSUE-0051` — `ProcessPolicy` overlaps the workflow catalogue.
-- `ISSUE-0052` — the Knowledge Explorer is named with a requirement but
-  undefined.
+- `ISSUE-0054` — the Engineering OS metamodel is named but undefined. Likely the
+  same question as `ISSUE-0031`'s self-model, approached from another direction.
 - `ISSUE-0048` — no mechanism for correcting part of an `Active` ADR.
 - `ISSUE-0007` — versioning granularity, now also covering what identifies a
   **revision**.

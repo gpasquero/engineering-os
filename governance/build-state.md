@@ -17,9 +17,9 @@ milestone: M2
 ## Current milestone
 
 **M2 — Foundational contracts, manifests and the compiler interface. Not
-started.** The three manifests are blocked; the rest is not.
+started, and fully unblocked.**
 
-M1 is complete.
+M1 is complete. **M3 is also unblocked.**
 
 ## What exists
 
@@ -29,10 +29,10 @@ M1 is complete.
 | Documentation system, session protocol | Defined and accepted |
 | Vision, principles, glossary | Written |
 | Roadmap | M1–M13 |
-| ADRs | 31 — 26 accepted, 5 superseded |
-| Issues | 53 recorded — 25 open, 27 resolved, 1 deferred |
-| Acceptance Records | 5 — `ACCEPT-0001` (trust root) through `ACCEPT-0005` |
-| Session journal | 10 entries |
+| ADRs | 34 — 29 accepted, 5 superseded |
+| Issues | 54 recorded — 23 open, 30 resolved, 1 deferred |
+| Acceptance Records | 6 — `ACCEPT-0001` (trust root) through `ACCEPT-0006` |
+| Session journal | 11 entries |
 | Frozen provenance | `imports/` (3 prototypes), `sources/` (requirements, archives, original handoff) |
 
 ## What does not exist
@@ -41,7 +41,8 @@ No executable code, and none is planned before M9 (`ADR-0017`, `ISSUE-0036`).
 
 Nothing in `shared/`, `skills/`, `workflows/`, `model-spec/`, `model/`,
 `templates/`, `schemas/`, `validation/`, `tests/`, `adapters/` or `docs/`. None
-of the three manifests. No State Machine Registry. **No policies of any kind.**
+of the three manifests. No Registry Specification of any kind. **No policies of
+any kind.**
 
 ## Acceptance status
 
@@ -52,14 +53,15 @@ of the three manifests. No State Machine Registry. **No policies of any kind.**
 | `ACCEPT-0003` | `SESSION-0007` at `d439084` |
 | `ACCEPT-0004` | `SESSION-0008` at `51bed77` |
 | `ACCEPT-0005` | `SESSION-0009` at `7af8f44` |
+| `ACCEPT-0006` | `SESSION-0010` at `a87ce51` |
 
-**`ADR-0030`, `ADR-0031`, `ISSUE-0051`–`ISSUE-0053` and this session's
-propagation are `Under Review`**, not `Active`.
+**`ADR-0032`–`ADR-0034`, `ISSUE-0054` and this session's propagation are `Under
+Review`**, not `Active`.
 
 ## A note for agents reading this repository
 
-**The ADR corpus is history, not specification** (`ADR-0029`). Thirty-one
-decisions, five superseded, one partially corrected.
+**The ADR corpus is history, not specification** (`ADR-0029`). Thirty-four
+decisions, five superseded, two partially corrected.
 
 The normative rules will live in `ModelingPolicy`, `GovernancePolicy` and
 `ProcessPolicy` artifacts under `shared/policies/`. **Until M3 writes them, no
@@ -68,16 +70,17 @@ condition `ADR-0029` exists to end.
 
 ## Blocking
 
-| Issue | Blocks |
-|---|---|
-| `ISSUE-0053` | **The three manifests.** Whether a Registry is `authoritative` or `derived` is contested across `ADR-0031`, `ADR-0016` and `ADR-0012`, and the artifact kind determines how each manifest is built. |
-| `ISSUE-0049` | `shared/vocabularies/` and the state machine specifications |
-| `ISSUE-0051` | Process policies in M3, and the workflow catalogue in M8 |
-| `ISSUE-0002` | M8 |
-| `ISSUE-0006` | M10 |
+**Nothing blocks M2 or M3.** For the first time since M1, no issue blocks a
+named deliverable.
 
-The compiler interface specification, `model-spec/` and the remaining contracts
-are unblocked and can start now.
+Two issues gate specific work within M2:
+
+| Issue | Gates |
+|---|---|
+| `ISSUE-0049` | State machine specifications and `shared/vocabularies/` |
+| `ISSUE-0054` | Anything depending on the metamodel |
+
+`ISSUE-0002` blocks M8; `ISSUE-0006` blocks M10.
 
 ## Must be resolved within M2
 
@@ -86,9 +89,12 @@ are unblocked and can start now.
 
 ## Known debt
 
-- **`ISSUE-0037`** — five hand-maintained projections; no generator until
-  `ISSUE-0036` is un-deferred.
-- **`ADR-0027`** — registration correctness unenforced until validators exist.
+- **`ISSUE-0037`** — five hand-maintained Registry Projections; no compiler until
+  `ISSUE-0036` is un-deferred. `ADR-0032` now names what they are, and notes
+  their Registry Specifications do not exist either.
+- **`ISSUE-0048`** — no machine-readable correction mechanism. Two corrections
+  now exist (`ADR-0025`←`ADR-0026`, `ADR-0031`←`ADR-0032`), both visible only in
+  prose and the ADR index.
 - **`ADR-0029`** — rule text will exist in both ADRs and policies. The divergence
   is intended, but intended divergence and accidental drift look identical in a
   diff.
@@ -97,9 +103,8 @@ are unblocked and can start now.
 
 Accept or return this session's work.
 
-Then `ISSUE-0053`, which is the only issue blocking a named M2 deliverable.
-Meanwhile the compiler interface specification and `model-spec/` need no further
-decisions.
+Then begin M2. The compiler interface specification and `model-spec/` are the
+largest deliverables and have no remaining decision dependencies.
 
 ## Repository state
 

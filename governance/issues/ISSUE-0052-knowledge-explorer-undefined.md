@@ -2,7 +2,7 @@
 id: ISSUE-0052
 title: The Knowledge Explorer is named with a requirement but has no definition
 type: gap
-status: open
+status: resolved
 severity: medium
 created: 2026-08-02
 updated: 2026-08-02
@@ -10,7 +10,7 @@ blocks: [M12]
 evidence:
   - governance/adr/ADR-0031-registry-pattern.md
   - governance/adr/ADR-0014-three-tier-knowledge-model.md
-resolved-by: null
+resolved-by: ADR-0034
 ---
 
 # ISSUE-0052 — The Knowledge Explorer is undefined
@@ -51,8 +51,25 @@ attached to an undefined artifact would cost more.
 That last question matters most: if every adopter gets an explorer over its own
 knowledge, it is a shipped capability rather than a project website.
 
-## Resolution criteria
+## Resolution
 
-A definition — as an ADR or as an entry in the consumer list of `ADR-0014`'s
-successor — stating what the Knowledge Explorer is, what it reads, and who it is
-for.
+`ADR-0034`. **Every Engineering OS repository owns its own Knowledge Explorer.**
+
+All four sub-questions are answered:
+
+- It is a **projection of that repository's Canonical Knowledge Model**, like
+  every other consumer.
+- It is **not** the Documentation Website. It stands alongside documentation,
+  search indexes and validation reports.
+- Generating one requires the compiler toolchain — consistent with `ADR-0017`,
+  which carves out generation as the case where the toolchain *is* needed.
+- **It is per-repository, not framework-only.** Engineering OS has one
+  describing the framework; every adopting repository generates another
+  describing its own domain.
+
+The sub-question flagged as mattering most is answered in the direction that
+makes it a **shipped capability rather than a project website** — arguably the
+most visible benefit of adopting Engineering OS.
+
+Federation between Explorers via Knowledge Packages is **an additional
+capability, not the default architecture**.

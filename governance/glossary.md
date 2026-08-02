@@ -36,9 +36,12 @@ A skill lives in `skills/<skill-id>/`.
 > unit of methodology. When this repository says "skill" without qualification,
 > it means the methodology unit. The runtime packaging question is `ISSUE-0001`.
 
-**Workflow** — an ordered composition of skills with gates and exit criteria,
-representing one kind of engineering change end to end. Workflows sequence
-skills; they contain no methodology of their own.
+**Workflow** — **executable orchestration**: an ordered composition of skills
+with gates and exit criteria, representing one kind of engineering change end to
+end. Workflows sequence skills and contain no methodology of their own — the
+normative rules live in the `ProcessPolicy` artifacts a workflow references
+(`ADR-0033`). This prevents implementation procedures from becoming the source
+of engineering policy.
 
 **Policy** — **never used unqualified in specifications** (`ADR-0030`). Three
 distinct normative artifact kinds live in `shared/policies/`:
@@ -51,8 +54,10 @@ distinct normative artifact kinds live in `shared/policies/`:
   traceability rules. Not tied to one decision, expected to evolve, normative
   rather than historical, **directly consumed by AI agents** (`ADR-0029`).
 - **`ProcessPolicy`** — rules governing *execution of workflows*: feature
-  implementation, bug investigation, release, migration. Overlaps the workflow
-  catalogue — `ISSUE-0051`.
+  implementation, bug investigation, release, migration. **A ProcessPolicy
+  governs a Workflow; the two are independent artifact types.** A Workflow
+  references ProcessPolicies and never embeds normative rules; a ProcessPolicy
+  never embeds execution steps (`ADR-0033`).
 
 > **The general naming rule for normative artifact types: a name is always
 > qualified by what it governs.** `ADR-0025` fixed state names by owning
@@ -140,9 +145,21 @@ state. What identifies a revision is undefined — `ISSUE-0007`.
 after the entity it governs, per the naming rule in `ADR-0026`, which applies to
 every versioned object in Engineering OS.
 
-**Registry** — an **authoritative index of semantic entities**. A Registry never
-contains the complete specification; it references independently versioned
-specifications (`ADR-0031`).
+**Registry** — a first-class concept that never contains the complete
+specification; it references independently versioned specifications
+(`ADR-0031`). **The word names two artifacts, and they have different kinds**
+(`ADR-0032`):
+
+- **Registry Specification** — **authoritative**. Defines registry identity,
+  semantic purpose, ownership, membership rules, required metadata, constraints,
+  relationships and extension rules. *This is what governs the registry.*
+- **Registry Projection** — **derived**. The generated index of the entities
+  currently registered. *This is what humans browse.*
+
+```text
+Registry Specification → Knowledge Compiler → Registry Projection
+    (authoritative)                              (derived)
+```
 
 | The Registry answers | The Specification answers |
 |---|---|

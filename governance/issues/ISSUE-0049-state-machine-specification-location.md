@@ -76,6 +76,16 @@ transition rules and the rest. That narrows this issue to one question — where
 the specification file lives — and removes the third option below, which
 contradicts the pattern.
 
+## Vocabulary sharpened by ADR-0032
+
+Three artifacts are now distinguishable where this issue saw two: the **Registry
+Specification** (governing the registry itself), the **Registry Projection**
+(the generated index), and each **entity specification** — one per state
+machine.
+
+This issue concerns only the third. The first two have homes: the specification
+is authored, the projection is generated from it.
+
 ## Resolution criteria
 
 An ADR naming where state machine specifications live, what

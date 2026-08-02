@@ -30,13 +30,14 @@ recorded as issues. No skills, policies or contracts.
 resolved by `ADR-0020` through `ADR-0023`, and the trust root `ACCEPT-0001`
 exists.
 
-**`ISSUE-0053` blocks the three manifests** — whether a Registry is
-authoritative or derived is contested across `ADR-0031`, `ADR-0016` and
-`ADR-0012`, and the artifact kind determines how each manifest is built.
+**Unblocked.** `ISSUE-0053` is resolved by `ADR-0032`: a Registry Specification
+is authoritative and a Registry Projection is derived, so each manifest gets one
+artifact kind.
 
-`ISSUE-0049` gates `shared/vocabularies/` and the state machine specifications.
-The compiler interface specification, `model-spec/` and the remaining contracts
-can proceed in parallel.
+`ISSUE-0049` gates the state machine specifications and `shared/vocabularies/`;
+`ISSUE-0054` gates anything depending on the metamodel. The compiler interface
+specification, `model-spec/`, the manifests and the remaining contracts can
+proceed.
 
 **Registry Pattern evaluation** (`ADR-0031`): every extensible concept —
 skills, workflows, state machines, policies, contracts, vocabularies, ontology
@@ -53,8 +54,10 @@ Registry + Specification modeling before being modeled another way.
 - Skill contract and workflow contract, including write-scope declaration
 - Evidence record, conflict record, traceability record contracts
 - **Acceptance Record contract** (`ADR-0021`, `ISSUE-0042`)
-- **State Machine Registry** — a section of `KNOWLEDGE-MANIFEST.yaml`
-  (`ADR-0028`), indexing machines whose specifications are separate artifacts.
+- **State Machine Registry** — a **Registry Specification** (authoritative) plus
+  its **Registry Projection** (derived), the latter indexed from a section of
+  `KNOWLEDGE-MANIFEST.yaml` (`ADR-0028`, `ADR-0032`). Machine specifications are
+  separate artifacts.
   Includes defining the shape of three fields that do not yet have one:
   transition rules, related ontology concepts, authoritative specification.
 - `shared/vocabularies/` — **grouped by state machine** (`ADR-0025`), never as
@@ -76,8 +79,8 @@ must be readable and editable without the compiler (`ADR-0017`).
 
 ## M3 — Shared policies
 
-**Blocked by `ISSUE-0051`** — `ProcessPolicy` overlaps the M8 workflow
-catalogue, and the boundary must be drawn before process policies are written.
+**Unblocked.** `ISSUE-0051` is resolved by `ADR-0033`: a ProcessPolicy governs a
+Workflow, and the two are independent artifact types.
 
 Three normative artifact kinds (`ADR-0030`):
 
@@ -88,7 +91,9 @@ Three normative artifact kinds (`ADR-0030`):
 - **`GovernancePolicy`** — acceptance, review and release governance. The first
   is accepted under the trust root `ACCEPT-0001` and thereafter governs its own
   successor (`ADR-0023`).
-- **`ProcessPolicy`** — execution rules for workflows.
+- **`ProcessPolicy`** — normative execution rules. Referenced *by* workflows,
+  never embedding execution steps (`ADR-0033`). M8 depends on these existing
+  first, or workflows will be written with rules inlined.
 
 The inherited policy list — evidence, research, ontology, constraint-placement,
 write-scope, autonomy and escalation, secrets and privacy, traceability,
@@ -120,7 +125,8 @@ depend on this milestone more directly than on the decision corpus.
 `feature`, `bug`, `behavior-change`, `refactoring`, `integration`,
 `architecture-evolution`
 
-Blocked by `ISSUE-0002` and `ISSUE-0051`. Depends on `ISSUE-0016`.
+Blocked by `ISSUE-0002`. Depends on `ISSUE-0016`, and on the M3 ProcessPolicies
+that each workflow references (`ADR-0033`).
 
 ## M9 — Schemas, validation and the reference implementation
 
@@ -147,8 +153,10 @@ which includes the unresolved question of whether `governance/` overlaps
 
 ## M12 — Documentation, adapters and v1 release
 
-User guides, `adapters/`, licence, changelog, and the **Knowledge Explorer**
-(`ADR-0031`, `ISSUE-0052`). Depends on `ISSUE-0001` and `ISSUE-0011`.
+User guides, `adapters/`, licence, changelog, and the **Knowledge Explorer** — a
+per-repository projection of the Canonical Knowledge Model that every adopting
+repository generates over its own domain (`ADR-0034`). Depends on `ISSUE-0001`
+and `ISSUE-0011`.
 
 ## M13 — Knowledge Packages and federation
 
