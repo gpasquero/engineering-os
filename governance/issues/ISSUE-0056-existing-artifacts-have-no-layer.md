@@ -2,7 +2,7 @@
 id: ISSUE-0056
 title: The methodology artifacts have no layer under the four-layer architecture
 type: gap
-status: open
+status: resolved
 severity: blocking
 created: 2026-08-02
 updated: 2026-08-02
@@ -11,7 +11,7 @@ evidence:
   - governance/adr/ADR-0037-four-layer-semantic-architecture.md
   - governance/adr/ADR-0038-four-questions-for-every-new-artifact-type.md
   - governance/adr/ADR-0010-repository-local-knowledge-ownership.md
-resolved-by: null
+resolved-by: ADR-0039
 ---
 
 # ISSUE-0056 — The methodology artifacts have no layer
@@ -70,9 +70,38 @@ to exactly one layer" is false as stated.
 The first reading is the most consistent with the metamodel's entity list, and
 the most surprising in its consequences.
 
-## Resolution criteria
+## Resolution
 
-An ADR assigning a layer to `shared/`, `skills/`, `workflows/`, `templates/`,
-`schemas/` and `governance/`, or amending `ADR-0037`'s claim that every artifact
-belongs to exactly one layer. Must precede the M2 contracts, since each must
-declare its layer.
+`ADR-0039`. **All four readings above were wrong, because the question was.**
+
+> **The problem comes from assigning layers to directories. Layers do not own
+> directories. Layers own semantic artifacts.**
+
+A directory may legitimately contain artifacts of multiple layers. Repository
+layout is an **implementation** concern; the semantic layer is an
+**architectural** one. **The compiler classifies artifacts, not folders.**
+
+`governance/` is **orthogonal** to the semantic layers. ADRs, Issues, Acceptance
+Records and Sessions are governance artifacts — inputs to the Engineering OS
+*process*, not part of the semantic model of a target domain. The same applies to
+`tests/`, `scripts/`, `tooling/`, `ci/` and editor configuration.
+
+Two kinds of thing are now distinguished:
+
+- **Semantic Layers** — A, B, C, D.
+- **Cross-Cutting Infrastructure** — Governance, Tooling, Automation,
+  Validation, Testing, CI/CD.
+
+These intersect the semantic layers but are not themselves layers. The ambiguity
+is resolved **without forcing unrelated artifacts into the semantic
+architecture**.
+
+`ADR-0037`'s universality claim is corrected: every *semantic* artifact belongs
+to exactly one layer; cross-cutting artifacts belong to none. `ADR-0038`'s
+question 1 accepts `None (Not Applicable)` as a valid answer.
+
+Generalized by `ADR-0040` into Architectural Dimensions.
+
+Opened by this answer: `ISSUE-0057` (the dimension and infrastructure sets are
+examples) and `ISSUE-0058` (how an artifact declares its classification, now
+that paths no longer imply it).

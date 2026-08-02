@@ -16,7 +16,7 @@ same session the decision is made.
 > a rule exists; the rule that must be followed lives in a Policy under
 > `shared/policies/`. Agents consume policies; humans read ADRs for rationale.
 
-**Highest allocated ID: `ADR-0038`.** IDs are sequential and never reused.
+**Highest allocated ID: `ADR-0040`.** IDs are sequential and never reused.
 
 > This index table is a hand-maintained projection of ADR front matter. It is
 > listed in the transitional-debt register, `ISSUE-0037`.
@@ -52,6 +52,10 @@ Read these before designing anything that produces an artifact:
   C (canonical model), D (projections).
 - **`ADR-0038`** — **four questions** every new artifact type must answer before
   acceptance.
+- **`ADR-0039`** — layers classify **artifacts, not directories**. Governance
+  and infrastructure are cross-cutting, not layers.
+- **`ADR-0040`** — **Architectural Dimensions**. Artifacts are classified along
+  multiple independent axes; the metamodel models them explicitly.
 - **`ADR-0017`** — reference architecture, not reference implementation.
 - **`ADR-0019`** — Knowledge Packages are a published interface.
 
@@ -97,6 +101,8 @@ Read these before designing anything that produces an artifact:
 | [ADR-0036](ADR-0036-canonical-model-conforms-to-the-metamodel.md) | **The Canonical Knowledge Model conforms to the Metamodel** | accepted | — |
 | [ADR-0037](ADR-0037-four-layer-semantic-architecture.md) | **The four-layer semantic architecture** | accepted | ISSUE-0031, ISSUE-0055 |
 | [ADR-0038](ADR-0038-four-questions-for-every-new-artifact-type.md) | **Four questions for every new artifact type** | accepted | — |
+| [ADR-0039](ADR-0039-layers-classify-artifacts-not-directories.md) | **Layers classify artifacts, not directories** | accepted | ISSUE-0056 |
+| [ADR-0040](ADR-0040-architectural-dimensions.md) | **Architectural Dimensions** | accepted | — |
 
 ## Supersessions
 
@@ -125,6 +131,7 @@ wrong. There is no front-matter mechanism for this — `ISSUE-0048`.
 |---|---|---|
 | `ADR-0025` | `ADR-0026` | Examples only. `ArtifactLifecycle` should read `ArtifactRevisionLifecycle`. The state-machine rule is untouched and remains `Active`. |
 | `ADR-0010` | `ADR-0037` | Layer terminology only. `ADR-0010` used "Layer A" for the methodology; Layer A is now the Metamodel. Its decision — knowledge is repository-local, environments federate — is untouched and remains `Active`. |
+| `ADR-0037` | `ADR-0039` | The universality claim. "Every artifact belongs to exactly one layer" should read: every *semantic* artifact does; cross-cutting artifacts belong to none. The four layers are untouched and remain `Active`. |
 | `ADR-0031` | `ADR-0032` | The opening definition. "A Registry is an authoritative index" should read: a Registry *Specification* is authoritative; a Registry *Projection* is the derived index. The pattern is untouched and remains `Active`. |
 
 ## Rules

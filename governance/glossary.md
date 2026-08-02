@@ -279,6 +279,24 @@ representation of Layer B, conforming to Layer A (`ADR-0036`).
 Projections, search, Knowledge Packages, validation reports, future AI
 interfaces.
 
+> **Layers classify artifacts, not directories** (`ADR-0039`). A directory may
+> hold artifacts of several layers. Repository layout is an implementation
+> concern; the semantic layer is an architectural one.
+
+**Cross-Cutting Infrastructure** — Governance, Tooling, Automation, Validation,
+Testing, CI/CD. **Orthogonal to the semantic layers**: they intersect them but
+are not themselves layers. ADRs, Issues, Acceptance Records and Sessions are
+governance artifacts — inputs to the Engineering OS process, not part of any
+target domain's semantic model. Their Semantic Layer is `None (Not Applicable)`.
+
+**Architectural Dimension** — an independent classification axis. **Every
+artifact is classified along several simultaneously** (`ADR-0040`): Semantic
+Layer, Artifact Taxonomy, Lifecycle, Governance Status, Ownership, Authority,
+Visibility, Compilation Phase. A value on one dimension never implies a value on
+another. The metamodel models dimensions explicitly rather than forcing every
+classification into a single hierarchy. The set is examples rather than closed,
+and four of the eight are undefined — `ISSUE-0057`.
+
 > **The term was redefined.** Under `ADR-0010`, "Layer A" meant the methodology
 > and "Layer B" the knowledge model. `ADR-0037` redefines Layer A as the
 > Metamodel. The former Layer A content — `shared/`, `skills/`, `workflows/`,

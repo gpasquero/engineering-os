@@ -86,6 +86,16 @@ machine.
 This issue concerns only the third. The first two have homes: the specification
 is authored, the projection is generated from it.
 
+## Narrowed again by ADR-0039
+
+Layers classify artifacts, not directories, and repository layout is an
+implementation concern. So this issue is no longer an architectural question —
+choosing a directory does not choose a layer, and a state machine specification
+is Layer A or B by what it is, not by where it sits.
+
+What remains is a placement convention, which is a smaller decision than the
+issue was originally recorded as.
+
 ## Resolution criteria
 
 An ADR naming where state machine specifications live, what

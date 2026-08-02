@@ -18,7 +18,13 @@ below. `governance/build-state.md` records which parts exist today.
 
 ## The four-layer semantic architecture
 
-**Every artifact in Engineering OS belongs to exactly one layer** (`ADR-0037`).
+**Layers classify semantic artifacts, not directories** (`ADR-0039`). A
+directory may contain artifacts of several layers; repository layout is an
+**implementation** concern while the semantic layer is an **architectural** one.
+The compiler classifies artifacts, not folders.
+
+**Every *semantic* artifact belongs to exactly one layer.** Cross-cutting
+artifacts belong to none.
 
 | Layer | Name | Defines |
 |---|---|---|
@@ -61,10 +67,40 @@ holds for adopters, not here.
   tree. Ships to adopters.
 - **`model/`** — this repository's own tree, containing `metamodel/`.
 
-> **Open:** `shared/`, `skills/`, `workflows/`, `templates/`, `schemas/` and
-> `governance/` have **no layer**. Under `ADR-0010` they were "Layer A — the
-> methodology"; `ADR-0037` redefined Layer A as the Metamodel alone.
-> `ISSUE-0056`, which blocks M2.
+### Cross-Cutting Infrastructure
+
+`governance/`, `tests/`, `scripts/`, `tooling/`, `ci/` and editor configuration
+are **orthogonal to the semantic layers** (`ADR-0039`). ADRs, Issues, Acceptance
+Records and Sessions are governance artifacts: inputs to the Engineering OS
+*process*, not part of the semantic model of a target domain.
+
+| | |
+|---|---|
+| **Semantic Layers** | A, B, C, D |
+| **Cross-Cutting Infrastructure** | Governance · Tooling · Automation · Validation · Testing · CI/CD |
+
+These intersect the semantic layers but are not themselves layers. Both sets are
+examples rather than closed — `ISSUE-0057`.
+
+## Architectural Dimensions
+
+**Artifacts are classified along multiple independent axes simultaneously**
+(`ADR-0040`), rather than forced into a single hierarchy:
+
+Semantic Layer · Artifact Taxonomy · Lifecycle · Governance Status · Ownership ·
+Authority · Visibility · Compilation Phase
+
+An ADR is Governance / Authoritative Artifact / `Active` / Owner: Architecture /
+Visibility: Public / Compiler Phase: Input / **Layer: None**. A Workflow
+Specification is Semantic / Layer B / Authoritative Artifact / `Active` /
+Owner: Domain / Compiler Phase: Input.
+
+This is the general form of a fix applied five times locally: every earlier
+vocabulary collision came from one classification being asked to do several
+jobs. **The metamodel models dimensions explicitly.**
+
+How an artifact declares its classification is unresolved (`ISSUE-0058`), now
+that paths no longer imply it.
 
 ## Knowledge ownership
 
@@ -411,6 +447,10 @@ engineering-os/
 
 ## Directory contracts
 
+> **Implementation guidance, not architecture** (`ADR-0039`). A directory does
+> not determine an artifact's semantic layer. What follows is convention: useful,
+> and revisable without changing what anything means.
+
 **`governance/`** — the persistent memory. Anything a future session must know
 lives here. This is the only directory a session is required to read in full.
 
@@ -459,9 +499,10 @@ These are recorded as issues and must not be silently assumed:
 
 - `ISSUE-0049` — where state machine specifications live, and their boundary
   with `shared/vocabularies/`. Blocks `shared/vocabularies/`.
-- `ISSUE-0056` — `shared/`, `skills/`, `workflows/`, `templates/`, `schemas/`
-  and `governance/` have no layer under `ADR-0037`. **Blocks M2**, because
-  `ADR-0038` makes "which layer owns it?" mandatory for every artifact type.
+- `ISSUE-0057` — the dimension and infrastructure sets are examples, and four
+  dimensions are undefined. **Blocks M2**, since the metamodel must model them.
+- `ISSUE-0058` — how an artifact declares its classification. **Blocks M2**,
+  since every contract depends on it.
 - `ISSUE-0048` — no mechanism for correcting part of an `Active` ADR.
 - `ISSUE-0007` — versioning granularity, now also covering what identifies a
   **revision**.
