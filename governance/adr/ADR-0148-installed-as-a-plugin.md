@@ -1,6 +1,6 @@
 ---
 id: ADR-0148
-title: Engineering OS is installed as a skill directory and depends on nothing
+title: Engineering OS installs without cloning anything and depends on nothing
 status: accepted
 date: 2026-08-03
 supersedes: null
@@ -9,7 +9,7 @@ resolves: []
 related: [ADR-0135, ADR-0140, ADR-0141, ADR-0143, ADR-0145, ADR-0147]
 ---
 
-# ADR-0148 — Installed as a skill, depending on nothing
+# ADR-0148 — Installed without cloning, depending on nothing
 
 ## Context
 
@@ -32,30 +32,36 @@ installation** is permitted under Research Freeze.
 
 ## Decision
 
-**Engineering OS is installed by cloning it into a skills directory, and it
-depends on nothing.**
+**The default installation requires no clone, no terminal and no package
+manager.** Two lines, typed inside Claude Code:
 
-```bash
-git clone https://github.com/gpasquero/engineering-os.git \
-  ~/.claude/skills/engineering-os
+```
+/plugin marketplace add gpasquero/engineering-os
+/plugin install engineering-os@engineering-os
 ```
 
-**No marketplace and no install step.** A folder under a skills directory that
-carries a plugin manifest is loaded automatically on the next session — so one
-clone yields all five skills and puts `eos` on `PATH`.
+Claude Code fetches and caches the product; the user never runs `git`.
 
-The reviewer pushed back on the first version of this decision, which required
-`/plugin marketplace add` and `/plugin install`:
+**The manifest is what makes every other shape work too.** A folder under a
+skills directory that carries one is loaded automatically on the next session,
+with no marketplace and no install step — so the same repository also works
+dropped into `~/.claude/skills/` or a project's `.claude/skills/`, yielding the
+same five namespaced skills and the same `bin/` on `PATH`.
+
+**This ordering was wrong once and the correction is recorded rather than
+quietly applied.** The reviewer asked whether a plugin was required at all:
 
 > **¿Pero no hace falta plugin para esto, no? Puede ser un skill con scripts en
 > node o python?**
 
-**They were right, and the manifest is not wasted.** It is what makes the single
-clone load five namespaced skills and a `bin/` directory instead of one flat
-skill. The marketplace remains available for anyone who wants versioned
-updates; it is a distribution channel, not a requirement.
+It is not required — and answering that by making a `git clone` the primary
+instruction **reintroduced the exact friction the reviewer had rejected one
+message earlier**: *no quiero que tengan que clonar el repo*. Both facts are
+true and only one belongs first. **"Does it need a plugin?" is a question about
+mechanism; "must they clone?" is a question about experience, and the experience
+governs** (`ADR-0141`).
 
-Three properties make that the whole installation.
+Three properties make the installation possible at all.
 
 **1. Zero dependencies.** A pure-Python PyYAML is vendored in `vendor/`. The
 plugin system has **no dependency-installation step**, so a product that needed

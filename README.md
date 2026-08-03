@@ -11,9 +11,9 @@ difficult question and get an answer nobody had to rediscover.
 
 **Apache-2.0** · Python 3.9+ · **zero dependencies** · no network calls, no API keys
 
-```bash
-git clone https://github.com/gpasquero/engineering-os.git \
-  ~/.claude/skills/engineering-os
+```
+/plugin marketplace add gpasquero/engineering-os
+/plugin install engineering-os@engineering-os
 ```
 
 ---
@@ -157,19 +157,16 @@ eos check      # verifies all of the above and much more
 
 ## 5 · Installation
 
-**One command. No plugin marketplace, no virtual environment, nothing to
-`pip install`.**
+**Two lines, typed inside Claude Code. You never clone anything, never open a
+terminal, and never `pip install`.**
 
-```bash
-git clone https://github.com/gpasquero/engineering-os.git \
-  ~/.claude/skills/engineering-os
+```
+/plugin marketplace add gpasquero/engineering-os
+/plugin install engineering-os@engineering-os
 ```
 
-Restart Claude Code. That is the whole installation.
-
-Any folder under a skills directory that carries a plugin manifest is loaded
-automatically on the next session — so this one clone gives you **all five
-skills** and puts **`eos` on your `PATH`**, with no install step of its own.
+That is the whole installation. Claude Code fetches and caches Engineering OS
+for you, loads its **five skills**, and puts **`eos` on your `PATH`**.
 
 Then just ask, in plain language:
 
@@ -187,39 +184,35 @@ Claude picks the right skill:
 | `curate-proposals` | help a human authorize what is true |
 | `maintain-understanding` | keep it current, and challenge it |
 
-Verify it:
+Verify it, in Claude Code's terminal:
 
 ```bash
 eos check
 eos --help
 ```
 
-**Why nothing needs installing:** Engineering OS is Python, uses only the
+**Why there is nothing to install:** Engineering OS is Python, uses only the
 standard library, and vendors a pure-Python YAML. It makes no network calls and
 reads no credentials.
 
-### For one project only
+<details>
+<summary><b>Other ways to install</b> — if you cannot use the marketplace</summary>
+
+All three work because Engineering OS carries a plugin manifest. Pick one.
+
+**As a skill folder.** Any folder under a skills directory that carries a
+manifest loads automatically on the next session — same five skills, same
+`eos` on `PATH`, no install step:
 
 ```bash
 git clone https://github.com/gpasquero/engineering-os.git \
-  .claude/skills/engineering-os
+  ~/.claude/skills/engineering-os          # for you, everywhere
+git clone https://github.com/gpasquero/engineering-os.git \
+  .claude/skills/engineering-os            # for one project only
 ```
 
-Same behaviour, scoped to that repository.
-
-### As a marketplace plugin
-
-If you prefer versioned installs and updates:
-
-```
-/plugin marketplace add gpasquero/engineering-os
-/plugin install engineering-os@engineering-os
-```
-
-### Codex and other tools
-
-**There is no skill or plugin mechanism to install into.** Engineering OS still
-works — `eos` is a dependency-free script:
+**Codex and other tools.** There is no skill or plugin mechanism to install
+into. `eos` is a dependency-free script, so put it on `PATH` yourself:
 
 ```bash
 git clone https://github.com/gpasquero/engineering-os.git ~/.engineering-os
@@ -230,7 +223,7 @@ eos check
 Then paste any `skills/*/SKILL.md` into your `AGENTS.md`. **The skills name no
 model vendor** — the contract is the same whichever model reads it.
 
-### From a clone, for contributors
+**From a clone, for contributors:**
 
 ```bash
 git clone https://github.com/gpasquero/engineering-os.git
@@ -240,6 +233,8 @@ cd engineering-os
 
 `pip install -r requirements.txt` is optional and only makes YAML parsing
 faster; an installed PyYAML always wins over the vendored copy.
+
+</details>
 
 `eos check` verifies Python, dependencies, all 20 registries, the
 engineering-question set, discovery skills, plans, deterministic generation and
