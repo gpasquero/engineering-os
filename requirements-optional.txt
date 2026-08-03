@@ -1,0 +1,7 @@
+# Optional. Not needed for any step of the MVP journey.
+#
+# rdflib is used only by tools/generate-metamodel-views.py, an internal tool
+# that regenerates the metamodel's diagrams from the OWL ontology. Skip it
+# unless you are editing the metamodel itself.
+
+rdflib>=6.0

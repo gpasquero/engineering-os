@@ -1,0 +1,7 @@
+# Engineering OS — runtime dependencies.
+#
+# The product needs exactly one third-party package. Everything else is the
+# Python standard library, which is deliberate: a knowledge model whose
+# toolchain is hard to install is a knowledge model nobody installs.
+
+PyYAML>=6.0

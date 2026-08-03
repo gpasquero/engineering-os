@@ -55,7 +55,16 @@ CONFIDENCE = {"1": "low", "2": "medium", "3": "high"}
 
 
 def load(project):
-    candidate = json.loads((project / "candidate-initial.json").read_text())
+    source = project / "candidate-initial.json"
+    if not source.exists():
+        raise SystemExit(
+            f"no Candidate Engineering Model in {project}.\n"
+            f"  There is nothing to curate yet. Produce proposals first:\n"
+            f"    python discovery/run.py <repository> {project}      "
+            f"# deterministic\n"
+            f"    python tools/onboard.py brief <repository> {project}  "
+            f"# with Claude or Codex")
+    candidate = json.loads(source.read_text())
     reviews = {}
     review_file = project / "engineering-review.json"
     if review_file.exists():

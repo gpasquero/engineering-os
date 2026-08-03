@@ -305,6 +305,23 @@ catalogue. Six more were deferred by the test written in the same session.
 | Exhaustive stopping conditions conflict with bounded proposal counts | `BENCHMARK-BLIND.md` |
 | The frontend and widget contribute nothing to the Mechanical Model | blind gap report |
 
+## The MVP journey
+
+```text
+clone → install → tools/check.py → point at a repository
+  → tools/onboard.py brief   (Mechanical Acquisition + worker briefing)
+  → discovery/run.py  or  Claude/Codex → tools/onboard.py ingest
+  → tools/curate.py          (refuses to run without a human)
+  → tools/review.py apply
+  → tools/compile.py         (CKM · OWL · SHACL · graph · indexes · Explorer)
+  → tools/ask.py · tools/advise.py · tools/direct.py
+  → tools/lifecycle.py       (Continuous · Periodic · Drift)
+```
+
+**No API key, no SDK, no network call.** The onboarding bridge writes a
+briefing and validates the JSON that comes back; the worker runs in whatever
+tool the user already has.
+
 ## Next action
 
 **Decide what Continuous Acquisition may infer, then re-run the longitudinal

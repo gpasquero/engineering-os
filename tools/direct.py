@@ -120,7 +120,22 @@ def render(r, context_filter=None):
         L.append("  Workers never write to the model. This is a proposal, not a write.")
         L.append("")
 
-    k = r["kpi"]
+    # An intent that selects no plan produces no KPI, and that is a real
+    # answer rather than a failure: `I-investigate` is a genuine intent with no
+    # planning support, and the registry says so deliberately. Reporting it is
+    # the point; crashing on it made a documented workflow unusable.
+    k = r.get("kpi")
+    if not k:
+        L += [BAR,
+              "No plan is declared for this intent.",
+              "",
+              "  This is a recorded gap, not an error: the intent exists and",
+              "  nothing plans for it yet. Ask for a recommendation instead:",
+              "",
+              f"    python tools/advise.py <project> R-change-implementation "
+              f"{r.get('subject') or '<subject>'}",
+              BAR]
+        return "\n".join(L)
     L += [BAR,
           f"KPI   {k['decisionsBeforeFirstToken']} engineering decisions made "
           f"before the first LLM token",

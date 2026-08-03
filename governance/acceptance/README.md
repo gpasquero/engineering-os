@@ -15,7 +15,12 @@ committed.
 
 **Acceptance is an engineering decision, not a Git operation** (`ADR-0020`).
 
-**Highest allocated ID: `ACCEPT-0046`.** IDs are never reused.
+**Highest allocated ID: `ACCEPT-0048`.**
+
+**`ACCEPT-0047` was never allocated.** The reviewer requested `ACCEPT-0048`
+directly, and the reviewer is the register's authority over its own identifiers.
+The gap is documented here, so a reference to it is documentation rather than a
+dangling reference. IDs are never reused.
 
 > **`ACCEPT-0033` and `ACCEPT-0035` are not allocated.** Each was skipped when
 > the reviewer requested the next identifier: `ACCEPT-0034` while the highest was
@@ -70,6 +75,7 @@ committed.
 | [ACCEPT-0044](ACCEPT-0044-session-0048-decisions.md) | `SESSION-0048` — Understanding Retention and the diagnosis at `185db71` | Project Owner (`gpasquero`) | accepted | 2026-08-02 |
 | [ACCEPT-0045](ACCEPT-0045-session-0049-decisions.md) | `SESSION-0049` — semantic preservation, 100 % retention at `d6d3bef` | Project Owner (`gpasquero`) | accepted | 2026-08-02 |
 | [ACCEPT-0046](ACCEPT-0046-session-0050-decisions.md) | `SESSION-0050` — the benchmark begins measuring Guidance at `a0f3316` | Project Owner (`gpasquero`) | accepted | 2026-08-02 |
+| [ACCEPT-0048](ACCEPT-0048-session-0051-decisions.md) | `SESSION-0051` — Human Curation as a product at `33dea67` | Project Owner (`gpasquero`) | accepted | 2026-08-02 |
 
 ## The three conditions
 
