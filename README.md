@@ -177,7 +177,16 @@ mkdir -p ~/.claude/skills/engineering-os && curl -fsSL \
   | tar xz -C ~/.claude/skills/engineering-os --strip-components=1
 ```
 
-### Codex
+### Codex — give it the link
+
+```
+$skill-installer install https://github.com/gpasquero/engineering-os
+```
+
+`$skill-installer` ships with Codex and takes a GitHub directory URL. Restart
+Codex afterwards.
+
+Or download it yourself:
 
 ```bash
 mkdir -p ~/.agents/skills/engineering-os && curl -fsSL \
@@ -185,7 +194,7 @@ mkdir -p ~/.agents/skills/engineering-os && curl -fsSL \
   | tar xz -C ~/.agents/skills/engineering-os --strip-components=1
 ```
 
-Codex scans `~/.agents/skills` for user skills, and `.agents/skills` inside a
+Codex scans `~/.agents/skills` for user skills and `.agents/skills` inside a
 repository for project ones. Invoke it with `$engineering-os`, or just describe
 the task and let it select.
 
@@ -204,6 +213,16 @@ Then paste `SKILL.md` — or any file in `skills/` — into your agent's
 instructions. **The skills name no model vendor**; the contract is identical
 whichever model reads it.
 
+### Any other agent
+
+Engineering OS is a valid **[Agent Skill](https://agentskills.io)** — the open
+standard originally released by Anthropic and adopted by Codex, Cursor, Gemini
+CLI, GitHub Copilot, VS Code, Goose, OpenCode and others. **There is no registry
+and no separate manifest**: a skill is a folder whose `SKILL.md` frontmatter
+*is* the manifest, so distribution is simply pointing a tool at the folder.
+
+Drop it wherever your agent scans for skills. The same folder works unchanged.
+
 ## One package, four shapes
 
 The same folder is all of them, which is why there is nothing to choose between:
@@ -214,6 +233,9 @@ The same folder is all of them, which is why there is nothing to choose between:
 | `skills/*/SKILL.md` | Claude Code's plugin loader — five namespaced skills |
 | `.claude-plugin/` | the Claude Code marketplace, so nothing has to be cloned |
 | `bin/eos` | every one of them, and your shell |
+
+`SKILL.md` carries the standard's six frontmatter fields; `eos check` validates
+them against the specification.
 
 Skills are the unit. **The plugin manifest is a shipping label, not
 architecture** — it exists so a Claude Code user never has to leave the chat.

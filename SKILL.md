@@ -1,6 +1,12 @@
 ---
 name: engineering-os
 description: Build and maintain a durable engineering model of a system that already exists. Use when the user wants to onboard, map or understand a legacy or unfamiliar codebase; asks what a system does, why it works the way it does, or what its business rules are; asks what breaks if something changes, what depends on it, or which invariant protects a behaviour; wants guidance before modifying something; or wants to know whether an existing engineering model is still accurate after changes.
+license: Apache-2.0
+compatibility: Requires Python 3.9+. No other dependency, no network access, no API key.
+metadata:
+  author: gpasquero
+  version: "0.1.0"
+  repository: https://github.com/gpasquero/engineering-os
 ---
 
 # Engineering OS

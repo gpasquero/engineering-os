@@ -165,6 +165,8 @@ def main(argv):
          "a decision record is inconsistent; see docs/troubleshooting.md"),
         ("engineering questions", "tools/check-questions.py",
          "the question set is malformed"),
+        ("Agent Skills standard", "tools/check-agentskills.py",
+         "a SKILL.md does not meet agentskills.io/specification"),
         ("discovery skills", "tools/check-skills.py",
          "a skill contract is incomplete"),
         ("plans and recommendations", "tools/check-plans.py",
