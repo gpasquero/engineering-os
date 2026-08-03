@@ -1,6 +1,6 @@
 ---
 id: ADR-0148
-title: Engineering OS installs without cloning anything and depends on nothing
+title: Skills are the unit; the plugin manifest is a shipping label, and both ship
 status: accepted
 date: 2026-08-03
 supersedes: null
@@ -9,7 +9,7 @@ resolves: []
 related: [ADR-0135, ADR-0140, ADR-0141, ADR-0143, ADR-0145, ADR-0147]
 ---
 
-# ADR-0148 — Installed without cloning, depending on nothing
+# ADR-0148 — Skills are the unit, and the manifest ships beside them
 
 ## Context
 
@@ -48,18 +48,51 @@ with no marketplace and no install step — so the same repository also works
 dropped into `~/.claude/skills/` or a project's `.claude/skills/`, yielding the
 same five namespaced skills and the same `bin/` on `PATH`.
 
-**This ordering was wrong once and the correction is recorded rather than
-quietly applied.** The reviewer asked whether a plugin was required at all:
+## Skills are the unit
 
-> **¿Pero no hace falta plugin para esto, no? Puede ser un skill con scripts en
-> node o python?**
+The reviewer asked three times, with increasing force, why a plugin was involved
+at all — and the third time named what settled it:
 
-It is not required — and answering that by making a `git clone` the primary
-instruction **reintroduced the exact friction the reviewer had rejected one
-message earlier**: *no quiero que tengan que clonar el repo*. Both facts are
-true and only one belongs first. **"Does it need a plugin?" is a question about
-mechanism; "must they clone?" is a question about experience, and the experience
-governs** (`ADR-0141`).
+> **Otra vez, ¿por qué plugin si esto se resuelve con skills?**
+> **Si quiero en Codex, ¿cómo hago?**
+
+**Codex has skills too**, at `~/.agents/skills/` and `.agents/skills/`, with the
+same `SKILL.md` carrying `name` and `description`, and scripts bundled beside
+it. So the portable unit is a **skill folder**, and a plugin manifest does
+nothing there.
+
+**Both ship, because they are the same folder:**
+
+| File | Read by |
+|---|---|
+| `SKILL.md` at the root | Codex, and Claude Code as a plain skill |
+| `skills/*/SKILL.md` | Claude Code's plugin loader — five namespaced skills |
+| `.claude-plugin/` | the Claude marketplace, so nothing has to be cloned |
+| `bin/eos` | all of them, and any shell |
+
+**The manifest is a shipping label, not architecture.** Its only job is letting
+a Claude Code user install without leaving the chat. Deleting it would cost that
+and buy nothing; treating it as the product's shape cost three rounds of
+confusion.
+
+## Two wrong turns, recorded rather than quietly fixed
+
+**First:** answering *"does it need a plugin?"* by making `git clone` the
+primary instruction — which **reintroduced the exact friction rejected one
+message earlier**: *no quiero que tengan que clonar el repo*.
+
+**Second:** answering *"why plugin if skills solve this?"* by starting to delete
+the plugin path, until the reviewer stopped it:
+
+> **No borres la posibilidad de tenerlo como plugin para Claude, pero Codex no
+> tiene, así que tenemos que tener empaquetado para skill, downloadable o como
+> sea.**
+
+**Both corrections were subtractive when the answer was additive.** A question
+about mechanism was twice answered by removing a capability, when the right
+response was to add the missing one and stop leading with the wrong vocabulary.
+*"Must they clone?"* is a question about experience, and the experience governs
+(`ADR-0141`).
 
 Three properties make the installation possible at all.
 
@@ -116,10 +149,14 @@ ships neither, and `eos check` now reports them as not shipped rather than
 failing. **An installation check must check the installation, not the author's
 repository.**
 
-**Codex has no skill mechanism**, and the README says so rather than implying
-parity. `eos` is a dependency-free script, so the honest instruction is a clone
-onto `PATH` plus pasting a skill into `AGENTS.md`. **The skills name no vendor**
-(`ADR-0113`), so the contract is identical whichever model reads it.
+**Nothing is ever cloned by a user.** Every documented install is either two
+slash commands or one `curl` of a release tarball into the tool's skills
+directory. The clone survives only for contributors, behind a fold.
+
+**`ADR-0113` paid off three milestones later.** It required Discovery Skills to
+be engine-independent and to name no model vendor, when there was exactly one
+consumer. That is the only reason the same `SKILL.md` files work unchanged in
+Codex.
 
 **Vendoring is a maintenance obligation**, accepted deliberately. Writing a
 small YAML subset parser was considered and rejected: this repository has

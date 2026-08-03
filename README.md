@@ -11,10 +11,9 @@ difficult question and get an answer nobody had to rediscover.
 
 **Apache-2.0** · Python 3.9+ · **zero dependencies** · no network calls, no API keys
 
-```
-/plugin marketplace add gpasquero/engineering-os
-/plugin install engineering-os@engineering-os
-```
+**Claude Code:** `/plugin marketplace add gpasquero/engineering-os` then
+`/plugin install engineering-os@engineering-os`
+**Codex, or any other agent:** one `curl` into its skills directory — see §5.
 
 ---
 
@@ -157,16 +156,67 @@ eos check      # verifies all of the above and much more
 
 ## 5 · Installation
 
-**Two lines, typed inside Claude Code. You never clone anything, never open a
-terminal, and never `pip install`.**
+**Nothing is cloned, nothing is compiled, nothing is `pip install`ed.** Pick the
+line that matches your tool.
+
+### Claude Code — no terminal at all
 
 ```
 /plugin marketplace add gpasquero/engineering-os
 /plugin install engineering-os@engineering-os
 ```
 
-That is the whole installation. Claude Code fetches and caches Engineering OS
-for you, loads its **five skills**, and puts **`eos` on your `PATH`**.
+Claude Code fetches and caches it, loads **five separate skills**, and puts
+**`eos` on your `PATH`**.
+
+### Claude Code — as a plain skill
+
+```bash
+mkdir -p ~/.claude/skills/engineering-os && curl -fsSL \
+  https://github.com/gpasquero/engineering-os/archive/refs/heads/main.tar.gz \
+  | tar xz -C ~/.claude/skills/engineering-os --strip-components=1
+```
+
+### Codex
+
+```bash
+mkdir -p ~/.agents/skills/engineering-os && curl -fsSL \
+  https://github.com/gpasquero/engineering-os/archive/refs/heads/main.tar.gz \
+  | tar xz -C ~/.agents/skills/engineering-os --strip-components=1
+```
+
+Codex scans `~/.agents/skills` for user skills, and `.agents/skills` inside a
+repository for project ones. Invoke it with `$engineering-os`, or just describe
+the task and let it select.
+
+### Anything else
+
+Same download, anywhere you like, plus `eos` on your `PATH`:
+
+```bash
+mkdir -p ~/.engineering-os && curl -fsSL \
+  https://github.com/gpasquero/engineering-os/archive/refs/heads/main.tar.gz \
+  | tar xz -C ~/.engineering-os --strip-components=1
+export PATH="$HOME/.engineering-os/bin:$PATH"
+```
+
+Then paste `SKILL.md` — or any file in `skills/` — into your agent's
+instructions. **The skills name no model vendor**; the contract is identical
+whichever model reads it.
+
+## One package, four shapes
+
+The same folder is all of them, which is why there is nothing to choose between:
+
+| File | Read by |
+|---|---|
+| `SKILL.md` at the root | Codex, and Claude Code when installed as a plain skill |
+| `skills/*/SKILL.md` | Claude Code's plugin loader — five namespaced skills |
+| `.claude-plugin/` | the Claude Code marketplace, so nothing has to be cloned |
+| `bin/eos` | every one of them, and your shell |
+
+Skills are the unit. **The plugin manifest is a shipping label, not
+architecture** — it exists so a Claude Code user never has to leave the chat.
 
 Then just ask, in plain language:
 
@@ -174,9 +224,7 @@ Then just ask, in plain language:
 > *What breaks if I change the billing module?*
 > *Is the model still accurate after these commits?*
 
-Claude picks the right skill:
-
-| Skill | For |
+| Workflow | For |
 |---|---|
 | `brownfield-onboarding` | build a model of a system nobody fully understands |
 | `engineering-questions` | impact, dependencies, rationale, unsupported claims |
@@ -184,46 +232,29 @@ Claude picks the right skill:
 | `curate-proposals` | help a human authorize what is true |
 | `maintain-understanding` | keep it current, and challenge it |
 
-Verify it, in Claude Code's terminal:
+Verify any installation:
 
 ```bash
-eos check
+eos check        # or  ~/.agents/skills/engineering-os/bin/eos check
 eos --help
 ```
 
-**Why there is nothing to install:** Engineering OS is Python, uses only the
+**Why nothing needs installing:** Engineering OS is Python, uses only the
 standard library, and vendors a pure-Python YAML. It makes no network calls and
 reads no credentials.
 
+`eos check` verifies Python, dependencies, all 20 registries, the
+engineering-question set, discovery skills, plans, deterministic generation and
+compiler health. In a full checkout it also checks governance consistency and
+all 17 fixtures; those are **contributor** checks, and a downloaded copy that
+omits them reports it rather than failing.
+
+```text
+Engineering OS is installed and healthy (all checks passed)
+```
+
 <details>
-<summary><b>Other ways to install</b> — if you cannot use the marketplace</summary>
-
-All three work because Engineering OS carries a plugin manifest. Pick one.
-
-**As a skill folder.** Any folder under a skills directory that carries a
-manifest loads automatically on the next session — same five skills, same
-`eos` on `PATH`, no install step:
-
-```bash
-git clone https://github.com/gpasquero/engineering-os.git \
-  ~/.claude/skills/engineering-os          # for you, everywhere
-git clone https://github.com/gpasquero/engineering-os.git \
-  .claude/skills/engineering-os            # for one project only
-```
-
-**Codex and other tools.** There is no skill or plugin mechanism to install
-into. `eos` is a dependency-free script, so put it on `PATH` yourself:
-
-```bash
-git clone https://github.com/gpasquero/engineering-os.git ~/.engineering-os
-export PATH="$HOME/.engineering-os/bin:$PATH"
-eos check
-```
-
-Then paste any `skills/*/SKILL.md` into your `AGENTS.md`. **The skills name no
-model vendor** — the contract is the same whichever model reads it.
-
-**From a clone, for contributors:**
+<summary>For contributors</summary>
 
 ```bash
 git clone https://github.com/gpasquero/engineering-os.git
@@ -235,16 +266,6 @@ cd engineering-os
 faster; an installed PyYAML always wins over the vendored copy.
 
 </details>
-
-`eos check` verifies Python, dependencies, all 20 registries, the
-engineering-question set, discovery skills, plans, deterministic generation and
-compiler health — plus, in a full checkout, governance consistency and all 17
-fixtures. Those two are **contributor** checks: an installed copy may not ship
-them, and their absence is reported and never fails.
-
-```text
-Engineering OS is installed and healthy (all checks passed)
-```
 
 See [`docs/installation.md`](docs/installation.md) and
 [`docs/troubleshooting.md`](docs/troubleshooting.md).
