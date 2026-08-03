@@ -13,7 +13,7 @@ difficult question and get an answer nobody had to rediscover.
 
 **Claude Code:** `/plugin marketplace add gpasquero/engineering-os` then
 `/plugin install engineering-os@engineering-os`
-**Codex, or any other agent:** one `curl` into its skills directory — see §5.
+**Codex, or any other agent:** one `curl` into `~/.agents/skills/` — see §5.
 
 ---
 
@@ -177,16 +177,7 @@ mkdir -p ~/.claude/skills/engineering-os && curl -fsSL \
   | tar xz -C ~/.claude/skills/engineering-os --strip-components=1
 ```
 
-### Codex — give it the link
-
-```
-$skill-installer install https://github.com/gpasquero/engineering-os
-```
-
-`$skill-installer` ships with Codex and takes a GitHub directory URL. Restart
-Codex afterwards.
-
-Or download it yourself:
+### Codex
 
 ```bash
 mkdir -p ~/.agents/skills/engineering-os && curl -fsSL \
@@ -194,24 +185,24 @@ mkdir -p ~/.agents/skills/engineering-os && curl -fsSL \
   | tar xz -C ~/.agents/skills/engineering-os --strip-components=1
 ```
 
-Codex scans `~/.agents/skills` for user skills and `.agents/skills` inside a
-repository for project ones. Invoke it with `$engineering-os`, or just describe
-the task and let it select.
+Restart Codex. Invoke it with `$engineering-os`, or just describe the task and
+let Codex select it.
 
-### Anything else
-
-Same download, anywhere you like, plus `eos` on your `PATH`:
+Codex looks for skills in `$HOME/.agents/skills` for you, and in
+`.agents/skills` inside a repository for a single project — so the second form
+installs it for one codebase:
 
 ```bash
-mkdir -p ~/.engineering-os && curl -fsSL \
+mkdir -p .agents/skills/engineering-os && curl -fsSL \
   https://github.com/gpasquero/engineering-os/archive/refs/heads/main.tar.gz \
-  | tar xz -C ~/.engineering-os --strip-components=1
-export PATH="$HOME/.engineering-os/bin:$PATH"
+  | tar xz -C .agents/skills/engineering-os --strip-components=1
 ```
 
-Then paste `SKILL.md` — or any file in `skills/` — into your agent's
-instructions. **The skills name no model vendor**; the contract is identical
-whichever model reads it.
+> **Not `$skill-installer`.** Codex bundles a `$skill-installer` skill, but it
+> takes a URL pointing at a skill *subdirectory*
+> (`.../tree/<ref>/<path>`) and installs into `$CODEX_HOME/skills`, which the
+> Codex source marks as the **deprecated** user location. Engineering OS is a
+> skill at its repository root, so the download above is the correct install.
 
 ### Any other agent
 
@@ -221,7 +212,19 @@ CLI, GitHub Copilot, VS Code, Goose, OpenCode and others. **There is no registry
 and no separate manifest**: a skill is a folder whose `SKILL.md` frontmatter
 *is* the manifest, so distribution is simply pointing a tool at the folder.
 
-Drop it wherever your agent scans for skills. The same folder works unchanged.
+Download it wherever your agent scans for skills — the same folder works
+unchanged — or put `eos` on your `PATH` and paste `SKILL.md` into the agent's
+instructions:
+
+```bash
+mkdir -p ~/.engineering-os && curl -fsSL \
+  https://github.com/gpasquero/engineering-os/archive/refs/heads/main.tar.gz \
+  | tar xz -C ~/.engineering-os --strip-components=1
+export PATH="$HOME/.engineering-os/bin:$PATH"
+```
+
+**The skills name no model vendor**; the contract is identical whichever model
+reads it.
 
 ## One package, four shapes
 
