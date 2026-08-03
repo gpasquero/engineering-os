@@ -26,6 +26,9 @@ import pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT / "tools"))
+
+from _cli import help_requested, project as project_arg  # noqa: E402
 
 from compiler import compile_project                            # noqa: E402
 from compiler.registry import load_all                          # noqa: E402
@@ -144,6 +147,9 @@ def measure(project, questions, queries):
 
 
 def main(argv):
+    if help_requested(argv):
+        print(__doc__)
+        return 0
     if len(argv) < 2:
         print(__doc__)
         return 2
@@ -152,7 +158,7 @@ def main(argv):
 
     summaries = []
     for arg in argv[1:]:
-        project = ROOT / arg
+        project = project_arg(arg)
         ckm, rows = measure(project, questions, queries)
         name = project.name
         print(f"\n{name}  {DIM}{ckm['statistics']['nodes']} nodes, "

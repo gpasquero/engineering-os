@@ -1161,10 +1161,6 @@
         "why": "nothing is recorded as enforcing it"
       },
       {
-        "subject": "Invariant.ReturnsTheSameDateFor0Minutes",
-        "why": "nothing is recorded as enforcing it"
-      },
-      {
         "subject": "Invariant.ScopesTheTagLookupByTenantidTenantIsolation",
         "why": "nothing is recorded as enforcing it"
       },
@@ -1199,7 +1195,7 @@
     "D-conflicting-interpretation": 0,
     "D-dependency-change": 0,
     "D-implementation-without-knowledge": 123,
-    "D-invariant-without-enforcement": 10,
+    "D-invariant-without-enforcement": 9,
     "D-knowledge-without-implementation": 0,
     "D-missed-incremental-update": 0,
     "D-new-knowledge": 104,

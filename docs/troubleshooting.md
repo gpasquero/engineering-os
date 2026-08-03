@@ -3,67 +3,59 @@
 Every failure below is one you can reproduce. Each entry gives the message you
 will actually see, why it happens, and what to do.
 
-**First step for anything unexplained:**
-
-```bash
-python tools/check.py
-```
-
-Exit code 0 means the installation itself is sound and the problem is in your
-project or your inputs.
+**First step for anything unexplained:** `python tools/check.py`. Exit code 0
+means the installation is sound and the problem is in your project or inputs.
 
 ---
 
-## Compilation
-
-### Malformed YAML front matter
+## Malformed YAML front matter
 
 ```text
 [parsing]    0 nodes, 1 structural diagnostic(s)
 [FAILED]     1 diagnostic(s):
     (parsing) bad.md: key 'relationships' must be list, got str
-```
-
-`relationships:` must be a YAML **list** of single-key mappings, not a string.
-A related one:
-
-```text
     (parsing) a.md: attributes must be scalar; ['source'] are not
 ```
 
-Attribute values must be scalars — no lists, no nested mappings.
+`relationships:` must be a YAML **list** of single-key mappings, not a string.
+Attribute values must be scalars — no lists, no nested mappings. Values
+beginning with a YAML indicator character (`*`, `&`, `@`, `` ` ``, a leading
+`"`) need quoting.
 
-Both are reported at **Parsing**, before any semantic work, and the file
-contributes no nodes. Values beginning with a YAML indicator character (`*`,
-`&`, `@`, `` ` ``, a leading `"`) need quoting. Exit code 1.
+Both are reported at **Parsing**, before any semantic work, so the file
+contributes no nodes at all. Exit code 1. Fixtures:
+`tests/projects/malformed-yaml/`, `tests/projects/bad-attributes/`.
 
-### Unknown entity type or unregistered predicate
+---
+
+## Unknown registry references in a model
 
 ```text
     (resolution) w.md: 'Widget' is not a metamodel entity [VR-0001]
     (resolution) a.md: predicate 'invented-link' has no registered parent (ADR-0071) [VR-0002]
-```
-
-`type` must be one of the 23 types in `model/metamodel/entities/`, and every
-predicate must appear in `model/metamodel/relationship-vocabulary.md`. The
-vocabulary is enforced, not advisory.
-
-### Unresolved and inconsistent references
-
-```text
     (resolution) a.md: 'references' points at unknown node 'Concept.Missing' [VR-0003]
     (resolution) duplicate node id 'Concept.Same' declared 2 times [VR-0004]
     (resolution) loop.md: 'scoped-to' on 'BC.Loop' points at itself [VR-0005]
     (resolution) step.md: a WorkflowStep must declare 'executes' [VR-0006]
 ```
 
-Ids are case-sensitive and unique within a project. Containment and revision
-edges may not point at their own node. A `WorkflowStep` exists only to position
-a `Skill`, so it must execute one.
+`type` must be one of the 23 types in `model/metamodel/entities/`; every
+predicate must appear in `model/metamodel/relationship-vocabulary.md`. Ids are
+case-sensitive and unique within a project. Containment and revision edges may
+not point at their own node. Each fixture in `tests/projects/` documents what it
+exercises in `expected.md`.
 
-Reproduce any of these against the shipped fixtures in
-`tests/projects/<name>/`, each of which documents what it exercises in
-`expected.md`.
+## Unknown registry references on the command line
+
+```text
+unknown query 'Q-nope'. Try: questions
+unknown recommendation 'R-nope'. Try: recommendations
+unknown plan 'P-nope'. Try: plans
+  INVALID — unknown intent 'I-nope'
+```
+
+Exit code 2 (1 for the intent case). List valid ids with `questions`,
+`recommendations`, `plans`, `intents`.
 
 ---
 
@@ -77,9 +69,7 @@ python tools/compile.py exmaples/tiny     # typo
 
 ```text
 [discovery]  0 authoring sources
-[parsing]    0 nodes, 0 structural diagnostic(s)
 [ckm]        0 nodes, 0 edges
-[projection] canonical-knowledge-model.json, …
 ```
 
 Exit code **0**. `compile.py` creates the directory it was given and emits an
@@ -87,25 +77,20 @@ empty model rather than reporting that nothing is there. If your model suddenly
 has 0 nodes, check the path first — and delete the stray directory the typo
 created.
 
-Two related points:
-
 - **Project paths resolve against the repository root**, not your shell's
   working directory. `myproject` means `<checkout>/myproject`. Absolute paths
   work everywhere.
-- `python tools/compile.py --help` is treated as a project path and **creates a
-  directory literally named `--help`**. Use `python tools/compile.py --phases`
-  for the phase listing. `tools/curate.py --help`, `tools/measure.py --help` and
-  `tools/test.py --help` are also parsed as project arguments; `tools/test.py
-  --help` exits with a `FileNotFoundError` traceback. Tools with a real `--help`
-  are `check.py`, `smoke.py`, `ask.py`, `advise.py`, `direct.py`, `plan.py`,
-  `taskgraph.py`, `onboard.py`, `review.py`, `lifecycle.py`, `longitudinal.py`,
-  `guidance.py` and `drift-queue.py`.
+- `python tools/compile.py --help` is parsed as a project path and **creates a
+  directory literally named `--help`**. Use `--phases` instead. `curate.py`,
+  `measure.py` and `test.py` also parse `--help` as a project argument, and
+  `tools/test.py --help` exits with a `FileNotFoundError` traceback. Tools with
+  a working `--help`: `check.py`, `smoke.py`, `ask.py`, `advise.py`, `direct.py`,
+  `plan.py`, `taskgraph.py`, `onboard.py`, `review.py`, `lifecycle.py`,
+  `longitudinal.py`, `guidance.py`, `drift-queue.py`.
 
 ---
 
-## Queries and guidance
-
-### `no compiled model`
+## `no compiled model`
 
 ```text
 no compiled model at <project>/build/canonical-knowledge-model.json
@@ -116,47 +101,26 @@ run: python3 tools/compile.py <project>
 `drift-queue.py --plan=` read the compiled CKM; they do not compile.
 `measure.py` and `guidance.py` compile the project themselves.
 
-### Query not applicable
+---
+
+## Query not applicable
 
 ```text
   NOT APPLICABLE — applies to Artifact, ArtifactRevision; Concept.Order is a Concept
   status: not-applicable · Q-status
 ```
 
-**This is not an error.** Queries are typed, and a typed refusal is more useful
-than an empty answer. Exit code 1. The same message with a different ending —
-`no node 'Concept.Nope' in this model` — means the subject id does not exist.
+**Not an error.** Queries are typed, and a typed refusal is more useful than an
+empty answer. Exit code 1. The variant `no node 'Concept.Nope' in this model`
+means the subject id does not exist.
 
-A related non-error: `status: empty` means the question applied and nothing
-matched. That is frequently the finding, not a fault.
-
-### Unknown registry reference
-
-```text
-unknown query 'Q-nope'. Try: questions
-unknown recommendation 'R-nope'. Try: recommendations
-unknown plan 'P-nope'. Try: plans
-  INVALID — unknown intent 'I-nope'
-```
-
-Exit code 2 (1 for the intent case). Every id comes from a declared registry;
-list them with `questions`, `recommendations`, `plans`, `intents`.
-
-### A plan phase produced nothing
-
-```text
-  ── VERIFY: Confirm the guarantees survived   requires: change
-       (nothing to do — no query returned anything)
-```
-
-Expected. A step that cannot apply to your subject is named, never silently
-skipped.
+`status: empty` (exit 0) means the question applied and nothing matched — often
+the finding. Likewise, a plan phase printing `(nothing to do — no query returned
+anything)` is expected: a step that cannot apply is named, never skipped.
 
 ---
 
-## Discovery and onboarding
-
-### Unsupported stack profile
+## Unsupported stack profile
 
 ```text
 no Stack Profile matches /path/to/repo.
@@ -172,13 +136,14 @@ is written into it. Adding a stack is a declaration in `discovery/stacks.yaml`.
 Only one profile is detected per repository, so a polyglot monorepo is only
 partly covered.
 
-### Empty discovery output
+---
 
-The profile matched but the statistics are all zero, or nearly:
+## Empty discovery output
+
+The profile matched but the statistics are zero or nearly zero:
 
 ```text
 [mechanical]  /path/to/repo
-    packages         1
     routes           0
     tables           0
     testSuites       0
@@ -186,15 +151,16 @@ The profile matched but the statistics are all zero, or nearly:
 ```
 
 The profile's globs did not match your layout. Compare the `glob` entries for
-your profile in `discovery/stacks.yaml` against the real paths in your
-repository — for the Node profile these are
-`packages/backend/src/**/*.controller.ts`,
+your profile in `discovery/stacks.yaml` against your real paths — for the Node
+profile: `packages/backend/src/**/*.controller.ts`,
 `packages/backend/src/common/database/schema/*.ts`,
-`packages/backend/src/**/*.spec.ts` and `docs/**/*.md`. Vendor and build
+`packages/backend/src/**/*.spec.ts`, `docs/**/*.md`. Vendor and build
 directories (`node_modules`, `target`, `dist`, `build`, `.git`, …) are always
 skipped.
 
-### Digest mismatch on ingest
+---
+
+## Digest mismatch on onboarding ingest
 
 ```text
   rejected — 1 problem(s)
@@ -205,11 +171,9 @@ skipped.
   Nothing was written. Fix the worker's output and run ingest again.
 ```
 
-Exit code 1. The Mechanical Model is the agreed evidence, and a proposal made
-against a different one cannot be checked. Re-run `brief`, re-run the worker,
-re-run `ingest`.
-
-Other ingestion rejections, all with the same "nothing was written" guarantee:
+Exit code 1. The Mechanical Model is the agreed evidence; a proposal made
+against a different one cannot be checked. Other ingestion rejections, all with
+the same "nothing was written" guarantee:
 
 | Message | Fix |
 |---|---|
@@ -222,27 +186,25 @@ Other ingestion rejections, all with the same "nothing was written" guarantee:
 Only the first per-proposal problem is reported; fix it and re-run to see the
 next.
 
-### `no Candidate Engineering Model in …`
+---
+
+## Nothing to curate, or curation refuses
 
 ```text
 no Candidate Engineering Model in <project>.
-  There is nothing to curate yet. Produce proposals first:
-    python discovery/run.py <repository> <project>      # deterministic
-    python tools/onboard.py brief <repository> <project>  # with Claude or Codex
+  There is nothing to curate yet. Produce proposals first: …
 ```
 
 Wrong project directory, or discovery has not run. Note that `tools/review.py`
 reads `candidate-engineering-model.json` (written by `discovery/run.py`) while
 `tools/curate.py` reads `candidate-initial.json` (written by both paths).
 
-### Curation refuses to run
-
 ```text
 Human Curation requires a human.
   This tool refuses to run without a terminal.
 ```
 
-Exit code 1. **By design.** Use `--report` for the session summary, which works
+Exit code 1, **by design**. Use `--report` for the session summary, which works
 without a terminal, or `tools/review.py apply --reviewer=NAME` for
 non-interactive authorization.
 
@@ -250,13 +212,8 @@ non-interactive authorization.
 
 ## Stale bytecode cache
 
-Symptom: `tools/check.py` reports
-
-```text
-  FAIL  deterministic generation
-```
-
-or a change you made to a `.py` file appears to have no effect.
+Symptom: `tools/check.py` reports `FAIL deterministic generation`, or an edit to
+a `.py` file appears to have no effect.
 
 **On macOS, Python may cache bytecode outside the repository**, so deleting
 `__pycache__` inside the checkout is not enough:
@@ -275,22 +232,15 @@ Then re-run `python tools/check.py`.
 
 ```text
   FAIL  governance consistency             15 governance finding(s)
-        → a decision record is inconsistent; see docs/troubleshooting.md
 ```
 
-List them:
-
-```bash
-python tools/check-governance.py
-```
-
-Findings are one of: a document with no front matter or unparseable front
-matter, an id that disagrees with its filename, a gap in a numbered sequence
-that the index does not explain, a dangling reference between records, a
+List them with `python tools/check-governance.py`. Findings are: missing or
+unparseable front matter, an id disagreeing with its filename, a gap in a
+numbered sequence the index does not explain, a dangling reference, a
 supersession recorded on only one side, an index row count that disagrees with
-the number of files, or a **broken Markdown link** — for example a link to a
-`docs/` page that does not exist. This check runs inside both `tools/check.py`
-and `tools/test.py`, so a broken link in `README.md` fails the whole suite.
+the file count, or a **broken Markdown link** — including a link to a `docs/`
+page that does not exist. This check runs inside both `tools/check.py` and
+`tools/test.py`, so one broken link in `README.md` fails the whole suite.
 
 ---
 
@@ -302,5 +252,5 @@ python tools/test.py         # 17 fixtures, both query engines, governance
 python tools/smoke.py --keep # the whole documented path, workspace preserved
 ```
 
-`tools/test.py --accept` rewrites the golden outputs. Only run it when you have
-deliberately changed the compiler's output and have reviewed the diff.
+`tools/test.py --accept` rewrites the golden outputs. Run it only when you have
+deliberately changed the compiler's output and reviewed the diff.

@@ -33,6 +33,9 @@ import pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT / "tools"))
+
+from _cli import help_requested, project as project_arg  # noqa: E402
 
 from discovery.mechanical import extract              # noqa: E402
 from compiler.registry import load_all                # noqa: E402
@@ -42,8 +45,11 @@ GREEN, RED, YELLOW, DIM, BOLD, OFF = (
 
 SKILL = "DS-brownfield-onboarding"
 UNCERTAINTY = {"high", "medium", "low"}
-TYPES = {"Concept", "Capability", "Invariant", "ADR", "Actor", "Evidence",
-         "BoundedContext", "Artifact", "Policy", "Workflow"}
+
+# The allowed types come from the SKILL DECLARATION, never from a second list
+# here. A briefing that told the worker six types while ingestion accepted ten
+# is a contract that disagrees with itself — found while writing the
+# third-party documentation.
 
 
 def skill():
@@ -56,8 +62,10 @@ def skill():
 # ─────────────────────────────────────────────────────────────── brief
 
 def brief(repository, project):
-    project.mkdir(parents=True, exist_ok=True)
+    # Extract FIRST. Creating the project directory before the stack profile is
+    # known left an empty directory behind every time a repository was refused.
     mech = extract(repository)
+    project.mkdir(parents=True, exist_ok=True)
     (project / "mechanical-engineering-model.json").write_text(
         json.dumps(mech, indent=2) + "\n")
 
@@ -187,6 +195,7 @@ def ingest(project, reply_path):
                          f"  Models often wrap JSON in prose or a code fence. "
                          f"Save only the JSON document.")
 
+    types = set(skill()["proposal-types"])
     problems, proposals = [], reply.get("proposals") or []
     if reply.get("mechanicalModelDigest") != mech["digest"]:
         problems.append(
@@ -205,11 +214,15 @@ def ingest(project, reply_path):
 
     entities, reviews, seen = [], [], set()
     for i, p in enumerate(proposals):
+        # Report EVERY proposal's problems, not only the first. A worker reply
+        # is fixed by a model in one pass or not at all, and drip-feeding one
+        # error per run makes that impossible.
+        before_this = len(problems)
         where = f"proposals[{i}] {p.get('id', '?')}"
         for field in ("id", "type", "label", "source", "uncertainty", "for", "against"):
             if not p.get(field):
                 problems.append(f"{where}: missing {field!r}")
-        if p.get("type") not in TYPES:
+        if p.get("type") not in types:
             problems.append(f"{where}: type {p.get('type')!r} is not a metamodel entity")
         if p.get("uncertainty") not in UNCERTAINTY:
             problems.append(f"{where}: uncertainty must be high, medium or low")
@@ -224,7 +237,7 @@ def ingest(project, reply_path):
             problems.append(f"{where}: source {p['source']!r} is not in the "
                             f"Mechanical Model — the worker went outside the "
                             f"evidence boundary")
-        if problems:
+        if len(problems) > before_this:
             continue
         entities.append({
             "id": p["id"], "type": p["type"], "label": p["label"],
@@ -241,11 +254,12 @@ def ingest(project, reply_path):
 
     relationships = []
     for i, r in enumerate(reply.get("relationships") or []):
+        before_this = len(problems)
         where = f"relationships[{i}]"
         for field in ("from", "predicate", "to", "source"):
             if not r.get(field):
                 problems.append(f"{where}: missing {field!r}")
-        if problems:
+        if len(problems) > before_this:
             continue
         relationships.append({
             "from": r["from"], "predicate": r["predicate"], "to": r["to"],
@@ -328,9 +342,9 @@ def main(argv):
     if cmd == "brief" and len(argv) == 4:
         return brief(pathlib.Path(argv[2]).resolve(), ROOT / argv[3])
     if cmd == "ingest" and len(argv) == 4:
-        return ingest(ROOT / argv[2], argv[3])
+        return ingest(project_arg(argv[2], must_have_model=False), argv[3])
     if cmd == "status" and len(argv) == 3:
-        return status(ROOT / argv[2])
+        return status(project_arg(argv[2], must_have_model=False))
     print(__doc__)
     return 2
 

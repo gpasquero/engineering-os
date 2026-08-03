@@ -73,9 +73,7 @@ Each proposal is then shown alone:
 wrong words* is the common case, and rejecting it loses the idea.
 
 **Sessions are resumable.** Run the same command again: only undecided and
-deferred proposals return. There is no separate resume flag — the tool's own
-`--help` text mentions `--resume`, but the code resumes automatically from
-`curation-session.json` and the flag has no effect.
+deferred proposals return. There is no separate resume flag.
 
 ---
 
@@ -132,10 +130,10 @@ attributes:
   support: S-implemented
 relationships: []
 ---
-
-Proposed by `W-domain-interpreter` in task `T02-interpret` and accepted through
-review. Support: `S-implemented`.
 ```
+
+Every accepted proposal keeps the provenance it carried: its source, its
+locator, the worker and task that proposed it, and its support classification.
 
 Then compile:
 

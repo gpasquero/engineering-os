@@ -19,6 +19,9 @@ import pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT / "tools"))
+
+from _cli import help_requested, project as project_arg  # noqa: E402
 
 from compiler.registry import load_all      # noqa: E402
 from compiler.plan import load_plans, plan  # noqa: E402
@@ -28,6 +31,9 @@ BAR = "─" * 74
 
 
 def main(argv):
+    if help_requested(argv):
+        print(__doc__)
+        return 0
     opts = {a.split("=", 1)[0]: a.split("=", 1)[1]
             for a in argv if a.startswith("--") and "=" in a}
     argv = [a for a in argv if not a.startswith("--")]
@@ -35,7 +41,7 @@ def main(argv):
         print(__doc__)
         return 2
 
-    project = ROOT / argv[1]
+    project = project_arg(argv[1], must_have_model=False)
     report_path = project / "knowledge-drift-report.json"
     if not report_path.exists():
         print(f"no drift report at {report_path}\nrun: python3 tools/lifecycle.py …")

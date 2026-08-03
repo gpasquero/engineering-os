@@ -40,6 +40,9 @@ import pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT / "tools"))
+
+from _cli import help_requested, project as project_arg  # noqa: E402
 
 from compiler import compile_project                                # noqa: E402
 from compiler.recommend import load_recommendations, advise, applicable  # noqa: E402
@@ -98,12 +101,15 @@ def guidance(ckm_before, ckm_after, untouched=None):
 
 
 def main(argv):
+    if help_requested(argv):
+        print(__doc__)
+        return 0
     if len(argv) != 3:
         print(__doc__)
         return 2
     models = []
     for arg in argv[1:]:
-        ckm, problems = compile_project(ROOT / arg)
+        ckm, problems = compile_project(project_arg(arg))
         if problems:
             raise SystemExit(f"{arg}: {len(problems)} diagnostic(s)")
         models.append(ckm)

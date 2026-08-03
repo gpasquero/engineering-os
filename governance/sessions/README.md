@@ -75,6 +75,7 @@ ADRs answer "why".
 | [SESSION-0050](SESSION-0050-2026-08-02.md) | 2026-08-02 | guidance | `ACCEPT-0045`; **the benchmark begins measuring Guidance** (`ADR-0139`) — 80 %, disagreeing with 100 % understanding on the same run; the question set becomes a stable contract; the **Brownfield Onboarding Skill** specified (`ADR-0140`); the customer lifecycle (`ADR-0141`) |
 | [SESSION-0051](SESSION-0051-2026-08-02.md) | 2026-08-02 | curation | `ACCEPT-0046`; **Human Curation becomes a product** (`ADR-0145`) — `tools/curate.py`, which refuses to run without a human; two onboarding deliverables (`ADR-0142`); the five responsibilities (`ADR-0143`); **guidance becomes the center** (`ADR-0146`) |
 | [SESSION-0052](SESSION-0052-2026-08-02.md) | 2026-08-02 | mvp-closure | `ACCEPT-0048`; **Research Freeze** (`ADR-0147`); `README.md` rewritten for a third party; `tools/check.py`, `tools/onboard.py`, `tools/smoke.py` and a bundled brownfield demo created; **four defects found by writing down what a stranger would type** |
+| [SESSION-0053](SESSION-0053-2026-08-02.md) | 2026-08-02 | mvp-closure | Thirteen findings from the third-party docs pass: **nine repaired**, four recorded. `--help` and a missing-project guard on every documented command; `compile.py` no longer exits 0 on a mistyped path |
 
 ## Reading
 

@@ -12,6 +12,7 @@ attributes:
   source: packages/backend/src/common/utils/__tests__/business-hours-calc.spec.ts
   support: S-inferred
 relationships:
+- enforced-at: Artifact.BusinessHoursCalcSpec
 - specializes: Invariant.Calculatebusinessminutes
 ---
 

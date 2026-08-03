@@ -169,7 +169,7 @@ python3 tools/drift-queue.py external/ai-desk-lifecycle
 
 ```text
 P-discover               123 item(s)   from D-implementation-without-knowledge
-P-establish-enforcement   10 item(s)   from D-invariant-without-enforcement
+P-establish-enforcement    9 item(s)   from D-invariant-without-enforcement
 P-review-unsupported       1 item(s)   from D-unsupported-assertion
 NOT ROUTED — D-new-knowledge (104): additive; curation alone suffices
 ```

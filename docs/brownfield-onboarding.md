@@ -100,7 +100,6 @@ relationships. `--strategy` selects how test suites become invariants:
 ```text
 [mechanical]  …/examples/brownfield-demo
     packages         1
-    …
     digest           60116bae4c791115
 [interpretive] strategy 'suite-level', reading only the mechanical model
 [candidate]   11 entities · 10 relationships

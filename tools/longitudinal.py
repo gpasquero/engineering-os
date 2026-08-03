@@ -30,6 +30,9 @@ import subprocess
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT / "tools"))
+
+from _cli import help_requested, project as project_arg  # noqa: E402
 
 from discovery.mechanical import extract                    # noqa: E402
 from discovery.interpretive import interpret                # noqa: E402
@@ -81,6 +84,9 @@ def measure(project, questions, queries):
 
 
 def main(argv):
+    if help_requested(argv):
+        print(__doc__)
+        return 0
     if len(argv) < 4:
         print(__doc__)
         return 2

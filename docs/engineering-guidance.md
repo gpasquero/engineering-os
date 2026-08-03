@@ -32,12 +32,10 @@ take no subject at all — `Q-unsupported`, `Q-obsolete-decisions`,
 `Q-stale-implementation`, `Q-unenforced`, `Q-unaccepted`, `Q-orphan-concepts`.
 
 Three statuses, three meanings: `ok` (answered), `empty` (the question applies
-and nothing matched — often the finding), `not-applicable` (the question does
-not apply to this subject type, or the subject is not in the model). `ok` and
-`empty` exit 0; `not-applicable` exits 1; an unknown query id exits 2.
-
-`--paths` prints the relationship path behind every row. `--json` adds full
-provenance, so the follow-up question — *how do you know?* — is always
+and nothing matched — often the finding), `not-applicable` (wrong subject type,
+or the subject is not in the model). `ok` and `empty` exit 0; `not-applicable`
+exits 1; an unknown query id exits 2. `--paths` prints the relationship path
+behind every row; `--json` adds full provenance, so *how do you know?* is always
 answerable.
 
 **Two independent query engines** exist and `tools/check.py` verifies that they
@@ -108,9 +106,8 @@ EXECUTION   1 mechanical · 2 reasoning · 1 human   ·   max parallelism 1
               needs:      C-read-source
 ```
 
-Each task declares the **capabilities** it requires (`C-read-source`, …), never
-which worker performs it. `--mermaid` emits a graph you can paste into any
-Mermaid renderer.
+Each task declares the **capabilities** it requires, never which worker performs
+it. `--mermaid` emits a graph you can paste into any Mermaid renderer.
 
 ---
 

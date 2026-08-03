@@ -21,6 +21,9 @@ import pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT / "tools"))
+
+from _cli import help_requested, project as project_arg  # noqa: E402
 
 from compiler.query import Model, run, load_queries  # noqa: E402
 
@@ -80,13 +83,16 @@ def render(result, paths=False):
 
 
 def main(argv):
+    if help_requested(argv):
+        print(__doc__)
+        return 0
     as_json, paths = "--json" in argv, "--paths" in argv
     argv = [a for a in argv if a not in ("--json", "--paths")]
     if len(argv) < 3:
         print(__doc__)
         return 2
 
-    project = ROOT / argv[1]
+    project = project_arg(argv[1])
     ckm_path = project / "build/canonical-knowledge-model.json"
     if not ckm_path.exists():
         print(f"no compiled model at {ckm_path}\nrun: python3 tools/compile.py {argv[1]}")

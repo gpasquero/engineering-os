@@ -6,9 +6,9 @@
 
     python3 tools/direct.py <project> intents
     python3 tools/direct.py <project> I-modify-behavior Artifact.ConflictGo
-    python3 tools/direct.py <project> I-modify-behavior Artifact.ConflictGo --context T02
+    python3 tools/direct.py <project> I-modify-behavior Artifact.ConflictGo --context=T02
     python3 tools/direct.py <project> I-modify-behavior Artifact.ConflictGo \\
-        --observations external/kubernetes-ssa/simulated-observations.yaml
+        --observations=external/kubernetes-ssa/simulated-observations.yaml
 
 **No language model participates.** A worker receives one task and its context,
 never an intent, a plan or a graph.
@@ -23,6 +23,9 @@ import yaml
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT / "tools"))
+
+from _cli import help_requested, project as project_arg  # noqa: E402
 
 from compiler.query import Model          # noqa: E402
 from compiler.registry import load_all    # noqa: E402
@@ -144,6 +147,9 @@ def render(r, context_filter=None):
 
 
 def main(argv):
+    if help_requested(argv):
+        print(__doc__)
+        return 0
     modes = {a for a in argv if a.startswith("--")}
     ctx = next((a.split("=", 1)[1] for a in modes if a.startswith("--context=")), None)
     obs_path = next((a.split("=", 1)[1] for a in modes if a.startswith("--observations=")), None)
@@ -152,7 +158,7 @@ def main(argv):
         print(__doc__)
         return 2
 
-    project = ROOT / argv[1]
+    project = project_arg(argv[1])
     ckm_path = project / "build/canonical-knowledge-model.json"
     if not ckm_path.exists():
         print(f"no compiled model at {ckm_path}")

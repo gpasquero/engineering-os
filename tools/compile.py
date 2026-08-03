@@ -12,6 +12,9 @@ import pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT / "tools"))
+
+from _cli import help_requested, project as project_arg  # noqa: E402
 
 from compiler import compile_project, emit_all           # noqa: E402
 from compiler.runtime.phases import describe             # noqa: E402
@@ -21,11 +24,11 @@ def main(argv):
     if len(argv) == 2 and argv[1] == "--phases":
         print(describe())
         return 0
-    if len(argv) != 2:
+    if help_requested(argv) or len(argv) != 2:
         print(__doc__)
-        return 2
+        return 0 if help_requested(argv) else 2
 
-    project = ROOT / argv[1]
+    project = project_arg(argv[1])
     ckm, problems = compile_project(project, log=print)
     if problems:
         print(f"[FAILED]     {len(problems)} diagnostic(s):")

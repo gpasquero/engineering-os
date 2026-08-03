@@ -84,6 +84,38 @@
     ],
     "relationships": [
       {
+        "from": "Artifact.BusinessHoursCalcSpec",
+        "predicate": "validates",
+        "to": "Capability.Utils",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/common/utils/__tests__/business-hours-calc.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-domain-interpreter",
+          "task": "T-continuous",
+          "rule": "C1-new-suite",
+          "preserves": "S4-spec-validates-module"
+        }
+      },
+      {
+        "from": "Invariant.Addbusinessminutes",
+        "predicate": "constrains",
+        "to": "Capability.Utils",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/common/utils/__tests__/business-hours-calc.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T-continuous",
+          "rule": "C1-new-suite",
+          "preserves": "R4-both-levels"
+        }
+      },
+      {
         "from": "Invariant.Addbusinessminutes",
         "predicate": "enforced-at",
         "to": "Artifact.BusinessHoursCalcSpec",
@@ -95,7 +127,24 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T-continuous",
-          "rule": "C1-new-suite"
+          "rule": "C1-new-suite",
+          "preserves": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.Calculatebusinessminutes",
+        "predicate": "constrains",
+        "to": "Capability.Utils",
+        "support": "S-inferred",
+        "provenance": {
+          "source": "packages/backend/src/common/utils/__tests__/business-hours-calc.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T-continuous",
+          "rule": "C1-new-suite",
+          "preserves": "R4-both-levels"
         }
       },
       {
@@ -110,7 +159,24 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T-continuous",
-          "rule": "C1-new-suite"
+          "rule": "C1-new-suite",
+          "preserves": "R4-both-levels"
+        }
+      },
+      {
+        "from": "Invariant.ReturnsTheSameDateFor0Minutes",
+        "predicate": "enforced-at",
+        "to": "Artifact.BusinessHoursCalcSpec",
+        "support": "S-tested",
+        "provenance": {
+          "source": "packages/backend/src/common/utils/__tests__/business-hours-calc.spec.ts",
+          "locator": null
+        },
+        "origin": {
+          "worker": "W-constraint-interpreter",
+          "task": "T-continuous",
+          "rule": "C1-new-suite",
+          "preserves": "R4-both-levels"
         }
       },
       {
@@ -125,7 +191,8 @@
         "origin": {
           "worker": "W-constraint-interpreter",
           "task": "T-continuous",
-          "rule": "C1-new-suite"
+          "rule": "C1-new-suite",
+          "preserves": "R4-both-levels"
         }
       }
     ],
@@ -138,31 +205,31 @@
   },
   "statistics": {
     "entities": 4,
-    "relationships": 3,
+    "relationships": 7,
     "classifications": 0,
     "ambiguities": 0,
     "conflicts": 0,
     "gaps": 0,
     "bySupport": {
-      "S-inferred": 4,
-      "S-tested": 3
+      "S-inferred": 7,
+      "S-tested": 4
     },
     "byType": {
       "Artifact": 1,
       "Invariant": 3
     },
     "byWorker": {
-      "W-constraint-interpreter": 6,
-      "W-domain-interpreter": 1
+      "W-constraint-interpreter": 9,
+      "W-domain-interpreter": 2
     },
     "byOrigin": {
-      "O-deterministic-rule": 7
+      "O-deterministic-rule": 11
     },
     "byRule": {
       "C1-new-suite": 4
     }
   },
-  "digest": "5bbc24e32f4d8489",
+  "digest": "ce6dccc862041d7b",
   "mechanicalModelDigest": "81b171cccf561206",
   "previousMechanicalDigest": "a5fe1bb920a37756",
   "mode": "continuous"

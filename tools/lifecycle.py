@@ -2,6 +2,7 @@
 """Run the complete Brownfield Acquisition lifecycle.
 
     python3 tools/lifecycle.py <before-repo> <after-repo> <project>
+    python3 tools/lifecycle.py <before> <after> <project> --keep=Auth,Ticket
 
     Initial Acquisition → review → Authoritative Model → CKM
         → [engineering change]
@@ -18,6 +19,9 @@ import pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT / "tools"))
+
+from _cli import help_requested, project as project_arg  # noqa: E402
 
 from discovery.mechanical import extract           # noqa: E402
 from discovery.interpretive import interpret       # noqa: E402
@@ -46,17 +50,31 @@ def initial(repo, project, accept_filter):
 
 
 def main(argv):
+    if help_requested(argv):
+        print(__doc__)
+        return 0
+    opts = {a.split("=", 1)[0]: a.split("=", 1)[1]
+            for a in argv if a.startswith("--") and "=" in a}
+    argv = [a for a in argv if not a.startswith("--")]
     if len(argv) != 4:
         print(__doc__)
         return 2
     before_repo, after_repo, project = argv[1], argv[2], ROOT / argv[3]
     (project / "model").mkdir(parents=True, exist_ok=True)
 
+    # The curation policy is an ARGUMENT, not a property of this tool. The
+    # default accepts everything, because a demonstration that silently
+    # authorized 2 of 15 proposals on an unfamiliar repository looked like a
+    # broken pipeline rather than a narrow filter.
+    #
+    #   --keep=Auth,Jwt,Ticket    accept only ids containing one of these
+    #
+    # The frozen longitudinal benchmark keeps its own fixed policy on purpose
+    # (ADR-0129): a benchmark needs a constant, and a human is not one.
+    wanted = [k for k in (opts.get("--keep") or "").split(",") if k]
+
     def keep(node_id):
-        return any(k in node_id for k in
-                   ("Auth", "Jwt", "RefreshToken", "Lockout", "Password", "Sla",
-                    "BusinessHours", "TenantIsolation", "Rls", "Ticket")) \
-            or node_id in ("ADR.0001", "BoundedContext.Backend")
+        return True if not wanted else any(k in node_id for k in wanted)
 
     print(BAR); print("1  INITIAL ACQUISITION"); print(BAR)
     mech_before, cand_initial, auth = initial(before_repo, project, keep)
@@ -105,12 +123,18 @@ def main(argv):
     print(f"   NOT applied — reacquisition challenges, it does not replace\n")
 
     print(BAR); print("5  KNOWLEDGE DRIFT REPORT"); print(BAR)
-    maintained = json.loads(
-        (project / "build/canonical-knowledge-model.json").read_text()) \
-        if (project / "build/canonical-knowledge-model.json").exists() else None
-    if not maintained:
-        print("   compile the project first: python3 tools/compile.py " + argv[3])
+    # Compile the maintained model here rather than telling the user to go and
+    # do it. Stage 5 failed on every FIRST run of the lifecycle, which is the
+    # only run a new user makes.
+    from compiler import compile_project                      # noqa: PLC0415
+    ckm, problems = compile_project(project)
+    if problems:
+        print(f"   the maintained model does not compile "
+              f"({len(problems)} diagnostic(s)):")
+        for d in problems[:5]:
+            print(f"     ({d.phase}) {d}")
         return 1
+    maintained = ckm
     rep = drift.report(maintained["nodes"], maintained["edges"], fresh,
                        incremental_ids=inc_ids)
     (project / "knowledge-drift-report.json").write_text(json.dumps(rep, indent=2) + "\n")

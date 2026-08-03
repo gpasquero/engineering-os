@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """Human Curation — the only stage where a person decides anything.
 
-    python3 tools/curate.py <project>                  curate, interactively
-    python3 tools/curate.py <project> --resume         continue a session
-    python3 tools/curate.py <project> --report         read a finished session
+    python3 tools/curate.py <project>          curate, interactively
+    python3 tools/curate.py <project> --report read a finished session
+
+Sessions resume automatically: run the same command again and only undecided
+and deferred proposals return.
 
 **Human Curation is a first-class product, not a governance requirement**
 (`ADR-0145`). It has existed in this repository since `SESSION-0039` as a filter
@@ -44,6 +46,9 @@ import pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT / "tools"))
+
+from _cli import help_requested, project as project_arg  # noqa: E402
 
 from compiler.apply import authorize, apply       # noqa: E402
 
@@ -140,10 +145,13 @@ def report(project, session, candidate):
 
 
 def main(argv):
+    if help_requested(argv):
+        print(__doc__)
+        return 0
     if len(argv) < 2:
         print(__doc__)
         return 2
-    project = ROOT / argv[1]
+    project = project_arg(argv[1], must_have_model=False)
     candidate, reviews, session, session_file = load(project)
     entities = candidate["proposals"]["entities"]
     rels = {}

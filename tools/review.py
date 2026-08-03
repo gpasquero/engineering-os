@@ -17,11 +17,17 @@ import pathlib
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT / "tools"))
+
+from _cli import help_requested, project as project_arg  # noqa: E402
 
 from compiler.apply import authorize, apply, _review_mode   # noqa: E402
 
 
 def main(argv):
+    if help_requested(argv):
+        print(__doc__)
+        return 0
     opts = {a.split("=", 1)[0]: a.split("=", 1)[1]
             for a in argv if a.startswith("--") and "=" in a}
     argv = [a for a in argv if not a.startswith("--")]
@@ -29,7 +35,7 @@ def main(argv):
         print(__doc__)
         return 2
 
-    project = ROOT / argv[1]
+    project = project_arg(argv[1], must_have_model=False)
     path = project / "candidate-engineering-model.json"
     if not path.exists():
         print(f"no candidate model at {path}\nrun: python3 discovery/run.py <repo> {argv[1]}")

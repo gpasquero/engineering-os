@@ -1,7 +1,7 @@
 ---
 id: EXAMPLE-TINY
 title: Tiny end-to-end example
-status: draft
+status: current
 created: 2026-08-02
 updated: 2026-08-02
 semantic-layer: B
@@ -11,12 +11,13 @@ established-by: [ADR-0062]
 
 # Tiny end-to-end example
 
-**The first running Engineering OS pipeline.** Thirteen nodes, compiled from
-Markdown into a Canonical Knowledge Model and four projections.
+**The smallest complete Engineering OS model.** Thirteen nodes covering every
+entity family, compiled from Markdown into a Canonical Knowledge Model and six
+projections.
 
-> Built deliberately before B1 was complete. The objective is to validate the
-> whole pipeline as early as possible, **even crudely** — every remaining design
-> decision is easier once something runs end to end.
+It is the Quick Start in `README.md`, and it is the right thing to copy when
+starting a model by hand — `model/*.md` shows what an authoring source looks
+like for each entity type.
 
 ## Run it
 
@@ -25,11 +26,12 @@ python3 tools/compile.py examples/tiny
 ```
 
 ```text
-[metamodel] 20 entity types, 67 registered predicates
-[discover]  13 authoring sources
-[parse]     13 nodes
-[resolve]   OK — 16 edges, all types and predicates valid
-[emit]      canonical-knowledge-model.json, model.ttl, graph.md, explorer.html
+[registries] 20 registries: assertion-origins 5, core-relationship-types 18, discovery-skills 11, drift-categories 15, engineering-intents 4, engineering-questions 9, entity-types 23, finding-kinds 8, governance-gates 3, interpretive-failures 5, observation-kinds 8, plans 8, queries 17, recommendations 4, relationship-predicates 74, support-classification 8, task-kinds 11, validation-rules 7, worker-capabilities 9, workers 12
+[discovery]  13 authoring sources
+[parsing]    13 nodes, 0 structural diagnostic(s)
+[resolution] 7 rules executed, 0 violation(s)
+[ckm]        13 nodes, 16 edges
+[projection] canonical-knowledge-model.json, explorer.html, graph.md, indexes.json, model.ttl, shapes.ttl
 ```
 
 ## What it contains

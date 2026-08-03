@@ -31,6 +31,9 @@ import yaml
 
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT / "tools"))
+
+from _cli import help_requested, project as project_arg  # noqa: E402
 
 from compiler import compile_project, emit_all, EMITTERS  # noqa: E402
 from compiler.query import Model, run as run_query, load_queries  # noqa: E402
@@ -133,6 +136,9 @@ def check(project, accept=False):
 
 
 def main(argv):
+    if help_requested(argv):
+        print(__doc__)
+        return 0
     accept = "--accept" in argv
     argv = [a for a in argv if a != "--accept"]
     names = [argv[1]] if len(argv) > 1 else sorted(p.name for p in PROJECTS.iterdir() if p.is_dir())
