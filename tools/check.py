@@ -93,7 +93,10 @@ def main(argv):
 
     try:
         import yaml                                          # noqa: F401
-        c.ok("PyYAML", getattr(yaml, "__version__", "installed"))
+        where = ("vendored — nothing to install"
+                 if "vendor" in str(getattr(yaml, "__file__", ""))
+                 else f"installed, {getattr(yaml, '__version__', '?')}")
+        c.ok("YAML", where)
     except ImportError:
         c.fail("PyYAML", "not installed",
                "python -m pip install -r requirements.txt")
@@ -189,7 +192,7 @@ def report(c, quick=False):
     scope = "quick check" if quick else "all checks"
     print(f"{GREEN}{BOLD}Engineering OS is installed and healthy{OFF} "
           f"{DIM}({scope} passed){OFF}")
-    print(f"{DIM}Next: python tools/compile.py examples/tiny  "
+    print(f"{DIM}Next: eos compile examples/tiny  "
           f"— or read the Quick Start in README.md{OFF}\n")
     return 0
 

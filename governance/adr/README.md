@@ -16,7 +16,7 @@ same session the decision is made.
 > a rule exists; the rule that must be followed lives in a Policy under
 > `shared/policies/`. Agents consume policies; humans read ADRs for rationale.
 
-**Highest allocated ID: `ADR-0147`.** IDs are sequential and never reused.
+**Highest allocated ID: `ADR-0148`.** IDs are sequential and never reused.
 
 > This index table is a hand-maintained projection of ADR front matter. It is
 > listed in the transitional-debt register, `ISSUE-0037`.
@@ -242,6 +242,7 @@ Read these before designing anything that produces an artifact:
 | [ADR-0145](ADR-0145-curation-is-a-product.md) | **Human Curation is a first-class product and a user-experience problem** | accepted | — |
 | [ADR-0146](ADR-0146-guidance-becomes-the-center.md) | **The product question moves from what we know to what an engineer should do next** | accepted | — |
 | [ADR-0147](ADR-0147-research-freeze.md) | **Research Freeze — the objective is a third party completing the MVP, not a better architecture** | accepted | — |
+| [ADR-0148](ADR-0148-installed-as-a-plugin.md) | **Engineering OS is installed as a Claude Code plugin and depends on nothing** | accepted | — |
 
 ## Supersessions
 

@@ -27,3 +27,6 @@ __pycache__/
 
 # discovery scratch
 /tmp-worktrees/
+
+# Vendored dependency: keep the source, never the compiled artefacts.
+vendor/**/__pycache__/

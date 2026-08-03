@@ -1,0 +1,21 @@
+{
+  "name": "engineering-os",
+  "displayName": "Engineering OS",
+  "version": "0.1.0",
+  "description": "Build and maintain a durable engineering model of a system you already have. Onboard a Brownfield repository, curate what is true, then ask engineering questions and get guidance that survives as the code changes.",
+  "author": {
+    "name": "gpasquero",
+    "url": "https://github.com/gpasquero"
+  },
+  "homepage": "https://github.com/gpasquero/engineering-os",
+  "repository": "https://github.com/gpasquero/engineering-os",
+  "license": "Apache-2.0",
+  "keywords": [
+    "brownfield",
+    "onboarding",
+    "architecture",
+    "knowledge-model",
+    "legacy-code",
+    "engineering-knowledge"
+  ]
+}

@@ -21,3 +21,7 @@ becoming smarter and not less deterministic; a probabilistic interpreter is
 admissible under `ADR-0105` and is not built here, so that the first candidate
 model is reproducible.
 """
+# Zero-install: fall back to the vendored pure-Python PyYAML when none is
+# installed. Appended to sys.path, so a real installation always wins.
+import sys as _sys, pathlib as _pathlib
+_sys.path.append(str(_pathlib.Path(__file__).resolve().parent.parent / "vendor"))

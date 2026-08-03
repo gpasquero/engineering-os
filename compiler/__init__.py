@@ -8,6 +8,10 @@ emitter produces a projection of it.
 Module layout mirrors the phases (ADR-0073). `tools/compile.py` is orchestration
 only and holds no compiler logic.
 """
+# Zero-install: fall back to the vendored pure-Python PyYAML when none is
+# installed. Appended to sys.path, so a real installation always wins.
+import sys as _sys, pathlib as _pathlib
+_sys.path.append(str(_pathlib.Path(__file__).resolve().parent.parent / "vendor"))
 from .runtime import phases, diagnostics
 from .registry import load_all as load_registries
 from .discovery import discover

@@ -1,0 +1,122 @@
+#!/usr/bin/env python3
+"""Engineering OS — one entry point.
+
+    eos check                                  verify the installation
+    eos onboard <repository> <project>         mechanical facts + worker briefing
+    eos discover <repository> <project>        deterministic proposals, no model
+    eos ingest <project> <worker-output.json>  accept a worker's proposals
+    eos curate <project>                       human curation (needs a terminal)
+    eos apply <project> --ids=A,B --reviewer=NAME
+    eos compile <project>                      CKM, OWL, SHACL, graph, Explorer
+    eos ask <project> [<query> <subject>]      answer an engineering question
+    eos advise <project> [<recommendation> <subject>]
+    eos direct <project> <intent> <subject>    plan, task graph, worker routing
+    eos measure <project>                      engineering questions answered
+    eos maintain <before> <after> <project>    continuous + periodic + drift
+    eos drift <project>                        the drift report as a work queue
+    eos status <project>                       where this project is in the loop
+    eos explorer <project>                     path to the navigable web view
+
+Every subcommand accepts `--help`.
+
+**Nothing needs to be installed.** Engineering OS ships a pure-Python YAML and
+uses no other third-party package, makes no network calls, and reads no
+credentials.
+"""
+import os
+import sys
+import pathlib
+import subprocess
+
+# `bin/eos` is on PATH when the plugin is enabled, so the product root is one
+# level up. Symlinks are resolved first, so `./eos` at the root works too.
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(ROOT))
+sys.path.append(str(ROOT / "vendor"))  # fallback only — appended, never first
+
+BOLD, DIM, GREEN, OFF = "\033[1m", "\033[2m", "\033[32m", "\033[0m"
+
+# subcommand → (script, argument transform). The tools are unchanged; this is
+# one stable surface over them, not a redesign of them.
+COMMANDS = {
+    "check":     ("tools/check.py",       lambda a: a),
+    "onboard":   ("tools/onboard.py",     lambda a: ["brief", *a]),
+    "discover":  ("discovery/run.py",     lambda a: a),
+    "ingest":    ("tools/onboard.py",     lambda a: ["ingest", *a]),
+    "curate":    ("tools/curate.py",      lambda a: a),
+    "apply":     ("tools/review.py",      lambda a: [a[0], "apply", *a[1:]] if a else a),
+    "compile":   ("tools/compile.py",     lambda a: a),
+    "ask":       ("tools/ask.py",         lambda a: [*a, "questions"] if len(a) == 1 else a),
+    "advise":    ("tools/advise.py",      lambda a: [*a, "recommendations"] if len(a) == 1 else a),
+    "direct":    ("tools/direct.py",      lambda a: [*a, "intents"] if len(a) == 1 else a),
+    "measure":   ("tools/measure.py",     lambda a: a),
+    "maintain":  ("tools/lifecycle.py",   lambda a: a),
+    "drift":     ("tools/drift-queue.py", lambda a: a),
+    "status":    ("tools/onboard.py",     lambda a: ["status", *a]),
+    "smoke":     ("tools/smoke.py",       lambda a: a),
+    "test":      ("tools/test.py",        lambda a: a),
+}
+
+
+def explorer(args):
+    """Print — and optionally open — the generated navigable view."""
+    if not args:
+        print("usage: eos explorer <project>")
+        return 2
+    given = pathlib.Path(args[0]).expanduser()
+    if not given.is_absolute():
+        given = given if given.exists() else ROOT / given
+    page = given / "build/explorer.html"
+    if not page.exists():
+        print(f"{page} does not exist yet.\n"
+              f"  Compile the project first:  eos compile {args[0]}")
+        return 1
+    print(page)
+    if "--open" in args:
+        opener = "open" if sys.platform == "darwin" else "xdg-open"
+        subprocess.run([opener, str(page)])
+    return 0
+
+
+def main(argv):
+    if len(argv) < 2 or argv[1] in ("--help", "-h", "help"):
+        print(__doc__)
+        return 0 if len(argv) > 1 else 2
+    if argv[1] in ("--version", "version"):
+        print("Engineering OS")
+        return 0
+
+    cmd, args = argv[1], argv[2:]
+    if cmd == "explorer":
+        return explorer(args)
+    if cmd not in COMMANDS:
+        print(f"unknown command: {cmd}\n")
+        print(f"{DIM}Available:{OFF} " + "  ".join(sorted([*COMMANDS, "explorer"])))
+        print(f"{DIM}Run `eos --help` for what each one does.{OFF}")
+        return 2
+
+    script, transform = COMMANDS[cmd]
+    if "--help" in args or "-h" in args:
+        args = ["--help"]
+    else:
+        args = transform(args)
+    # PYTHONPATH is placed AHEAD of site-packages, so putting `vendor/` there
+    # unconditionally would make the vendored YAML beat an installed one — the
+    # opposite of what is documented. Add it only when there is nothing to beat.
+    path = [str(ROOT)]
+    try:
+        import yaml                                          # noqa: PLC0415
+        if "vendor" in str(getattr(yaml, "__file__", "")):
+            raise ImportError
+    except ImportError:
+        path.append(str(ROOT / "vendor"))
+    env = dict(os.environ, PYTHONPATH=os.pathsep.join(
+        path + [os.environ.get("PYTHONPATH", "")]))
+    # Do NOT change directory. A project path the user typed is relative to
+    # where they are, not to wherever the plugin happens to be cached.
+    return subprocess.run([sys.executable, str(ROOT / script), *args],
+                          env=env).returncode
+
+
+if __name__ == "__main__":
+    sys.exit(main(sys.argv))

@@ -9,7 +9,12 @@ attributable engineering model of a system you already have — and then keeps i
 alive as the system changes, so that six months later an engineer can ask a
 difficult question and get an answer nobody had to rediscover.
 
-**Apache-2.0** · Python 3.9+ · one dependency · no network calls, no API keys
+**Apache-2.0** · Python 3.9+ · **zero dependencies** · no network calls, no API keys
+
+```
+/plugin marketplace add gpasquero/engineering-os
+/plugin install engineering-os@engineering-os
+```
 
 ---
 
@@ -127,8 +132,8 @@ readers who want the reasoning, `governance/adr/`.
 | **Operating systems** | macOS and Linux. Windows is untested; WSL should work. |
 | **Python** | **3.9 or newer** |
 | **System dependencies** | none |
-| **Python dependencies** | **PyYAML** only (`requirements.txt`) |
-| **Optional** | `rdflib` (`requirements-optional.txt`) — only to regenerate metamodel diagrams |
+| **Python dependencies** | **none.** A pure-Python PyYAML is vendored in `vendor/` |
+| **Optional** | an installed `PyYAML` (faster parsing) · `rdflib`, only to regenerate metamodel diagrams |
 | **Git** | required only for Continuous Acquisition against a real history |
 | **Claude / Codex** | required only for the non-deterministic Onboarding Skill |
 | **API keys** | **none.** Engineering OS makes no network calls of any kind |
@@ -145,35 +150,85 @@ Verify everything:
 python3 --version          # 3.9 or newer
 git --version              # optional
 python -c "import yaml; print(yaml.__version__)"
-python tools/check.py      # verifies all of the above and much more
+eos check      # verifies all of the above and much more
 ```
 
 ---
 
 ## 5 · Installation
 
-One canonical method.
+**Install it into Claude Code. There is nothing to clone, no virtual
+environment and nothing to `pip install`.**
+
+```
+/plugin marketplace add gpasquero/engineering-os
+/plugin install engineering-os@engineering-os
+```
+
+That is the whole installation. Engineering OS ships a pure-Python YAML and
+uses no other third-party package, so the plugin works the moment it is
+enabled.
+
+Then just ask, in plain language:
+
+> *Onboard this repository — I want to understand what it does and why.*
+> *What breaks if I change the billing module?*
+> *Is the model still accurate after these commits?*
+
+Claude picks the right skill. Five ship with the plugin:
+
+| Skill | For |
+|---|---|
+| `brownfield-onboarding` | build a model of a system nobody fully understands |
+| `engineering-questions` | impact, dependencies, rationale, unsupported claims |
+| `engineering-guidance` | what to read and check **before** changing something |
+| `curate-proposals` | help a human authorize what is true |
+| `maintain-understanding` | keep it current, and challenge it |
+
+The plugin also puts **`eos`** on your `PATH`, so every command in this README
+works verbatim in Claude Code's terminal:
+
+```bash
+eos check                        # verify the installation
+eos --help                       # every subcommand
+```
+
+### Codex and other tools
+
+**There is no plugin mechanism to install into.** Engineering OS still works —
+`eos` is a plain Python script with no dependencies — but you install it
+yourself:
+
+```bash
+git clone https://github.com/gpasquero/engineering-os.git ~/.engineering-os
+export PATH="$HOME/.engineering-os/bin:$PATH"
+eos check
+```
+
+Then paste the contents of any `skills/*/SKILL.md` into your `AGENTS.md`, or
+point the model at `~/.engineering-os/skills/`. The skills are plain Markdown
+and name no vendor — the contract is the same whichever model reads it.
+
+### From a clone, for contributors
 
 ```bash
 git clone https://github.com/gpasquero/engineering-os.git
 cd engineering-os
-python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install --upgrade pip
-python -m pip install -r requirements.txt
-python tools/check.py
+./eos check
 ```
 
-`tools/check.py` verifies Python, dependencies, Git, all 20 registries,
-governance consistency, the engineering-question set, discovery skills, plans,
-all 17 fixtures, query-engine parity, deterministic generation and compiler
-health. It ends with:
+`python -m pip install -r requirements.txt` is optional and only makes YAML
+parsing faster; an installed PyYAML always wins over the vendored copy.
+
+`eos check` verifies Python, dependencies, all 20 registries, governance
+consistency, the engineering-question set, discovery skills, plans, all 17
+fixtures, query-engine parity, deterministic generation and compiler health. It
+ends with:
 
 ```text
 Engineering OS is installed and healthy (all checks passed)
 ```
 
-If it does not, it prints exactly what failed and what to do.
 See [`docs/installation.md`](docs/installation.md) and
 [`docs/troubleshooting.md`](docs/troubleshooting.md).
 
@@ -186,7 +241,7 @@ repository.
 
 ```bash
 # 1 · authoring sources → compiler → CKM and every knowledge product
-python tools/compile.py examples/tiny
+eos compile examples/tiny
 ```
 
 ```text
@@ -202,7 +257,7 @@ xdg-open examples/tiny/build/explorer.html    # Linux
 
 ```bash
 # 3 · ask an Engineering Question
-python tools/ask.py examples/tiny Q-impact Concept.Order
+eos ask examples/tiny Q-impact Concept.Order
 ```
 
 ```text
@@ -216,7 +271,7 @@ What breaks if I change this?
 
 ```bash
 # 4 · request Engineering Guidance
-python tools/advise.py examples/tiny R-change-concept Concept.Order
+eos advise examples/tiny R-change-concept Concept.Order
 ```
 
 You now have the whole loop: **authoring sources → compiler → CKM → Explorer →
@@ -225,9 +280,9 @@ one question answered → one guidance result.**
 List what else you can ask:
 
 ```bash
-python tools/ask.py examples/tiny questions
-python tools/advise.py examples/tiny recommendations
-python tools/direct.py examples/tiny intents
+eos ask examples/tiny questions
+eos advise examples/tiny recommendations
+eos direct examples/tiny intents
 ```
 
 More in [`docs/quickstart.md`](docs/quickstart.md).
@@ -258,7 +313,7 @@ the cost** of re-deriving it each time.
 Try it now against the bundled demo repository:
 
 ```bash
-python tools/onboard.py brief examples/brownfield-demo external/demo
+eos onboard examples/brownfield-demo external/demo
 ```
 
 **Output:** `external/demo/mechanical-engineering-model.json` and
@@ -269,28 +324,28 @@ Then either path — or both:
 **Deterministic (no model needed):**
 
 ```bash
-python discovery/run.py examples/brownfield-demo external/demo
+eos discover examples/brownfield-demo external/demo
 ```
 
 **With Claude or Codex** — open `external/demo/onboarding-brief.md` in your
 session, follow it, save the JSON reply, then:
 
 ```bash
-python tools/onboard.py ingest external/demo path/to/worker-output.json
+eos ingest external/demo path/to/worker-output.json
 ```
 
 Either way you get `candidate-initial.json` — and, from the skill, also
 `engineering-review.json`. Check where you are at any point:
 
 ```bash
-python tools/onboard.py status external/demo
+eos status external/demo
 ```
 
 Then curate and compile:
 
 ```bash
-python tools/curate.py external/demo     # requires a terminal and a human
-python tools/compile.py external/demo
+eos curate external/demo     # requires a terminal and a human
+eos compile external/demo
 ```
 
 Per-step purpose, inputs, outputs, failure modes and how to resume safely:
@@ -299,7 +354,7 @@ Per-step purpose, inputs, outputs, failure modes and how to resume safely:
 **Your own repository** works the same way, if its stack is supported:
 
 ```bash
-python tools/onboard.py brief /path/to/your/repo external/yourrepo
+eos onboard /path/to/your/repo external/yourrepo
 ```
 
 If the stack is not recognised, Mechanical Acquisition **refuses** rather than
@@ -315,7 +370,7 @@ and get JSON back.** Engineering OS never calls a model itself.
 
 - **Skill contracts:** `discovery/skills/skills.yaml`. The onboarding skill is
   `DS-brownfield-onboarding`.
-- **Invoke:** `python tools/onboard.py brief <repo> <project>` writes
+- **Invoke:** `eos onboard <repo> <project>` writes
   `onboarding-brief.md`. Open it in your Claude Code or Codex session and follow
   it.
 - **Context to provide:** the briefing, and `mechanical-engineering-model.json`
@@ -349,8 +404,8 @@ More in [`docs/discovery-skills.md`](docs/discovery-skills.md).
 ## 9 · Human curation
 
 ```bash
-python tools/curate.py external/demo
-python tools/curate.py external/demo --report      # summary of a finished session
+eos curate external/demo
+eos curate external/demo --report      # summary of a finished session
 ```
 
 **Reads:** `candidate-initial.json`, and `engineering-review.json` if present.
@@ -389,10 +444,10 @@ At the end of a curation session you are asked whether to apply. You can also
 inspect and apply explicitly:
 
 ```bash
-python tools/review.py <project> summary
-python tools/review.py <project> show ambiguities
-python tools/review.py <project> apply --types=Capability,Invariant --reviewer=NAME
-python tools/review.py <project> apply --ids=Concept.Order,Capability.Billing --reviewer=NAME
+eos apply <project> summary
+eos apply <project> show ambiguities
+eos apply <project> apply --types=Capability,Invariant --reviewer=NAME
+eos apply <project> apply --ids=Concept.Order,Capability.Billing --reviewer=NAME
 ```
 
 What application does:
@@ -411,7 +466,7 @@ What application does:
 Then compile:
 
 ```bash
-python tools/compile.py external/demo
+eos compile external/demo
 ```
 
 ---
@@ -419,8 +474,8 @@ python tools/compile.py external/demo
 ## 11 · Generating the knowledge products
 
 ```bash
-python tools/compile.py <project>
-python tools/compile.py --phases        # what the compiler does, in order
+eos compile <project>
+eos compile --phases        # what the compiler does, in order
 ```
 
 Everything lands in `<project>/build/`:
@@ -456,10 +511,10 @@ python -m http.server 8000 --directory <project>/build
 ## 12 · Asking engineering questions
 
 ```bash
-python tools/ask.py <project> questions                     # list them
-python tools/ask.py <project> Q-impact Concept.Order        # ask one
-python tools/ask.py <project> Q-impact Concept.Order --paths
-python tools/ask.py <project> Q-impact Concept.Order --json
+eos ask <project> questions                     # list them
+eos ask <project> Q-impact Concept.Order        # ask one
+eos ask <project> Q-impact Concept.Order --paths
+eos ask <project> Q-impact Concept.Order --json
 ```
 
 Three outcomes, and they mean different things:
@@ -476,7 +531,7 @@ know?* — is always answerable.
 Measure how much a model can answer:
 
 ```bash
-python tools/measure.py <project>
+eos measure <project>
 ```
 
 ---
@@ -484,10 +539,10 @@ python tools/measure.py <project>
 ## 13 · Requesting engineering guidance
 
 ```bash
-python tools/direct.py <project> intents
-python tools/direct.py <project> I-modify-behavior Concept.Order
-python tools/advise.py <project> recommendations
-python tools/advise.py <project> R-change-concept Concept.Order
+eos direct <project> intents
+eos direct <project> I-modify-behavior Concept.Order
+eos advise <project> recommendations
+eos advise <project> R-change-concept Concept.Order
 ```
 
 `direct.py` runs the complete loop: **intent → plan → task graph → worker
@@ -507,7 +562,7 @@ More in [`docs/engineering-guidance.md`](docs/engineering-guidance.md).
 After a change lands, maintain the model instead of rebuilding it.
 
 ```bash
-python tools/lifecycle.py <before-repo> <after-repo> <project>
+eos maintain <before-repo> <after-repo> <project>
 ```
 
 `<before-repo>` and `<after-repo>` are two checkouts — typically a detached
@@ -522,8 +577,8 @@ human reviews.
 Check that understanding survived:
 
 ```bash
-python tools/measure.py <project>
-python tools/longitudinal.py <repo> <project> <commit> <commit> ...
+eos measure <project>
+python tools/longitudinal.py <repo> <project> <commit> ...   # the frozen benchmark
 ```
 
 More in [`docs/continuous-acquisition.md`](docs/continuous-acquisition.md).
@@ -540,8 +595,8 @@ stages, writing `candidate-reacquisition.json` and
 Turn the report into work:
 
 ```bash
-python tools/drift-queue.py <project>
-python tools/drift-queue.py <project> --plan=P-review-unsupported
+eos drift <project>
+eos drift <project> --plan=P-review-unsupported
 ```
 
 ```text
@@ -571,8 +626,8 @@ complete worked example of every entity type, and is the right thing to copy.
 mkdir -p myproject/model
 cp examples/tiny/model/*.md myproject/model/
 # edit them to describe your system, then:
-python tools/compile.py myproject
-python tools/advise.py myproject recommendations
+eos compile myproject
+eos advise myproject recommendations
 ```
 
 Ask for guidance **before** implementing, and keep the model current as work
@@ -585,14 +640,14 @@ completes. More in [`docs/greenfield.md`](docs/greenfield.md).
 | Goal | Start here |
 |---|---|
 | Onboard an existing repository | `tools/onboard.py brief` → [onboarding](docs/brownfield-onboarding.md) |
-| Investigate a bug | `python tools/direct.py <project> I-investigate <subject>` |
-| Add a feature / modify behaviour | `python tools/direct.py <project> I-modify-behavior <subject>` |
-| Architecture review | `python tools/advise.py <project> R-audit-model` |
-| Inspect impact | `python tools/ask.py <project> Q-impact <subject> --paths` |
-| Review unsupported knowledge | `python tools/ask.py <project> Q-unsupported` |
+| Investigate a bug | `eos direct <project> I-investigate <subject>` |
+| Add a feature / modify behaviour | `eos direct <project> I-modify-behavior <subject>` |
+| Architecture review | `eos advise <project> R-audit-model` |
+| Inspect impact | `eos ask <project> Q-impact <subject> --paths` |
+| Review unsupported knowledge | `eos ask <project> Q-unsupported` |
 | Update the model after a change | `tools/lifecycle.py` → [continuous](docs/continuous-acquisition.md) |
 | Rerun full acquisition | `tools/lifecycle.py` → [drift](docs/knowledge-drift.md) |
-| Generate the navigable web | `python tools/compile.py <project>` → `build/explorer.html` |
+| Generate the navigable web | `eos compile <project>` → `build/explorer.html` |
 
 ---
 
@@ -688,7 +743,7 @@ Stated plainly.
 | a **recommendation** | `model/recommendations.md` | composed of declared queries |
 | a **fixture** | `tests/projects/<name>/` | with `expected.md` and golden outputs |
 
-Run `python tools/check.py` before and after any change.
+Run `eos check` before and after any change.
 
 **Two rules that matter more than the rest:**
 
@@ -710,5 +765,5 @@ pass by pointing it at a different query, which is exactly why it is protected.
 ---
 
 <sub>Verify a clean installation end to end at any time with
-`python tools/smoke.py` — it runs the whole documented path in a temporary
+`eos smoke` — it runs the whole documented path in a temporary
 workspace and reports whether a third-party engineer can complete it.</sub>

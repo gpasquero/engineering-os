@@ -35,7 +35,7 @@ ROOT = pathlib.Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "tools"))
 
-from _cli import help_requested, project as project_arg  # noqa: E402
+from _cli import help_requested, project as project_arg, new_project  # noqa: E402
 
 from discovery.mechanical import extract              # noqa: E402
 from compiler.registry import load_all                # noqa: E402
@@ -340,7 +340,8 @@ def main(argv):
         return 0 if len(argv) > 1 else 2
     cmd = argv[1]
     if cmd == "brief" and len(argv) == 4:
-        return brief(pathlib.Path(argv[2]).resolve(), ROOT / argv[3])
+        return brief(pathlib.Path(argv[2]).expanduser().resolve(),
+                     new_project(argv[3]))
     if cmd == "ingest" and len(argv) == 4:
         return ingest(project_arg(argv[2], must_have_model=False), argv[3])
     if cmd == "status" and len(argv) == 3:

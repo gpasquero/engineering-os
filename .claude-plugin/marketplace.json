@@ -1,0 +1,14 @@
+{
+  "name": "engineering-os",
+  "owner": {
+    "name": "gpasquero",
+    "url": "https://github.com/gpasquero"
+  },
+  "plugins": [
+    {
+      "name": "engineering-os",
+      "source": "./",
+      "description": "Acquire, curate and maintain engineering understanding of an existing system."
+    }
+  ]
+}

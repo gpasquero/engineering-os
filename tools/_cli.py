@@ -40,7 +40,14 @@ def project(arg, *, must_have_model=True, hint=None):
     third-party project may live anywhere.
     """
     path = pathlib.Path(arg).expanduser()
-    path = path if path.is_absolute() else ROOT / path
+    if not path.is_absolute():
+        # Resolve against the USER's working directory first. When Engineering
+        # OS is installed as a plugin its own root is a cache directory that is
+        # replaced on every update — a project kept there would be destroyed.
+        # The repository root is the fallback, so `examples/tiny` still works
+        # from a clone.
+        here = pathlib.Path.cwd() / path
+        path = here if here.exists() else ROOT / path
 
     if not path.exists():
         _refuse(f"no such project directory: {arg}",
@@ -64,3 +71,17 @@ def _refuse(what, why, hint):
     if hint:
         print(f"{DIM}  {hint}{OFF}")
     sys.exit(2)
+
+
+def new_project(arg):
+    """A project directory being CREATED. Relative paths are the user's.
+
+    Creation is the opposite case to `project()`: nothing exists yet, so there
+    is nothing to look for. A relative path here always means "where I am",
+    never "inside Engineering OS" — a plugin's own directory is a cache that is
+    replaced on update.
+    """
+    path = pathlib.Path(arg).expanduser()
+    if not path.is_absolute():
+        path = pathlib.Path.cwd() / path
+    return path

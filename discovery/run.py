@@ -29,8 +29,9 @@ def main(argv):
     # A project directory may live anywhere — a third-party user onboarding
     # their own system will not put it inside this checkout. Relative paths
     # resolve against the repository root; absolute ones are used as given.
-    project = pathlib.Path(argv[2]).expanduser()
-    project = (project if project.is_absolute() else ROOT / project)
+    sys.path.insert(0, str(ROOT / "tools"))
+    from _cli import new_project                      # noqa: PLC0415
+    project = new_project(argv[2])
     project.mkdir(parents=True, exist_ok=True)
     strategy = opts.get("--strategy", "suite-level")
     if strategy not in STRATEGIES:
