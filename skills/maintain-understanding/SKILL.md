@@ -22,6 +22,20 @@ Create the "before" state safely:
 git -C <repo> worktree add --detach /tmp/before <commit>
 ```
 
+## Locating the engine
+
+Run this once per session, before anything else:
+
+```bash
+EOS="$(command -v eos 2>/dev/null || echo "${CLAUDE_SKILL_DIR}/../../bin/eos")"
+"$EOS" --version
+```
+
+`eos` is on `PATH` whenever Engineering OS is loaded as a plugin. Otherwise it
+ships beside this skill, and `${CLAUDE_SKILL_DIR}` points at this skill's own
+directory. **Use `"$EOS"` wherever the commands below say `eos`** if the bare
+name was not found.
+
 ## What it runs
 
 1. **Continuous Acquisition** — only what changed is proposed, carrying the

@@ -1,6 +1,6 @@
 ---
 id: ADR-0148
-title: Engineering OS is installed as a Claude Code plugin and depends on nothing
+title: Engineering OS is installed as a skill directory and depends on nothing
 status: accepted
 date: 2026-08-03
 supersedes: null
@@ -9,7 +9,7 @@ resolves: []
 related: [ADR-0135, ADR-0140, ADR-0141, ADR-0143, ADR-0145, ADR-0147]
 ---
 
-# ADR-0148 — Installed as a plugin, depending on nothing
+# ADR-0148 — Installed as a skill, depending on nothing
 
 ## Context
 
@@ -32,12 +32,28 @@ installation** is permitted under Research Freeze.
 
 ## Decision
 
-**Engineering OS is a Claude Code plugin, and it depends on nothing.**
+**Engineering OS is installed by cloning it into a skills directory, and it
+depends on nothing.**
 
+```bash
+git clone https://github.com/gpasquero/engineering-os.git \
+  ~/.claude/skills/engineering-os
 ```
-/plugin marketplace add gpasquero/engineering-os
-/plugin install engineering-os@engineering-os
-```
+
+**No marketplace and no install step.** A folder under a skills directory that
+carries a plugin manifest is loaded automatically on the next session — so one
+clone yields all five skills and puts `eos` on `PATH`.
+
+The reviewer pushed back on the first version of this decision, which required
+`/plugin marketplace add` and `/plugin install`:
+
+> **¿Pero no hace falta plugin para esto, no? Puede ser un skill con scripts en
+> node o python?**
+
+**They were right, and the manifest is not wasted.** It is what makes the single
+clone load five namespaced skills and a `bin/` directory instead of one flat
+skill. The marketplace remains available for anyone who wants versioned
+updates; it is a distribution channel, not a requirement.
 
 Three properties make that the whole installation.
 
@@ -47,8 +63,10 @@ one could not be a plugin at all. **An installed PyYAML always wins** — `vendo
 is only reached when nothing else provides it.
 
 **2. One entry point.** `bin/eos` — and `bin/` is added to `PATH` when the
-plugin is enabled, so every documented command runs verbatim. It dispatches to
-the existing tools and redesigns none of them.
+skill folder is loaded, so every documented command runs verbatim. It dispatches
+to the existing tools and redesigns none of them. Skills locate it through
+`${CLAUDE_SKILL_DIR}` rather than assuming `PATH`, so they work in every
+installation shape.
 
 **3. Five skills, invoked in plain language.** `brownfield-onboarding`,
 `engineering-questions`, `engineering-guidance`, `curate-proposals`,
@@ -85,7 +103,14 @@ and it would have silently written a customer's engineering model into a cache.
 
 ## Consequences
 
-**Codex has no plugin mechanism**, and the README says so rather than implying
+**Contributor checks may be absent, and their absence is not a failure.**
+Governance consistency and the 17 fixtures verify **this project's own** corpus
+and suite. A trimmed installation — 1.8 MB against 11 MB for the full checkout —
+ships neither, and `eos check` now reports them as not shipped rather than
+failing. **An installation check must check the installation, not the author's
+repository.**
+
+**Codex has no skill mechanism**, and the README says so rather than implying
 parity. `eos` is a dependency-free script, so the honest instruction is a clone
 onto `PATH` plus pasting a skill into `AGENTS.md`. **The skills name no vendor**
 (`ADR-0113`), so the contract is identical whichever model reads it.

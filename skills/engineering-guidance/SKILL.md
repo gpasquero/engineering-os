@@ -20,6 +20,20 @@ eos direct <project> I-modify-behavior Concept.Order    # the full loop
 context**. It tells you which decisions were made deterministically and which
 are deliberately left to a worker.
 
+## Locating the engine
+
+Run this once per session, before anything else:
+
+```bash
+EOS="$(command -v eos 2>/dev/null || echo "${CLAUDE_SKILL_DIR}/../../bin/eos")"
+"$EOS" --version
+```
+
+`eos` is on `PATH` whenever Engineering OS is loaded as a plugin. Otherwise it
+ships beside this skill, and `${CLAUDE_SKILL_DIR}` points at this skill's own
+directory. **Use `"$EOS"` wherever the commands below say `eos`** if the bare
+name was not found.
+
 ## Use it before you change anything
 
 When the user asks you to modify a system that has a model, run guidance

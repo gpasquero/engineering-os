@@ -14,6 +14,20 @@ eos status <project>      # where this project is in the loop
 eos curate <project>      # the session itself — the user runs this
 ```
 
+## Locating the engine
+
+Run this once per session, before anything else:
+
+```bash
+EOS="$(command -v eos 2>/dev/null || echo "${CLAUDE_SKILL_DIR}/../../bin/eos")"
+"$EOS" --version
+```
+
+`eos` is on `PATH` whenever Engineering OS is loaded as a plugin. Otherwise it
+ships beside this skill, and `${CLAUDE_SKILL_DIR}` points at this skill's own
+directory. **Use `"$EOS"` wherever the commands below say `eos`** if the bare
+name was not found.
+
 ## Your role
 
 **Prepare and explain. Do not decide.**

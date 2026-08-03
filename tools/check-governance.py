@@ -39,6 +39,10 @@ INDEXED = ("governance/adr", "governance/acceptance", "governance/sessions")
 
 
 def main():
+    if not (ROOT / "governance/adr").is_dir():
+        print(f"{DIM}no governance corpus in this installation — "
+              f"nothing to check{OFF}")
+        return 0
     bad, docs = [], {}
 
     def front_matter(path):

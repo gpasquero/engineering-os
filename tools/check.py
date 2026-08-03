@@ -155,6 +155,11 @@ def main(argv):
         return report(c, quick=True)
 
     # 3 · the corpus and the suite
+    #
+    # Governance consistency and the fixtures are CONTRIBUTOR checks: they
+    # verify this project's own decision corpus and regression suite. An
+    # installed copy may not ship them, and their absence says nothing about
+    # whether the installation works. Skipped, never failed.
     for label, script, fix in (
         ("governance consistency", "tools/check-governance.py",
          "a decision record is inconsistent; see docs/troubleshooting.md"),
@@ -165,12 +170,20 @@ def main(argv):
         ("plans and recommendations", "tools/check-plans.py",
          "a plan phase can never act"),
     ):
+        if not (ROOT / script).exists():
+            c.warn(label, "not shipped in this installation",
+                   "a contributor check; its absence is not a problem")
+            continue
         code, last, _ = run(script)
         if code == 0:
             c.ok(label, strip(last)[:60])
         else:
             c.fail(label, strip(last)[:60], fix)
 
+    if not (ROOT / "tests/projects").is_dir():
+        c.warn("fixtures and query parity", "no fixtures in this installation",
+               "a contributor check; the compiler was already exercised above")
+        return report(c)
     code, last, out = run("tools/test.py")
     if code == 0:
         c.ok("fixtures and query parity", strip(last)[:60])

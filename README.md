@@ -11,9 +11,9 @@ difficult question and get an answer nobody had to rediscover.
 
 **Apache-2.0** · Python 3.9+ · **zero dependencies** · no network calls, no API keys
 
-```
-/plugin marketplace add gpasquero/engineering-os
-/plugin install engineering-os@engineering-os
+```bash
+git clone https://github.com/gpasquero/engineering-os.git \
+  ~/.claude/skills/engineering-os
 ```
 
 ---
@@ -157,17 +157,19 @@ eos check      # verifies all of the above and much more
 
 ## 5 · Installation
 
-**Install it into Claude Code. There is nothing to clone, no virtual
-environment and nothing to `pip install`.**
+**One command. No plugin marketplace, no virtual environment, nothing to
+`pip install`.**
 
-```
-/plugin marketplace add gpasquero/engineering-os
-/plugin install engineering-os@engineering-os
+```bash
+git clone https://github.com/gpasquero/engineering-os.git \
+  ~/.claude/skills/engineering-os
 ```
 
-That is the whole installation. Engineering OS ships a pure-Python YAML and
-uses no other third-party package, so the plugin works the moment it is
-enabled.
+Restart Claude Code. That is the whole installation.
+
+Any folder under a skills directory that carries a plugin manifest is loaded
+automatically on the next session — so this one clone gives you **all five
+skills** and puts **`eos` on your `PATH`**, with no install step of its own.
 
 Then just ask, in plain language:
 
@@ -175,7 +177,7 @@ Then just ask, in plain language:
 > *What breaks if I change the billing module?*
 > *Is the model still accurate after these commits?*
 
-Claude picks the right skill. Five ship with the plugin:
+Claude picks the right skill:
 
 | Skill | For |
 |---|---|
@@ -185,19 +187,39 @@ Claude picks the right skill. Five ship with the plugin:
 | `curate-proposals` | help a human authorize what is true |
 | `maintain-understanding` | keep it current, and challenge it |
 
-The plugin also puts **`eos`** on your `PATH`, so every command in this README
-works verbatim in Claude Code's terminal:
+Verify it:
 
 ```bash
-eos check                        # verify the installation
-eos --help                       # every subcommand
+eos check
+eos --help
+```
+
+**Why nothing needs installing:** Engineering OS is Python, uses only the
+standard library, and vendors a pure-Python YAML. It makes no network calls and
+reads no credentials.
+
+### For one project only
+
+```bash
+git clone https://github.com/gpasquero/engineering-os.git \
+  .claude/skills/engineering-os
+```
+
+Same behaviour, scoped to that repository.
+
+### As a marketplace plugin
+
+If you prefer versioned installs and updates:
+
+```
+/plugin marketplace add gpasquero/engineering-os
+/plugin install engineering-os@engineering-os
 ```
 
 ### Codex and other tools
 
-**There is no plugin mechanism to install into.** Engineering OS still works —
-`eos` is a plain Python script with no dependencies — but you install it
-yourself:
+**There is no skill or plugin mechanism to install into.** Engineering OS still
+works — `eos` is a dependency-free script:
 
 ```bash
 git clone https://github.com/gpasquero/engineering-os.git ~/.engineering-os
@@ -205,9 +227,8 @@ export PATH="$HOME/.engineering-os/bin:$PATH"
 eos check
 ```
 
-Then paste the contents of any `skills/*/SKILL.md` into your `AGENTS.md`, or
-point the model at `~/.engineering-os/skills/`. The skills are plain Markdown
-and name no vendor — the contract is the same whichever model reads it.
+Then paste any `skills/*/SKILL.md` into your `AGENTS.md`. **The skills name no
+model vendor** — the contract is the same whichever model reads it.
 
 ### From a clone, for contributors
 
@@ -217,13 +238,14 @@ cd engineering-os
 ./eos check
 ```
 
-`python -m pip install -r requirements.txt` is optional and only makes YAML
-parsing faster; an installed PyYAML always wins over the vendored copy.
+`pip install -r requirements.txt` is optional and only makes YAML parsing
+faster; an installed PyYAML always wins over the vendored copy.
 
-`eos check` verifies Python, dependencies, all 20 registries, governance
-consistency, the engineering-question set, discovery skills, plans, all 17
-fixtures, query-engine parity, deterministic generation and compiler health. It
-ends with:
+`eos check` verifies Python, dependencies, all 20 registries, the
+engineering-question set, discovery skills, plans, deterministic generation and
+compiler health — plus, in a full checkout, governance consistency and all 17
+fixtures. Those two are **contributor** checks: an installed copy may not ship
+them, and their absence is reported and never fails.
 
 ```text
 Engineering OS is installed and healthy (all checks passed)
